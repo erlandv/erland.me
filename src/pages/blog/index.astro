@@ -12,6 +12,13 @@ const heroMap = import.meta.glob('../../posts/blog/*/hero.{jpg,jpeg,png,webp,gif
 
 type PostModule = { frontmatter: any } & { default: any };
 
+// Helper untuk parsing tanggal yang aman
+const safeDate = (value: unknown): Date | null => {
+  if (!value) return null;
+  const d = new Date(value as any);
+  return isNaN(d.valueOf()) ? null : d;
+};
+
 const posts = Object.entries(modules)
   .map(([path, mod]) => {
     const m = mod as PostModule;
@@ -20,15 +27,18 @@ const posts = Object.entries(modules)
     const hero = Object.entries(heroMap).find(([p]) => p.startsWith(`../../posts/blog/${slug}/hero.`))?.[1] as
       | string
       | undefined;
+    const date = safeDate(m.frontmatter?.publishDate);
     return {
       slug,
       data: m.frontmatter ?? {},
+      date,
       hero,
       Content: m.default,
     };
   })
   .filter((p) => !p.data?.draft)
-  .sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+  // Urutkan dengan aman; jika tidak ada tanggal, jadikan paling lama
+  .sort((a, b) => (b.date?.valueOf() ?? 0) - (a.date?.valueOf() ?? 0));
 ---
 
 <!DOCTYPE html>
@@ -73,12 +83,14 @@ const posts = Object.entries(modules)
                         <h2 style="margin:0; font-size:1.125rem; font-weight:700;">
                           {post.data.title}
                         </h2>
-                        <time
-                          datetime={new Date(post.data.publishDate).toISOString()}
-                          style="opacity:.7; font-size:.9rem;"
-                        >
-                          {new Date(post.data.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
-                        </time>
+                        {post.date && (
+                          <time
+                            datetime={post.date.toISOString()}
+                            style="opacity:.7; font-size:.9rem;"
+                          >
+                            {post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })}
+                          </time>
+                        )}
                       </header>
 
                       {post.data.description && (
