@@ -2,8 +2,12 @@
 import { ViewTransitions } from 'astro:transitions';
 interface HeaderProps {
   title: string;
+  canonical?: string;
+  prevHref?: string;
+  nextHref?: string;
+  jsonLd?: any;
 }
-const { title } = Astro.props as HeaderProps;
+const { title, canonical, prevHref, nextHref, jsonLd } = Astro.props as HeaderProps;
 ---
 
 <head>
@@ -16,6 +20,14 @@ const { title } = Astro.props as HeaderProps;
   <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/" rel="preconnect" />
   <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous" />
+  {canonical && <link rel="canonical" href={canonical} />}
+  {prevHref && <link rel="prev" href={prevHref} />}
+  {nextHref && <link rel="next" href={nextHref} />}
+  {jsonLd && (
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </script>
+  )}
   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
   <script type="text/javascript">
     !(function (o, c) {
@@ -24,6 +36,6 @@ const { title } = Astro.props as HeaderProps;
       (n.className += t + "js"), ("ontouchstart" in o || (o.DocumentTouch && c instanceof DocumentTouch)) && (n.className += t + "touch");
     })(window, document);
   </script>
-  <link href="/assets/favicon-32x32.png" rel="shortcut icon" type="image/x-icon" />
-  <link href="/assets/favicon-32x32.png" rel="apple-touch-icon" />
+  <link href="/assets/erland-icon.svg" rel="shortcut icon" type="image/x-icon" />
+  <link href="/assets/erland-icon.svg" rel="apple-touch-icon" />
 </head>

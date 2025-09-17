@@ -1,33 +1,45 @@
 ---
-import Header from '../../components/Header.astro';
-import Sidebar from '../../components/Sidebar.astro';
-import { loadAllPosts, slicePage } from '../../lib/blog';
+import Header from '../../../components/Header.astro';
+import Sidebar from '../../../components/Sidebar.astro';
+import { loadAllPosts } from '../../../lib/blog';
+
+// Generate static paths for pages 2..N (page 1 handled by /blog)
+export async function getStaticPaths() {
+  const posts = await loadAllPosts();
+  const pageSize = 10;
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
+  return Array.from({ length: Math.max(0, totalPages - 1) }).map((_, i) => ({
+    params: { page: String(i + 2) },
+  }));
+}
 
 const posts = await loadAllPosts();
 
-// Pagination (10 posts per halaman)
+// Pagination
 const pageSize = 10;
-const page = 1; // halaman pertama
 const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
-const paginated = slicePage(posts, page, pageSize);
+const param = Number(Astro.params.page ?? '1');
+const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Math.floor(param));
+const paginated = posts.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
 ---
 
 <!DOCTYPE html>
 <html>
   <Header
-    title="Blog | Erland"
-    canonical="/blog/"
-    nextHref={totalPages > 1 ? pageHref(2) : undefined}
+    title={`Blog | Page ${page}`}
+    canonical={pageHref(page)}
+    prevHref={page > 1 ? pageHref(page - 1) : undefined}
+    nextHref={page < totalPages ? pageHref(page + 1) : undefined}
     jsonLd={{
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Blog',
-      url: '/blog/',
+      name: `Blog - Page ${page}`,
+      url: pageHref(page),
       isPartOf: { '@type': 'Blog', name: 'Blog', url: '/blog/' },
       itemListElement: paginated.map((p, i) => ({
         '@type': 'ListItem',
-        position: i + 1,
+        position: (page - 1) * pageSize + i + 1,
         url: `/blog/${p.slug}/`,
         name: p.data.title,
       })),
@@ -62,20 +74,14 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
                         </div>
                         <div class="post-card__body">
                           <header class="post-card__header">
-                            <h2 class="post-card__title">
-                              {post.data.title}
-                            </h2>
+                            <h2 class="post-card__title">{post.data.title}</h2>
                             {post.date && (
                               <time datetime={post.date.toISOString()} class="post-card__date">
                                 {post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })}
                               </time>
                             )}
                           </header>
-
-                          {post.data.description && (
-                            <p class="post-card__desc">{post.data.description}</p>
-                          )}
-
+                          {post.data.description && <p class="post-card__desc">{post.data.description}</p>}
                           {post.data.tags?.length > 0 && (
                             <ul class="post-card__tags">
                               {post.data.tags.map((t) => (
@@ -88,42 +94,41 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
                     </article>
                   </a>
                 ))}
-                
+
                 {posts.length === 0 && (
                   <p style="opacity:.8;">Belum ada tulisan. Tambahkan folder di <code>src/posts/blog/[slug]/index.md</code> ya ✍️</p>
                 )}
+
+                {posts.length > pageSize && (
+                  <nav aria-label="Pagination" style="display:flex; gap:.5rem; align-items:center; justify-content:center; margin-top:1rem;">
+                    {page > 1 && (
+                      <a href={pageHref(page - 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Prev</a>
+                    )}
+                    {Array.from({ length: totalPages }).map((_, i) => {
+                      const n = i + 1;
+                      const active = n === page;
+                      return (
+                        <a
+                          href={pageHref(n)}
+                          aria-current={active ? 'page' : undefined}
+                          style={`padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none; ${active ? 'background: var(--surface-2, rgba(0,0,0,.06)); font-weight:600;' : ''}`}
+                        >
+                          {n}
+                        </a>
+                      );
+                    })}
+                    {page < totalPages && (
+                      <a href={pageHref(page + 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Next</a>
+                    )}
+                  </nav>
+                )}
               </div>
             </section>
-            {posts.length > pageSize && (
-              <nav aria-label="Pagination" style="display:flex; gap:.5rem; align-items:center; justify-content:center; margin-top:1rem;">
-                {page > 1 && (
-                  <a href={pageHref(page - 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Prev</a>
-                )}
-                {Array.from({ length: totalPages }).map((_, i) => {
-                  const n = i + 1;
-                  const active = n === page;
-                  return (
-                    <a
-                      href={pageHref(n)}
-                      aria-current={active ? 'page' : undefined}
-                      style={`padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none; ${active ? 'background: var(--surface-2, rgba(0,0,0,.06)); font-weight:600;' : ''}`}
-                    >
-                      {n}
-                    </a>
-                  );
-                })}
-                {page < totalPages && (
-                  <a href={pageHref(page + 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Next</a>
-                )}
-              </nav>
-            )}
           </div>
         </div>
       </nav>
     </div>
 
     <style></style>
-
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   </body>
 </html>
