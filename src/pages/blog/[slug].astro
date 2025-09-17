@@ -1,0 +1,78 @@
+---
+import Header from '../../components/Header.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = slug ? await getEntryBySlug('blog', slug) : null;
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const { Content } = await post.render();
+---
+
+<!DOCTYPE html>
+<html>
+  <Header title={`${post.data.title} | Erland`} />
+  <body>
+    <div class="content">
+      <Sidebar selectedItem="blog" />
+      <main class="main">
+        <div class="container">
+          <div class="back-nav-container">
+            <a href="/blog" class="back-nav-button w-inline-block">
+              <img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              <div>Back to blog</div>
+            </a>
+          </div>
+
+          <article class="content-container" style="max-width: 780px;">
+            <header style="margin-bottom:1rem;">
+              <h1 style="margin:0 0 .25rem 0;">{post.data.title}</h1>
+              {post.data.publishDate && (
+                <time datetime={post.data.publishDate.toISOString()} style="opacity:.7;">
+                  {post.data.publishDate.toLocaleDateString('id-ID', { dateStyle: 'medium' })}
+                </time>
+              )}
+              {post.data.tags?.length > 0 && (
+                <ul style="display:flex; gap:.5rem; margin:.75rem 0 0; padding:0; list-style:none;">
+                  {post.data.tags.map((t) => (
+                    <li
+                      style="
+                        padding:.2rem .6rem;
+                        border:1px solid var(--border, rgba(0,0,0,.08));
+                        border-radius:999px;
+                        font-size:.8rem;
+                        opacity:.9;
+                      "
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </header>
+
+            <div class="prose">
+              <Content />
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+  <style>
+    .prose :is(p, ul, ol) { line-height: 1.75; }
+    .prose pre { padding: 1rem; border-radius: 8px; overflow: auto; }
+  </style>
+</html>
+

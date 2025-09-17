@@ -1,0 +1,92 @@
+---
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+---
+
+
+<!DOCTYPE html>
+<html
+>
+  <Header title="Erland Ramdhani" />
+  <body>
+    <div class="content">
+      <Sidebar selectedItem="home" />
+      <nav class="main">
+        <div class="container">
+          <main class="fold-content-container">
+            <div class="fold-content">
+              <h1>Hi, I'm Erland.<br />I build things for the web.</h1>
+              <p class="lead">
+                Hi there, I’m Erland, a passionate Developer based in Jakarta, Indonesia. With over a decade of experience in web development and open-source technologies, I thrive on building solutions that empower businesses to succeed in the digital space.
+                <br /><br />
+                Since 2013, I’ve specialized in crafting robust web apps and web sites using PHP, JavaScript, MySQL, Apache, Nginx, and other core web technologies. Beyond development, my journey has expanded into the dynamic realm of cloud computing. I now focus on Infrastructure as a Service (IaaS), leveraging cloud-based virtual machines and load balancers to create scalable, efficient systems.
+                <br /><br />
+                I’m also a devoted advocate of GNU/Linux and the open-source community, always exploring innovative ways to integrate these tools into modern development workflows.
+                <br /><br />
+                This is my small corner on the interweb where I’ll post my notes, achievements, and whatever I want to post.
+              </p>
+            </div>
+            <a href="mailto:hello@erland.me" class="button w-button">Contact</a>
+          </main>
+          <div class="projects-section">
+            <!-- Software Development -->
+            <a href="/software-development" class="projects-container">
+              <div class="single-projects-category">
+                <div class="projects-category-image-container">
+                  <img src="./assets/browser.svg" loading="lazy" alt="" class="projects-category-image" />
+                </div>
+              </div>
+              <div class="single-projects-content">
+                <h4>Web Development</h4>
+                <div class="tech-tools-container">
+                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                  <div class="chips-container chips-container-small-width">
+                    <div class="single-chip small-chip">PHP</div>
+                    <div class="single-chip small-chip">JavaScript</div>
+                    <div class="single-chip small-chip">MySQL</div>
+                    <div class="single-chip small-chip">MariaDB</div>
+                    <div class="single-chip small-chip">Nginx</div>
+                    <div class="single-chip small-chip">Apache</div>
+                    <div class="single-chip small-chip">Astro</div>
+                    <div class="single-chip small-chip">WordPress</div>
+                    <div class="single-chip small-chip">Node.js</div>
+                    <div class="single-chip small-chip">Tailwind CSS</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- DevOps & Cloud -->
+            <a href="/devops" class="projects-container">
+              <div class="single-projects-category">
+                <div class="projects-category-image-container devops-img">
+                  <img src="./assets/database.svg" loading="lazy" alt="" class="projects-category-image" />
+                </div>
+              </div>
+              <div class="single-projects-content">
+                <h4>DevOps &amp;&nbsp;Cloud</h4>
+                <div class="tech-tools-container">
+                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                  <div class="chips-container chips-container-small-width">
+                    <div class="single-chip small-chip">Terraform</div>
+                    <div class="single-chip small-chip">Docker</div>
+                    <div class="single-chip small-chip">Kubernetes</div>
+                    <div class="single-chip small-chip">GitLab CI/CD</div>
+                    <div class="single-chip small-chip">Azure</div>
+                    <div class="single-chip small-chip">AWS</div>
+                    <div class="single-chip small-chip">GCP</div>
+                    <div class="single-chip small-chip">Digital Ocean</div>
+                    <div class="single-chip small-chip">Linode</div>
+                    <div class="single-chip small-chip">Vultr</div>
+                    <div class="single-chip small-chip">Cloudflare</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+</html>
