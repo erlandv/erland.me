@@ -1,26 +1,42 @@
 ---
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
-import { getCollection, getEntryBySlug } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { slug: post.slug } }));
+  const modules = import.meta.glob('../../posts/blog/*/index.md');
+  const slugs = Object.keys(modules).map((p) => {
+    const parts = p.split('/');
+    return parts[parts.length - 2];
+  });
+  return slugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
-const post = slug ? await getEntryBySlug('blog', slug) : null;
+const modules = import.meta.glob('../../posts/blog/*/index.md');
+const key = `../../posts/blog/${slug}/index.md`;
+const loader = modules[key] as any;
+const mod = loader ? await loader() : null;
 
-if (!post) {
+if (!mod) {
   return Astro.redirect('/blog');
 }
 
-const { Content } = await post.render();
+const { default: Content, frontmatter } = mod;
+
+// Auto-detect hero image placed as: src/posts/blog/[slug]/hero.(jpg|jpeg|png|webp|gif|svg)
+const heroMap = import.meta.glob('../../posts/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
+  as: 'url',
+  eager: true,
+});
+const hero = Object.entries(heroMap).find(([p]) => p.startsWith(`../../posts/blog/${slug}/hero.`))?.[1] as
+  | string
+  | undefined;
+const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 ---
 
 <!DOCTYPE html>
 <html>
-  <Header title={`${post.data.title} | Erland`} />
+  <Header title={`${frontmatter.title} | Erland`} />
   <body>
     <div class="content">
       <Sidebar selectedItem="blog" />
@@ -35,15 +51,25 @@ const { Content } = await post.render();
 
           <article class="content-container" style="max-width: 780px;">
             <header style="margin-bottom:1rem;">
-              <h1 style="margin:0 0 .25rem 0;">{post.data.title}</h1>
-              {post.data.publishDate && (
-                <time datetime={post.data.publishDate.toISOString()} style="opacity:.7;">
-                  {post.data.publishDate.toLocaleDateString('id-ID', { dateStyle: 'medium' })}
+              {hero && (
+                <img
+                  src={hero}
+                  alt={heroAlt}
+                  width="1440"
+                  height="720"
+                  loading="eager"
+                  style="display:block; width:100%; height:auto; border-radius:12px; margin:0 0 1rem 0;"
+                />
+              )}
+              <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
+              {frontmatter.publishDate && (
+                <time datetime={new Date(frontmatter.publishDate).toISOString()} style="opacity:.7;">
+                  {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
                 </time>
               )}
-              {post.data.tags?.length > 0 && (
+              {frontmatter.tags?.length > 0 && (
                 <ul style="display:flex; gap:.5rem; margin:.75rem 0 0; padding:0; list-style:none;">
-                  {post.data.tags.map((t) => (
+                  {frontmatter.tags.map((t) => (
                     <li
                       style="
                         padding:.2rem .6rem;
@@ -75,4 +101,3 @@ const { Content } = await post.render();
     .prose pre { padding: 1rem; border-radius: 8px; overflow: auto; }
   </style>
 </html>
-

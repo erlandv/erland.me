@@ -8,7 +8,7 @@ const blog = defineCollection({
     description: z.string().max(160).optional(),
     publishDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(), // taruh di /public/images/blog/...
+    heroImage: z.string().optional(), // tidak dipakai; gambar kini berdampingan dengan post (./hero.*)
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),
