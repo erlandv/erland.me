@@ -1,34 +1,28 @@
 ---
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const modules = import.meta.glob('../../posts/blog/*/index.md');
-  const slugs = Object.keys(modules).map((p) => {
-    const parts = p.split('/');
-    return parts[parts.length - 2];
-  });
-  return slugs.map((slug) => ({ params: { slug } }));
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
-const modules = import.meta.glob('../../posts/blog/*/index.md');
-const key = `../../posts/blog/${slug}/index.md`;
-const loader = modules[key] as any;
-const mod = loader ? await loader() : null;
-
-if (!mod) {
+const entry = (await getCollection('blog')).find((e) => e.slug === slug);
+if (!entry) {
   return Astro.redirect('/blog');
 }
 
-const { default: Content, frontmatter } = mod;
+const { Content } = await entry.render();
+const frontmatter = entry.data;
 
-// Auto-detect hero image placed as: src/posts/blog/[slug]/hero.(jpg|jpeg|png|webp|gif|svg)
-const heroMap = import.meta.glob('../../posts/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
+// Auto-detect hero image placed as: src/content/blog/[slug]/hero.(jpg|jpeg|png,webp,gif,svg)
+const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
   as: 'url',
   eager: true,
 });
-const hero = Object.entries(heroMap).find(([p]) => p.startsWith(`../../posts/blog/${slug}/hero.`))?.[1] as
+const hero = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
   | string
   | undefined;
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
