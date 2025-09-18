@@ -1,0 +1,82 @@
+---
+import Header from "../components/Header.astro";
+import Project from "../components/Project.astro";
+import Sidebar from "../components/Sidebar.astro";
+const projects = [
+  {
+    title: "EdgeDC",
+    desc: [
+      "Co-shaped layout and copy with the design team",
+      "Converted Figma designs into a responsive, accessible UI.",
+      "Deployed from staging to production with smoke tests and checks."
+    ],
+    tech: ["Figma", "Tailwind", "Nginx", "Git", "Astro"]
+  },
+  {
+    title: "Cimika",
+    desc: [
+      "Developed a conversion-focused landing page tailored for Google Ads.",
+      "Set up Google Analytics with key events for funnel analysis.",
+      "Added customer reviews to provide social proof and boost trust."
+    ],
+    tech: ["PHP", "JavaScript", "MySQL", "Redis", "WordPress"]
+  },
+  {
+    title: "Penalis",
+    desc: [
+      "Built a CMS workflow that lets editors publish fast and safely.",
+      "Delivered a clean, reader-first blog UI for comfortable reading.",
+      "Maintained backend/database powering posts, users, and comments.",
+      "Implemented SEO best practices to improve organic search visibility.",
+      "Implemented anti-spam and moderation to keep comments healthy."
+    ],
+    tech: ["MySQL", "PHP", "Redis", "WordPress", "Github"]
+  },
+  {
+    title: "Freelance Projects",
+    desc: [
+      "Developed and maintained websites for small businesses and personal projects",
+      "Handled full-stack development including frontend, backend, and database management",
+      "Provided ongoing support and updates"
+    ],
+    tech: ["PHP", "JavaScript", "MySQL", "MariaDB", "Nginx", "Apache", "Astro", "WordPress", "Node.js", "Tailwind CSS"]
+  }
+];
+---
+
+<!DOCTYPE html>
+<html
+>
+  <Header title="Web Development | Erland Ramdhani" />
+  <body>
+    <div class="content">
+        <Sidebar selectedItem="web-development" />
+      <nav class="main">
+        <div class="container">
+          <div class="back-nav-container">
+            <a href="/" class="back-nav-button w-inline-block"
+              ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              <div>Back</div></a
+            >
+          </div>
+          <div class="content-container">
+            <h1>Web Development</h1>
+            <section class="items-container">
+                <div class="resouce-items">
+                    {projects.map(project => (
+                      <Project 
+                        title={project.title} 
+                        desc={project.desc}
+                        tech={project.tech}
+                      />
+                    ))}
+                  </div>
+            </section>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+</html>
