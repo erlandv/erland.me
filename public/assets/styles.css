@@ -597,6 +597,7 @@ p {
 .projects-category-image {
   width: 82px;
   height: 82px;
+  color: #fff; /* ensure inline SVG uses white instead of link default */
 }
 
 @media screen and (max-width: 991px) {

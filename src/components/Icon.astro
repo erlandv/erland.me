@@ -1,0 +1,98 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+  ariaLabel?: string;
+}
+
+const { name, class: className, ariaLabel }: Props = Astro.props as Props;
+
+import home from "../icons/home.svg?raw";
+import code from "../icons/code.svg?raw";
+import dns from "../icons/dns.svg?raw";
+import favorite from "../icons/favorite.svg?raw";
+import blog from "../icons/blog.svg?raw";
+import menu from "../icons/menu.svg?raw";
+import back from "../icons/back.svg?raw";
+import browser from "../icons/browser.svg?raw";
+import database from "../icons/database.svg?raw";
+
+const icons: Record<string, string> = {
+  home,
+  code,
+  dns,
+  favorite,
+  blog,
+  menu,
+  back,
+  browser,
+  database,
+};
+
+function normalizeSvg(svg: string): string {
+  let s = svg
+    // remove XML declarations and comments
+    .replace(/<\?xml[\s\S]*?\?>/g, "")
+    .replace(/<!--([\s\S]*?)-->/g, "")
+    // remove style blocks (e.g., .st0 { fill:#FFFFFF })
+    .replace(/<style[\s\S]*?<\/style>/g, "")
+    // replace fill/stroke colors to currentColor
+    .replace(/fill\s*:\s*#?fff(f{0,2})/gi, "fill:currentColor")
+    .replace(/stroke\s*:\s*#?fff(f{0,2})/gi, "stroke:currentColor")
+    .replace(/fill\s*=\s*"#?fff(f{0,2})"/gi, 'fill="currentColor"')
+    .replace(/stroke\s*=\s*"#?fff(f{0,2})"/gi, 'stroke="currentColor"');
+
+  // inject class + accessibility + default color attributes on root <svg>
+  s = s.replace(
+    /<svg(\s[^>]*)?>/i,
+    (match) => {
+      let tag = match;
+      // strip width/height from root svg so CSS controls sizing
+      tag = tag.replace(/\s(width|height)\s*=\s*"[^"]*"/gi, "");
+      // ensure class
+      if (className) {
+        if (/class\s*=\s*"[^"]*"/i.test(tag)) {
+          tag = tag.replace(
+            /class\s*=\s*"([^"]*)"/i,
+            (_m, cls) => `class="${cls} ${className}"`
+          );
+        } else {
+          tag = tag.replace(/<svg/i, `<svg class="${className}"`);
+        }
+      }
+      // ensure aria-hidden or aria-label
+      if (ariaLabel && ariaLabel.trim().length > 0) {
+        if (/aria-label\s*=\s*"[^"]*"/i.test(tag)) {
+          tag = tag.replace(/aria-label\s*=\s*"([^"]*)"/i, `aria-label="${ariaLabel}"`);
+        } else {
+          tag = tag.replace(/<svg/i, `<svg aria-label="${ariaLabel}"`);
+        }
+        // role img for labeled icon
+        if (!/role\s*=\s*"img"/i.test(tag)) {
+          tag = tag.replace(/<svg/i, `<svg role="img"`);
+        }
+      } else {
+        // decorative
+        if (!/aria-hidden\s*=\s*"true"/i.test(tag)) {
+          tag = tag.replace(/<svg/i, `<svg aria-hidden="true"`);
+        }
+      }
+      // default color behavior
+      if (!/fill\s*=\s*"currentColor"/i.test(tag)) {
+        tag = tag.replace(/<svg/i, `<svg fill="currentColor"`);
+      }
+      return tag;
+    }
+  );
+
+  return s;
+}
+
+const raw = icons[name];
+if (!raw) {
+  throw new Error(`Icon not found: ${name}`);
+}
+
+const svg = normalizeSvg(raw);
+---
+<Fragment set:html={svg} />

@@ -1,5 +1,6 @@
 ---
 const { selectedItem } = Astro.props;
+import Icon from "./Icon.astro";
 ---
 
 <aside
@@ -34,12 +35,7 @@ const { selectedItem } = Astro.props;
           selectedItem === "home" ? "w--current" : ""
         }`}
       >
-        <img
-          src="/assets/home.svg"
-          loading="eager"
-          alt=""
-          class="nav-link-image"
-        />
+        <Icon name="home" class="nav-link-image" />
         <div>Home</div>
       </a>
       <a
@@ -51,12 +47,7 @@ const { selectedItem } = Astro.props;
           ? "page"
           : undefined}
       >
-        <img
-          src="/assets/code.svg"
-          loading="eager"
-          alt=""
-          class="nav-link-image"
-        />
+        <Icon name="code" class="nav-link-image" />
         <div>Web development</div>
       </a>
       <a
@@ -65,12 +56,7 @@ const { selectedItem } = Astro.props;
           selectedItem === "cloud-infra" ? "w--current" : ""
         }`}
       >
-        <img
-          src="/assets/dns.svg"
-          loading="eager"
-          alt=""
-          class="nav-link-image"
-        />
+        <Icon name="dns" class="nav-link-image" />
         <div>Cloud Infra</div>
       </a>
       <a
@@ -79,12 +65,7 @@ const { selectedItem } = Astro.props;
           selectedItem === "personal-projects" ? "w--current" : ""
         }`}
       >
-        <img
-          src="/assets/favorite.svg"
-          loading="eager"
-          alt=""
-          class="nav-link-image"
-        />
+        <Icon name="favorite" class="nav-link-image" />
         <div>Personal projects</div>
       </a>
       <a
@@ -93,12 +74,7 @@ const { selectedItem } = Astro.props;
           selectedItem === "blog" ? "w--current" : ""
         }`}
       >
-        <img
-          src="/assets/blog.svg"
-          loading="eager"
-          alt=""
-          class="nav-link-image"
-        />
+        <Icon name="blog" class="nav-link-image" />
         <div>Blog</div>
       </a>
     </nav>
@@ -110,7 +86,7 @@ const { selectedItem } = Astro.props;
       role="button"
       tabindex="0"
     >
-      <img src="/assets/menu.svg" loading="eager" alt="" class="navbar-icon" />
+      <Icon name="menu" class="navbar-icon" />
     </div>
   </div>
 
