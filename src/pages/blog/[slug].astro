@@ -1,6 +1,7 @@
 ---
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import Icon from "../../components/Icon.astro";
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -49,7 +50,7 @@ const jsonLd = {
         <div class="container">
           <div class="back-nav-container">
             <a href="/blog" class="back-nav-button w-inline-block">
-              <img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              <Icon name="back" class="back-nav-img" />
               <div>Back to blog</div>
             </a>
           </div>

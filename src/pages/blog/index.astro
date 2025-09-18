@@ -1,6 +1,7 @@
 ---
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import Icon from "../../components/Icon.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
 
 const posts = await loadAllPosts();
@@ -40,7 +41,7 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
         <div class="container">
           <div class="back-nav-container">
             <a href="/" class="back-nav-button w-inline-block">
-              <img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              <Icon name="back" class="back-nav-img" />
               <div>Back</div>
             </a>
           </div>
