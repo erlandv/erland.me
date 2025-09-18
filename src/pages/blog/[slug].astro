@@ -2,6 +2,7 @@
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
+import Footer from "../../components/Footer.astro";
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -90,9 +91,9 @@ const jsonLd = {
             </div>
           </article>
         </div>
+        <Footer />
       </main>
     </div>
-
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   </body>
   <style>

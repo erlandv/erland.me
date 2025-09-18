@@ -3,6 +3,7 @@ import Header from '../../../components/Header.astro';
 import Sidebar from '../../../components/Sidebar.astro';
 import Icon from "../../../components/Icon.astro";
 import { loadAllPosts } from '../../../lib/blog';
+import Footer from "../../../components/Footer.astro";
 
 // Generate static paths for pages 2..N (page 1 handled by /blog)
 export async function getStaticPaths() {
@@ -127,6 +128,7 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
             </section>
           </div>
         </div>
+        <Footer />
       </nav>
     </div>
 

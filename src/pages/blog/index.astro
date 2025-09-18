@@ -3,6 +3,7 @@ import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
+import Footer from "../../components/Footer.astro";
 
 const posts = await loadAllPosts();
 
@@ -120,6 +121,7 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
             )}
           </div>
         </div>
+        <Footer />
       </nav>
     </div>
 
