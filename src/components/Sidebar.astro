@@ -1,6 +1,14 @@
 ---
 const { selectedItem } = Astro.props;
 import Icon from "./Icon.astro";
+
+const socials: Array<{ name: string; href: string; label: string }> = [
+  { name: "twitter", href: "https://twitter.com/erlandzz", label: "Twitter" },
+  { name: "instagram", href: "https://www.instagram.com/erlandramdhani", label: "Instagram" },
+  { name: "facebook", href: "https://www.facebook.com/erlandramdhani", label: "Facebook" },
+  { name: "github", href: "https://github.com/erlandv", label: "GitHub" },
+  { name: "bluesky", href: "https://bsky.app/profile/erland.me", label: "Bluesky" },
+];
 ---
 
 <aside
@@ -77,7 +85,24 @@ import Icon from "./Icon.astro";
         <Icon name="blog" class="nav-link-image" />
         <div>Blog</div>
       </a>
+      <!-- Social icons inside the collapsible menu (mobile/tablet) -->
+      <div class="socials socials--menu">
+        {socials.map((s) => (
+          <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
+            <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+          </a>
+        ))}
+      </div>
     </nav>
+
+    <!-- Social icons at the bottom of the sidebar (desktop) -->
+    <div class="socials socials--sidebar">
+      {socials.map((s) => (
+        <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
+          <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+        </a>
+      ))}
+    </div>
 
     <div
       class="navbar-icon-button w-nav-button"
