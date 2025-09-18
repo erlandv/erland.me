@@ -20,6 +20,7 @@ const { title, canonical, prevHref, nextHref, jsonLd } = Astro.props as HeaderPr
   <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/" rel="preconnect" />
   <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
   {canonical && <link rel="canonical" href={canonical} />}
   {prevHref && <link rel="prev" href={prevHref} />}
   {nextHref && <link rel="next" href={nextHref} />}
