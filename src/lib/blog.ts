@@ -20,7 +20,8 @@ const safeDate = (value: unknown): Date | null => {
 export async function loadAllPosts(): Promise<Post[]> {
   const entries = await getCollection('blog');
   const heroMap = import.meta.glob('../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
-    as: 'url',
+    query: '?url',
+    import: 'default',
     eager: true,
   });
 
