@@ -1,9 +1,7 @@
 ---
-import Header from "../../components/Header.astro";
-import Sidebar from "../../components/Sidebar.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
 import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
-import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 const downloads = (await getCollection("downloads"))
@@ -11,65 +9,51 @@ const downloads = (await getCollection("downloads"))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<!DOCTYPE html>
-<html>
-  <Header title="Download | Erland Ramdhani" />
-  <body>
-    <div class="content">
-      <Sidebar selectedItem="download" />
-      <nav class="main">
-        <div class="container">
-          <BackNav href="/" label="Back" />
-          <div class="content-container">
-            <h1>Download</h1>
-            <div class="download-intro">
-              <p>
-                Melalui halaman ini, kalian dapat mengunduh berbagai macam file yang saya bagikan secara gratis. Download dengan mudah hanya dengan sekali klik, file akan otomatis terunduh ke perangkat kalian tanpa perlu melewati halaman safelink.
-              </p>
-              <p>
-                Semoga apa yang saya bagikan di sini dapat bermanfaat untuk orang banyak!
-              </p>
-            </div>
-            <section class="download-grid">
-              {downloads.map((item) => {
-                const data = item.data;
-                const thumbSrc = data.hero ? data.hero.src : "/assets/erland-icon.svg";
-                const thumbWidth = data.hero?.width ?? 240;
-                const thumbHeight = data.hero?.height ?? 180;
-                const alt = data.heroAlt ?? data.title;
-                const detailHref = `/download/${item.slug}`;
-                return (
-                  <article class="download-card">
-                    <a href={detailHref} class="download-card-thumb" aria-label={`Buka halaman ${data.title}`}>
-                      <img
-                        src={thumbSrc}
-                        width={thumbWidth}
-                        height={thumbHeight}
-                        alt={alt}
-                        loading="lazy"
-                      />
-                    </a>
-                    <div class="download-card-body">
-                      <h3 class="download-card-title">
-                        <a href={detailHref}>{data.title}</a>
-                      </h3>
-                      <p class="download-card-desc">{data.excerpt ?? data.description}</p>
-                      <div class="download-card-actions">
-                        <a class="button download-card-button" href={detailHref}>
-                          {data.ctaLabel}
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </section>
-          </div>
-        </div>
-        <Footer />
-      </nav>
+<SiteLayout title="Download | Erland Ramdhani" selectedItem="download">
+  <BackNav href="/" label="Back" />
+  <div class="content-container">
+    <h1>Download</h1>
+    <div class="download-intro">
+      <p>
+        Melalui halaman ini, kalian dapat mengunduh berbagai macam file yang saya bagikan secara gratis. Download dengan mudah hanya dengan sekali klik, file akan otomatis terunduh ke perangkat kalian tanpa perlu melewati halaman safelink.
+      </p>
+      <p>
+        Semoga apa yang saya bagikan di sini dapat bermanfaat untuk orang banyak!
+      </p>
     </div>
-
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-  </body>
-</html>
+    <section class="download-grid">
+      {downloads.map((item) => {
+        const data = item.data;
+        const thumbSrc = data.hero ? data.hero.src : "/assets/erland-icon.svg";
+        const thumbWidth = data.hero?.width ?? 240;
+        const thumbHeight = data.hero?.height ?? 180;
+        const alt = data.heroAlt ?? data.title;
+        const detailHref = `/download/${item.slug}`;
+        return (
+          <article class="download-card">
+            <a href={detailHref} class="download-card-thumb" aria-label={`Buka halaman ${data.title}`}>
+              <img
+                src={thumbSrc}
+                width={thumbWidth}
+                height={thumbHeight}
+                alt={alt}
+                loading="lazy"
+              />
+            </a>
+            <div class="download-card-body">
+              <h3 class="download-card-title">
+                <a href={detailHref}>{data.title}</a>
+              </h3>
+              <p class="download-card-desc">{data.excerpt ?? data.description}</p>
+              <div class="download-card-actions">
+                <a class="button download-card-button" href={detailHref}>
+                  {data.ctaLabel}
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+  </div>
+</SiteLayout>
