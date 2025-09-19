@@ -21,8 +21,7 @@ const frontmatter = entry.data;
 
 // Auto-detect hero image placed as: src/content/blog/[slug]/hero.(jpg|jpeg|png,webp,gif,svg)
 const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
-  query: '?url',
-  import: 'default',
+  as: 'url',
   eager: true,
 });
 const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
