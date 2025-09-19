@@ -1,0 +1,35 @@
+---
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  selectedItem?: string;
+  canonical?: string;
+  prevHref?: string;
+  nextHref?: string;
+  jsonLd?: any;
+}
+
+const { title, selectedItem, canonical, prevHref, nextHref, jsonLd } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html>
+  <Header title={title} canonical={canonical} prevHref={prevHref} nextHref={nextHref} jsonLd={jsonLd} />
+  <body>
+    <div class="content">
+      <Sidebar selectedItem={selectedItem} />
+      <nav class="main">
+        <div class="container">
+          <slot />
+        </div>
+        <Footer />
+      </nav>
+    </div>
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+  
+</html>
+
