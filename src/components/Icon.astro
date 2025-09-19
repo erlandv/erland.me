@@ -16,6 +16,7 @@ import menu from "../icons/menu.svg?raw";
 import back from "../icons/back.svg?raw";
 import browser from "../icons/browser.svg?raw";
 import database from "../icons/database.svg?raw";
+import mail from "../icons/mail.svg?raw";
 import twitter from "../icons/twitter.svg?raw";
 import instagram from "../icons/instagram.svg?raw";
 import facebook from "../icons/facebook.svg?raw";
@@ -32,6 +33,7 @@ const icons: Record<string, string> = {
   back,
   browser,
   database,
+  mail,
   twitter,
   instagram,
   facebook,
@@ -46,11 +48,23 @@ function normalizeSvg(svg: string): string {
     .replace(/<!--([\s\S]*?)-->/g, "")
     // remove style blocks (e.g., .st0 { fill:#FFFFFF })
     .replace(/<style[\s\S]*?<\/style>/g, "")
-    // replace fill/stroke colors to currentColor
-    .replace(/fill\s*:\s*#?fff(f{0,2})/gi, "fill:currentColor")
-    .replace(/stroke\s*:\s*#?fff(f{0,2})/gi, "stroke:currentColor")
-    .replace(/fill\s*=\s*"#?fff(f{0,2})"/gi, 'fill="currentColor"')
-    .replace(/stroke\s*=\s*"#?fff(f{0,2})"/gi, 'stroke="currentColor"');
+    // normalize inline fill/stroke declarations to currentColor (skip none/url/currentColor)
+    .replace(
+      /fill\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
+      "fill:currentColor"
+    )
+    .replace(
+      /stroke\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
+      "stroke:currentColor"
+    )
+    .replace(
+      /fill\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
+      'fill="currentColor"'
+    )
+    .replace(
+      /stroke\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
+      'stroke="currentColor"'
+    );
 
   // inject class + accessibility + default color attributes on root <svg>
   s = s.replace(
@@ -59,6 +73,8 @@ function normalizeSvg(svg: string): string {
       let tag = match;
       // strip width/height from root svg so CSS controls sizing
       tag = tag.replace(/\s(width|height)\s*=\s*"[^"]*"/gi, "");
+      // drop any existing root fill attribute before injecting our default
+      tag = tag.replace(/\sfill\s*=\s*"[^"]*"/i, "");
       // ensure class
       if (className) {
         if (/class\s*=\s*"[^"]*"/i.test(tag)) {

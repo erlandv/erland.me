@@ -24,7 +24,10 @@ import Footer from "../components/Footer.astro";
                 Today I focus on cloud and IaaS, leveraging virtual machines and load balancers to deliver scalable, efficient systems. I’m a GNU/Linux and open-source advocate, and this is my corner of the web for notes, achievements, and other posts.
               </p>
             </div>
-            <a href="mailto:hello@erland.me" class="button w-button">Contact</a>
+            <a href="mailto:hello@erland.me" class="button w-button contact-button">
+              <Icon name="mail" class="button-icon" />
+              <span>Contact</span>
+            </a>
           </main>
           <div class="projects-section">
             <a href="/web-development" class="projects-container">
@@ -87,3 +90,16 @@ import Footer from "../components/Footer.astro";
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   </body>
 </html>
+<style is:global>
+  .contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .contact-button .button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+</style>
