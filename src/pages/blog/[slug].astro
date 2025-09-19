@@ -2,6 +2,7 @@
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
+import BackNav from "../../components/BackNav.astro";
 import Footer from "../../components/Footer.astro";
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '../../lib/seo';
@@ -22,7 +23,8 @@ const frontmatter = entry.data;
 
 // Auto-detect hero image placed as: src/content/blog/[slug]/hero.(jpg|jpeg|png,webp,gif,svg)
 const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
-  as: 'url',
+  query: '?url',
+  import: 'default',
   eager: true,
 });
 const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
@@ -52,49 +54,43 @@ const jsonLd = blogPostingJsonLd({
       <Sidebar selectedItem="blog" />
       <main class="main">
         <div class="container">
-          <div class="back-nav-container">
-            <a href="/blog" class="back-nav-button w-inline-block">
-              <Icon name="back" class="back-nav-img" />
-              <div>Back to blog</div>
-            </a>
-          </div>
-
+          <BackNav href="/blog" label="Back to blog" />
           <article class="content-container blog-post">
-            <header class="blog-post__header">
-              {heroSrc && (
-                <img
-                  src={heroSrc}
-                  width={heroWidth}
-                  height={heroHeight}
-                  alt={heroAlt}
-                  loading="eager"
-                  class="hero-image"
-                />
-              )}
-              <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
-              {(frontmatter.category || frontmatter.publishDate) && (
-                <div class="blog-post__meta">
-                  {frontmatter.category && (
-                    <div class="blog-post__meta-item">
-                      <Icon name="tags" class="blog-post__meta-icon" />
-                      <span class="blog-post__meta-text">{frontmatter.category}</span>
-                    </div>
-                  )}
-                  {frontmatter.publishDate && (
-                    <div class="blog-post__meta-item">
-                      <Icon name="date" class="blog-post__meta-icon" />
-                      <time datetime={new Date(frontmatter.publishDate).toISOString()} class="blog-post__meta-text">
-                        {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
-                      </time>
-                    </div>
-                  )}
-                </div>
-              )}
-            </header>
-
-            <div class="prose">
-              <Content />
+    <header class="blog-post__header">
+      {heroSrc && (
+        <img
+          src={heroSrc}
+          width={heroWidth}
+          height={heroHeight}
+          alt={heroAlt}
+          loading="eager"
+          class="hero-image"
+        />
+      )}
+      <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
+      {(frontmatter.category || frontmatter.publishDate) && (
+        <div class="blog-post__meta">
+          {frontmatter.category && (
+            <div class="blog-post__meta-item">
+              <Icon name="tags" class="blog-post__meta-icon" />
+              <span class="blog-post__meta-text">{frontmatter.category}</span>
             </div>
+          )}
+          {frontmatter.publishDate && (
+            <div class="blog-post__meta-item">
+              <Icon name="date" class="blog-post__meta-icon" />
+              <time datetime={new Date(frontmatter.publishDate).toISOString()} class="blog-post__meta-text">
+                {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
+              </time>
+            </div>
+          )}
+        </div>
+      )}
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
           </article>
         </div>
         <Footer />
@@ -102,41 +98,4 @@ const jsonLd = blogPostingJsonLd({
     </div>
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   </body>
-  <style>
-    .blog-post { max-width: 780px; }
-    .blog-post__header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      /* margin-bottom: 1rem; */
-    }
-    .blog-post__meta {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      color: rgba(214,214,214,0.85);
-    }
-    .blog-post__meta-item {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-    :global(.blog-post__meta-icon) {
-      width: 16px;
-      height: 16px;
-      color: rgba(138, 180, 255, 0.8);
-    }
-    .blog-post__meta-text {
-      display: inline-block;
-      white-space: nowrap;
-    }
-    .prose :is(p, ul, ol) { line-height: 1.75; }
-    .prose pre { padding: 1rem; border-radius: 10px; overflow: auto; border:1px solid #252525; background:#0f1115; }
-    .prose h1 { font-size: 2rem; line-height:1.25; margin:1.25rem 0 .5rem; letter-spacing:-.02em; }
-    .prose h2 { font-size: 1.5rem; line-height:1.3; margin:1.2rem 0 .5rem; }
-    .prose h3 { font-size: 1.25rem; line-height:1.35; margin:1rem 0 .4rem; }
-    .prose img { border-radius: 12px; }
-  </style>
 </html>
