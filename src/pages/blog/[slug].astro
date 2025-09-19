@@ -1,9 +1,7 @@
 ---
-import Header from '../../components/Header.astro';
-import Sidebar from '../../components/Sidebar.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
-import Footer from "../../components/Footer.astro";
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '../../lib/seo';
 
@@ -21,15 +19,12 @@ if (!entry) {
 const { Content } = await entry.render();
 const frontmatter = entry.data;
 
-// Auto-detect hero image placed as: src/content/blog/[slug]/hero.(jpg|jpeg|png,webp,gif,svg)
 const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
   query: '?url',
   import: 'default',
   eager: true,
 });
-const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
-  | string
-  | undefined;
+const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as string | undefined;
 const heroData = frontmatter.hero ?? heroFallback;
 const heroSrc = typeof heroData === 'string' ? heroData : heroData?.src;
 const heroWidth = typeof heroData === 'object' ? heroData.width : undefined;
@@ -46,26 +41,12 @@ const jsonLd = blogPostingJsonLd({
 });
 ---
 
-<!DOCTYPE html>
-<html>
-  <Header title={`${frontmatter.title} | Erland`} canonical={canonical} jsonLd={jsonLd} />
-  <body>
-    <div class="content">
-      <Sidebar selectedItem="blog" />
-      <main class="main">
-        <div class="container">
-          <BackNav href="/blog" label="Back to blog" />
-          <article class="content-container blog-post">
+<SiteLayout title={`${frontmatter.title} | Erland`} canonical={canonical} jsonLd={jsonLd} selectedItem="blog">
+  <BackNav href="/blog" label="Back to blog" />
+  <article class="content-container blog-post">
     <header class="blog-post__header">
       {heroSrc && (
-        <img
-          src={heroSrc}
-          width={heroWidth}
-          height={heroHeight}
-          alt={heroAlt}
-          loading="eager"
-          class="hero-image"
-        />
+        <img src={heroSrc} width={heroWidth} height={heroHeight} alt={heroAlt} loading="eager" class="hero-image" />
       )}
       <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
       {(frontmatter.category || frontmatter.publishDate) && (
@@ -87,15 +68,8 @@ const jsonLd = blogPostingJsonLd({
         </div>
       )}
     </header>
-
     <div class="prose">
       <Content />
     </div>
-          </article>
-        </div>
-        <Footer />
-      </main>
-    </div>
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-  </body>
-</html>
+  </article>
+</SiteLayout>
