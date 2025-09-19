@@ -652,6 +652,20 @@ p {
 	box-shadow: 0 2px 4px rgba(8, 8, 8, 0.82);
 }
 
+/* Button helpers */
+.contact-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.contact-button .button-icon,
+.button-icon {
+	width: 1.25rem;
+	height: 1.25rem;
+	flex-shrink: 0;
+}
+
 .fold-content {
 	margin-bottom: 48px;
 }
