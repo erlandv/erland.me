@@ -1,0 +1,142 @@
+---
+import Header from "../../components/Header.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import Icon from "../../components/Icon.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+export async function getStaticPaths() {
+  const downloads = await getCollection("downloads");
+  return downloads
+    .filter((item) => !item.data.draft)
+    .map((item) => ({ params: { slug: item.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug("downloads", slug ?? "");
+
+if (!entry || entry.data.draft) {
+  return Astro.redirect("/download");
+}
+
+const { Content } = await entry.render();
+const data = entry.data;
+
+const hero = data.hero;
+const heroAlt = data.heroAlt ?? data.title;
+const canonicalPath = `/download/${entry.slug}/`;
+const canonicalUrl = `https://erland.me${canonicalPath}`;
+const lastUpdated = data.lastUpdated
+  ? new Date(data.lastUpdated)
+  : undefined;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  description: data.description,
+  dateModified: lastUpdated ? lastUpdated.toISOString() : undefined,
+  version: data.version,
+  keywords: data.tags?.join(", ") || undefined,
+  downloadUrl: data.file,
+  url: canonicalUrl,
+  image: hero ? new URL(hero.src, canonicalUrl).toString() : undefined,
+};
+
+const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
+  ? data.downloadFiles
+  : data.file
+    ? [{ label: data.file.split("/").pop() ?? data.title, href: data.file }]
+    : []
+).map((item) => ({
+  label: item.label,
+  href: item.href,
+  size: item.size,
+}));
+
+const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
+---
+
+<!DOCTYPE html>
+<html>
+  <Header title={`${data.title} | Erland Ramdhani`} canonical={canonicalUrl} jsonLd={jsonLd} />
+  <body>
+    <div class="content">
+      <Sidebar selectedItem="download" />
+      <nav class="main">
+        <div class="container">
+          <div class="back-nav-container">
+            <a href="/download" class="back-nav-button w-inline-block">
+              <Icon name="back" class="back-nav-img" />
+              <div>Back</div>
+            </a>
+          </div>
+          <div class="content-container download-page">
+            <header class="download-header">
+              <div class="download-hero">
+                {hero ? (
+                  <img
+                    src={hero.src}
+                    width={hero.width}
+                    height={hero.height}
+                    alt={heroAlt}
+                    loading="lazy"
+                    class="hero-image"
+                  />
+                ) : (
+                  <div class="hero-image hero-placeholder" aria-hidden="true">📦</div>
+                )}
+              </div>
+              <h1>{data.title}</h1>
+            </header>
+
+            <article class="download-richtext">
+              <Content />
+            </article>
+
+            {downloadRows.length > 0 && (
+              <section class="download-files">
+                <h2 class="download-files-title">Link Download</h2>
+                {data.downloadIntro && data.downloadIntro.length > 0 && (
+                  <div class="download-files-intro">
+                    {data.downloadIntro.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+                <table class="download-files-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">File Name</th>
+                      {hasSizeColumn && <th scope="col">Size</th>}
+                      <th scope="col">Download</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {downloadRows.map((item) => (
+                      <tr key={item.label}>
+                        <td data-label="File Name">{item.label}</td>
+                        {hasSizeColumn && <td data-label="Size">{item.size ?? "-"}</td>}
+                        <td data-label="Download">
+                          <a class="download-files-link" href={item.href} download>
+                            Download
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {data.downloadNote && (
+                  <p class="download-files-note">{data.downloadNote}</p>
+                )}
+              </section>
+            )}
+          </div>
+        </div>
+        <Footer />
+      </nav>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+</html>

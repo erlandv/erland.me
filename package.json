@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.5"
+    "astro": "^5.1.5",
+    "remark-directive": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
   }
 }

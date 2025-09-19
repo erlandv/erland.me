@@ -77,6 +77,16 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         <div>Personal projects</div>
       </a>
       <a
+        href="/download"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "download" ? "w--current" : ""
+        }`}
+        aria-current={selectedItem === "download" ? "page" : undefined}
+      >
+        <Icon name="download" class="nav-link-image" />
+        <div>Download</div>
+      </a>
+      <a
         href="/blog"
         class={`nav-link-container w-inline-block ${
           selectedItem === "blog" ? "w--current" : ""

@@ -1,10 +1,13 @@
 import { getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+
+type HeroType = string | ImageMetadata | undefined;
 
 export type Post = {
   slug: string;
   data: any;
   date: Date | null;
-  hero?: string;
+  hero?: HeroType;
   Content: any;
 };
 
@@ -24,9 +27,9 @@ export async function loadAllPosts(): Promise<Post[]> {
   const posts: Post[] = [];
   for (const entry of entries) {
     const { Content } = await entry.render();
-    const hero = (Object.entries(heroMap).find(([p]) => p.startsWith(`../content/blog/${entry.slug}/hero.`))?.[1] as
-      | string
-      | undefined) as string | undefined;
+    const heroEntry = Object.entries(heroMap).find(([p]) => p.startsWith(`../content/blog/${entry.slug}/hero.`));
+    const fallbackHero = heroEntry?.[1] as string | undefined;
+    const hero = (entry.data?.hero as ImageMetadata | undefined) ?? fallbackHero;
     posts.push({
       slug: entry.slug,
       data: entry.data,

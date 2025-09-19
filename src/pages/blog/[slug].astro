@@ -24,9 +24,13 @@ const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,g
   as: 'url',
   eager: true,
 });
-const hero = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
+const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as
   | string
   | undefined;
+const heroData = frontmatter.hero ?? heroFallback;
+const heroSrc = typeof heroData === 'string' ? heroData : heroData?.src;
+const heroWidth = typeof heroData === 'object' ? heroData.width : undefined;
+const heroHeight = typeof heroData === 'object' ? heroData.height : undefined;
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 const canonical = `/blog/${slug}/`;
 
@@ -37,7 +41,7 @@ const jsonLd = {
   datePublished: frontmatter.publishDate ? new Date(frontmatter.publishDate).toISOString() : undefined,
   dateModified: (frontmatter.updatedDate ? new Date(frontmatter.updatedDate) : new Date(frontmatter.publishDate || Date.now())).toISOString(),
   mainEntityOfPage: canonical,
-  image: hero ? [hero] : undefined,
+  image: heroSrc ? [heroSrc] : undefined,
 };
 ---
 
@@ -56,33 +60,36 @@ const jsonLd = {
             </a>
           </div>
 
-          <article class="content-container" style="max-width: 780px;">
-            <header style="margin-bottom:1rem;">
-              {hero && (
-                <img src={hero} alt={heroAlt} loading="eager" class="post-hero" />
+          <article class="content-container blog-post">
+            <header class="blog-post__header">
+              {heroSrc && (
+                <img
+                  src={heroSrc}
+                  width={heroWidth}
+                  height={heroHeight}
+                  alt={heroAlt}
+                  loading="eager"
+                  class="hero-image"
+                />
               )}
               <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
-              {frontmatter.publishDate && (
-                <time datetime={new Date(frontmatter.publishDate).toISOString()} style="opacity:.7;">
-                  {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
-                </time>
-              )}
-              {frontmatter.tags?.length > 0 && (
-                <ul style="display:flex; gap:.5rem; margin:.75rem 0 0; padding:0; list-style:none;">
-                  {frontmatter.tags.map((t) => (
-                    <li
-                      style="
-                        padding:.2rem .6rem;
-                        border:1px solid var(--border, rgba(0,0,0,.08));
-                        border-radius:999px;
-                        font-size:.8rem;
-                        opacity:.9;
-                      "
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
+              {(frontmatter.category || frontmatter.publishDate) && (
+                <div class="blog-post__meta">
+                  {frontmatter.category && (
+                    <div class="blog-post__meta-item">
+                      <Icon name="tags" class="blog-post__meta-icon" />
+                      <span class="blog-post__meta-text">{frontmatter.category}</span>
+                    </div>
+                  )}
+                  {frontmatter.publishDate && (
+                    <div class="blog-post__meta-item">
+                      <Icon name="date" class="blog-post__meta-icon" />
+                      <time datetime={new Date(frontmatter.publishDate).toISOString()} class="blog-post__meta-text">
+                        {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
+                      </time>
+                    </div>
+                  )}
+                </div>
               )}
             </header>
 
@@ -97,13 +104,40 @@ const jsonLd = {
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   </body>
   <style>
+    .blog-post { max-width: 780px; }
+    .blog-post__header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      /* margin-bottom: 1rem; */
+    }
+    .blog-post__meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      color: rgba(214,214,214,0.85);
+    }
+    .blog-post__meta-item {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    :global(.blog-post__meta-icon) {
+      width: 16px;
+      height: 16px;
+      color: rgba(138, 180, 255, 0.8);
+    }
+    .blog-post__meta-text {
+      display: inline-block;
+      white-space: nowrap;
+    }
     .prose :is(p, ul, ol) { line-height: 1.75; }
     .prose pre { padding: 1rem; border-radius: 10px; overflow: auto; border:1px solid #252525; background:#0f1115; }
     .prose h1 { font-size: 2rem; line-height:1.25; margin:1.25rem 0 .5rem; letter-spacing:-.02em; }
     .prose h2 { font-size: 1.5rem; line-height:1.3; margin:1.2rem 0 .5rem; }
     .prose h3 { font-size: 1.25rem; line-height:1.35; margin:1rem 0 .4rem; }
     .prose img { border-radius: 12px; }
-    .post-hero { display:block; width:100%; height:auto; border-radius:12px; margin:0 0 1rem 0; }
-    @media (max-width: 640px) { .post-hero { border-radius: 12px; } }
   </style>
 </html>

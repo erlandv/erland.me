@@ -1,9 +1,13 @@
 ---
 title: "Cara Transaksi Jual-Beli Saham di Pasar Negosiasi"
 description: "Mau jual-beli saham di pasar negosiasi? Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula."
+excerpt: "Berbagi info tentang proses transaksi jual-beli saham di pasar negosiasi"
 publishDate: 2025-09-16
 updatedDate: 2025-09-16
+hero: ./hero.png
+heroAlt: "Ilustrasi grafik saham"
 tags: ["info"]
+category: "Finance"
 draft: false
 ---
 
@@ -63,10 +67,10 @@ Yanto mengubungi CS stockbit untuk meminta form instruksi transaksi saham di pas
 
 Begini contoh formulirnya:
 
-<div style="display: flex; gap: 16px;">
-  <img src="blog/images/contoh-form-beli-saham-pasar-nego.webp" width="48%">
-  <img src="blog/images/contoh-form-jual-saham-pasar-nego.webp" width="48%">
-</div>
+:::gallery
+![Contoh Form Jual Beli Saham Pasar Nego](./images/contoh-form-beli-saham-pasar-nego.webp "Form Pembeli"),
+![Contoh Form Jual Beli Saham Pasar Nego](./images/contoh-form-jual-saham-pasar-nego.webp "Form Penjual")
+:::
 
 Setelah Stockbit menerima instruksi tersebut, Stockbit akan langsung mengirimkan email ke pembeli dan penjual untuk konfirmasi mengeksekusi transaksi tersebut di jam bursa jika nilai transaksinya cukup kecil. Tapi jika nilai transaksi cukup besar, di atas Rp25.000.000 misalnya, biasanya Stockbit akan menghubungi investor melalui telepon kantor untuk melakukan konfirmasi.
 

@@ -24,6 +24,19 @@ const param = Number(Astro.params.page ?? '1');
 const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Math.floor(param));
 const paginated = posts.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
+
+const normalizeHero = (hero: any) => {
+  if (!hero) return null;
+  if (typeof hero === 'string') {
+    return { src: hero, width: 512, height: 512 };
+  }
+  const { src, width, height } = hero;
+  return { src, width, height };
+};
+
+const getHero = (post: any) => normalizeHero(post.data?.hero ?? post.hero);
+const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <!DOCTYPE html>
@@ -63,39 +76,61 @@ const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
             <h1>Blog</h1>
             <section class="items-container">
               <div class="resouce-items">
-                {paginated.map((post) => (
-                  <a href={`/blog/${post.slug}/`} class="w-inline-block" style="text-decoration:none;">
-                    <article class="resource-card post-card">
-                      <div class="post-card__inner">
-                        <div class="post-card__thumb">
-                          {post.hero ? (
-                            <img src={post.hero} alt={post.data.heroAlt ?? post.data.title} loading="lazy" />
-                          ) : (
-                            <div class="post-card__thumb--placeholder"></div>
-                          )}
-                        </div>
-                        <div class="post-card__body">
-                          <header class="post-card__header">
-                            <h2 class="post-card__title">{post.data.title}</h2>
-                            {post.date && (
-                              <time datetime={post.date.toISOString()} class="post-card__date">
-                                {post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })}
-                              </time>
+                {paginated.map((post) => {
+                  const hero = getHero(post);
+                  const excerpt = getExcerpt(post);
+                  const dateLabel = post.date
+                    ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+                    : null;
+                  return (
+                    <a href={`/blog/${post.slug}/`} class="w-inline-block post-card__link">
+                      <article class="resource-card post-card">
+                        <div class="post-card__inner">
+                          <div class="post-card__thumb">
+                            {hero ? (
+                              <img
+                                src={hero.src}
+                                width={hero.width}
+                                height={hero.height}
+                                alt={post.data.heroAlt ?? post.data.title}
+                                loading="lazy"
+                                class="post-card__img"
+                              />
+                            ) : (
+                              <div class="post-card__thumb--placeholder" aria-hidden="true"></div>
                             )}
-                          </header>
-                          {post.data.description && <p class="post-card__desc">{post.data.description}</p>}
-                          {post.data.tags?.length > 0 && (
-                            <ul class="post-card__tags">
-                              {post.data.tags.map((t) => (
-                                <li class="post-card__tag">{t}</li>
-                              ))}
-                            </ul>
-                          )}
+                          </div>
+                          <div class="post-card__body">
+                            <header class="post-card__header">
+                              <h2 class="post-card__title">{post.data.title}</h2>
+                              <div class="post-card__meta">
+                                {getCategory(post) && (
+                                  <div class="post-card__meta-item">
+                                    <Icon name="tags" class="post-card__meta-icon" />
+                                    <span class="post-card__category">{getCategory(post)}</span>
+                                  </div>
+                                )}
+                                {dateLabel && (
+                                  <div class="post-card__meta-item">
+                                    <Icon name="date" class="post-card__meta-icon" />
+                                    <time datetime={post.date?.toISOString()} class="post-card__date">
+                                      {dateLabel}
+                                    </time>
+                                  </div>
+                                )}
+                              </div>
+                            </header>
+                            {excerpt && <p class="post-card__excerpt">{excerpt}</p>}
+                            <span class="post-card__readmore">
+                              <span>Read more</span>
+                              <Icon name="readmore" class="post-card__readmore-icon" />
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </article>
-                  </a>
-                ))}
+                      </article>
+                    </a>
+                  );
+                })}
 
                 {posts.length === 0 && (
                   <p style="opacity:.8;">Belum ada tulisan. Tambahkan file di <code>src/content/blog/[slug]/index.md</code> ya ✍️</p>

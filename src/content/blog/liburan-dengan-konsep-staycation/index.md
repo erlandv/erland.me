@@ -1,9 +1,13 @@
 ---
 title: "Liburan dengan Konsep Staycation"
-description: "Ulasan ringkas berlibur santai dengan konsep staycation di hotel terdekat"
+description: "Cerita pengalaman kecanduan liburan dengan konsep stayction di hotel terdekat untuk menikmati waktu dengan cara bersantai di kamar hotel"
+excerpt: "Ulasan ringkas berlibur santai dengan konsep staycation di hotel terdekat"
 publishDate: 2025-09-17
 updatedDate: 2025-09-17
+hero: ./hero.png
+heroAlt: "Ilustrasi hotel untuk staycation"
 tags: ["essay"]
+category: "Lifestyle"
 draft: false
 ---
 
@@ -29,6 +33,11 @@ Eh, tapi entah, tekanannya yang memang tinggi atau saya yang terlalu lemah (?).
 
 Sebelum memiliki kegemaran staycation ini, cara saya meredam stres adalah mengunjungi alam bebas dengan mendaki gunung atau sekadar berkemah. Namun, kegiatan pendakian gunung kian menjadi tren akhir-akhir ini. Banyak orang-orang yang mulai gemar naik gunung juga, sehingga alam bebas yang notabene wilayah sunyi kini menjadi sangat ramai. Karena itu, saya menjadi tidak nyaman lagi. Niatnya mencari ketenangan di alam, malah bertemu banyak orang. Dalam beberapa momen malah terkadang naik gunung aja sampai harus antre saking ramainya di jalur pendakian, belum lagi ditambah harus cape menggendong beratnya tas carrier yang berisi peralatan pendakian.
 
+:::gallery
+![Staycation di Hotel](./images/staycation-di-hotel.jpg "Staycation di Hotel"),
+![Camping di Gunung](./images/camping-di-gunung.jpg "Camping di Gunung")
+:::
+
 Sejak saat itulah kegiatan saya naik gunung menjadi berkurang drastis dan beralih menjadi staycation di hotel. Periode waktunya tidak menentu, selain tergantung pada situasi stresnya, juga tergantung pada ketersediaan uang. Hehe. Rata-rata biaya menginap di hotel yang saya keluarkan untuk satu malam antara Rp500.000 hingga Rp1.000.000, tergantung pada hotelnya. Pernah di bawah Rp500.000 saat menginap di hotel bintang 2, dan pernah pula di atas Rp1.000.000 saat menginap di hotel bintang 5.
 
 Biasanya waktu yang paling rutin untuk staycation adalah saat akhir bulan, karena kebetulan pemasukan saya dari gaji kantor dan side job berada di akhir bulan. Terkadang staycation sebulan sekali, terkadang juga sebulan dua kali, bahkan pernah pula seminggu sekali. Memang yang paling berpengaruh adalah perkara uang. Hahaha.
@@ -42,13 +51,3 @@ Yuk, cobain deh liburan dengan konsep staycation. Tidak harus staycation sendiri
 Di awal-awal masa pandemi, saya sudah menerapkan di rumah aja yang benar-benar di rumah aja. Jangankan pergi liburan, bersilaturahmi ke keluarga saat idulfitri aja tidak sama sekali. Stres saya meningkat drastis, saya butuh penyegaran. Jadi solusi saya ya itu, liburan di tempat sepi. Saya pikir juga sekalian membuat ekonomi terus berputar di masa pandemi, meminimalisir terjadinya resesi di Indonesia. Betul, kan?
 
 Ya sudah, begitu aja. Saya menulis ini dalam rangka lagi nggak ada kerjaan aja. Ditulis di sebuah kafe mungil tidak jauh dari rumah, ditemani segelas cappucino yang rasanya harus kalian coba. Bhay~
-
-<!--
-Gambar artikel dapat diletakkan di folder yang sama:
-- hero: ./hero.jpg
-- gambar lain: ./images/photo-1.png, ./images/photo-2.png, dst.
-
-Contoh pakai gambar lokal:
-![Ilustrasi](./images/photo-1.png)
--->
-
