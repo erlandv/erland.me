@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Project from "../components/Project.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Icon from "../components/Icon.astro";
+import BackNav from "../components/BackNav.astro";
 import Footer from "../components/Footer.astro";
 const projects = [
   {
@@ -55,12 +56,7 @@ const projects = [
         <Sidebar selectedItem="web-development" />
       <nav class="main">
         <div class="container">
-          <div class="back-nav-container">
-            <a href="/" class="back-nav-button w-inline-block"
-              ><Icon name="back" class="back-nav-img" />
-              <div>Back</div></a
-            >
-          </div>
+          <BackNav href="/" label="Back" />
           <div class="content-container">
             <h1>Web Development</h1>
             <section class="items-container">

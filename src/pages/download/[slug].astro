@@ -3,6 +3,7 @@ import Header from "../../components/Header.astro";
 import Sidebar from "../../components/Sidebar.astro";
 import Icon from "../../components/Icon.astro";
 import Footer from "../../components/Footer.astro";
+import BackNav from "../../components/BackNav.astro";
 import { getCollection, getEntryBySlug } from "astro:content";
 
 export async function getStaticPaths() {
@@ -65,12 +66,7 @@ const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
       <Sidebar selectedItem="download" />
       <nav class="main">
         <div class="container">
-          <div class="back-nav-container">
-            <a href="/download" class="back-nav-button w-inline-block">
-              <Icon name="back" class="back-nav-img" />
-              <div>Back</div>
-            </a>
-          </div>
+          <BackNav href="/download" label="Back" />
           <div class="content-container download-page">
             <header class="download-header">
               <div class="download-hero">

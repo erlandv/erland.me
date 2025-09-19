@@ -2,6 +2,7 @@
 import Header from '../../components/Header.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
+import PostCard from "../../components/PostCard.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
 import Footer from "../../components/Footer.astro";
 
@@ -71,54 +72,15 @@ const getCategory = (post: any) => post.data?.category ?? null;
                     ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
                     : null;
                   return (
-                    <a href={`/blog/${post.slug}/`} class="w-inline-block post-card__link">
-                      <article class="resource-card post-card">
-                        <div class="post-card__inner">
-                          <div class="post-card__thumb">
-                            {hero ? (
-                              <img
-                                src={hero.src}
-                                width={hero.width}
-                                height={hero.height}
-                                alt={post.data.heroAlt ?? post.data.title}
-                                loading="lazy"
-                                class="post-card__img"
-                              />
-                            ) : (
-                              <div class="post-card__thumb--placeholder" aria-hidden="true"></div>
-                            )}
-                          </div>
-                          <div class="post-card__body">
-                            <header class="post-card__header">
-                              <h2 class="post-card__title">{post.data.title}</h2>
-                              <div class="post-card__meta">
-                                {getCategory(post) && (
-                                  <div class="post-card__meta-item">
-                                    <Icon name="tags" class="post-card__meta-icon" />
-                                    <span class="post-card__category">{getCategory(post)}</span>
-                                  </div>
-                                )}
-                                {dateLabel && (
-                                  <div class="post-card__meta-item">
-                                    <Icon name="date" class="post-card__meta-icon" />
-                                    <time datetime={post.date?.toISOString()} class="post-card__date">
-                                      {dateLabel}
-                                    </time>
-                                  </div>
-                                )}
-                              </div>
-                            </header>
-
-                            {excerpt && <p class="post-card__excerpt">{excerpt}</p>}
-
-                            <span class="post-card__readmore">
-                              <span>Read more</span>
-                              <Icon name="readmore" class="post-card__readmore-icon" />
-                            </span>
-                          </div>
-                        </div>
-                      </article>
-                    </a>
+                    <PostCard
+                      href={`/blog/${post.slug}/`}
+                      title={post.data.title}
+                      hero={hero}
+                      alt={post.data.heroAlt ?? post.data.title}
+                      category={getCategory(post)}
+                      dateLabel={dateLabel}
+                      excerpt={excerpt}
+                    />
                   );
                 })}
                 
