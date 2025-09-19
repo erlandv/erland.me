@@ -4,6 +4,7 @@ import Sidebar from '../../../components/Sidebar.astro';
 import Icon from "../../../components/Icon.astro";
 import PostCard from "../../../components/PostCard.astro";
 import { loadAllPosts } from '../../../lib/blog';
+import { collectionPageJsonLd } from '../../../lib/seo';
 import Footer from "../../../components/Footer.astro";
 
 // Generate static paths for pages 2..N (page 1 handled by /blog)
@@ -47,19 +48,15 @@ const getCategory = (post: any) => post.data?.category ?? null;
     canonical={pageHref(page)}
     prevHref={page > 1 ? pageHref(page - 1) : undefined}
     nextHref={page < totalPages ? pageHref(page + 1) : undefined}
-    jsonLd={{
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: `Blog - Page ${page}`,
-      url: pageHref(page),
-      isPartOf: { '@type': 'Blog', name: 'Blog', url: '/blog/' },
-      itemListElement: paginated.map((p, i) => ({
-        '@type': 'ListItem',
-        position: (page - 1) * pageSize + i + 1,
-        url: `/blog/${p.slug}/`,
-        name: p.data.title,
-      })),
-    }}
+  jsonLd={collectionPageJsonLd(
+    `Blog - Page ${page}`,
+    pageHref(page),
+    paginated.map((p, i) => ({
+      url: `/blog/${p.slug}/`,
+      name: p.data.title,
+      position: (page - 1) * pageSize + i + 1,
+    }))
+  )}
   />
   <body>
     <div class="content">

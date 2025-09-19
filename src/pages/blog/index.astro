@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
 import PostCard from "../../components/PostCard.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
+import { collectionPageJsonLd } from '../../lib/seo';
 import Footer from "../../components/Footer.astro";
 
 const posts = await loadAllPosts();
@@ -35,19 +36,11 @@ const getCategory = (post: any) => post.data?.category ?? null;
     title="Blog | Erland"
     canonical="/blog/"
     nextHref={totalPages > 1 ? pageHref(2) : undefined}
-    jsonLd={{
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: 'Blog',
-      url: '/blog/',
-      isPartOf: { '@type': 'Blog', name: 'Blog', url: '/blog/' },
-      itemListElement: paginated.map((p, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        url: `/blog/${p.slug}/`,
-        name: p.data.title,
-      })),
-    }}
+  jsonLd={collectionPageJsonLd(
+    'Blog',
+    '/blog/',
+    paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
+  )}
   />
   <body>
     <div class="content">

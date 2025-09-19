@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar.astro';
 import Icon from "../../components/Icon.astro";
 import Footer from "../../components/Footer.astro";
 import { getCollection } from 'astro:content';
+import { blogPostingJsonLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -34,15 +35,13 @@ const heroHeight = typeof heroData === 'object' ? heroData.height : undefined;
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 const canonical = `/blog/${slug}/`;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: frontmatter.title,
-  datePublished: frontmatter.publishDate ? new Date(frontmatter.publishDate).toISOString() : undefined,
-  dateModified: (frontmatter.updatedDate ? new Date(frontmatter.updatedDate) : new Date(frontmatter.publishDate || Date.now())).toISOString(),
-  mainEntityOfPage: canonical,
+const jsonLd = blogPostingJsonLd({
+  title: frontmatter.title,
+  canonical,
+  publishDate: frontmatter.publishDate,
+  updatedDate: frontmatter.updatedDate,
   image: heroSrc ? [heroSrc] : undefined,
-};
+});
 ---
 
 <!DOCTYPE html>
