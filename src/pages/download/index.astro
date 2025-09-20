@@ -27,7 +27,7 @@ const downloads = (await getCollection("downloads"))
         const thumbWidth = data.hero?.width ?? 240;
         const thumbHeight = data.hero?.height ?? 180;
         const alt = data.heroAlt ?? data.title;
-        const detailHref = `/download/${item.slug}`;
+        const detailHref = `/download/${item.slug}/`;
         return (
           <article class="download-card">
             <a href={detailHref} class="download-card-thumb" aria-label={`Buka halaman ${data.title}`}>
