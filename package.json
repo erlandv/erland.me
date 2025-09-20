@@ -6,13 +6,29 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:analyze": "astro build && npx vite-bundle-analyzer dist/_astro/*.js",
+    "build:clean": "rm -rf dist && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "astro check"
+    "lint": "astro check",
+    "lint:fix": "astro check --fix",
+    "type-check": "astro check --only=types",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "optimize": "node scripts/optimize-build.js",
+    "analyze:assets": "npx @astrojs/analyze",
+    "validate": "npm run lint && npm run type-check && npm run format:check"
   },
   "dependencies": {
     "astro": "^5.1.5",
     "remark-directive": "^4.0.0",
     "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@types/node": "^24.5.2",
+    "autoprefixer": "^10.4.21",
+    "prettier": "^3.6.2",
+    "terser": "^5.44.0"
   }
 }
