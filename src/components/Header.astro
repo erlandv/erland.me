@@ -1,6 +1,5 @@
 ---
-// @ts-ignore - ViewTransitions is deprecated but still functional
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import { generateMetaTags, websiteJsonLd } from '../lib/seo';
 
 interface HeaderProps {
@@ -52,7 +51,7 @@ const websiteSchema = websiteJsonLd();
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>{metaTags.title}</title>
-  <ViewTransitions />
+  <ClientRouter fallback="swap" />
   
   <!-- Enhanced Meta Tags -->
   <meta name="description" content={metaTags.description} />
