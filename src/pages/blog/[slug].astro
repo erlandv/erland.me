@@ -7,11 +7,11 @@ import { blogPostingJsonLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((p) => ({ params: { slug: p.slug } }));
+  return posts.map((p: any) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
-const entry = (await getCollection('blog')).find((e) => e.slug === slug);
+const entry = (await getCollection('blog')).find((e: any) => e.slug === slug);
 if (!entry) {
   return Astro.redirect('/blog/');
 }

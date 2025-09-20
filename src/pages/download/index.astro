@@ -1,12 +1,11 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
 import { getCollection } from "astro:content";
 
 const downloads = (await getCollection("downloads"))
-  .filter((item) => !item.data.draft)
-  .sort((a, b) => a.data.order - b.data.order);
+  .filter((item: any) => !item.data.draft)
+  .sort((a: any, b: any) => a.data.order - b.data.order);
 ---
 
 <SiteLayout title="Download | Erland Ramdhani" selectedItem="download">
@@ -22,7 +21,7 @@ const downloads = (await getCollection("downloads"))
       </p>
     </div>
     <section class="download-grid">
-      {downloads.map((item) => {
+      {downloads.map((item: any) => {
         const data = item.data;
         const thumbSrc = data.hero ? data.hero.src : "/assets/erland-icon.svg";
         const thumbWidth = data.hero?.width ?? 240;

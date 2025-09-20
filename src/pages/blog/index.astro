@@ -1,12 +1,10 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
 import PostCard from "../../components/PostCard.astro";
 import Pagination from "../../components/Pagination.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
 import { collectionPageJsonLd } from '../../lib/seo';
-import Footer from "../../components/Footer.astro";
 
 const posts = await loadAllPosts();
 

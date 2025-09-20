@@ -1,4 +1,5 @@
 ---
+// @ts-ignore - ViewTransitions is deprecated but still functional
 import { ViewTransitions } from 'astro:transitions';
 import { generateMetaTags, websiteJsonLd } from '../lib/seo';
 
@@ -104,14 +105,14 @@ const websiteSchema = websiteJsonLd();
   <link href="/assets/erland-icon.svg" rel="icon" type="image/svg+xml" />
   
   <!-- Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
   {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   )}
   
   <!-- Legacy Browser Support -->
   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
-  <script type="text/javascript">
+  <script type="text/javascript" is:inline>
     !(function (o, c) {
       var n = c.documentElement,
         t = " w-mod-";
