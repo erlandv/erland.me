@@ -16,7 +16,7 @@ const { slug } = Astro.params;
 const entry = await getEntryBySlug("downloads", slug ?? "");
 
 if (!entry || entry.data.draft) {
-  return Astro.redirect("/download");
+  return Astro.redirect("/download/");
 }
 
 const { Content } = await entry.render();
@@ -56,7 +56,7 @@ const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
 ---
 
 <SiteLayout title={`${data.title} | Erland Ramdhani`} canonical={canonicalUrl} jsonLd={jsonLd} selectedItem="download">
-  <BackNav href="/download" label="Back" />
+  <BackNav href="/download/" label="Back" />
   <div class="content-container download-page">
     <header class="download-header">
       <div class="download-hero">

@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const entry = (await getCollection('blog')).find((e) => e.slug === slug);
 if (!entry) {
-  return Astro.redirect('/blog');
+  return Astro.redirect('/blog/');
 }
 
 const { Content } = await entry.render();
@@ -58,7 +58,7 @@ const jsonLd = blogPostingJsonLd({
   tags={frontmatter.tags}
   author="Erland Ramdhani"
 >
-  <BackNav href="/blog" label="Back to blog" />
+  <BackNav href="/blog/" label="Back to blog" />
   <article class="content-container blog-post">
     <header class="blog-post__header">
       {heroSrc && (
