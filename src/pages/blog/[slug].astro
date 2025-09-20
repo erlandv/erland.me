@@ -38,10 +38,26 @@ const jsonLd = blogPostingJsonLd({
   publishDate: frontmatter.publishDate,
   updatedDate: frontmatter.updatedDate,
   image: heroSrc ? [heroSrc] : undefined,
+  description: frontmatter.description,
+  excerpt: frontmatter.excerpt,
+  tags: frontmatter.tags,
+  category: frontmatter.category,
 });
 ---
 
-<SiteLayout title={`${frontmatter.title} | Erland`} canonical={canonical} jsonLd={jsonLd} selectedItem="blog">
+<SiteLayout 
+  title={frontmatter.title} 
+  canonical={canonical} 
+  jsonLd={jsonLd} 
+  selectedItem="blog"
+  description={frontmatter.description || frontmatter.excerpt}
+  image={heroSrc}
+  type="article"
+  publishedTime={frontmatter.publishDate}
+  modifiedTime={frontmatter.updatedDate}
+  tags={frontmatter.tags}
+  author="Erland Ramdhani"
+>
   <BackNav href="/blog" label="Back to blog" />
   <article class="content-container blog-post">
     <header class="blog-post__header">

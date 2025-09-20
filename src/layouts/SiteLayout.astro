@@ -10,14 +10,48 @@ interface Props {
   prevHref?: string;
   nextHref?: string;
   jsonLd?: any;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  publishedTime?: Date | string;
+  modifiedTime?: Date | string;
+  tags?: string[];
+  author?: string;
 }
 
-const { title, selectedItem, canonical, prevHref, nextHref, jsonLd } = Astro.props as Props;
+const { 
+  title, 
+  selectedItem, 
+  canonical, 
+  prevHref, 
+  nextHref, 
+  jsonLd,
+  description,
+  image,
+  type,
+  publishedTime,
+  modifiedTime,
+  tags,
+  author
+} = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
 <html>
-  <Header title={title} canonical={canonical} prevHref={prevHref} nextHref={nextHref} jsonLd={jsonLd} />
+  <Header 
+    title={title} 
+    canonical={canonical} 
+    prevHref={prevHref} 
+    nextHref={nextHref} 
+    jsonLd={jsonLd}
+    description={description}
+    image={image}
+    type={type}
+    publishedTime={publishedTime}
+    modifiedTime={modifiedTime}
+    tags={tags}
+    author={author}
+  />
   <body>
     <div class="content">
       <Sidebar selectedItem={selectedItem} />
