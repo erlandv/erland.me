@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "build:analyze": "astro build && npx vite-bundle-analyzer dist/_astro/*.js",
     "build:clean": "rm -rf dist && astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -15,8 +14,6 @@
     "type-check": "astro check --only=types",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "optimize": "node scripts/optimize-build.js",
-    "analyze:assets": "npx @astrojs/analyze",
     "validate": "npm run lint && npm run type-check && npm run format:check"
   },
   "dependencies": {
