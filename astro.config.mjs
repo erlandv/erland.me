@@ -8,16 +8,16 @@ export default defineConfig({
   // Site configuration
   site: 'https://erland.me',
   trailingSlash: 'always',
-  
+
   // Output configuration
   output: 'static',
-  
+
   // Build configuration
   build: {
     assets: '_astro',
     inlineStylesheets: 'auto',
   },
-  
+
   // Markdown configuration
   markdown: {
     remarkPlugins: [remarkDirective, remarkGallery],
@@ -28,7 +28,7 @@ export default defineConfig({
     gfm: true,
     smartypants: true,
   },
-  
+
   // Vite configuration for optimizations
   vite: {
     build: {
@@ -43,7 +43,7 @@ export default defineConfig({
       // Optimize chunk splitting
       rollupOptions: {
         output: {
-          manualChunks: (id) => {
+          manualChunks: id => {
             // Vendor chunks
             if (id.includes('node_modules')) {
               if (id.includes('remark') || id.includes('unist')) {
@@ -74,7 +74,7 @@ export default defineConfig({
       },
     },
   },
-  
+
   // Image optimization
   image: {
     domains: ['erland.me'],
@@ -85,23 +85,22 @@ export default defineConfig({
       },
     ],
   },
-  
-  
+
   // Compress configuration
   compressHTML: true,
-  
+
   // Scoped style strategy
   scopedStyleStrategy: 'where',
-  
+
   // Dev server configuration
   devToolbar: {
     enabled: true,
   },
-  
+
   // Integrations for additional features
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('404'),
+      filter: page => !page.includes('404'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

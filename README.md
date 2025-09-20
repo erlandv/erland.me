@@ -20,16 +20,19 @@ This is my personal website and blog where I share my thoughts, experiences, and
 ## Tech Stack
 
 ### Core Framework
+
 - **Astro 5.1.5** - Modern static site generator
 - **TypeScript** - Type-safe development
 - **Vite** - Fast build tool and dev server
 
 ### Content & Styling
+
 - **Markdown** - Content with frontmatter
 - **Vanilla CSS** - Custom styling with CSS variables
 - **SVG Icons** - Optimized icon system with lazy loading
 
 ### Plugins & Tools
+
 - **@astrojs/sitemap** - Automatic sitemap generation
 - **remark-directive** - Custom markdown syntax
 - **Custom remark-gallery** - Image gallery support

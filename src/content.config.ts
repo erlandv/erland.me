@@ -1,8 +1,8 @@
 // src/content.config.ts
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -19,7 +19,7 @@ const blog = defineCollection({
 });
 
 const downloads = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -30,20 +30,20 @@ const downloads = defineCollection({
       file: z.string(),
       version: z.string().optional(),
       lastUpdated: z.coerce.date().optional(),
-    ctaLabel: z.string().default("Download sekarang"),
-    order: z.number().default(0),
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-    downloadFiles: z
-      .array(
-        z.object({
-          label: z.string(),
-          href: z.string(),
-          size: z.string().optional(),
-        })
-      )
-      .optional(),
-    downloadNote: z.string().optional(),
+      ctaLabel: z.string().default('Download sekarang'),
+      order: z.number().default(0),
+      tags: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+      downloadFiles: z
+        .array(
+          z.object({
+            label: z.string(),
+            href: z.string(),
+            size: z.string().optional(),
+          })
+        )
+        .optional(),
+      downloadNote: z.string().optional(),
       downloadIntro: z.array(z.string()).optional(),
     }),
 });

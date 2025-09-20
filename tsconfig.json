@@ -35,9 +35,5 @@
     "src/**/*.js",
     "src/**/*.jsx"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".astro"
-  ]
+  "exclude": ["node_modules", "dist", ".astro"]
 }

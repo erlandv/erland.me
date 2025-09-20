@@ -19,18 +19,24 @@ const safeDate = (value: unknown): Date | null => {
 
 export async function loadAllPosts(): Promise<Post[]> {
   const entries = await getCollection('blog');
-  const heroMap = import.meta.glob('../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
-    query: '?url',
-    import: 'default',
-    eager: true,
-  });
+  const heroMap = import.meta.glob(
+    '../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}',
+    {
+      query: '?url',
+      import: 'default',
+      eager: true,
+    }
+  );
 
   const posts: Post[] = [];
   for (const entry of entries) {
     const { Content } = await entry.render();
-    const heroEntry = Object.entries(heroMap).find(([p]) => p.startsWith(`../content/blog/${entry.slug}/hero.`));
+    const heroEntry = Object.entries(heroMap).find(([p]) =>
+      p.startsWith(`../content/blog/${entry.slug}/hero.`)
+    );
     const fallbackHero = heroEntry?.[1] as string | undefined;
-    const hero = (entry.data?.hero as ImageMetadata | undefined) ?? fallbackHero;
+    const hero =
+      (entry.data?.hero as ImageMetadata | undefined) ?? fallbackHero;
     posts.push({
       slug: entry.slug,
       data: entry.data,
@@ -41,7 +47,7 @@ export async function loadAllPosts(): Promise<Post[]> {
   }
 
   return posts
-    .filter((p) => !p.data?.draft)
+    .filter(p => !p.data?.draft)
     .sort((a, b) => (b.date?.valueOf() ?? 0) - (a.date?.valueOf() ?? 0));
 }
 

@@ -1,42 +1,42 @@
 ---
-title: "Template Kalender 2025"
-description: "Free download file template kalender 2025 CDR, AI, PDF, PNG HD transparan, cukup sekali klik link download. Full 12 bulan lengkap hari libur nasional."
-excerpt: "Free download file template kalender 2025 berformat vector"
+title: 'Template Kalender 2025'
+description: 'Free download file template kalender 2025 CDR, AI, PDF, PNG HD transparan, cukup sekali klik link download. Full 12 bulan lengkap hari libur nasional.'
+excerpt: 'Free download file template kalender 2025 berformat vector'
 hero: ./hero.png
-heroAlt: "Template Kalender 2025"
-file: "https://asset.erland.me/template/kalender-2025.zip"
-version: "v1.0.0"
+heroAlt: 'Template Kalender 2025'
+file: 'https://asset.erland.me/template/kalender-2025.zip'
+version: 'v1.0.0'
 lastUpdated: 2024-12-12
-ctaLabel: "Download template"
+ctaLabel: 'Download template'
 order: 1
-tags: ["kalender", "template", "desain"]
+tags: ['kalender', 'template', 'desain']
 downloadFiles:
-  - label: "kalender-2025.zip"
-    href: "https://asset.erland.me/template/kalender-2025.zip"
-    size: "11.59 MB"
-  - label: "kalender-2025.cdr"
-    href: "https://asset.erland.me/template/kalender-2025.cdr"
-    size: "1.06 MB"
-  - label: "kalender-2025.ai"
-    href: "https://asset.erland.me/template/kalender-2025.ai"
-    size: "2.77 MB"
-  - label: "kalender-2025.pdf"
-    href: "https://asset.erland.me/template/kalender-2025.pdf"
-    size: "2.77 MB"
-  - label: "kalender-2025.png"
-    href: "https://asset.erland.me/template/kalender-2025.png"
-    size: "1.37 MB"
-  - label: "kalender-2025-perbulan.pdf"
-    href: "https://asset.erland.me/template/kalender-2025-perbulan.pdf"
-    size: "1.28 MB"
-  - label: "kalender-2025-perbulan.png"
-    href: "https://asset.erland.me/template/kalender-2025-perbulan.zip"
-    size: "4.07 MB"
+  - label: 'kalender-2025.zip'
+    href: 'https://asset.erland.me/template/kalender-2025.zip'
+    size: '11.59 MB'
+  - label: 'kalender-2025.cdr'
+    href: 'https://asset.erland.me/template/kalender-2025.cdr'
+    size: '1.06 MB'
+  - label: 'kalender-2025.ai'
+    href: 'https://asset.erland.me/template/kalender-2025.ai'
+    size: '2.77 MB'
+  - label: 'kalender-2025.pdf'
+    href: 'https://asset.erland.me/template/kalender-2025.pdf'
+    size: '2.77 MB'
+  - label: 'kalender-2025.png'
+    href: 'https://asset.erland.me/template/kalender-2025.png'
+    size: '1.37 MB'
+  - label: 'kalender-2025-perbulan.pdf'
+    href: 'https://asset.erland.me/template/kalender-2025-perbulan.pdf'
+    size: '1.28 MB'
+  - label: 'kalender-2025-perbulan.png'
+    href: 'https://asset.erland.me/template/kalender-2025-perbulan.zip'
+    size: '4.07 MB'
 downloadNote: |
   Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, beri tahu saya melalui kolom komentar di bawah ini, akan saya usahakan respons secepatnya. Butuh komunikasi lebih lanjut? Hubungi saya melalui email hello@erland.me
 downloadIntro:
-  - "Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama."
-  - "Silakan download file template kalender 2025 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!"
+  - 'Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama.'
+  - 'Silakan download file template kalender 2025 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!'
 ---
 
 Halo, guys! Saya masih konsisten nih setiap tahun untuk berbagi file template kalender gratis melalui blog pribadi ini. Kali ini saya akan berbagi template kalender 2025 cdr yang saya buat sendiri pastinya secara khusus untuk dibagikan kepada siapapun yang membutuhkan.
@@ -73,8 +73,8 @@ Bagi kalian pengguna produk Adobe ataupun software editor lain, tidak perlu khaw
 File format .ai dan .pdf dapat dibuka dan diedit dengan Adobe Illustrator. Sedangkan file format .png dapat dibuka dan diedit dengan Adobe Photoshop, latar belakang file .png juga sudah dibuat transparan.
 
 :::gallery
-![Preview di Adobe Illustrator](./template-kalender-2025-ai.webp "Adobe Illustrator"),
-![Preview di Adobe Photoshop](./template-kalender-2025-png.webp "Adobe Photoshop")
+![Preview di Adobe Illustrator](./template-kalender-2025-ai.webp 'Adobe Illustrator'),
+![Preview di Adobe Photoshop](./template-kalender-2025-png.webp 'Adobe Photoshop')
 :::
 
 Jadi secara keseluruhan terdapat 4 jenis format file kalender 2025, yaitu format file .cdr, .ai, .pdf, dan .png yang semua file tersebut di-compress ke dalam satu file ZIP atau saya sebut sebagai edisi full pack. Selain edisi full pack, saya juga sudah memisahkan file-file dengan link download berdasarkan formatnya masing-masing, ini khusus untuk kalian yang ingin download template kalender 2025 dalam satu format saja. Silakan download file kalender 2025 sesuai format yang kalian butuhkan.

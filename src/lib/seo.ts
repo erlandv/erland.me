@@ -1,7 +1,8 @@
 // Base site configuration
 const SITE_CONFIG = {
   name: 'Erland Ramdhani',
-  description: 'Web Developer based in Jakarta, Indonesia. Building scalable web applications and sharing knowledge about web development, cloud infrastructure, and open source.',
+  description:
+    'Web Developer based in Jakarta, Indonesia. Building scalable web applications and sharing knowledge about web development, cloud infrastructure, and open source.',
   url: 'https://erland.me',
   author: {
     name: 'Erland Ramdhani',
@@ -13,34 +14,38 @@ const SITE_CONFIG = {
       'https://twitter.com/erlandzz',
       'https://www.instagram.com/erlandramdhani',
       'https://www.facebook.com/erlandramdhani',
-      'https://bsky.app/profile/erland.me'
-    ]
-  }
+      'https://bsky.app/profile/erland.me',
+    ],
+  },
 } as const;
 
-export function collectionPageJsonLd(name: string, url: string, items: { url: string; name: string; position: number }[]) {
+export function collectionPageJsonLd(
+  name: string,
+  url: string,
+  items: { url: string; name: string; position: number }[]
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name,
     url: `${SITE_CONFIG.url}${url}`,
     description: `Collection of ${name.toLowerCase()} posts by ${SITE_CONFIG.author.name}`,
-    isPartOf: { 
-      '@type': 'Blog', 
+    isPartOf: {
+      '@type': 'Blog',
       name: `${SITE_CONFIG.name} Blog`,
       url: `${SITE_CONFIG.url}/blog/`,
-      author: personJsonLd()
+      author: personJsonLd(),
     },
     author: personJsonLd(),
     publisher: organizationJsonLd(),
-    itemListElement: items.map((it) => ({ 
-      '@type': 'ListItem', 
+    itemListElement: items.map(it => ({
+      '@type': 'ListItem',
       position: it.position,
       item: {
         '@type': 'BlogPosting',
         name: it.name,
-        url: `${SITE_CONFIG.url}${it.url}`
-      }
+        url: `${SITE_CONFIG.url}${it.url}`,
+      },
     })),
   } as const;
 }
@@ -58,11 +63,19 @@ export function blogPostingJsonLd(opts: {
   wordCount?: number | null;
   readingTime?: number | null;
 }) {
-  const datePublished = opts.publishDate ? new Date(opts.publishDate).toISOString() : undefined;
-  const dateModified = new Date(opts.updatedDate || opts.publishDate || Date.now()).toISOString();
-  const image = Array.isArray(opts.image) ? opts.image : opts.image ? [opts.image] : undefined;
+  const datePublished = opts.publishDate
+    ? new Date(opts.publishDate).toISOString()
+    : undefined;
+  const dateModified = new Date(
+    opts.updatedDate || opts.publishDate || Date.now()
+  ).toISOString();
+  const image = Array.isArray(opts.image)
+    ? opts.image
+    : opts.image
+      ? [opts.image]
+      : undefined;
   const fullUrl = `${SITE_CONFIG.url}${opts.canonical}`;
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -73,7 +86,7 @@ export function blogPostingJsonLd(opts: {
     url: fullUrl,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': fullUrl
+      '@id': fullUrl,
     },
     author: personJsonLd(),
     publisher: organizationJsonLd(),
@@ -81,7 +94,7 @@ export function blogPostingJsonLd(opts: {
       '@type': 'ImageObject',
       url: img.startsWith('http') ? img : `${SITE_CONFIG.url}${img}`,
       width: 1200,
-      height: 630
+      height: 630,
     })),
     keywords: opts.tags?.join(', ') || undefined,
     articleSection: opts.category || undefined,
@@ -91,8 +104,8 @@ export function blogPostingJsonLd(opts: {
     isPartOf: {
       '@type': 'Blog',
       name: `${SITE_CONFIG.name} Blog`,
-      url: `${SITE_CONFIG.url}/blog/`
-    }
+      url: `${SITE_CONFIG.url}/blog/`,
+    },
   } as const;
 }
 
@@ -108,9 +121,11 @@ export function creativeWorkJsonLd(opts: {
   fileSize?: string | null;
   fileFormat?: string | null;
 }) {
-  const dateModified = opts.lastUpdated ? new Date(opts.lastUpdated).toISOString() : undefined;
+  const dateModified = opts.lastUpdated
+    ? new Date(opts.lastUpdated).toISOString()
+    : undefined;
   const fullUrl = `${SITE_CONFIG.url}${opts.url}`;
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -122,21 +137,29 @@ export function creativeWorkJsonLd(opts: {
     url: fullUrl,
     author: personJsonLd(),
     publisher: organizationJsonLd(),
-    image: opts.image ? {
-      '@type': 'ImageObject',
-      url: opts.image.startsWith('http') ? opts.image : `${SITE_CONFIG.url}${opts.image}`,
-      width: 1200,
-      height: 630
-    } : undefined,
-    downloadUrl: opts.downloadUrl ? {
-      '@type': 'DataDownload',
-      url: opts.downloadUrl.startsWith('http') ? opts.downloadUrl : `${SITE_CONFIG.url}${opts.downloadUrl}`,
-      fileFormat: opts.fileFormat || 'application/zip',
-      contentSize: opts.fileSize
-    } : undefined,
+    image: opts.image
+      ? {
+          '@type': 'ImageObject',
+          url: opts.image.startsWith('http')
+            ? opts.image
+            : `${SITE_CONFIG.url}${opts.image}`,
+          width: 1200,
+          height: 630,
+        }
+      : undefined,
+    downloadUrl: opts.downloadUrl
+      ? {
+          '@type': 'DataDownload',
+          url: opts.downloadUrl.startsWith('http')
+            ? opts.downloadUrl
+            : `${SITE_CONFIG.url}${opts.downloadUrl}`,
+          fileFormat: opts.fileFormat || 'application/zip',
+          contentSize: opts.fileSize,
+        }
+      : undefined,
     inLanguage: 'id-ID',
     isAccessibleForFree: true,
-    license: 'https://creativecommons.org/licenses/by/4.0/'
+    license: 'https://creativecommons.org/licenses/by/4.0/',
   } as const;
 }
 
@@ -152,8 +175,8 @@ export function personJsonLd() {
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Jakarta',
-      addressCountry: 'ID'
-    }
+      addressCountry: 'ID',
+    },
   } as const;
 }
 
@@ -166,10 +189,10 @@ export function organizationJsonLd() {
       '@type': 'ImageObject',
       url: `${SITE_CONFIG.url}/assets/erland-icon.svg`,
       width: 512,
-      height: 512
+      height: 512,
     },
     founder: personJsonLd(),
-    description: SITE_CONFIG.description
+    description: SITE_CONFIG.description,
   } as const;
 }
 
@@ -187,10 +210,10 @@ export function websiteJsonLd() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE_CONFIG.url}/blog/?q={search_term_string}`
+        urlTemplate: `${SITE_CONFIG.url}/blog/?q={search_term_string}`,
       },
-      'query-input': 'required name=search_term_string'
-    }
+      'query-input': 'required name=search_term_string',
+    },
   } as const;
 }
 
@@ -202,8 +225,8 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${SITE_CONFIG.url}${item.url}`
-    }))
+      item: `${SITE_CONFIG.url}${item.url}`,
+    })),
   } as const;
 }
 
@@ -219,11 +242,15 @@ export function generateMetaTags(opts: {
   tags?: string[] | null;
   author?: string | null;
 }) {
-  const fullUrl = opts.canonical ? `${SITE_CONFIG.url}${opts.canonical}` : SITE_CONFIG.url;
-  const imageUrl = opts.image ? 
-    (opts.image.startsWith('http') ? opts.image : `${SITE_CONFIG.url}${opts.image}`) : 
-    `${SITE_CONFIG.url}/assets/erland-icon.svg`;
-  
+  const fullUrl = opts.canonical
+    ? `${SITE_CONFIG.url}${opts.canonical}`
+    : SITE_CONFIG.url;
+  const imageUrl = opts.image
+    ? opts.image.startsWith('http')
+      ? opts.image
+      : `${SITE_CONFIG.url}${opts.image}`
+    : `${SITE_CONFIG.url}/assets/erland-icon.svg`;
+
   return {
     title: `${opts.title} | ${SITE_CONFIG.name}`,
     description: opts.description || SITE_CONFIG.description,
@@ -236,10 +263,14 @@ export function generateMetaTags(opts: {
       image: imageUrl,
       siteName: SITE_CONFIG.name,
       locale: 'id_ID',
-      ...(opts.publishedTime && { publishedTime: new Date(opts.publishedTime).toISOString() }),
-      ...(opts.modifiedTime && { modifiedTime: new Date(opts.modifiedTime).toISOString() }),
+      ...(opts.publishedTime && {
+        publishedTime: new Date(opts.publishedTime).toISOString(),
+      }),
+      ...(opts.modifiedTime && {
+        modifiedTime: new Date(opts.modifiedTime).toISOString(),
+      }),
       ...(opts.tags && { tags: opts.tags }),
-      ...(opts.author && { authors: [opts.author] })
+      ...(opts.author && { authors: [opts.author] }),
     },
     twitter: {
       card: 'summary_large_image',
@@ -247,8 +278,7 @@ export function generateMetaTags(opts: {
       description: opts.description || SITE_CONFIG.description,
       image: imageUrl,
       creator: '@erlandzz',
-      site: '@erlandzz'
-    }
+      site: '@erlandzz',
+    },
   };
 }
-

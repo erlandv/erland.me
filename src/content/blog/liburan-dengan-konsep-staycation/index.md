@@ -1,13 +1,13 @@
 ---
-title: "Liburan dengan Konsep Staycation"
-description: "Cerita pengalaman kecanduan liburan dengan konsep stayction di hotel terdekat untuk menikmati waktu dengan cara bersantai di kamar hotel"
-excerpt: "Ulasan ringkas berlibur santai dengan konsep staycation di hotel terdekat"
+title: 'Liburan dengan Konsep Staycation'
+description: 'Cerita pengalaman kecanduan liburan dengan konsep stayction di hotel terdekat untuk menikmati waktu dengan cara bersantai di kamar hotel'
+excerpt: 'Ulasan ringkas berlibur santai dengan konsep staycation di hotel terdekat'
 publishDate: 2025-09-17
 updatedDate: 2025-09-17
 hero: ./hero.png
-heroAlt: "Ilustrasi hotel untuk staycation"
-tags: ["essay"]
-category: "Lifestyle"
+heroAlt: 'Ilustrasi hotel untuk staycation'
+tags: ['essay']
+category: 'Lifestyle'
 draft: false
 ---
 
@@ -21,7 +21,7 @@ Sejak tahun 2018 sampai saat ini, sudah banyak hotel-hotel di Kota Bogor yang sa
 
 Ya, memang, kalau hotelnya berada di luar Bogor yang menjadi domisili saya mungkin namanya bukan staycation lagi, karena kalau menurut Cambridge Dictionary sih staycation artinya liburan yang dilakukan di rumah atau di dekat rumah, daripada bepergian ke tempat lain.
 
-Mau gimana lagi? Saya sudah pernah mengunjungi semua hotel yang ada di Kota Bogor. *masih sombong*
+Mau gimana lagi? Saya sudah pernah mengunjungi semua hotel yang ada di Kota Bogor. _masih sombong_
 
 ![Arti Staycation](./images/arti-staycation.jpg)
 
@@ -34,8 +34,8 @@ Eh, tapi entah, tekanannya yang memang tinggi atau saya yang terlalu lemah (?).
 Sebelum memiliki kegemaran staycation ini, cara saya meredam stres adalah mengunjungi alam bebas dengan mendaki gunung atau sekadar berkemah. Namun, kegiatan pendakian gunung kian menjadi tren akhir-akhir ini. Banyak orang-orang yang mulai gemar naik gunung juga, sehingga alam bebas yang notabene wilayah sunyi kini menjadi sangat ramai. Karena itu, saya menjadi tidak nyaman lagi. Niatnya mencari ketenangan di alam, malah bertemu banyak orang. Dalam beberapa momen malah terkadang naik gunung aja sampai harus antre saking ramainya di jalur pendakian, belum lagi ditambah harus cape menggendong beratnya tas carrier yang berisi peralatan pendakian.
 
 :::gallery
-![Staycation di Hotel](./images/staycation-di-hotel.jpg "Staycation di Hotel"),
-![Camping di Gunung](./images/camping-di-gunung.jpg "Camping di Gunung")
+![Staycation di Hotel](./images/staycation-di-hotel.jpg 'Staycation di Hotel'),
+![Camping di Gunung](./images/camping-di-gunung.jpg 'Camping di Gunung')
 :::
 
 Sejak saat itulah kegiatan saya naik gunung menjadi berkurang drastis dan beralih menjadi staycation di hotel. Periode waktunya tidak menentu, selain tergantung pada situasi stresnya, juga tergantung pada ketersediaan uang. Hehe. Rata-rata biaya menginap di hotel yang saya keluarkan untuk satu malam antara Rp500.000 hingga Rp1.000.000, tergantung pada hotelnya. Pernah di bawah Rp500.000 saat menginap di hotel bintang 2, dan pernah pula di atas Rp1.000.000 saat menginap di hotel bintang 5.

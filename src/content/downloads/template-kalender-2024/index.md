@@ -1,42 +1,42 @@
 ---
-title: "Template Kalender 2024"
-description: "Mentahan file template kalender 2024 CDR, AI, PDF, PNG HD sekali klik link download gratis 100% full 12 bulan lengkap hari libur nasional."
-excerpt: "Free download file template kalender 2024 berformat vector"
+title: 'Template Kalender 2024'
+description: 'Mentahan file template kalender 2024 CDR, AI, PDF, PNG HD sekali klik link download gratis 100% full 12 bulan lengkap hari libur nasional.'
+excerpt: 'Free download file template kalender 2024 berformat vector'
 hero: ./hero.png
-heroAlt: "Template Kalender 2024"
-file: "https://asset.erland.me/template/kalender-2024.zip"
-version: "v1.0.0"
+heroAlt: 'Template Kalender 2024'
+file: 'https://asset.erland.me/template/kalender-2024.zip'
+version: 'v1.0.0'
 lastUpdated: 2024-12-12
-ctaLabel: "Download template"
+ctaLabel: 'Download template'
 order: 2
-tags: ["kalender", "template", "desain"]
+tags: ['kalender', 'template', 'desain']
 downloadFiles:
-  - label: "kalender-2024.zip"
-    href: "https://asset.erland.me/template/kalender-2024.zip"
-    size: "11.09 MB"
-  - label: "kalender-2024.cdr"
-    href: "https://asset.erland.me/template/kalender-2024.cdr"
-    size: "1.0 MB"
-  - label: "kalender-2024.ai"
-    href: "https://asset.erland.me/template/kalender-2024.ai"
-    size: "2.73 MB"
-  - label: "kalender-2024.pdf"
-    href: "https://asset.erland.me/template/kalender-2024.pdf"
-    size: "1.22 MB"
-  - label: "kalender-2024.png"
-    href: "https://asset.erland.me/template/kalender-2024.png"
-    size: "1.49 MB"
-  - label: "kalender-2024-perbulan.pdf"
-    href: "https://asset.erland.me/template/kalender-2024-perbulan.pdf"
-    size: "1.27 MB"
-  - label: "kalender-2024-perbulan.png"
-    href: "https://asset.erland.me/template/kalender-2024-png-perbulan.zip"
-    size: "4.65 MB"
+  - label: 'kalender-2024.zip'
+    href: 'https://asset.erland.me/template/kalender-2024.zip'
+    size: '11.09 MB'
+  - label: 'kalender-2024.cdr'
+    href: 'https://asset.erland.me/template/kalender-2024.cdr'
+    size: '1.0 MB'
+  - label: 'kalender-2024.ai'
+    href: 'https://asset.erland.me/template/kalender-2024.ai'
+    size: '2.73 MB'
+  - label: 'kalender-2024.pdf'
+    href: 'https://asset.erland.me/template/kalender-2024.pdf'
+    size: '1.22 MB'
+  - label: 'kalender-2024.png'
+    href: 'https://asset.erland.me/template/kalender-2024.png'
+    size: '1.49 MB'
+  - label: 'kalender-2024-perbulan.pdf'
+    href: 'https://asset.erland.me/template/kalender-2024-perbulan.pdf'
+    size: '1.27 MB'
+  - label: 'kalender-2024-perbulan.png'
+    href: 'https://asset.erland.me/template/kalender-2024-png-perbulan.zip'
+    size: '4.65 MB'
 downloadNote: |
   Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, beri tahu saya melalui kolom komentar di bawah ini, akan saya usahakan respons secepatnya. Butuh komunikasi lebih lanjut? Hubungi saya melalui email hello@erland.me
 downloadIntro:
-  - "Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama."
-  - "Silakan download file template kalender 2024 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!"
+  - 'Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama.'
+  - 'Silakan download file template kalender 2024 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!'
 ---
 
 Kembali lagi ke edisi berbagi file template kalender 2024 cdr. Lima tahun terakhir saya mencoba konsisten untuk berbagi template kalender secara gratis setiap tahunnya melalui blog pribadi ini, tidak ada tujuan lain selain untuk berbagi kepada kalian yang membutuhkan.
@@ -50,8 +50,8 @@ Desain kalendernya masih sama dengan tahun-tahun sebelumnya. Saya mencoba membua
 ## Preview Kalender 2024
 
 :::gallery
-![Preview Template 2024](./template-kalender-2024.webp "Januari"),
-![Preview Template 2024](./download-template-kalender-2024.webp "Februari")
+![Preview Template 2024](./template-kalender-2024.webp 'Januari'),
+![Preview Template 2024](./download-template-kalender-2024.webp 'Februari')
 :::
 
 Desain template kalender 2024 ini dibuat dengan menggunakan 2 font favorit saya, yaitu [font Philosopher](https://fonts.google.com/specimen/Philosopher) dan [font Poppins](https://fonts.google.com/specimen/Poppins) yang merupakan font berlisensi [Open Font Licence](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL), keduanya dapat diunduh langsung melalui Google Fonts secara gratis.

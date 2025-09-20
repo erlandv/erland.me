@@ -1,11 +1,11 @@
 import { visit } from 'unist-util-visit';
 
 export default function remarkGallery() {
-  return (tree) => {
+  return tree => {
     visit(
       tree,
-      (node) => node.type === 'containerDirective' && node.name === 'gallery',
-      (node) => {
+      node => node.type === 'containerDirective' && node.name === 'gallery',
+      node => {
         node.data = node.data || {};
         node.data.hName = 'div';
         node.data.hProperties = {
@@ -24,7 +24,7 @@ export default function remarkGallery() {
             continue;
           }
 
-         const images = child.children?.filter((n) => n.type === 'image') ?? [];
+          const images = child.children?.filter(n => n.type === 'image') ?? [];
           if (images.length === 0) {
             nextChildren.push(child);
             continue;
