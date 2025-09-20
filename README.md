@@ -1,92 +1,150 @@
-Codefolio (Astro)
+# erland.me
 
-Overview
-- Personal portfolio and blog built with Astro 5.
-- Includes sections for Web Development, DevOps, Personal Projects, and a Markdown‑powered blog.
-- Clean, fast, and SEO‑friendly with Astro View Transitions enabled.
+Personal website and blog built with Astro 5, featuring a clean and fast static site with blog functionality and download sections.
 
-Features
-- Astro content collections for blog posts with typed frontmatter.
-- Reusable components for header, sidebar, and project cards.
-- Responsive layout and prebuilt styles in `public/assets/styles.css`.
-- Simple author/profile details via the sidebar component.
+## ✨ Features
 
-Tech Stack
-- Astro ^5.x
-- TypeScript (minimal typings)
-- Vanilla CSS (served from `public/assets/styles.css`)
+- **Fast & Modern**: Built with Astro 5 for optimal performance
+- **Blog System**: Markdown-powered blog with content collections
+- **Custom Markdown**: Enhanced with remark plugins for galleries and directives
+- **SEO Optimized**: Clean URLs and meta tags
+- **Responsive Design**: Works great on all devices
 
-Getting Started
-1) Prerequisites
-- Node.js 18+ recommended
+## 🚀 Tech Stack
 
-2) Install
-- Run `npm install`
+- **Framework**: Astro ^5.1.5
+- **Content**: Markdown with frontmatter
+- **Styling**: Vanilla CSS
+- **Plugins**: 
+  - remark-directive for custom markdown syntax
+  - Custom remark-gallery plugin
 
-3) Development
-- Start dev server: `npm run dev`
-- The app runs at `http://localhost:4321` by default.
+## 📁 Project Structure
 
-4) Build & Preview
-- Production build: `npm run build`
-- Preview build locally: `npm run preview`
-
-Scripts (from package.json)
-- `dev` / `start`: run Astro dev server
-- `build`: build for production
-- `preview`: preview the production build
-
-Project Structure (high level)
-- `src/pages` — route pages (home, blog, sections)
-- `src/components` — UI components (Header, Sidebar, Project)
-- `src/layouts` — base layout(s)
-- `src/content` — Markdown content (blog)
-- `public/assets` — static assets and global styles
-
-Blog Content
-- Posts live in `src/content/blog/` as Markdown files.
-- Frontmatter schema is defined in `src/content.config.ts` and supports:
-  - `title` (string)
-  - `description` (string, optional)
-  - `publishDate` (date)
-  - `updatedDate` (date, optional)
-  - `heroImage` (string, optional)
-  - `tags` (string[])
-  - `draft` (boolean)
-
-Example post (`src/content/blog/hello-world.md`):
 ```
+src/
+├── components/          # Reusable UI components
+│   ├── Header.astro
+│   ├── Footer.astro
+│   ├── Sidebar.astro
+│   └── ...
+├── content/            # Content collections
+│   ├── blog/          # Blog posts (Markdown)
+│   └── ...
+├── layouts/           # Page layouts
+├── pages/             # Route pages
+│   ├── blog/         # Blog routes
+│   ├── index.astro   # Homepage
+│   └── ...
+├── lib/              # Utilities and plugins
+└── icons/            # SVG icons
+```
+
+## 🛠️ Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/erlandv/erland.me.git
+cd eland.me
+
+# Install dependencies
+npm install
+```
+
+### Development
+
+```bash
+# Start development server
+npm run dev
+
+# The site will be available at http://localhost:4321
+```
+
+### Building
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run linting
+npm run lint
+```
+
+## 📝 Content Management
+
+### Blog Posts
+
+Create new blog posts in `src/content/blog/` as Markdown files with frontmatter:
+
+~~~
 ---
-title: "Hello World"
-description: "First post"
-publishDate: 2025-09-17
-updatedDate: 2025-09-17
-tags: ["update", "personal"]
+title: "Your Post Title"
+description: "Brief description for SEO"
+excerpt: "Short excerpt for listings"
+publishDate: 2024-01-01
+updatedDate: 2024-01-02  # optional
+hero: ./images/hero.jpg  # optional
+heroAlt: "Hero image description"  # optional
+tags: ["web", "development"]
+category: "tutorial"  # optional
 draft: false
 ---
 
-Your Markdown content here.
+Your markdown content here...
+~~~
+
+## 🎨 Customization
+
+- **Styling**: Edit `public/assets/styles.css` for global styles
+- **Profile**: Update `src/components/Sidebar.astro` for personal info
+- **Navigation**: Modify `src/components/Header.astro` for menu items
+- **Homepage**: Edit `src/pages/index.astro` for main content
+
+## 🚀 Deployment
+
+This site can be deployed to any static hosting service:
+
+### Netlify/Vercel
+1. Connect your repository
+2. Set build command: `npm run build`
+3. Set publish directory: `dist`
+
+### Manual Deployment
+```bash
+npm run build
+# Upload the `dist` folder to your hosting service
 ```
 
-Key Files
-- `package.json` — scripts and dependencies
-- `astro.config.mjs` — Astro configuration
-- `src/components/Header.astro` — document head, fonts, and view transitions
-- `src/components/Sidebar.astro` — navigation, profile/avatar
-- `src/components/Project.astro` — project card renderer
-- `src/pages/index.astro` — home page
-- `src/pages/blog/index.astro` — blog index (lists posts)
-- `src/pages/blog/[slug].astro` — blog post page
+## 📄 Available Scripts
 
-Customization
-- Profile details and avatar: edit `src/components/Sidebar.astro` and images in `public/assets/`.
-- Home hero text: edit `src/pages/index.astro`.
-- Colors and spacing: adjust `public/assets/styles.css`.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run Astro check for linting
+- `npm run astro` - Run Astro CLI commands
 
-Deployment
-- Any static host works. Typical options:
-  - Netlify / Vercel: connect repo, set build command `npm run build` and output directory `dist`.
-  - Static hosting: run build and upload the `dist` folder.
+## 🔧 Configuration
 
-License
-- MIT — see `LICENSE`.
+- **Astro Config**: `astro.config.mjs`
+- **Content Schema**: `src/content.config.ts`
+- **TypeScript**: `tsconfig.json`
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
+
+## Credit
+
+This project is a derivative of the original theme with customizations to layout, components, and build config.
+
+- Original theme by [Daniel Alter](https://github.com/danielunited).
+- Modified and maintained by [Erland](https://github.com/erlandv).
