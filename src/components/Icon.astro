@@ -7,47 +7,38 @@ interface Props {
 
 const { name, class: className, ariaLabel }: Props = Astro.props as Props;
 
-import home from "../icons/home.svg?raw";
-import code from "../icons/code.svg?raw";
-import dns from "../icons/dns.svg?raw";
-import favorite from "../icons/favorite.svg?raw";
-import blog from "../icons/blog.svg?raw";
-import menu from "../icons/menu.svg?raw";
-import back from "../icons/back.svg?raw";
-import browser from "../icons/browser.svg?raw";
-import database from "../icons/database.svg?raw";
-import mail from "../icons/mail.svg?raw";
-import download from "../icons/download.svg?raw";
-import twitter from "../icons/twitter.svg?raw";
-import instagram from "../icons/instagram.svg?raw";
-import facebook from "../icons/facebook.svg?raw";
-import github from "../icons/github.svg?raw";
-import bluesky from "../icons/bluesky.svg?raw";
-import date from "../icons/date.svg?raw";
-import tags from "../icons/tags.svg?raw";
-import readmore from "../icons/readmore.svg?raw";
-
-const icons: Record<string, string> = {
-  home,
-  code,
-  dns,
-  favorite,
-  blog,
-  menu,
-  back,
-  browser,
-  database,
-  mail,
-  download,
-  twitter,
-  instagram,
-  facebook,
-  github,
-  bluesky,
-  date,
-  tags,
-  readmore,
+// Lazy load icons using dynamic imports
+const iconMap = {
+  home: () => import("../icons/home.svg?raw"),
+  code: () => import("../icons/code.svg?raw"),
+  dns: () => import("../icons/dns.svg?raw"),
+  favorite: () => import("../icons/favorite.svg?raw"),
+  blog: () => import("../icons/blog.svg?raw"),
+  menu: () => import("../icons/menu.svg?raw"),
+  back: () => import("../icons/back.svg?raw"),
+  browser: () => import("../icons/browser.svg?raw"),
+  database: () => import("../icons/database.svg?raw"),
+  mail: () => import("../icons/mail.svg?raw"),
+  download: () => import("../icons/download.svg?raw"),
+  twitter: () => import("../icons/twitter.svg?raw"),
+  instagram: () => import("../icons/instagram.svg?raw"),
+  facebook: () => import("../icons/facebook.svg?raw"),
+  github: () => import("../icons/github.svg?raw"),
+  bluesky: () => import("../icons/bluesky.svg?raw"),
+  date: () => import("../icons/date.svg?raw"),
+  tags: () => import("../icons/tags.svg?raw"),
+  readmore: () => import("../icons/readmore.svg?raw"),
 };
+
+// Get the icon loader function
+const iconLoader = iconMap[name as keyof typeof iconMap];
+if (!iconLoader) {
+  throw new Error(`Icon not found: ${name}`);
+}
+
+// Load the icon dynamically
+const iconModule = await iconLoader();
+const raw = iconModule.default;
 
 function normalizeSvg(svg: string): string {
   let s = svg
@@ -120,11 +111,6 @@ function normalizeSvg(svg: string): string {
   );
 
   return s;
-}
-
-const raw = icons[name];
-if (!raw) {
-  throw new Error(`Icon not found: ${name}`);
 }
 
 const svg = normalizeSvg(raw);
