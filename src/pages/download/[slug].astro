@@ -1,6 +1,5 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
 import { getCollection, getEntryBySlug } from "astro:content";
 import { creativeWorkJsonLd } from "../../lib/seo";
@@ -8,8 +7,8 @@ import { creativeWorkJsonLd } from "../../lib/seo";
 export async function getStaticPaths() {
   const downloads = await getCollection("downloads");
   return downloads
-    .filter((item) => !item.data.draft)
-    .map((item) => ({ params: { slug: item.slug } }));
+    .filter((item: any) => !item.data.draft)
+    .map((item: any) => ({ params: { slug: item.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -46,13 +45,13 @@ const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
   : data.file
     ? [{ label: data.file.split("/").pop() ?? data.title, href: data.file }]
     : []
-).map((item) => ({
+).map((item: any) => ({
   label: item.label,
   href: item.href,
   size: item.size,
 }));
 
-const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
+const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 ---
 
 <SiteLayout title={`${data.title} | Erland Ramdhani`} canonical={canonicalUrl} jsonLd={jsonLd} selectedItem="download">
@@ -85,8 +84,8 @@ const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
         <h2 class="download-files-title">Link Download</h2>
         {data.downloadIntro && data.downloadIntro.length > 0 && (
           <div class="download-files-intro">
-            {data.downloadIntro.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
+            {data.downloadIntro.map((paragraph: string) => (
+              <p>{paragraph}</p>
             ))}
           </div>
         )}
@@ -99,8 +98,8 @@ const hasSizeColumn = downloadRows.some((item) => Boolean(item.size));
             </tr>
           </thead>
           <tbody>
-            {downloadRows.map((item) => (
-              <tr key={item.label}>
+            {downloadRows.map((item: any) => (
+              <tr>
                 <td data-label="File Name">{item.label}</td>
                 {hasSizeColumn && <td data-label="Size">{item.size ?? "-"}</td>}
                 <td data-label="Download">
