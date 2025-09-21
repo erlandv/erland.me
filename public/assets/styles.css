@@ -142,7 +142,7 @@ h3 {
 h4 {
   margin-top: 12px;
   font-weight: 600;
-  font-size: clamp(1.0625rem, 0.8vw + 0.7rem, 1.25rem);
+  font-size: clamp(1.25rem, 1vw + 0.8rem, 1.5rem);
   line-height: 1.35;
 }
 
@@ -312,7 +312,7 @@ h4 {
 p {
   color: #a8a8a8;
   margin-bottom: 12px;
-  font-size: clamp(1rem, 0.25vw + 0.95rem, 1.0625rem);
+  font-size: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
   line-height: 1.7;
 }
 
@@ -881,7 +881,7 @@ p {
   font-family:
     'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
     'Liberation Mono', monospace;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 24px;
 }
@@ -914,8 +914,8 @@ p {
 }
 
 .single-chip.small-chip {
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 6px 10px;
+  font-size: 14px;
 }
 
 .single-item {
