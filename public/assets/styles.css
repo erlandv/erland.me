@@ -33,6 +33,13 @@ section {
 
 a {
   background-color: rgba(0, 0, 0, 0);
+  color: #6bb6ff;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: #8ab4ff;
 }
 
 a:active,
@@ -200,6 +207,12 @@ ul {
   position: relative;
 }
 
+.sidebar .w-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .w-nav-menu.is-open {
   display: block !important;
   position: fixed;
@@ -354,6 +367,16 @@ p {
   border-left: 3px solid var(--border);
   background: rgba(255, 255, 255, 0.03);
   color: #cfcfcf;
+}
+
+.prose a {
+  color: #6bb6ff;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.prose a:hover {
+  color: #8ab4ff;
 }
 
 .prose code {
@@ -758,11 +781,17 @@ p {
 
 .items-container {
   flex-direction: column;
+  gap: 6px;
 }
 
 .nav-link-image {
   width: 24px;
   opacity: 0.48;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link-container:hover .nav-link-image {
+  opacity: 1;
 }
 
 .nav-link-container {
@@ -777,12 +806,32 @@ p {
   padding: 12px;
   text-decoration: none;
   display: flex;
+  transition: all 0.2s ease;
+  transform: translateX(0);
+}
+
+.nav-link-container:hover {
+  color: #fff !important;
+  background-color: #252525;
+  border-color: #353535;
+  transform: translateX(0) scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link-container a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-link-container:hover a {
+  color: inherit;
 }
 
 .nav-link-container.w--current {
   color: #fff;
   background-color: #2b2b2b;
   border-color: #353535;
+  transform: translateX(0);
 }
 
 .projects-container {
@@ -899,51 +948,58 @@ p {
 }
 
 .download-card {
-  background-color: #1f1f1f;
-  border: 1px solid #353535;
+  border: 1px solid rgba(138, 180, 255, 0.18);
   border-radius: 16px;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+  padding: 16px 18px;
+  background: rgba(28, 28, 28, 0.85);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease;
 }
 
 .download-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
+  transform: translateY(-2px);
 }
 
 .download-card-thumb {
-  background:
-    radial-gradient(circle at top, rgba(79, 148, 255, 0.18), transparent 60%),
-    #262626;
-  border-bottom: 1px solid #2f2f2f;
-  padding: 32px;
+  background: radial-gradient(
+    circle at top,
+    rgba(79, 148, 255, 0.18),
+    transparent 70%
+  );
+  border-radius: 12px;
+  padding: 12px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .download-card-thumb img {
-  width: 100%;
-  max-width: 180px;
+  width: 80%;
   height: auto;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 .download-card-body {
-  padding: 24px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   flex: 1;
 }
 
 .download-card-title {
-  color: #fff;
-  font-size: 20px;
   margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
 }
 
 .download-card-title a {
@@ -956,9 +1012,9 @@ p {
 }
 
 .download-card-desc {
-  color: #c9c9c9;
   margin: 0;
-  line-height: 24px;
+  color: #c9c9c9;
+  line-height: 1.6;
 }
 
 .download-card-actions {
@@ -970,14 +1026,33 @@ p {
 }
 
 .download-card-button {
-  background-color: #ffffff;
-  border-color: #ffffff;
-  color: #1c1c1c;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #8ab4ff;
   font-weight: 600;
+  border: 1px solid rgba(138, 180, 255, 0.35);
+  border-radius: 8px;
+  padding: 6px 16px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  width: fit-content;
+  background: transparent;
 }
 
 .download-card-button:hover {
-  background-color: #e9e9e9;
+  background: rgba(138, 180, 255, 0.12);
+  color: #fff;
+  border-color: rgba(138, 180, 255, 0.6);
+}
+
+.download-card-button-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .download-page {
@@ -1062,8 +1137,13 @@ p {
 }
 
 .download-richtext a {
+  color: #6bb6ff;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.download-richtext a:hover {
   color: #8ab4ff;
-  text-decoration: underline;
 }
 
 .download-richtext strong {
