@@ -20,12 +20,13 @@ const year = new Date().getFullYear();
     /* transparent to let grid background show through */
     background: transparent;
     border-top: none;
-    color: #d6d6d6;
-    font-size: 14px;
+    color: #d0d0d0;
+    font-size: clamp(12px, 2vw, 14px);
     line-height: 1.6;
     width: 100%;
-    margin-top: 32px; /* give a bit more breathing room */
+    margin-top: clamp(24px, 4vw, 32px); /* give a bit more breathing room */
     padding-bottom: 12px;
+    font-weight: 400;
   }
 
   .footer-inner {
