@@ -380,22 +380,172 @@ p {
 }
 
 .prose code {
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.15rem 0.35rem;
-  border-radius: 6px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   font-family:
     'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
     'Liberation Mono', monospace;
   font-size: 0.95em;
 }
 
+/* Inline code styling (not inside pre) */
+.prose p code,
+.prose li code,
+.prose h1 code,
+.prose h2 code,
+.prose h3 code,
+.prose h4 code,
+.prose h5 code,
+.prose h6 code {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+/* Code inside pre blocks should not have background */
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
 .prose pre {
-  background: #0f1115;
-  color: #e8e8e8;
-  border: 1px solid #252525;
-  padding: 1rem;
-  border-radius: 10px;
+  position: relative;
+  background: #0d1117;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  padding: 1.5rem;
+  border-radius: 12px;
   overflow: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.prose pre:hover {
+  border-color: #58a6ff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(88, 166, 255, 0.1);
+}
+
+/* Code block header with language and copy button */
+.prose pre::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #21262d;
+  color: #8b949e;
+  padding: 0.5rem 1rem;
+  border-radius: 12px 0 12px 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-right: 1px solid #30363d;
+  border-bottom: 1px solid #30363d;
+  z-index: 5;
+  max-width: calc(100% - 4rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Copy button */
+.code-copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  z-index: 10;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+.code-copy-btn:hover {
+  background: #30363d;
+  color: #e6edf3;
+  border-color: #58a6ff;
+}
+
+.code-copy-btn:active {
+  transform: scale(0.95);
+}
+
+.code-copy-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* Copy button success state */
+.code-copy-btn.copied {
+  background: #238636;
+  border-color: #238636;
+  color: #ffffff;
+}
+
+.code-copy-btn.copied::after {
+  content: "Copied!";
+  position: absolute;
+  top: -2rem;
+  right: 0;
+  background: #21262d;
+  color: #e6edf3;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  border: 1px solid #30363d;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust padding when copy button is present */
+.prose pre:has(.code-copy-btn) {
+  padding-top: 3rem;
+}
+
+/* Ensure language label doesn't overlap with copy button */
+.prose pre:has(.code-copy-btn)::before {
+  left: 0;
+  max-width: calc(100% - 4rem);
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* Code block scrollbar styling */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: #21262d;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: #6e7681;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: #8b949e;
 }
 
 .resource-card {
