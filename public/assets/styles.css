@@ -836,10 +836,7 @@ p {
     linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.64)),
     url('./grid-top-right.svg'),
     linear-gradient(rgba(28, 28, 28, 0.24), rgba(28, 28, 28, 0.24));
-  background-position:
-    0 0,
-    0 0,
-    0 0;
+  background-position: left center;
   background-size:
     auto,
     auto 1130px,
@@ -849,7 +846,7 @@ p {
   align-items: center;
   padding: 46px 48px 0px;
   display: flex;
-  overflow: visible;
+  overflow: auto;
 }
 
 .container {
@@ -1540,6 +1537,7 @@ p {
   }
 
   .main {
+    background-position: center center;
     padding-left: 28px;
     padding-right: 28px;
   }
