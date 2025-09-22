@@ -1508,15 +1508,30 @@ p {
   }
 
   .navbar-icon {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
     color: #fff;
     font-size: 32px;
+    transition: all 0.2s ease-in-out;
+    transform-origin: center;
   }
 
   .navbar-icon-button {
     padding: 12px;
     transition: all 0.24s;
+  }
+
+  .navbar-icon.icon-transitioning {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+
+  .navbar-icon[data-icon="close"] {
+    transform: rotate(0deg);
+  }
+
+  .navbar-icon[data-icon="menu"] {
+    transform: rotate(0deg);
   }
 }
 
