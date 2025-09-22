@@ -19,7 +19,7 @@ Di tutorial ini saya menggunakan [VPS murah Indonesia](https://www.domainesia.co
 ## Backup Data Web di Shared Hosting
 Langkah pertama untuk migrasi website antar server adalah melakukan backup data website yang akan dipindahkan dari server lama. Yang akan kita backup cukup file yang terdapat di public_html aja atau folder dari web yang akan dipindahkan, bukan semua yang ada di file manager.
 
-![Ilustrasi](./images/backup-data-web-di-file-manager.png)
+![backup data web di file manager](./images/backup-data-web-di-file-manager.png 'backup data web di file manager')
 
 Di shared hosting umumnya menggunakan cPanel sebagai kontrol panel. Berikut tahap-tahap cara backup data di file manager cPanel.
 
@@ -211,7 +211,7 @@ sudo mysql -u root -p
 
 Kalian akan diminta memasukan password MySQL untuk user `root`. Jangan bilang lupa, harus ingat ya password-nya yang dibuat saat proses instal MySQL.
 
-![login ke mysql](./images/login-mysql.png)
+![login ke mysql](./images/login-mysql.png 'login ke mysql')
 
 Setelah memasukan password, kalian akan berhasil login ke MySQL. Selanjutnya kita akan membuat database baru untuk web yang akan di pindahkan.
 
@@ -345,7 +345,7 @@ gzip_types text/plain text/css text/javascript image/svg+xml image/x-ic>;
 
 Berikut ini contohnya.
 
-![GZIP Compression](./images/gzip-compression.png)
+![GZIP Compression](./images/gzip-compression.png 'contoh GZIP Compression')
 
 Setelah itu exit dan jangan lupa simpan perubahan, ya. Setelah setting GZIP Compression ini, dijamin load speed web kalian menjadi lebih ngebut dan tidak akan ada peringatan tentang GZIP di tools pengecek kecepatan web seperti GTmetrix dan Google PageSpeed Insights.
 

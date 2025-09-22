@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
-import remarkGallery from './src/lib/remark-gallery.js';
+import remarkGallery, { remarkFigure } from './src/lib/remark-gallery.js';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +20,7 @@ export default defineConfig({
 
   // Markdown configuration
   markdown: {
-    remarkPlugins: [remarkDirective, remarkGallery],
+    remarkPlugins: [remarkDirective, remarkGallery, remarkFigure],
     shikiConfig: {
       theme: 'github-dark-dimmed',
       wrap: true,

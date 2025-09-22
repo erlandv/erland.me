@@ -65,3 +65,41 @@ export default function remarkGallery() {
     );
   };
 }
+
+// Plugin untuk mengkonversi markdown image dengan title menjadi figure/figcaption
+export function remarkFigure() {
+  return tree => {
+    visit(
+      tree,
+      node => node.type === 'paragraph',
+      node => {
+        // Cek apakah paragraph hanya berisi satu image
+        if (node.children?.length === 1 && node.children[0].type === 'image') {
+          const image = node.children[0];
+          const caption = image.title;
+          
+          // Jika ada title (caption), konversi menjadi figure
+          if (caption) {
+            image.title = null; // Hapus title dari image
+            
+            node.data = {
+              hName: 'figure',
+              hProperties: {
+                className: ['prose-figure'],
+              },
+            };
+            
+            node.children = [
+              image,
+              {
+                type: 'paragraph',
+                data: { hName: 'figcaption' },
+                children: [{ type: 'text', value: caption }],
+              },
+            ];
+          }
+        }
+      }
+    );
+  };
+}
