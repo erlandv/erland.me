@@ -1064,6 +1064,10 @@ p {
   display: flex;
 }
 
+.single-projects-content h4 {
+  margin-bottom: 0;
+}
+
 .projects-section {
   grid-column-gap: 32px;
   grid-row-gap: 32px;
