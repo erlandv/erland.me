@@ -854,7 +854,7 @@ p {
 
 .container {
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   grid-column-gap: 68px;
   grid-row-gap: 68px;
   flex-direction: column;
@@ -862,7 +862,7 @@ p {
 }
 
 .lead {
-  max-width: 580px;
+  max-width: 620px;
   color: #e8e8e8;
   margin-bottom: 0;
   line-height: 1.7;
