@@ -8,9 +8,8 @@ import { collectionPageJsonLd } from '../../lib/seo';
 
 const posts = await loadAllPosts();
 
-// Pagination (10 posts per halaman)
 const pageSize = 10;
-const page = 1; // halaman pertama
+const page = 1;
 const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
 const paginated = slicePage(posts, page, pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
@@ -30,7 +29,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
-  title="Blog | Erland"
+  title="Blog"
   canonical="/blog/"
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={collectionPageJsonLd(
@@ -66,7 +65,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
         })}
 
         {posts.length === 0 && (
-          <p style="opacity:.8;">Belum ada tulisan. Tambahkan file di <code>src/content/blog/[slug]/index.md</code> ya ✍️</p>
+          <p style="opacity:.8;">There are no articles to read yet</p>
         )}
       </div>
     </section>

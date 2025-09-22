@@ -2,7 +2,7 @@
 title: 'Liburan dengan Konsep Staycation'
 description: 'Cerita pengalaman kecanduan liburan dengan konsep stayction di hotel terdekat untuk menikmati waktu dengan cara bersantai di kamar hotel'
 excerpt: 'Ulasan ringkas berlibur santai dengan konsep staycation di hotel terdekat'
-publishDate: 2025-09-17
+publishDate: 2021-08-01
 updatedDate: 2025-09-17
 hero: ./hero.png
 heroAlt: 'Ilustrasi hotel untuk staycation'
