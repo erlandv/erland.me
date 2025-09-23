@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 export default defineConfig({
   build: {
@@ -69,9 +71,19 @@ export default defineConfig({
     postcss: {
       plugins: [
         // Add autoprefixer for better browser compatibility
-        require('autoprefixer')({
+        autoprefixer({
           overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
         }),
+        // Add cssnano for CSS minification in production
+        ...(process.env.NODE_ENV === 'production' ? [
+          cssnano({
+            preset: ['default', {
+              discardComments: {
+                removeAll: true,
+              },
+            }],
+          }),
+        ] : []),
       ],
     },
   },

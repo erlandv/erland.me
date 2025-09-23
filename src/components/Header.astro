@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import { generateMetaTags, websiteJsonLd } from '../lib/seo';
+import '../styles/styles.css';
 
 interface HeaderProps {
   title: string;
@@ -88,8 +89,7 @@ const websiteSchema = websiteJsonLd();
   <!-- DNS prefetch as fallback for older browsers -->
   <link href="https://fonts.googleapis.com/" rel="dns-prefetch" />
   <link href="https://fonts.gstatic.com/" rel="dns-prefetch" />
-  <!-- Load stylesheet after preconnect -->
-  <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
+  <!-- CSS is imported at the top of the file -->
   <!-- Load Google Fonts with display=swap for better performance -->
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
   

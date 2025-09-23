@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery.js';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,6 +54,13 @@ export default defineConfig({
               return 'vendor';
             }
           },
+          // Configure CSS output to dist/assets/css/
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+              return 'assets/css/[name]-[hash][extname]';
+            }
+            return 'assets/[name]-[hash][extname]';
+          },
         },
       },
       // Enable source maps for production debugging
@@ -62,6 +71,24 @@ export default defineConfig({
     // CSS optimization
     css: {
       devSourcemap: true,
+      postcss: {
+        plugins: [
+          // Add autoprefixer for better browser compatibility
+          autoprefixer({
+            overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
+          }),
+          // Add cssnano for CSS minification in production
+          ...(process.env.NODE_ENV === 'production' ? [
+            cssnano({
+              preset: ['default', {
+                discardComments: {
+                  removeAll: true,
+                },
+              }],
+            }),
+          ] : []),
+        ],
+      },
     },
     // Optimize dependencies
     optimizeDeps: {
