@@ -964,7 +964,7 @@ p {
 }
 
 .fold-content {
-  margin-bottom: 48px;
+  margin-bottom: 26px;
 }
 
 .mini-label-white {
@@ -1127,6 +1127,10 @@ p {
 
 .single-projects-content h3 {
   margin-bottom: 0;
+}
+
+.single-projects-content a {
+  color: #fff;
 }
 
 .projects-section {
