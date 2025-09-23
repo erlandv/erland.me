@@ -40,9 +40,9 @@ const downloads = (await getCollection("downloads"))
               />
             </a>
             <div class="download-card-body">
-              <h3 class="download-card-title">
+              <h2 class="download-card-title">
                 <a href={detailHref}>{data.title}</a>
-              </h3>
+              </h2>
               <p class="download-card-desc">{data.excerpt ?? data.description}</p>
               <div class="download-card-actions">
                 <a class="button download-card-button" href={detailHref}>
