@@ -40,6 +40,12 @@ export default defineConfig({
         compress: {
           drop_console: true,
           drop_debugger: true,
+          // Remove unused code
+          dead_code: true,
+        },
+        format: {
+          // Remove comments from output
+          comments: false,
         },
       },
       // Optimize chunk splitting
