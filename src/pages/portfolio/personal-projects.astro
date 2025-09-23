@@ -1,7 +1,7 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import Project from '../components/Project.astro';
-import BackNav from "../components/BackNav.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Project from '../../components/Project.astro';
+import BackNav from "../../components/BackNav.astro";
 const projects = [
   {
     title: "TeleJS",
@@ -31,7 +31,7 @@ const projects = [
 ---
 
 <SiteLayout title="Personal Projects" selectedItem="personal-projects">
-  <BackNav href="/" label="Back" />
+  <BackNav href="/portfolio/" label="See Other Portfolios" />
   <div class="content-container">
     <h1>Personal Projects</h1>
     <section class="items-container">

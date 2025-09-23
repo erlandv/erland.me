@@ -1,0 +1,105 @@
+---
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Icon from "../components/Icon.astro";
+import Footer from "../components/Footer.astro";
+import BackNav from "../components/BackNav.astro";
+---
+
+<!DOCTYPE html>
+<html>
+  <Header title="Portfolio" />
+  <body>
+    <div class="content">
+      <Sidebar selectedItem="portfolio" />
+      <nav class="main">
+        <div class="container">
+          <BackNav href="/" label="Back" />
+          <main class="fold-content-container">
+            <div class="fold-content">
+              <h1>Portfolio</h1>
+              <p class="lead">
+                Explore my work across different domains. From web development projects to cloud infrastructure solutions and personal side projects, here's a collection of what I've built and learned along the way.
+              </p>
+            </div>
+          </main>
+          <div class="projects-section">
+            <a href="/portfolio/web-development/" class="projects-container">
+              <div class="single-projects-category">
+                <div class="projects-category-image-container">
+                  <Icon name="browser" class="projects-category-image" />
+                </div>
+              </div>
+              <div class="single-projects-content">
+                <h3>Web Development</h3>  
+                <div class="tech-tools-container">
+                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                  <div class="chips-container chips-container-small-width">
+                    <div class="single-chip small-chip">Node.js</div>
+                    <div class="single-chip small-chip">TypeScript</div>
+                    <div class="single-chip small-chip">Next.js</div>
+                    <div class="single-chip small-chip">React</div>
+                    <div class="single-chip small-chip">Tailwind CSS</div>
+                    <div class="single-chip small-chip">PostgreSQL</div>
+                    <div class="single-chip small-chip">Vite</div>
+                    <div class="single-chip small-chip">Git</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="/portfolio/cloud-infra/" class="projects-container">
+              <div class="single-projects-category">
+                <div class="projects-category-image-container devops-img">
+                  <Icon name="database" class="projects-category-image" />
+                </div>
+              </div>
+              <div class="single-projects-content">
+                <h3>Cloud Infra</h3>
+                <div class="tech-tools-container">
+                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                  <div class="chips-container chips-container-small-width">
+                    <div class="single-chip small-chip">Terraform</div>
+                    <div class="single-chip small-chip">Docker</div>
+                    <div class="single-chip small-chip">Kubernetes</div>
+                    <div class="single-chip small-chip">Bash</div>
+                    <div class="single-chip small-chip">Github Actions</div>
+                    <div class="single-chip small-chip">AWS</div> 
+                    <div class="single-chip small-chip">Azure</div>
+                    <div class="single-chip small-chip">GCP</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="/portfolio/personal-projects/" class="projects-container">
+              <div class="single-projects-category">
+                <div class="projects-category-image-container">
+                  <Icon name="personal" class="projects-category-image" />
+                </div>
+              </div>
+              <div class="single-projects-content">
+                <h3>Personal Projects</h3>
+                <div class="tech-tools-container">
+                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                  <div class="chips-container chips-container-small-width">
+                    <div class="single-chip small-chip">Nginx</div>
+                    <div class="single-chip small-chip">Apache</div>
+                    <div class="single-chip small-chip">Redis</div>
+                    <div class="single-chip small-chip">PHP</div>
+                    <div class="single-chip small-chip">CSS</div>
+                    <div class="single-chip small-chip">JavaScript</div>
+                    <div class="single-chip small-chip">MySQL</div>
+                    <div class="single-chip small-chip">MariaDB</div>
+                    <div class="single-chip small-chip">Certbot</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <Footer />
+      </nav>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+</html>

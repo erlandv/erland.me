@@ -26,64 +26,59 @@ import Footer from "../components/Footer.astro";
                 This is my small corner on the interweb where I'll post my notes, achievements, and whatever I want to post.
               </p>
             </div>
-            <a href="mailto:hello@erland.me" class="button w-button contact-button">
-              <Icon name="mail" class="button-icon" />
-              <span>Contact</span>
-            </a>
-          </main>
-          <div class="projects-section">
-            <a href="/web-development/" class="projects-container">
-              <div class="single-projects-category">
-                <div class="projects-category-image-container">
-                  <Icon name="browser" class="projects-category-image" />
+          <a href="mailto:hello@erland.me" class="button w-button contact-button">
+            <Icon name="mail" class="button-icon" />
+            <span>Contact</span>
+          </a>
+        </main>
+        <div class="projects-section">
+          <a href="/portfolio/web-development/" class="projects-container">
+            <div class="single-projects-category">
+              <div class="projects-category-image-container">
+                <Icon name="browser" class="projects-category-image" />
+              </div>
+            </div>
+            <div class="single-projects-content">
+              <h3>Web Development</h3>
+              <div class="tech-tools-container">
+                <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                <div class="chips-container chips-container-small-width">
+                  <div class="single-chip small-chip">Node.js</div>
+                  <div class="single-chip small-chip">TypeScript</div>
+                  <div class="single-chip small-chip">Next.js</div>
+                  <div class="single-chip small-chip">React</div>
+                  <div class="single-chip small-chip">Tailwind CSS</div>
+                  <div class="single-chip small-chip">Vite</div>
+                  <div class="single-chip small-chip">PostgreSQL</div>
+                  <div class="single-chip small-chip">Git</div>
                 </div>
               </div>
-              <div class="single-projects-content">
-                <h4>Web Development</h4>
-                <div class="tech-tools-container">
-                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
-                  <div class="chips-container chips-container-small-width">
-                    <div class="single-chip small-chip">PHP</div>
-                    <div class="single-chip small-chip">JavaScript</div>
-                    <div class="single-chip small-chip">MySQL</div>
-                    <div class="single-chip small-chip">MariaDB</div>
-                    <div class="single-chip small-chip">Nginx</div>
-                    <div class="single-chip small-chip">Apache</div>
-                    <div class="single-chip small-chip">Astro</div>
-                    <div class="single-chip small-chip">WordPress</div>
-                    <div class="single-chip small-chip">Node.js</div>
-                    <div class="single-chip small-chip">Tailwind CSS</div>
-                  </div>
+            </div>
+          </a>
+          <a href="/portfolio/cloud-infra/" class="projects-container">
+            <div class="single-projects-category">
+              <div class="projects-category-image-container devops-img">
+                <Icon name="database" class="projects-category-image" />
+              </div>
+            </div>
+            <div class="single-projects-content">
+              <h3>Cloud Infra</h3>
+              <div class="tech-tools-container">
+                <div class="mini-label-white gray-color">Technologies &amp; tools</div>
+                <div class="chips-container chips-container-small-width">
+                  <div class="single-chip small-chip">Terraform</div>
+                  <div class="single-chip small-chip">Docker</div>
+                  <div class="single-chip small-chip">Kubernetes</div>
+                  <div class="single-chip small-chip">Bash</div>
+                  <div class="single-chip small-chip">Github Actions</div>
+                  <div class="single-chip small-chip">AWS</div>
+                  <div class="single-chip small-chip">Azure</div>
+                  <div class="single-chip small-chip">GCP</div>
                 </div>
               </div>
-            </a>
-            <a href="/cloud-infra/" class="projects-container">
-              <div class="single-projects-category">
-                <div class="projects-category-image-container devops-img">
-                  <Icon name="database" class="projects-category-image" />
-                </div>
-              </div>
-              <div class="single-projects-content">
-                <h4>Cloud Infra</h4>
-                <div class="tech-tools-container">
-                  <div class="mini-label-white gray-color">Technologies &amp; tools</div>
-                  <div class="chips-container chips-container-small-width">
-                    <div class="single-chip small-chip">Terraform</div>
-                    <div class="single-chip small-chip">Docker</div>
-                    <div class="single-chip small-chip">Kubernetes</div>
-                    <div class="single-chip small-chip">Github CI/CD</div>
-                    <div class="single-chip small-chip">Azure</div>
-                    <div class="single-chip small-chip">AWS</div>
-                    <div class="single-chip small-chip">GCP</div>
-                    <div class="single-chip small-chip">Digital Ocean</div>
-                    <div class="single-chip small-chip">Linode</div>
-                    <div class="single-chip small-chip">Vultr</div>
-                    <div class="single-chip small-chip">Cloudflare</div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+            </div>
+          </a>
+        </div>
         </div>
         <Footer />
       </nav>
