@@ -1,7 +1,7 @@
 ---
 title: 'Cara Transaksi Jual-Beli Saham di Pasar Negosiasi'
 description: 'Mau jual-beli saham di pasar negosiasi? Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula.'
-excerpt: 'Berbagi info tentang proses transaksi jual-beli saham di pasar negosiasi'
+excerpt: 'Berbagi informasi tentang cara dan proses transaksi jual-beli saham di pasar negosiasi'
 publishDate: 2025-07-16
 updatedDate: 2025-09-16
 hero: ./hero.png

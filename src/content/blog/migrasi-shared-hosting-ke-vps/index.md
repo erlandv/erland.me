@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial Cara Migrasi Website dari Shared Hosting ke VPS'
+title: 'Tutorial Migrasi Website dari Shared Hosting ke VPS'
 description: 'Bagaimana cara migrasi website dari shared hosting ke VPS? Ikuti tutorial ini untuk memindahkan website dari hosting ke VPS.'
 excerpt: 'Dokumentasi sederhana tentang cara migrasi web dari shared hosting ke VPS'
 publishDate: 2022-02-02
