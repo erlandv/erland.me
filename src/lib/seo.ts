@@ -3,12 +3,12 @@ const SITE_CONFIG = {
   name: 'Erland Ramdhani',
   description:
     'Web Developer based in Jakarta, Indonesia. Building scalable web applications and sharing knowledge about web development, cloud infrastructure, and open source.',
-  url: 'https://erland.me',
+  url: process.env.SITE_URL || 'https://erland.me',
   author: {
     name: 'Erland Ramdhani',
-    email: 'hello@erland.me',
+    email: `hello@${process.env.SITE_DOMAIN || 'erland.me'}`,
     jobTitle: 'Web Developer',
-    url: 'https://erland.me',
+    url: process.env.SITE_URL || 'https://erland.me',
     sameAs: [
       'https://github.com/erlandv',
       'https://twitter.com/erlandzz',

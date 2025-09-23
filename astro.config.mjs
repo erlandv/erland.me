@@ -8,7 +8,7 @@ import cssnano from 'cssnano';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
-  site: 'https://erland.me',
+  site: process.env.SITE_URL || 'https://erland.me',
   trailingSlash: 'always',
 
   // Output configuration
@@ -104,11 +104,11 @@ export default defineConfig({
 
   // Image optimization
   image: {
-    domains: ['erland.me'],
+    domains: [process.env.SITE_DOMAIN || 'erland.me'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'erland.me',
+        hostname: process.env.SITE_DOMAIN || 'erland.me',
       },
     ],
   },
@@ -132,12 +132,13 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       customPages: [
-        'https://erland.me/',
-        'https://erland.me/blog/',
-        'https://erland.me/download/',
-        'https://erland.me/web-development/',
-        'https://erland.me/cloud-infra/',
-        'https://erland.me/personal-projects/',
+        `${process.env.SITE_URL || 'https://erland.me'}/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/blog/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/download/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/web-development/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/cloud-infra/`,
+        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/personal-projects/`,
       ],
     }),
   ],

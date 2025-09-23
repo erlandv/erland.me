@@ -9,7 +9,7 @@ import Footer from "../components/Footer.astro";
 <!DOCTYPE html>
 <html
 >
-  <Header title="Personal Web" />
+  <Header title="Personal Web" canonical="/" />
   <body>
     <div class="content">
       <Sidebar selectedItem="home" />
@@ -26,7 +26,7 @@ import Footer from "../components/Footer.astro";
                 This is my small corner on the interweb where I'll post my notes, achievements, and whatever I want to post.
               </p>
             </div>
-          <a href="mailto:hello@erland.me" class="button w-button contact-button">
+          <a href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`} class="button w-button contact-button">
             <Icon name="mail" class="button-icon" />
             <span>Contact Me</span>
           </a>

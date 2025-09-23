@@ -16,6 +16,7 @@ Disallow: /_astro/
 # Allow all other content
 Allow: /blog/
 Allow: /download/
-Allow: /web-development/
-Allow: /cloud-infra/
-Allow: /personal-projects/
+Allow: /portfolio/
+Allow: /portfolio/web-development/
+Allow: /portfolio/cloud-infra/
+Allow: /portfolio/personal-projects/

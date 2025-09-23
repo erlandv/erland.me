@@ -24,7 +24,7 @@ const data = entry.data;
 const hero = data.hero;
 const heroAlt = data.heroAlt ?? data.title;
 const canonicalPath = `/download/${entry.slug}/`;
-const canonicalUrl = `https://erland.me${canonicalPath}`;
+const canonicalUrl = `${import.meta.env.SITE_URL || 'https://erland.me'}${canonicalPath}`;
 const lastUpdated = data.lastUpdated
   ? new Date(data.lastUpdated)
   : undefined;
