@@ -20,48 +20,48 @@ interface Props {
 const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
 ---
 
-<a href={href} class="w-inline-block post-card__link">
-  <article class="resource-card post-card">
-    <div class="post-card__inner">
-      <div class="post-card__thumb">
-        {hero ? (
-          <img
-            src={hero.src}
-            width={hero.width}
-            height={hero.height}
-            alt={alt}
-            loading="lazy"
-            class="post-card__img"
-          />
-        ) : (
-          <div class="post-card__thumb--placeholder" aria-hidden="true"></div>
-        )}
-      </div>
-      <div class="post-card__body">
-        <header class="post-card__header">
-          <h2 class="post-card__title">{title}</h2>
-          <div class="post-card__meta">
-            {category && (
-              <div class="post-card__meta-item">
-                <Icon name="tags" class="post-card__meta-icon" />
-                <span class="post-card__category">{category}</span>
-              </div>
-            )}
-            {dateLabel && (
-              <div class="post-card__meta-item">
-                <Icon name="date" class="post-card__meta-icon" />
-                <time class="post-card__date">{dateLabel}</time>
-              </div>
-            )}
-          </div>
-        </header>
-        {excerpt && <p class="post-card__excerpt">{excerpt}</p>}
-        <span class="post-card__readmore">
-          <span>Read more</span>
-          <Icon name="readmore" class="post-card__readmore-icon" />
-        </span>
-      </div>
+<article class="resource-card post-card">
+  <div class="post-card__inner">
+    <div class="post-card__thumb">
+      {hero ? (
+        <img
+          src={hero.src}
+          width={hero.width}
+          height={hero.height}
+          alt={alt}
+          loading="lazy"
+          class="post-card__img"
+        />
+      ) : (
+        <div class="post-card__thumb--placeholder" aria-hidden="true"></div>
+      )}
     </div>
-  </article>
-</a>
+    <div class="post-card__body">
+      <header class="post-card__header">
+        <h2 class="post-card__title">
+          <a href={href} class="post-card__title-link">{title}</a>
+        </h2>
+        <div class="post-card__meta">
+          {category && (
+            <div class="post-card__meta-item">
+              <Icon name="tags" class="post-card__meta-icon" />
+              <span class="post-card__category">{category}</span>
+            </div>
+          )}
+          {dateLabel && (
+            <div class="post-card__meta-item">
+              <Icon name="date" class="post-card__meta-icon" />
+              <time class="post-card__date">{dateLabel}</time>
+            </div>
+          )}
+        </div>
+      </header>
+      {excerpt && <p class="post-card__excerpt">{excerpt}</p>}
+      <a href={href} class="post-card__readmore">
+        <span>Read more</span>
+        <Icon name="readmore" class="post-card__readmore-icon" />
+      </a>
+    </div>
+  </div>
+</article>
 
