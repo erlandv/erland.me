@@ -466,41 +466,129 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       margin-bottom: 8px !important;
     }
 
+    /* Initial state CSS to prevent flash of unstyled content */
+    html.sidebar-initially-collapsed .sidebar {
+      width: 80px;
+      padding: 20px 8px;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .label-white,
+    html.sidebar-initially-collapsed .sidebar .label-gray {
+      display: none !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .nav-link-container div {
+      display: none !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .socials--sidebar {
+      display: none !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .w-nav-brand {
+      justify-content: center !important;
+      margin-bottom: 20px !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .niv-data {
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .niv-image {
+      margin-right: 0 !important;
+      margin: 0 auto !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .nav-link-container {
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 12px 8px !important;
+      margin-bottom: 8px !important;
+      min-height: 44px !important;
+      width: 60px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .nav-link-image {
+      margin: 0 auto !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .w-nav-menu {
+      align-items: center !important;
+    }
+    
+    html.sidebar-initially-collapsed .sidebar .sidebar-toggle-button {
+      display: flex !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin-bottom: 8px !important;
+    }
   </style>
 
   <script>
-    // Simplified sidebar toggle functionality with localStorage persistence
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
-        const sidebar = document.querySelector('.sidebar');
-        const STORAGE_KEY = 'sidebar-collapsed';
-
-        if (sidebarToggle && sidebar) {
-          // Load saved state from localStorage
+    // Enhanced sidebar toggle functionality with robust localStorage persistence
+    (function() {
+      const STORAGE_KEY = 'sidebar-collapsed';
+      
+      // Apply saved state immediately (before DOM is fully loaded)
+      function applyInitialState() {
+        try {
           const savedState = localStorage.getItem(STORAGE_KEY);
           const isCollapsed = savedState === 'true';
           
-          // Apply saved state
           if (isCollapsed) {
-            sidebarToggle.checked = true;
-            sidebar.classList.add('sidebar-collapsed');
+            // Add CSS class immediately to prevent flash
+            document.documentElement.classList.add('sidebar-initially-collapsed');
           }
-
-          // Handle toggle changes
-          sidebarToggle.addEventListener('change', function() {
-            if (this.checked) {
-              sidebar.classList.add('sidebar-collapsed');
-              localStorage.setItem(STORAGE_KEY, 'true');
-            } else {
-              sidebar.classList.remove('sidebar-collapsed');
-              localStorage.setItem(STORAGE_KEY, 'false');
-            }
-          });
+        } catch (error) {
+          // Silently handle localStorage errors
         }
-      } catch (error) {
-        // Silently handle errors to avoid console spam
       }
-    });
+      
+      // Apply initial state immediately
+      applyInitialState();
+      
+      // Setup toggle functionality when DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
+          const sidebar = document.querySelector('.sidebar');
+          
+          if (sidebarToggle && sidebar) {
+            // Load and apply saved state
+            const savedState = localStorage.getItem(STORAGE_KEY);
+            const isCollapsed = savedState === 'true';
+            
+            if (isCollapsed) {
+              sidebarToggle.checked = true;
+              sidebar.classList.add('sidebar-collapsed');
+            }
+            
+            // Remove the initial state class
+            document.documentElement.classList.remove('sidebar-initially-collapsed');
+
+            // Handle toggle changes
+            sidebarToggle.addEventListener('change', function() {
+              if (this.checked) {
+                sidebar.classList.add('sidebar-collapsed');
+                localStorage.setItem(STORAGE_KEY, 'true');
+              } else {
+                sidebar.classList.remove('sidebar-collapsed');
+                localStorage.setItem(STORAGE_KEY, 'false');
+              }
+            });
+          }
+        } catch (error) {
+          // Silently handle errors to avoid console spam
+        }
+      });
+    })();
   </script>
 </aside>
