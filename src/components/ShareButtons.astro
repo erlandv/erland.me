@@ -31,7 +31,7 @@ const enc = encodeURIComponent;
 // Intent URLs (fallback)
 const whatsappHref = `https://wa.me/?text=${enc(`${title} — ${shareUrlWhatsapp}`)}`;
 const telegramHref = `https://t.me/share/url?url=${enc(shareUrlTelegram)}&text=${enc(title)}`;
-const twitterHref = `https://twitter.com/intent/tweet?url=${enc(shareUrlTwitter)}&text=${enc(title)}`;
+const twitterHref = `https://x.com/intent/post?url=${enc(shareUrlTwitter)}&text=${enc(title)}`;
 const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrlFacebook)}`;
 const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrlLinkedIn)}`;
 ---
@@ -114,8 +114,12 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
 
   <script is:inline>
     (function () {
-      const root =
-        document.currentScript && document.currentScript.parentElement;
+      const root = (function() {
+        const s = document.currentScript;
+        if (!s) return null;
+        const viaClosest = typeof s.closest === 'function' ? s.closest('section.share') : null;
+        return (viaClosest || s.parentElement);
+      })();
       if (!root) return;
       const nativeWrap = root.querySelector('.share__native');
 

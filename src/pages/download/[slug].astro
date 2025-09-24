@@ -80,13 +80,6 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
     <Content />
   </article>
 
-  <ShareButtons
-    title={data.title}
-    url={canonicalUrl}
-    description={data.description}
-    heading="Share this template:"
-  />
-
     {downloadRows.length > 0 && (
       <section class="download-files">
         <h2 class="download-files-title">Link Download</h2>
@@ -124,5 +117,11 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
         )}
       </section>
     )}
+    <ShareButtons
+      title={data.title}
+      url={canonicalUrl}
+      description={data.description}
+      heading="Share this template:"
+    />
   </div>
 </SiteLayout>
