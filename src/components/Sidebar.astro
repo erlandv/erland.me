@@ -269,17 +269,11 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     .sidebar:has(.sidebar-toggle:checked) .label-white,
     .sidebar:has(.sidebar-toggle:checked) .label-gray {
-      opacity: 0 !important;
-      transform: translateX(-10px) !important;
-      transition: opacity 0.1s ease, transform 0.1s ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
-      opacity: 0 !important;
-      transform: translateX(-10px) !important;
-      transition: opacity 0.1s ease, transform 0.1s ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
@@ -411,29 +405,15 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       overflow: hidden !important;
     }
 
-    /* Smooth text hiding with transitions */
-    .label-white,
-    .label-gray,
-    .nav-link-container div {
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      transform: translateX(0);
-    }
-
     /* Hide profile text completely */
     .sidebar.sidebar-collapsed .label-white,
     .sidebar.sidebar-collapsed .label-gray {
-      opacity: 0 !important;
-      transform: translateX(-10px) !important;
-      transition: opacity 0.1s ease, transform 0.1s ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     /* Hide nav menu text completely */
     .sidebar.sidebar-collapsed .nav-link-container div {
-      opacity: 0 !important;
-      transform: translateX(-10px) !important;
-      transition: opacity 0.1s ease, transform 0.1s ease;
-      pointer-events: none;
+      display: none !important;
     }
 
     /* Hide social icons */
@@ -499,10 +479,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       align-items: center !important;
     }
 
-    /* Additional cleanup for smooth transitions */
-    .sidebar * {
-      box-sizing: border-box;
-    }
   </style>
 
   <script>

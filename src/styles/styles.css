@@ -853,9 +853,7 @@ p {
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
   padding: 32px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  will-change: width, max-width, padding;
+  transition: max-width 0.3s ease, width 0.3s ease, padding 0.3s ease;
 }
 
 /* Collapsed sidebar state */
@@ -1654,18 +1652,18 @@ p {
     display: flex !important;
   }
   
-  /* Default main content positioning for desktop */
+  /* Default main content positioning for desktop - expanded sidebar */
   .main {
-    transition: all 0.3s ease;
-    margin-left: 0;
-    width: 100%;
+    transition: width 0.3s ease, margin-left 0.3s ease;
+    width: calc(100% - 280px);
+    margin-left: 280px;
   }
   
   /* Adjust main content when sidebar is collapsed */
   .content:has(.sidebar-toggle:checked) .main,
   .content.sidebar-collapsed .main {
-    margin-left: 0 !important;
-    width: 100% !important;
+    width: calc(100% - 80px) !important;
+    margin-left: 80px !important;
   }
 }
 
