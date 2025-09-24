@@ -261,8 +261,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Sidebar expand/collapse states using :has() selector for modern browsers */
     .sidebar:has(.sidebar-toggle:checked) {
-      width: 80px !important;
-      padding: 20px 8px !important;
+      transform: translateX(-200px);
     }
 
     .sidebar:has(.sidebar-toggle:checked) .label-white,
@@ -278,16 +277,11 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       display: none !important;
     }
 
-    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
-      display: flex !important;
-      width: 44px !important;
-      height: 44px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin-bottom: 8px !important;
+    /* Apply same styling for :has() selector */
+    .sidebar:has(.sidebar-toggle:checked) .nav-content {
+      padding-left: 200px;
+      width: 280px;
+      box-sizing: border-box;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .w-nav-brand {
@@ -322,6 +316,18 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     .sidebar:has(.sidebar-toggle:checked) .w-nav-menu {
       align-items: center !important;
+    }
+
+    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
+      display: flex !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin-bottom: 8px !important;
     }
 
     /* Mobile-only menu toggle behavior */
@@ -395,10 +401,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       touch-action: none;
     }
 
-    /* Enhanced class-based collapsed state */
+    /* Enhanced class-based collapsed state using CSS Transform */
     .sidebar.sidebar-collapsed {
-      width: 80px !important;
-      padding: 20px 8px !important;
+      transform: translateX(-200px);
     }
 
     /* Hide profile text completely */
@@ -417,20 +422,14 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       display: none !important;
     }
 
-    /* Show sidebar toggle button in collapsed state */
-    .sidebar.sidebar-collapsed .sidebar-toggle-button {
-      display: flex !important;
-      width: 44px !important;
-      height: 44px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin-bottom: 8px !important;
+    /* Adjust sidebar content positioning when collapsed */
+    .sidebar.sidebar-collapsed .nav-content {
+      padding-left: 200px; /* Push content to visible area */
+      width: 280px;
+      box-sizing: border-box;
     }
 
-    /* Center and adjust profile area */
+    /* Center profile area when collapsed */
     .sidebar.sidebar-collapsed .w-nav-brand {
       justify-content: center !important;
       margin-bottom: 20px !important;
@@ -441,13 +440,12 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       align-items: center !important;
     }
 
-    /* Make profile image smaller and centered */
     .sidebar.sidebar-collapsed .niv-image {
       margin-right: 0 !important;
       margin: 0 auto !important;
     }
 
-    /* Center nav links and make them compact */
+    /* Center and compact nav links */
     .sidebar.sidebar-collapsed .nav-link-container {
       justify-content: center !important;
       align-items: center !important;
@@ -459,20 +457,25 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       margin-right: auto !important;
     }
 
-    /* Ensure nav icons are centered */
     .sidebar.sidebar-collapsed .nav-link-image {
       margin: 0 auto !important;
     }
 
-    /* Adjust main content */
-    .content.sidebar-collapsed .main {
-      width: calc(100% - 80px) !important;
-      margin-left: 80px !important;
-    }
-
-    /* Center the entire nav menu */
     .sidebar.sidebar-collapsed .w-nav-menu {
       align-items: center !important;
+    }
+
+    /* Ensure toggle button is visible and centered */
+    .sidebar.sidebar-collapsed .sidebar-toggle-button {
+      display: flex !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin-bottom: 8px !important;
     }
 
   </style>
