@@ -173,6 +173,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Mobile-only menu toggle behavior */
     @media (max-width: 991px) {
+      /* Ensure header (brand) and toggle stay above the overlay */
+      .w-nav-brand { position: relative; z-index: 1301; }
+      .navbar-icon-button { position: relative; z-index: 1301; }
       /* Mobile overlay panel: present in DOM, hidden by opacity/visibility/transform */
       .sidebar .w-nav-menu {
         display: flex !important; /* override global collapse */
@@ -181,16 +184,18 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         position: fixed;
         left: 0;
         right: 0;
-        top: 92px;
+        top: 0; /* start at very top to avoid visible gap */
         bottom: 0;
-        /* Fill remaining viewport height and scroll internally */
-        height: calc(100vh - 92px);
-        height: calc(100dvh - 92px);
+        /* Fill full viewport and scroll internally */
+        height: 100vh;
+        height: 100dvh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        /* Reserve space for the header area so menu items start below it */
+        padding-top: 92px;
         padding-bottom: 8px;
         background-color: #1c1c1c;
-        z-index: 1200;
+        z-index: 900; /* sit below header brand/toggle */
         /* Hidden state */
         opacity: 0;
         transform: translateY(-10px);

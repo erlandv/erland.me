@@ -217,7 +217,10 @@ ul {
   position: fixed;
   left: 0;
   right: 0;
-  top: 92px;
+  top: 0; /* ensure no gap at the very top */
+  height: 100vh;
+  height: 100dvh;
+  padding-top: 92px; /* push contents below header */
 }
 
 .w-nav-button {
@@ -248,7 +251,10 @@ ul {
     position: fixed;
     left: 0;
     right: 0;
-    top: 92px;
+    top: 0; /* attach to top to avoid background showing */
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 92px;
     transform: translateY(-50%);
     opacity: 0;
     transition:
