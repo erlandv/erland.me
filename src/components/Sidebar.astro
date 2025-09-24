@@ -144,11 +144,12 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     }
 
     /* Icon animations and alignment: both icons overlap exactly */
+    /* Default: hide the toggle; show it only on mobile in media query below */
     .navbar-icon-button {
       position: relative;
       width: 44px;
       height: 44px;
-      display: inline-flex;
+      display: none;
       align-items: center;
       justify-content: center;
     }
@@ -175,7 +176,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     @media (max-width: 991px) {
       /* Ensure header (brand) and toggle stay above the overlay */
       .w-nav-brand { position: relative; z-index: 1301; }
-      .navbar-icon-button { position: relative; z-index: 1301; }
+      .navbar-icon-button { position: relative; z-index: 1301; display: inline-flex; }
       /* Mobile overlay panel: present in DOM, hidden by opacity/visibility/transform */
       .sidebar .w-nav-menu {
         display: flex !important; /* override global collapse */
