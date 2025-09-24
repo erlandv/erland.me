@@ -36,7 +36,10 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       </div>
     </a>
 
-    <nav role="navigation" class="w-nav-menu">
+    <!-- Hidden checkbox to drive CSS-only toggle -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
+
+    <nav id="site-nav" role="navigation" class="w-nav-menu">
       <a
         href="/"
         class={`nav-link-container w-inline-block ${
@@ -112,28 +115,126 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       ))}
     </div>
 
-    <div
+    <label
+      for="nav-toggle"
       class="navbar-icon-button w-nav-button"
       style="-webkit-user-select: text;"
-      aria-label="menu"
-      role="button"
+      aria-label="Toggle menu"
+      aria-controls="site-nav"
       tabindex="0"
     >
-      <Icon name="menu" class="navbar-icon" />
-    </div>
+      <span class="icon-switch icon-switch--menu"><Icon name="menu" class="navbar-icon" /></span>
+      <span class="icon-switch icon-switch--close"><Icon name="close" class="navbar-icon" /></span>
+    </label>
   </div>
 
-  <script>
-    import { setupNav } from "../scripts/nav.js";
+  <style>
+    /* Hide the checkbox driver */
+    .nav-toggle {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+      border: 0;
+      padding: 0;
+      margin: -1px;
+    }
 
-    let cleanup: (() => void) | undefined;
-    document.addEventListener("astro:page-load", () => {
-      if (cleanup) cleanup();
-      cleanup = setupNav();
-    });
+    /* Icon animations and alignment: both icons overlap exactly */
+    .navbar-icon-button {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .navbar-icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+    .icon-switch {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* base placement and animated transform via variable */
+      --icon-xform: rotate(0deg) scale(1);
+      transform: translate(-50%, -50%) var(--icon-xform);
+      transform-origin: center;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    /* initial states */
+    .icon-switch--menu { opacity: 1; --icon-xform: rotate(0deg) scale(1); }
+    .icon-switch--close { opacity: 0; --icon-xform: rotate(-90deg) scale(0.9); }
 
-    document.addEventListener("astro:before-swap", () => {
-      if (cleanup) cleanup();
-    });
-  </script>
+    /* Mobile-only menu toggle behavior */
+    @media (max-width: 991px) {
+      /* Mobile overlay panel: present in DOM, hidden by opacity/visibility/transform */
+      .sidebar .w-nav-menu {
+        display: flex !important; /* override global collapse */
+        flex-direction: column;
+        align-items: stretch;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 92px;
+        bottom: 0;
+        /* Fill remaining viewport height and scroll internally */
+        height: calc(100vh - 92px);
+        height: calc(100dvh - 92px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        background-color: #1c1c1c;
+        z-index: 1200;
+        /* Hidden state */
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+        will-change: transform, opacity;
+      }
+      /* Open state */
+      .nav-toggle:checked ~ .w-nav-menu {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+      /* Ensure social icons appear inside the mobile menu */
+      .nav-toggle:checked ~ .w-nav-menu .socials--menu {
+        display: flex !important;
+        position: static;
+        justify-content: flex-start;
+        gap: 18px;
+        padding: 12px 28px 12px 32px;
+        border-top: 1px solid #353535;
+        margin-top: auto;
+        background-color: #1c1c1c;
+      }
+      /* Swap icons with animation (preserve centering via CSS var) */
+      .nav-toggle:checked ~ .navbar-icon-button .icon-switch--menu {
+        opacity: 0;
+        --icon-xform: rotate(90deg) scale(0.9);
+      }
+      .nav-toggle:checked ~ .navbar-icon-button .icon-switch--close {
+        opacity: 1;
+        --icon-xform: rotate(0deg) scale(1);
+      }
+    }
+  </style>
+
+  <style is:global>
+    /* Prevent body from scrolling when the mobile menu is open (modern browsers) */
+    body:has(.sidebar .nav-toggle:checked) {
+      overflow: hidden;
+      touch-action: none;
+    }
+  </style>
 </aside>
