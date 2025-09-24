@@ -38,6 +38,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     <!-- Hidden checkbox to drive CSS-only toggle -->
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
+    
+    <!-- Hidden checkbox for sidebar expand/collapse (desktop only) -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar" />
 
     <nav id="site-nav" role="navigation" class="w-nav-menu">
       <a
@@ -107,6 +110,16 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       </div>
     </nav>
 
+    <!-- Desktop-only sidebar toggle button -->
+    <label
+      for="sidebar-toggle"
+      class="sidebar-toggle-button"
+      aria-label="Toggle sidebar width"
+      tabindex="0"
+    >
+      <Icon name="sidebar" class="sidebar-toggle-icon" />
+    </label>
+
     <div class="socials socials--sidebar">
       {socials.map((s) => (
         <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
@@ -129,8 +142,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   </div>
 
   <style>
-    /* Hide the checkbox driver */
-    .nav-toggle {
+    /* Hide the checkbox drivers */
+    .nav-toggle,
+    .sidebar-toggle {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -171,6 +185,99 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     /* initial states */
     .icon-switch--menu { opacity: 1; --icon-xform: rotate(0deg) scale(1); }
     .icon-switch--close { opacity: 0; --icon-xform: rotate(-90deg) scale(0.9); }
+
+    /* Sidebar toggle button (desktop only) */
+    .sidebar-toggle-button {
+      display: none; /* Hidden by default, shown only on desktop */
+      grid-column-gap: 12px;
+      grid-row-gap: 12px;
+      color: #c0c0c0;
+      border: 1px solid rgba(0, 0, 0, 0);
+      border-radius: 8px;
+      justify-content: flex-start;
+      align-items: center;
+      padding: clamp(10px, 2vw, 14px);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      transform: translateX(0);
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-toggle-button:hover {
+      color: #ffffff !important;
+      background-color: #252525;
+      border-color: #353535;
+      transform: translateX(0) scale(1.02);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-toggle-icon {
+      width: 24px;
+      opacity: 0.48;
+      transition: opacity 0.2s ease;
+    }
+
+    .sidebar-toggle-button:hover .sidebar-toggle-icon {
+      opacity: 1;
+    }
+
+    /* Sidebar expand/collapse states (desktop only) */
+    .sidebar {
+      transition: max-width 0.3s ease, width 0.3s ease;
+    }
+
+    /* Collapsed state - using :has() selector for modern browsers */
+    .sidebar:has(.sidebar-toggle:checked) {
+      max-width: 80px;
+      width: 80px;
+    }
+
+    /* Hide text elements in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .label-white,
+    .sidebar:has(.sidebar-toggle:checked) .label-gray {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+      transition: opacity 0.2s ease, width 0.2s ease;
+    }
+
+    /* Hide nav text in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+      transition: opacity 0.2s ease, width 0.2s ease;
+    }
+
+    /* Hide social icons in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
+      display: none;
+    }
+
+    /* Hide sidebar toggle button in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
+      display: none;
+    }
+
+    /* Adjust nav content padding in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .nav-content {
+      padding: 32px 16px;
+    }
+
+    /* Center profile image in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .niv-data {
+      justify-content: center;
+    }
+
+    /* Adjust nav links in collapsed state */
+    .sidebar:has(.sidebar-toggle:checked) .nav-link-container {
+      justify-content: center;
+      padding: clamp(10px, 2vw, 14px) 8px;
+    }
 
     /* Mobile-only menu toggle behavior */
     @media (max-width: 1024px) {
@@ -242,5 +349,78 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       overflow: hidden;
       touch-action: none;
     }
+
+    /* Fallback for browsers that don't support :has() */
+    .sidebar.sidebar-collapsed {
+      max-width: 80px;
+      width: 80px;
+    }
+
+    .sidebar.sidebar-collapsed .label-white,
+    .sidebar.sidebar-collapsed .label-gray {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+    }
+
+    .sidebar.sidebar-collapsed .nav-link-container div {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+    }
+
+    .sidebar.sidebar-collapsed .socials--sidebar {
+      display: none;
+    }
+
+    .sidebar.sidebar-collapsed .sidebar-toggle-button {
+      display: none;
+    }
+
+    .sidebar.sidebar-collapsed .nav-content {
+      padding: 32px 16px;
+    }
+
+    .sidebar.sidebar-collapsed .niv-data {
+      justify-content: center;
+    }
+
+    .sidebar.sidebar-collapsed .nav-link-container {
+      justify-content: center;
+      padding: clamp(10px, 2vw, 14px) 8px;
+    }
+
+    .content.sidebar-collapsed .main {
+      width: calc(100% - 80px);
+      margin-left: 80px;
+    }
   </style>
+
+  <script>
+    // JavaScript fallback for browsers that don't support :has() selector
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content');
+
+      if (sidebarToggle && sidebar && content) {
+        // Check if browser supports :has() selector
+        const supportsHas = CSS.supports('selector(:has(*))');
+        
+        if (!supportsHas) {
+          // Use JavaScript fallback for older browsers
+          sidebarToggle.addEventListener('change', function() {
+            const checkbox = this as HTMLInputElement;
+            if (checkbox.checked) {
+              sidebar.classList.add('sidebar-collapsed');
+              content.classList.add('sidebar-collapsed');
+            } else {
+              sidebar.classList.remove('sidebar-collapsed');
+              content.classList.remove('sidebar-collapsed');
+            }
+          });
+        }
+      }
+    });
+  </script>
 </aside>

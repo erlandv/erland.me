@@ -1639,6 +1639,22 @@ p {
   }
   /* Hide mobile toggle icon on desktop */
   .navbar-icon-button { display: none; }
+  
+  /* Show sidebar toggle button on desktop */
+  .sidebar-toggle-button {
+    display: flex !important;
+  }
+  
+  /* Adjust main content width when sidebar is collapsed */
+  .content:has(.sidebar-toggle:checked) .main {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+  
+  /* Smooth transition for main content */
+  .main {
+    transition: width 0.3s ease, margin-left 0.3s ease;
+  }
 }
 
 @media screen and (max-width: 767px) {
