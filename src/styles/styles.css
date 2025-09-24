@@ -853,6 +853,13 @@ p {
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
   padding: 32px;
+  transition: max-width 0.3s ease, width 0.3s ease;
+}
+
+/* Collapsed sidebar state */
+.sidebar.sidebar-collapsed {
+  max-width: 80px !important;
+  width: 80px !important;
 }
 
 .nav-content {
@@ -1646,9 +1653,10 @@ p {
   }
   
   /* Adjust main content width when sidebar is collapsed */
-  .content:has(.sidebar-toggle:checked) .main {
-    width: calc(100% - 80px);
-    margin-left: 80px;
+  .content:has(.sidebar-toggle:checked) .main,
+  .content.sidebar-collapsed .main {
+    width: calc(100% - 80px) !important;
+    margin-left: 80px !important;
   }
   
   /* Smooth transition for main content */

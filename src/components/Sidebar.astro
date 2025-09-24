@@ -225,58 +225,44 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       opacity: 1;
     }
 
-    /* Sidebar expand/collapse states (desktop only) */
-    .sidebar {
-      transition: max-width 0.3s ease, width 0.3s ease;
-    }
-
-    /* Collapsed state - using :has() selector for modern browsers */
+    /* Sidebar expand/collapse states (desktop only) - using :has() as backup */
     .sidebar:has(.sidebar-toggle:checked) {
-      max-width: 80px;
-      width: 80px;
+      max-width: 80px !important;
+      width: 80px !important;
     }
 
-    /* Hide text elements in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .label-white,
     .sidebar:has(.sidebar-toggle:checked) .label-gray {
-      opacity: 0;
-      width: 0;
+      opacity: 0 !important;
+      width: 0 !important;
       overflow: hidden;
-      transition: opacity 0.2s ease, width 0.2s ease;
     }
 
-    /* Hide nav text in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
-      opacity: 0;
-      width: 0;
+      opacity: 0 !important;
+      width: 0 !important;
       overflow: hidden;
-      transition: opacity 0.2s ease, width 0.2s ease;
     }
 
-    /* Hide social icons in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
-      display: none;
+      display: none !important;
     }
 
-    /* Hide sidebar toggle button in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
-      display: none;
+      display: none !important;
     }
 
-    /* Adjust nav content padding in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .nav-content {
-      padding: 32px 16px;
+      padding: 32px 16px !important;
     }
 
-    /* Center profile image in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .niv-data {
-      justify-content: center;
+      justify-content: center !important;
     }
 
-    /* Adjust nav links in collapsed state */
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container {
-      justify-content: center;
-      padding: clamp(10px, 2vw, 14px) 8px;
+      justify-content: center !important;
+      padding: clamp(10px, 2vw, 14px) 8px !important;
     }
 
     /* Mobile-only menu toggle behavior */
@@ -350,76 +336,70 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       touch-action: none;
     }
 
-    /* Fallback for browsers that don't support :has() */
+    /* Enhanced class-based collapsed state */
     .sidebar.sidebar-collapsed {
-      max-width: 80px;
-      width: 80px;
+      max-width: 80px !important;
+      width: 80px !important;
+      padding: 32px 16px !important;
     }
 
     .sidebar.sidebar-collapsed .label-white,
     .sidebar.sidebar-collapsed .label-gray {
-      opacity: 0;
-      width: 0;
-      overflow: hidden;
+      display: none !important;
     }
 
     .sidebar.sidebar-collapsed .nav-link-container div {
-      opacity: 0;
-      width: 0;
-      overflow: hidden;
+      display: none !important;
     }
 
     .sidebar.sidebar-collapsed .socials--sidebar {
-      display: none;
+      display: none !important;
     }
 
     .sidebar.sidebar-collapsed .sidebar-toggle-button {
-      display: none;
-    }
-
-    .sidebar.sidebar-collapsed .nav-content {
-      padding: 32px 16px;
+      display: none !important;
     }
 
     .sidebar.sidebar-collapsed .niv-data {
-      justify-content: center;
+      justify-content: center !important;
     }
 
     .sidebar.sidebar-collapsed .nav-link-container {
-      justify-content: center;
-      padding: clamp(10px, 2vw, 14px) 8px;
+      justify-content: center !important;
+      padding: clamp(10px, 2vw, 14px) 8px !important;
     }
 
     .content.sidebar-collapsed .main {
-      width: calc(100% - 80px);
-      margin-left: 80px;
+      width: calc(100% - 80px) !important;
+      margin-left: 80px !important;
     }
   </style>
 
   <script>
-    // JavaScript fallback for browsers that don't support :has() selector
+    // Enhanced sidebar toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
       const sidebarToggle = document.getElementById('sidebar-toggle');
       const sidebar = document.querySelector('.sidebar');
       const content = document.querySelector('.content');
 
       if (sidebarToggle && sidebar && content) {
-        // Check if browser supports :has() selector
-        const supportsHas = CSS.supports('selector(:has(*))');
+        // Always use JavaScript for more reliable functionality
+        sidebarToggle.addEventListener('change', function() {
+          const checkbox = this as HTMLInputElement;
+          if (checkbox.checked) {
+            sidebar.classList.add('sidebar-collapsed');
+            content.classList.add('sidebar-collapsed');
+            console.log('Sidebar collapsed');
+          } else {
+            sidebar.classList.remove('sidebar-collapsed');
+            content.classList.remove('sidebar-collapsed');
+            console.log('Sidebar expanded');
+          }
+        });
         
-        if (!supportsHas) {
-          // Use JavaScript fallback for older browsers
-          sidebarToggle.addEventListener('change', function() {
-            const checkbox = this as HTMLInputElement;
-            if (checkbox.checked) {
-              sidebar.classList.add('sidebar-collapsed');
-              content.classList.add('sidebar-collapsed');
-            } else {
-              sidebar.classList.remove('sidebar-collapsed');
-              content.classList.remove('sidebar-collapsed');
-            }
-          });
-        }
+        console.log('Sidebar toggle initialized');
+      } else {
+        console.error('Sidebar elements not found:', { sidebarToggle, sidebar, content });
       }
     });
   </script>
