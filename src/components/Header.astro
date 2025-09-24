@@ -54,15 +54,13 @@ const websiteSchema = websiteJsonLd();
   <title>{metaTags.title}</title>
   <ClientRouter fallback="swap" />
   
-  <!-- Enhanced Meta Tags -->
   <meta name="description" content={metaTags.description} />
-  <meta name="author" content="Erland Ramdhani" />
+  <meta name="author" content="Erland" />
   <meta name="robots" content="index, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#1a1a1a" />
   <meta name="msapplication-TileColor" content="#1a1a1a" />
   
-  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content={metaTags.openGraph.title} />
   <meta property="og:description" content={metaTags.openGraph.description} />
   <meta property="og:url" content={metaTags.openGraph.url} />
@@ -75,7 +73,6 @@ const websiteSchema = websiteJsonLd();
   {metaTags.openGraph.tags && metaTags.openGraph.tags.map(tag => <meta property="article:tag" content={tag} />)}
   {metaTags.openGraph.authors && metaTags.openGraph.authors.map(author => <meta property="article:author" content={author} />)}
   
-  <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content={metaTags.twitter.card} />
   <meta name="twitter:title" content={metaTags.twitter.title} />
   <meta name="twitter:description" content={metaTags.twitter.description} />
@@ -83,34 +80,21 @@ const websiteSchema = websiteJsonLd();
   <meta name="twitter:creator" content={metaTags.twitter.creator} />
   <meta name="twitter:site" content={metaTags.twitter.site} />
   
-  <!-- Preconnect to Google Fonts for faster loading -->
-  <link href="https://fonts.googleapis.com/" rel="preconnect" />
-  <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous" />
-  <!-- DNS prefetch as fallback for older browsers -->
-  <link href="https://fonts.googleapis.com/" rel="dns-prefetch" />
-  <link href="https://fonts.gstatic.com/" rel="dns-prefetch" />
-  <!-- CSS is imported at the top of the file -->
-  <!-- Load Google Fonts with display=swap for better performance -->
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
   
-  <!-- Canonical and Navigation Links -->
   <link rel="canonical" href={metaTags.canonical} />
   {prevHref && <link rel="prev" href={prevHref} />}
   {nextHref && <link rel="next" href={nextHref} />}
   
-  <!-- Favicon and Icons -->
   <link href="/assets/erland-icon.svg" rel="shortcut icon" type="image/x-icon" />
   <link href="/assets/erland-icon.svg" rel="apple-touch-icon" />
   <link href="/assets/erland-icon.svg" rel="icon" type="image/svg+xml" />
   
-  <!-- Structured Data -->
   <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
   {jsonLd && (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   )}
   
-  <!-- Legacy Browser Support -->
-  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
   <script type="text/javascript" is:inline>
     !(function (o, c) {
       var n = c.documentElement,
