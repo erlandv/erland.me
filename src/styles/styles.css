@@ -847,19 +847,19 @@ p {
 }
 
 .sidebar {
-  width: 100%;
+  width: 280px;
   height: 100%;
-  max-width: 280px;
+  flex-shrink: 0;
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
   padding: 32px;
-  transition: max-width 0.3s ease, width 0.3s ease, padding 0.3s ease;
+  transition: width 0.3s ease, padding 0.3s ease;
 }
 
 /* Collapsed sidebar state */
 .sidebar.sidebar-collapsed {
-  max-width: 80px !important;
   width: 80px !important;
+  padding: 20px 8px !important;
 }
 
 .nav-content {
@@ -1652,18 +1652,10 @@ p {
     display: flex !important;
   }
   
-  /* Default main content positioning for desktop - expanded sidebar */
+  /* Remove any fixed positioning for main content - let flexbox handle it */
   .main {
-    transition: width 0.3s ease, margin-left 0.3s ease;
-    width: calc(100% - 280px);
-    margin-left: 280px;
-  }
-  
-  /* Adjust main content when sidebar is collapsed */
-  .content:has(.sidebar-toggle:checked) .main,
-  .content.sidebar-collapsed .main {
-    width: calc(100% - 80px) !important;
-    margin-left: 80px !important;
+    flex: 1;
+    transition: all 0.3s ease;
   }
 }
 
