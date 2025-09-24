@@ -15,6 +15,29 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
+		<!-- Inline script for instant sidebar state application -->
+		<script>
+			// CRITICAL: This runs immediately when HTML is parsed, before any CSS or other resources
+			(function() {
+				try {
+					const STORAGE_KEY = 'sidebar-collapsed';
+					const savedState = localStorage.getItem(STORAGE_KEY);
+					const isCollapsed = savedState === 'true';
+					
+					if (isCollapsed) {
+						// Apply CSS custom property immediately
+						document.documentElement.style.setProperty('--sidebar-collapsed', '1');
+						document.documentElement.classList.add('sidebar-collapsed-global');
+					} else {
+						document.documentElement.style.setProperty('--sidebar-collapsed', '0');
+						document.documentElement.classList.remove('sidebar-collapsed-global');
+					}
+				} catch (error) {
+					// Silently handle localStorage errors (e.g., private browsing)
+				}
+			})();
+		</script>
 	</head>
 	<body>
 		<slot />
@@ -31,6 +54,83 @@ const { title } = Astro.props;
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
+		
+		/* Sidebar state management via CSS custom properties */
+		--sidebar-collapsed: 0; /* Default: expanded */
+		--sidebar-width-expanded: 280px;
+		--sidebar-width-collapsed: 80px;
+		--sidebar-width: var(--sidebar-width-expanded); /* Default */
+	}
+	
+	/* Global sidebar state management */
+	html.sidebar-collapsed-global {
+		--sidebar-collapsed: 1;
+		--sidebar-width: var(--sidebar-width-collapsed);
+	}
+	
+	/* Instant sidebar styling using CSS custom properties */
+	html.sidebar-collapsed-global .sidebar {
+		width: var(--sidebar-width-collapsed) !important;
+		padding: 20px 8px !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .label-white,
+	html.sidebar-collapsed-global .sidebar .label-gray {
+		display: none !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .nav-link-container div {
+		display: none !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .socials--sidebar {
+		display: none !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .w-nav-brand {
+		justify-content: center !important;
+		margin-bottom: 20px !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .niv-data {
+		justify-content: center !important;
+		align-items: center !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .niv-image {
+		margin-right: 0 !important;
+		margin: 0 auto !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .nav-link-container {
+		justify-content: center !important;
+		align-items: center !important;
+		padding: 12px 8px !important;
+		margin-bottom: 8px !important;
+		min-height: 44px !important;
+		width: 60px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .nav-link-image {
+		margin: 0 auto !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .w-nav-menu {
+		align-items: center !important;
+	}
+	
+	html.sidebar-collapsed-global .sidebar .sidebar-toggle-button {
+		display: flex !important;
+		width: 44px !important;
+		height: 44px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		justify-content: center !important;
+		align-items: center !important;
+		padding: 0 !important;
+		margin-bottom: 8px !important;
 	}
 	html {
 		font-family: system-ui, sans-serif;
