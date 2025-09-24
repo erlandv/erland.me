@@ -49,3 +49,4 @@ shrinkwrap.yaml
 .vercel/
 .netlify/
 .output/
+AGENTS.md
