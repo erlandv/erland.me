@@ -1,0 +1,266 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  url: string; // absolute URL
+  description?: string;
+}
+
+const { title, url, description }: Props = Astro.props as Props;
+
+function withUtm(baseUrl: string, source: string) {
+  const u = new URL(baseUrl);
+  u.searchParams.set('utm_source', source);
+  u.searchParams.set('utm_medium', 'social');
+  u.searchParams.set('utm_campaign', 'share-button');
+  return u.toString();
+}
+
+const shareUrlCopy = withUtm(url, 'copy');
+const shareUrlWebShare = withUtm(url, 'webshare');
+const shareUrlWhatsapp = withUtm(url, 'whatsapp');
+const shareUrlTelegram = withUtm(url, 'telegram');
+const shareUrlTwitter = withUtm(url, 'twitter');
+const shareUrlFacebook = withUtm(url, 'facebook');
+const shareUrlLinkedIn = withUtm(url, 'linkedin');
+
+const enc = encodeURIComponent;
+
+// Intent URLs (fallback)
+const whatsappHref = `https://wa.me/?text=${enc(`${title} — ${shareUrlWhatsapp}`)}`;
+const telegramHref = `https://t.me/share/url?url=${enc(shareUrlTelegram)}&text=${enc(title)}`;
+const twitterHref = `https://twitter.com/intent/tweet?url=${enc(shareUrlTwitter)}&text=${enc(title)}`;
+const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrlFacebook)}`;
+const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrlLinkedIn)}`;
+---
+
+<section
+  class='share'
+  data-title={title}
+  data-text={description || title}
+  data-url={shareUrlWebShare}
+>
+  <h3 class='share__title'>Share this article:</h3>
+
+  <div class='share__wrap'>
+    <div class='share__native' hidden>
+      <button
+        class='share__btn share__btn--native'
+        type='button'
+        aria-label='Share via native share'
+      >
+        <Icon name='share' class='share__icon' ariaLabel='Share' />
+      </button>
+      <button
+        class='share__btn share__btn--copy'
+        type='button'
+        aria-label='Copy link'
+        data-copy={shareUrlCopy}
+      >
+        <Icon name='copy' class='share__icon' ariaLabel='Copy link' />
+      </button>
+    </div>
+
+    <div class='share__fallback'>
+      <a
+        class='share__btn'
+        href={whatsappHref}
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Share on WhatsApp'
+      >
+        <Icon name='whatsapp' class='share__icon' ariaLabel='WhatsApp' />
+      </a>
+      <a
+        class='share__btn'
+        href={telegramHref}
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Share on Telegram'
+      >
+        <Icon name='telegram' class='share__icon' ariaLabel='Telegram' />
+      </a>
+      <a
+        class='share__btn'
+        href={twitterHref}
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Share on X/Twitter'
+      >
+        <Icon name='x' class='share__icon' ariaLabel='X / Twitter' />
+      </a>
+      <a
+        class='share__btn'
+        href={facebookHref}
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Share on Facebook'
+      >
+        <Icon name='facebook' class='share__icon' ariaLabel='Facebook' />
+      </a>
+      <a
+        class='share__btn'
+        href={linkedinHref}
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Share on LinkedIn'
+      >
+        <Icon name='linkedin' class='share__icon' ariaLabel='LinkedIn' />
+      </a>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const root =
+        document.currentScript && document.currentScript.parentElement;
+      if (!root) return;
+      const nativeWrap = root.querySelector('.share__native');
+
+      const title = root.getAttribute('data-title') || document.title;
+      const text = root.getAttribute('data-text') || title;
+      const url = root.getAttribute('data-url') || location.href;
+
+      function bindCopyButtons(scope) {
+        scope.querySelectorAll('.share__btn--copy').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const link = btn.getAttribute('data-copy') || url;
+            try {
+              await navigator.clipboard.writeText(link);
+              const span = btn.querySelector('span');
+              const old = span && span.textContent;
+              if (span) span.textContent = 'Copied!';
+              btn.classList.add('is-copied');
+              setTimeout(() => {
+                btn.classList.remove('is-copied');
+                if (span && old) span.textContent = old;
+              }, 1800);
+            } catch (e) {
+              try {
+                const ta = document.createElement('textarea');
+                ta.value = link;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+              } catch {}
+            }
+          });
+        });
+      }
+
+      bindCopyButtons(root);
+
+      const canWebShare = typeof navigator !== 'undefined' && !!navigator.share;
+      if (nativeWrap) {
+        nativeWrap.hidden = !canWebShare;
+        const shareBtn = nativeWrap.querySelector('.share__btn--native');
+        if (shareBtn) {
+          shareBtn.addEventListener('click', async () => {
+            try {
+              await navigator.share({ title, text, url });
+            } catch (err) {
+              // user dismissed or not allowed; ignore
+            }
+          });
+        }
+      }
+    })();
+  </script>
+
+  <style>
+    .share__title {
+      font-size: 1.25rem;
+      margin: 1.25rem 0 1rem;
+      opacity: 0.9;
+    }
+    .share__wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      column-gap: 0.6rem;
+      row-gap: 0.6rem;
+    }
+    .share__fallback,
+    .share__native {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .share__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.05s ease;
+      font: inherit;
+    }
+    .share__btn:hover {
+      background: rgba(107, 182, 255, 0.12);
+      border-color: rgba(107, 182, 255, 0.45);
+    }
+    .share__btn:focus-visible {
+      outline: 2px solid #6bb6ff;
+      outline-offset: 2px;
+    }
+    .share__btn:active {
+      transform: scale(0.97);
+    }
+    .share__icon {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+    }
+    @media (max-width: 1024px) {
+      .share__wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 0.75rem;
+      }
+      .share__fallback,
+      .share__native {
+        gap: 0.5rem;
+      }
+      .share__btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+      .share__icon {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    @media (max-width: 480px) {
+      .share__fallback,
+      .share__native {
+        gap: 0.5rem;
+      }
+      .share__wrap {
+        row-gap: 0.85rem;
+      }
+    }
+    @media (hover: none) {
+      .share__btn:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.24);
+      }
+    }
+  </style>
+</section>

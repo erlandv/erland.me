@@ -4,6 +4,7 @@ import Icon from "../../components/Icon.astro";
 import BackNav from "../../components/BackNav.astro";
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '../../lib/seo';
+import ShareButtons from "../../components/ShareButtons.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -31,6 +32,7 @@ const heroWidth = typeof heroData === 'object' ? heroData.width : undefined;
 const heroHeight = typeof heroData === 'object' ? heroData.height : undefined;
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 const canonical = `/blog/${slug}/`;
+const canonicalUrl = `${import.meta.env.SITE_URL || 'https://erland.me'}${canonical}`;
 
 const jsonLd = blogPostingJsonLd({
   title: frontmatter.title,
@@ -87,6 +89,7 @@ const jsonLd = blogPostingJsonLd({
     <div class="prose">
       <Content />
     </div>
+    <ShareButtons title={frontmatter.title} url={canonicalUrl} description={frontmatter.description || frontmatter.excerpt} />
   </article>
   
   <script>
