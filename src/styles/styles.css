@@ -1655,13 +1655,16 @@ p {
   /* Adjust main content width when sidebar is collapsed */
   .content:has(.sidebar-toggle:checked) .main,
   .content.sidebar-collapsed .main {
-    width: calc(100% - 80px) !important;
+    width: calc(100vw - 80px) !important;
     margin-left: 80px !important;
+    max-width: none !important;
   }
   
   /* Smooth transition for main content */
   .main {
     transition: width 0.3s ease, margin-left 0.3s ease;
+    width: calc(100vw - 280px);
+    margin-left: 280px;
   }
 }
 

@@ -117,7 +117,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       aria-label="Toggle sidebar width"
       tabindex="0"
     >
-      <Icon name="sidebar" class="sidebar-toggle-icon" />
+      <Icon name="collapse" class="sidebar-toggle-icon sidebar-toggle-icon--collapse" />
+      <Icon name="expand" class="sidebar-toggle-icon sidebar-toggle-icon--expand" />
     </label>
 
     <div class="socials socials--sidebar">
@@ -219,10 +220,43 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       width: 24px;
       opacity: 0.48;
       transition: opacity 0.2s ease;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .sidebar-toggle-button:hover .sidebar-toggle-icon {
       opacity: 1;
+    }
+
+    /* Icon switching logic */
+    .sidebar-toggle-icon--collapse {
+      opacity: 1;
+    }
+
+    .sidebar-toggle-icon--expand {
+      opacity: 0;
+    }
+
+    /* Switch icons when collapsed */
+    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-icon--collapse,
+    .sidebar.sidebar-collapsed .sidebar-toggle-icon--collapse {
+      opacity: 0;
+    }
+
+    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-icon--expand,
+    .sidebar.sidebar-collapsed .sidebar-toggle-icon--expand {
+      opacity: 1;
+    }
+
+    /* Make toggle button square like nav menu items */
+    .sidebar-toggle-button {
+      position: relative;
+      width: 44px !important;
+      height: 44px !important;
+      min-height: 44px !important;
+      border-radius: 8px !important;
     }
 
     /* Sidebar expand/collapse states using :has() selector for modern browsers */
@@ -250,7 +284,15 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     }
 
     .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
-      display: none !important;
+      display: flex !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin-bottom: 8px !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .w-nav-brand {
@@ -385,9 +427,17 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       display: none !important;
     }
 
-    /* Hide sidebar toggle button */
+    /* Show sidebar toggle button in collapsed state */
     .sidebar.sidebar-collapsed .sidebar-toggle-button {
-      display: none !important;
+      display: flex !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin-bottom: 8px !important;
     }
 
     /* Center and adjust profile area */
@@ -453,28 +503,42 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   </style>
 
   <script>
-    // Enhanced sidebar toggle functionality
+    // Enhanced sidebar toggle functionality with localStorage persistence
     document.addEventListener('DOMContentLoaded', function() {
-      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
       const sidebar = document.querySelector('.sidebar');
       const content = document.querySelector('.content');
+      const STORAGE_KEY = 'sidebar-collapsed';
 
       if (sidebarToggle && sidebar && content) {
-        // Always use JavaScript for more reliable functionality
+        // Load saved state from localStorage
+        const savedState = localStorage.getItem(STORAGE_KEY);
+        const isCollapsed = savedState === 'true';
+        
+        // Apply saved state
+        if (isCollapsed) {
+          sidebarToggle.checked = true;
+          sidebar.classList.add('sidebar-collapsed');
+          content.classList.add('sidebar-collapsed');
+        }
+
+        // Handle toggle changes
         sidebarToggle.addEventListener('change', function() {
           const checkbox = this as HTMLInputElement;
           if (checkbox.checked) {
             sidebar.classList.add('sidebar-collapsed');
             content.classList.add('sidebar-collapsed');
+            localStorage.setItem(STORAGE_KEY, 'true');
             console.log('Sidebar collapsed');
           } else {
             sidebar.classList.remove('sidebar-collapsed');
             content.classList.remove('sidebar-collapsed');
+            localStorage.setItem(STORAGE_KEY, 'false');
             console.log('Sidebar expanded');
           }
         });
         
-        console.log('Sidebar toggle initialized');
+        console.log('Sidebar toggle initialized with state:', isCollapsed);
       } else {
         console.error('Sidebar elements not found:', { sidebarToggle, sidebar, content });
       }
