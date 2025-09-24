@@ -1832,7 +1832,7 @@ p {
     position: static;
     justify-content: flex-start;
     gap: 18px;
-    padding: 12px 28px 12px 32px;
+    padding: 4%;
     border-top: 1px solid #353535;
     margin-top: auto;
     background-color: #1c1c1c;
