@@ -225,23 +225,24 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       opacity: 1;
     }
 
-    /* Sidebar expand/collapse states (desktop only) - using :has() as backup */
+    /* Sidebar expand/collapse states using :has() selector for modern browsers */
     .sidebar:has(.sidebar-toggle:checked) {
       max-width: 80px !important;
       width: 80px !important;
+      padding: 20px 8px !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .label-white,
     .sidebar:has(.sidebar-toggle:checked) .label-gray {
+      display: none !important;
+      visibility: hidden !important;
       opacity: 0 !important;
-      width: 0 !important;
-      overflow: hidden;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
+      display: none !important;
+      visibility: hidden !important;
       opacity: 0 !important;
-      width: 0 !important;
-      overflow: hidden;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
@@ -252,17 +253,38 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       display: none !important;
     }
 
-    .sidebar:has(.sidebar-toggle:checked) .nav-content {
-      padding: 32px 16px !important;
+    .sidebar:has(.sidebar-toggle:checked) .w-nav-brand {
+      justify-content: center !important;
+      margin-bottom: 20px !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .niv-data {
       justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .sidebar:has(.sidebar-toggle:checked) .niv-image {
+      margin-right: 0 !important;
+      margin: 0 auto !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container {
       justify-content: center !important;
-      padding: clamp(10px, 2vw, 14px) 8px !important;
+      align-items: center !important;
+      padding: 12px 8px !important;
+      margin-bottom: 8px !important;
+      min-height: 44px !important;
+      width: 60px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .sidebar:has(.sidebar-toggle:checked) .nav-link-image {
+      margin: 0 auto !important;
+    }
+
+    .sidebar:has(.sidebar-toggle:checked) .w-nav-menu {
+      align-items: center !important;
     }
 
     /* Mobile-only menu toggle behavior */
@@ -340,38 +362,93 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     .sidebar.sidebar-collapsed {
       max-width: 80px !important;
       width: 80px !important;
-      padding: 32px 16px !important;
+      padding: 20px 8px !important;
     }
 
+    /* Hide profile text completely */
     .sidebar.sidebar-collapsed .label-white,
     .sidebar.sidebar-collapsed .label-gray {
       display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
     }
 
+    /* Hide nav menu text completely */
     .sidebar.sidebar-collapsed .nav-link-container div {
       display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
     }
 
+    /* Hide social icons */
     .sidebar.sidebar-collapsed .socials--sidebar {
       display: none !important;
     }
 
+    /* Hide sidebar toggle button */
     .sidebar.sidebar-collapsed .sidebar-toggle-button {
       display: none !important;
     }
 
+    /* Center and adjust profile area */
+    .sidebar.sidebar-collapsed .w-nav-brand {
+      justify-content: center !important;
+      margin-bottom: 20px !important;
+    }
+
     .sidebar.sidebar-collapsed .niv-data {
       justify-content: center !important;
+      align-items: center !important;
     }
 
+    /* Make profile image smaller and centered */
+    .sidebar.sidebar-collapsed .niv-image {
+      margin-right: 0 !important;
+      margin: 0 auto !important;
+    }
+
+    /* Center nav links and make them compact */
     .sidebar.sidebar-collapsed .nav-link-container {
       justify-content: center !important;
-      padding: clamp(10px, 2vw, 14px) 8px !important;
+      align-items: center !important;
+      padding: 12px 8px !important;
+      margin-bottom: 8px !important;
+      min-height: 44px !important;
+      width: 60px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
     }
 
+    /* Ensure nav icons are centered */
+    .sidebar.sidebar-collapsed .nav-link-image {
+      margin: 0 auto !important;
+    }
+
+    /* Adjust main content */
     .content.sidebar-collapsed .main {
       width: calc(100% - 80px) !important;
       margin-left: 80px !important;
+    }
+
+    /* Center the entire nav menu */
+    .sidebar.sidebar-collapsed .w-nav-menu {
+      align-items: center !important;
+    }
+
+    /* Force text elements to be completely hidden */
+    .sidebar.sidebar-collapsed * {
+      text-overflow: clip !important;
+    }
+
+    .sidebar.sidebar-collapsed .nav-link-container > div,
+    .sidebar.sidebar-collapsed .label-white,
+    .sidebar.sidebar-collapsed .label-gray {
+      font-size: 0 !important;
+      line-height: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      white-space: nowrap !important;
     }
   </style>
 
