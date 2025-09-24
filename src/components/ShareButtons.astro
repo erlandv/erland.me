@@ -5,9 +5,10 @@ interface Props {
   title: string;
   url: string; // absolute URL
   description?: string;
+  heading?: string;
 }
 
-const { title, url, description }: Props = Astro.props as Props;
+const { title, url, description, heading = 'Share this article:' }: Props = Astro.props as Props;
 
 function withUtm(baseUrl: string, source: string) {
   const u = new URL(baseUrl);
@@ -41,7 +42,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
   data-text={description || title}
   data-url={shareUrlWebShare}
 >
-  <h3 class='share__title'>Share this article:</h3>
+  <h3 class='share__title'>{heading}</h3>
 
   <div class='share__wrap'>
     <div class='share__native' hidden>
