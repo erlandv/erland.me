@@ -264,19 +264,22 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       max-width: 80px !important;
       width: 80px !important;
       padding: 20px 8px !important;
+      overflow: hidden !important;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .label-white,
     .sidebar:has(.sidebar-toggle:checked) .label-gray {
-      display: none !important;
-      visibility: hidden !important;
       opacity: 0 !important;
+      transform: translateX(-10px) !important;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+      pointer-events: none;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
-      display: none !important;
-      visibility: hidden !important;
       opacity: 0 !important;
+      transform: translateX(-10px) !important;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+      pointer-events: none;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
@@ -405,21 +408,32 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       max-width: 80px !important;
       width: 80px !important;
       padding: 20px 8px !important;
+      overflow: hidden !important;
+    }
+
+    /* Smooth text hiding with transitions */
+    .label-white,
+    .label-gray,
+    .nav-link-container div {
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: translateX(0);
     }
 
     /* Hide profile text completely */
     .sidebar.sidebar-collapsed .label-white,
     .sidebar.sidebar-collapsed .label-gray {
-      display: none !important;
-      visibility: hidden !important;
       opacity: 0 !important;
+      transform: translateX(-10px) !important;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+      pointer-events: none;
     }
 
     /* Hide nav menu text completely */
     .sidebar.sidebar-collapsed .nav-link-container div {
-      display: none !important;
-      visibility: hidden !important;
       opacity: 0 !important;
+      transform: translateX(-10px) !important;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+      pointer-events: none;
     }
 
     /* Hide social icons */
@@ -485,20 +499,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       align-items: center !important;
     }
 
-    /* Force text elements to be completely hidden */
-    .sidebar.sidebar-collapsed * {
-      text-overflow: clip !important;
-    }
-
-    .sidebar.sidebar-collapsed .nav-link-container > div,
-    .sidebar.sidebar-collapsed .label-white,
-    .sidebar.sidebar-collapsed .label-gray {
-      font-size: 0 !important;
-      line-height: 0 !important;
-      height: 0 !important;
-      width: 0 !important;
-      overflow: hidden !important;
-      white-space: nowrap !important;
+    /* Additional cleanup for smooth transitions */
+    .sidebar * {
+      box-sizing: border-box;
     }
   </style>
 
