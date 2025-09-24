@@ -42,6 +42,12 @@ export default defineConfig({
           drop_debugger: true,
           // Remove unused code
           dead_code: true,
+          // Mark common console helpers as pure to aid DCE
+          pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        },
+        // Extra safety for older Safari mangling
+        mangle: {
+          safari10: true,
         },
         format: {
           // Remove comments from output
@@ -54,25 +60,43 @@ export default defineConfig({
           manualChunks: id => {
             // Vendor chunks
             if (id.includes('node_modules')) {
+              if (id.includes('astro')) {
+                return 'astro';
+              }
               if (id.includes('remark') || id.includes('unist')) {
                 return 'markdown';
               }
               return 'vendor';
             }
           },
-          // Configure CSS output to dist/assets/css/
+          // Configure asset output locations
           assetFileNames: (assetInfo) => {
-            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            const name = assetInfo.name || '';
+            if (name.endsWith('.css')) {
+              // CSS to assets/css
               return 'assets/css/[name]-[hash][extname]';
+            }
+            if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico|webp|avif)$/i.test(name)) {
+              return 'assets/images/[name]-[hash][extname]';
+            }
+            if (/\.(woff2?|eot|ttf|otf)$/i.test(name)) {
+              return 'assets/fonts/[name]-[hash][extname]';
             }
             return 'assets/[name]-[hash][extname]';
           },
+          // JS output location
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
         },
       },
       // Enable source maps for production debugging
       sourcemap: false,
       // Optimize asset handling
       assetsInlineLimit: 4096,
+      // Split CSS into separate files
+      cssCodeSplit: true,
+      // Target modern browsers
+      target: ['es2020', 'chrome80', 'firefox78', 'safari14'],
     },
     // CSS optimization
     css: {
@@ -98,12 +122,17 @@ export default defineConfig({
     },
     // Optimize dependencies
     optimizeDeps: {
+      // keep default; explicit include not necessary
       include: [],
     },
     // Server configuration
     server: {
       fs: {
         strict: false,
+      },
+      // Enable overlay for Vite HMR errors in dev
+      hmr: {
+        overlay: true,
       },
     },
   },
