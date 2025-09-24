@@ -261,7 +261,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Sidebar expand/collapse states using :has() selector for modern browsers */
     .sidebar:has(.sidebar-toggle:checked) {
-      transform: translateX(-200px);
+      width: 80px;
+      padding: 20px 8px;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .label-white,
@@ -275,13 +276,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
       display: none !important;
-    }
-
-    /* Apply same styling for :has() selector */
-    .sidebar:has(.sidebar-toggle:checked) .nav-content {
-      padding-left: 200px;
-      width: 280px;
-      box-sizing: border-box;
     }
 
     .sidebar:has(.sidebar-toggle:checked) .w-nav-brand {
@@ -401,9 +395,10 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       touch-action: none;
     }
 
-    /* Enhanced class-based collapsed state using CSS Transform */
+    /* Enhanced class-based collapsed state - simple approach */
     .sidebar.sidebar-collapsed {
-      transform: translateX(-200px);
+      width: 80px;
+      padding: 20px 8px;
     }
 
     /* Hide profile text completely */
@@ -420,13 +415,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     /* Hide social icons */
     .sidebar.sidebar-collapsed .socials--sidebar {
       display: none !important;
-    }
-
-    /* Adjust sidebar content positioning when collapsed */
-    .sidebar.sidebar-collapsed .nav-content {
-      padding-left: 200px; /* Push content to visible area */
-      width: 280px;
-      box-sizing: border-box;
     }
 
     /* Center profile area when collapsed */
@@ -481,44 +469,37 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   </style>
 
   <script>
-    // Enhanced sidebar toggle functionality with localStorage persistence
+    // Simplified sidebar toggle functionality with localStorage persistence
     document.addEventListener('DOMContentLoaded', function() {
-      const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
-      const sidebar = document.querySelector('.sidebar');
-      const content = document.querySelector('.content');
-      const STORAGE_KEY = 'sidebar-collapsed';
+      try {
+        const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
+        const sidebar = document.querySelector('.sidebar');
+        const STORAGE_KEY = 'sidebar-collapsed';
 
-      if (sidebarToggle && sidebar && content) {
-        // Load saved state from localStorage
-        const savedState = localStorage.getItem(STORAGE_KEY);
-        const isCollapsed = savedState === 'true';
-        
-        // Apply saved state
-        if (isCollapsed) {
-          sidebarToggle.checked = true;
-          sidebar.classList.add('sidebar-collapsed');
-          content.classList.add('sidebar-collapsed');
-        }
-
-        // Handle toggle changes
-        sidebarToggle.addEventListener('change', function() {
-          const checkbox = this as HTMLInputElement;
-          if (checkbox.checked) {
+        if (sidebarToggle && sidebar) {
+          // Load saved state from localStorage
+          const savedState = localStorage.getItem(STORAGE_KEY);
+          const isCollapsed = savedState === 'true';
+          
+          // Apply saved state
+          if (isCollapsed) {
+            sidebarToggle.checked = true;
             sidebar.classList.add('sidebar-collapsed');
-            content.classList.add('sidebar-collapsed');
-            localStorage.setItem(STORAGE_KEY, 'true');
-            console.log('Sidebar collapsed');
-          } else {
-            sidebar.classList.remove('sidebar-collapsed');
-            content.classList.remove('sidebar-collapsed');
-            localStorage.setItem(STORAGE_KEY, 'false');
-            console.log('Sidebar expanded');
           }
-        });
-        
-        console.log('Sidebar toggle initialized with state:', isCollapsed);
-      } else {
-        console.error('Sidebar elements not found:', { sidebarToggle, sidebar, content });
+
+          // Handle toggle changes
+          sidebarToggle.addEventListener('change', function() {
+            if (this.checked) {
+              sidebar.classList.add('sidebar-collapsed');
+              localStorage.setItem(STORAGE_KEY, 'true');
+            } else {
+              sidebar.classList.remove('sidebar-collapsed');
+              localStorage.setItem(STORAGE_KEY, 'false');
+            }
+          });
+        }
+      } catch (error) {
+        // Silently handle errors to avoid console spam
       }
     });
   </script>

@@ -843,28 +843,26 @@ p {
 .content {
   width: 100%;
   min-height: 100vh;
-  position: relative;
-  display: block;
+  display: flex;
 }
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 280px;
   height: 100vh;
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
   padding: 32px;
-  z-index: 100;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
   overflow-y: auto;
+  transition: width 0.3s ease, padding 0.3s ease;
 }
 
-/* Collapsed sidebar state using CSS Transform */
+/* Collapsed sidebar state - simple width change */
 .sidebar.sidebar-collapsed {
-  transform: translateX(-200px); /* Slide 200px to the left, leaving 80px visible */
+  width: 80px;
+  padding: 20px 8px;
 }
 
 .nav-content {
@@ -905,8 +903,8 @@ p {
 }
 
 .main {
+  flex: 1;
   min-height: 100vh;
-  margin-left: 280px; /* Default space for expanded sidebar */
   background-image:
     linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.64)),
     url('/assets/grid-top-right.svg'),
@@ -922,12 +920,6 @@ p {
   padding: 46px 48px 0px;
   display: flex;
   overflow: auto;
-  transition: margin-left 0.3s ease;
-}
-
-/* Adjust main content when sidebar is collapsed */
-.content.sidebar-collapsed .main {
-  margin-left: 80px; /* Space for collapsed sidebar */
 }
 
 .container {
@@ -1585,23 +1577,17 @@ p {
 @media screen and (max-width: 1024px) {
   /* Mobile: revert to normal layout */
   .content {
-    display: flex;
     flex-direction: column;
   }
 
   .sidebar {
     position: relative;
-    transform: none;
     width: 100%;
     height: auto;
     max-width: 100%;
     padding: 18px 28px 18px 24px;
     border-right: none;
     border-bottom: 1px solid #353535;
-  }
-  
-  .main {
-    margin-left: 0;
   }
   
   /* Hide sidebar collapse feature on mobile */
@@ -1662,12 +1648,12 @@ p {
 }
 
 @media (min-width: 1025px) {
-  /* Desktop: sidebar is fixed positioned */
+  /* Desktop: sidebar is sticky positioned */
   .sidebar {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
     height: 100vh;
+    align-self: flex-start;
     overflow-y: auto;
   }
   
@@ -1677,16 +1663,6 @@ p {
   /* Show sidebar toggle button on desktop */
   .sidebar-toggle-button {
     display: flex !important;
-  }
-  
-  /* Main content adjusts margin based on sidebar state */
-  .main {
-    margin-left: 280px;
-    transition: margin-left 0.3s ease;
-  }
-  
-  .content.sidebar-collapsed .main {
-    margin-left: 80px;
   }
 }
 
