@@ -567,10 +567,12 @@ const socials: Array<{ name: string; href: string; label: string }> = [
           document.documentElement.classList.add('sidebar-collapsed-global');
           document.documentElement.setAttribute('data-sidebar', 'collapsed');
           document.body.classList.add('sidebar-collapsed');
+          log('Applied collapsed state to all elements');
         } else {
           document.documentElement.classList.remove('sidebar-collapsed-global');
           document.documentElement.setAttribute('data-sidebar', 'expanded');
           document.body.classList.remove('sidebar-collapsed');
+          log('Applied expanded state to all elements');
         }
       }
       

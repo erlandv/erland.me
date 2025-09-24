@@ -16,74 +16,50 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		
-		<!-- Debug and robust sidebar state management -->
+	</head>
+	<body>
+		<!-- Instant sidebar state script - runs immediately when body starts parsing -->
 		<script>
-			// Enhanced debugging and multiple fallback approach
+			// CRITICAL: This script runs as soon as body starts parsing
 			(function() {
 				const STORAGE_KEY = 'sidebar-collapsed';
-				const DEBUG = true; // Set to true for debugging
+				const DEBUG = true;
 				
 			function log(msg: any) {
 				if (DEBUG) console.log('[Sidebar Debug]', msg);
 			}
-			
-			function applySidebarState(isCollapsed: boolean) {
-					log('Applying state: ' + isCollapsed);
+				
+				log('Script starting...');
+				
+				try {
+					// Try to get saved state
+					let savedState = null;
 					
+					if (typeof localStorage !== 'undefined') {
+						savedState = localStorage.getItem(STORAGE_KEY);
+						log('localStorage value: ' + savedState);
+					}
+					
+					const isCollapsed = savedState === 'true';
+					log('Final state decision: ' + isCollapsed);
+					
+					// Apply state immediately
 					if (isCollapsed) {
 						document.documentElement.classList.add('sidebar-collapsed-global');
 						document.documentElement.setAttribute('data-sidebar', 'collapsed');
-						document.body.classList.add('sidebar-collapsed');
+						log('Applied collapsed state');
 					} else {
 						document.documentElement.classList.remove('sidebar-collapsed-global');
 						document.documentElement.setAttribute('data-sidebar', 'expanded');
-						document.body.classList.remove('sidebar-collapsed');
+						log('Applied expanded state');
 					}
-				}
-				
-				try {
-					// Multiple storage strategies
-					let savedState = null;
-					
-					// Try localStorage first
-					if (typeof localStorage !== 'undefined') {
-						savedState = localStorage.getItem(STORAGE_KEY);
-					log('localStorage value: ' + savedState);
-				}
-				
-				// Fallback to sessionStorage
-				if (!savedState && typeof sessionStorage !== 'undefined') {
-					savedState = sessionStorage.getItem(STORAGE_KEY);
-					log('sessionStorage value: ' + savedState);
-				}
-				
-				// Fallback to cookie
-				if (!savedState) {
-					const cookies = document.cookie.split(';');
-					for (let cookie of cookies) {
-						const [name, value] = cookie.trim().split('=');
-						if (name === STORAGE_KEY) {
-							savedState = value;
-							log('cookie value: ' + savedState);
-							break;
-						}
-					}
-				}
-				
-				const isCollapsed = savedState === 'true';
-				log('Final state decision: ' + isCollapsed);
-					
-					applySidebarState(isCollapsed);
 					
 			} catch (error: any) {
 				log('Error: ' + error.message);
-					// Default to expanded if all fails
-					applySidebarState(false);
 				}
 			})();
 		</script>
-	</head>
-	<body>
+		
 		<slot />
 	</body>
 </html>
