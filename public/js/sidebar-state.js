@@ -1,4 +1,4 @@
-// Sidebar state utility (shared across Header and AnimatedSidebar)
+// Sidebar state utility (shared across Header and Sidebar component)
 // Exposes a global API under window.sidebarState
 (function() {
   var MOBILE_QUERY = '(max-width: 1024px)';
