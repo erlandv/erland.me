@@ -15,8 +15,51 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
 	</head>
 	<body>
+		<!-- Instant sidebar state script - runs immediately when body starts parsing -->
+		<script>
+			// CRITICAL: This script runs as soon as body starts parsing
+			(function() {
+				const STORAGE_KEY = 'sidebar-collapsed';
+				const DEBUG = true;
+				
+			function log(msg: any) {
+				if (DEBUG) console.log('[Sidebar Debug]', msg);
+			}
+				
+				log('Script starting...');
+				
+				try {
+					// Try to get saved state
+					let savedState = null;
+					
+					if (typeof localStorage !== 'undefined') {
+						savedState = localStorage.getItem(STORAGE_KEY);
+						log('localStorage value: ' + savedState);
+					}
+					
+					const isCollapsed = savedState === 'true';
+					log('Final state decision: ' + isCollapsed);
+					
+					// Apply state immediately
+					if (isCollapsed) {
+						document.documentElement.classList.add('sidebar-collapsed-global');
+						document.documentElement.setAttribute('data-sidebar', 'collapsed');
+						log('Applied collapsed state');
+					} else {
+						document.documentElement.classList.remove('sidebar-collapsed-global');
+						document.documentElement.setAttribute('data-sidebar', 'expanded');
+						log('Applied expanded state');
+					}
+					
+			} catch (error: any) {
+				log('Error: ' + error.message);
+				}
+			})();
+		</script>
+		
 		<slot />
 	</body>
 </html>
@@ -31,6 +74,148 @@ const { title } = Astro.props;
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
+		
+		/* Sidebar state management via CSS custom properties */
+		--sidebar-collapsed: 0; /* Default: expanded */
+		--sidebar-width-expanded: 280px;
+		--sidebar-width-collapsed: 80px;
+		--sidebar-width: var(--sidebar-width-expanded); /* Default */
+	}
+	
+	/* Global sidebar state management - multiple selectors for reliability */
+	html.sidebar-collapsed-global,
+	html[data-sidebar="collapsed"],
+	body.sidebar-collapsed {
+		--sidebar-collapsed: 1;
+		--sidebar-width: var(--sidebar-width-collapsed);
+	}
+	
+	/* Advanced sidebar transition with CSS Grid approach */
+	.sidebar {
+		display: grid;
+		grid-template-columns: 1fr;
+		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		overflow: hidden;
+		position: relative;
+		will-change: width, padding, grid-template-columns;
+		contain: layout style;
+	}
+	
+	/* Instant sidebar styling - multiple selectors */
+	html.sidebar-collapsed-global .sidebar,
+	html[data-sidebar="collapsed"] .sidebar,
+	body.sidebar-collapsed .sidebar {
+		width: var(--sidebar-width-collapsed) !important;
+		padding: 20px 8px !important;
+		transform: translateX(0);
+	}
+	
+    /* Smooth text and section transitions instead of hard hiding */
+    .sidebar .profile-text,
+    .sidebar .nav-text {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateX(0);
+        transition: opacity 220ms ease, clip-path 240ms ease, transform 220ms ease;
+        will-change: opacity, clip-path, transform;
+        overflow: hidden;
+    }
+
+    html.sidebar-collapsed-global .sidebar .profile-text,
+    html[data-sidebar="collapsed"] .sidebar .profile-text,
+    body.sidebar-collapsed .sidebar .profile-text,
+    html.sidebar-collapsed-global .sidebar .nav-text,
+    html[data-sidebar="collapsed"] .sidebar .nav-text,
+    body.sidebar-collapsed .sidebar .nav-text {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateX(-6px);
+    }
+
+    .sidebar .socials--sidebar,
+    .sidebar .socials--menu {
+        transition: opacity 220ms ease, max-height 240ms ease, padding-top 240ms ease, border-color 240ms ease;
+        will-change: opacity, max-height;
+        overflow: hidden;
+    }
+
+    html.sidebar-collapsed-global .sidebar .socials--sidebar,
+    html[data-sidebar="collapsed"] .sidebar .socials--sidebar,
+    body.sidebar-collapsed .sidebar .socials--sidebar,
+    html.sidebar-collapsed-global .sidebar .socials--menu,
+    html[data-sidebar="collapsed"] .sidebar .socials--menu,
+    body.sidebar-collapsed .sidebar .socials--menu {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        border-top-color: transparent;
+    }
+	
+	
+	html.sidebar-collapsed-global .sidebar .w-nav-brand,
+	html[data-sidebar="collapsed"] .sidebar .w-nav-brand,
+	body.sidebar-collapsed .sidebar .w-nav-brand {
+		justify-content: center !important;
+		margin-bottom: 20px !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .niv-data,
+	html[data-sidebar="collapsed"] .sidebar .niv-data,
+	body.sidebar-collapsed .sidebar .niv-data {
+		justify-content: center !important;
+		align-items: center !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .niv-image,
+	html[data-sidebar="collapsed"] .sidebar .niv-image,
+	body.sidebar-collapsed .sidebar .niv-image {
+		margin-right: 0 !important;
+		margin: 0 auto !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .nav-link-container,
+	html[data-sidebar="collapsed"] .sidebar .nav-link-container,
+	body.sidebar-collapsed .sidebar .nav-link-container {
+		justify-content: center !important;
+		align-items: center !important;
+		padding: 12px 8px !important;
+		margin-bottom: 8px !important;
+		min-height: 44px !important;
+		width: 60px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .nav-link-image,
+	html[data-sidebar="collapsed"] .sidebar .nav-link-image,
+	body.sidebar-collapsed .sidebar .nav-link-image {
+		margin: 0 auto !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .w-nav-menu,
+	html[data-sidebar="collapsed"] .sidebar .w-nav-menu,
+	body.sidebar-collapsed .sidebar .w-nav-menu {
+		align-items: center !important;
+	}
+	
+	
+	html.sidebar-collapsed-global .sidebar .sidebar-toggle-button,
+	html[data-sidebar="collapsed"] .sidebar .sidebar-toggle-button,
+	body.sidebar-collapsed .sidebar .sidebar-toggle-button {
+		display: flex !important;
+		width: 44px !important;
+		height: 44px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		justify-content: center !important;
+		align-items: center !important;
+		padding: 0 !important;
+		margin-bottom: 8px !important;
 	}
 	html {
 		font-family: system-ui, sans-serif;
