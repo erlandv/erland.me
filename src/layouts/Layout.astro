@@ -90,34 +90,67 @@ const { title } = Astro.props;
 		--sidebar-width: var(--sidebar-width-collapsed);
 	}
 	
+	/* Advanced sidebar transition with CSS Grid approach */
+	.sidebar {
+		display: grid;
+		grid-template-columns: 1fr;
+		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		overflow: hidden;
+		position: relative;
+		will-change: width, padding, grid-template-columns;
+		contain: layout style;
+	}
+	
 	/* Instant sidebar styling - multiple selectors */
 	html.sidebar-collapsed-global .sidebar,
 	html[data-sidebar="collapsed"] .sidebar,
 	body.sidebar-collapsed .sidebar {
 		width: var(--sidebar-width-collapsed) !important;
 		padding: 20px 8px !important;
+		transform: translateX(0);
 	}
 	
-	html.sidebar-collapsed-global .sidebar .label-white,
-	html.sidebar-collapsed-global .sidebar .label-gray,
-	html[data-sidebar="collapsed"] .sidebar .label-white,
-	html[data-sidebar="collapsed"] .sidebar .label-gray,
-	body.sidebar-collapsed .sidebar .label-white,
-	body.sidebar-collapsed .sidebar .label-gray {
-		display: none !important;
-	}
+    /* Smooth text and section transitions instead of hard hiding */
+    .sidebar .profile-text,
+    .sidebar .nav-text {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateX(0);
+        transition: opacity 220ms ease, clip-path 240ms ease, transform 220ms ease;
+        will-change: opacity, clip-path, transform;
+        overflow: hidden;
+    }
+
+    html.sidebar-collapsed-global .sidebar .profile-text,
+    html[data-sidebar="collapsed"] .sidebar .profile-text,
+    body.sidebar-collapsed .sidebar .profile-text,
+    html.sidebar-collapsed-global .sidebar .nav-text,
+    html[data-sidebar="collapsed"] .sidebar .nav-text,
+    body.sidebar-collapsed .sidebar .nav-text {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateX(-6px);
+    }
+
+    .sidebar .socials--sidebar,
+    .sidebar .socials--menu {
+        transition: opacity 220ms ease, max-height 240ms ease, padding-top 240ms ease, border-color 240ms ease;
+        will-change: opacity, max-height;
+        overflow: hidden;
+    }
+
+    html.sidebar-collapsed-global .sidebar .socials--sidebar,
+    html[data-sidebar="collapsed"] .sidebar .socials--sidebar,
+    body.sidebar-collapsed .sidebar .socials--sidebar,
+    html.sidebar-collapsed-global .sidebar .socials--menu,
+    html[data-sidebar="collapsed"] .sidebar .socials--menu,
+    body.sidebar-collapsed .sidebar .socials--menu {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        border-top-color: transparent;
+    }
 	
-	html.sidebar-collapsed-global .sidebar .nav-link-container div,
-	html[data-sidebar="collapsed"] .sidebar .nav-link-container div,
-	body.sidebar-collapsed .sidebar .nav-link-container div {
-		display: none !important;
-	}
-	
-	html.sidebar-collapsed-global .sidebar .socials--sidebar,
-	html[data-sidebar="collapsed"] .sidebar .socials--sidebar,
-	body.sidebar-collapsed .sidebar .socials--sidebar {
-		display: none !important;
-	}
 	
 	html.sidebar-collapsed-global .sidebar .w-nav-brand,
 	html[data-sidebar="collapsed"] .sidebar .w-nav-brand,
@@ -126,6 +159,7 @@ const { title } = Astro.props;
 		margin-bottom: 20px !important;
 	}
 	
+	
 	html.sidebar-collapsed-global .sidebar .niv-data,
 	html[data-sidebar="collapsed"] .sidebar .niv-data,
 	body.sidebar-collapsed .sidebar .niv-data {
@@ -133,12 +167,14 @@ const { title } = Astro.props;
 		align-items: center !important;
 	}
 	
+	
 	html.sidebar-collapsed-global .sidebar .niv-image,
 	html[data-sidebar="collapsed"] .sidebar .niv-image,
 	body.sidebar-collapsed .sidebar .niv-image {
 		margin-right: 0 !important;
 		margin: 0 auto !important;
 	}
+	
 	
 	html.sidebar-collapsed-global .sidebar .nav-link-container,
 	html[data-sidebar="collapsed"] .sidebar .nav-link-container,
@@ -153,17 +189,20 @@ const { title } = Astro.props;
 		margin-right: auto !important;
 	}
 	
+	
 	html.sidebar-collapsed-global .sidebar .nav-link-image,
 	html[data-sidebar="collapsed"] .sidebar .nav-link-image,
 	body.sidebar-collapsed .sidebar .nav-link-image {
 		margin: 0 auto !important;
 	}
 	
+	
 	html.sidebar-collapsed-global .sidebar .w-nav-menu,
 	html[data-sidebar="collapsed"] .sidebar .w-nav-menu,
 	body.sidebar-collapsed .sidebar .w-nav-menu {
 		align-items: center !important;
 	}
+	
 	
 	html.sidebar-collapsed-global .sidebar .sidebar-toggle-button,
 	html[data-sidebar="collapsed"] .sidebar .sidebar-toggle-button,

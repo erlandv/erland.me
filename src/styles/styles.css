@@ -856,7 +856,14 @@ p {
   position: sticky;
   top: 0;
   overflow-y: auto;
-  transition: width 0.3s ease, padding 0.3s ease;
+  overflow-x: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  contain: layout style;
+  will-change: width, padding;
 }
 
 /* Collapsed sidebar state - simple width change */

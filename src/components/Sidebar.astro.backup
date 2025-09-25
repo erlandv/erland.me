@@ -117,8 +117,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       aria-label="Toggle sidebar width"
       tabindex="0"
     >
-      <Icon name="collapse" class="sidebar-toggle-icon sidebar-toggle-icon--collapse" />
-      <Icon name="expand" class="sidebar-toggle-icon sidebar-toggle-icon--expand" />
+      <Icon name="sidebar" class="sidebar-toggle-icon" />
     </label>
 
     <div class="socials socials--sidebar">
@@ -189,7 +188,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Sidebar toggle button (desktop only) */
     .sidebar-toggle-button {
-      display: none; /* Hidden by default, shown only on desktop */
+      display: flex; /* Show on desktop by default */
       grid-column-gap: 12px;
       grid-row-gap: 12px;
       color: #c0c0c0;
@@ -200,7 +199,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       padding: clamp(10px, 2vw, 14px);
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translateX(0);
       font-size: clamp(14px, 2vw, 16px);
       font-weight: 500;
@@ -210,122 +209,30 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     .sidebar-toggle-button:hover {
       color: #ffffff !important;
-      background-color: #252525;
+      background-color: #2b2b2b;
       border-color: #353535;
-      transform: translateX(0) scale(1.02);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .sidebar-toggle-icon {
       width: 24px;
       opacity: 0.48;
-      transition: opacity 0.2s ease;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease, width 0.2s ease;
     }
 
     .sidebar-toggle-button:hover .sidebar-toggle-icon {
       opacity: 1;
     }
 
-    /* Icon switching logic */
-    .sidebar-toggle-icon--collapse {
-      opacity: 1;
-    }
 
-    .sidebar-toggle-icon--expand {
-      opacity: 0;
-    }
 
-    /* Switch icons when collapsed */
-    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-icon--collapse,
-    .sidebar.sidebar-collapsed .sidebar-toggle-icon--collapse {
-      opacity: 0;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-icon--expand,
-    .sidebar.sidebar-collapsed .sidebar-toggle-icon--expand {
-      opacity: 1;
-    }
-
-    /* Make toggle button square like nav menu items */
-    .sidebar-toggle-button {
-      position: relative;
-      width: 44px !important;
-      height: 44px !important;
-      min-height: 44px !important;
-      border-radius: 8px !important;
-    }
-
-    /* Sidebar expand/collapse states using :has() selector for modern browsers */
-    .sidebar:has(.sidebar-toggle:checked) {
-      width: 80px;
-      padding: 20px 8px;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .label-white,
-    .sidebar:has(.sidebar-toggle:checked) .label-gray {
-      display: none !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .nav-link-container div {
-      display: none !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .socials--sidebar {
-      display: none !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .w-nav-brand {
-      justify-content: center !important;
-      margin-bottom: 20px !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .niv-data {
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .niv-image {
-      margin-right: 0 !important;
-      margin: 0 auto !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .nav-link-container {
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 12px 8px !important;
-      margin-bottom: 8px !important;
-      min-height: 44px !important;
-      width: 60px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .nav-link-image {
-      margin: 0 auto !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .w-nav-menu {
-      align-items: center !important;
-    }
-
-    .sidebar:has(.sidebar-toggle:checked) .sidebar-toggle-button {
-      display: flex !important;
-      width: 44px !important;
-      height: 44px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin-bottom: 8px !important;
-    }
 
     /* Mobile-only menu toggle behavior */
     @media (max-width: 1024px) {
+      /* Hide sidebar toggle button on mobile */
+      .sidebar-toggle-button {
+        display: none !important;
+      }
+      
       /* Ensure header (brand) and toggle stay above the overlay */
       .w-nav-brand { position: relative; z-index: 1301; }
       .navbar-icon-button { position: relative; z-index: 1301; display: inline-flex; }
@@ -395,10 +302,11 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       touch-action: none;
     }
 
-    /* Enhanced class-based collapsed state - simple approach */
+    /* Enhanced class-based collapsed state - smooth approach */
     .sidebar.sidebar-collapsed {
       width: 80px;
       padding: 20px 8px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Hide profile text completely */
@@ -464,6 +372,11 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       align-items: center !important;
       padding: 0 !important;
       margin-bottom: 8px !important;
+    }
+
+    /* Icon size adjustment for collapsed state */
+    .sidebar.sidebar-collapsed .sidebar-toggle-icon {
+      width: 20px;
     }
 
     /* Note: Global sidebar state CSS moved to Layout.astro for instant application */

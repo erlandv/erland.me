@@ -1,0 +1,559 @@
+---
+const { selectedItem } = Astro.props;
+import Icon from "./Icon.astro";
+
+const socials: Array<{ name: string; href: string; label: string }> = [
+  { name: "x", href: "https://x.com/erlandzz", label: "X" },
+  { name: "instagram", href: "https://www.instagram.com/erlandramdhani", label: "Instagram" },
+  { name: "facebook", href: "https://www.facebook.com/erlandramdhani", label: "Facebook" },
+  { name: "github", href: "https://github.com/erlandv", label: "GitHub" },
+  { name: "bluesky", href: "https://bsky.app/profile/erland.me", label: "Bluesky" },
+];
+---
+
+<aside
+  data-animation="default"
+  data-collapse="medium"
+  data-duration="400"
+  data-easing="ease"
+  data-easing2="ease"
+  role="banner"
+  class="sidebar w-nav"
+>
+  <div class="nav-content">
+    <a href="/" class="w-nav-brand" aria-label="home">
+      <div class="niv-data">
+        <img
+          src="/assets/erland.webp"
+          loading="eager"
+          alt="Profile picture"
+          class="niv-image"
+        />
+        <div class="profile-text">
+          <div class="label-white">Erland Ramdhani</div>
+          <div class="label-gray">Web Developer</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Hidden checkbox to drive CSS-only toggle -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
+    
+    <!-- Hidden checkbox for sidebar expand/collapse (desktop only) -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar" />
+
+    <nav id="site-nav" role="navigation" class="w-nav-menu">
+      <a
+        href="/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "home" ? "w--current" : ""
+        }`}
+      >
+        <Icon name="home" class="nav-link-image" />
+        <div class="nav-text">Home</div>
+      </a>
+      <a
+        href="/portfolio/web-development/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "web-development" ? "w--current" : ""
+        }`}
+        aria-current={selectedItem === "web-development"
+          ? "page"
+          : undefined}
+      >
+        <Icon name="code" class="nav-link-image" />
+        <div class="nav-text">Web development</div>
+      </a>
+      <a
+        href="/portfolio/cloud-infra/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "cloud-infra" ? "w--current" : ""
+        }`}
+      >
+        <Icon name="dns" class="nav-link-image" />
+        <div class="nav-text">Cloud Infra</div>
+      </a>
+      <a
+        href="/portfolio/personal-projects/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "personal-projects" ? "w--current" : ""
+        }`}
+      >
+        <Icon name="favorite" class="nav-link-image" />
+        <div class="nav-text">Personal projects</div>
+      </a>
+      <a
+        href="/download/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "download" ? "w--current" : ""
+        }`}
+        aria-current={selectedItem === "download" ? "page" : undefined}
+      >
+        <Icon name="download" class="nav-link-image" />
+        <div class="nav-text">Download</div>
+      </a>
+      <a
+        href="/blog/"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === "blog" ? "w--current" : ""
+        }`}
+      >
+        <Icon name="blog" class="nav-link-image" />
+        <div class="nav-text">Blog</div>
+      </a>
+      <div class="socials socials--menu">
+        {socials.map((s) => (
+          <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
+            <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <!-- Desktop-only sidebar toggle button -->
+    <label
+      for="sidebar-toggle"
+      class="sidebar-toggle-button"
+      aria-label="Toggle sidebar width"
+      tabindex="0"
+    >
+      <Icon name="sidebar" class="sidebar-toggle-icon" />
+    </label>
+
+    <div class="socials socials--sidebar">
+      {socials.map((s) => (
+        <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
+          <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+        </a>
+      ))}
+    </div>
+
+    <label
+      for="nav-toggle"
+      class="navbar-icon-button w-nav-button"
+      style="-webkit-user-select: text;"
+      aria-label="Toggle menu"
+      aria-controls="site-nav"
+      tabindex="0"
+    >
+      <span class="icon-switch icon-switch--menu"><Icon name="menu" class="navbar-icon" /></span>
+      <span class="icon-switch icon-switch--close"><Icon name="close" class="navbar-icon" /></span>
+    </label>
+  </div>
+
+  <style>
+    /* Hide the checkbox drivers */
+    .nav-toggle,
+    .sidebar-toggle {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+      border: 0;
+      padding: 0;
+      margin: -1px;
+    }
+
+    /* Icon animations and alignment: both icons overlap exactly */
+    /* Default: hide the toggle; show it only on mobile in media query below */
+    .navbar-icon-button {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .navbar-icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+    .icon-switch {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* base placement and animated transform via variable */
+      --icon-xform: rotate(0deg) scale(1);
+      transform: translate(-50%, -50%) var(--icon-xform);
+      transform-origin: center;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    /* initial states */
+    .icon-switch--menu { opacity: 1; --icon-xform: rotate(0deg) scale(1); }
+    .icon-switch--close { opacity: 0; --icon-xform: rotate(-90deg) scale(0.9); }
+
+    /* Sidebar toggle button (desktop only) */
+    .sidebar-toggle-button {
+      display: inline-flex; /* desktop */
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 0;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    /* Expand hover: square button, no stretching like nav links */
+    .sidebar-toggle-button:hover {
+      background-color: #2b2b2b;
+      border-color: #353535;
+      transform: translateZ(0) scale(1.02);
+    }
+
+    .sidebar-toggle-icon {
+      width: 24px; /* match nav icon base */
+      height: 24px;
+      opacity: 0.6;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+    .sidebar-toggle-button:hover .sidebar-toggle-icon { opacity: 1; }
+
+    /* Mobile-only menu toggle behavior */
+    @media (max-width: 1024px) {
+      /* Hide sidebar toggle button on mobile */
+      .sidebar-toggle-button {
+        display: none !important;
+      }
+      
+      /* Ensure header (brand) and toggle stay above the overlay */
+      .w-nav-brand { position: relative; z-index: 1301; }
+      .navbar-icon-button { position: relative; z-index: 1301; display: inline-flex; }
+      /* Mobile overlay panel: present in DOM, hidden by opacity/visibility/transform */
+      .sidebar .w-nav-menu {
+        display: flex !important; /* override global collapse */
+        flex-direction: column;
+        align-items: stretch;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0; /* start at very top to avoid visible gap */
+        bottom: 0;
+        /* Fill full viewport and scroll internally */
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        /* Reserve space for the header area so menu items start below it */
+        padding-top: 92px;
+        padding-bottom: 8px;
+        background-color: #1c1c1c;
+        z-index: 900; /* sit below header brand/toggle */
+        /* Hidden state */
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+        will-change: transform, opacity;
+      }
+      /* Open state */
+      .nav-toggle:checked ~ .w-nav-menu {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+      /* Ensure social icons appear inside the mobile menu */
+      .nav-toggle:checked ~ .w-nav-menu .socials--menu {
+        display: flex !important;
+        position: static;
+        justify-content: flex-start;
+        gap: 18px;
+        padding: 12px 28px 12px 32px;
+        border-top: 1px solid #353535;
+        margin-top: auto;
+        background-color: #1c1c1c;
+      }
+      /* Swap icons with animation (preserve centering via CSS var) */
+      .nav-toggle:checked ~ .navbar-icon-button .icon-switch--menu {
+        opacity: 0;
+        --icon-xform: rotate(90deg) scale(0.9);
+      }
+      .nav-toggle:checked ~ .navbar-icon-button .icon-switch--close {
+        opacity: 1;
+        --icon-xform: rotate(0deg) scale(1);
+      }
+    }
+  </style>
+
+  <script>
+    // Enhanced sidebar toggle with Framer Motion-like animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const STORAGE_KEY = 'sidebar-collapsed';
+      const DEBUG = true;
+      
+      function log(msg: any, data?: any) {
+        if (DEBUG) console.log('[Animated Sidebar]', msg, data || '');
+      }
+      
+      function saveState(isCollapsed: boolean) {
+        const value = isCollapsed ? 'true' : 'false';
+        log('Saving state: ' + value);
+        
+        try {
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY, value);
+            log('Saved to localStorage');
+          }
+        } catch (e: any) {
+          log('localStorage failed: ' + e.message);
+        }
+      }
+      
+      function getState() {
+        try {
+          if (typeof localStorage !== 'undefined') {
+            const value = localStorage.getItem(STORAGE_KEY);
+            if (value) {
+              log('Got from localStorage: ' + value);
+              return value === 'true';
+            }
+          }
+        } catch (e: any) {
+          log('localStorage read failed: ' + e.message);
+        }
+        
+        log('No saved state found, defaulting to false');
+        return false;
+      }
+      
+      function applyStateImmediate(isCollapsed: boolean) {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return;
+        if (isCollapsed) {
+          document.documentElement.classList.add('sidebar-collapsed-global');
+          document.documentElement.setAttribute('data-sidebar', 'collapsed');
+          document.body.classList.add('sidebar-collapsed');
+          sidebar.classList.add('sidebar-collapsed');
+          sidebar.classList.remove('sidebar-animating', 'hiding-text');
+        } else {
+          document.documentElement.classList.remove('sidebar-collapsed-global');
+          document.documentElement.setAttribute('data-sidebar', 'expanded');
+          document.body.classList.remove('sidebar-collapsed');
+          sidebar.classList.remove('sidebar-collapsed', 'sidebar-animating', 'hiding-text');
+        }
+      }
+
+      function animateToState(isCollapsed: boolean) {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return applyStateImmediate(isCollapsed);
+
+        // Ensure anim root class for hover/overflow tweaks
+        sidebar.classList.add('sidebar-animating');
+
+        if (isCollapsed) {
+          // Collapse: hide text first, then shrink width
+          sidebar.classList.add('hiding-text');
+          // After text is mostly hidden, shrink container and set global flags
+          setTimeout(() => {
+            document.documentElement.classList.add('sidebar-collapsed-global');
+            document.documentElement.setAttribute('data-sidebar', 'collapsed');
+            document.body.classList.add('sidebar-collapsed');
+            sidebar.classList.add('sidebar-collapsed');
+          }, 120);
+
+          // Cleanup after animation
+          setTimeout(() => {
+            sidebar.classList.remove('sidebar-animating');
+          }, 360);
+        } else {
+          // Expand: widen first, then reveal text
+          document.documentElement.classList.remove('sidebar-collapsed-global');
+          document.documentElement.setAttribute('data-sidebar', 'expanded');
+          document.body.classList.remove('sidebar-collapsed');
+          sidebar.classList.remove('sidebar-collapsed');
+          // Keep text hidden briefly to avoid jitter
+          sidebar.classList.add('hiding-text');
+          setTimeout(() => {
+            sidebar.classList.remove('hiding-text');
+          }, 180);
+          setTimeout(() => {
+            sidebar.classList.remove('sidebar-animating');
+          }, 360);
+        }
+      }
+      
+      try {
+        const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
+        const sidebar = document.querySelector('.sidebar');
+        
+        if (sidebarToggle && sidebar) {
+          log('Elements found, initializing...');
+          
+          // Get current state
+          const isCollapsed = getState();
+          log('Current state: ' + isCollapsed);
+          
+          // Sync checkbox
+          sidebarToggle.checked = isCollapsed;
+          
+          // Apply initial state without animation
+          applyStateImmediate(isCollapsed);
+
+          // Handle toggle changes
+          sidebarToggle.addEventListener('change', function() {
+            const newState = this.checked;
+            log('Toggle changed to: ' + newState);
+            
+            // Apply animated transition
+            animateToState(newState);
+            
+            // Save state
+            saveState(newState);
+            
+            log('State change complete');
+          });
+          
+          log('Animated sidebar toggle initialized successfully');
+        } else {
+          log('Elements not found');
+        }
+      } catch (error: any) {
+        log('Error in sidebar initialization: ' + error.message);
+      }
+    });
+  </script>
+</aside>
+
+<style is:global>
+  /* Prevent body from scrolling when the mobile menu is open (modern browsers) */
+  body:has(.sidebar .nav-toggle:checked) {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+
+  /* Smooth collapsed/expanded transitions */
+  .sidebar {
+    transition: width 300ms ease, padding 300ms ease;
+    overflow-x: clip;
+  }
+
+  .sidebar .nav-link-container {
+    box-sizing: border-box;
+    transition: width 220ms ease, padding 220ms ease, margin 220ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .sidebar .profile-text,
+  .sidebar .nav-text {
+    opacity: 1;
+    max-width: 220px;
+    inline-size: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 200ms ease, max-width 220ms ease;
+    will-change: opacity, max-width;
+  }
+
+  .sidebar .socials--sidebar,
+  .sidebar .socials--menu {
+    opacity: 1;
+    max-height: 200px;
+    transition: opacity 220ms ease, max-height 240ms ease, padding-top 240ms ease, border-color 240ms ease;
+    will-change: opacity, max-height;
+    overflow: hidden;
+  }
+
+  /* Orchestrated step: hide text first during animation */
+  .sidebar.sidebar-animating.hiding-text .profile-text,
+  .sidebar.sidebar-animating.hiding-text .nav-text {
+    opacity: 0;
+    max-width: 0;
+  }
+  .sidebar.sidebar-animating.hiding-text .socials--sidebar,
+  .sidebar.sidebar-animating.hiding-text .socials--menu {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    border-top-color: transparent;
+  }
+
+  /* Collapsed state: slider-like fold */
+  .sidebar.sidebar-collapsed {
+    width: 80px;
+    padding: 20px 8px;
+  }
+
+  .sidebar.sidebar-collapsed .profile-text,
+  .sidebar.sidebar-collapsed .nav-text {
+    opacity: 0;
+    max-width: 0;
+  }
+
+  .sidebar.sidebar-collapsed .socials--sidebar,
+  .sidebar.sidebar-collapsed .socials--menu {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    border-top-color: transparent;
+    margin-top: 0 !important;
+  }
+
+  /* Alignment adjustments during collapse */
+  .sidebar.sidebar-collapsed .w-nav-brand {
+    justify-content: center !important;
+    margin-bottom: 20px !important;
+  }
+  .sidebar.sidebar-collapsed .niv-data {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .sidebar.sidebar-collapsed .niv-image {
+    margin-right: 0 !important;
+    margin: 0 auto !important;
+  }
+  .sidebar.sidebar-collapsed .nav-link-container {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px 6px !important;
+    margin-bottom: 8px !important;
+    min-height: 44px !important;
+    width: 60px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 0 !important;
+    transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+  }
+  .sidebar.sidebar-collapsed .nav-link-image { margin: 0 auto !important; }
+  .sidebar.sidebar-collapsed .nav-text { pointer-events: none; }
+  .sidebar.sidebar-collapsed .w-nav-menu { align-items: center !important; }
+
+  /* Toggle button sizing in collapsed view */
+  .sidebar.sidebar-collapsed .sidebar-toggle-button {
+    display: inline-flex !important;
+    width: 60px !important; /* match collapsed nav-link width */
+    height: 44px !important; /* match collapsed nav-link height */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important; /* match nav-link default */
+    background: transparent !important;
+    transition: all 0.2s ease !important; /* match nav-link */
+  }
+  /* Collapse hover size: match nav menu icon */
+  .sidebar.sidebar-collapsed .sidebar-toggle-icon { width: 24px; height: 24px; opacity: 0.48; }
+  .sidebar.sidebar-collapsed .sidebar-toggle-button:hover .sidebar-toggle-icon { opacity: 1; }
+
+  /* Collapsed hover appearance: match nav-link hover */
+  .sidebar.sidebar-collapsed .sidebar-toggle-button:hover {
+    background-color: #252525;
+    border-color: #353535;
+    transform: translateX(0) scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+</style>

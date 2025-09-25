@@ -1,6 +1,6 @@
 ---
 import Header from "../components/Header.astro";
-import Sidebar from "../components/Sidebar.astro";
+import AnimatedSidebar from "../components/AnimatedSidebar.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
@@ -54,7 +54,7 @@ const {
   />
   <body>
     <div class="content">
-      <Sidebar selectedItem={selectedItem} />
+      <AnimatedSidebar selectedItem={selectedItem} />
       <nav class="main">
         <div class="container">
           <slot />
