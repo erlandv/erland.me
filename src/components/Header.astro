@@ -132,4 +132,67 @@ const websiteSchema = websiteJsonLd();
       } catch (e) {}
     })();
   </script>
+
+  <!-- Global nav active-state sync to support persisted sidebar -->
+  <script is:inline>
+    (function(){
+      function normalizePath(p){ try { if (!p) return '/'; return p.endsWith('/') ? p : p + '/'; } catch(e){ return '/'; } }
+      function updateActiveNav(){
+        try {
+          var links = document.querySelectorAll('.sidebar .nav-link-container[href]');
+          if (!links || !links.length) return;
+          var current = normalizePath(window.location.pathname);
+          var best = null, bestLen = -1;
+
+          links.forEach(function(link){
+            try {
+              var hrefAttr = link.getAttribute('href') || '';
+              var hrefPath = normalizePath(new URL(hrefAttr, window.location.origin).pathname);
+              if (current === '/' && hrefPath === '/') {
+                if (hrefPath.length > bestLen) { best = link; bestLen = hrefPath.length; }
+              } else if (hrefPath !== '/' && current.startsWith(hrefPath)) {
+                if (hrefPath.length > bestLen) { best = link; bestLen = hrefPath.length; }
+              }
+            } catch(e){}
+          });
+
+          links.forEach(function(link){
+            link.classList.remove('w--current');
+            link.removeAttribute('aria-current');
+          });
+          if (best) {
+            best.classList.add('w--current');
+            best.setAttribute('aria-current', 'page');
+          }
+        } catch(e){}
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateActiveNav);
+      } else { updateActiveNav(); }
+      // Hook history navigations triggered by ClientRouter
+      try {
+        var _push = history.pushState.bind(history);
+        history.pushState = function(){ var r = _push.apply(history, arguments); try { queueMicrotask(updateActiveNav); } catch(e){} return r; };
+        var _replace = history.replaceState.bind(history);
+        history.replaceState = function(){ var r = _replace.apply(history, arguments); try { queueMicrotask(updateActiveNav); } catch(e){} return r; };
+      } catch(e){}
+      window.addEventListener('astro:before-swap', updateActiveNav);
+      window.addEventListener('astro:after-swap', updateActiveNav);
+      window.addEventListener('astro:page-load', updateActiveNav);
+      window.addEventListener('popstate', updateActiveNav);
+
+      // MutationObserver fallback: trigger on content swaps
+      try {
+        if (!window.__navActiveSyncObserver) {
+          var target = document.querySelector('.content') || document.body;
+          var obs = new MutationObserver(function(mutations){
+            try { updateActiveNav(); } catch(e){}
+          });
+          obs.observe(target, { childList: true, subtree: true });
+          window.__navActiveSyncObserver = obs;
+        }
+      } catch(e){}
+    })();
+  </script>
 </head>
