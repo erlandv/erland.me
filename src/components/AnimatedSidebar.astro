@@ -325,142 +325,20 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     }
   </style>
 
-  <script data-astro-reload>
-    // Ensure initialization runs on initial load and after Astro client-side navigations
+  <script is:inline>
     (function() {
-      const STORAGE_KEY = 'sidebar-collapsed';
-      const MOBILE_QUERY = '(max-width: 1024px)';
-      const DEBUG = false;
-
-      function log(msg, data) {
-        if (DEBUG) console.log('[Animated Sidebar]', msg, data || '');
-      }
-
-      function isMobile() {
-        try { return window.matchMedia && window.matchMedia(MOBILE_QUERY).matches; } catch (e) { return false; }
-      }
-
-      function saveState(isCollapsed) {
-        const value = isCollapsed ? 'true' : 'false';
-        try { if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
-      }
-
-      function getState() {
-        try {
-          if (typeof localStorage !== 'undefined') {
-            const value = localStorage.getItem(STORAGE_KEY);
-            return value === 'true';
-          }
-        } catch (e) {}
-        return false;
-      }
-
-      function applyStateImmediate(isCollapsed) {
-        const sidebar = document.querySelector('.sidebar');
-        if (!sidebar) return;
-        // Never apply collapsed visuals on mobile
-        if (isMobile()) { isCollapsed = false; }
-        if (isCollapsed) {
-          document.documentElement.classList.add('sidebar-collapsed-global');
-          document.documentElement.setAttribute('data-sidebar', 'collapsed');
-          document.body.classList.add('sidebar-collapsed');
-          sidebar.classList.add('sidebar-collapsed');
-          sidebar.classList.remove('sidebar-animating', 'hiding-text');
-        } else {
-          document.documentElement.classList.remove('sidebar-collapsed-global');
-          document.documentElement.setAttribute('data-sidebar', 'expanded');
-          document.body.classList.remove('sidebar-collapsed');
-          sidebar.classList.remove('sidebar-collapsed', 'sidebar-animating', 'hiding-text');
+      function initAll() {
+        if (window.sidebarState && typeof window.sidebarState.init === 'function') {
+          window.sidebarState.init();
         }
       }
-
-      function animateToState(isCollapsed) {
-        const sidebar = document.querySelector('.sidebar');
-        if (!sidebar) return applyStateImmediate(isCollapsed);
-        // Never animate to collapsed on mobile
-        if (isMobile()) { return applyStateImmediate(false); }
-        sidebar.classList.add('sidebar-animating');
-        if (isCollapsed) {
-          sidebar.classList.add('hiding-text');
-          setTimeout(() => {
-            document.documentElement.classList.add('sidebar-collapsed-global');
-            document.documentElement.setAttribute('data-sidebar', 'collapsed');
-            document.body.classList.add('sidebar-collapsed');
-            sidebar.classList.add('sidebar-collapsed');
-          }, 120);
-          setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
-        } else {
-          document.documentElement.classList.remove('sidebar-collapsed-global');
-          document.documentElement.setAttribute('data-sidebar', 'expanded');
-          document.body.classList.remove('sidebar-collapsed');
-          sidebar.classList.remove('sidebar-collapsed');
-          sidebar.classList.add('hiding-text');
-          setTimeout(() => { sidebar.classList.remove('hiding-text'); }, 180);
-          setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
-        }
-      }
-
-      function init() {
-        try {
-          const sidebar = document.querySelector('.sidebar');
-          const sidebarToggle = document.getElementById('sidebar-toggle');
-          if (!sidebar || !sidebarToggle) { log('Elements not found'); return; }
-          // Prevent double init if DOM wasn't replaced
-          if (sidebar.dataset.initialized === 'true') { log('Already initialized; refreshing state'); applyStateImmediate(getState()); return; }
-          sidebar.dataset.initialized = 'true';
-
-          let isCollapsed = getState();
-          if (isMobile()) { isCollapsed = false; }
-          log('Init with state: ' + isCollapsed);
-          sidebarToggle.checked = isCollapsed;
-          applyStateImmediate(isCollapsed);
-
-          sidebarToggle.addEventListener('change', function() {
-            const newState = this.checked;
-            if (isMobile()) {
-              this.checked = false;
-              applyStateImmediate(false);
-              // Preserve desktop preference but don't enforce collapse on mobile
-              saveState(true);
-              return;
-            }
-            animateToState(newState);
-            saveState(newState);
-          });
-        } catch (error) {
-          log('Init error: ' + (error && error.message ? error.message : error));
-        }
-      }
-
-      // Initial load
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', initAll);
       } else {
-        init();
+        initAll();
       }
-
-      // Re-init after Astro client-side navigations
-      window.addEventListener('astro:page-load', init);
-      window.addEventListener('astro:after-swap', init);
-
-      // Handle viewport changes to re-apply correct state
-      try {
-        const mq = window.matchMedia(MOBILE_QUERY);
-        const mqHandler = function() {
-          const toggle = document.getElementById('sidebar-toggle');
-          if (!toggle) return;
-          if (mq.matches) {
-            toggle.checked = false;
-            applyStateImmediate(false);
-          } else {
-            const collapsed = getState();
-            toggle.checked = collapsed;
-            applyStateImmediate(collapsed);
-          }
-        };
-        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', mqHandler);
-        else if (typeof mq.addListener === 'function') mq.addListener(mqHandler);
-      } catch (e) {}
+      window.addEventListener('astro:page-load', initAll);
+      window.addEventListener('astro:after-swap', initAll);
     })();
   </script>
 </aside>

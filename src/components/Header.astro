@@ -104,118 +104,31 @@ const websiteSchema = websiteJsonLd();
   </script>
   
   <!-- Persistent sidebar state controller: applies before paint and re-initializes after client navigations -->
+  <!-- Shared sidebar state helper -->
+  <script src="/js/sidebar-state.js"></script>
   <script is:inline>
     (function() {
-      var STORAGE_KEY = 'sidebar-collapsed';
-      var MOBILE_QUERY = '(max-width: 1024px)';
+      try {
+        // Apply root flags ASAP (before paint), but never collapse on mobile
+        if (window.sidebarState && typeof window.sidebarState.applyInitialRootFlags === 'function') {
+          window.sidebarState.applyInitialRootFlags();
+        }
 
-      function isMobile() {
-        try { return window.matchMedia && window.matchMedia(MOBILE_QUERY).matches; } catch (e) { return false; }
-      }
-      function getState() {
-        try { return (typeof localStorage !== 'undefined') && localStorage.getItem(STORAGE_KEY) === 'true'; } catch (e) { return false; }
-      }
-      function saveState(isCollapsed) {
-        try { if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, isCollapsed ? 'true' : 'false'); } catch (e) {}
-      }
-      function applyStateImmediate(isCollapsed) {
-        var sidebar = document.querySelector('.sidebar');
-        if (isCollapsed) {
-          document.documentElement.classList.add('sidebar-collapsed-global');
-          document.documentElement.setAttribute('data-sidebar', 'collapsed');
-          if (sidebar) {
-            document.body.classList.add('sidebar-collapsed');
-            sidebar.classList.add('sidebar-collapsed');
-            sidebar.classList.remove('sidebar-animating', 'hiding-text');
-          }
-        } else {
-          document.documentElement.classList.remove('sidebar-collapsed-global');
-          document.documentElement.setAttribute('data-sidebar', 'expanded');
-          if (sidebar) {
-            document.body.classList.remove('sidebar-collapsed');
-            sidebar.classList.remove('sidebar-collapsed', 'sidebar-animating', 'hiding-text');
+        function initAll() {
+          if (window.sidebarState && typeof window.sidebarState.init === 'function') {
+            window.sidebarState.init();
+            window.sidebarState.handleBreakpointChanges();
           }
         }
-      }
 
-      function initSidebar() {
-        try {
-          var sidebar = document.querySelector('.sidebar');
-          var toggle = document.getElementById('sidebar-toggle');
-          if (!sidebar || !toggle) return;
-          var collapsed = getState();
-          // If on mobile, force expanded state and uncheck toggle regardless of storage
-          if (isMobile()) {
-            collapsed = false;
-          }
-          toggle.checked = collapsed;
-          applyStateImmediate(collapsed);
-          // Bind change handler once per current toggle element
-          if (toggle.dataset.bound !== 'true') {
-            toggle.addEventListener('change', function() {
-              var newState = this.checked;
-              // Ignore changes on mobile, but keep storage consistent on desktop
-              if (isMobile()) {
-                this.checked = false;
-                applyStateImmediate(false);
-                saveState(true); // preserve user's desktop preference if they collapsed
-                return;
-              }
-              applyStateImmediate(newState);
-              saveState(newState);
-            });
-            toggle.dataset.bound = 'true';
-          }
-        } catch (e) {}
-      }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initAll);
+        } else {
+          initAll();
+        }
 
-      // Apply root flags ASAP (before paint), but never collapse on mobile
-      try {
-        var initialCollapsed = getState();
-        var shouldCollapse = initialCollapsed && !isMobile();
-        document.documentElement.classList.toggle('sidebar-collapsed-global', shouldCollapse);
-        document.documentElement.setAttribute('data-sidebar', shouldCollapse ? 'collapsed' : 'expanded');
-      } catch (e) {}
-
-      // Initialize on first load
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSidebar);
-      } else { initSidebar(); }
-
-      // Re-initialize after client-side navigations (support multiple event targets/names)
-      var reinit = function() { initSidebar(); };
-      window.addEventListener('astro:page-load', reinit);
-      document.addEventListener('astro:page-load', reinit);
-      window.addEventListener('astro:after-swap', reinit);
-      document.addEventListener('astro:after-swap', reinit);
-
-      // Listen to viewport changes to re-apply correct state when crossing breakpoint
-      try {
-        var mq = window.matchMedia(MOBILE_QUERY);
-        var mqHandler = function() {
-          var toggle = document.getElementById('sidebar-toggle');
-          if (!toggle) return;
-          if (mq.matches) {
-            toggle.checked = false;
-            applyStateImmediate(false);
-          } else {
-            var collapsed = getState();
-            toggle.checked = collapsed;
-            applyStateImmediate(collapsed);
-          }
-        };
-        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', mqHandler);
-        else if (typeof mq.addListener === 'function') mq.addListener(mqHandler);
-      } catch (e) {}
-
-      // Fallback: observe DOM mutations to re-bind if the sidebar/toggle gets replaced
-      try {
-        var mo = new MutationObserver(function() {
-          var toggle = document.getElementById('sidebar-toggle');
-          // Bind if present and not yet bound
-          if (toggle && toggle.dataset.bound !== 'true') initSidebar();
-        });
-        mo.observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('astro:page-load', initAll);
+        window.addEventListener('astro:after-swap', initAll);
       } catch (e) {}
     })();
   </script>
