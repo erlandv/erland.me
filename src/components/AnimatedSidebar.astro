@@ -102,6 +102,16 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         <Icon name="blog" class="nav-link-image" />
         <div class="nav-text">Blog</div>
       </a>
+      <!-- Sidebar toggle as a nav item (desktop only). Acts as a label for the hidden checkbox. -->
+      <label
+        for="sidebar-toggle"
+        class="nav-link-container sidebar-toggle-button w-inline-block"
+        aria-label="Toggle sidebar width"
+        tabindex="0"
+      >
+        <Icon name="sidebar" class="nav-link-image" />
+        <div class="nav-text">Expand/Collapse</div>
+      </label>
       <div class="socials socials--menu">
         {socials.map((s) => (
           <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
@@ -110,16 +120,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         ))}
       </div>
     </nav>
-
-    <!-- Desktop-only sidebar toggle button -->
-    <label
-      for="sidebar-toggle"
-      class="sidebar-toggle-button"
-      aria-label="Toggle sidebar width"
-      tabindex="0"
-    >
-      <Icon name="sidebar" class="sidebar-toggle-icon" />
-    </label>
 
     <div class="socials socials--sidebar">
       {socials.map((s) => (
@@ -187,35 +187,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     .icon-switch--menu { opacity: 1; --icon-xform: rotate(0deg) scale(1); }
     .icon-switch--close { opacity: 0; --icon-xform: rotate(-90deg) scale(0.9); }
 
-    /* Sidebar toggle button (desktop only) */
-    .sidebar-toggle-button {
-      display: inline-flex; /* desktop */
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      background: transparent;
-      padding: 0;
-      margin-bottom: 12px;
-      cursor: pointer;
-      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
-    }
-
-    /* Expand hover: square button, no stretching like nav links */
-    .sidebar-toggle-button:hover {
-      background-color: #2b2b2b;
-      border-color: #353535;
-      transform: translateZ(0) scale(1.02);
-    }
-
-    .sidebar-toggle-icon {
-      width: 24px; /* match nav icon base */
-      height: 24px;
-      opacity: 0.6;
-      transition: opacity 160ms ease, transform 160ms ease;
-    }
+    /* Sidebar toggle is now styled as a nav-link item */
+    .sidebar-toggle-button { cursor: pointer; }
     .sidebar-toggle-button:hover .sidebar-toggle-icon { opacity: 1; }
 
     /* Mobile-only menu toggle behavior */
@@ -429,13 +402,14 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   /* Collapsed state: slider-like fold */
   .sidebar.sidebar-collapsed {
     width: 80px;
-    padding: 20px 8px;
+    /* Match expanded vertical padding for consistent vertical positions */
+    padding: 32px 8px;
   }
 
   /* Pure-CSS fallback: collapse when the hidden checkbox is checked */
   .sidebar:has(#sidebar-toggle:checked) {
     width: 80px;
-    padding: 20px 8px;
+    padding: 32px 8px;
   }
 
   .sidebar.sidebar-collapsed .profile-text,
@@ -450,22 +424,38 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     max-width: 0;
   }
 
-  .sidebar.sidebar-collapsed .socials--sidebar,
+  /* Preserve vertical layout when collapsed: keep a spacer where socials would be */
+  .sidebar.sidebar-collapsed .socials--sidebar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    margin-top: auto !important;
+    border-top-color: transparent;
+    padding-top: 0;
+    /* Reserve space equal to expanded socials area: border (1) + padding-top (12) + row (22 icon + 16 vertical padding) = 51px */
+    min-height: 51px;
+  }
   .sidebar.sidebar-collapsed .socials--menu {
     opacity: 0;
     max-height: 0;
     padding-top: 0;
     border-top-color: transparent;
-    margin-top: 0 !important;
   }
 
-  .sidebar:has(#sidebar-toggle:checked) .socials--sidebar,
+  .sidebar:has(#sidebar-toggle:checked) .socials--sidebar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    margin-top: auto !important;
+    border-top-color: transparent;
+    padding-top: 0;
+    min-height: 51px;
+  }
   .sidebar:has(#sidebar-toggle:checked) .socials--menu {
     opacity: 0;
     max-height: 0;
     padding-top: 0;
     border-top-color: transparent;
-    margin-top: 0 !important;
   }
 
   /* Alignment adjustments during collapse */
@@ -538,22 +528,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   .sidebar:has(#sidebar-toggle:checked) .nav-text { pointer-events: none; }
   .sidebar:has(#sidebar-toggle:checked) .w-nav-menu { align-items: center !important; }
 
-  /* Toggle button sizing in collapsed view */
-  .sidebar.sidebar-collapsed .sidebar-toggle-button {
-    display: inline-flex !important;
-    width: 60px !important; /* match collapsed nav-link width */
-    height: 44px !important; /* match collapsed nav-link height */
-    margin-left: auto !important;
-    margin-right: auto !important;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 0 !important;
-    margin-bottom: 8px !important;
-    border-radius: 8px !important;
-    border: 1px solid rgba(0, 0, 0, 0) !important; /* match nav-link default */
-    background: transparent !important;
-    transition: all 0.2s ease !important; /* match nav-link */
-  }
+  /* Toggle button sizing in collapsed view uses nav-link defaults; no extra overrides needed */
 
   .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button {
     display: inline-flex !important;
@@ -566,19 +541,28 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     padding: 0 !important;
     margin-bottom: 8px !important;
     border-radius: 8px !important;
-    border: 1px solid rgba(0, 0, 0, 0) !important;
-    background: transparent !important;
-    transition: all 0.2s ease !important;
+    /* Let base/hover styles inherit from .nav-link-container */
   }
   /* Collapse hover size: match nav menu icon */
-  .sidebar.sidebar-collapsed .sidebar-toggle-icon { width: 24px; height: 24px; opacity: 0.48; }
-  .sidebar.sidebar-collapsed .sidebar-toggle-button:hover .sidebar-toggle-icon { opacity: 1; }
+  .sidebar.sidebar-collapsed .sidebar-toggle-button .nav-link-image { opacity: 0.48; }
+  .sidebar.sidebar-collapsed .sidebar-toggle-button:hover .nav-link-image { opacity: 1; }
 
   /* Collapsed hover appearance: match nav-link hover */
-  .sidebar.sidebar-collapsed .sidebar-toggle-button:hover {
+  /* Hover styles inherited from .nav-link-container */
+
+  /* Active state for toggle when collapsed: mimic nav-link active */
+  /* Base styles inherit from .nav-link-container; no overrides here to keep hover identical */
+  /* Visually mark toggle as active when sidebar is collapsed */
+  .sidebar.sidebar-collapsed .sidebar-toggle-button.is-active,
+  .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active {
     background-color: #2b2b2b;
     border-color: #353535;
-    transform: translateX(0) scale(1.02);
+  }
+  /* Hover on active toggle: same as nav-link active + hover */
+  .sidebar.sidebar-collapsed .sidebar-toggle-button.is-active:hover,
+  .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active:hover {
+    background-color: #252525;
+    border-color: #353535;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 

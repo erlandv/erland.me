@@ -851,7 +851,7 @@ p {
   height: 100vh;
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
-  padding: 32px;
+  padding: 32px; /* baseline vertical padding used to align collapsed */
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -1076,6 +1076,7 @@ p {
   justify-content: flex-start;
   align-items: center;
   padding: clamp(10px, 2vw, 14px);
+  min-height: 44px; /* unify item height across states (expanded/collapsed) */
   text-decoration: none;
   display: flex;
   transition: all 0.2s ease;
@@ -1799,7 +1800,7 @@ p {
 
 .socials {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
   color: #d6d6d6;
 }
@@ -1848,7 +1849,7 @@ p {
 
 @media screen and (max-width: 1024px) {
   .sidebar .socials--sidebar {
-    display: none !important;
+    display: none !important; /* hidden on mobile; space is handled inside component CSS */
   }
 
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible {

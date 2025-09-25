@@ -100,6 +100,18 @@
         animateToState(newState);
         saveState(newState);
       });
+
+      // Reflect active state class on toggle button when collapsed
+      var toggleButton = sidebar.querySelector('.sidebar-toggle-button');
+      function syncToggleActive() {
+        if (!toggleButton) return;
+        var isCollapsedNow = document.documentElement.getAttribute('data-sidebar') === 'collapsed' || sidebar.classList.contains('sidebar-collapsed');
+        toggleButton.classList.toggle('is-active', isCollapsedNow);
+      }
+      syncToggleActive();
+      // Sync after animations and on state changes
+      ['astro:page-load', 'astro:after-swap'].forEach(function(ev){ window.addEventListener(ev, syncToggleActive); });
+      sidebarToggle.addEventListener('change', function(){ setTimeout(syncToggleActive, 200); });
     } catch (e) {}
   }
 
@@ -144,4 +156,3 @@
     handleBreakpointChanges: handleBreakpointChanges,
   };
 })();
-
