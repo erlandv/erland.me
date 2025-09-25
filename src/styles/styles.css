@@ -912,16 +912,7 @@ p {
 .main {
   flex: 1;
   min-height: 100vh;
-  background-image:
-    linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.64)),
-    url('/assets/grid-top-right.svg'),
-    linear-gradient(rgba(28, 28, 28, 0.24), rgba(28, 28, 28, 0.24));
-  background-position: left center;
-  background-size:
-    auto,
-    auto 1130px,
-    auto;
-  background-attachment: scroll, fixed, scroll;
+  background: linear-gradient(90deg, #1b1d1c, #0e1412);
   flex-direction: column;
   align-items: center;
   padding: 46px 48px 0px;
