@@ -102,6 +102,8 @@ const websiteSchema = websiteJsonLd();
       (n.className += t + "js"), ("ontouchstart" in o || (o.DocumentTouch && c instanceof DocumentTouch)) && (n.className += t + "touch");
     })(window, document);
   </script>
+  <!-- Clipboard util on window for inline scripts -->
+  <script src="/js/clipboard.js" is:inline></script>
   
   <!-- Persistent sidebar state controller: applies before paint and re-initializes after client navigations -->
   <!-- Shared sidebar state helper -->

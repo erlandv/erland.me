@@ -155,9 +155,10 @@ const jsonLd = blogPostingJsonLd({
         `;
         
         copyButton.addEventListener('click', async function() {
-          try {
+            try {
             const text = codeElement.textContent;
-            await navigator.clipboard.writeText(text);
+            const mod = await import('../../lib/clipboard');
+            await mod.copyToClipboard(text);
             
             copyButton.classList.add('copied');
             
@@ -167,14 +168,7 @@ const jsonLd = blogPostingJsonLd({
             
           } catch (err) {
             console.error('Failed to copy text: ', err);
-            
-            const textArea = document.createElement('textarea');
-            textArea.value = codeElement.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            
+            // Feedback remains consistent even on failure
             copyButton.classList.add('copied');
             setTimeout(() => {
               copyButton.classList.remove('copied');

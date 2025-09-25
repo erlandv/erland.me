@@ -318,6 +318,20 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   <!-- Active nav state sync: updates current item on client navigations -->
   <script is:inline>
     (function() {
+      // Ensure mobile menu is closed when navigating between pages
+      function closeMobileMenu() {
+        try {
+          var toggle = document.getElementById('nav-toggle');
+          if (!toggle) return;
+          if (toggle.checked) {
+            toggle.checked = false;
+            // Clean up focus state on the toggle button to avoid visual stickiness
+            var btn = document.querySelector('.navbar-icon-button');
+            if (btn && typeof btn.blur === 'function') { btn.blur(); }
+          }
+        } catch (e) {}
+      }
+
       function normalizePath(p) {
         try {
           if (!p) return '/';
@@ -378,6 +392,9 @@ const socials: Array<{ name: string; href: string; label: string }> = [
                 var targetUrl = new URL(hrefAttr, window.location.origin);
                 if (targetUrl.origin !== window.location.origin) return;
 
+                // Close the mobile menu immediately on in-app navigation
+                closeMobileMenu();
+
                 // Optimistically mark active immediately for snappy UI
                 var all = document.querySelectorAll('.sidebar .nav-link-container[href]');
                 all.forEach(function(a){ a.classList.remove('w--current'); a.removeAttribute('aria-current'); });
@@ -393,21 +410,23 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function(){ updateActiveNav(); attachNavClickHandlers(); });
+        document.addEventListener('DOMContentLoaded', function(){ closeMobileMenu(); updateActiveNav(); attachNavClickHandlers(); });
       } else {
+        closeMobileMenu();
         updateActiveNav();
         attachNavClickHandlers();
       }
       // Hook history navigations to ensure sync
       try {
         var _push = history.pushState.bind(history);
-        history.pushState = function(){ var r = _push.apply(history, arguments); try { queueMicrotask(updateActiveNav); } catch(e){} return r; };
+        history.pushState = function(){ var r = _push.apply(history, arguments); try { queueMicrotask(function(){ closeMobileMenu(); updateActiveNav(); }); } catch(e){} return r; };
         var _replace = history.replaceState.bind(history);
-        history.replaceState = function(){ var r = _replace.apply(history, arguments); try { queueMicrotask(updateActiveNav); } catch(e){} return r; };
+        history.replaceState = function(){ var r = _replace.apply(history, arguments); try { queueMicrotask(function(){ closeMobileMenu(); updateActiveNav(); }); } catch(e){} return r; };
       } catch(e){}
-      window.addEventListener('popstate', updateActiveNav);
-      window.addEventListener('astro:page-load', function(){ updateActiveNav(); attachNavClickHandlers(); });
-      window.addEventListener('astro:after-swap', function(){ updateActiveNav(); attachNavClickHandlers(); });
+      window.addEventListener('popstate', function(){ closeMobileMenu(); updateActiveNav(); });
+      window.addEventListener('astro:before-swap', closeMobileMenu);
+      window.addEventListener('astro:page-load', function(){ closeMobileMenu(); updateActiveNav(); attachNavClickHandlers(); });
+      window.addEventListener('astro:after-swap', function(){ closeMobileMenu(); updateActiveNav(); attachNavClickHandlers(); });
     })();
   </script>
 </aside>

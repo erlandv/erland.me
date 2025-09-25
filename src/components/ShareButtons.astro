@@ -131,8 +131,34 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         scope.querySelectorAll('.share__btn--copy').forEach(btn => {
           btn.addEventListener('click', async () => {
             const link = btn.getAttribute('data-copy') || url;
+            let copied = false;
             try {
-              await navigator.clipboard.writeText(link);
+              // Prefer util if globally available
+              var w = /** @type {any} */ (window);
+              if (w && typeof w.copyToClipboard === 'function') {
+                copied = !!(await w.copyToClipboard(link));
+              } else if (typeof navigator !== 'undefined' && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+                await navigator.clipboard.writeText(link);
+                copied = true;
+              } else {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = link;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                var docAny = /** @type {any} */ (document);
+                var exec = docAny && docAny['execCommand'];
+                if (typeof exec === 'function') { copied = !!exec.call(document, 'copy'); }
+                document.body.removeChild(ta);
+              }
+            } catch (e) {
+              copied = false;
+            }
+
+            if (copied) {
               const span = btn.querySelector('span');
               const old = span && span.textContent;
               if (span) span.textContent = 'Copied!';
@@ -141,18 +167,6 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
                 btn.classList.remove('is-copied');
                 if (span && old) span.textContent = old;
               }, 1800);
-            } catch (e) {
-              try {
-                const ta = document.createElement('textarea');
-                ta.value = link;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.focus();
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-              } catch {}
             }
           });
         });
