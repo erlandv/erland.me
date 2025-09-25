@@ -1,17 +1,13 @@
 ---
-import Header from "../components/Header.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 import Icon from "../components/Icon.astro";
 ---
 
-<!DOCTYPE html>
-<html>
-  <Header title="404 - Page Not Found" canonical="/404/" />
-  <body>
-    <div class="content">
-      <nav class="main">
-        <div class="container">
-          <main class="fold-content-container">
-            <div class="fold-content">
+<SiteLayout title="404 - Page Not Found" canonical="/404/" selectedItem="">
+  <nav class="main">
+    <div class="container">
+      <main class="fold-content-container">
+        <div class="fold-content">
               <div class="error-content">
                 <div class="error-icon">
                   <div class="error-icon-svg">!</div>
@@ -33,13 +29,11 @@ import Icon from "../components/Icon.astro";
                   </a>
                 </div>
               </div>
-            </div>
-          </main>
         </div>
-      </nav>
-    </div>    
-  </body>
-</html>
+      </main>
+    </div>
+  </nav>
+</SiteLayout>
 
 <style>
   .error-content {
