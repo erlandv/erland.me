@@ -1,19 +1,12 @@
 ---
-import Header from "../components/Header.astro";
-import AnimatedSidebar from "../components/AnimatedSidebar.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 import Icon from "../components/Icon.astro";
-import Footer from "../components/Footer.astro";
 import BackNav from "../components/BackNav.astro";
 ---
 
-<!DOCTYPE html>
-<html>
-  <Header title="Portfolio" canonical="/portfolio/" />
-  <body>
-    <div class="content">
-      <AnimatedSidebar selectedItem="portfolio" />
-      <nav class="main">
-        <div class="container">
+<SiteLayout title="Portfolio" canonical="/portfolio/" selectedItem="portfolio">
+  <nav class="main">
+    <div class="container">
           <BackNav href="/" label="Back" />
           <main class="fold-content-container">
             <div class="fold-content">
@@ -95,9 +88,6 @@ import BackNav from "../components/BackNav.astro";
               </div>
             </div>
           </div>
-        </div>
-        <Footer />
-      </nav>
     </div>
-  </body>
-</html>
+  </nav>
+</SiteLayout>
