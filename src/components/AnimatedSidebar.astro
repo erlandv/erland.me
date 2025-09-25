@@ -220,6 +220,15 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Mobile-only menu toggle behavior */
     @media (max-width: 1024px) {
+      /* Ensure mobile overlay anchors to the viewport, not the sidebar
+         Fix: remove transforms/contain that create a containing block for position: fixed */
+      .sidebar {
+        transform: none !important;
+        -webkit-transform: none !important;
+        will-change: auto !important;
+        contain: none !important;
+      }
+
       /* On mobile, ignore desktop collapsed width/padding */
       html.sidebar-collapsed-global .sidebar,
       html[data-sidebar="collapsed"] .sidebar,
@@ -227,8 +236,12 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         width: 100% !important;
         padding: 24px !important;
       }
-      /* Hide sidebar toggle button on mobile */
-      .sidebar-toggle-button {
+      /* Hide sidebar toggle button on mobile regardless of collapsed state */
+      .sidebar-toggle-button,
+      .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button,
+      html.sidebar-collapsed-global .sidebar .sidebar-toggle-button,
+      html[data-sidebar="collapsed"] .sidebar .sidebar-toggle-button,
+      body.sidebar-collapsed .sidebar .sidebar-toggle-button {
         display: none !important;
       }
       
@@ -254,7 +267,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         padding-top: 92px;
         padding-bottom: 8px;
         background-color: #1c1c1c;
-        z-index: 900; /* sit below header brand/toggle */
+        /* Ensure overlay sits above main content but below brand/toggle */
+        z-index: 1200;
         /* Hidden state */
         opacity: 0;
         transform: translateY(-10px);
@@ -315,10 +329,15 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     // Ensure initialization runs on initial load and after Astro client-side navigations
     (function() {
       const STORAGE_KEY = 'sidebar-collapsed';
-      const DEBUG = true;
+      const MOBILE_QUERY = '(max-width: 1024px)';
+      const DEBUG = false;
 
       function log(msg, data) {
         if (DEBUG) console.log('[Animated Sidebar]', msg, data || '');
+      }
+
+      function isMobile() {
+        try { return window.matchMedia && window.matchMedia(MOBILE_QUERY).matches; } catch (e) { return false; }
       }
 
       function saveState(isCollapsed) {
@@ -339,6 +358,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       function applyStateImmediate(isCollapsed) {
         const sidebar = document.querySelector('.sidebar');
         if (!sidebar) return;
+        // Never apply collapsed visuals on mobile
+        if (isMobile()) { isCollapsed = false; }
         if (isCollapsed) {
           document.documentElement.classList.add('sidebar-collapsed-global');
           document.documentElement.setAttribute('data-sidebar', 'collapsed');
@@ -356,6 +377,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       function animateToState(isCollapsed) {
         const sidebar = document.querySelector('.sidebar');
         if (!sidebar) return applyStateImmediate(isCollapsed);
+        // Never animate to collapsed on mobile
+        if (isMobile()) { return applyStateImmediate(false); }
         sidebar.classList.add('sidebar-animating');
         if (isCollapsed) {
           sidebar.classList.add('hiding-text');
@@ -386,13 +409,21 @@ const socials: Array<{ name: string; href: string; label: string }> = [
           if (sidebar.dataset.initialized === 'true') { log('Already initialized; refreshing state'); applyStateImmediate(getState()); return; }
           sidebar.dataset.initialized = 'true';
 
-          const isCollapsed = getState();
+          let isCollapsed = getState();
+          if (isMobile()) { isCollapsed = false; }
           log('Init with state: ' + isCollapsed);
           sidebarToggle.checked = isCollapsed;
           applyStateImmediate(isCollapsed);
 
           sidebarToggle.addEventListener('change', function() {
             const newState = this.checked;
+            if (isMobile()) {
+              this.checked = false;
+              applyStateImmediate(false);
+              // Preserve desktop preference but don't enforce collapse on mobile
+              saveState(true);
+              return;
+            }
             animateToState(newState);
             saveState(newState);
           });
@@ -411,6 +442,25 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       // Re-init after Astro client-side navigations
       window.addEventListener('astro:page-load', init);
       window.addEventListener('astro:after-swap', init);
+
+      // Handle viewport changes to re-apply correct state
+      try {
+        const mq = window.matchMedia(MOBILE_QUERY);
+        const mqHandler = function() {
+          const toggle = document.getElementById('sidebar-toggle');
+          if (!toggle) return;
+          if (mq.matches) {
+            toggle.checked = false;
+            applyStateImmediate(false);
+          } else {
+            const collapsed = getState();
+            toggle.checked = collapsed;
+            applyStateImmediate(collapsed);
+          }
+        };
+        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', mqHandler);
+        else if (typeof mq.addListener === 'function') mq.addListener(mqHandler);
+      } catch (e) {}
     })();
   </script>
 </aside>

@@ -107,7 +107,11 @@ const websiteSchema = websiteJsonLd();
   <script is:inline>
     (function() {
       var STORAGE_KEY = 'sidebar-collapsed';
+      var MOBILE_QUERY = '(max-width: 1024px)';
 
+      function isMobile() {
+        try { return window.matchMedia && window.matchMedia(MOBILE_QUERY).matches; } catch (e) { return false; }
+      }
       function getState() {
         try { return (typeof localStorage !== 'undefined') && localStorage.getItem(STORAGE_KEY) === 'true'; } catch (e) { return false; }
       }
@@ -140,13 +144,23 @@ const websiteSchema = websiteJsonLd();
           var toggle = document.getElementById('sidebar-toggle');
           if (!sidebar || !toggle) return;
           var collapsed = getState();
-          // Sync UI immediately
+          // If on mobile, force expanded state and uncheck toggle regardless of storage
+          if (isMobile()) {
+            collapsed = false;
+          }
           toggle.checked = collapsed;
           applyStateImmediate(collapsed);
           // Bind change handler once per current toggle element
           if (toggle.dataset.bound !== 'true') {
             toggle.addEventListener('change', function() {
               var newState = this.checked;
+              // Ignore changes on mobile, but keep storage consistent on desktop
+              if (isMobile()) {
+                this.checked = false;
+                applyStateImmediate(false);
+                saveState(true); // preserve user's desktop preference if they collapsed
+                return;
+              }
               applyStateImmediate(newState);
               saveState(newState);
             });
@@ -155,23 +169,45 @@ const websiteSchema = websiteJsonLd();
         } catch (e) {}
       }
 
-      // Apply root flags ASAP (before paint)
+      // Apply root flags ASAP (before paint), but never collapse on mobile
       try {
         var initialCollapsed = getState();
-        document.documentElement.classList.toggle('sidebar-collapsed-global', initialCollapsed);
-        document.documentElement.setAttribute('data-sidebar', initialCollapsed ? 'collapsed' : 'expanded');
+        var shouldCollapse = initialCollapsed && !isMobile();
+        document.documentElement.classList.toggle('sidebar-collapsed-global', shouldCollapse);
+        document.documentElement.setAttribute('data-sidebar', shouldCollapse ? 'collapsed' : 'expanded');
       } catch (e) {}
 
       // Initialize on first load
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initSidebar);
       } else { initSidebar(); }
+
       // Re-initialize after client-side navigations (support multiple event targets/names)
       var reinit = function() { initSidebar(); };
       window.addEventListener('astro:page-load', reinit);
       document.addEventListener('astro:page-load', reinit);
       window.addEventListener('astro:after-swap', reinit);
       document.addEventListener('astro:after-swap', reinit);
+
+      // Listen to viewport changes to re-apply correct state when crossing breakpoint
+      try {
+        var mq = window.matchMedia(MOBILE_QUERY);
+        var mqHandler = function() {
+          var toggle = document.getElementById('sidebar-toggle');
+          if (!toggle) return;
+          if (mq.matches) {
+            toggle.checked = false;
+            applyStateImmediate(false);
+          } else {
+            var collapsed = getState();
+            toggle.checked = collapsed;
+            applyStateImmediate(collapsed);
+          }
+        };
+        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', mqHandler);
+        else if (typeof mq.addListener === 'function') mq.addListener(mqHandler);
+      } catch (e) {}
+
       // Fallback: observe DOM mutations to re-bind if the sidebar/toggle gets replaced
       try {
         var mo = new MutationObserver(function() {
