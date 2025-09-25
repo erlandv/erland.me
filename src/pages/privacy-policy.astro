@@ -1,45 +1,75 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import BackNav from "../components/BackNav.astro";
+import SiteLayout from '../layouts/SiteLayout.astro';
+import BackNav from '../components/BackNav.astro';
 ---
 
-<SiteLayout title="Privacy Policy" canonical="/privacy-policy/">
-  <nav class="main">
-    <div class="container">
-          <BackNav href="/" label="Back" />
-          <main class="fold-content-container">
-            <div class="fold-content">
-              <h1>Privacy Policy</h1>
-              <p>
-                Privacy policy atau kebijakan privasi ini berlaku antara saya sebagai pemilik situs web {import.meta.env.SITE_DOMAIN || 'erland.me'} (selanjutnya disebut sebagai kami) dan Anda sebagai pengunjung dari situs web ini (selanjutnya disebut sebagai Anda).<br /><br />
-                Kami sangat menjunjung tinggi privasi yang Anda miliki, oleh karena itu kami menempatkannya sebagai hal yang penting dan wajib untuk dijaga. Dengan mengakses dan/atau memanfaatkan semua layanan di web ini, berarti Anda dianggap telah membaca, memahami, dan tunduk serta setuju untuk terikat dalam kebijakan privasi ini dan segala perubahannya di kemudian hari.
-              </p>
-              <h2>Data yang kami kumpulkan</h2>
-              <p>
-                Kami hanya menggunakan beberapa informasi kecil yang bersifat publik dari Anda untuk digunakan sebagai catatan atau logging pada server kami. Selebihnya, kami tidak menyimpan informasi apapun mengenai Anda.<br /><br />
-                Berikut ini adalah beberapa informasi yang kami kumpulkan beserta tujuan penggunaannya.
-              </p>
-              <h3>Alamat IP</h3>
-              <p>
-                Ketika Anda terhubung ke internet, maka perangkat Anda akan memiliki alamat IP khusus untuk identifikasi. Alamat IP ini biasanya diberikan oleh Internet Service Provider Anda ketika terhubung ke internet.<br /><br />
-                Setiap kali Anda mengunjungi suatu situs, mengirim email, bermain game online atau apapun yang terhubung ke internet, maka server tujuan mengidentifikasi Anda salah satunya dari alamat IP ini.<br /><br />
-                Kami menyimpan alamat IP ini pada log server kami untuk kebutuhan audit atau analisis, dan tidak untuk dibagikan kepada pihak mana pun.
-              </p>
-              <h3>Cookies</h3>
-                Cookies adalah sebuah informasi kecil yang disimpan oleh browser Anda ketika mengunjungi sebuah situs web. Kadang sebuah situs memerlukan cookie agar ketika Anda berkunjung untuk kedua kalinya, web tersebut dapat mengidentifikasi preferensi Anda.<br /><br />
-                Kami sendiri tidak memerlukan cookie ketika Anda mengunjungi situs web ini, tapi mungkin mitra iklan kami akan menggunakan cookie untuk melakukan pelacakan sehingga dapat menyuguhkan iklan yang sesuai dengan keinginan Anda.<br /><br />
-                Mitra iklan kami pada situs web ini adalah Google Adsense. Setiap pelacakannya dilakukan langsung oleh Google melalui server mereka sendiri dan mereka memiliki kebijakan privasi tersendiri. Anda dapat mempelajari bagaimana Google menggunakan cookie untuk menayangkan iklan sesuai preferensi Anda melalui tautan <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a>
-              </p>
-              <h2>Informasi Kontak</h2>
-              <p>
-                Jika Anda memiliki pertanyaan tentang kebijakan privasi di blog ini, Anda dapat menghubungi saya melalui email <a href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}>hello@{import.meta.env.SITE_DOMAIN || 'erland.me'}</a>.
-              </p>
-              <h2>Pembaruan</h2>
-              <p>
-                Halaman kebijakan privasi ini terakhir diperbarui pada Rabu, 1 Juli 2020.
-              </p>
-            </div>
-          </main>
+<SiteLayout title='Privacy Policy' canonical='/privacy-policy/'>
+  <BackNav href='/' label='Back' />
+  <main class='fold-content-container'>
+    <div class='fold-content'>
+      <h1>Privacy Policy</h1>
+      <p>
+        Privacy policy atau kebijakan privasi ini berlaku antara saya sebagai
+        pemilik situs web {import.meta.env.SITE_DOMAIN || 'erland.me'} (selanjutnya
+        disebut sebagai kami) dan Anda sebagai pengunjung dari situs web ini (selanjutnya
+        disebut sebagai Anda).<br /><br />
+        Kami sangat menjunjung tinggi privasi yang Anda miliki, oleh karena itu kami
+        menempatkannya sebagai hal yang penting dan wajib untuk dijaga. Dengan mengakses
+        dan/atau memanfaatkan semua layanan di web ini, berarti Anda dianggap telah
+        membaca, memahami, dan tunduk serta setuju untuk terikat dalam kebijakan
+        privasi ini dan segala perubahannya di kemudian hari.
+      </p>
+      <h2>Data yang kami kumpulkan</h2>
+      <p>
+        Kami hanya menggunakan beberapa informasi kecil yang bersifat publik
+        dari Anda untuk digunakan sebagai catatan atau logging pada server kami.
+        Selebihnya, kami tidak menyimpan informasi apapun mengenai Anda.<br
+        /><br />
+        Berikut ini adalah beberapa informasi yang kami kumpulkan beserta tujuan
+        penggunaannya.
+      </p>
+      <h3>Alamat IP</h3>
+      <p>
+        Ketika Anda terhubung ke internet, maka perangkat Anda akan memiliki
+        alamat IP khusus untuk identifikasi. Alamat IP ini biasanya diberikan
+        oleh Internet Service Provider Anda ketika terhubung ke internet.<br
+        /><br />
+        Setiap kali Anda mengunjungi suatu situs, mengirim email, bermain game online
+        atau apapun yang terhubung ke internet, maka server tujuan mengidentifikasi
+        Anda salah satunya dari alamat IP ini.<br /><br />
+        Kami menyimpan alamat IP ini pada log server kami untuk kebutuhan audit atau
+        analisis, dan tidak untuk dibagikan kepada pihak mana pun.
+      </p>
+      <h3>Cookies</h3>
+      Cookies adalah sebuah informasi kecil yang disimpan oleh browser Anda ketika
+      mengunjungi sebuah situs web. Kadang sebuah situs memerlukan cookie agar ketika
+      Anda berkunjung untuk kedua kalinya, web tersebut dapat mengidentifikasi preferensi
+      Anda.<br /><br />
+      Kami sendiri tidak memerlukan cookie ketika Anda mengunjungi situs web ini,
+      tapi mungkin mitra iklan kami akan menggunakan cookie untuk melakukan pelacakan
+      sehingga dapat menyuguhkan iklan yang sesuai dengan keinginan Anda.<br
+      /><br />
+      Mitra iklan kami pada situs web ini adalah Google Adsense. Setiap pelacakannya
+      dilakukan langsung oleh Google melalui server mereka sendiri dan mereka memiliki
+      kebijakan privasi tersendiri. Anda dapat mempelajari bagaimana Google menggunakan
+      cookie untuk menayangkan iklan sesuai preferensi Anda melalui tautan <a
+        href='https://policies.google.com/technologies/ads'
+        target='_blank'
+        rel='noopener noreferrer'
+        >https://policies.google.com/technologies/ads</a
+      >
     </div>
-  </nav>
+    <h2>Informasi Kontak</h2>
+    <p>
+      Jika Anda memiliki pertanyaan tentang kebijakan privasi di blog ini, Anda
+      dapat menghubungi saya melalui email <a
+        href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}
+        >hello@{import.meta.env.SITE_DOMAIN || 'erland.me'}</a
+      >.
+    </p>
+    <h2>Pembaruan</h2>
+    <p>
+      Halaman kebijakan privasi ini terakhir diperbarui pada Rabu, 1 Juli 2020.
+    </p>
+  </main>
 </SiteLayout>

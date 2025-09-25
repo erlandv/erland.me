@@ -1,72 +1,84 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import Icon from "../components/Icon.astro";
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
 ---
 
-
-<SiteLayout title="Personal Web" canonical="/" selectedItem="home">
-  <div class="container">
-          <main class="fold-content-container">
-            <div class="fold-content">
-              <h1>Hi, I'm Erland.<br />I build things for the web.</h1>
-              <p class="lead">
-                I help teams turn ideas into production-ready, scalable web products that customers genuinely value. Over the past decade, I have led projects end-to-end spanning websites and web apps, balancing usability, performance, and ROI from discovery through launch and continuous iteration.<br /><br />
-                On the infrastructure side, I design and manage resilient IaaS platforms using virtual machines, load balancers, and CI/CD pipelines. I implement autoscaling and observability on GNU/Linux. The result is a stable, secure, and cost-aware platform that keeps your product growing.<br /><br />
-                This is my small corner on the interweb where I'll post my notes, achievements, and whatever I want to post.
-              </p>
-            </div>
-          <a href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`} class="button w-button contact-button">
-            <Icon name="mail" class="button-icon" />
-            <span>Contact Me</span>
-          </a>
-        </main>
-        <div class="projects-section">
-          <div class="projects-container">
-            <div class="single-projects-category">
-              <div class="projects-category-image-container">
-                <Icon name="browser" class="projects-category-image" />
-              </div>
-            </div>
-            <div class="single-projects-content">
-              <h3><a href="/portfolio/web-development/">Web Development</a></h3>
-              <div class="tech-tools-container">
-                <div class="mini-label-white gray-color">Technologies &amp; tools</div>
-                <div class="chips-container chips-container-small-width">
-                  <div class="single-chip small-chip">Node.js</div>
-                  <div class="single-chip small-chip">TypeScript</div>
-                  <div class="single-chip small-chip">Next.js</div>
-                  <div class="single-chip small-chip">React</div>
-                  <div class="single-chip small-chip">Tailwind CSS</div>
-                  <div class="single-chip small-chip">Vite</div>
-                  <div class="single-chip small-chip">PostgreSQL</div>
-                  <div class="single-chip small-chip">Git</div>
-                </div>
-              </div>
-            </div>
+<SiteLayout title='Personal Web' canonical='/' selectedItem='home'>
+  <main class='fold-content-container'>
+    <div class='fold-content'>
+      <h1>Hi, I'm Erland.<br />I build things for the web.</h1>
+      <p class='lead'>
+        I help teams turn ideas into production-ready, scalable web products
+        that customers genuinely value. Over the past decade, I have led
+        projects end-to-end spanning websites and web apps, balancing usability,
+        performance, and ROI from discovery through launch and continuous
+        iteration.<br /><br />
+        On the infrastructure side, I design and manage resilient IaaS platforms
+        using virtual machines, load balancers, and CI/CD pipelines. I implement
+        autoscaling and observability on GNU/Linux. The result is a stable, secure,
+        and cost-aware platform that keeps your product growing.<br /><br />
+        This is my small corner on the interweb where I'll post my notes, achievements,
+        and whatever I want to post.
+      </p>
+    </div>
+    <a
+      href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}
+      class='button w-button contact-button'
+    >
+      <Icon name='mail' class='button-icon' />
+      <span>Contact Me</span>
+    </a>
+  </main>
+  <div class='projects-section'>
+    <div class='projects-container'>
+      <div class='single-projects-category'>
+        <div class='projects-category-image-container'>
+          <Icon name='browser' class='projects-category-image' />
+        </div>
+      </div>
+      <div class='single-projects-content'>
+        <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
+        <div class='tech-tools-container'>
+          <div class='mini-label-white gray-color'>
+            Technologies &amp; tools
           </div>
-          <div class="projects-container">
-            <div class="single-projects-category">
-              <div class="projects-category-image-container devops-img">
-                <Icon name="database" class="projects-category-image" />
-              </div>
-            </div>
-            <div class="single-projects-content">
-              <h3><a href="/portfolio/cloud-infra/">Cloud Infra</a></h3>
-              <div class="tech-tools-container">
-                <div class="mini-label-white gray-color">Technologies &amp; tools</div>
-                <div class="chips-container chips-container-small-width">
-                  <div class="single-chip small-chip">Terraform</div>
-                  <div class="single-chip small-chip">Docker</div>
-                  <div class="single-chip small-chip">Kubernetes</div>
-                  <div class="single-chip small-chip">Bash</div>
-                  <div class="single-chip small-chip">Github Actions</div>
-                  <div class="single-chip small-chip">AWS</div>
-                  <div class="single-chip small-chip">Azure</div>
-                  <div class="single-chip small-chip">GCP</div>
-                </div>
-              </div>
-            </div>
+          <div class='chips-container chips-container-small-width'>
+            <div class='single-chip small-chip'>Node.js</div>
+            <div class='single-chip small-chip'>TypeScript</div>
+            <div class='single-chip small-chip'>Next.js</div>
+            <div class='single-chip small-chip'>React</div>
+            <div class='single-chip small-chip'>Tailwind CSS</div>
+            <div class='single-chip small-chip'>Vite</div>
+            <div class='single-chip small-chip'>PostgreSQL</div>
+            <div class='single-chip small-chip'>Git</div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class='projects-container'>
+      <div class='single-projects-category'>
+        <div class='projects-category-image-container devops-img'>
+          <Icon name='database' class='projects-category-image' />
+        </div>
+      </div>
+      <div class='single-projects-content'>
+        <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
+        <div class='tech-tools-container'>
+          <div class='mini-label-white gray-color'>
+            Technologies &amp; tools
+          </div>
+          <div class='chips-container chips-container-small-width'>
+            <div class='single-chip small-chip'>Terraform</div>
+            <div class='single-chip small-chip'>Docker</div>
+            <div class='single-chip small-chip'>Kubernetes</div>
+            <div class='single-chip small-chip'>Bash</div>
+            <div class='single-chip small-chip'>Github Actions</div>
+            <div class='single-chip small-chip'>AWS</div>
+            <div class='single-chip small-chip'>Azure</div>
+            <div class='single-chip small-chip'>GCP</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </SiteLayout>
