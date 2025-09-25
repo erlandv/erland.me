@@ -17,6 +17,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   data-duration="400"
   data-easing="ease"
   data-easing2="ease"
+  data-astro-transition-persist="sidebar"
   role="banner"
   class="sidebar w-nav"
 >
@@ -219,6 +220,13 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
     /* Mobile-only menu toggle behavior */
     @media (max-width: 1024px) {
+      /* On mobile, ignore desktop collapsed width/padding */
+      html.sidebar-collapsed-global .sidebar,
+      html[data-sidebar="collapsed"] .sidebar,
+      body.sidebar-collapsed .sidebar {
+        width: 100% !important;
+        padding: 24px !important;
+      }
       /* Hide sidebar toggle button on mobile */
       .sidebar-toggle-button {
         display: none !important;
@@ -263,6 +271,23 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         pointer-events: auto;
         transition: opacity 220ms ease, transform 220ms ease;
       }
+      /* When mobile menu is open, override any collapsed-state text hiding */
+      .nav-toggle:checked ~ .w-nav-menu .nav-text,
+      .nav-toggle:checked ~ .w-nav-menu .profile-text {
+        opacity: 1 !important;
+        max-width: 100% !important;
+        pointer-events: auto !important;
+      }
+      /* Mobile menu items should be full width */
+      .nav-toggle:checked ~ .w-nav-menu .nav-link-container {
+        width: auto !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 12px 28px 12px 32px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
       /* Ensure social icons appear inside the mobile menu */
       .nav-toggle:checked ~ .w-nav-menu .socials--menu {
         display: flex !important;
@@ -286,48 +311,32 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     }
   </style>
 
-  <script>
-    // Enhanced sidebar toggle with Framer Motion-like animations
-    document.addEventListener('DOMContentLoaded', function() {
+  <script data-astro-reload>
+    // Ensure initialization runs on initial load and after Astro client-side navigations
+    (function() {
       const STORAGE_KEY = 'sidebar-collapsed';
       const DEBUG = true;
-      
-      function log(msg: any, data?: any) {
+
+      function log(msg, data) {
         if (DEBUG) console.log('[Animated Sidebar]', msg, data || '');
       }
-      
-      function saveState(isCollapsed: boolean) {
+
+      function saveState(isCollapsed) {
         const value = isCollapsed ? 'true' : 'false';
-        log('Saving state: ' + value);
-        
-        try {
-          if (typeof localStorage !== 'undefined') {
-            localStorage.setItem(STORAGE_KEY, value);
-            log('Saved to localStorage');
-          }
-        } catch (e: any) {
-          log('localStorage failed: ' + e.message);
-        }
+        try { if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
       }
-      
+
       function getState() {
         try {
           if (typeof localStorage !== 'undefined') {
             const value = localStorage.getItem(STORAGE_KEY);
-            if (value) {
-              log('Got from localStorage: ' + value);
-              return value === 'true';
-            }
+            return value === 'true';
           }
-        } catch (e: any) {
-          log('localStorage read failed: ' + e.message);
-        }
-        
-        log('No saved state found, defaulting to false');
+        } catch (e) {}
         return false;
       }
-      
-      function applyStateImmediate(isCollapsed: boolean) {
+
+      function applyStateImmediate(isCollapsed) {
         const sidebar = document.querySelector('.sidebar');
         if (!sidebar) return;
         if (isCollapsed) {
@@ -344,84 +353,65 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         }
       }
 
-      function animateToState(isCollapsed: boolean) {
+      function animateToState(isCollapsed) {
         const sidebar = document.querySelector('.sidebar');
         if (!sidebar) return applyStateImmediate(isCollapsed);
-
-        // Ensure anim root class for hover/overflow tweaks
         sidebar.classList.add('sidebar-animating');
-
         if (isCollapsed) {
-          // Collapse: hide text first, then shrink width
           sidebar.classList.add('hiding-text');
-          // After text is mostly hidden, shrink container and set global flags
           setTimeout(() => {
             document.documentElement.classList.add('sidebar-collapsed-global');
             document.documentElement.setAttribute('data-sidebar', 'collapsed');
             document.body.classList.add('sidebar-collapsed');
             sidebar.classList.add('sidebar-collapsed');
           }, 120);
-
-          // Cleanup after animation
-          setTimeout(() => {
-            sidebar.classList.remove('sidebar-animating');
-          }, 360);
+          setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
         } else {
-          // Expand: widen first, then reveal text
           document.documentElement.classList.remove('sidebar-collapsed-global');
           document.documentElement.setAttribute('data-sidebar', 'expanded');
           document.body.classList.remove('sidebar-collapsed');
           sidebar.classList.remove('sidebar-collapsed');
-          // Keep text hidden briefly to avoid jitter
           sidebar.classList.add('hiding-text');
-          setTimeout(() => {
-            sidebar.classList.remove('hiding-text');
-          }, 180);
-          setTimeout(() => {
-            sidebar.classList.remove('sidebar-animating');
-          }, 360);
+          setTimeout(() => { sidebar.classList.remove('hiding-text'); }, 180);
+          setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
         }
       }
-      
-      try {
-        const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement;
-        const sidebar = document.querySelector('.sidebar');
-        
-        if (sidebarToggle && sidebar) {
-          log('Elements found, initializing...');
-          
-          // Get current state
+
+      function init() {
+        try {
+          const sidebar = document.querySelector('.sidebar');
+          const sidebarToggle = document.getElementById('sidebar-toggle');
+          if (!sidebar || !sidebarToggle) { log('Elements not found'); return; }
+          // Prevent double init if DOM wasn't replaced
+          if (sidebar.dataset.initialized === 'true') { log('Already initialized; refreshing state'); applyStateImmediate(getState()); return; }
+          sidebar.dataset.initialized = 'true';
+
           const isCollapsed = getState();
-          log('Current state: ' + isCollapsed);
-          
-          // Sync checkbox
+          log('Init with state: ' + isCollapsed);
           sidebarToggle.checked = isCollapsed;
-          
-          // Apply initial state without animation
           applyStateImmediate(isCollapsed);
 
-          // Handle toggle changes
           sidebarToggle.addEventListener('change', function() {
             const newState = this.checked;
-            log('Toggle changed to: ' + newState);
-            
-            // Apply animated transition
             animateToState(newState);
-            
-            // Save state
             saveState(newState);
-            
-            log('State change complete');
           });
-          
-          log('Animated sidebar toggle initialized successfully');
-        } else {
-          log('Elements not found');
+        } catch (error) {
+          log('Init error: ' + (error && error.message ? error.message : error));
         }
-      } catch (error: any) {
-        log('Error in sidebar initialization: ' + error.message);
       }
-    });
+
+      // Initial load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+      // Re-init after Astro client-side navigations
+      window.addEventListener('astro:page-load', init);
+      window.addEventListener('astro:after-swap', init);
+    })();
   </script>
 </aside>
 
@@ -437,6 +427,14 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   .sidebar {
     transition: width 300ms ease, padding 300ms ease;
     overflow-x: clip;
+  }
+
+  /* Also honor root-level collapsed flags so state applies before component init */
+  html.sidebar-collapsed-global .sidebar,
+  html[data-sidebar="collapsed"] .sidebar,
+  body.sidebar-collapsed .sidebar {
+    width: 80px;
+    padding: 20px 8px;
   }
 
   .sidebar .nav-link-container {
@@ -455,6 +453,16 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     will-change: opacity, max-width;
   }
 
+  html.sidebar-collapsed-global .sidebar .profile-text,
+  html[data-sidebar="collapsed"] .sidebar .profile-text,
+  body.sidebar-collapsed .sidebar .profile-text,
+  html.sidebar-collapsed-global .sidebar .nav-text,
+  html[data-sidebar="collapsed"] .sidebar .nav-text,
+  body.sidebar-collapsed .sidebar .nav-text {
+    opacity: 0;
+    max-width: 0;
+  }
+
   .sidebar .socials--sidebar,
   .sidebar .socials--menu {
     opacity: 1;
@@ -462,6 +470,18 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     transition: opacity 220ms ease, max-height 240ms ease, padding-top 240ms ease, border-color 240ms ease;
     will-change: opacity, max-height;
     overflow: hidden;
+  }
+
+  html.sidebar-collapsed-global .sidebar .socials--sidebar,
+  html[data-sidebar="collapsed"] .sidebar .socials--sidebar,
+  body.sidebar-collapsed .sidebar .socials--sidebar,
+  html.sidebar-collapsed-global .sidebar .socials--menu,
+  html[data-sidebar="collapsed"] .sidebar .socials--menu,
+  body.sidebar-collapsed .sidebar .socials--menu {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    border-top-color: transparent;
   }
 
   /* Orchestrated step: hide text first during animation */
@@ -484,8 +504,20 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     padding: 20px 8px;
   }
 
+  /* Pure-CSS fallback: collapse when the hidden checkbox is checked */
+  .sidebar:has(#sidebar-toggle:checked) {
+    width: 80px;
+    padding: 20px 8px;
+  }
+
   .sidebar.sidebar-collapsed .profile-text,
   .sidebar.sidebar-collapsed .nav-text {
+    opacity: 0;
+    max-width: 0;
+  }
+
+  .sidebar:has(#sidebar-toggle:checked) .profile-text,
+  .sidebar:has(#sidebar-toggle:checked) .nav-text {
     opacity: 0;
     max-width: 0;
   }
@@ -499,8 +531,28 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     margin-top: 0 !important;
   }
 
+  .sidebar:has(#sidebar-toggle:checked) .socials--sidebar,
+  .sidebar:has(#sidebar-toggle:checked) .socials--menu {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    border-top-color: transparent;
+    margin-top: 0 !important;
+  }
+
   /* Alignment adjustments during collapse */
+  html.sidebar-collapsed-global .sidebar .w-nav-brand,
+  html[data-sidebar="collapsed"] .sidebar .w-nav-brand,
+  body.sidebar-collapsed .sidebar .w-nav-brand {
+    justify-content: center !important;
+    margin-bottom: 20px !important;
+  }
   .sidebar.sidebar-collapsed .w-nav-brand {
+    justify-content: center !important;
+    margin-bottom: 20px !important;
+  }
+
+  .sidebar:has(#sidebar-toggle:checked) .w-nav-brand {
     justify-content: center !important;
     margin-bottom: 20px !important;
   }
@@ -508,11 +560,37 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     justify-content: center !important;
     align-items: center !important;
   }
+
+  .sidebar:has(#sidebar-toggle:checked) .niv-data {
+    justify-content: center !important;
+    align-items: center !important;
+  }
   .sidebar.sidebar-collapsed .niv-image {
     margin-right: 0 !important;
     margin: 0 auto !important;
   }
+
+  .sidebar:has(#sidebar-toggle:checked) .niv-image {
+    margin-right: 0 !important;
+    margin: 0 auto !important;
+  }
+  html.sidebar-collapsed-global .sidebar .nav-link-container,
+  html[data-sidebar="collapsed"] .sidebar .nav-link-container,
+  body.sidebar-collapsed .sidebar .nav-link-container,
   .sidebar.sidebar-collapsed .nav-link-container {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px 6px !important;
+    margin-bottom: 8px !important;
+    min-height: 44px !important;
+    width: 60px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 0 !important;
+    transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+  }
+
+  .sidebar:has(#sidebar-toggle:checked) .nav-link-container {
     justify-content: center !important;
     align-items: center !important;
     padding: 10px 6px !important;
@@ -527,6 +605,10 @@ const socials: Array<{ name: string; href: string; label: string }> = [
   .sidebar.sidebar-collapsed .nav-link-image { margin: 0 auto !important; }
   .sidebar.sidebar-collapsed .nav-text { pointer-events: none; }
   .sidebar.sidebar-collapsed .w-nav-menu { align-items: center !important; }
+
+  .sidebar:has(#sidebar-toggle:checked) .nav-link-image { margin: 0 auto !important; }
+  .sidebar:has(#sidebar-toggle:checked) .nav-text { pointer-events: none; }
+  .sidebar:has(#sidebar-toggle:checked) .w-nav-menu { align-items: center !important; }
 
   /* Toggle button sizing in collapsed view */
   .sidebar.sidebar-collapsed .sidebar-toggle-button {
@@ -544,13 +626,29 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     background: transparent !important;
     transition: all 0.2s ease !important; /* match nav-link */
   }
+
+  .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button {
+    display: inline-flex !important;
+    width: 60px !important;
+    height: 44px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    background: transparent !important;
+    transition: all 0.2s ease !important;
+  }
   /* Collapse hover size: match nav menu icon */
   .sidebar.sidebar-collapsed .sidebar-toggle-icon { width: 24px; height: 24px; opacity: 0.48; }
   .sidebar.sidebar-collapsed .sidebar-toggle-button:hover .sidebar-toggle-icon { opacity: 1; }
 
   /* Collapsed hover appearance: match nav-link hover */
   .sidebar.sidebar-collapsed .sidebar-toggle-button:hover {
-    background-color: #252525;
+    background-color: #2b2b2b;
     border-color: #353535;
     transform: translateX(0) scale(1.02);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
