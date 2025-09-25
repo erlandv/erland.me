@@ -1,22 +1,2 @@
 User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://erland.me/sitemap-index.xml
-Sitemap: https://erland.me/sitemap-0.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Disallow admin or private areas (if any)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /_astro/
-
-# Allow all other content
-Allow: /blog/
-Allow: /download/
-Allow: /portfolio/
-Allow: /portfolio/web-development/
-Allow: /portfolio/cloud-infra/
-Allow: /portfolio/personal-projects/
+Disallow: /

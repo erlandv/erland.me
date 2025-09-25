@@ -19,6 +19,13 @@ const SITE_CONFIG = {
   },
 } as const;
 
+// Environment helpers
+export function isProductionSite() {
+  const url = process.env.SITE_URL || '';
+  const domain = process.env.SITE_DOMAIN || '';
+  return url === 'https://erland.me' && domain === 'erland.me';
+}
+
 export function collectionPageJsonLd(
   name: string,
   url: string,
