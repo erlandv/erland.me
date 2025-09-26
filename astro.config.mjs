@@ -34,26 +34,22 @@ export default defineConfig({
   // Vite configuration for optimizations
   vite: {
     build: {
-      // Enable minification
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          // Remove unused code
-          dead_code: true,
-          // Mark common console helpers as pure to aid DCE
-          pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        },
-        // Extra safety for older Safari mangling
-        mangle: {
-          safari10: true,
-        },
-        format: {
-          // Remove comments from output
-          comments: false,
-        },
-      },
+      // Prefer esbuild for speed; allow switching to Terser via env
+      // MINIFY_ENGINE=terser to enable Terser for advanced cases
+      minify: process.env.MINIFY_ENGINE === 'terser' ? 'terser' : 'esbuild',
+      terserOptions:
+        process.env.MINIFY_ENGINE === 'terser'
+          ? {
+              compress: {
+                drop_console: true,
+                drop_debugger: true,
+                dead_code: true,
+                pure_funcs: ['console.log', 'console.info', 'console.debug'],
+              },
+              mangle: { safari10: true },
+              format: { comments: false },
+            }
+          : undefined,
       // Optimize chunk splitting
       rollupOptions: {
         output: {
@@ -98,6 +94,15 @@ export default defineConfig({
       // Target modern browsers
       target: ['es2020', 'chrome80', 'firefox78', 'safari14'],
     },
+    // Esbuild options (apply drops only in production)
+    esbuild:
+      process.env.NODE_ENV === 'production'
+        ? {
+            drop: ['console', 'debugger'],
+            pure: ['console.log', 'console.info', 'console.debug'],
+            legalComments: 'none',
+          }
+        : undefined,
     // CSS optimization
     css: {
       devSourcemap: true,
