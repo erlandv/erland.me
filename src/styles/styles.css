@@ -33,13 +33,13 @@ section {
 
 a {
   background-color: rgba(0, 0, 0, 0);
-  color: #6bb6ff;
+  color: #428DFF;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 a:hover {
-  color: #8ab4ff;
+  color: #33E1FF;
 }
 
 a:active,
