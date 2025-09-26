@@ -215,6 +215,7 @@ ul {
 .w-nav-menu.is-open {
   display: block !important;
   position: fixed;
+  z-index: 1200; /* ensure overlays main content */
   left: 0;
   right: 0;
   top: 0; /* ensure no gap at the very top */
@@ -249,6 +250,7 @@ ul {
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible {
     display: block;
     position: fixed;
+    z-index: 1200; /* overlay main content in mobile */
     left: 0;
     right: 0;
     top: 0; /* attach to top to avoid background showing */
@@ -918,6 +920,7 @@ p {
   padding: 46px 48px 0px;
   display: flex;
   overflow: auto;
+  position: relative; /* create stacking context but below fixed overlay since overlay has higher z-index */
 }
 
 .container {

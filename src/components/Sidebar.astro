@@ -219,6 +219,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         -webkit-transform: none !important;
         will-change: auto !important;
         contain: none !important;
+        /* Also drop perspective to avoid creating a containing block for fixed children */
+        perspective: none !important;
       }
 
       /* On mobile, ignore desktop collapsed width/padding */
