@@ -197,6 +197,39 @@
     if (navToggle) {
       updateMobileAriaExpanded();
       navToggle.addEventListener('change', updateMobileAriaExpanded);
+      // Focus trap when menu is open
+      const siteNav = document.getElementById('site-nav') as HTMLElement | null;
+      if (siteNav) {
+        const trap = (ev: KeyboardEvent) => {
+          if (ev.key !== 'Tab') return;
+          if (!navToggle.checked) return;
+          const focusables = siteNav.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          const active = document.activeElement as HTMLElement | null;
+          if (ev.shiftKey) {
+            if (active === first || !siteNav.contains(active)) {
+              ev.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (active === last || !siteNav.contains(active)) {
+              ev.preventDefault();
+              first.focus();
+            }
+          }
+        };
+        document.addEventListener('keydown', trap);
+        // Clean up when menu closes
+        navToggle.addEventListener('change', () => {
+          if (!navToggle.checked) {
+            document.removeEventListener('keydown', trap);
+          }
+        });
+      }
     }
 
     handleBreakpointChanges();
