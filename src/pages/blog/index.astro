@@ -31,6 +31,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
 <SiteLayout
   title="Blog"
   canonical="/blog/"
+  description="Artikel seputar web development, cloud infra, dan catatan teknis."
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={collectionPageJsonLd(
     'Blog',

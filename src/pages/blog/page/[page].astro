@@ -43,6 +43,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
 <SiteLayout
   title={`Blog | Page ${page}`}
   canonical={pageHref(page)}
+  description={`Halaman ${page} dari arsip blog: artikel web dev, cloud, dan produktivitas.`}
   prevHref={page > 1 ? pageHref(page - 1) : undefined}
   nextHref={page < totalPages ? pageHref(page + 1) : undefined}
   jsonLd={collectionPageJsonLd(

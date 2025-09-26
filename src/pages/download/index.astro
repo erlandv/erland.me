@@ -8,7 +8,12 @@ const downloads = (await getCollection("downloads"))
   .sort((a: any, b: any) => a.data.order - b.data.order);
 ---
 
-<SiteLayout title="Download" canonical="/download/" selectedItem="download">
+<SiteLayout
+  title="Download"
+  canonical="/download/"
+  selectedItem="download"
+  description="Unduh berbagai template dan aset gratis tanpa safelink, langsung dari sumber."
+>
   <BackNav href="/" label="Back" />
   <div class="content-container">
     <h1>Download</h1>
