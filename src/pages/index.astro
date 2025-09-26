@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
+import { SITE_DOMAIN } from '../lib/env';
 ---
 
 <SiteLayout title='Personal Web' canonical='/' selectedItem='home'>
@@ -22,7 +23,7 @@ import Icon from '../components/Icon.astro';
       </p>
     </div>
     <a
-      href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}
+      href={`mailto:hello@${SITE_DOMAIN}`}
       class='button w-button contact-button'
     >
       <Icon name='mail' class='button-icon' />

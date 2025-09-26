@@ -1,14 +1,16 @@
 // Base site configuration
+import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
+
 const SITE_CONFIG = {
   name: 'Erland Ramdhani',
   description:
     'Web Developer based in Jakarta, Indonesia. Building scalable web applications and sharing knowledge about web development, cloud infrastructure, and open source.',
-  url: process.env.SITE_URL || 'https://erland.me',
+  url: SITE_URL,
   author: {
     name: 'Erland Ramdhani',
-    email: `hello@${process.env.SITE_DOMAIN || 'erland.me'}`,
+    email: `hello@${SITE_DOMAIN}`,
     jobTitle: 'Web Developer',
-    url: process.env.SITE_URL || 'https://erland.me',
+    url: SITE_URL,
     sameAs: [
       'https://github.com/erlandv',
       'https://twitter.com/erlandzz',
@@ -20,11 +22,7 @@ const SITE_CONFIG = {
 } as const;
 
 // Environment helpers
-export function isProductionSite() {
-  const url = process.env.SITE_URL || '';
-  const domain = process.env.SITE_DOMAIN || '';
-  return url === 'https://erland.me' && domain === 'erland.me';
-}
+export const isProductionSite = isProdSite;
 
 export function collectionPageJsonLd(
   name: string,

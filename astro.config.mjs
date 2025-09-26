@@ -171,15 +171,6 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      customPages: [
-        `${process.env.SITE_URL || 'https://erland.me'}/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/blog/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/download/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/web-development/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/cloud-infra/`,
-        `${process.env.SITE_URL || 'https://erland.me'}/portfolio/personal-projects/`,
-      ],
     }),
   ],
 });

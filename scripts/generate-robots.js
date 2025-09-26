@@ -41,7 +41,6 @@ Allow: /
 
 # Sitemap
 Sitemap: ${siteUrl}/sitemap-index.xml
-Sitemap: ${siteUrl}/sitemap-0.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
