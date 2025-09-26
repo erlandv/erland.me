@@ -58,7 +58,7 @@ const {
   <body>
     <div class="content">
       {showSidebar && <Sidebar selectedItem={selectedItem} />}
-      {showSidebar && <SidebarController client:load />}
+      {showSidebar && <SidebarController />}
       <nav class="main">
         <div class="container">
           <slot />
