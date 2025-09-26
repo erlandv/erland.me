@@ -28,6 +28,7 @@
     document.body.classList.toggle('sidebar-collapsed', isCollapsed);
     sidebar.classList.toggle('sidebar-collapsed', isCollapsed);
     sidebar.classList.remove('sidebar-animating', 'hiding-text');
+    syncToggleActive();
   }
 
   function animateToState(collapsed: boolean): void {
@@ -42,6 +43,7 @@
         document.documentElement.setAttribute('data-sidebar', 'collapsed');
         document.body.classList.add('sidebar-collapsed');
         sidebar.classList.add('sidebar-collapsed');
+        syncToggleActive();
       }, 120);
       setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
     } else {
@@ -52,7 +54,20 @@
       sidebar.classList.add('hiding-text');
       setTimeout(() => { sidebar.classList.remove('hiding-text'); }, 180);
       setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
+      syncToggleActive();
     }
+  }
+
+  function syncToggleActive(): void {
+    try {
+      const toggleButton = document.querySelector('.sidebar .sidebar-toggle-button') as HTMLElement | null;
+      const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
+      if (!toggleButton || !sidebar) return;
+      const isCollapsedNow =
+        document.documentElement.getAttribute('data-sidebar') === 'collapsed' ||
+        sidebar.classList.contains('sidebar-collapsed');
+      toggleButton.classList.toggle('is-active', isCollapsedNow);
+    } catch {}
   }
 
   function applyInitialRootFlags(): void {
@@ -77,6 +92,7 @@
           sidebarToggle.checked = collapsed;
           applyStateImmediate(collapsed);
         }
+        syncToggleActive();
       };
       // Apply once immediately
       handler();
@@ -187,6 +203,7 @@
         }
         animateToState(input.checked);
         setCollapsed(input.checked);
+        setTimeout(syncToggleActive, 200);
       });
     } else {
       applyStateImmediate(getCollapsed());
