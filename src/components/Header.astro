@@ -1,6 +1,7 @@
 ---
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '../lib/seo';
 import '../styles/styles.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface HeaderProps {
   title: string;
@@ -93,10 +94,7 @@ const websiteSchema = websiteJsonLd();
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   )}
   
-  <!-- Clipboard util on window for inline scripts -->
+  <ClientRouter fallback="swap" />
+  <!-- Clipboard util (optional)—leave if needed elsewhere -->
   <script src="/js/clipboard.js" is:inline></script>
-  <!-- Shared sidebar state helper -->
-  <script src="/js/sidebar-state.js" is:inline></script>
-  <!-- Consolidated nav + sidebar lifecycle -->
-  <script src="/js/nav-active.js" is:inline></script>
 </head>
