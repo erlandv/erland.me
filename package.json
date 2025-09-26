@@ -18,8 +18,7 @@
     "generate:robots": "node scripts/generate-robots.js"
   },
   "dependencies": {
-    "astro": "^5.1.5",
-    "framer-motion": "^12.23.21"
+    "astro": "^5.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
