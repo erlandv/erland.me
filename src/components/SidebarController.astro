@@ -1,0 +1,214 @@
+---
+// No props; this island centralizes sidebar state, mobile menu, and active nav.
+---
+
+<script>
+  const STORAGE_KEY: string = 'sidebar-collapsed';
+  const MOBILE_QUERY: string = '(max-width: 1024px)';
+
+  function isMobile(): boolean {
+    try { return !!(window.matchMedia && window.matchMedia(MOBILE_QUERY).matches); } catch { return false; }
+  }
+
+  function getCollapsed(): boolean {
+    try { return localStorage.getItem(STORAGE_KEY) === 'true'; } catch { return false; }
+  }
+
+  function setCollapsed(v: boolean): void {
+    try { localStorage.setItem(STORAGE_KEY, v ? 'true' : 'false'); } catch {}
+  }
+
+  function applyStateImmediate(collapsed: boolean): void {
+    const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
+    if (!sidebar) return;
+    let isCollapsed = collapsed;
+    if (isMobile()) isCollapsed = false;
+    document.documentElement.classList.toggle('sidebar-collapsed-global', isCollapsed);
+    document.documentElement.setAttribute('data-sidebar', isCollapsed ? 'collapsed' : 'expanded');
+    document.body.classList.toggle('sidebar-collapsed', isCollapsed);
+    sidebar.classList.toggle('sidebar-collapsed', isCollapsed);
+    sidebar.classList.remove('sidebar-animating', 'hiding-text');
+  }
+
+  function animateToState(collapsed: boolean): void {
+    const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
+    if (!sidebar) return applyStateImmediate(collapsed);
+    if (isMobile()) return applyStateImmediate(false);
+    sidebar.classList.add('sidebar-animating');
+    if (collapsed) {
+      sidebar.classList.add('hiding-text');
+      setTimeout(() => {
+        document.documentElement.classList.add('sidebar-collapsed-global');
+        document.documentElement.setAttribute('data-sidebar', 'collapsed');
+        document.body.classList.add('sidebar-collapsed');
+        sidebar.classList.add('sidebar-collapsed');
+      }, 120);
+      setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
+    } else {
+      document.documentElement.classList.remove('sidebar-collapsed-global');
+      document.documentElement.setAttribute('data-sidebar', 'expanded');
+      document.body.classList.remove('sidebar-collapsed');
+      sidebar.classList.remove('sidebar-collapsed');
+      sidebar.classList.add('hiding-text');
+      setTimeout(() => { sidebar.classList.remove('hiding-text'); }, 180);
+      setTimeout(() => { sidebar.classList.remove('sidebar-animating'); }, 360);
+    }
+  }
+
+  function applyInitialRootFlags(): void {
+    try {
+      const shouldCollapse = getCollapsed() && !isMobile();
+      document.documentElement.classList.toggle('sidebar-collapsed-global', shouldCollapse);
+      document.documentElement.setAttribute('data-sidebar', shouldCollapse ? 'collapsed' : 'expanded');
+    } catch {}
+  }
+
+  function handleBreakpointChanges(): void {
+    try {
+      const mq = window.matchMedia(MOBILE_QUERY);
+      const handler = () => {
+        const toggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
+        if (!toggle) return;
+        if (mq.matches) {
+          toggle.checked = false;
+          applyStateImmediate(false);
+        } else {
+          const collapsed = getCollapsed();
+          toggle.checked = collapsed;
+          applyStateImmediate(collapsed);
+        }
+      };
+      if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handler);
+      else if (typeof mq.addListener === 'function') mq.addListener(handler);
+    } catch {}
+  }
+
+  function closeMobileMenu(): void {
+    try {
+      const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+      if (!toggle) return;
+      if (toggle.checked) {
+        toggle.checked = false;
+        const btn = document.querySelector('.navbar-icon-button');
+        if (btn instanceof HTMLElement) btn.blur();
+      }
+    } catch {}
+  }
+
+  function normalizePath(p: string): string {
+    try { if (!p) return '/'; return p.endsWith('/') ? p : p + '/'; } catch { return '/'; }
+  }
+
+  function updateActiveNav(): void {
+    try {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.sidebar .nav-link-container[href]');
+      if (!links || !links.length) return;
+      const current = normalizePath(window.location.pathname);
+      let best: HTMLAnchorElement | null = null; let bestLen = -1;
+      links.forEach((link) => {
+        try {
+          const hrefAttr = link.getAttribute('href') || '';
+          const hrefPath = normalizePath(new URL(hrefAttr, window.location.origin).pathname);
+          if (current === '/' && hrefPath === '/') {
+            if (hrefPath.length > bestLen) { best = link; bestLen = hrefPath.length; }
+          } else if (hrefPath !== '/' && current.startsWith(hrefPath)) {
+            if (hrefPath.length > bestLen) { best = link; bestLen = hrefPath.length; }
+          }
+        } catch {}
+      });
+      links.forEach((link) => { link.classList.remove('w--current'); link.removeAttribute('aria-current'); });
+      const b = best as HTMLAnchorElement | null;
+      if (b) { b.classList.add('w--current'); b.setAttribute('aria-current', 'page'); }
+    } catch {}
+  }
+
+  function attachNavClickHandlers(): void {
+    try {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.sidebar .nav-link-container[href]');
+      if (!links || !links.length) return;
+      links.forEach((link) => {
+        if (link.dataset.navActiveBound === 'true') return;
+        link.dataset.navActiveBound = 'true';
+        link.addEventListener('click', (ev: MouseEvent) => {
+          try {
+            if (ev.defaultPrevented) return;
+            if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+            const hrefAttr = link.getAttribute('href') || '';
+            const targetUrl = new URL(hrefAttr, window.location.origin);
+            if (targetUrl.origin !== window.location.origin) return;
+            closeMobileMenu();
+            const all = document.querySelectorAll<HTMLAnchorElement>('.sidebar .nav-link-container[href]');
+            all.forEach((a) => { a.classList.remove('w--current'); a.removeAttribute('aria-current'); });
+            link.classList.add('w--current');
+            link.setAttribute('aria-current', 'page');
+            setTimeout(updateActiveNav, 0);
+          } catch {}
+        }, { passive: true });
+      });
+    } catch {}
+  }
+
+  function bootOnce(): void {
+    const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
+    if (!sidebar) return;
+    if (sidebar.dataset.controllerInitialized === 'true') return;
+    sidebar.dataset.controllerInitialized = 'true';
+
+    // Apply root flags ASAP
+    applyInitialRootFlags();
+
+    // Init state and breakpoint handling
+    const toggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
+    if (toggle) {
+      let collapsed = getCollapsed();
+      if (isMobile()) collapsed = false;
+      toggle.checked = collapsed;
+      applyStateImmediate(collapsed);
+      toggle.addEventListener('change', (ev: Event) => {
+        const input = ev.currentTarget as HTMLInputElement;
+        if (isMobile()) {
+          input.checked = false;
+          applyStateImmediate(false);
+          setCollapsed(true); // preserve desktop pref
+          return;
+        }
+        animateToState(input.checked);
+        setCollapsed(input.checked);
+      });
+    } else {
+      applyStateImmediate(getCollapsed());
+    }
+
+    handleBreakpointChanges();
+
+    // Nav handling
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => { closeMobileMenu(); updateActiveNav(); attachNavClickHandlers(); });
+    } else {
+      closeMobileMenu(); updateActiveNav(); attachNavClickHandlers();
+    }
+    // History hooks
+    try {
+      const _push = history.pushState && history.pushState.bind(history) as (data: any, unused: string, url?: string | URL | null) => any;
+      if (_push) {
+        history.pushState = function (data: any, unused: string, url?: string | URL | null) {
+          const r = _push(data, unused, url);
+          try { queueMicrotask(() => { closeMobileMenu(); updateActiveNav(); }); } catch {}
+          return r;
+        };
+      }
+      const _replace = history.replaceState && history.replaceState.bind(history) as (data: any, unused: string, url?: string | URL | null) => any;
+      if (_replace) {
+        history.replaceState = function (data: any, unused: string, url?: string | URL | null) {
+          const r = _replace(data, unused, url);
+          try { queueMicrotask(() => { closeMobileMenu(); updateActiveNav(); }); } catch {}
+          return r;
+        };
+      }
+    } catch {}
+    window.addEventListener('popstate', () => { closeMobileMenu(); updateActiveNav(); });
+  }
+
+  // Run once on load; sidebar persists via data-astro-transition-persist
+  bootOnce();
+</script>
