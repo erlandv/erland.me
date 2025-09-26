@@ -67,19 +67,31 @@
     try {
       const mq = window.matchMedia(MOBILE_QUERY);
       const handler = () => {
-        const toggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
-        if (!toggle) return;
+        const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
+        if (!sidebarToggle) return;
         if (mq.matches) {
-          toggle.checked = false;
+          sidebarToggle.checked = false;
           applyStateImmediate(false);
         } else {
           const collapsed = getCollapsed();
-          toggle.checked = collapsed;
+          sidebarToggle.checked = collapsed;
           applyStateImmediate(collapsed);
         }
       };
-      if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handler);
-      else if (typeof mq.addListener === 'function') mq.addListener(handler);
+      // Apply once immediately
+      handler();
+      // Prefer modern listener; fallback to onchange without deprecated addListener
+      if (typeof (mq as any).addEventListener === 'function') (mq as any).addEventListener('change', handler);
+      else if ('onchange' in mq) (mq as any).onchange = handler as any;
+    } catch {}
+  }
+
+  function updateMobileAriaExpanded(): void {
+    try {
+      const btn = document.querySelector('.navbar-icon-button') as HTMLElement | null;
+      const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+      if (!btn || !toggle) return;
+      btn.setAttribute('aria-expanded', toggle.checked ? 'true' : 'false');
     } catch {}
   }
 
@@ -91,6 +103,7 @@
         toggle.checked = false;
         const btn = document.querySelector('.navbar-icon-button');
         if (btn instanceof HTMLElement) btn.blur();
+        updateMobileAriaExpanded();
       }
     } catch {}
   }
@@ -158,13 +171,13 @@
     applyInitialRootFlags();
 
     // Init state and breakpoint handling
-    const toggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
-    if (toggle) {
+    const sidebarToggle = document.getElementById('sidebar-toggle') as HTMLInputElement | null;
+    if (sidebarToggle) {
       let collapsed = getCollapsed();
       if (isMobile()) collapsed = false;
-      toggle.checked = collapsed;
+      sidebarToggle.checked = collapsed;
       applyStateImmediate(collapsed);
-      toggle.addEventListener('change', (ev: Event) => {
+      sidebarToggle.addEventListener('change', (ev: Event) => {
         const input = ev.currentTarget as HTMLInputElement;
         if (isMobile()) {
           input.checked = false;
@@ -177,6 +190,13 @@
       });
     } else {
       applyStateImmediate(getCollapsed());
+    }
+
+    // Sync ARIA for mobile nav toggle + listen for changes
+    const navToggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+    if (navToggle) {
+      updateMobileAriaExpanded();
+      navToggle.addEventListener('change', updateMobileAriaExpanded);
     }
 
     handleBreakpointChanges();
