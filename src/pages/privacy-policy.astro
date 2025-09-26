@@ -9,15 +9,15 @@ import BackNav from '../components/BackNav.astro';
     <div class='fold-content'>
       <h1>Privacy Policy</h1>
       <p>
-        Privacy policy atau kebijakan privasi ini berlaku antara saya sebagai
-        pemilik situs web {import.meta.env.SITE_DOMAIN || 'erland.me'} (selanjutnya
-        disebut sebagai kami) dan Anda sebagai pengunjung dari situs web ini (selanjutnya
-        disebut sebagai Anda).<br /><br />
-        Kami sangat menjunjung tinggi privasi yang Anda miliki, oleh karena itu kami
-        menempatkannya sebagai hal yang penting dan wajib untuk dijaga. Dengan mengakses
-        dan/atau memanfaatkan semua layanan di web ini, berarti Anda dianggap telah
-        membaca, memahami, dan tunduk serta setuju untuk terikat dalam kebijakan
-        privasi ini dan segala perubahannya di kemudian hari.
+        Privacy policy ini berlaku antara saya sebagai pemilik situs web 
+        {import.meta.env.SITE_DOMAIN || 'erland.me'} 
+        (selanjutnya disebut sebagai kami) dan Anda sebagai pengunjung dari situs
+        web ini (selanjutnya disebut sebagai Anda).<br /><br />
+        Kami sangat menjunjung tinggi privasi Anda. Oleh karena itu, kami menganggap
+        perlindungan privasi sebagai hal yang penting dan wajib dijaga. Dengan mengakses
+        dan/atau menggunakan layanan di situs ini, Anda dianggap telah membaca, memahami,
+        menyetujui, dan terikat oleh kebijakan privasi ini, termasuk setiap perubahan
+        di masa mendatang.
       </p>
       <h2>Data yang kami kumpulkan</h2>
       <p>
@@ -30,46 +30,57 @@ import BackNav from '../components/BackNav.astro';
       </p>
       <h3>Alamat IP</h3>
       <p>
-        Ketika Anda terhubung ke internet, maka perangkat Anda akan memiliki
-        alamat IP khusus untuk identifikasi. Alamat IP ini biasanya diberikan
-        oleh Internet Service Provider Anda ketika terhubung ke internet.<br
-        /><br />
-        Setiap kali Anda mengunjungi suatu situs, mengirim email, bermain game online
-        atau apapun yang terhubung ke internet, maka server tujuan mengidentifikasi
-        Anda salah satunya dari alamat IP ini.<br /><br />
-        Kami menyimpan alamat IP ini pada log server kami untuk kebutuhan audit atau
-        analisis, dan tidak untuk dibagikan kepada pihak mana pun.
+        Setiap kali Anda terhubung ke internet, perangkat Anda akan memiliki
+        alamat IP yang diberikan oleh penyedia layanan internet (ISP). Ketika
+        Anda mengunjungi situs kami, server kami mencatat alamat IP Anda untuk:
+      </p>
+      <ul>
+        <li>Keperluan audit internal,</li>
+        <li>Analisis keamanan,</li>
+        <li>Pemantauan performa situs,</li>
+        <li>Pencegahan aktivitas yang mencurigakan atau penyalahgunaan.</li>
+      </ul>
+      <p>
+        Data alamat IP ini kami simpan di log server dalam jangka waktu terbatas
+        dan tidak dibagikan kepada pihak mana pun.
       </p>
       <h3>Cookies</h3>
-      Cookies adalah sebuah informasi kecil yang disimpan oleh browser Anda ketika
-      mengunjungi sebuah situs web. Kadang sebuah situs memerlukan cookie agar ketika
-      Anda berkunjung untuk kedua kalinya, web tersebut dapat mengidentifikasi preferensi
-      Anda.<br /><br />
-      Kami sendiri tidak memerlukan cookie ketika Anda mengunjungi situs web ini,
-      tapi mungkin mitra iklan kami akan menggunakan cookie untuk melakukan pelacakan
-      sehingga dapat menyuguhkan iklan yang sesuai dengan keinginan Anda.<br
-      /><br />
-      Mitra iklan kami pada situs web ini adalah Google Adsense. Setiap pelacakannya
-      dilakukan langsung oleh Google melalui server mereka sendiri dan mereka memiliki
-      kebijakan privasi tersendiri. Anda dapat mempelajari bagaimana Google menggunakan
-      cookie untuk menayangkan iklan sesuai preferensi Anda melalui tautan <a
-        href='https://policies.google.com/technologies/ads'
-        target='_blank'
-        rel='noopener noreferrer'
-        >https://policies.google.com/technologies/ads</a
-      >
+      <p>
+        Cookies adalah informasi kecil yang disimpan oleh browser Anda saat
+        mengunjungi suatu situs. Cookies dapat membantu situs mengingat
+        preferensi Anda pada kunjungan berikutnya..<br /><br />
+        Kami secara langsung tidak menggunakan cookies untuk keperluan pelacakan.
+        Namun, mitra iklan kami, Google LLC, dapat menggunakan cookies untuk menyajikan
+        iklan yang sesuai dengan preferensi Anda.<br /><br />
+        Setiap pelacakan melalui cookie dilakukan langsung oleh Google melalui server
+        mereka dan tunduk pada kebijakan privasi Google. Anda dapat mengatur preferensi
+        cookie melalui pengaturan browser Anda, atau mengunjungi:
+      </p>
+      <ul>
+        <li>
+          <a href='https://adssettings.google.com'
+            >https://adssettings.google.com</a
+          > untuk mengatur preferensi iklan,
+        </li>
+        <li>
+          <a href='https://policies.google.com/technologies/ads'
+            >https://policies.google.com/technologies/ads</a
+          > untuk mempelajari lebih lanjut tentang cookie dan iklan yang ditayangkan
+          oleh Google.
+        </li>
+      </ul>
+      <h2>Informasi Kontak</h2>
+      <p>
+        Jika Anda memiliki pertanyaan tentang kebijakan privasi di blog ini,
+        Anda dapat menghubungi saya melalui email <a
+          href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}
+          >hello@{import.meta.env.SITE_DOMAIN || 'erland.me'}</a
+        >.
+      </p>
+      <h2>Pembaruan</h2>
+      <p>
+        Halaman kebijakan privasi ini terakhir diperbarui pada Senin, 1 September 2025.
+      </p>
     </div>
-    <h2>Informasi Kontak</h2>
-    <p>
-      Jika Anda memiliki pertanyaan tentang kebijakan privasi di blog ini, Anda
-      dapat menghubungi saya melalui email <a
-        href={`mailto:hello@${import.meta.env.SITE_DOMAIN || 'erland.me'}`}
-        >hello@{import.meta.env.SITE_DOMAIN || 'erland.me'}</a
-      >.
-    </p>
-    <h2>Pembaruan</h2>
-    <p>
-      Halaman kebijakan privasi ini terakhir diperbarui pada Rabu, 1 Juli 2020.
-    </p>
   </main>
 </SiteLayout>
