@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '../lib/seo';
 import '../styles/styles.css';
 
@@ -52,7 +51,6 @@ const websiteSchema = websiteJsonLd();
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>{metaTags.title}</title>
-  <ClientRouter fallback="swap" />
   
   <meta name="description" content={metaTags.description} />
   <meta name="author" content="Erland" />
