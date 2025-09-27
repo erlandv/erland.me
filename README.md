@@ -16,6 +16,7 @@ This is my personal website and blog where I share my thoughts, experiences, and
 - Download hub: templated detail pages with rich text + tables
 - Shared UI primitives: buttons, fold/lead blocks, listing layouts
 - Developer experience: TypeScript, Prettier, Astro check
+- Image Lightbox: click images in blog/download detail pages (single images and `:::gallery`) to open a smooth animated overlay with close button; floating open icon on images; supports SPA navigation via Astro ClientRouter
 
 ## Tech Stack
 
