@@ -95,6 +95,16 @@ const jsonLd = blogPostingJsonLd({
   </article>
   
   <script>
+    // Initialize image lightbox for markdown content images
+    (async () => {
+      try {
+        const mod = await import('../../lib/lightbox');
+        mod.autoInit();
+      } catch (e) {
+        console.error('Lightbox init error:', e);
+      }
+    })();
+
     function initCodeBlocks() {
       let codeBlocks = document.querySelectorAll('.prose pre code');
       

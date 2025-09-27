@@ -45,7 +45,7 @@ Template kalender 2025 ini didesain menggunakan CorelDRAW, dibuat dan disusun se
 
 ## Preview Kalender 2025
 
-![preview kalender 2025](./template-kalender-2025.webp)
+![preview kalender 2025](./template-kalender-2025.webp 'preview kalender 2025')
 
 Ada sedikit perbedaan desain pada template kalender 2025 kali ini. Saya sedikit mengubah tampilan frame nama bulan pada kalender dan menambahkan urutan angka bulan berjalan. Selebihnya, desain kalender masih sama seperti tahun-tahun sebelumnya yang menonjolkan sisi simple dan elegant dengan mengutamakan UX atau kemudahan dalam membaca kalender.
 
@@ -66,7 +66,7 @@ Template kalender 2025 lengkap full 12 bulan ini saya buat menggunakan CorelDRAW
 - CorelDRAW versi 2023 (24.3)
 - CorelDRAW versi 2024 (25.0)
 
-![preview kalender 2025](./template-kalender-2025-cdr.webp)
+![preview kalender 2025](./template-kalender-2025-cdr.webp 'preview kalender 2025')
 
 Bagi kalian pengguna produk Adobe ataupun software editor lain, tidak perlu khawatir. Karena selain file .cdr, saya juga membuat template kalender 2025 dengan format .ai, .pdf, dan juga .png agar lebih universal.
 

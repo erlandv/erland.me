@@ -73,9 +73,12 @@ export function remarkFigure() {
       tree,
       node => node.type === 'paragraph',
       node => {
-        // Cek apakah paragraph hanya berisi satu image
-        if (node.children?.length === 1 && node.children[0].type === 'image') {
-          const image = node.children[0];
+        // Cek apakah paragraph hanya berisi satu image (abaikan whitespace)
+        const children = (node.children || []).filter(
+          (c) => !(c.type === 'text' && !(c.value || '').trim())
+        );
+        if (children.length === 1 && children[0].type === 'image') {
+          const image = children[0];
           const caption = image.title;
 
           // Jika ada title (caption), konversi menjadi figure
