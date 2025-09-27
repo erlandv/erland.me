@@ -146,7 +146,6 @@
 
 .download-richtext {
   display: grid;
-  gap: 24px;
   color: var(--text-secondary);
   max-width: 720px;
   width: 100%;
