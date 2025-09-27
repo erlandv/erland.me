@@ -1,0 +1,82 @@
+.site-footer {
+  /* transparent to let grid background show through */
+  background: transparent;
+  border-top: none;
+  color: var(--text-secondary);
+  font-size: clamp(12px, 2vw, 14px);
+  line-height: 1.6;
+  width: 100%;
+  margin-top: clamp(24px, 4vw, 32px); /* give a bit more breathing room */
+  padding-bottom: 12px;
+  font-weight: 400;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 680px; /* match .container */
+  margin: 0 auto;
+  padding: 0; /* we'll control spacing below */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  position: relative;
+}
+
+/* Replace hatched divider with solid border to match sidebar socials */
+.footer-inner::before {
+  display: none;
+}
+.footer-inner {
+  border-top: 1px solid var(--border-color); /* same as .sidebar .socials--sidebar */
+  padding-top: 14px; /* slightly larger to avoid crowding on some DPIs */
+  padding-bottom: 28px; /* ensure top-of-border aligns closer to sidebar */
+  min-height: 38px; /* approximate socials row height for visual alignment */
+}
+
+.footer-powered {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+/* Inline Astro SVG sizing */
+/* Scale logo to text size and align nicely */
+.footer-astro svg {
+  height: 1em !important;
+  width: auto !important;
+  display: block;
+}
+.footer-astro {
+  display: inline-flex;
+  align-items: center;
+  transform: translateY(2px);
+}
+
+/* Desktop layout: side-by-side; Mobile: stacked */
+@media (min-width: 1025px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 0;
+    align-items: center;
+    padding: 24px 0px;
+  }
+  .footer-copy,
+  .footer-powered {
+    white-space: nowrap;
+  }
+}
+
+/* Extra spacing on small screens to prevent crowding with previous content */
+@media (max-width: 1024px) {
+  .site-footer {
+    margin-top: 60px;
+  }
+  .footer-inner {
+    padding: 20px 0px;
+  }
+}

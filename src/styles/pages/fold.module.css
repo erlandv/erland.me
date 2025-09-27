@@ -1,0 +1,16 @@
+.fold-content-container {
+  display: block;
+}
+
+.fold-content {
+  margin-bottom: 26px;
+}
+
+.lead {
+  max-width: 620px;
+  color: #e8e8e8;
+  margin-bottom: 0;
+  line-height: 1.7;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: 400;
+}

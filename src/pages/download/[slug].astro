@@ -4,6 +4,7 @@ import BackNav from "../../components/BackNav.astro";
 import { getCollection, getEntryBySlug } from "astro:content";
 import { creativeWorkJsonLd } from "../../lib/seo";
 import ShareButtons from "../../components/ShareButtons.astro";
+import dl from "../../styles/pages/download.module.css";
 
 export async function getStaticPaths() {
   const downloads = await getCollection("downloads");
@@ -58,9 +59,9 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 
 <SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download">
   <BackNav href="/download/" label="Back" />
-  <div class="content-container download-page">
-    <header class="download-header">
-      <div class="download-hero">
+  <div class:list={["content-container", dl["download-page"]]}>
+    <header class={dl["download-header"]}>
+      <div class={dl["download-hero"]}>
         {hero ? (
           <img
             src={hero.src}
@@ -77,21 +78,21 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
       <h1>{data.title}</h1>
     </header>
 
-  <article class="download-richtext">
+  <article class={dl["download-richtext"]}>
     <Content />
   </article>
 
     {downloadRows.length > 0 && (
-      <section class="download-files">
-        <h2 class="download-files-title">Link Download</h2>
+      <section class={dl["download-files"]}>
+        <h2 class={dl["download-files-title"]}>Link Download</h2>
         {data.downloadIntro && data.downloadIntro.length > 0 && (
-          <div class="download-files-intro">
+          <div class={dl["download-files-intro"]}>
             {data.downloadIntro.map((paragraph: string) => (
               <p>{paragraph}</p>
             ))}
           </div>
         )}
-        <table class="download-files-table">
+        <table class={dl["download-files-table"]}>
           <thead>
             <tr>
               <th scope="col">File Name</th>
@@ -105,7 +106,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
                 <td data-label="File Name">{item.label}</td>
                 {hasSizeColumn && <td data-label="Size">{item.size ?? "-"}</td>}
                 <td data-label="Download">
-                  <a class="download-files-link" href={item.href} download>
+                  <a class={dl["download-files-link"]} href={item.href} download>
                     Download
                   </a>
                 </td>
@@ -114,7 +115,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
           </tbody>
         </table>
         {data.downloadNote && (
-          <p class="download-files-note">{data.downloadNote}</p>
+          <p class={dl["download-files-note"]}>{data.downloadNote}</p>
         )}
       </section>
     )}

@@ -6,7 +6,11 @@
  */
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {
-    if (typeof navigator !== 'undefined' && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+    if (
+      typeof navigator !== 'undefined' &&
+      navigator.clipboard &&
+      typeof navigator.clipboard.writeText === 'function'
+    ) {
       await navigator.clipboard.writeText(text);
       return true;
     }
@@ -30,13 +34,13 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     ta.select();
 
     // Avoid TS deprecation hint by indexing via string key on any
-    const docAny = (document as any);
+    const docAny = document as any;
     const exec = docAny && docAny['execCommand'];
-    const ok = typeof exec === 'function' ? !!exec.call(document, 'copy') : false;
+    const ok =
+      typeof exec === 'function' ? !!exec.call(document, 'copy') : false;
     document.body.removeChild(ta);
     return ok;
   } catch {
     return false;
   }
 }
-

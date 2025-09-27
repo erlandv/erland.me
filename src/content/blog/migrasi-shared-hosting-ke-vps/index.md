@@ -17,6 +17,7 @@ Saya sih mau-mau aja, senang kalau bisa membantu orang. Kemudian saya kepikiran 
 Di tutorial ini saya menggunakan [VPS murah Indonesia](https://www.domainesia.com/vm/) dari DomaiNesia ya dengan OS Linux Ubuntu 20.04. Untuk dapat menjalankan website WordPress, kita memerlukan webserver, database management, dan bahasa pemrograman PHP. Saya memilih menggunakan LEMP Stack (Linux, Nginx, MySQL, PHP). Kalau kalian mau mengikuti pilihan saya, silakan kunjungi artikel Cara Install Nginx, MySQL, PHP di Ubuntu. Pastikan semuanya itu sudah terinstal sebelum mengikuti tutorial memindahkan website dari shared hosting ke VPS pada artikel ini.
 
 ## Backup Data Web di Shared Hosting
+
 Langkah pertama untuk migrasi website antar server adalah melakukan backup data website yang akan dipindahkan dari server lama. Yang akan kita backup cukup file yang terdapat di public_html aja atau folder dari web yang akan dipindahkan, bukan semua yang ada di file manager.
 
 ![backup data web di file manager](./images/backup-data-web-di-file-manager.png 'backup data web di file manager')
@@ -53,9 +54,11 @@ Setelah itu akan terunduh secara otomatis file database berformat `.sql` ke komp
 Proses backup selesai. Lanjut ke langkah selanjutnya!
 
 ## Menyiapkan Virtual Private Server
+
 Sebelum kita memindahkan file dan database yang tadi telah di-backup, terlebih dahulu kita siapkan tempat di VPS untuk menampung data-data website yang akan dipindahkan dan juga melakukan konfigurasi pada server block Nginx. Berikut ini beberapa langkah yang harus disiapkan.
 
 ### Membuat Root Directory
+
 Kita perlu membuat folder yang akan menjadi tempat penyimpanan semua data website nantinya. Folder ini dikenal juga dengan root directory dari web kita, atau kalau di shared hosting tadi seperti `public_html`.
 
 Akses/login VPS kalian menggunakan SSH di terminal linux atau PuTTy, lalu buatlah folder bernama domain.com dan html pada direktori `/var/www` dengan menjalankan perintah berikut.
@@ -74,7 +77,6 @@ sudo chown -R www-data:$USER /var/www/domain.com/html
 
 Setelah itu, ubah permission folder tersebut menjadi `755` dengan menjalankan perintah berikut.
 
-
 ```bash
 sudo chmod -R 755 /var/www/domain.com/html
 ```
@@ -82,6 +84,7 @@ sudo chmod -R 755 /var/www/domain.com/html
 Nah, sekarang direktori `/var/www/domain.com/html` sudah siap untuk diisi dengan data/konten website yang akan dipindahkan dari shared hosting.
 
 ### Membuat Server Block
+
 Setelah selesai membuat folder root directory untuk penyimpanan data website, selanjutnya kita akan membuat konfigurasi server block agar website kita nantinya bisa berjalan dengan webserver Nginx.
 
 Di webserver Apache, kita mengenal virtual host. Sedangkan kalau di Nginx, file konfigurasi servernya dikenal dengan nama server block.
@@ -145,9 +148,11 @@ sudo systemctl restart nginx
 Sekarang server block Nginx siap untuk digunakan untuk website yang akan dipindahkan.
 
 ## Memindahkan Data Website ke VPS
+
 Setelah backup data di hosting lama, membuat root directory, dan membuat server block di Nginx sudah selesai, selanjutnya langkah kita adalah memindahkan data website yang telah disiapkan tadi di shared hosting ke VPS. Caranya tentu tidak dengan men-download file tersebut lalu upload ke VPS, buang-buang waktu dan tenaga. Ada cara yang jauh lebih efektif, yaitu memanfaatkan perintah `wget`.
 
 ### Memindahkan Konten Website
+
 Pertama-tama sebelum memulai, pastikan posisi kalian berada di root directory untuk website yang telah disiapkan tadi. Pindah direktori dengan perintah berikut.
 
 ```bash
@@ -189,6 +194,7 @@ Sudah selesai? Selamat! Data-data file website kalian sudah berpindah dari share
 Eh, tapi masih belum selesai. Website kalian masih belum bisa diakses karena belum ada database. Ikuti langkah selanjutnya untuk import database dari shared hosting ke VPS.
 
 ### Memindahkan Database
+
 Tadi kita sudah export database melalui phpMyAdmin di shared hosting, compress file sql database tersebut menjadi zip, dan meng-upload ke folder root directory website di shared hosting. Sama seperti memindahkan data konten web, gunakan perintah wget untuk memindahkannya ke VPS.
 
 ```bash
@@ -288,6 +294,7 @@ sudo nano wp-config.php
 Sesuaikan `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` dengan yang baru. Exit setelah selesai dan jangan lupa simpan perubahan. Sampai di sini, urusan database selesai.
 
 ## Mengarahkan Domain ke VPS
+
 Kita telah berhasil memindahkan data-data web dari shared hosting ke VPS. Agar website kita sepenuhnya bermigrasi ke VPS, sekarang kita arahkan domain ke VPS dengan mengedit DNS management.
 
 Saya menyarankan untuk menggunakan DNS dari Cloudflare karena saya juga di sini menggunakan Cloudflare. Walau bisa aja sebenarnya kalau mau menggunakan DNS bawaan dari registrar atau tempat di mana kalian membeli domain. Caranya sama, pergi ke pengaturan DNS lalu ubah A record yang sebelumnya mengarah ke IP shared hosting menjadi mengarah ke IP dari VPS kalian. Kalau bingung, minta bantuan CS dari registrar tempat kalian membeli domain aja.
@@ -305,6 +312,7 @@ Kalau IP-nya sudah berubah menjadi IP dari VPS kalian, itu berarti domain kalian
 Eh, tapi, masih ada langkah tambahan, yaitu install SSL di VPS untuk domain kalian itu. Yuk lanjut!
 
 ## Install SSL di VPS dengan Certbot
+
 Sudah tidak perlu dijelaskan lagi lah ya pentingnya menggunakan SSL. Tanpa banyak basa-basi, langsung aja kita instal SSL gratis dari Let’s Encrypt menggunakan Certbot di VPS Ubuntu.
 
 Install Certbot dengan menjalankan perintah di bawah ini.
@@ -323,6 +331,7 @@ sudo certbot --nginx -d domain.com -d www.domain.com
 Di tengah proses install, kita akan diberikan opsi untuk no redirect atau redirect semua request ke https. Pilih nomor 2 agar otomatis redirect ke https ketika ada yang mengakses dengan http. Setelah itu domain kalian berhasil diinstal SSL gratis dari Let’s Encrypt menggunakan Certbot.
 
 ## Konfigurasi GZIP Compression
+
 Semua langkah-langkah di atas sudah membuat website kita sepenuhnya pindah ke server baru, sudah bisa diakses, dan sudah bisa dikelola kembali. Namun, masih ada satu langkah terakhir agar semuanya sempurna, yaitu konfigurasi GZIP Compression agar load website bisa lebih ngebut.
 
 Langkah ini opsional aja sebenarnya, boleh diterapkan, boleh juga tidak. Saya sarankan sih terapkan aja.

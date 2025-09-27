@@ -2,6 +2,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import BackNav from '../components/BackNav.astro';
+import pf from '../styles/pages/portfolio.module.css';
+import fold from '../styles/pages/fold.module.css';
 ---
 
 <SiteLayout
@@ -11,24 +13,24 @@ import BackNav from '../components/BackNav.astro';
   description='Explore projects across web, cloud, and side gigs, a snapshot of what I have built and learned. I deliver end-to-end builds with uptime-first architectures and lean cloud costs.'
 >
   <BackNav href='/' label='Back' />
-  <main class='fold-content-container'>
-    <div class='fold-content'>
+  <main class={fold['fold-content-container']}>
+    <div class={fold['fold-content']}>
       <h1>Portfolio</h1>
-      <p class='lead'>
+      <p class={fold['lead']}>
         Explore projects across web, cloud, and side gigs, a snapshot of what
         I've built and learned. I deliver end-to-end builds with uptime-first
         architectures and lean cloud costs.
       </p>
     </div>
   </main>
-  <div class='projects-section'>
-    <div class='projects-container'>
-      <div class='single-projects-category'>
-        <div class='projects-category-image-container'>
+  <div class={pf['projects-section']}>
+    <div class={pf['projects-container']}>
+      <div class={pf['single-projects-category']}>
+        <div class={pf['projects-category-image-container']}>
           <Icon name='browser' class='projects-category-image' />
         </div>
       </div>
-      <div class='single-projects-content'>
+      <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
         <div class='tech-tools-container'>
           <div class='mini-label-white gray-color'>
@@ -47,13 +49,13 @@ import BackNav from '../components/BackNav.astro';
         </div>
       </div>
     </div>
-    <div class='projects-container'>
-      <div class='single-projects-category'>
-        <div class='projects-category-image-container devops-img'>
+    <div class={pf['projects-container']}>
+      <div class={pf['single-projects-category']}>
+        <div class={pf['projects-category-image-container'] + ' devops-img'}>
           <Icon name='database' class='projects-category-image' />
         </div>
       </div>
-      <div class='single-projects-content'>
+      <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
         <div class='tech-tools-container'>
           <div class='mini-label-white gray-color'>
@@ -72,13 +74,13 @@ import BackNav from '../components/BackNav.astro';
         </div>
       </div>
     </div>
-    <div class='projects-container'>
-      <div class='single-projects-category'>
-        <div class='projects-category-image-container'>
+    <div class={pf['projects-container']}>
+      <div class={pf['single-projects-category']}>
+        <div class={pf['projects-category-image-container']}>
           <Icon name='personal' class='projects-category-image' />
         </div>
       </div>
-      <div class='single-projects-content'>
+      <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/personal-projects/'>Personal Projects</a></h3>
         <div class='tech-tools-container'>
           <div class='mini-label-white gray-color'>

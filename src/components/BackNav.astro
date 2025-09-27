@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import styles from "./BackNav/back-nav.module.css";
 
 interface Props {
   href: string;
@@ -9,11 +10,10 @@ interface Props {
 const { href, label = 'Back' } = Astro.props as Props;
 ---
 
-<div class="back-nav-container">
-  <a href={href} class="back-nav-button w-inline-block">
-    <Icon name="back" class="back-nav-img" />
+<div class={styles["back-nav-container"]}>
+  <a href={href} class:list={[styles["back-nav-button"], 'w-inline-block']}>
+    <Icon name="back" class={styles["back-nav-img"]} />
     <div>{label}</div>
   </a>
   
 </div>
-

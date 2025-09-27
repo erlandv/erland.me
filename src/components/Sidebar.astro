@@ -1,6 +1,8 @@
 ---
 const { selectedItem } = Astro.props;
 import Icon from "./Icon.astro";
+import socialsStyles from "./Sidebar/sidebar-socials.module.css";
+import navStyles from "./Sidebar/sidebar-nav.module.css";
 
 const socials: Array<{ name: string; href: string; label: string }> = [
   { name: "x", href: "https://x.com/erlandzz", label: "X" },
@@ -46,85 +48,73 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     <nav id="site-nav" role="navigation" class="w-nav-menu">
       <a
         href="/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "home" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "home" && 'w--current']}
       >
-        <Icon name="home" class="nav-link-image" />
+        <Icon name="home" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Home</div>
       </a>
       <a
         href="/portfolio/web-development/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "web-development" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "web-development" && 'w--current']}
         aria-current={selectedItem === "web-development"
           ? "page"
           : undefined}
       >
-        <Icon name="code" class="nav-link-image" />
+        <Icon name="code" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Web development</div>
       </a>
       <a
         href="/portfolio/cloud-infra/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "cloud-infra" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "cloud-infra" && 'w--current']}
       >
-        <Icon name="dns" class="nav-link-image" />
+        <Icon name="dns" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Cloud Infra</div>
       </a>
       <a
         href="/portfolio/personal-projects/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "personal-projects" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "personal-projects" && 'w--current']}
       >
-        <Icon name="favorite" class="nav-link-image" />
+        <Icon name="favorite" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Personal projects</div>
       </a>
       <a
         href="/download/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "download" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "download" && 'w--current']}
         aria-current={selectedItem === "download" ? "page" : undefined}
       >
-        <Icon name="download" class="nav-link-image" />
+        <Icon name="download" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Download</div>
       </a>
       <a
         href="/blog/"
-        class={`nav-link-container w-inline-block ${
-          selectedItem === "blog" ? "w--current" : ""
-        }`}
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'w-inline-block', selectedItem === "blog" && 'w--current']}
       >
-        <Icon name="blog" class="nav-link-image" />
+        <Icon name="blog" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Blog Posts</div>
       </a>
       <!-- Sidebar toggle as a nav item (desktop only). Acts as a label for the hidden checkbox. -->
       <label
         for="sidebar-toggle"
-        class="nav-link-container sidebar-toggle-button w-inline-block"
+        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'sidebar-toggle-button', 'w-inline-block']}
         aria-label="Toggle sidebar width"
         tabindex="0"
       >
-        <Icon name="sidebar" class="nav-link-image" />
+        <Icon name="sidebar" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Collapse Sidebar</div>
       </label>
-      <div class="socials socials--menu">
+      <div class:list={[socialsStyles.socials, 'socials--menu']}>
         {socials.map((s) => (
-          <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
-            <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+          <a href={s.href} aria-label={s.label} class={socialsStyles['social-link']} target="_blank" rel="noopener noreferrer">
+            <Icon name={s.name} class={socialsStyles['social-icon']} ariaLabel={s.label} />
           </a>
         ))}
       </div>
     </nav>
 
-    <div class="socials socials--sidebar">
+    <div class:list={[socialsStyles.socials, 'socials--sidebar']}>
       {socials.map((s) => (
-        <a href={s.href} aria-label={s.label} class="social-link" target="_blank" rel="noopener noreferrer">
-          <Icon name={s.name} class="social-icon" ariaLabel={s.label} />
+        <a href={s.href} aria-label={s.label} class={socialsStyles['social-link']} target="_blank" rel="noopener noreferrer">
+          <Icon name={s.name} class={socialsStyles['social-icon']} ariaLabel={s.label} />
         </a>
       ))}
     </div>

@@ -24,7 +24,9 @@
 
   function updateActiveNav() {
     try {
-      var links = document.querySelectorAll('.sidebar .nav-link-container[href]');
+      var links = document.querySelectorAll(
+        '.sidebar .nav-link-container[href]'
+      );
       if (!links || !links.length) return;
       var current = normalizePath(window.location.pathname);
       var best = null;
@@ -33,7 +35,9 @@
       links.forEach(function (link) {
         try {
           var hrefAttr = link.getAttribute('href') || '';
-          var hrefPath = normalizePath(new URL(hrefAttr, window.location.origin).pathname);
+          var hrefPath = normalizePath(
+            new URL(hrefAttr, window.location.origin).pathname
+          );
           if (current === '/' && hrefPath === '/') {
             if (hrefPath.length > bestLen) {
               best = link;
@@ -61,7 +65,9 @@
 
   function attachNavClickHandlers() {
     try {
-      var links = document.querySelectorAll('.sidebar .nav-link-container[href]');
+      var links = document.querySelectorAll(
+        '.sidebar .nav-link-container[href]'
+      );
       if (!links || !links.length) return;
       links.forEach(function (link) {
         if (link.dataset.navActiveBound === 'true') return;
@@ -77,7 +83,9 @@
               if (targetUrl.origin !== window.location.origin) return;
 
               closeMobileMenu();
-              var all = document.querySelectorAll('.sidebar .nav-link-container[href]');
+              var all = document.querySelectorAll(
+                '.sidebar .nav-link-container[href]'
+              );
               all.forEach(function (a) {
                 a.classList.remove('w--current');
                 a.removeAttribute('aria-current');
@@ -106,7 +114,9 @@
           if (typeof window.sidebarState.init === 'function') {
             window.sidebarState.init();
           }
-          if (typeof window.sidebarState.handleBreakpointChanges === 'function') {
+          if (
+            typeof window.sidebarState.handleBreakpointChanges === 'function'
+          ) {
             window.sidebarState.handleBreakpointChanges();
           }
         } catch (e) {}
@@ -150,7 +160,8 @@
             return r;
           };
         }
-        var _replace = history.replaceState && history.replaceState.bind(history);
+        var _replace =
+          history.replaceState && history.replaceState.bind(history);
         if (_replace) {
           history.replaceState = function () {
             var r = _replace.apply(history, arguments);
@@ -201,4 +212,3 @@
   initSidebarState();
   installNavSyncHooks();
 })();
-

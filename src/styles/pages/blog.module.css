@@ -1,0 +1,59 @@
+.blog-post__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blog-post__meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  color: rgba(214, 214, 214, 0.85);
+}
+
+.blog-post__meta-item {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.blog-post__meta-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(var(--color-primary-rgb), 0.8);
+}
+
+/* Link styling inside blog content (prose) */
+:global(.prose) a {
+  color: var(--color-primary);
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+:global(.prose) a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-secondary);
+  transition: width 0.3s ease;
+}
+
+:global(.prose) a:hover {
+  color: var(--color-secondary);
+}
+
+:global(.prose) a:hover::after {
+  width: 100%;
+}
+
+.blog-post__meta-text {
+  display: inline-block;
+  white-space: nowrap;
+}

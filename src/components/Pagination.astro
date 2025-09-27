@@ -6,11 +6,12 @@ interface Props {
 }
 
 const { page, totalPages, pageHref } = Astro.props as Props;
+import styles from "./Pagination/pagination.module.css";
 ---
 
-<nav aria-label="Pagination" style="display:flex; gap:.5rem; align-items:center; justify-content:center; margin-top:1rem;">
+<nav aria-label="Pagination" class={styles.pagination}>
   {page > 1 && (
-    <a href={pageHref(page - 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Prev</a>
+    <a href={pageHref(page - 1)} class={styles["page-link"]}>Prev</a>
   )}
   {Array.from({ length: totalPages }).map((_, i) => {
     const n = i + 1;
@@ -19,14 +20,13 @@ const { page, totalPages, pageHref } = Astro.props as Props;
       <a
         href={pageHref(n)}
         aria-current={active ? 'page' : undefined}
-        style={`padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none; ${active ? 'background: var(--surface-2, rgba(0,0,0,.06)); font-weight:600;' : ''}`}
+        class:list={[styles["page-link"], active && styles.active]}
       >
         {n}
       </a>
     );
   })}
   {page < totalPages && (
-    <a href={pageHref(page + 1)} style="padding:.4rem .7rem; border:1px solid var(--border, rgba(0,0,0,.08)); border-radius:8px; text-decoration:none;">Next</a>
+    <a href={pageHref(page + 1)} class={styles["page-link"]}>Next</a>
   )}
 </nav>
-

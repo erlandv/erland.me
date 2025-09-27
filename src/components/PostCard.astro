@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import styles from "./PostCard/post-card.module.css";
 
 interface Hero {
   src: string;
@@ -20,9 +21,9 @@ interface Props {
 const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
 ---
 
-<article class="resource-card post-card">
-  <div class="post-card__inner">
-    <div class="post-card__thumb">
+<article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>
+  <div class={styles["post-card__inner"]}>
+    <div class={styles["post-card__thumb"]}>
       {hero ? (
         <img
           src={hero.src}
@@ -30,38 +31,37 @@ const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as 
           height={hero.height}
           alt={alt}
           loading="lazy"
-          class="post-card__img"
+          class={styles["post-card__img"]}
         />
       ) : (
-        <div class="post-card__thumb--placeholder" aria-hidden="true"></div>
+        <div class={styles["post-card__thumb--placeholder"]} aria-hidden="true"></div>
       )}
     </div>
-    <div class="post-card__body">
-      <header class="post-card__header">
-        <h2 class="post-card__title">
-          <a href={href} class="post-card__title-link">{title}</a>
+    <div class={styles["post-card__body"]}>
+      <header class={styles["post-card__header"]}>
+        <h2 class={styles["post-card__title"]}>
+          <a href={href} class={styles["post-card__title-link"]}>{title}</a>
         </h2>
-        <div class="post-card__meta">
+        <div class={styles["post-card__meta"]}>
           {category && (
-            <div class="post-card__meta-item">
-              <Icon name="tags" class="post-card__meta-icon" />
-              <span class="post-card__category">{category}</span>
+            <div class={styles["post-card__meta-item"]}>
+              <Icon name="tags" class={styles["post-card__meta-icon"]} />
+              <span class={styles["post-card__category"]}>{category}</span>
             </div>
           )}
           {dateLabel && (
-            <div class="post-card__meta-item">
-              <Icon name="date" class="post-card__meta-icon" />
-              <time class="post-card__date">{dateLabel}</time>
+            <div class={styles["post-card__meta-item"]}>
+              <Icon name="date" class={styles["post-card__meta-icon"]} />
+              <time class={styles["post-card__date"]}>{dateLabel}</time>
             </div>
           )}
         </div>
       </header>
-      {excerpt && <p class="post-card__excerpt">{excerpt}</p>}
-      <a href={href} class="post-card__readmore">
+      {excerpt && <p class={styles["post-card__excerpt"]}>{excerpt}</p>}
+      <a href={href} class={styles["post-card__readmore"]}>
         <span>Read more</span>
-        <Icon name="readmore" class="post-card__readmore-icon" />
+        <Icon name="readmore" class={styles["post-card__readmore-icon"]} />
       </a>
     </div>
   </div>
 </article>
-

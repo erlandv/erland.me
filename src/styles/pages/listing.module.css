@@ -1,0 +1,23 @@
+.resouce-items {
+  grid-column-gap: 64px;
+  grid-row-gap: 32px;
+  flex-direction: column;
+  display: flex;
+}
+
+.items-container {
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (max-width: 820px) {
+  .resouce-items {
+    grid-row-gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .resouce-items {
+    grid-row-gap: 20px;
+  }
+}

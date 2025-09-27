@@ -1,0 +1,62 @@
+.single-item {
+  font-size: clamp(16px, 2vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.project-desc {
+  color: #c0c0c0;
+  line-height: 28px;
+}
+
+.project-desc.project-desc-list {
+  margin-left: -24px;
+}
+
+.mini-label-white {
+  color: #ffffff;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  margin-top: clamp(20px, 4vw, 28px);
+  font-family:
+    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.mini-label-white.gray-color {
+  color: #c0c0c0;
+}
+
+.chips-container {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 8px;
+  display: flex;
+}
+
+.chips-container.chips-container-small-width {
+  max-width: 380px;
+}
+
+.single-chip {
+  color: #ffffff;
+  background-color: #353535;
+  border-radius: 8px;
+  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2vw, 14px);
+  font-family:
+    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.single-chip.small-chip {
+  padding: clamp(4px, 1vw, 8px) clamp(8px, 1.5vw, 12px);
+  font-size: clamp(12px, 1.8vw, 13px);
+}

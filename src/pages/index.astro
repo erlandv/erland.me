@@ -2,13 +2,16 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import { SITE_DOMAIN } from '../lib/env';
+import pf from '../styles/pages/portfolio.module.css';
+import fold from '../styles/pages/fold.module.css';
+import btn from '../styles/pages/button.module.css';
 ---
 
 <SiteLayout title='Personal Web' canonical='/' selectedItem='home'>
-  <main class='fold-content-container'>
-    <div class='fold-content'>
+  <main class={fold['fold-content-container']}>
+    <div class={fold['fold-content']}>
       <h1>Hi, I'm Erland.<br />I build things for the web.</h1>
-      <p class='lead'>
+      <p class={fold['lead']}>
         I help teams turn ideas into production-ready, scalable web products
         that customers genuinely value. Over the past decade, I have led
         projects end-to-end spanning websites and web apps, balancing usability,
@@ -24,20 +27,20 @@ import { SITE_DOMAIN } from '../lib/env';
     </div>
     <a
       href={`mailto:hello@${SITE_DOMAIN}`}
-      class='button w-button contact-button'
+      class:list={[btn.button, 'button', 'w-button', 'contact-button']}
     >
-      <Icon name='mail' class='button-icon' />
+      <Icon name='mail' class={btn['button-icon']} />
       <span>Contact Me</span>
     </a>
   </main>
-  <div class='projects-section'>
-    <div class='projects-container'>
-      <div class='single-projects-category'>
-        <div class='projects-category-image-container'>
+  <div class={pf['projects-section']}>
+    <div class={pf['projects-container']}>
+      <div class={pf['single-projects-category']}>
+        <div class={pf['projects-category-image-container']}>
           <Icon name='browser' class='projects-category-image' />
         </div>
       </div>
-      <div class='single-projects-content'>
+      <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
         <div class='tech-tools-container'>
           <div class='mini-label-white gray-color'>
@@ -56,13 +59,13 @@ import { SITE_DOMAIN } from '../lib/env';
         </div>
       </div>
     </div>
-    <div class='projects-container'>
-      <div class='single-projects-category'>
-        <div class='projects-category-image-container devops-img'>
+    <div class={pf['projects-container']}>
+      <div class={pf['single-projects-category']}>
+        <div class={pf['projects-category-image-container'] + ' devops-img'}>
           <Icon name='database' class='projects-category-image' />
         </div>
       </div>
-      <div class='single-projects-content'>
+      <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
         <div class='tech-tools-container'>
           <div class='mini-label-white gray-color'>

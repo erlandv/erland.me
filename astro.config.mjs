@@ -66,7 +66,7 @@ export default defineConfig({
             }
           },
           // Configure asset output locations
-          assetFileNames: (assetInfo) => {
+          assetFileNames: assetInfo => {
             const name = assetInfo.name || '';
             if (name.endsWith('.css')) {
               // CSS to assets/css
@@ -113,15 +113,20 @@ export default defineConfig({
             overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
           }),
           // Add cssnano for CSS minification in production
-          ...(process.env.NODE_ENV === 'production' ? [
-            cssnano({
-              preset: ['default', {
-                discardComments: {
-                  removeAll: true,
-                },
-              }],
-            }),
-          ] : []),
+          ...(process.env.NODE_ENV === 'production'
+            ? [
+                cssnano({
+                  preset: [
+                    'default',
+                    {
+                      discardComments: {
+                        removeAll: true,
+                      },
+                    },
+                  ],
+                }),
+              ]
+            : []),
         ],
       },
     },

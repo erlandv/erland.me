@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import BackNav from '../components/BackNav.astro';
 import { SITE_DOMAIN } from '../lib/env';
+import fold from '../styles/pages/fold.module.css';
 ---
 
 <SiteLayout
@@ -10,8 +11,8 @@ import { SITE_DOMAIN } from '../lib/env';
   description='Dengan mengakses dan/atau menggunakan layanan di situs ini, Anda dianggap telah membaca, memahami, menyetujui, dan terikat oleh kebijakan privasi ini.'
 >
   <BackNav href='/' label='Back' />
-  <main class='fold-content-container'>
-    <div class='fold-content'>
+  <main class={fold['fold-content-container']}>
+    <div class={fold['fold-content']}>
       <h1>Privacy Policy</h1>
       <p>
         Privacy policy ini berlaku antara saya sebagai pemilik situs web 

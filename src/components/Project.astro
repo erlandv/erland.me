@@ -1,16 +1,17 @@
 ---
 const { title, desc, tech } = Astro.props;
+import styles from "./Project/project.module.css";
 ---
 
-<div class="single-item">
+<div class={styles["single-item"]}>
   <h3>{title}</h3>
-  <div class="project-desc project-desc-list w-richtext">
+  <div class:list={[styles["project-desc"], styles["project-desc-list"], 'w-richtext']}>
     <ul role="list">
       {desc.map((item: string) => <li>{item}</li>)}
     </ul>
   </div>
-  <div class="mini-label-white">Technologies &amp; tools</div>
-  <div class="chips-container">
-    {tech.map((techItem: string) => <div class="single-chip">{techItem}</div>)}
+  <div class={styles["mini-label-white"]}>Technologies &amp; tools</div>
+  <div class={styles["chips-container"]}>
+    {tech.map((techItem: string) => <div class={styles["single-chip"]}>{techItem}</div>)}
   </div>
 </div>

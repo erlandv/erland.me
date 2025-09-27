@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import styles from './ShareButtons/share-buttons.module.css';
 
 interface Props {
   title: string;
@@ -42,72 +43,72 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
   data-text={description || title}
   data-url={shareUrlWebShare}
 >
-  <h3 class='share__title'>{heading}</h3>
+  <h3 class={styles['share__title']}>{heading}</h3>
 
-  <div class='share__wrap'>
-    <div class='share__native' hidden>
+  <div class={styles['share__wrap']}>
+    <div class:list={[styles['share__native'], 'share__native']} hidden>
       <button
-        class='share__btn share__btn--native'
+        class:list={[styles['share__btn'], 'share__btn--native']}
         type='button'
         aria-label='Share via native share'
       >
-        <Icon name='share' class='share__icon' ariaLabel='Share' />
+        <Icon name='share' class={styles['share__icon']} ariaLabel='Share' />
       </button>
       <button
-        class='share__btn share__btn--copy'
+        class:list={[styles['share__btn'], 'share__btn--copy']}
         type='button'
         aria-label='Copy link'
         data-copy={shareUrlCopy}
       >
-        <Icon name='copy' class='share__icon' ariaLabel='Copy link' />
+        <Icon name='copy' class={styles['share__icon']} ariaLabel='Copy link' />
       </button>
     </div>
 
-    <div class='share__fallback'>
+    <div class={styles['share__fallback']}>
       <a
-        class='share__btn'
+        class={styles['share__btn']}
         href={whatsappHref}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Share on WhatsApp'
       >
-        <Icon name='whatsapp' class='share__icon' ariaLabel='WhatsApp' />
+        <Icon name='whatsapp' class={styles['share__icon']} ariaLabel='WhatsApp' />
       </a>
       <a
-        class='share__btn'
+        class={styles['share__btn']}
         href={telegramHref}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Share on Telegram'
       >
-        <Icon name='telegram' class='share__icon' ariaLabel='Telegram' />
+        <Icon name='telegram' class={styles['share__icon']} ariaLabel='Telegram' />
       </a>
       <a
-        class='share__btn'
+        class={styles['share__btn']}
         href={twitterHref}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Share on X/Twitter'
       >
-        <Icon name='x' class='share__icon' ariaLabel='X / Twitter' />
+        <Icon name='x' class={styles['share__icon']} ariaLabel='X / Twitter' />
       </a>
       <a
-        class='share__btn'
+        class={styles['share__btn']}
         href={facebookHref}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Share on Facebook'
       >
-        <Icon name='facebook' class='share__icon' ariaLabel='Facebook' />
+        <Icon name='facebook' class={styles['share__icon']} ariaLabel='Facebook' />
       </a>
       <a
-        class='share__btn'
+        class={styles['share__btn']}
         href={linkedinHref}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Share on LinkedIn'
       >
-        <Icon name='linkedin' class='share__icon' ariaLabel='LinkedIn' />
+        <Icon name='linkedin' class={styles['share__icon']} ariaLabel='LinkedIn' />
       </a>
     </div>
   </div>
@@ -191,95 +192,5 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
     })();
   </script>
 
-  <style>
-    .share__title {
-      font-size: 1.25rem;
-      margin: 1.25rem 0 1rem;
-      opacity: 0.9;
-    }
-    .share__wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      column-gap: 0.6rem;
-      row-gap: 0.6rem;
-    }
-    .share__fallback,
-    .share__native {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .share__btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      padding: 0;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      background: transparent;
-      color: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease,
-        transform 0.05s ease;
-      font: inherit;
-    }
-    .share__btn:hover {
-      background: rgba(107, 182, 255, 0.12);
-      border-color: rgba(107, 182, 255, 0.45);
-    }
-    .share__btn:focus-visible {
-      outline: 2px solid #6bb6ff;
-      outline-offset: 2px;
-    }
-    .share__btn:active {
-      transform: scale(0.97);
-    }
-    .share__icon {
-      width: 24px;
-      height: 24px;
-      display: inline-block;
-    }
-    @media (max-width: 1024px) {
-      .share__wrap {
-        flex-direction: column;
-        align-items: flex-start;
-        row-gap: 0.75rem;
-      }
-      .share__fallback,
-      .share__native {
-        gap: 0.5rem;
-      }
-      .share__btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-      }
-      .share__icon {
-        width: 22px;
-        height: 22px;
-      }
-    }
-    @media (max-width: 480px) {
-      .share__fallback,
-      .share__native {
-        gap: 0.5rem;
-      }
-      .share__wrap {
-        row-gap: 0.85rem;
-      }
-    }
-    @media (hover: none) {
-      .share__btn:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.24);
-      }
-    }
-  </style>
+  
 </section>

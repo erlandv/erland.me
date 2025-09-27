@@ -1,0 +1,16 @@
+:root {
+  --border: rgba(255, 255, 255, 0.12);
+  /* Brand blues */
+  --color-primary: #428dff;
+  --color-primary-rgb: 66, 141, 255;
+  --color-secondary: #33e1ff;
+  --color-secondary-rgb: 51, 225, 255;
+  /* Theme neutrals */
+  --text-primary: #ffffff;
+  --text-secondary: #d0d0d0;
+  --text-muted: #a0a0a0;
+  --bg-primary: #161616;
+  --bg-secondary: #1f1f1f;
+  --bg-tertiary: #232323;
+  --border-color: #353535;
+}

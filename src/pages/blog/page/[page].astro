@@ -5,6 +5,7 @@ import PostCard from "../../../components/PostCard.astro";
 import Pagination from "../../../components/Pagination.astro";
 import { loadAllPosts } from '../../../lib/blog';
 import { collectionPageJsonLd } from '../../../lib/seo';
+import listing from "../../../styles/pages/listing.module.css";
 
 // Generate static paths for pages 2..N (page 1 handled by /blog)
 export async function getStaticPaths() {
@@ -61,8 +62,8 @@ const getCategory = (post: any) => post.data?.category ?? null;
 
   <div class="content-container">
     <h1>Blog</h1>
-    <section class="items-container">
-      <div class="resouce-items">
+    <section class={listing['items-container']}>
+      <div class={listing['resouce-items']}>
         {paginated.map((post) => {
           const hero = getHero(post);
           const excerpt = getExcerpt(post);

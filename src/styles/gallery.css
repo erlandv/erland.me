@@ -1,0 +1,53 @@
+.content-image-grid,
+.download-image-grid {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (min-width: 720px) {
+  .content-image-grid,
+  .download-image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.content-image-grid figure,
+.download-image-grid figure {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.content-image-grid img,
+.download-image-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+.content-image-grid figcaption,
+.download-image-grid figcaption {
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  color: #a0a0a0;
+  text-align: center;
+  line-height: 1.5;
+  font-style: italic;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  opacity: 0.9;
+  transition: all 0.2s ease;
+  word-wrap: break-word;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.content-image-grid figure:hover figcaption,
+.download-image-grid figure:hover figcaption {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}

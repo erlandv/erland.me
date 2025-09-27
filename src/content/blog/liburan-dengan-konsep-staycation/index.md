@@ -14,7 +14,7 @@ Sejak tahun 2018, saya mulai tertarik dengan liburan berkonsep staycation, yaitu
 
 Beberapa orang mungkin akan bertanya, untuk apa buang-buang uang di hotel kalau kegiatannya bisa dilakukan di rumah? Jawabannya sederhana, karena uang saya banyak. HAHAHA. Nggak, bukan begitu, bercanda. Yang benar karena di hotel lebih tenang. Kamar hotel memiliki sifat privasi yang tinggi, menghormati privasi penghuni dengan pantang mengganggu saat berada di kamar, dan pada umumnya kamar hotel juga didesain soundproof yang membuat suasana lebih sunyi. Sebagai seorang yang mengklaim diri introvert, suasana sunyi yang jauh dari keramaian rasanya seperti di Surga. Ya walau saya belum pernah merasakan rasanya Surga, sih. Semoga nanti masuk Surga. Aamiin.
 
-![Ilustrasi staycation](./images/staycation.png "Ilustrasi staycation di hotel")
+![Ilustrasi staycation](./images/staycation.png 'Ilustrasi staycation di hotel')
 
 Sejak tahun 2018 sampai saat ini, sudah banyak hotel-hotel di Kota Bogor yang saya kunjungi. Kalau boleh sedikit sombong, malah saya merasa nyaris semua hotel di Kota Bogor sudah pernah saya singgahi. Sampai akhirnya saya merasa kehabisan tujuan untuk staycation di hotel Bogor mana lagi. Saya tidak tertarik mengunjungi hotel yang sama untuk kedua kalinya agar menambah-nambah pengalaman. Akhirnya saya merambah hotel-hotel lain di luar Bogor seperti Jakarta, Depok, Tangerang, Bekasi, dan bahkan sampai ke Bandung.
 
@@ -22,7 +22,7 @@ Ya, memang, kalau hotelnya berada di luar Bogor yang menjadi domisili saya mungk
 
 Mau gimana lagi? Saya sudah pernah mengunjungi semua hotel yang ada di Kota Bogor. _masih sombong_
 
-![Arti Staycation](./images/arti-staycation.jpg "Arti staycation menurut Cambridge Dictionary")
+![Arti Staycation](./images/arti-staycation.jpg 'Arti staycation menurut Cambridge Dictionary')
 
 Awal mula ketertarikan saya stay di hotel—kalau tidak salah ingat—sepertinya saat April 2018 ketika saya pergi ke Malang untuk menonton away match Persib melawan Arema. Selama di Malang, saya menginap di sebuah hotel, di sana saya seperti menemukan kenyamanan yang selama ini dicari-cari. Saking nyamannya berada di kamar hotel, saya sampai tidak jadi pergi ke stadion untuk menonton pertandingan yang menjadi tujuan utama saya pergi ke Malang saat itu, jadinya hanya menonton di TV kamar hotel. Konyol memang, jauh-jauh pergi ke Malang hanya untuk nonton bola lewat TV.
 

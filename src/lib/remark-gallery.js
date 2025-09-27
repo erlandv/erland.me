@@ -77,18 +77,18 @@ export function remarkFigure() {
         if (node.children?.length === 1 && node.children[0].type === 'image') {
           const image = node.children[0];
           const caption = image.title;
-          
+
           // Jika ada title (caption), konversi menjadi figure
           if (caption) {
             image.title = null; // Hapus title dari image
-            
+
             node.data = {
               hName: 'figure',
               hProperties: {
                 className: ['prose-figure'],
               },
             };
-            
+
             node.children = [
               image,
               {

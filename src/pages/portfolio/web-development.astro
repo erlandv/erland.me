@@ -2,6 +2,7 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import Project from "../../components/Project.astro";
 import BackNav from "../../components/BackNav.astro";
+import listing from "../../styles/pages/listing.module.css";
 const projects = [
   {
     title: "EdgeDC",
@@ -53,8 +54,8 @@ const projects = [
   <BackNav href="/portfolio/" label="See Other Portfolios" />
   <div class="content-container">
     <h1>Web Development</h1>
-    <section class="items-container">
-      <div class="resouce-items">
+    <section class={listing['items-container']}>
+      <div class={listing['resouce-items']}>
         {projects.map(project => (
           <Project 
             title={project.title} 

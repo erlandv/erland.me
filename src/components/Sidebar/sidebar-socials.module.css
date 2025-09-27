@@ -1,0 +1,68 @@
+.socials {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: #d6d6d6;
+}
+
+.social-link {
+  color: #d6d6d6;
+  opacity: 0.9;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease,
+    color 0.15s ease;
+}
+
+.social-link:hover {
+  color: #fff;
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.social-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.socials svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Sidebar placement variants */
+:global(.sidebar) .socials--sidebar {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+:global(.w-nav) .socials--menu {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  :global(.sidebar) .socials--sidebar {
+    display: none !important; /* hidden on mobile; space is handled inside component CSS */
+  }
+
+  :global(.w-nav[data-collapse='medium'])
+    :global(.w-nav-menu.is-visible)
+    .socials--menu {
+    display: flex !important;
+    position: static;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 4%;
+    border-top: 1px solid #353535;
+    margin-top: auto;
+    background-color: #1c1c1c;
+  }
+}

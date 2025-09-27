@@ -8,36 +8,27 @@ This is my personal website and blog where I share my thoughts, experiences, and
 
 ## Features
 
-- **Lightning Fast**: Built with Astro 5 and optimized for maximum performance
-- **Personal Blog**: Markdown-powered blog with my articles and thoughts
-- **Project Showcase**: Portfolio section for my projects
-- **Custom Markdown**: Enhanced with remark plugins for rich content
-- **SEO Optimized**: Comprehensive meta tags, structured data, and sitemap
-- **Responsive Design**: Works perfectly on all devices
-- **Performance**: Lazy loading, optimized assets, and modern build tools
-- **Developer Experience**: TypeScript, Prettier, and comprehensive tooling
+- Fast by default: Astro 5 + minimal client JS
+- Blog engine: Markdown content, custom remark plugins (gallery, figure)
+- Portfolio sections: Web Development, Cloud Infra, Personal Projects
+- SEO & Social: comprehensive meta tags + JSON‑LD
+- Responsive & Accessible UI
+- Download hub: templated detail pages with rich text + tables
+- Shared UI primitives: buttons, fold/lead blocks, listing layouts
+- Developer experience: TypeScript, Prettier, Astro check
 
 ## Tech Stack
 
-### Core Framework
+- Astro 5.x, Vite
+- TypeScript
+- Markdown content collections
+- CSS Modules (components and page modules), CSS variables
+- Custom remark plugins (directive, gallery, figure)
+- Prettier, Astro check
 
-- **Astro 5.1.5** - Modern static site generator
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
+## Docs
 
-### Content & Styling
-
-- **Markdown** - Content with frontmatter
-- **Vanilla CSS** - Custom styling with CSS variables
-- **SVG Icons** - Optimized icon system with lazy loading
-
-### Plugins & Tools
-
-- **@astrojs/sitemap** - Automatic sitemap generation
-- **remark-directive** - Custom markdown syntax
-- **Custom remark-gallery** - Image gallery support
-- **Prettier** - Code formatting
-- **Terser** - JavaScript minification
+- CSS Modules migration guide: `docs/css-modules.md`
 
 ## License
 
