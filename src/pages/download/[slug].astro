@@ -126,15 +126,5 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
       heading="Share this template:"
     />
   </div>
-  <script>
-    // Initialize image lightbox on download page content
-    (async () => {
-      try {
-        const mod = await import('../../lib/lightbox');
-        mod.autoInit();
-      } catch (e) {
-        console.error('Lightbox init error:', e);
-      }
-    })();
-  </script>
+  
 </SiteLayout>
