@@ -658,6 +658,47 @@ p {
   font-weight: 400;
 }
 
+/* Toast notifications */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.toast {
+  background: #21262d; /* matches code block controls */
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  pointer-events: auto;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  will-change: opacity, transform;
+}
+
+.toast.toast--success {
+  border-color: #238636;
+}
+
+.toast.toast--error {
+  border-color: #da3633;
+}
+
+.toast.toast--info {
+  border-color: #58a6ff;
+}
+
 .niv-data {
   align-items: center;
   display: flex;
