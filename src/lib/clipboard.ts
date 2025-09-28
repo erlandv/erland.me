@@ -44,3 +44,18 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     return false;
   }
 }
+
+// Optional: expose as a browser global for compatibility with any
+// non-module scripts that might expect `window.copyToClipboard`.
+declare global {
+  interface Window {
+    copyToClipboard?: (text: string) => Promise<boolean>;
+  }
+}
+
+if (typeof window !== 'undefined') {
+  const w = window as Window;
+  if (typeof w.copyToClipboard !== 'function') {
+    w.copyToClipboard = copyToClipboard;
+  }
+}
