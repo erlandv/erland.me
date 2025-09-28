@@ -72,7 +72,50 @@ const {
         <Footer />
       </nav>
     </div>
-    
+    <script>
+      // Initialize router-safe share buttons globally
+      (async () => {
+        try {
+          const mod = await import('../lib/share-buttons');
+          mod.autoInit();
+        } catch (e) {
+          console.error('ShareButtons init error:', e);
+        }
+      })();
+    </script>
+    <script>
+      // Initialize toast container early
+      (async () => {
+        try {
+          const mod = await import('../lib/toast');
+          mod.initToasts();
+        } catch (e) {
+          console.error('Toast init error:', e);
+        }
+      })();
+    </script>
+    <script>
+      // Initialize router-safe code copy buttons globally
+      (async () => {
+        try {
+          const mod = await import('../lib/code-copy');
+          mod.autoInit();
+        } catch (e) {
+          console.error('CodeCopy init error:', e);
+        }
+      })();
+    </script>
+    <script>
+      // Initialize router-safe image lightbox globally
+      (async () => {
+        try {
+          const mod = await import('../lib/lightbox');
+          mod.autoInit();
+        } catch (e) {
+          console.error('Lightbox init error:', e);
+        }
+      })();
+    </script>
   </body>
   
 </html>
