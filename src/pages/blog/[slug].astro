@@ -7,6 +7,7 @@ import { blogPostingJsonLd } from '../../lib/seo';
 import ShareButtons from "../../components/ShareButtons.astro";
 import { SITE_URL } from '../../lib/env';
 import blogStyles from "../../styles/pages/blog.module.css";
+import ScrollTopButton from "../../components/ScrollTopButton.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -93,6 +94,7 @@ const jsonLd = blogPostingJsonLd({
     </div>
     <ShareButtons title={frontmatter.title} url={canonicalUrl} description={frontmatter.description || frontmatter.excerpt} />
   </article>
+  <ScrollTopButton />
   
   
 </SiteLayout>

@@ -1,0 +1,25 @@
+---
+import Icon from "./Icon.astro";
+import styles from "./ScrollTopButton/scroll-top-button.module.css";
+---
+
+<button
+  id="scroll-top"
+  class={styles["scroll-top"]}
+  aria-label="Scroll to top"
+  title="Back to top"
+  data-visible="false"
+>
+  <Icon name="arrowup" class={styles["scroll-top-icon"]} />
+</button>
+
+<script>
+  (async () => {
+    try {
+      const mod = await import('../lib/scroll-top');
+      mod.autoInit();
+    } catch (e) {
+      console.error('ScrollTop init error:', e);
+    }
+  })();
+</script>
