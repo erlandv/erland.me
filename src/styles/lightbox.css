@@ -17,7 +17,7 @@ html.image-lightbox--locked body {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(0,0,0,.55);
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
   border: none;
   display: inline-flex;
@@ -26,11 +26,13 @@ html.image-lightbox--locked body {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  transition: background 120ms ease, transform 120ms ease;
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
 }
 
 .image-lightbox__open:hover {
-  background: rgba(0,0,0,.75);
+  background: rgba(0, 0, 0, 0.75);
   cursor: pointer;
   transform: translateY(-1px);
 }
@@ -49,7 +51,9 @@ html.image-lightbox--locked body {
   z-index: 1000;
   opacity: 0;
   transform: scale(0.98);
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
   cursor: zoom-out;
 }
 
@@ -82,16 +86,16 @@ html.image-lightbox--locked body {
 }
 
 .image-lightbox__caption {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   color: #f0f0f0;
-  font-size: .875rem;
+  font-size: 0.875rem;
   text-align: center;
 }
 
 .image-lightbox__close {
   position: absolute;
   top: 8px;
-  background: rgba(0,0,0,.55);
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
   border: none;
   display: inline-flex;
@@ -100,11 +104,13 @@ html.image-lightbox--locked body {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  transition: background 120ms ease, transform 120ms ease;
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
 }
 
 .image-lightbox__close:hover {
-  background: rgba(0,0,0,.75);
+  background: rgba(0, 0, 0, 0.75);
   cursor: pointer;
   transform: translateY(-1px);
 }
@@ -122,5 +128,7 @@ html.image-lightbox--locked body {
 }
 
 @media (max-width: 640px) {
-  .image-lightbox__image { max-height: 70vh; }
+  .image-lightbox__image {
+    max-height: 70vh;
+  }
 }

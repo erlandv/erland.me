@@ -75,7 +75,7 @@ export function remarkFigure() {
       node => {
         // Cek apakah paragraph hanya berisi satu image (abaikan whitespace)
         const children = (node.children || []).filter(
-          (c) => !(c.type === 'text' && !(c.value || '').trim())
+          c => !(c.type === 'text' && !(c.value || '').trim())
         );
         if (children.length === 1 && children[0].type === 'image') {
           const image = children[0];

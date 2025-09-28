@@ -117,7 +117,7 @@ function openLightbox(sourceImg: HTMLImageElement) {
   closeBtn.addEventListener('click', close);
   // Also allow closing by clicking the image itself
   img.addEventListener('click', close);
-  overlay.addEventListener('click', (e) => {
+  overlay.addEventListener('click', e => {
     // Click outside figure closes
     if (e.target === overlay) close();
   });
@@ -133,7 +133,9 @@ function openLightbox(sourceImg: HTMLImageElement) {
 function selectTargetImages(containers: string[]): HTMLImageElement[] {
   const imgs: HTMLImageElement[] = [];
   for (const sel of containers) {
-    const found = Array.from(document.querySelectorAll(`${sel} img`)) as HTMLImageElement[];
+    const found = Array.from(
+      document.querySelectorAll(`${sel} img`)
+    ) as HTMLImageElement[];
     for (const img of found) {
       // Skip non-content images like hero
       if (img.classList.contains('hero-image')) continue;
@@ -144,22 +146,25 @@ function selectTargetImages(containers: string[]): HTMLImageElement[] {
 }
 
 export function initImageLightbox(opts?: InitOptions) {
-  const containers = opts?.containerSelectors?.length ? opts.containerSelectors : DEFAULT_CONTAINERS;
+  const containers = opts?.containerSelectors?.length
+    ? opts.containerSelectors
+    : DEFAULT_CONTAINERS;
   const images = selectTargetImages(containers);
 
-  images.forEach((img) => {
+  images.forEach(img => {
     // Mark as ready and add handler once
     img.classList.add('lightbox-ready');
     if ((img as any)._lightboxBound) return;
     (img as any)._lightboxBound = true;
-    img.addEventListener('click', (e) => {
+    img.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
       openLightbox(img);
     });
 
     // Add open icon button top-right of image when lightbox is inactive
-    const container = (img.closest('figure') || img.parentElement) as HTMLElement | null;
+    const container = (img.closest('figure') ||
+      img.parentElement) as HTMLElement | null;
     if (container) {
       container.classList.add('lightbox-anchor');
       if (!(img as any)._lightboxBtn) {
@@ -168,7 +173,7 @@ export function initImageLightbox(opts?: InitOptions) {
         btn.className = 'image-lightbox__open';
         btn.setAttribute('aria-label', 'Open image');
         btn.innerHTML = fullscreenIcon;
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           e.stopPropagation();
           openLightbox(img);
@@ -196,7 +201,11 @@ function setupRouterReinit() {
   window.addEventListener('popstate', run);
   const _push = history.pushState?.bind(history);
   if (_push) {
-    history.pushState = function (data: any, unused: string, url?: string | URL | null) {
+    history.pushState = function (
+      data: any,
+      unused: string,
+      url?: string | URL | null
+    ) {
       const ret = _push(data, unused, url);
       // re-bind after navigation
       setTimeout(run, 10);
@@ -223,10 +232,14 @@ function setupRouterReinit() {
 export function autoInit() {
   const run = () => initImageLightbox();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      run();
-      setupRouterReinit();
-    }, { once: true });
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        run();
+        setupRouterReinit();
+      },
+      { once: true }
+    );
   } else {
     // Delay slightly to allow Astro content to hydrate
     setTimeout(() => {
