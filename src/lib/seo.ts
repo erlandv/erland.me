@@ -192,7 +192,7 @@ export function organizationJsonLd() {
     url: SITE_CONFIG.url,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE_CONFIG.url}/assets/logo.svg`,
+      url: `${SITE_CONFIG.url}/assets/profile/logo.svg`,
       width: 512,
       height: 512,
     },
