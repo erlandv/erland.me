@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
-import remarkGallery, { remarkFigure } from './src/lib/remark-gallery.js';
+import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
