@@ -39,19 +39,22 @@ export function showToast(message: string, options: ToastOptions = {}): void {
   });
 
   // Schedule hide and remove
-  window.setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(8px)';
-    const removeDelay = 220; // match CSS transition duration
-    window.setTimeout(() => {
-      if (toast.parentNode === wrap) wrap.removeChild(toast);
-      // If empty, remove container to keep DOM clean
-      if (wrap.childElementCount === 0) {
-        wrap.remove();
-        if (container === wrap) container = null;
-      }
-    }, removeDelay);
-  }, Math.max(1500, Math.min(2500, duration)));
+  window.setTimeout(
+    () => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(8px)';
+      const removeDelay = 220; // match CSS transition duration
+      window.setTimeout(() => {
+        if (toast.parentNode === wrap) wrap.removeChild(toast);
+        // If empty, remove container to keep DOM clean
+        if (wrap.childElementCount === 0) {
+          wrap.remove();
+          if (container === wrap) container = null;
+        }
+      }, removeDelay);
+    },
+    Math.max(1500, Math.min(2500, duration))
+  );
 }
 
 export function initToasts(): void {
@@ -59,4 +62,3 @@ export function initToasts(): void {
 }
 
 export default showToast;
-

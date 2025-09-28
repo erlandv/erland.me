@@ -683,13 +683,21 @@ p {
   font-size: 0.9rem;
   line-height: 1.2;
   pointer-events: auto;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
   will-change: opacity, transform;
 }
 
-.toast.toast--success { border-color: var(--color-primary); }
-.toast.toast--error { border-color: var(--color-primary); }
-.toast.toast--info { border-color: var(--color-primary); }
+.toast.toast--success {
+  border-color: var(--color-primary);
+}
+.toast.toast--error {
+  border-color: var(--color-primary);
+}
+.toast.toast--info {
+  border-color: var(--color-primary);
+}
 
 .niv-data {
   align-items: center;

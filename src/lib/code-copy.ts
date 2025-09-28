@@ -5,12 +5,16 @@ import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
 
 function findCodeBlocks(): NodeListOf<HTMLElement> {
-  let list = document.querySelectorAll('.prose pre code') as NodeListOf<HTMLElement>;
+  let list = document.querySelectorAll(
+    '.prose pre code'
+  ) as NodeListOf<HTMLElement>;
   if (list.length === 0) {
     list = document.querySelectorAll('pre code') as NodeListOf<HTMLElement>;
   }
   if (list.length === 0) {
-    list = document.querySelectorAll('pre[class*="language-"] code') as NodeListOf<HTMLElement>;
+    list = document.querySelectorAll(
+      'pre[class*="language-"] code'
+    ) as NodeListOf<HTMLElement>;
   }
   return list;
 }
@@ -29,7 +33,10 @@ function detectLanguage(pre: HTMLElement, code: HTMLElement): string {
     }
   }
   if (language === 'text') {
-    const preClasses = pre.className.split(' ').map(c => c.trim()).filter(Boolean);
+    const preClasses = pre.className
+      .split(' ')
+      .map(c => c.trim())
+      .filter(Boolean);
     for (const className of preClasses) {
       if (className.includes('language-') || /^[a-z]+$/.test(className)) {
         if (className.startsWith('language-')) {
@@ -41,7 +48,8 @@ function detectLanguage(pre: HTMLElement, code: HTMLElement): string {
       }
     }
   }
-  const dataLang = pre.getAttribute('data-language') || pre.getAttribute('lang');
+  const dataLang =
+    pre.getAttribute('data-language') || pre.getAttribute('lang');
   if (language === 'text' && dataLang) {
     language = dataLang;
   }
@@ -101,7 +109,11 @@ function setupRouterReinit() {
   window.addEventListener('popstate', run);
   const _push = history.pushState?.bind(history);
   if (_push) {
-    history.pushState = function (data: any, unused: string, url?: string | URL | null) {
+    history.pushState = function (
+      data: any,
+      unused: string,
+      url?: string | URL | null
+    ) {
       const ret = _push(data, unused, url);
       setTimeout(run, 10);
       return ret;

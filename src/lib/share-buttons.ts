@@ -13,9 +13,9 @@ function canUseWebShare(): boolean {
 
 function updateNativeVisibility(scope: Scope = document) {
   const showNative = canUseWebShare();
-  const list = (scope instanceof Document ? scope : (scope as Element)).querySelectorAll?.(
-    '.share__native'
-  );
+  const list = (
+    scope instanceof Document ? scope : (scope as Element)
+  ).querySelectorAll?.('.share__native');
   if (!list) return;
   list.forEach(el => {
     (el as HTMLElement).hidden = !showNative;
@@ -24,7 +24,9 @@ function updateNativeVisibility(scope: Scope = document) {
 
 async function handleCopy(btn: Element) {
   const root = (btn.closest('section.share') || document.body) as HTMLElement;
-  const url = (btn.getAttribute('data-copy') || root.getAttribute('data-url') || location.href) as string;
+  const url = (btn.getAttribute('data-copy') ||
+    root.getAttribute('data-url') ||
+    location.href) as string;
   let ok = false;
   try {
     const w = window as any;
@@ -94,7 +96,11 @@ function setupRouterReinit() {
   window.addEventListener('popstate', run);
   const _push = history.pushState?.bind(history);
   if (_push) {
-    history.pushState = function (data: any, unused: string, url?: string | URL | null) {
+    history.pushState = function (
+      data: any,
+      unused: string,
+      url?: string | URL | null
+    ) {
       const ret = _push(data, unused, url);
       setTimeout(run, 10);
       return ret;
