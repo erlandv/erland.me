@@ -58,7 +58,7 @@ const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
 const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 ---
 
-<SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download">
+<SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download" image={hero?.src}>
   <BackNav href="/download/" label="Back" />
   <div class:list={["content-container", dl["download-page"]]}>
     <header class={dl["download-header"]}>

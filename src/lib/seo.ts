@@ -254,7 +254,8 @@ export function generateMetaTags(opts: {
     ? opts.image.startsWith('http')
       ? opts.image
       : `${SITE_CONFIG.url}${opts.image}`
-    : `${SITE_CONFIG.url}/assets/erland-icon.svg`;
+    : `${SITE_CONFIG.url}/assets/social/og-default-1200x630.png`;
+  const imageAlt = opts.description || `${opts.title} – ${SITE_CONFIG.name}`;
 
   return {
     title: `${opts.title} | ${SITE_CONFIG.name}`,
@@ -266,7 +267,7 @@ export function generateMetaTags(opts: {
       url: fullUrl,
       type: opts.type || 'website',
       image: imageUrl,
-      imageAlt: opts.description || `${opts.title} – ${SITE_CONFIG.name}`,
+      imageAlt: imageAlt,
       siteName: SITE_CONFIG.name,
       locale: 'id_ID',
       ...(opts.publishedTime && {
@@ -283,7 +284,7 @@ export function generateMetaTags(opts: {
       title: opts.title,
       description: opts.description || SITE_CONFIG.description,
       image: imageUrl,
-      imageAlt: opts.description || `${opts.title} – ${SITE_CONFIG.name}`,
+      imageAlt: imageAlt,
       creator: '@erlandzz',
       site: '@erlandzz',
     },
