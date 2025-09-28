@@ -65,6 +65,9 @@ const websiteSchema = websiteJsonLd();
   <meta property="og:url" content={metaTags.openGraph.url} />
   <meta property="og:type" content={metaTags.openGraph.type} />
   <meta property="og:image" content={metaTags.openGraph.image} />
+  {metaTags.openGraph.imageAlt && (
+    <meta property="og:image:alt" content={metaTags.openGraph.imageAlt} />
+  )}
   <meta property="og:site_name" content={metaTags.openGraph.siteName} />
   <meta property="og:locale" content={metaTags.openGraph.locale} />
   {metaTags.openGraph.publishedTime && <meta property="article:published_time" content={metaTags.openGraph.publishedTime} />}
@@ -76,6 +79,9 @@ const websiteSchema = websiteJsonLd();
   <meta name="twitter:title" content={metaTags.twitter.title} />
   <meta name="twitter:description" content={metaTags.twitter.description} />
   <meta name="twitter:image" content={metaTags.twitter.image} />
+  {metaTags.twitter.imageAlt && (
+    <meta name="twitter:image:alt" content={metaTags.twitter.imageAlt} />
+  )}
   <meta name="twitter:creator" content={metaTags.twitter.creator} />
   <meta name="twitter:site" content={metaTags.twitter.site} />
   

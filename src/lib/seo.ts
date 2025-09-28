@@ -266,6 +266,7 @@ export function generateMetaTags(opts: {
       url: fullUrl,
       type: opts.type || 'website',
       image: imageUrl,
+      imageAlt: opts.description || `${opts.title} – ${SITE_CONFIG.name}`,
       siteName: SITE_CONFIG.name,
       locale: 'id_ID',
       ...(opts.publishedTime && {
@@ -282,6 +283,7 @@ export function generateMetaTags(opts: {
       title: opts.title,
       description: opts.description || SITE_CONFIG.description,
       image: imageUrl,
+      imageAlt: opts.description || `${opts.title} – ${SITE_CONFIG.name}`,
       creator: '@erlandzz',
       site: '@erlandzz',
     },
