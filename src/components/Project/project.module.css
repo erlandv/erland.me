@@ -10,7 +10,18 @@
 }
 
 .project-desc.project-desc-list {
-  margin-left: -24px;
+  margin-left: 0;
+}
+
+.project-desc ul {
+  margin: 8px 0 10px;
+  padding-left: 1.25rem;
+  list-style: disc;
+  overflow: visible;
+}
+
+.project-desc li {
+  margin: 4px 0;
 }
 
 .mini-label-white {

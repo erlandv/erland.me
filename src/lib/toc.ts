@@ -47,6 +47,15 @@ function collectHeadings(prose: HTMLElement): HeadingInfo[] {
   return out;
 }
 
+function isBlogArticleRoute(): boolean {
+  try {
+    const p = window.location?.pathname || '';
+    return p.startsWith('/blog/') && !p.startsWith('/blog/page/');
+  } catch {
+    return false;
+  }
+}
+
 function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   if (!headings.length) return null;
 
@@ -186,6 +195,8 @@ function findInsertPoint(prose: HTMLElement): ChildNode | null {
 }
 
 export function initToc() {
+  // Guard: only initialize on blog article routes
+  if (!isBlogArticleRoute()) return;
   const prose = document.querySelector('.prose');
   if (!(prose instanceof HTMLElement)) return;
   if (prose.dataset.tocInitialized === 'true') return;
@@ -206,7 +217,7 @@ let routerSetup = false;
 function setupRouterReinit() {
   if (routerSetup) return;
   routerSetup = true;
-  const run = () => initToc();
+  const run = () => { if (isBlogArticleRoute()) initToc(); };
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
   window.addEventListener('popstate', run);
@@ -221,7 +232,7 @@ function setupRouterReinit() {
 }
 
 export function autoInit() {
-  const run = () => { initToc(); setupRouterReinit(); };
+  const run = () => { if (!isBlogArticleRoute()) return; initToc(); setupRouterReinit(); };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
