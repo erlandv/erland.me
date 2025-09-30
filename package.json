@@ -18,8 +18,7 @@
     "generate:robots": "node scripts/generate-robots.js"
   },
   "dependencies": {
-    "astro": "^5.1.5",
-    "fuse.js": "^7.1.0"
+    "astro": "^5.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
