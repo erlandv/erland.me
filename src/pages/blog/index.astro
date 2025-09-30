@@ -35,7 +35,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
-  title="Blog"
+  title="Personal Blog Posts"
   canonical="/blog/"
   description="Halaman blog pribadi milik Erland Ramdhani. Berisi berbagai artikel yang ditulis untuk menyalurkan hobi walau tak tentu waktu publikasi."
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
@@ -49,7 +49,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
   <BackNav href="/" label="Back" />
 
   <div class="content-container">
-    <h1>Blog</h1>
+    <h1>Blog Posts</h1>
     
     <!-- Search Component -->
     <SearchInput posts={searchablePosts} placeholder="Cari artikel..." />

@@ -2,9 +2,9 @@
 import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
 
 const SITE_CONFIG = {
-  name: 'Erland Ramdhani',
+  name: 'erland.me',
   description:
-    'Web Developer based in Jakarta, Indonesia. Building scalable web applications and sharing knowledge about web development, cloud infrastructure, and open source.',
+    'Erland, a passionate Developer based in Jakarta, Indonesia. With over a decade of experience in web development and open-source technologies.',
   url: SITE_URL,
   author: {
     name: 'Erland Ramdhani',
