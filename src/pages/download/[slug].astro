@@ -40,7 +40,7 @@ const jsonLd = creativeWorkJsonLd({
   version: data.version,
   tags: data.tags,
   downloadUrl: data.file,
-  url: canonicalUrl,
+  url: canonicalPath,
   image: hero ? new URL(hero.src, canonicalUrl).toString() : undefined,
 });
 

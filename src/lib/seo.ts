@@ -129,7 +129,9 @@ export function creativeWorkJsonLd(opts: {
   const dateModified = opts.lastUpdated
     ? new Date(opts.lastUpdated).toISOString()
     : undefined;
-  const fullUrl = `${SITE_CONFIG.url}${opts.url}`;
+  const fullUrl = opts.url.startsWith('http')
+    ? opts.url
+    : `${SITE_CONFIG.url}${opts.url}`;
 
   return {
     '@context': 'https://schema.org',
