@@ -21,20 +21,29 @@ function getPageWindow(current: number, total: number, size: number): number[] {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
-const windowPages = getPageWindow(page, totalPages, 5);
+// Desktop/Tablet: window of 4 page numbers
+const windowPages = getPageWindow(page, totalPages, 4);
 const showLeadingEllipsis = windowPages[0] > 2;
 const showTrailingEllipsis = windowPages[windowPages.length - 1] < totalPages - 1;
 
-// Determine which window items to hide on mobile to show max 3 numbers
+// Determine which window items to hide on mobile to show max 2 numbers
 const mobileHideIdx = (() => {
-  if (windowPages.length <= 3) return new Set<number>();
-  if (windowPages.length === 4) {
-    // hide the edge farther from current to keep centered
-    if (page <= windowPages[1]) return new Set<number>([3]);
-    return new Set<number>([0]);
+  const len = windowPages.length;
+  const currentIdx = windowPages.indexOf(page);
+  if (len <= 2) return new Set<number>();
+  if (len === 3) {
+    // Keep 2 numbers: prefer current + next when in middle; otherwise current + neighbor
+    if (currentIdx === 1) return new Set<number>([0]); // hide first, keep [current, next]
+    if (currentIdx === 0) return new Set<number>([2]); // hide last, keep [current, next]
+    return new Set<number>([0]); // currentIdx === 2 -> hide first, keep [prev, current]
   }
-  // length >= 5: hide both ends to keep 3 centered
-  return new Set<number>([0, windowPages.length - 1]);
+  if (len === 4) {
+    // Keep 2 numbers based on where current is
+    if (currentIdx <= 1) return new Set<number>([2, 3]); // near start: keep [0,1]
+    return new Set<number>([0, 1]); // near end: keep [2,3]
+  }
+  // Fallback: hide edges to keep 2 centered
+  return new Set<number>([0, len - 1]);
 })();
 ---
 

@@ -144,7 +144,7 @@ p {
 ul {
   margin-top: 0;
   margin-bottom: 10px;
-  padding-left: 40px;
+  padding-left: 10px;
 }
 
 @media screen and (max-width: 767px) {
