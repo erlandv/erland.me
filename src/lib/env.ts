@@ -14,3 +14,10 @@ export const SITE_DOMAIN: string =
 export function isProdSite(): boolean {
   return SITE_URL === 'https://erland.me' && SITE_DOMAIN === 'erland.me';
 }
+
+// Google Tag Manager container ID (public, non-secret)
+// Prefer `PUBLIC_GTM_ID` via `import.meta.env`, fall back to process.env for scripts.
+export const GTM_ID: string =
+  (import.meta as any).env?.PUBLIC_GTM_ID ||
+  process.env.PUBLIC_GTM_ID ||
+  '';
