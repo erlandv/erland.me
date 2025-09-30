@@ -69,7 +69,7 @@
 
 :global(.prose .toc__header) {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   vertical-align: middle;
@@ -105,7 +105,7 @@
 :global(.prose .toc__list) {
   list-style: none;
   margin: 0;
-  padding-left: 0;
+  padding-left: 0.5em;
   display: none;
 }
 
@@ -140,8 +140,8 @@
 :global(.prose .toc__item--h3)::before {
   background: transparent;
   border: 2px solid currentColor;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 :global(.prose .toc__item--h2) { margin: 8px 0 2px; }
