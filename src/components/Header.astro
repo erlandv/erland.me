@@ -86,6 +86,8 @@ const websiteSchema = websiteJsonLd();
   <meta name="twitter:site" content={metaTags.twitter.site} />
   
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
   <link rel="canonical" href={metaTags.canonical} />
   {prevHref && <link rel="prev" href={prevHref} />}
@@ -103,5 +105,5 @@ const websiteSchema = websiteJsonLd();
   )}
   
   <ClientRouter fallback="swap" />
-  <!-- Clipboard util now provided via module import; legacy global removed -->
+
 </head>
