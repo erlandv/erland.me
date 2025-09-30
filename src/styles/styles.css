@@ -367,6 +367,60 @@ p {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
+.prose table {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  border-collapse: collapse;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
+}
+
+.prose table th,
+.prose table td {
+  border-top: 1px solid #2f2f2f;
+  border-right: 1px solid #2f2f2f;
+  padding: 16px 18px;
+  text-align: left;
+  color: #d6d6d6;
+}
+
+.prose table th {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  font-weight: 600;
+}
+
+.prose table tr:first-child th,
+.prose table tr:first-child td {
+  border-top: none;
+}
+
+.prose table tr td:last-child,
+.prose table tr th:last-child {
+  border-right: none;
+}
+
+.prose table tr:nth-child(even) td {
+  background-color: var(--bg-primary);
+}
+
+.prose table th:first-child,
+.prose table td:first-child {
+  width: 34%;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.prose table a {
+  color: var(--color-primary);
+}
+
+.prose table a:hover {
+  color: var(--color-secondary);
+}
+
 .prose img {
   border-radius: 12px;
   display: block;
@@ -392,28 +446,31 @@ p {
 }
 
 .prose figcaption {
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  /* Smaller caption text and tighter box */
+  font-size: clamp(0.75rem, 1.4vw, 0.85rem);
   color: #a0a0a0;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.35;
   font-style: italic;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  max-width: 100%;
+  padding: 0.5rem;
+  /* Improve wrapping for long captions */
   word-wrap: break-word;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
   opacity: 0.9;
   transition: all 0.2s ease;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .prose figure:hover figcaption,
 .prose .prose-figure:hover figcaption {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
 }
+
 
 .prose blockquote {
   margin: clamp(1rem, 3vw, 1.5rem) 0;

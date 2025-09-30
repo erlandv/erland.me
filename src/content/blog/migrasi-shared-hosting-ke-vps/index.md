@@ -14,7 +14,7 @@ Kemarin ada teman yang minta dibantu untuk memindahkan web dari shared hosting k
 
 Saya sih mau-mau aja, senang kalau bisa membantu orang. Kemudian saya kepikiran untuk nulis artikel tentang cara pindah shared hosting ke VPS, di blog pribadi. Udah jarang update juga blog pribadi ini karena kesibukan mengurus moneysite. Jadi, yaudah, ayo kita mulai.
 
-Di tutorial ini saya menggunakan [VPS murah Indonesia](https://www.domainesia.com/vm/) dari DomaiNesia ya dengan OS Linux Ubuntu 20.04. Untuk dapat menjalankan website WordPress, kita memerlukan webserver, database management, dan bahasa pemrograman PHP. Saya memilih menggunakan LEMP Stack (Linux, Nginx, MySQL, PHP). Kalau kalian mau mengikuti pilihan saya, silakan kunjungi artikel Cara Install Nginx, MySQL, PHP di Ubuntu. Pastikan semuanya itu sudah terinstal sebelum mengikuti tutorial memindahkan website dari shared hosting ke VPS pada artikel ini.
+Di tutorial ini saya menggunakan <a href="https://www.domainesia.com/vm/">VPS murah Indonesia</a> dari DomaiNesia ya dengan OS Linux Ubuntu 20.04. Untuk dapat menjalankan website WordPress, kita memerlukan webserver, database management, dan bahasa pemrograman PHP. Saya memilih menggunakan LEMP Stack (Linux, Nginx, MySQL, PHP). Kalau kalian mau mengikuti pilihan saya, silakan kunjungi artikel Cara Install Nginx, MySQL, PHP di Ubuntu. Pastikan semuanya itu sudah terinstal sebelum mengikuti tutorial memindahkan website dari shared hosting ke VPS pada artikel ini.
 
 ## Backup Data Web di Shared Hosting
 

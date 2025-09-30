@@ -1,12 +1,15 @@
 ---
-title: 'Cara Transaksi Jual-Beli Saham di Pasar Negosiasi'
-description: 'Mau jual-beli saham di pasar negosiasi? Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula.'
-excerpt: 'Berbagi informasi tentang cara dan proses transaksi jual-beli saham di pasar negosiasi'
+title: Cara Transaksi Jual-Beli Saham di Pasar Negosiasi
+description: >-
+  Mau jual-beli saham di pasar negosiasi?
+  Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula
+excerpt: >-
+  Bursa Efek Indonesia memiliki 3 jenis pasar untuk transaksi jual-beli saham: Pasar Reguler, Pasar Tunai, dan Pasar Negosiasi. Nah, artikel ini membahas khusus soal pasar negosiasi...
 publishDate: 2025-07-16
 updatedDate: 2025-09-16
 hero: ./hero.png
 heroAlt: 'Ilustrasi grafik saham'
-category: 'Info'
+category: 'info'
 draft: false
 ---
 
@@ -28,7 +31,7 @@ Namun, di balik berbagai perbedaan pasar nego dari pasar reguler itu semua, pros
 
 ## Cara Jual-Beli Saham di Pasar Nego
 
-Sama seperti pasar reguler, pasar nego juga punya [jam perdagangan](https://www.idx.co.id/id/produk/mekanisme-dan-jam-perdagangan/). Transaksi pasar nego dapat dilakukan pada pukul 09.00–12.00 WIB dan 13.30–16.30 WIB pada hari Senin–Kamis. Sedangkan khusus hari Jumat pada jam 09.00–11.30 WIB dan 14.00–16.30 WIB.
+Sama seperti pasar reguler, pasar nego juga punya <a href="https://www.idx.co.id/id/produk/mekanisme-dan-jam-perdagangan/" rel="nofollow noopener" target="_blank">jam perdagangan</a>. Transaksi pasar nego dapat dilakukan pada pukul 09.00–12.00 WIB dan 13.30–16.30 WIB pada hari Senin–Kamis. Sedangkan khusus hari Jumat pada jam 09.00–11.30 WIB dan 14.00–16.30 WIB.
 
 Ada 3 cara bertransaksi jual-beli saham di pasar nego, yaitu:
 

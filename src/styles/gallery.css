@@ -36,7 +36,7 @@
   line-height: 1.5;
   font-style: italic;
   margin-top: 0.5rem;
-  padding: 0.4rem 0.5rem;
+  padding: 0.5rem 1rem; /* match desktop-like paddings */
   opacity: 0.9;
   transition: all 0.2s ease;
   word-wrap: break-word;
