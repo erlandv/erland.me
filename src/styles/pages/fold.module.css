@@ -14,3 +14,11 @@
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   font-weight: 400;
 }
+
+.intro {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  color: var(--text-muted);
+  display: block;
+  font-weight: 500;
+}
