@@ -98,3 +98,11 @@ const jsonLd = blogPostingJsonLd({
   
   
 </SiteLayout>
+
+<script>
+  import { autoInit as autoInitToc } from "../../lib/toc";
+  // Initialize dynamic TOC after content renders
+  try { autoInitToc(); } catch {}
+  document.addEventListener('astro:page-load', () => { try { autoInitToc(); } catch {} });
+  document.addEventListener('astro:after-swap', () => { try { autoInitToc(); } catch {} });
+</script>
