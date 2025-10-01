@@ -23,6 +23,14 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
   }
 }
 
+export function insertPlaceholderUnit(container: Element, label?: string) {
+  if (!container) return;
+  const box = document.createElement('div');
+  box.className = 'ad-placeholder';
+  box.textContent = label || 'Ad Placeholder';
+  container.appendChild(box);
+}
+
 export function insertAdAfterMiddle(
   container: Element,
   client: string,
@@ -65,6 +73,30 @@ export function insertAdAfterMiddle(
   }
 }
 
+export function insertPlaceholderAfterMiddle(container: Element, label?: string) {
+  if (!container) return;
+  try {
+    const candidates = Array.from(
+      container.querySelectorAll(
+        'p, h2, h3, ul, ol, pre, blockquote, figure, img'
+      )
+    );
+    const n = candidates.length;
+    const index = n > 4 ? Math.floor(n / 2) : Math.max(n - 1, 0);
+    const ref = candidates[index];
+    const box = document.createElement('div');
+    box.className = 'ad-placeholder';
+    box.textContent = label || 'Ad Placeholder';
+    if (!ref || !ref.parentNode) {
+      container.appendChild(box);
+    } else {
+      ref.parentNode.insertBefore(box, ref.nextSibling);
+    }
+  } catch (e) {
+    console.warn('AdSense insertPlaceholderAfterMiddle error:', e);
+  }
+}
+
 export function autoInitBlogAds(
   client: string,
   slotMid?: string,
@@ -74,6 +106,13 @@ export function autoInitBlogAds(
   if (!prose) return;
   if (slotMid) insertAdAfterMiddle(prose, client, slotMid);
   if (slotEnd) insertAdUnit(prose, client, slotEnd);
+}
+
+export function autoInitBlogPlaceholders() {
+  const prose = document.getElementById('blog-content');
+  if (!prose) return;
+  insertPlaceholderAfterMiddle(prose, 'Ad Placeholder (mid)');
+  insertPlaceholderUnit(prose, 'Ad Placeholder (end)');
 }
 
 export function autoInitDownloadAds(
@@ -87,3 +126,9 @@ export function autoInitDownloadAds(
   if (slotEnd) insertAdUnit(container, client, slotEnd);
 }
 
+export function autoInitDownloadPlaceholders() {
+  const container = document.getElementById('download-content');
+  if (!container) return;
+  insertPlaceholderAfterMiddle(container, 'Ad Placeholder (mid)');
+  insertPlaceholderUnit(container, 'Ad Placeholder (end)');
+}

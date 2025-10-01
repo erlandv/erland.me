@@ -100,14 +100,20 @@ const jsonLd = blogPostingJsonLd({
 </SiteLayout>
 
 <script>
-  import { autoInitBlogAds } from "../../lib/adsense";
+  import { autoInitBlogAds, autoInitBlogPlaceholders } from "../../lib/adsense";
   import { ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END } from "../../lib/env";
   import { autoInit as autoInitToc } from "../../lib/toc";
   // Initialize dynamic TOC after content renders
   try { autoInitToc(); } catch {}
-  try { if (import.meta.env.PROD) autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END); } catch {}
+  try {
+    if (import.meta.env.PROD) {
+      autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END);
+    } else {
+      autoInitBlogPlaceholders();
+    }
+  } catch {}
   document.addEventListener('astro:page-load', () => { try { autoInitToc(); } catch {} });
-  document.addEventListener('astro:page-load', () => { try { if (import.meta.env.PROD) autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END); } catch {} });
+  document.addEventListener('astro:page-load', () => { try { if (import.meta.env.PROD) autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END); else autoInitBlogPlaceholders(); } catch {} });
   document.addEventListener('astro:after-swap', () => { try { autoInitToc(); } catch {} });
-  document.addEventListener('astro:after-swap', () => { try { if (import.meta.env.PROD) autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END); } catch {} });
+  document.addEventListener('astro:after-swap', () => { try { if (import.meta.env.PROD) autoInitBlogAds(ADSENSE_CLIENT, ADSENSE_SLOT_BLOG_MID, ADSENSE_SLOT_BLOG_END); else autoInitBlogPlaceholders(); } catch {} });
 </script>
