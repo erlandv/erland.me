@@ -7,9 +7,10 @@
 .blog-post__meta {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
-  color: rgba(214, 214, 214, 0.85);
+  color: rgba(214, 214, 214, 0.9);
+  margin-top: 6px;
 }
 
 .blog-post__meta-item {
@@ -19,10 +20,33 @@
   font-size: 0.9rem;
 }
 
+/* subtle divider between items for better readability */
+.blog-post__meta-item + .blog-post__meta-item {
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 .blog-post__meta-icon {
   width: 16px;
   height: 16px;
   color: rgba(var(--color-primary-rgb), 0.8);
+}
+
+/* Link + date styles within meta */
+.blog-post__meta a {
+  color: #d0d0d0;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(var(--color-primary-rgb), 0.35);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.blog-post__meta a:hover {
+  color: var(--color-secondary);
+  border-bottom-color: rgba(var(--color-primary-rgb), 0.6);
+}
+
+.blog-post__meta time {
+  color: var(--text-secondary);
 }
 
 /* Link styling inside blog content (prose) */
