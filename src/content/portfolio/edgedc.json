@@ -1,0 +1,11 @@
+{
+  "title": "EdgeDC",
+  "category": "web-development",
+  "desc": [
+    "Co-shaped layout and copy with the design team",
+    "Converted Figma designs into a responsive, accessible UI.",
+    "Deployed from staging to production with smoke tests and checks."
+  ],
+  "tech": ["Figma", "Tailwind", "Nginx", "Git", "Astro"],
+  "order": 1
+}

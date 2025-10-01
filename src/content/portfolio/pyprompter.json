@@ -1,0 +1,10 @@
+{
+  "title": "pyPrompter",
+  "category": "personal-projects",
+  "desc": [
+    "Contributed to a popular open-source Python pip package for building interactive CLIs",
+    "Developed a feature that lets you 'freeze' inquirer choices"
+  ],
+  "tech": ["Python"],
+  "order": 2
+}

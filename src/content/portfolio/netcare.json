@@ -1,0 +1,11 @@
+{
+  "title": "NetCare",
+  "category": "cloud-infra",
+  "desc": [
+    "Built an infrastructure for a telemedicine startup focusing on remote patient monitoring",
+    "Created Azure environment from scratch using Terraform as a IaC tool",
+    "Developed a comprehensive CI/CD pipeline for mobile app deployment"
+  ],
+  "tech": ["Terraform", "Azure", "Docker", "Nginx", "GitLab CI/CD"],
+  "order": 1
+}

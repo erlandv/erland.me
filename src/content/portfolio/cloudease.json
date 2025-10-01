@@ -1,0 +1,11 @@
+{
+  "title": "CloudEase",
+  "category": "cloud-infra",
+  "desc": [
+    "Migrated a cloud-based CRM system from one provider to another",
+    "Built the new GCP infrastructure using Terraform as a IaC tool",
+    "Deployed logging and monitoring tools in GKE cluster"
+  ],
+  "tech": ["GCP", "Terraform", "Kubernetes", "GitLab"],
+  "order": 3
+}

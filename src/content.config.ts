@@ -48,4 +48,16 @@ const downloads = defineCollection({
     }),
 });
 
-export const collections = { blog, downloads };
+// Portfolio collection: structured project data for portfolio pages
+const portfolio = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    category: z.enum(['web-development', 'cloud-infra', 'personal-projects']),
+    desc: z.array(z.string()),
+    tech: z.array(z.string()),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { blog, downloads, portfolio };
