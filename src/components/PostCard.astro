@@ -1,6 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 import styles from "./PostCard/post-card.module.css";
+import { slugifyCategory } from "../lib/blog";
 
 interface Hero {
   src: string;
@@ -19,7 +20,7 @@ interface Props {
 }
 
 const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
-const categoryHref = category ? `/blog/category/${category.toLowerCase()}/` : null;
+const categoryHref = category ? `/blog/category/${slugifyCategory(category)}/` : null;
 ---
 
 <article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>

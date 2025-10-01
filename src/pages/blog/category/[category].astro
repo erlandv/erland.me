@@ -4,7 +4,7 @@ import BackNav from "../../../components/BackNav.astro";
 import PostCard from "../../../components/PostCard.astro";
 import Pagination from "../../../components/Pagination.astro";
 import SearchInput from "../../../components/SearchInput.astro";
-import { loadAllPosts, slicePage } from '../../../lib/blog';
+import { loadAllPosts, slicePage, slugifyCategory } from '../../../lib/blog';
 import { postToSearchable } from '../../../lib/search';
 import { collectionPageJsonLd } from '../../../lib/seo';
 import listing from "../../../styles/pages/listing.module.css";
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   const categories = Array.from(
     new Set(posts.map((p) => (p.data?.category ?? '').toString().trim()).filter(Boolean))
   );
-  return categories.map((c) => ({ params: { category: c.toLowerCase() } }));
+  return categories.map((c) => ({ params: { category: slugifyCategory(c) } }));
 }
 
 const allPosts = await loadAllPosts();
@@ -23,7 +23,7 @@ const categoryParam = (Astro.params.category ?? '').toString().toLowerCase();
 
 // Filter posts by category (case-insensitive compare)
 const filtered = allPosts.filter((p) => {
-  const cat = (p.data?.category ?? '').toString().toLowerCase();
+  const cat = slugifyCategory((p.data?.category ?? '').toString());
   return cat === categoryParam;
 });
 

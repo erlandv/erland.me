@@ -59,3 +59,17 @@ export async function getTotalPages(pageSize = 10): Promise<number> {
 export function slicePage<T>(arr: T[], page: number, pageSize = 10): T[] {
   return arr.slice((page - 1) * pageSize, page * pageSize);
 }
+
+// Slugify helper for category names used in URLs
+export function slugifyCategory(input: string): string {
+  if (!input) return '';
+  const s = String(input)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '') // strip diacritics
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return s;
+}

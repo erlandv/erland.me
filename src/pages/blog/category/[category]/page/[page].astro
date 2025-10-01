@@ -5,7 +5,7 @@ import PostCard from "../../../../../components/PostCard.astro";
 import Pagination from "../../../../../components/Pagination.astro";
 import SearchInput from "../../../../../components/SearchInput.astro";
 import { postToSearchable } from '../../../../../lib/search';
-import { loadAllPosts } from '../../../../../lib/blog';
+import { loadAllPosts, slugifyCategory } from '../../../../../lib/blog';
 import { collectionPageJsonLd } from '../../../../../lib/seo';
 import listing from "../../../../../styles/pages/listing.module.css";
 
@@ -37,7 +37,7 @@ const categoryParam = (Astro.params.category ?? '').toString().toLowerCase();
 
 // Filter posts by category (case-insensitive compare)
 const filtered = allPosts.filter((p: any) => {
-  const cat = (p.data?.category ?? '').toString().toLowerCase();
+  const cat = slugifyCategory((p.data?.category ?? '').toString());
   return cat === categoryParam;
 });
 
