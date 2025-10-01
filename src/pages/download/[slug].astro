@@ -79,7 +79,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
       <h1>{data.title}</h1>
     </header>
 
-  <article class={dl["download-richtext"]}>
+  <article class={dl["download-richtext"]} id="download-content">
     <Content />
   </article>
 
@@ -130,3 +130,11 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
   <ScrollTopButton />
   
 </SiteLayout>
+
+<script>
+  import { ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END } from "../../lib/env";
+  import { autoInitDownloadAds } from "../../lib/adsense";
+  try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); } catch {}
+  document.addEventListener('astro:page-load', () => { try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); } catch {} });
+  document.addEventListener('astro:after-swap', () => { try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); } catch {} });
+</script>

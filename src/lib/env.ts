@@ -26,3 +26,23 @@ export const ADSENSE_CLIENT: string =
   (import.meta as any).env?.PUBLIC_ADSENSE_CLIENT ||
   process.env.PUBLIC_ADSENSE_CLIENT ||
   '';
+
+// AdSense slots for blog pages
+export const ADSENSE_SLOT_BLOG_MID: string =
+  (import.meta as any).env?.PUBLIC_ADSENSE_SLOT_BLOG_MID ||
+  process.env.PUBLIC_ADSENSE_SLOT_BLOG_MID ||
+  '';
+export const ADSENSE_SLOT_BLOG_END: string =
+  (import.meta as any).env?.PUBLIC_ADSENSE_SLOT_BLOG_END ||
+  process.env.PUBLIC_ADSENSE_SLOT_BLOG_END ||
+  '';
+
+// AdSense slots for download pages
+export const ADSENSE_SLOT_DL_MID: string =
+  (import.meta as any).env?.PUBLIC_ADSENSE_SLOT_DL_MID ||
+  process.env.PUBLIC_ADSENSE_SLOT_DL_MID ||
+  '';
+export const ADSENSE_SLOT_DL_END: string =
+  (import.meta as any).env?.PUBLIC_ADSENSE_SLOT_DL_END ||
+  process.env.PUBLIC_ADSENSE_SLOT_DL_END ||
+  '';
