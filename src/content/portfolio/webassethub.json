@@ -1,0 +1,10 @@
+{
+  "title": "WebAssetHub",
+  "category": "personal-projects",
+  "desc": [
+    "Created a web scraper tool that monitors digital assets across multiple platforms and offers them at competitive prices",
+    "Sold over 700 items"
+  ],
+  "tech": ["Python", "Selenium"],
+  "order": 3
+}

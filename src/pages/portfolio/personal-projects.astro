@@ -3,32 +3,14 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import Project from '../../components/Project.astro';
 import BackNav from "../../components/BackNav.astro";
 import listing from "../../styles/pages/listing.module.css";
-const projects = [
-  {
-    title: "TeleJS",
-    desc: [
-      "Built a lightweight, open-source Slack API framework for efficient bot development",
-      "Developed in Node.js and published as an NPM package"
-    ],
-    tech: ["Node.js", "NPM"]
-  },
-  {
-    title: "pyPrompter",
-    desc: [
-      "Contributed to a popular open-source Python pip package for building interactive CLIs",
-      "Developed a feature that lets you 'freeze' inquirer choices"
-    ],
-    tech: ["Python"]
-  },
-  {
-    title: "WebAssetHub",
-    desc: [
-      "Created a web scraper tool that monitors digital assets across multiple platforms and offers them at competitive prices",
-      "Sold over 700 items"
-    ],
-    tech: ["Python", "Selenium"]
-  }
-];
+import { getCollection, type CollectionEntry } from 'astro:content';
+type ProjectEntry = CollectionEntry<'portfolio'>;
+type ProjectData = ProjectEntry['data'];
+const allProjects: ProjectEntry[] = await getCollection('portfolio');
+const projects: ProjectData[] = allProjects
+  .filter((p: ProjectEntry) => p.data.category === 'personal-projects')
+  .sort((a: ProjectEntry, b: ProjectEntry) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .map((p: ProjectEntry) => p.data);
 ---
 
 <SiteLayout
@@ -42,7 +24,7 @@ const projects = [
     <h1>Personal Projects</h1>
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
-        {projects.map(project => (
+        {projects.map((project: ProjectData) => (
           <Project 
             title={project.title} 
             desc={project.desc}

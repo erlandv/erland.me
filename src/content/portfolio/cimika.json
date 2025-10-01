@@ -1,0 +1,11 @@
+{
+  "title": "Cimika",
+  "category": "web-development",
+  "desc": [
+    "Developed a conversion-focused landing page tailored for Google Ads.",
+    "Set up Google Analytics with key events for funnel analysis.",
+    "Added customer reviews to provide social proof and boost trust."
+  ],
+  "tech": ["PHP", "JavaScript", "MySQL", "Redis", "WordPress"],
+  "order": 2
+}

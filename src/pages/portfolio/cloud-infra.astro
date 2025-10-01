@@ -3,36 +3,14 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import Project from "../../components/Project.astro";
 import BackNav from "../../components/BackNav.astro";
 import listing from "../../styles/pages/listing.module.css";
-const projects = [
-  {
-    title: "NetCare",
-    desc: [
-      "Built an infrastructure for a telemedicine startup focusing on remote patient monitoring",
-      "Created Azure environment from scratch using Terraform as a IaC tool",
-      "Developed a comprehensive CI/CD pipeline for mobile app deployment",
-    ],
-    tech: ["Terraform", "Azure", "Docker", "Nginx", "GitLab CI/CD"]
-  },
-  {
-    title: "DataMesh",
-    desc: [
-      "Built an infrastructure for a data analytics platform",
-      "Configured VMs and deployed a multi-node Kubernetes cluster on AWS",
-      "Designed to handle a high volume of ~5 million data points per day",
-      "Integrated Grafana and Prometheus for monitoring",
-    ],
-    tech: ["Docker", "Kubernetes", "AWS", "Node.js", "RabbitMQ"]
-  },
-  {
-    title: "CloudEase",
-    desc: [
-      "Migrated a cloud-based CRM system from one provider to another",
-      "Built the new GCP infrastructure using Terraform as a IaC tool",
-      "Deployed logging and monitoring tools in GKE cluster",
-    ],
-    tech: ["GCP", "Terraform", "Kubernetes", "GitLab"]
-  }
-];
+import { getCollection, type CollectionEntry } from 'astro:content';
+type ProjectEntry = CollectionEntry<'portfolio'>;
+type ProjectData = ProjectEntry['data'];
+const allProjects: ProjectEntry[] = await getCollection('portfolio');
+const projects: ProjectData[] = allProjects
+  .filter((p: ProjectEntry) => p.data.category === 'cloud-infra')
+  .sort((a: ProjectEntry, b: ProjectEntry) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .map((p: ProjectEntry) => p.data);
 ---
 
 <SiteLayout
@@ -46,7 +24,7 @@ const projects = [
     <h1>Cloud Infra</h1>
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
-        {projects.map(project => (
+        {projects.map((project: ProjectData) => (
           <Project 
             title={project.title} 
             desc={project.desc}
