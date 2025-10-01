@@ -25,8 +25,14 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
 
 export function insertPlaceholderUnit(container: Element, label?: string) {
   if (!container) return;
+  // Prevent duplicate placeholder for end position
+  const existing = container.querySelector(
+    `.ad-placeholder[data-ad-pos="end"]`
+  );
+  if (existing) return;
   const box = document.createElement('div');
   box.className = 'ad-placeholder';
+  box.setAttribute('data-ad-pos', 'end');
   box.textContent = label || 'Ad Placeholder';
   container.appendChild(box);
 }
@@ -76,6 +82,11 @@ export function insertAdAfterMiddle(
 export function insertPlaceholderAfterMiddle(container: Element, label?: string) {
   if (!container) return;
   try {
+    // Prevent duplicate placeholder for mid position
+    const existing = container.querySelector(
+      `.ad-placeholder[data-ad-pos="mid"]`
+    );
+    if (existing) return;
     const candidates = Array.from(
       container.querySelectorAll(
         'p, h2, h3, ul, ol, pre, blockquote, figure, img'
@@ -86,6 +97,7 @@ export function insertPlaceholderAfterMiddle(container: Element, label?: string)
     const ref = candidates[index];
     const box = document.createElement('div');
     box.className = 'ad-placeholder';
+    box.setAttribute('data-ad-pos', 'mid');
     box.textContent = label || 'Ad Placeholder';
     if (!ref || !ref.parentNode) {
       container.appendChild(box);

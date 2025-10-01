@@ -132,9 +132,39 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 </SiteLayout>
 
 <script>
-  import { ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END } from "../../lib/env";
   import { autoInitDownloadAds, autoInitDownloadPlaceholders } from "../../lib/adsense";
-  try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); else autoInitDownloadPlaceholders(); } catch {}
-  document.addEventListener('astro:page-load', () => { try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); else autoInitDownloadPlaceholders(); } catch {} });
-  document.addEventListener('astro:after-swap', () => { try { if (import.meta.env.PROD) autoInitDownloadAds(ADSENSE_CLIENT, ADSENSE_SLOT_DL_MID, ADSENSE_SLOT_DL_END); else autoInitDownloadPlaceholders(); } catch {} });
+  try {
+    if (import.meta.env.PROD) {
+      const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
+      const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
+      const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
+      autoInitDownloadAds(client, slotMid, slotEnd);
+    } else {
+      autoInitDownloadPlaceholders();
+    }
+  } catch {}
+  document.addEventListener('astro:page-load', () => {
+    try {
+      if (import.meta.env.PROD) {
+        const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
+        const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
+        const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
+        autoInitDownloadAds(client, slotMid, slotEnd);
+      } else {
+        autoInitDownloadPlaceholders();
+      }
+    } catch {}
+  });
+  document.addEventListener('astro:after-swap', () => {
+    try {
+      if (import.meta.env.PROD) {
+        const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
+        const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
+        const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
+        autoInitDownloadAds(client, slotMid, slotEnd);
+      } else {
+        autoInitDownloadPlaceholders();
+      }
+    } catch {}
+  });
 </script>
