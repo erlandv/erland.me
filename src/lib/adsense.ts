@@ -143,52 +143,63 @@ export function autoInitDownloadAds(
   const container = document.getElementById('download-content');
   if (!container) return;
   if (slotMid) insertAdAfterMiddle(container, client, slotMid);
-  if (slotEnd) {
-    try {
-      const share = document.querySelector('section.share');
-      if (share && share.parentNode) {
-        const existing = document.querySelector(
-          `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
-        );
-        if (!existing) {
-          const ins = document.createElement('ins');
-          ins.className = 'adsbygoogle';
-          ins.style.display = 'block';
-          ins.setAttribute('data-ad-client', client);
-          ins.setAttribute('data-ad-slot', slotEnd);
-          ins.setAttribute('data-ad-format', 'auto');
-          ins.setAttribute('data-full-width-responsive', 'true');
-          share.parentNode.insertBefore(ins, share);
-          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-          (window as any).adsbygoogle.push({});
-          return;
-        }
-      }
+  if (!slotEnd) return;
 
-      const filesSection = document.getElementById('download-files-section');
-      if (filesSection && filesSection.parentNode) {
-        const existing = document.querySelector(
-          `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
-        );
-        if (!existing) {
-          const ins = document.createElement('ins');
-          ins.className = 'adsbygoogle';
-          ins.style.display = 'block';
-          ins.setAttribute('data-ad-client', client);
-          ins.setAttribute('data-ad-slot', slotEnd);
-          ins.setAttribute('data-ad-format', 'auto');
-          ins.setAttribute('data-full-width-responsive', 'true');
-          filesSection.parentNode.insertBefore(ins, filesSection.nextSibling);
-          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-          (window as any).adsbygoogle.push({});
-          return;
-        }
-      }
+  // Re-entrancy guard to avoid race duplicates across multiple events
+  const w = window as any;
+  w.__ads_dl_end = w.__ads_dl_end || new Set<string>();
+  const key = `${client}:${slotEnd}`;
+  if (w.__ads_dl_end.has(key)) return;
 
+  try {
+    const existingGlobal = document.querySelector(
+      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
+    );
+    if (existingGlobal) { w.__ads_dl_end.add(key); return; }
+
+    // Target: between files section and share -> insert before share if present
+    const share = document.querySelector('section.share');
+    if (share && share.parentNode) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.display = 'block';
+      ins.setAttribute('data-ad-client', client);
+      ins.setAttribute('data-ad-slot', slotEnd);
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive', 'true');
+      share.parentNode.insertBefore(ins, share);
+      (w.adsbygoogle = w.adsbygoogle || []).push({});
+      w.__ads_dl_end.add(key);
+      return;
+    }
+
+    // Fallback: after files section if present
+    const filesSection = document.getElementById('download-files-section');
+    if (filesSection && filesSection.parentNode) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.display = 'block';
+      ins.setAttribute('data-ad-client', client);
+      ins.setAttribute('data-ad-slot', slotEnd);
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive', 'true');
+      filesSection.parentNode.insertBefore(ins, filesSection.nextSibling);
+      (w.adsbygoogle = w.adsbygoogle || []).push({});
+      w.__ads_dl_end.add(key);
+      return;
+    }
+
+    // Final fallback: append inside content container
+    insertAdUnit(container, client, slotEnd);
+    w.__ads_dl_end.add(key);
+  } catch (e) {
+    console.warn('AdSense end placement (download) error:', e);
+    const exists = document.querySelector(
+      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
+    );
+    if (!exists) {
       insertAdUnit(container, client, slotEnd);
-    } catch (e) {
-      console.warn('AdSense end placement (download) error:', e);
-      insertAdUnit(container, client, slotEnd);
+      (window as any).__ads_dl_end.add(key);
     }
   }
 }
@@ -198,27 +209,37 @@ export function autoInitDownloadPlaceholders() {
   if (!container) return;
   insertPlaceholderAfterMiddle(container, 'Ad Placeholder (mid)');
   try {
+    const w = window as any;
+    w.__ph_dl_end = w.__ph_dl_end || false;
+    if (w.__ph_dl_end) return;
+
+    const phExists = document.querySelector('.ad-placeholder[data-ad-pos="end"]');
+    if (phExists) { w.__ph_dl_end = true; return; }
+
     const share = document.querySelector('section.share');
-    if (share && share.parentNode && !document.querySelector('.ad-placeholder[data-ad-pos="end"]')) {
+    if (share && share.parentNode) {
       const box = document.createElement('div');
       box.className = 'ad-placeholder';
       box.setAttribute('data-ad-pos', 'end');
       box.textContent = 'Ad Placeholder (end)';
       share.parentNode.insertBefore(box, share);
+      w.__ph_dl_end = true;
       return;
     }
 
     const filesSection = document.getElementById('download-files-section');
-    if (filesSection && filesSection.parentNode && !document.querySelector('.ad-placeholder[data-ad-pos="end"]')) {
+    if (filesSection && filesSection.parentNode) {
       const box = document.createElement('div');
       box.className = 'ad-placeholder';
       box.setAttribute('data-ad-pos', 'end');
       box.textContent = 'Ad Placeholder (end)';
       filesSection.parentNode.insertBefore(box, filesSection.nextSibling);
+      w.__ph_dl_end = true;
       return;
     }
 
     insertPlaceholderUnit(container, 'Ad Placeholder (end)');
+    w.__ph_dl_end = true;
   } catch (e) {
     console.warn('Placeholder end placement (download) error:', e);
     insertPlaceholderUnit(container, 'Ad Placeholder (end)');
