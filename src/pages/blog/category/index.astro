@@ -1,10 +1,11 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import BackNav from "../../../components/BackNav.astro";
-import Icon from "../../../components/Icon.astro";
-import postCardStyles from "../../../components/PostCard/post-card.module.css";
+import PostCard from "../../../components/PostCard.astro";
+import Pagination from "../../../components/Pagination.astro";
+//
 import listing from "../../../styles/pages/listing.module.css";
-import { loadAllPosts, slugifyCategory } from '../../../lib/blog';
+import { loadAllPosts, slugifyCategory, slicePage } from '../../../lib/blog';
 
 const posts = await loadAllPosts();
 
@@ -74,6 +75,15 @@ for (const p of posts) {
 const categories = Array.from(categoriesMap.values()).sort((a, b) =>
   a.name.localeCompare(b.name, 'id')
 );
+
+// Build paginated posts for each category to mirror /blog/
+const pageSize = 10;
+const byCategory = categories.map((cat) => {
+  const catPosts = posts.filter((p) => slugifyCategory(String(p.data?.category || '')) === cat.slug);
+  const totalPages = Math.max(1, Math.ceil(catPosts.length / pageSize));
+  const pages = Array.from({ length: totalPages }, (_, i) => slicePage(catPosts, i + 1, pageSize));
+  return { cat, pages, totalPages };
+});
 ---
 
 <SiteLayout
@@ -87,100 +97,109 @@ const categories = Array.from(categoriesMap.values()).sort((a, b) =>
   <div class="content-container">
     <h1>Blog Categories</h1>
 
-    <!-- Simple search/filter for categories -->
-    <div style="margin: 16px 0 24px 0;">
-      <label for="category-search" class="sr-only">Cari kategori</label>
-      <input
-        id="category-search"
-        type="text"
-        placeholder="Cari kategori..."
-        style="width:100%;max-width:520px;padding:10px 12px;border-radius:8px;border:1px solid rgba(138,180,255,.25);background:#0b1020;color:#fff;"
-        aria-label="Cari kategori"
-      />
+    <!-- Category filter buttons -->
+    <div id="category-filter" style="display:flex;flex-wrap:wrap;gap:10px;margin: 8px 0 18px 0;">
+      {categories.map((c) => (
+        <a href={`#cat-${c.slug}-page-1`} class="cat-filter-btn" data-cat={c.slug} style="text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid rgba(138,180,255,.35);color:#fff;background:rgba(255,255,255,0.04);font-size:.95rem;">
+          {c.name}
+        </a>
+      ))}
     </div>
 
     <section class={listing['items-container']}>
-      <div class={listing['resouce-items']} id="category-list">
-        {categories.map((cat) => (
-          <article class:list={[postCardStyles['resource-card'], 'resource-card', 'post-card']} data-name={cat.name.toLowerCase()}>
-            <div class={postCardStyles["post-card__inner"]}>
-              <div class={postCardStyles["post-card__thumb"]}>
-                {cat.hero ? (
-                  <img
-                    src={cat.hero.src}
-                    width={cat.hero.width}
-                    height={cat.hero.height}
-                    alt={cat.name}
-                    loading="lazy"
-                    class={postCardStyles["post-card__img"]}
+      {byCategory.map(({ cat, pages, totalPages }) => (
+        pages.map((pagePosts, idx) => {
+          const page = idx + 1;
+          const pageHref = (n: number) => `#cat-${cat.slug}-page-${n}`;
+          return (
+            <div class={listing['resouce-items']} data-cat-page data-cat={cat.slug} data-page={String(page)} style="display:none;">
+              {pagePosts.map((post) => {
+                const hero = normalizeHero(post.data?.hero ?? post.hero);
+                const excerpt = getExcerpt(post);
+                const dateLabel = post.date
+                  ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+                  : null;
+                return (
+                  <PostCard
+                    href={`/blog/${post.slug}/`}
+                    title={post.data.title}
+                    hero={hero}
+                    alt={post.data.heroAlt ?? post.data.title}
+                    category={post.data?.category ?? null}
+                    dateLabel={dateLabel}
+                    excerpt={excerpt}
                   />
-                ) : (
-                  <div class={postCardStyles["post-card__thumb--placeholder"]} aria-hidden="true"></div>
-                )}
-              </div>
-              <div class={postCardStyles["post-card__body"]}>
-                <header class={postCardStyles["post-card__header"]}>
-                  <h2 class={postCardStyles["post-card__title"]}>
-                    <a href={`/blog/category/${cat.slug}/`} class={postCardStyles["post-card__title-link"]}>{cat.name}</a>
-                  </h2>
-                  <div class={postCardStyles["post-card__meta"]}>
-                    <div class={postCardStyles["post-card__meta-item"]}>
-                      <Icon name="tags" class={postCardStyles["post-card__meta-icon"]} />
-                      <span class={postCardStyles["post-card__category"]}>{cat.count} artikel</span>
-                    </div>
-                  </div>
-                </header>
-                {cat.latest && (
-                  <p class={postCardStyles["post-card__excerpt"]}>
-                    <a href={`/blog/${cat.latest.slug}/`} style="text-decoration:none;color:var(--color-secondary);font-weight:600;">{cat.latest.title}</a>
-                    {cat.latest.excerpt ? ` — ${cat.latest.excerpt}` : ''}
-                  </p>
-                )}
-                <a href={`/blog/category/${cat.slug}/`} class={postCardStyles["post-card__readmore"]}>
-                  <span>Lihat kategori</span>
-                  <Icon name="readmore" class={postCardStyles["post-card__readmore-icon"]} />
-                </a>
-              </div>
+                );
+              })}
+              {pagePosts.length === 0 && (
+                <p style="opacity:.8;">Tidak ada artikel.</p>
+              )}
+              {totalPages > 1 && (
+                <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
+              )}
             </div>
-          </article>
-        ))}
-        {categories.length === 0 && (
-          <p style="opacity:.8;">Tidak ada kategori yang tersedia.</p>
-        )}
-      </div>
+          );
+        })
+      ))}
+      {categories.length === 0 && (
+        <p style="opacity:.8;">Tidak ada kategori yang tersedia.</p>
+      )}
     </section>
   </div>
 </SiteLayout>
 
-<script define:vars={{ categories }} is:inline>
-  // Filter category cards by the input value
-  function setupCategoryFilter() {
-    /** @type {any} */
-    const input = document.getElementById('category-search');
-    /** @type {any} */
-    const list = document.getElementById('category-list');
-    if (!input || !list) return;
-
-    const handle = () => {
-      const q = String((input && input.value) || '').trim().toLowerCase();
-      const items = Array.from(list.querySelectorAll('[data-name]'));
-      if (!q) {
-        items.forEach((el) => {
-          if (el && el.style) el.style.display = '';
-        });
-        return;
-      }
-      items.forEach((el) => {
-        const name = String((el.getAttribute && el.getAttribute('data-name')) || '').toLowerCase();
-        if (el && el.style) el.style.display = name.includes(q) ? '' : 'none';
-      });
-    };
-    input.addEventListener('input', handle);
+<script is:inline>
+  function parseHash() {
+    const m = (location.hash || '').match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);
+    if (!m) return null;
+    return { cat: m[1], page: Math.max(1, parseInt(m[2] || '1', 10) || 1) };
   }
 
+  function showCatPage(cat, page) {
+    const all = document.querySelectorAll('[data-cat-page]');
+    all.forEach((el) => (el instanceof HTMLElement ? (el.style.display = 'none') : null));
+    const active = document.querySelector(`[data-cat-page][data-cat="${cat}"][data-page="${page}"]`);
+    if (active instanceof HTMLElement) active.style.display = '';
+
+    // toggle active state on filter buttons
+    document.querySelectorAll('#category-filter .cat-filter-btn').forEach((btn) => {
+      if (!(btn instanceof HTMLElement)) return;
+      const slug = btn.getAttribute('data-cat');
+      if (slug === cat) {
+        btn.style.background = 'rgba(var(--color-primary-rgb), 0.18)';
+        btn.style.borderColor = 'rgba(var(--color-primary-rgb), 0.6)';
+      } else {
+        btn.style.background = 'rgba(255,255,255,0.04)';
+        btn.style.borderColor = 'rgba(138,180,255,0.35)';
+      }
+    });
+  }
+
+  function init() {
+    let hp = parseHash();
+    if (!hp) {
+      // pick random category
+      const cats = Array.from(document.querySelectorAll('[data-cat-page]'))
+        .map((el) => el.getAttribute('data-cat'))
+        .filter(Boolean);
+      const unique = Array.from(new Set(cats));
+      if (unique.length > 0) {
+        const cat = unique[Math.floor(Math.random() * unique.length)];
+        location.replace(`#cat-${cat}-page-1`);
+        hp = { cat, page: 1 };
+      }
+    }
+    if (hp) showCatPage(hp.cat, hp.page);
+  }
+
+  window.addEventListener('hashchange', () => {
+    const hp = parseHash();
+    if (hp) showCatPage(hp.cat, hp.page);
+  });
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCategoryFilter);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    setupCategoryFilter();
+    init();
   }
 </script>
