@@ -7,6 +7,7 @@ import Pagination from "../../../components/Pagination.astro";
 import listing from "../../../styles/pages/listing.module.css";
 import catStyles from "../../../styles/pages/category.module.css";
 import { loadAllPosts, slugifyCategory, slicePage } from '../../../lib/blog';
+import { categoriesIndexJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
 
 const posts = await loadAllPosts();
 
@@ -92,6 +93,21 @@ const byCategory = categories.map((cat) => {
   canonical="/blog/category/"
   description="Daftar kategori blog dan jumlah artikelnya, lengkap dengan artikel terbaru per kategori."
   selectedItem="blog"
+  jsonLd={[
+    categoriesIndexJsonLd(
+      'Blog Categories',
+      '/blog/category/',
+      categories.map((c, i) => ({
+        url: `/blog/category/${c.slug}/`,
+        name: c.name,
+        position: i + 1,
+      }))
+    ),
+    breadcrumbJsonLd([
+      { name: 'Blog', url: '/blog/' },
+      { name: 'Categories', url: '/blog/category/' },
+    ]),
+  ]}
 >
   <BackNav href="/blog/" label="Back to Blog" />
 

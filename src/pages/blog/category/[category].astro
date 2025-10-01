@@ -6,7 +6,7 @@ import Pagination from "../../../components/Pagination.astro";
 import SearchInput from "../../../components/SearchInput.astro";
 import { loadAllPosts, slicePage, slugifyCategory } from '../../../lib/blog';
 import { postToSearchable } from '../../../lib/search';
-import { collectionPageJsonLd } from '../../../lib/seo';
+import { collectionPageJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
 import listing from "../../../styles/pages/listing.module.css";
 
 // Build-time static paths for each category found in content
@@ -55,11 +55,18 @@ const getCategory = (post: any) => post.data?.category ?? null;
   canonical={`/blog/category/${categoryParam}/`}
   description={`Arsip blog berdasarkan kategori "${categoryParam}".`}
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
-  jsonLd={collectionPageJsonLd(
-    `Blog Category: ${categoryParam}`,
-    `/blog/category/${categoryParam}/`,
-    paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
-  )}
+  jsonLd={[
+    collectionPageJsonLd(
+      `Blog Category: ${categoryParam}`,
+      `/blog/category/${categoryParam}/`,
+      paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
+    ),
+    breadcrumbJsonLd([
+      { name: 'Blog', url: '/blog/' },
+      { name: 'Categories', url: '/blog/category/' },
+      { name: categoryParam, url: `/blog/category/${categoryParam}/` },
+    ]),
+  ]}
   selectedItem="blog"
 >
   <BackNav href="/blog/category/" label="Back to Category" />

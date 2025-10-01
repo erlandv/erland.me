@@ -55,6 +55,38 @@ export function collectionPageJsonLd(
   } as const;
 }
 
+// Category index CollectionPage JSON-LD where items are category pages
+export function categoriesIndexJsonLd(
+  name: string,
+  url: string,
+  items: { url: string; name: string; position: number }[]
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name,
+    url: `${SITE_CONFIG.url}${url}`,
+    description: `Categories of blog posts by ${SITE_CONFIG.author.name}`,
+    isPartOf: {
+      '@type': 'Blog',
+      name: `${SITE_CONFIG.name} Blog`,
+      url: `${SITE_CONFIG.url}/blog/`,
+      author: personJsonLd(),
+    },
+    author: personJsonLd(),
+    publisher: organizationJsonLd(),
+    itemListElement: items.map(it => ({
+      '@type': 'ListItem',
+      position: it.position,
+      item: {
+        '@type': 'WebPage',
+        name: it.name,
+        url: `${SITE_CONFIG.url}${it.url}`,
+      },
+    })),
+  } as const;
+}
+
 export function blogPostingJsonLd(opts: {
   title: string;
   canonical: string;
