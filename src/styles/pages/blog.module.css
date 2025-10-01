@@ -27,26 +27,24 @@
 }
 
 .blog-post__meta-icon {
-  width: 16px;
-  height: 16px;
-  color: rgba(var(--color-primary-rgb), 0.8);
+  width: 22px;
+  height: 22px;
+  color: var(--text-muted);
 }
 
 /* Link + date styles within meta */
 .blog-post__meta a {
-  color: #d0d0d0;
+  color: var(--text-muted);
+  font-size: 16px;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(var(--color-primary-rgb), 0.35);
+  text-transform: capitalize;
+  border-bottom: 1px dashed var(--text-muted);
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.blog-post__meta a:hover {
-  color: var(--color-secondary);
-  border-bottom-color: rgba(var(--color-primary-rgb), 0.6);
-}
-
 .blog-post__meta time {
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  font-size: 16px;
 }
 
 /* Link styling inside blog content (prose) */
