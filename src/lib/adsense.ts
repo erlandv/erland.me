@@ -143,12 +143,84 @@ export function autoInitDownloadAds(
   const container = document.getElementById('download-content');
   if (!container) return;
   if (slotMid) insertAdAfterMiddle(container, client, slotMid);
-  if (slotEnd) insertAdUnit(container, client, slotEnd);
+  if (slotEnd) {
+    try {
+      const share = document.querySelector('section.share');
+      if (share && share.parentNode) {
+        const existing = document.querySelector(
+          `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
+        );
+        if (!existing) {
+          const ins = document.createElement('ins');
+          ins.className = 'adsbygoogle';
+          ins.style.display = 'block';
+          ins.setAttribute('data-ad-client', client);
+          ins.setAttribute('data-ad-slot', slotEnd);
+          ins.setAttribute('data-ad-format', 'auto');
+          ins.setAttribute('data-full-width-responsive', 'true');
+          share.parentNode.insertBefore(ins, share);
+          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+          (window as any).adsbygoogle.push({});
+          return;
+        }
+      }
+
+      const filesSection = document.getElementById('download-files-section');
+      if (filesSection && filesSection.parentNode) {
+        const existing = document.querySelector(
+          `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
+        );
+        if (!existing) {
+          const ins = document.createElement('ins');
+          ins.className = 'adsbygoogle';
+          ins.style.display = 'block';
+          ins.setAttribute('data-ad-client', client);
+          ins.setAttribute('data-ad-slot', slotEnd);
+          ins.setAttribute('data-ad-format', 'auto');
+          ins.setAttribute('data-full-width-responsive', 'true');
+          filesSection.parentNode.insertBefore(ins, filesSection.nextSibling);
+          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+          (window as any).adsbygoogle.push({});
+          return;
+        }
+      }
+
+      insertAdUnit(container, client, slotEnd);
+    } catch (e) {
+      console.warn('AdSense end placement (download) error:', e);
+      insertAdUnit(container, client, slotEnd);
+    }
+  }
 }
 
 export function autoInitDownloadPlaceholders() {
   const container = document.getElementById('download-content');
   if (!container) return;
   insertPlaceholderAfterMiddle(container, 'Ad Placeholder (mid)');
-  insertPlaceholderUnit(container, 'Ad Placeholder (end)');
+  try {
+    const share = document.querySelector('section.share');
+    if (share && share.parentNode && !document.querySelector('.ad-placeholder[data-ad-pos="end"]')) {
+      const box = document.createElement('div');
+      box.className = 'ad-placeholder';
+      box.setAttribute('data-ad-pos', 'end');
+      box.textContent = 'Ad Placeholder (end)';
+      share.parentNode.insertBefore(box, share);
+      return;
+    }
+
+    const filesSection = document.getElementById('download-files-section');
+    if (filesSection && filesSection.parentNode && !document.querySelector('.ad-placeholder[data-ad-pos="end"]')) {
+      const box = document.createElement('div');
+      box.className = 'ad-placeholder';
+      box.setAttribute('data-ad-pos', 'end');
+      box.textContent = 'Ad Placeholder (end)';
+      filesSection.parentNode.insertBefore(box, filesSection.nextSibling);
+      return;
+    }
+
+    insertPlaceholderUnit(container, 'Ad Placeholder (end)');
+  } catch (e) {
+    console.warn('Placeholder end placement (download) error:', e);
+    insertPlaceholderUnit(container, 'Ad Placeholder (end)');
+  }
 }

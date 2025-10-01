@@ -84,7 +84,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
   </article>
 
     {downloadRows.length > 0 && (
-      <section class={dl["download-files"]}>
+      <section class={dl["download-files"]} id="download-files-section">
         <h2 class={dl["download-files-title"]}>Link Download</h2>
         {data.downloadIntro && data.downloadIntro.length > 0 && (
           <div class={dl["download-files-intro"]}>
