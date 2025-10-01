@@ -46,7 +46,7 @@ export function insertAdAfterMiddle(
   try {
     const candidates = Array.from(
       container.querySelectorAll(
-        'p, h2, h3, ul, ol, pre, blockquote, figure, img'
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
       )
     );
     const n = candidates.length;
@@ -71,7 +71,11 @@ export function insertAdAfterMiddle(
     ins.setAttribute('data-ad-format', 'auto');
     ins.setAttribute('data-full-width-responsive', 'true');
 
-    ref.parentNode.insertBefore(ins, ref.nextSibling);
+    const target =
+      (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
+      (ref.closest && (ref.closest('figure') as Element)) ||
+      ref;
+    target.parentNode!.insertBefore(ins, target.nextSibling);
     (window as any).adsbygoogle = (window as any).adsbygoogle || [];
     (window as any).adsbygoogle.push({});
   } catch (e) {
@@ -89,7 +93,7 @@ export function insertPlaceholderAfterMiddle(container: Element, label?: string)
     if (existing) return;
     const candidates = Array.from(
       container.querySelectorAll(
-        'p, h2, h3, ul, ol, pre, blockquote, figure, img'
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
       )
     );
     const n = candidates.length;
@@ -102,7 +106,11 @@ export function insertPlaceholderAfterMiddle(container: Element, label?: string)
     if (!ref || !ref.parentNode) {
       container.appendChild(box);
     } else {
-      ref.parentNode.insertBefore(box, ref.nextSibling);
+      const target =
+        (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
+        (ref.closest && (ref.closest('figure') as Element)) ||
+        ref;
+      target.parentNode!.insertBefore(box, target.nextSibling);
     }
   } catch (e) {
     console.warn('AdSense insertPlaceholderAfterMiddle error:', e);

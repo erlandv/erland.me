@@ -168,12 +168,13 @@ ul {
   display: block;
   margin: 1rem auto;
   padding: 0.75rem 1rem;
-  border: 1px dashed rgba(var(--color-primary-rgb), 0.35);
+  border: 2px dashed var(--border);
   border-radius: 8px;
-  color: var(--text-secondary);
-  background: rgba(var(--color-primary-rgb), 0.06);
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
   text-align: center;
   font-size: 0.95rem;
+  font-family: 'Agave Nerd Font', ui-monospace, monospace;
 }
 
 @media screen and (max-width: 640px) {
