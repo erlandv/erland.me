@@ -118,7 +118,7 @@ const enableAdsense = import.meta.env.PROD && isProductionSite() && Boolean(ADSE
   )}
   {enableAdsense && (
     <>
-      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
       <script is:inline>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
     </>
   )}
