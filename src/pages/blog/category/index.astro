@@ -5,6 +5,7 @@ import PostCard from "../../../components/PostCard.astro";
 import Pagination from "../../../components/Pagination.astro";
 //
 import listing from "../../../styles/pages/listing.module.css";
+import catStyles from "../../../styles/pages/category.module.css";
 import { loadAllPosts, slugifyCategory, slicePage } from '../../../lib/blog';
 
 const posts = await loadAllPosts();
@@ -98,9 +99,9 @@ const byCategory = categories.map((cat) => {
     <h1>Blog Categories</h1>
 
     <!-- Category filter buttons -->
-    <div id="category-filter" style="display:flex;flex-wrap:wrap;gap:10px;margin: 8px 0 18px 0;">
+    <div id="category-filter" class={catStyles.filterContainer}>
       {categories.map((c) => (
-        <a href={`#cat-${c.slug}-page-1`} class="cat-filter-btn" data-cat={c.slug} style="text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid rgba(138,180,255,.35);color:#fff;background:rgba(255,255,255,0.04);font-size:.95rem;">
+        <a href={`#cat-${c.slug}-page-1`} class="cat-filter-btn" data-cat={c.slug}>
           {c.name}
         </a>
       ))}
@@ -166,11 +167,9 @@ const byCategory = categories.map((cat) => {
       if (!(btn instanceof HTMLElement)) return;
       const slug = btn.getAttribute('data-cat');
       if (slug === cat) {
-        btn.style.background = 'rgba(var(--color-primary-rgb), 0.18)';
-        btn.style.borderColor = 'rgba(var(--color-primary-rgb), 0.6)';
+        btn.classList.add('is-active');
       } else {
-        btn.style.background = 'rgba(255,255,255,0.04)';
-        btn.style.borderColor = 'rgba(138,180,255,0.35)';
+        btn.classList.remove('is-active');
       }
     });
   }

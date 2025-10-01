@@ -1,0 +1,39 @@
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 18px 0;
+}
+
+/* Use global class for button to allow JS toggling without hashed name */
+:global(.cat-filter-btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  color: var(--color-secondary);
+  font-weight: 600;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.35);
+  border-radius: 8px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  width: fit-content;
+  line-height: 1.4;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+:global(.cat-filter-btn:hover) {
+  background: rgba(var(--color-primary-rgb), 0.12);
+  color: #ffffff;
+  border-color: rgba(var(--color-primary-rgb), 0.6);
+}
+
+:global(.cat-filter-btn.is-active) {
+  background: rgba(var(--color-primary-rgb), 0.18);
+  color: #ffffff;
+  border-color: rgba(var(--color-primary-rgb), 0.6);
+}
