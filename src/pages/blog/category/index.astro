@@ -190,6 +190,20 @@ const byCategory = categories.map((cat) => {
       }
     }
     if (hp) showCatPage(hp.cat, hp.page);
+
+    // Bind filter buttons clicks
+    document.querySelectorAll('#category-filter .cat-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cat = btn.getAttribute('data-cat');
+        if (!cat) return;
+        const target = `#cat-${cat}-page-1`;
+        if (location.hash !== target) {
+          location.hash = target;
+        }
+        showCatPage(cat, 1);
+      });
+    });
   }
 
   window.addEventListener('hashchange', () => {
@@ -197,9 +211,37 @@ const byCategory = categories.map((cat) => {
     if (hp) showCatPage(hp.cat, hp.page);
   });
 
+  // Delegate clicks for pagination links with hash targets
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!t) return;
+    var a = null;
+    if (t instanceof HTMLAnchorElement) {
+      a = t;
+    } else if (t instanceof Element && typeof t.closest === 'function') {
+      a = t.closest('a');
+    }
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (!href.startsWith('#cat-')) return;
+    const m = href.match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);
+    if (!m) return;
+    e.preventDefault();
+    const cat = m[1];
+    const page = Math.max(1, parseInt(m[2] || '1', 10) || 1);
+    if (location.hash !== href) {
+      location.hash = href;
+    }
+    showCatPage(cat, page);
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  // Re-initialize on Astro client router transitions if present
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:after-swap', init);
 </script>
