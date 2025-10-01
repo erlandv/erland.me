@@ -18,6 +18,4 @@ export function isProdSite(): boolean {
 // Google Tag Manager container ID (public, non-secret)
 // Prefer `PUBLIC_GTM_ID` via `import.meta.env`, fall back to process.env for scripts.
 export const GTM_ID: string =
-  (import.meta as any).env?.PUBLIC_GTM_ID ||
-  process.env.PUBLIC_GTM_ID ||
-  '';
+  (import.meta as any).env?.PUBLIC_GTM_ID || process.env.PUBLIC_GTM_ID || '';

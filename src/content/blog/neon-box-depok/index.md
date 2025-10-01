@@ -40,17 +40,17 @@ Selain itu, masih banyak sekali jenis-jenisnya. Anda bisa memesan berbagai bentu
 
 Harga <a href="https://reklamesia.com/neon-box/depok">neon box Depok</a> yang saya lampirkan di sini hanya harga neonbox bulat saja demi artikel yang ringkas. Jika Anda ingin mengetahui daftar harga pembuatan neonbox yang lebih lengkap, saya sarankan Anda menghubungi langsung _customer service_ Cipta Mica Kreasi melalui chat WhatsApp **0812-8552-8669**
 
-| Diameter | Media Akrilik | Media Backlight | Tiang |
-| --- | --- | --- | --- |
-| 50 cm | Rp1.700.000 | Rp1.500.000 | 2½ inch |
-| 60 cm | Rp1.900.000 | Rp1.700.000 | 2½ inch |
-| 70 cm | Rp2.100.000 | Rp1.900.000 | 2½ inch |
-| 80 cm | Rp2.400.000 | Rp2.100.000 | 3 inch |
-| 90 cm | Rp2.700.000 | Rp2.300.000 | 3 inch |
-| 100 cm | Rp2.900.000 | Rp2.500.000 | 3 inch |
-| 120 cm | Rp3.300.000 | Rp2.700.000 | 3 inch |
-| 150 cm | \- | Rp3.500.000 | 3 inch |
-| 200 cm | \- | Rp4.500.000 | 3 inch |
+| Diameter | Media Akrilik | Media Backlight | Tiang   |
+| -------- | ------------- | --------------- | ------- |
+| 50 cm    | Rp1.700.000   | Rp1.500.000     | 2½ inch |
+| 60 cm    | Rp1.900.000   | Rp1.700.000     | 2½ inch |
+| 70 cm    | Rp2.100.000   | Rp1.900.000     | 2½ inch |
+| 80 cm    | Rp2.400.000   | Rp2.100.000     | 3 inch  |
+| 90 cm    | Rp2.700.000   | Rp2.300.000     | 3 inch  |
+| 100 cm   | Rp2.900.000   | Rp2.500.000     | 3 inch  |
+| 120 cm   | Rp3.300.000   | Rp2.700.000     | 3 inch  |
+| 150 cm   | \-            | Rp3.500.000     | 3 inch  |
+| 200 cm   | \-            | Rp4.500.000     | 3 inch  |
 
 ## Bahan Neon Box
 
@@ -86,11 +86,11 @@ Berikut ini adalah beberapa foto contoh-contoh neonbox hasil produksi yang saya 
 
 [![](./images/pembuatan-neon-box-depok.jpg)](/wp-content/uploads/2020/04/pembuatan-neon-box-depok.jpg)
 
-* * *
+---
 
 ## Pertanyaan Terkait Neon Box
 
-* * *
+---
 
 ### Bagaimana cara membuat neonbox?
 

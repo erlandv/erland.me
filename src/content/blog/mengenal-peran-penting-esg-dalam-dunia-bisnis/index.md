@@ -37,7 +37,7 @@ Komponen "_Governance_" dari ESG fokus pada bagaimana perusahaan dikelola dan di
 
 ## Mengapa ESG Penting dalam Bisnis?
 
-![](./images/business.webp 'Source: freepik.com/free-photo/business-partners-handshake-global-corporate-with-technology-concept\_15556737.htm')
+![](./images/business.webp 'Source: freepik.com/free-photo/business-partners-handshake-global-corporate-with-technology-concept_15556737.htm')
 
 ESG memiliki peran penting dalam dunia bisnis karena dampaknya yang luas. Berikut beberapa alasan mengapa ESG menjadi semakin relevan:
 

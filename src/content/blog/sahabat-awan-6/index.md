@@ -284,7 +284,7 @@ _“Kalau itu memang cita-citamu, buatlah cita-citamu itu menjadi nyata. Jadilah
 
 Di keheningan alam itu, kami masih terduduk menikmati waktu yang tersisa bersama Lijuan. Besok Lijuan akan kembali pulang ke kota berdirinya Monas. Lijuan memberikan kami 7 buah foto sekaligus. Masing-masing dari kami mendapatkan foto yang berbeda. Foto-foto itu adalah foto hasil jepretan di banyak negara. Foto yang aku pegang adalah foto Lijuan berlatar belakang menara eifel. Hatiku menjerit seketika. Aku iri dengan Lijuan.
 
-* * *
+---
 
 ## Bulan Purnama
 
@@ -359,6 +359,6 @@ _“Kami akan selalu menjaganya, nek.”_ sahutku, disambut dengan anggukan yang
 
 Nenek memberikan senyuman hangatnya kepada kami sebelum tubuhnya dibungkus oleh kelemahan. Tubuhnya yang kurus kering terjatuh di atas tanah. Kami semua dibuat bingung untuk kesekian kalinya. Siti dan Christy mencoba menyadarkan nenek. Kakiku gemetaran. Dimas terlihat berpikir keras. Egi dan Gian terlihat garuk-garuk kepala. Sementara itu Pahing tertidur lemas di bawah pohon.
 
-* * *
+---
 
 Bersambung ke [Sahabat Awan Bagian 7](/blog/sahabat-awan-7)

@@ -20,7 +20,7 @@ Lidah buaya sudah lama dikenal sebagai tanaman serbaguna yang memiliki segudang 
 
 Selain kandungan nutrisinya yang melimpah, cara penggunaan lidah buaya juga cukup mudah, bahkan bisa dilakukan di rumah. Yuk, kita bahas lebih dalam tentang <a href="https://www.kahfeveryday.com/2024/04/26/4-manfaat-lidah-buaya-untuk-rambut-dan-cara-pemanfaatannya/">manfaat lidah buaya</a>, terutama untuk rambut, serta cara penggunaannya.
 
-![](./images/manfaat-lidah-buaya.webp 'Source: https://www.freepik.com/free-photo/aloevera-table\_6118252.htm')
+![](./images/manfaat-lidah-buaya.webp 'Source: https://www.freepik.com/free-photo/aloevera-table_6118252.htm')
 
 ## Manfaat Lidah Buaya secara Umum
 

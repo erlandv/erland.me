@@ -16,7 +16,7 @@ Granit atau granum telah menjadi salah satu bahan bangunan yang paling populer d
 
 Namun, agar hasilnya memuaskan dan tahan lama, penting untuk memasang granum dengan benar. Artikel ini akan membahas cara pasang agar rapi dan awet, serta mengapa Anda harus mempertimbangkan batu alam ini dalam proyek desain Anda.
 
-![](./images/pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment\_22699397.htm')
+![](./images/pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22699397.htm')
 
 ## Tips Pasang Granit agar Rapi dan Awet
 
@@ -44,7 +44,7 @@ Sebelum memulai pemasangan, tentukan titik awal yang tepat untuk memulai pemasan
 
 Tarik benang untuk membuat garis lurus di sepanjang area yang akan dipasangi granum. Pastikan benang tersebut sejajar dengan permukaan lantai. Kemudian, gunakan leveling untuk memastikan bahwa benang tersebut berada pada tingkat yang sama dengan permukaan lantai.
 
-![](./images/cara-pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment\_22698700.htm')
+![](./images/cara-pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22698700.htm')
 
 ### Periksa Gambar Pola
 

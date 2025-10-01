@@ -15,7 +15,7 @@ category: essay
 draft: false
 ---
 
-_**Nocturnal human being**_ adalah sebutan bagi orang yang cenderung terjaga hingga larut malam dan aktif pada malam hari. Sebutan lainnya yaitu _evening person_, _night owl,_ atau _lychnobite_. Sebutan-sebutan tersebut disematkan pada orang yang aktif di malam hari untuk bekerja.
+**_Nocturnal human being_** adalah sebutan bagi orang yang cenderung terjaga hingga larut malam dan aktif pada malam hari. Sebutan lainnya yaitu *evening person*, *night owl,* atau _lychnobite_. Sebutan-sebutan tersebut disematkan pada orang yang aktif di malam hari untuk bekerja.
 
 Untuk kali ini aku menambahkan satu sebutan lagi, sebut saja "manusia pemuja malam". Ini hanyalah berupa diksi yang aku sematkan bagi orang yang produktif di malam hari. Aku, kamu, dan banyak lagi orang di muka bumi ini yang mengalami.
 
@@ -29,11 +29,11 @@ Normalnya pola tidur untuk dewasa rata-rata sampai 8 jam, namun dalam kasusnya j
 
 _Apa saja dampak negatif dari pola tidur tidak normal?_
 
-Banyak sekali dampak negatif dari pola tidur yang tidak normal ini. Seperti gangguan _mood_, kesehatan kulit berkurang, munculnya lingkaran hitam di bawah mata, mudah stres, menjadi pelupa, bahkan yang paling ngeri dari dampak ini adalah masalah kesehatan pada jantung dan juga dapat memicu kanker.
+Banyak sekali dampak negatif dari pola tidur yang tidak normal ini. Seperti gangguan *mood*, kesehatan kulit berkurang, munculnya lingkaran hitam di bawah mata, mudah stres, menjadi pelupa, bahkan yang paling ngeri dari dampak ini adalah masalah kesehatan pada jantung dan juga dapat memicu kanker.
 
 > Baca juga: **[Menghadapi Quater Life Crisis](/blog/menghadapi-quarter-life-crisis/)**
 
-Tapi aku di sini tidak sedang membahas dampak negatif pola tidur yang tidak normal dikarenakan tidur larut malam. Justru ingin membahas orang yang suka tidur larut malam cenderung orang yang lebih cerdas. Menurut Psychology Today, orang-orang cerdas biasanya lebih memilih menjadi _nocturnal_ daripada orang dengan yang punya IQ normal. Dalam sebuah _Study Magazine_, <a href="https://scholar.google.co.uk/citations?user=Zc33N34AAAAJ&hl=en">Satoshi Kanazawa</a>, seorang psikolog di London School of Economics and Political Science, melaporkan bahwa IQ rata-rata dan pola tidur memiliki hubungan erat. Korelasi ini membuktikan bahwa orang yang cerdas menghabiskan waktunya untuk terjaga di malam hari.
+Tapi aku di sini tidak sedang membahas dampak negatif pola tidur yang tidak normal dikarenakan tidur larut malam. Justru ingin membahas orang yang suka tidur larut malam cenderung orang yang lebih cerdas. Menurut Psychology Today, orang-orang cerdas biasanya lebih memilih menjadi _nocturnal_ daripada orang dengan yang punya IQ normal. Dalam sebuah *Study Magazine*, <a href="https://scholar.google.co.uk/citations?user=Zc33N34AAAAJ&hl=en" rel="nofollow" target="_blank">Satoshi Kanazawa</a>, seorang psikolog di London School of Economics and Political Science, melaporkan bahwa IQ rata-rata dan pola tidur memiliki hubungan erat. Korelasi ini membuktikan bahwa orang yang cerdas menghabiskan waktunya untuk terjaga di malam hari.
 
 Siang hari kamu memaksakan diri untuk aktif dan produktif. Namun semua itu tidak berjalan dengan 100% kemampuanmu. Bahkan bisa jadi pikiranmu berjalan tak tentu arah. Ketika malam hari tiba, kamu bisa mengeluarkan seluruh kemampuanmu dan kamu dengan mudah menjelajahi segala yang ada di pikiranmu. Kamu menjadi diri sendiri dan melepaskan topeng yang kamu pakai seharian. Kamu bisa fokus dan merasa damai untuk menghasilkan suatu karya hasil dari buah pikiran. Ide-ide segar datang dan mengalir di pikiranmu.
 
@@ -43,7 +43,7 @@ Memang banyak sekali orang bilang bahwa tidur larut malam adalah kebiasaan negat
 
 ### IQ Lebih Tinggi
 
-Beberapa penelitian mengatakan bahwa individu yang suka tidur larut malam cenderung memiliki kecerdasan di atas rata-rata. Dalam surat kabar akademik <a href="https://www.psychologytoday.com/intl/blog/the-scientific-fundamentalist/201005/why-night-owls-are-more-intelligent-morning-larks">Why Night Owls Are More Intelligent Than Morning Larks</a>, yang diterbitkan dalam jurnal _Psychology And Individual Difference_, menjelaskan asumsi bahwa dalam beberapa dekade ini, orang-orang cenderung bekerja pada siang hari dan tidur pada malam hari. Dan orang yang terjaga pada malam hari, adalah sosok yang mampu memperluas pemikiran mereka.
+Beberapa penelitian mengatakan bahwa individu yang suka tidur larut malam cenderung memiliki kecerdasan di atas rata-rata. Dalam surat kabar akademik <a href="https://www.psychologytoday.com/intl/blog/the-scientific-fundamentalist/201005/why-night-owls-are-more-intelligent-morning-larks" rel="nofollow" target="_blank">Why Night Owls Are More Intelligent Than Morning Larks</a>, yang diterbitkan dalam jurnal *Psychology And Individual Difference*, menjelaskan asumsi bahwa dalam beberapa dekade ini, orang-orang cenderung bekerja pada siang hari dan tidur pada malam hari. Dan orang yang terjaga pada malam hari, adalah sosok yang mampu memperluas pemikiran mereka.
 
 ### Lebih Open Minded
 
@@ -55,15 +55,13 @@ Dikatakan proaktif dikarenakan orang yang tidur larut malam beberapa langkah leb
 
 ### Memiliki Keunggulan Fisik
 
-Para peneliti di _University of Alberta_ menguji kekuatan kaki sembilan orang yang rutin bangun pagi dan sembilan orang yang biasa tidur larut malam. Yang terbiasa bangun pagi cenderung memiliki kekuatan yang konsisten sepanjang hari, dan yang terbiasa tidur larut malam memiliki kekuatan lebih tinggi di malam hari. Olle Lagerquist, penulis penelitian, mengatakan bahwa hal ini terjadi mungkin karena pada sekitar pukul 21, terjadi peningkatan motorik korteks dan rangsangan sumsum tulang belakang di dalam tubuh orang yang suka tidur larut malam. Para ilmuwan masih meneliti kebenarannya.
+Para peneliti di *University of Alberta* menguji kekuatan kaki sembilan orang yang rutin bangun pagi dan sembilan orang yang biasa tidur larut malam. Yang terbiasa bangun pagi cenderung memiliki kekuatan yang konsisten sepanjang hari, dan yang terbiasa tidur larut malam memiliki kekuatan lebih tinggi di malam hari. Olle Lagerquist, penulis penelitian, mengatakan bahwa hal ini terjadi mungkin karena pada sekitar pukul 21, terjadi peningkatan motorik korteks dan rangsangan sumsum tulang belakang di dalam tubuh orang yang suka tidur larut malam. Para ilmuwan masih meneliti kebenarannya.
 
 ### Lebih Kreatif
 
-Peneliti dari _Catholic University of the Sacred Heart_ di Milan menemukan, bahwa orang yang rutin tidur larut malam, cenderung memiliki solusi yang lebih orisinil dan kreatif dibanding orang yang tidur lebih awal.
+Peneliti dari *Catholic University of the Sacred Heart* di Milan menemukan, bahwa orang yang rutin tidur larut malam, cenderung memiliki solusi yang lebih orisinil dan kreatif dibanding orang yang tidur lebih awal.
 
 ![nocturnal human being](./images/nocturnal-human-being.png)
-
-* * *
 
 _Jadi siapa yang bangga dengan hobi begadang?_
 
@@ -95,6 +93,6 @@ Walaupun tidurmu kurang dari 8 jam, itu bukanlah tolak ukur dari tidur yang tida
 
 Begadang butuh energi. Hindari makanan berat yang mengandung gula dan karbohidrat. Konsumsi buah dan sayur segar. Hindari pula makanan yang mengandung cokelat, keju, makanan berlemak atau goreng-gorengan, dan mie instan yang mengandung kadar garam berlebih karena mengakibatkan gangguan metabolisme tubuh.
 
-* * *
+---
 
 Bagi kalian yang seorang _nocturnal_, jangan terlalu takut dengan kondisi kesehatan kalian karena kebiasaan kalian yang hobi tidur larut malam. Terapkan tips di atas agar kondisi kalian tetap stabil, dan tetap berstamina di siang hari menjalankan segala aktivitas.

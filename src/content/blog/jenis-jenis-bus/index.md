@@ -48,6 +48,4 @@ Sesuai dengan namanya, bus ini adalah bus dengan dua lantai alias bus tingkat. D
 
 ![model bus](./images/model-bus.png)
 
-* * *
-
 Nah, itulah jenis-jenis bus yang beragam. Semoga dengan membaca artikel ini kalian dapat membedakan jenis-jenis bus. Khususnya untuk kalian yang akan melakukan perjalanan jauh menggunakan bus dan untuk kalian yang ingin [sewa bus pariwisata](/blog/sewa-bus-pariwisata-semarang/) agar dapat memilih bus yang sesuai dengan kebutuhan kalian. Saran saya, pilih jenis bus SHD karena fitur-fitur busnya super mewah, dijamin kalian nyaman selama perjalanan. Oke? Semoga perjalanan kalian menyenangkan!

@@ -86,35 +86,35 @@ Jika Anda sedang mencari <a href="https://www.ef.co.id/englishfirst/adults/">tem
 
 1. **fX Sudirman**, Jl. Jendral Sudirman – Pintu Satu, Senayan, Jakarta 10270
 
-3. **Mall Taman Anggrek**, Lt. 3, Jl. Letjen S. Parman, Kav. 21, Jakarta Barat 11470
+2. **Mall Taman Anggrek**, Lt. 3, Jl. Letjen S. Parman, Kav. 21, Jakarta Barat 11470
 
-5. **The Plaza Office Tower**, Level 22 # B, Jl. M.H. Thamrin Kav 28-30, Jakarta Pusat 10350
+3. **The Plaza Office Tower**, Level 22 # B, Jl. M.H. Thamrin Kav 28-30, Jakarta Pusat 10350
 
-7. **Kuningan City**, Lt. 1. Jl. Prof. Dr, Satrio Kav. 8, Setiabudi Kuningan, Jakarta Selatan 12940
+4. **Kuningan City**, Lt. 1. Jl. Prof. Dr, Satrio Kav. 8, Setiabudi Kuningan, Jakarta Selatan 12940
 
-9. **Mall of Indonesia**, Lt 2, C9-C10, Jl. Boulevard Barat Raya, Kelapa Gading, Jakarta, 14240
+5. **Mall of Indonesia**, Lt 2, C9-C10, Jl. Boulevard Barat Raya, Kelapa Gading, Jakarta, 14240
 
-11. **Lippo Mall Puri**, Lt 1. Unit L1-67C., Jl. Puri Indah Raya Blok U1, Puri Indah CBD, Jakarta 11610
+6. **Lippo Mall Puri**, Lt 1. Unit L1-67C., Jl. Puri Indah Raya Blok U1, Puri Indah CBD, Jakarta 11610
 
 Selain Jakarta, ada juga nih _center location_ EF di Surabaya. Bisa dikunjungi untuk Anda yang berdomisili di Surabaya dan sekitarnya. Lokasinya berada di **Tanjungan Plaza 6**, Lantai 5, Jl. Embong Malang 21-31, Surabaya 60261.
 
 Sekian ulasan tentang layanan EF Adults kursus bahasa Inggris Profesional. Baca juga beberapa pertanyaan yang sering diajukan oleh calon _student_ terkait EF Adults di bawah ini.
 
-* * *
+---
 
 ## _Frequently Asked Questions_
 
-* * *
+---
 
-\[rank\_math\_rich\_snippet id="s-099142cc-22f7-447c-ae13-6939b6ede876"\]
+\[rank_math_rich_snippet id="s-099142cc-22f7-447c-ae13-6939b6ede876"\]
 
-* * *
+---
 
-\[rank\_math\_rich\_snippet id="s-10879e42-bfd2-4220-a7c9-e0779e7f3339"\]
+\[rank_math_rich_snippet id="s-10879e42-bfd2-4220-a7c9-e0779e7f3339"\]
 
-* * *
+---
 
 _**"Utamakan Bahasa Indonesia, lestarikan Bahasa Daerah, kuasai Bahasa Asing."**_  
 \- _Badan Bahasa_
 
-* * *
+---

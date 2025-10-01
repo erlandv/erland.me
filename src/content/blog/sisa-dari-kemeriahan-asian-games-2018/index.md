@@ -40,18 +40,18 @@ Terlepas dari jenis kelamin yang mengalami _sexual harassment_, entah perempuan 
 
 > Lalu apa yang harus dilakukan ketika mendapatkan sexual harassment?
 
-Sedikit tips yang bisa saya berikan, apa yang harus dilakukan ketika mendapatkan _sexual harassment_.
+Sedikit tips yang bisa saya berikan, apa yang harus dilakukan ketika mendapatkan *sexual harassment*.
 
 1. Apabila di tempat umum, berteriaklah. Agar orang di sekitarmu mengalihkan pandangan padamu dan menggagalkan niat si pelaku.
 
-3. Apabila melalui media sosial berupa pesan singkat, maka _screen shoot-_lah isi percakapan dan akun pelaku, kemudian _share_ di media sosial Anda.
+2. Apabila melalui media sosial berupa pesan singkat, maka *screen shoot-\_lah isi percakapan dan akun pelaku, kemudian \_share* di media sosial Anda.
 
-5. Apabila di tempat tertutup yang tidak banyak diketahui orang lain, cobalah mencatat tentang kejadian (identitas pelaku, tempat kejadian, waktu, saksi dan apa saja yang diperbuat  oleh pelaku). Karena data ini bisa digunakan sebagai bentuk laporan kamu kepada pihak berwajib.
+3. Apabila di tempat tertutup yang tidak banyak diketahui orang lain, cobalah mencatat tentang kejadian (identitas pelaku, tempat kejadian, waktu, saksi dan apa saja yang diperbuat  oleh pelaku). Karena data ini bisa digunakan sebagai bentuk laporan kamu kepada pihak berwajib.
 
-7. Jangan menutup diri dan merasa malu karena telah mengalami pelecehan seksual. Bicaralah pada orang lain tentang pelecehan seksual yang kamu alami. Ceritakan pada teman, rekan kerja, keluarga, atasan atau siapa pun yang kamu percayai dan mau mengerti situasi yang kamu alami.
+4. Jangan menutup diri dan merasa malu karena telah mengalami pelecehan seksual. Bicaralah pada orang lain tentang pelecehan seksual yang kamu alami. Ceritakan pada teman, rekan kerja, keluarga, atasan atau siapa pun yang kamu percayai dan mau mengerti situasi yang kamu alami.
 
-9. Berilah pelajaran kepada pelaku. Apabila kamu punya ilmu beladiri, berilah dia pelajaran agar menciptakan efek jera. Atau katakan langsung padanya bahwa kamu tidak bisa terima dengan tindakannya.
+5. Berilah pelajaran kepada pelaku. Apabila kamu punya ilmu beladiri, berilah dia pelajaran agar menciptakan efek jera. Atau katakan langsung padanya bahwa kamu tidak bisa terima dengan tindakannya.
 
-11. Laporkan perbuatan pelecehan seksual tersebut kepada yang berwajib, karena pelecehan seksual jelas telah melanggar hukum.
+6. Laporkan perbuatan pelecehan seksual tersebut kepada yang berwajib, karena pelecehan seksual jelas telah melanggar hukum.
 
-Selain hal di atas, untuk perempuan jaga diri dan jaga perilaku, kemudian untuk laki-laki jaga pandangan dan jaga pikiran. Hal tersebut dilakukan untuk menghindari perbuatan dilecehkan maupun melecehkan. Karena _sexual harassment_ ini bisa terjadi di mana saja dan kapan saja. Entah sejak kapan _sexual harassment_ ini muncul di muka bumi dan belum bisa hilang hingga sekarang. Semoga Tuhan melindungi kita dari hal yang berbau _sexual harassment_.
+Selain hal di atas, untuk perempuan jaga diri dan jaga perilaku, kemudian untuk laki-laki jaga pandangan dan jaga pikiran. Hal tersebut dilakukan untuk menghindari perbuatan dilecehkan maupun melecehkan. Karena *sexual harassment* ini bisa terjadi di mana saja dan kapan saja. Entah sejak kapan *sexual harassment* ini muncul di muka bumi dan belum bisa hilang hingga sekarang. Semoga Tuhan melindungi kita dari hal yang berbau *sexual harassment*.

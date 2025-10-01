@@ -37,7 +37,7 @@ Keren yaa bocah ingusan kelas 5 SD sudah bisa merasakan penat. Padahal masalah h
 
 Kamu tau KRL Ekonomi? Atau pernah menaikinya? Kalau pernah, masa kecil kamu pasti bahagia. Jauh sebelum ada Commuter Line, KRL Ekonomi begitu murah walau tak nyaman, pintu kereta terbuka lebar saat berjalan, banyak yang naik di atap kereta. Terbilang membahayakan. Yaa namanya juga kelas ekonomi.
 
-![KRL Ekonomi](./images/krl-ekonomi.jpg 'Sumber: [https://id.wikipedia.org/wiki/Berkas:KRL\_train\_surfing\_5.jpg](https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg)')
+![KRL Ekonomi](./images/krl-ekonomi.jpg 'Sumber: [https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg](https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg)')
 
 Di KRL Ekonomi tak hanya ada penumpang kereta, ada pedagang asongan, pengemis, pengamen, bahkan ada badut sulat dan topeng monyet juga juga. Benar-benar transportasi umum yang antik.
 
@@ -117,13 +117,13 @@ Sekarang aku jualan dengan modal sendiri, berasa ganteng jadi pengusaha sejak us
 
 “_Itu uang hasil jualan, bu. hehe_” aku jawab sambil tersipu malu. 
 
-Senangnya berlipat-lipat ganda punya penghasilan sendiri, tabungan banyak. Walau capek pagi-siang sekolah, siang-malam jualan. Tapi itu semua dibayar oleh hasil yang memuaskan. Sampai waktu itu sekolah aku ngadain _Study Tour_, kalau nggak salah (berarti benar)... ke Gedung Sate Bandung dan Air Panas Ciater. Bayarnya sekitar Rp. 200.000 dan itu aku bayar sendiri dengan uang tabunganku. Pikir aja anak kelas 5 SD punya uang segitu bukan hasil minta dari orang tua, gimana rasanya? Dibilang megang uang Lima Puluh Ribu aja tangan merinding.
+Senangnya berlipat-lipat ganda punya penghasilan sendiri, tabungan banyak. Walau capek pagi-siang sekolah, siang-malam jualan. Tapi itu semua dibayar oleh hasil yang memuaskan. Sampai waktu itu sekolah aku ngadain *Study Tour*, kalau nggak salah (berarti benar)... ke Gedung Sate Bandung dan Air Panas Ciater. Bayarnya sekitar Rp. 200.000 dan itu aku bayar sendiri dengan uang tabunganku. Pikir aja anak kelas 5 SD punya uang segitu bukan hasil minta dari orang tua, gimana rasanya? Dibilang megang uang Lima Puluh Ribu aja tangan merinding.
 
 Waktu berlalu sampai aku kelas 6 SD, awal-awal aku masih jualan juga. Tapi mendekati akhir sekolah aku benar-benar berhenti dulu jualan karena aku harus fokus EBTANAS.
 
 Eh, kamu tau EBTANAS? Kalau tau, berarti kita seumuran. Ehe.
 
-Sampai akhirnya, _Alhamdulillah_.. lulus SD, aku melanjutkan ke SMP.
+Sampai akhirnya, *Alhamdulillah*.. lulus SD, aku melanjutkan ke SMP.
 
 Lokasi sekolah? Tetap jauh dari rumah yang mengharuskan aku naik kereta untuk pulang perginya. Saat sudah SMP dan ketika pulang naik kereta, aku lihat pedagang asongan, sedikit rindu aku untuk kembali berjualan. Akhirnya aku berniat untuk jualan lagi, mengejar cita-cita jadi pengusaha lagi, aku pikir aku harus lelah dulu memang berjualan. Ada saatnya nanti aku berbisnis tanpa lelah lagi, mempekerjakan pegawai aku, jadi Bandar, tinggal nunggu para pegawai setoran uang ke aku. Ah, itu cita-cita ku!
 
@@ -139,24 +139,24 @@ Sejurus kemudian paman aku mengatakan suatu kata-kata yang sampai detik ini ngga
 
 > _Lah, jualan kok malu? Jangan malu berjualan, sebaik-baiknya pekerjaan itu berdagang. Nabi Muhammad aja dulu pekerjaannya berdagang._
 
-Kata-kata itu bikin semangat berbisnisku tumbuh lagi, bikin termotivasi. Dipikir benar juga, untuk apa malu berjualan selama apa yang dijual itu halal? Rasulullah SAW aja dulu pekerjaannya jualan.  
-  
+Kata-kata itu bikin semangat berbisnisku tumbuh lagi, bikin termotivasi. Dipikir benar juga, untuk apa malu berjualan selama apa yang dijual itu halal? Rasulullah SAW aja dulu pekerjaannya jualan.
+
 Setelah itu, aku pikirkan baik-baik bisnis apa yang enak untuk selanjutnya.. Aku disarankan bisnis pulsa oleh paman aku, karena waktu itu adalah awal-awal populer penggunaan ponsel untuk SMS-an. Kecil-kecilan pun tidak apa-apa, karena kata Bob Sadino:
 
 > _Setinggi apapun pangkat yang dimiliki, kamu tetep seorang pegawai. Sekecil apapun usaha yang kamu punya, kamu adalah bosnya_
 
-Aku akhirnya usaha jualan pulsa. Menawarkan ke teman-teman sekelas, ke teman sekitar rumah, tetangga, dan siapapun semua orang yang aku kenal. Bertujuan orang-orang tau apa yang aku jual, jadi ketika mereka butuh pulsa, selalu teringat aku.  
-  
-Kiprah berjualan pulsa lumayanlah, nambah-nambah uang buat tabungan. Aku berencana buka usaha lain setelah lulus SMP nanti, berencana berbisnis yang lebih besar setelah SMK nanti, maka itu aku giat promosi jualan pulsa sana-sini, nabung untuk modal usaha nanti.  
-  
-Akhirnya.. Aku lulus SMP, uang tabunganku sudah cukup banyak untuk memulai suatu yang baru, bisnis yang baru, melampiaskan hasrat wirausaha yang dulu terpendam sifat malu remaja.  
-  
-Sekarang ceritanya aku sudah kelas 1 SMK, uang tabungan udah tersedia untuk modal usaha. Usaha apa yang akan aku geluti selanjutnya?  
-  
-Biar ada drama ala sinetron, aku buat tulisan ini bersambung. Aku sambung lagi nanti kalau lagi santai walau nggak tau kapan santainya. Orang sibuk namanya juga. Sibuk makan dan tidur setiap hari tanpa henti.  
-  
-Ya pokoknya nanti aku lanjut lagi, berhubung ini hampir nggak terasa bus Primajasa yang aku tumpangi sudah masuk kota Garut, aku harus berterima kasih ke anak kecil penjual air mineral tadi. Tanpa dia, mungkin aku nggak akan menulis ini. Lima jam perjalanan Jakarta-Garut aku habiskan untuk menulis di bus. Sementara temanku, Arif, tidur nyenyak di samping aku menyandarkan kepalanya di pundak aku dengan mulutnya yang menganga. Sebaiknya aku bangunkan dia dengan cara disiram menggunakan air mineral hasil beli di anak kecil tadi yang sama sekali belum aku minum, inilah fungsinya air.  
-  
-Dan akhirnya tujuan kami sudah tiba. Kota Garut! Kota yang indah dengan dua gunung terkenalnya, Papandayan & Cikuray. Aku rekomendasikan kalian untuk mengunjungi Garut. Kota ini rajin membuat rindu.  
-  
+Aku akhirnya usaha jualan pulsa. Menawarkan ke teman-teman sekelas, ke teman sekitar rumah, tetangga, dan siapapun semua orang yang aku kenal. Bertujuan orang-orang tau apa yang aku jual, jadi ketika mereka butuh pulsa, selalu teringat aku.
+
+Kiprah berjualan pulsa lumayanlah, nambah-nambah uang buat tabungan. Aku berencana buka usaha lain setelah lulus SMP nanti, berencana berbisnis yang lebih besar setelah SMK nanti, maka itu aku giat promosi jualan pulsa sana-sini, nabung untuk modal usaha nanti.
+
+Akhirnya.. Aku lulus SMP, uang tabunganku sudah cukup banyak untuk memulai suatu yang baru, bisnis yang baru, melampiaskan hasrat wirausaha yang dulu terpendam sifat malu remaja.
+
+Sekarang ceritanya aku sudah kelas 1 SMK, uang tabungan udah tersedia untuk modal usaha. Usaha apa yang akan aku geluti selanjutnya?
+
+Biar ada drama ala sinetron, aku buat tulisan ini bersambung. Aku sambung lagi nanti kalau lagi santai walau nggak tau kapan santainya. Orang sibuk namanya juga. Sibuk makan dan tidur setiap hari tanpa henti.
+
+Ya pokoknya nanti aku lanjut lagi, berhubung ini hampir nggak terasa bus Primajasa yang aku tumpangi sudah masuk kota Garut, aku harus berterima kasih ke anak kecil penjual air mineral tadi. Tanpa dia, mungkin aku nggak akan menulis ini. Lima jam perjalanan Jakarta-Garut aku habiskan untuk menulis di bus. Sementara temanku, Arif, tidur nyenyak di samping aku menyandarkan kepalanya di pundak aku dengan mulutnya yang menganga. Sebaiknya aku bangunkan dia dengan cara disiram menggunakan air mineral hasil beli di anak kecil tadi yang sama sekali belum aku minum, inilah fungsinya air.
+
+Dan akhirnya tujuan kami sudah tiba. Kota Garut! Kota yang indah dengan dua gunung terkenalnya, Papandayan & Cikuray. Aku rekomendasikan kalian untuk mengunjungi Garut. Kota ini rajin membuat rindu.
+
 Baiklah, kawan. Sampai jumpa.

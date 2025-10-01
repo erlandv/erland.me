@@ -27,9 +27,9 @@ Bagi keluarga yang mencari tempat untuk liburan yang menyenangkan, Bogor adalah 
 
 1. Berjalan-jalan: Taman ini memiliki berbagai jalur dan jalan setapak yang indah, sehingga Anda dapat menjelajahi keindahan alamnya. Pastikan untuk selalu membawa kamera agar Anda dapat meresapi dan mengabadikan momen-momen indah selama kunjungan Anda.
 
-3. Kebun Anggrek: Bagi pecinta anggrek, Taman Bogor Raya memiliki kebun anggrek yang menakjubkan. Anda dapat melihat berbagai jenis anggrek dari berbagai belahan dunia.
+2. Kebun Anggrek: Bagi pecinta anggrek, Taman Bogor Raya memiliki kebun anggrek yang menakjubkan. Anda dapat melihat berbagai jenis anggrek dari berbagai belahan dunia.
 
-5. Museum Zoologi: Taman ini juga memiliki museum zoologi yang menarik, di mana Anda dapat belajar lebih banyak tentang satwa liar dan ekosistem di sekitar Bogor.
+3. Museum Zoologi: Taman ini juga memiliki museum zoologi yang menarik, di mana Anda dapat belajar lebih banyak tentang satwa liar dan ekosistem di sekitar Bogor.
 
 ## Mengunjungi Taman Bogor Raya
 

@@ -37,11 +37,11 @@ Kita _zoom_ lagi ke pemerintahan tingkat 2 atau kabupaten Kotawaringin Barat, at
 
 Kumai adalah sebuah kota kecamatan, di mana masyarakatnya sedikit demi sedikit mulai melupakan tradisi. Hanya para orang tua yang sudah lanjutlah yang punya banyak cerita tentang asyiknya tradisi. Nenekku sering bercerita tentang tradisi Bebarsih Banua, di mana orang-orang turun ke laut dan saling lempar ketupat. Perayaan 1 Muharam di mana orang-orang membaca selawat di dalam [mobil](/blog/seva-pusat-mobil-murah/) bak berkeliling kampung dan para penontonnya melempar permen, ketupat, atau sesuatu yang manis lainnya dengan berharap rezekinya satu tahun ke depan juga manis seperti pemberiannya. Bahkan pawai Tanglong yang memiliki banyak pengemar juga hilang ditelan zaman.
 
-Selain itu, Kumai juga punya spa yang diajarkan turun temurun. Seperti betimung yang bisa dibilang sauna ala Kumai dengan peralatan serba tradisional. Wadak, lulur ala Kumai. Dan pupur dingin, masker ala Kumai. Pada dasarnya semua itu dilakukan untuk setiap pasangan yang akan menikah agar terlihat lebih cantik atau tampan. Untuk kami yang belum waktunya menikah, bisa ikut sekadar mempercantik diri. Tapi bersiaplah harus menanggung risiko dari kicauan para ibu-ibu. Mereka akan bilang _“Sudah kebelet kawin kah?”_ Itulah pertanyaan yang akan kami terima saat melakukan spa tersebut. Suatu ketika aku pernah iseng menjawab _“Iya, mungkin tidak lama lagi,”_ Pernyataan itu ternyata terbawa angin, menilisik telinga, dan tercantum keras di otak Uma. Dengan sigap Uma menarik tanganku dan mengurungku di dalam WC seharian. Tidak makan, hanya minum air keran yang tidak higienis. Hal itu terjadi saat aku duduk di bangku SMP.
+Selain itu, Kumai juga punya spa yang diajarkan turun temurun. Seperti betimung yang bisa dibilang sauna ala Kumai dengan peralatan serba tradisional. Wadak, lulur ala Kumai. Dan pupur dingin, masker ala Kumai. Pada dasarnya semua itu dilakukan untuk setiap pasangan yang akan menikah agar terlihat lebih cantik atau tampan. Untuk kami yang belum waktunya menikah, bisa ikut sekadar mempercantik diri. Tapi bersiaplah harus menanggung risiko dari kicauan para ibu-ibu. Mereka akan bilang *“Sudah kebelet kawin kah?”* Itulah pertanyaan yang akan kami terima saat melakukan spa tersebut. Suatu ketika aku pernah iseng menjawab *“Iya, mungkin tidak lama lagi,”* Pernyataan itu ternyata terbawa angin, menilisik telinga, dan tercantum keras di otak Uma. Dengan sigap Uma menarik tanganku dan mengurungku di dalam WC seharian. Tidak makan, hanya minum air keran yang tidak higienis. Hal itu terjadi saat aku duduk di bangku SMP.
 
-Tradisi yang paling membuat aku bingung adalah tradisi _Tampung Tawar_. Di kota, mungkin yang namanya belajar pakai motor atau mobil itu sudah biasa. Tapi di sini, setiap orang yang berhasil mengendarai motor atau mobil setelah cukup lama belajar harus dirayakan. Tidak dirayakan besar-besaran, hanya mengundang beberapa keluarga dan seorang sesepuh untuk berdoa. Sesepuh akan mencipratkan air yang telah diberi mantra kepada pelatihnya, kepada orang yang menjalaninya, dan tidak lupa kendaraannya. Anehnya, kalau kita mengalami kecelakaan, proses tersebut harus diulangi sekali lagi. Tapi hal ini sudah jarang dilakukan. Hanya nenekku yang masih memegang teguh tradisi ini. Jadi, setiap kali aku jatuh dalam mengendarai motor, aku tak ingin ada keluarga yang tahu.
+Tradisi yang paling membuat aku bingung adalah tradisi *Tampung Tawar*. Di kota, mungkin yang namanya belajar pakai motor atau mobil itu sudah biasa. Tapi di sini, setiap orang yang berhasil mengendarai motor atau mobil setelah cukup lama belajar harus dirayakan. Tidak dirayakan besar-besaran, hanya mengundang beberapa keluarga dan seorang sesepuh untuk berdoa. Sesepuh akan mencipratkan air yang telah diberi mantra kepada pelatihnya, kepada orang yang menjalaninya, dan tidak lupa kendaraannya. Anehnya, kalau kita mengalami kecelakaan, proses tersebut harus diulangi sekali lagi. Tapi hal ini sudah jarang dilakukan. Hanya nenekku yang masih memegang teguh tradisi ini. Jadi, setiap kali aku jatuh dalam mengendarai motor, aku tak ingin ada keluarga yang tahu.
 
-Yang lebih aku tidak mengerti lagi bahwa disini yang namanya _kepuhunan_ merajalela. _Kepuhunan_ adalah kecelakaan yang terjadi karena belum makan atau belum sempat mencicipi masakan. Aneh memang, tapi itulah yang terjadi. Misalnya ada anak yang bergegas berangkat sekolah, tapi belum sempat sarapan, anak itu diwajibkan untuk secuil saja memegang nasi. Diharapkan agar tidak terjadi apa-apa saat diperjalanan nanti. Sungguh aneh tapi nyata.
+Yang lebih aku tidak mengerti lagi bahwa disini yang namanya *kepuhunan* merajalela. *Kepuhunan* adalah kecelakaan yang terjadi karena belum makan atau belum sempat mencicipi masakan. Aneh memang, tapi itulah yang terjadi. Misalnya ada anak yang bergegas berangkat sekolah, tapi belum sempat sarapan, anak itu diwajibkan untuk secuil saja memegang nasi. Diharapkan agar tidak terjadi apa-apa saat diperjalanan nanti. Sungguh aneh tapi nyata.
 
 ## Masa Kecil yang Tersisa
 
@@ -83,7 +83,7 @@ Bu Nia adalah bosku yang sangar, tubuhnya yang besar membuat sebagian toko tampa
 
 _“Halo... Dengan siapa, dimana?”_
 
-“_Hai, May. Sudah lupa dengan suaraku ini?”_ kata seseorang di ujung telpon sana.
+“*Hai, May. Sudah lupa dengan suaraku ini?”* kata seseorang di ujung telpon sana.
 
 Aku diam sejenak mengingat suaranya, saat dia bilang “suara” ada yang aneh dengan kata itu saat dia mengucapkannya. Ya, dia Dian Putra teman sekelasku ketika SD di kota Sampit dulu. Yang paling aku kenal dan aku rindu saat dia bilang kata-kata yang memuat huruf “R”.
 
@@ -137,8 +137,8 @@ _"May, mulai sekarang kita rival. Aku akan berusaha menggapai cita-citaku menjad
 
 Dian mematikan ponselnya, tanpa peduli dengan diriku yang masih dalam keadaan linglung. Dian mengingatkan kejadian yang mengukir sejarah dihidupku beberapa tahun yang lalu.
 
-_Plak...._ sebuah botol bekas air mineral mendarat tepat di kepalaku. Kejadian itu membuatku tersadar. Terlihat wajah geram bu Nia yang menaruh dendam kepada karyawannya yang agak sedikit bandel (melanggar peraturan dilarang mengangkat telpon saat banyak pelanggan).
+*Plak....* sebuah botol bekas air mineral mendarat tepat di kepalaku. Kejadian itu membuatku tersadar. Terlihat wajah geram bu Nia yang menaruh dendam kepada karyawannya yang agak sedikit bandel (melanggar peraturan dilarang mengangkat telpon saat banyak pelanggan).
 
-* * *
+---
 
 Bersambung ke [Sahabat Awan Bagian 2](/blog/sahabat-awan-2/)

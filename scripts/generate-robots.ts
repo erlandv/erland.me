@@ -5,7 +5,7 @@ function loadEnvFromFile(filePath: string): void {
   try {
     if (!existsSync(filePath)) return;
     const content = readFileSync(filePath, 'utf-8');
-    content.split(/\r?\n/).forEach((line) => {
+    content.split(/\r?\n/).forEach(line => {
       const trimmed = line.trim();
       if (!trimmed || trimmed.startsWith('#')) return;
       const eqIdx = trimmed.indexOf('=');
@@ -33,7 +33,8 @@ loadEnvFromFile(join(process.cwd(), '.env'));
 const siteUrl: string = process.env.SITE_URL || 'https://erland.me';
 const siteDomain: string = process.env.SITE_DOMAIN || 'erland.me';
 
-const isProd: boolean = siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
+const isProd: boolean =
+  siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
 
 const robotsContent: string = isProd
   ? `User-agent: *
@@ -68,4 +69,3 @@ writeFileSync(robotsPath, robotsContent);
 console.log(
   `✅ Generated robots.txt for ${isProd ? 'production' : 'staging/testing'} (site URL: ${siteUrl})`
 );
-

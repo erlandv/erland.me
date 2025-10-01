@@ -18,7 +18,7 @@ draft: false
 
 ## 5 Momen Terbaik
 
-Dari awal masuk sekolah sampai kelas 3 SD adalah masa penuh kenangan. Saat itu teman sebayaku kira-kira masih ada 19 orang. Ada 5 kenangan yang masih segar terpatri indah di kepalaku dengan nama folder "5 Momen Terbaik_"_.
+Dari awal masuk sekolah sampai kelas 3 SD adalah masa penuh kenangan. Saat itu teman sebayaku kira-kira masih ada 19 orang. Ada 5 kenangan yang masih segar terpatri indah di kepalaku dengan nama folder "5 Momen Terbaik*"*.
 
 ### Kenangan Pertama
 
@@ -33,7 +33,7 @@ Aku diam terpaku.
 
 Jawaban Uma terkesan aneh. Selama ini yang aku tahu orang gila itu hidupnya di jalan dengan kelakuan yang unik-unik. Kalau orang yang lama di TK adalah orang gila, berarti guru-guru TK yang setiap harinya menyanyi lagu anak-anak di TK adalah orang gila. Dan yang pasti, yang merasa dulunya pernah bersekolah di TK adalah mantan orang gila. Berarti aku dulu gila dong. Kalau hal itu semakin dipikirkan, lama-lama aku bisa gila juga.
 
-Saat pertama kali menginjakan kaki di tempat ini, rasanya itu dilempar dari bumi ke planet terasing di jagat raya. Orang-orang yang asing, suasana yang asing, dan tempat yang asing pula. Saat pertama kali naik taksi kelotok, melintasi sungai dengan kiri kanan adalah hutan. Aku sempat berpikir kalau tempat itu seperti hutan apa adanya dan semua penduduknya hidup seperti _tarzan_.
+Saat pertama kali menginjakan kaki di tempat ini, rasanya itu dilempar dari bumi ke planet terasing di jagat raya. Orang-orang yang asing, suasana yang asing, dan tempat yang asing pula. Saat pertama kali naik taksi kelotok, melintasi sungai dengan kiri kanan adalah hutan. Aku sempat berpikir kalau tempat itu seperti hutan apa adanya dan semua penduduknya hidup seperti *tarzan*.
 
 Ternyata pikiranku itu ditendang dengan kasar dalam benakku. Ternyata mereka hidup seperti pada umumnya. Hanya saja di sini lebih sederhana dan lebih bersahaja. Yang unik di sini, kaki mereka tidak menyentuh tanah. Karena setiap mess dibangun dengan tiang yang tinggi layaknya rumah panggung. Dan antara mess satu dengan mess lainnya dihubungkan dengan jembatan-jembatan kecil yang saling berhubungan. Semua itu dilakukan untuk mengatisipasi pasangnya air sungai yang bisa saja  menenggelamkan mess. Jadi pantaslah kalau tempat ini disebut negeri tanpa jejak.
 
@@ -59,7 +59,7 @@ Aku, Siti, Christy, Egi, dan beberapa teman lainnya duduk menemani mereka. Pahin
 
 Keasyikan kami terganggu ketika abang-abang dari mess bujangan datang. Dengan sigap, mereka menakuti kesepuluh anak malang itu. Mereka merasuki otak kami dengan meniupkan jutaan rasa ketakutan. Bujangers jahat itu beraksi lagi. Egi yang non muslim langsung berlari pulang dan mengunci kamarnya rapat-rapat. Aku dan teman perempuan lainnya menjerit histeris dan kabur ke ibu masing-masing. (_Maaf sekali lagi yah_) abang-abang itu dengan sadis membuka itunya Pahing dan mempratikkan bagaimana cara dokter memotong kemaluannya anak-anak dengan bengis. Kesepuluh anak itu langsung drop dan panas dingin. Bayangan akan makan banyak, dapat uang dari tamu, dapat hadiah mainan dari orang tua, ditambah dengan hadiah kejutan dari pemilik perusahaan ini, hilang seketika terbawa angin tornado.
 
-Sementara itu, di luar sedang diadakan penyambutan dokter di dermaga _speed boat_. Dengan gagah dokter itu turun dari speed boat. Karena terlalu _over_ pede, si dokter yang diketahui namanya Efendi itu terjungkal di dermaga. Ketidaktahuan akan medan jalan yang licin karena berlumut adalah penyebabnya. Alhasil, dia jatuh dengan sukses. Setelah sampai di tempat acara. Belum sempat si dokter merapatkan pantatnya ke lantai. Kesepuluh anak yang ingin disunat memberontak. Mereka semua berlari dengan pakaian seadanya. Para orang tua dibikin gelagapan. Mereka juga ikut berlari mengejar anak masing-masing tentunya. Terjadilah acara kejar-kejaran sengit. Para penghuni perusahaan ini dibuat pusing, para tamu dibuat bingung, dan pimpinan perusahaan beserta staffnya dibuat malu.
+Sementara itu, di luar sedang diadakan penyambutan dokter di dermaga *speed boat*. Dengan gagah dokter itu turun dari speed boat. Karena terlalu *over* pede, si dokter yang diketahui namanya Efendi itu terjungkal di dermaga. Ketidaktahuan akan medan jalan yang licin karena berlumut adalah penyebabnya. Alhasil, dia jatuh dengan sukses. Setelah sampai di tempat acara. Belum sempat si dokter merapatkan pantatnya ke lantai. Kesepuluh anak yang ingin disunat memberontak. Mereka semua berlari dengan pakaian seadanya. Para orang tua dibikin gelagapan. Mereka juga ikut berlari mengejar anak masing-masing tentunya. Terjadilah acara kejar-kejaran sengit. Para penghuni perusahaan ini dibuat pusing, para tamu dibuat bingung, dan pimpinan perusahaan beserta staffnya dibuat malu.
 
 Dimas, Pahing, dan Gian berlari ke gudang. Beberapa teman lainnya berlari masuk ke area pabrik. Parahnya ada juga yang menceburkan diri secara sukarela ke dalam sungai, yaitu Dodi. Para orang tua terpaksa membujuk dan menguras kantong lebih dalam untuk memberi iming-iming kepada anaknya.
 
@@ -79,7 +79,7 @@ Kami semua terjatuh ke dalam sungai yang saat itu sedang pasang. Dalamnya air sa
 
 Dengan postur tubuhnya yang tinggi, Egi dengan gagahnya mengangkat Siti naik ke daratan. Siti meringis kesakitan. Wajahnya pucat dan bibirnya bergetar. Hal itu membuat kami semua menjadi tambah gugup. Gian dan beberapa teman lainnya berlari ke pabrik  memanggil semua pekerja yang saat itu sedang menjalani tugasnya. Christy ke mess orang tuanya Siti. Aku, Dimas, Pahing, dan Egi dibuat gelagapan mengangkat tubuh Siti yang sudah tidak berdaya.
 
-Beberapa saat kemudian semua pekerja datang menolong. Ibunya Siti menangis histeris. Tangisan sang ibu ternyata membuat sang ayah tambah gugup dan pingsan. Jadilah keluarga ini keluarga pingsan bersama. Kemudian Siti dibawa ke rumah sakit di kota Sampit dengan _speedboat_. Setelah ibu dan ayahnya sadar, mereka berdua juga menyusul ke rumah sakit.
+Beberapa saat kemudian semua pekerja datang menolong. Ibunya Siti menangis histeris. Tangisan sang ibu ternyata membuat sang ayah tambah gugup dan pingsan. Jadilah keluarga ini keluarga pingsan bersama. Kemudian Siti dibawa ke rumah sakit di kota Sampit dengan *speedboat*. Setelah ibu dan ayahnya sadar, mereka berdua juga menyusul ke rumah sakit.
 
 Hingga malam tiba, aku dan teman-teman termenung di dermaga menunggu kabar terbaru tentang Siti. Tidak lama kemudian bang Usup datang dengan wajah yang murung.
 
@@ -96,21 +96,21 @@ Peryataan bang Erick itu membuat posisi jantungku berpindah entah kemana. Kami s
 
 “_Mulai sekarang kalian jangan dekat-dekat Siti lagi. Karena kalian semua hanya membuat Siti tambah menderita._” tukas seseorang yang punya gigi tak beraturan dan wajah yang dibombardir oleh jerawat.
 
-Di lubuk hatiku yang terdalam aku tak mempercayai perkataan mereka. Menakut-nakuti adalah hobi mereka. Membuat masalah adalah _basic_ hidup mereka. Mencari pacar untuk pemuas nafsu adalah tujuan masa depan mereka. Itulah aktivitas yang dikerjakan para bujangers selain bekerja. Harap dimaklumi kalau mereka hidup terkurung dikelilingi hutan. Bekerja dan bekerja, hanya itulah yang mereka lakukan. Sedikit penyimpangan membuat mereka merasa berada di dunia yang jauh dari kejenuhan. Semakin lama prilaku mereka menampakan prilaku tarzan yang liar dan ganas.
+Di lubuk hatiku yang terdalam aku tak mempercayai perkataan mereka. Menakut-nakuti adalah hobi mereka. Membuat masalah adalah *basic* hidup mereka. Mencari pacar untuk pemuas nafsu adalah tujuan masa depan mereka. Itulah aktivitas yang dikerjakan para bujangers selain bekerja. Harap dimaklumi kalau mereka hidup terkurung dikelilingi hutan. Bekerja dan bekerja, hanya itulah yang mereka lakukan. Sedikit penyimpangan membuat mereka merasa berada di dunia yang jauh dari kejenuhan. Semakin lama prilaku mereka menampakan prilaku tarzan yang liar dan ganas.
 
 Beberapa hari tanpa kehadiran Siti membuat kami menjadi generasi galau. Hujan, badai, dan tsunami menebas habis isi hati dan pikiran kami. Demi menyambut kedatangan Siti, beberapa kali aku turun ke batang untuk menengok situasi. Gelisah melanda hati silih berganti. Dari kejauhan terdengar suara speedboat yang berderu. Itulah tanda kalau Siti sudah dekat.
 
 _Te Jrenggg..._
 
-Siti turun dari _speedboat_ dengan kaki yang masih utuh dan masih pincang tentunya. Dengan emosi yang menderu kami semua menatap para bujangers yang berada di atas. Sebuah kata “_seraaaaang_” dari Gian menandakan perang telah dimulai. Sebuah keranjang penuh dengan balon air, dengan racikan beberapa kotoran dan daun-daun yang dipercaya membuat gatal, kami lemparkan dengan liar kepada para bujangers. Siti dan semua orang di situ dibuat bingung. Para bujangers kami buat kalang kabut dan pastinya gatal.
+Siti turun dari *speedboat* dengan kaki yang masih utuh dan masih pincang tentunya. Dengan emosi yang menderu kami semua menatap para bujangers yang berada di atas. Sebuah kata “_seraaaaang_” dari Gian menandakan perang telah dimulai. Sebuah keranjang penuh dengan balon air, dengan racikan beberapa kotoran dan daun-daun yang dipercaya membuat gatal, kami lemparkan dengan liar kepada para bujangers. Siti dan semua orang di situ dibuat bingung. Para bujangers kami buat kalang kabut dan pastinya gatal.
 
 ### Kenangan Keempat
 
 Setiap malamnya di sekitar pabrik dilepaskan beberapa ekor anjing penjaga. Jadi tidak ada yang berani mendekati pabrik itu di malam hari. Namun pada suatu hari ada anjing yang nyasar ke kawasan mess. Langsung saja hal itu membuat geger penghuni mess. Si penjaga anjing bersumpah kalau semua anjing sudah dikembalikan ke kandang subuh tadi.
 
-Setelah dilihat-lihat, si anjing ternyata memiliki ciri-ciri _rabies_. Sontak saja membuat semua pekerja menjadikan ini sebagai alasan bolos kerja. Semua pintu mess tertutup rapat. Bahkan jendelapun juga tertutup rapat. Mereka menganggap anjing _rabies_ layaknya anjing yang terkena virus _zombie_ di filmnya _Resident Evil_. Lagi-lagi pimpinan dibuat bingung oleh kelakuan karyawannya yang semakin hari semakin unik.
+Setelah dilihat-lihat, si anjing ternyata memiliki ciri-ciri *rabies*. Sontak saja membuat semua pekerja menjadikan ini sebagai alasan bolos kerja. Semua pintu mess tertutup rapat. Bahkan jendelapun juga tertutup rapat. Mereka menganggap anjing *rabies* layaknya anjing yang terkena virus *zombie* di filmnya *Resident Evil*. Lagi-lagi pimpinan dibuat bingung oleh kelakuan karyawannya yang semakin hari semakin unik.
 
-Kami yang berangkat subuh, benar-benar tidak mengetahui kejadian yang telah melanda mess. Sepulang sekolah, kami diperlihatkan keadaan mess yang seperti kota mati. Dengan berjalan lambat, kami meraba-raba apa yang sedang terjadi. Bang Doni yang saat itu duduk di bangku SMA mencoba memimpin kami di depan. Kami seolah-olah beradegan di film garapan sendiri dengan judul _The Monster_. Dengan alur cerita kami tersesat di daerah kumuh karena warganya yang telah tewas dimangsa si _monster_ dan kami adalah gerombolan regu pahlawan yang siap memberantas _monster_ tersebut.
+Kami yang berangkat subuh, benar-benar tidak mengetahui kejadian yang telah melanda mess. Sepulang sekolah, kami diperlihatkan keadaan mess yang seperti kota mati. Dengan berjalan lambat, kami meraba-raba apa yang sedang terjadi. Bang Doni yang saat itu duduk di bangku SMA mencoba memimpin kami di depan. Kami seolah-olah beradegan di film garapan sendiri dengan judul *The Monster*. Dengan alur cerita kami tersesat di daerah kumuh karena warganya yang telah tewas dimangsa si *monster* dan kami adalah gerombolan regu pahlawan yang siap memberantas *monster* tersebut.
 
 Dari kejauhan tiba-tiba terdengar suara teriakan dari lantai dua mess gadis.
 
@@ -172,9 +172,9 @@ Sejuta pohon tumbang, seratus monyet mati kejang-kejang, seribu ikan langsung te
 “_Kenapa pak?_” tanya Dimas.  
 “_Pak ustadz berlaku keras kepada kalian untuk menciptakan moral yang disiplin dan tidak penakut alias tidak cengeng dan yang jelas pemberani. Pak ustadz akan setia berada di sisi kalian agar kalian bisa memiliki iman yang lebih kuat. Masalah TV, suatu saat benda yang dinamakan televisi itu akan merusak moral kalian. Mereka hanya diam kemudian  menampilkan banyak acara, di situlah perlahan-lahan mereka merusak kalian. Yang namanya manusia akan selalu dihantui oleh nafsu. Hanya malaikat yang tidak punya nafsu. Bagaimana?_” tanya pak ustadz dengan wajah serius.
 
-Kami semua saling berpandangan satu sama lain. Bagi kami televisi itu adalah dunia lain yang sangat luas ruang lingkupnya. Apalagi saat itu sedang populer yang namanya _Teletubbies_. Empat boneka semok dengan wajah imut yang hobi berpelukan. Perlahan dan tampak meragukan kami mengangguk saja.
+Kami semua saling berpandangan satu sama lain. Bagi kami televisi itu adalah dunia lain yang sangat luas ruang lingkupnya. Apalagi saat itu sedang populer yang namanya *Teletubbies*. Empat boneka semok dengan wajah imut yang hobi berpelukan. Perlahan dan tampak meragukan kami mengangguk saja.
 
-Sepulang dari musala, Gian tampak kesal dengan kejadian tadi. Dia kecewa karena tidak bisa lagi menonton sosok _Poo_ si merah. Esoknya di taksi kelotok dia juga masih termenung. Salah seorang anak SMA dari perusahaan sebelah yang bertubuh kurus mendekati Gian. Gian akhirnya bercerita dengan seorang laki-laki yang diketahui nama panggilannya Koci itu.
+Sepulang dari musala, Gian tampak kesal dengan kejadian tadi. Dia kecewa karena tidak bisa lagi menonton sosok *Poo* si merah. Esoknya di taksi kelotok dia juga masih termenung. Salah seorang anak SMA dari perusahaan sebelah yang bertubuh kurus mendekati Gian. Gian akhirnya bercerita dengan seorang laki-laki yang diketahui nama panggilannya Koci itu.
 
 “_Oh... Masalah itu. Itu hanyalah masalah biasa. Datanglah ke mess abang. Kitakan berbeda perusahaan, ustadzmu tidak akan pernah tahu, jadi kamu bisa nonton sepuasnya._” kata si abang.  
 “_Benar itu, Bang?_”  
@@ -187,7 +187,7 @@ Sesampainya di perusahaan sebelah kami disambut hangat oleh bujangers dari mess 
 
 _Gebrak...._
 
-Suara tendangan dari luar menghancurkan pintu. Layaknya film-film _action_, seseorang yang berada di depan pintu itu akhirnya tersungkur. Seorang ustadz Zai, muncul dari balik pintu itu. Beliau datang dengan wajah bersih dan bercahaya. Aku dibuat linglung. Mungkinkah ustadz yang terlihat lemah dari kebiasaan sehari-harinya itu bisa merubuhkan sebuah pintu. Aku mengira kalau beliau dibantu oleh jutaan malaikat di sisinya.
+Suara tendangan dari luar menghancurkan pintu. Layaknya film-film *action*, seseorang yang berada di depan pintu itu akhirnya tersungkur. Seorang ustadz Zai, muncul dari balik pintu itu. Beliau datang dengan wajah bersih dan bercahaya. Aku dibuat linglung. Mungkinkah ustadz yang terlihat lemah dari kebiasaan sehari-harinya itu bisa merubuhkan sebuah pintu. Aku mengira kalau beliau dibantu oleh jutaan malaikat di sisinya.
 
 Para bujangers itu mendapatkan cap tangan dari jurus silat pak ustadz. Mereka semua dibuat K.O oleh ustadz andalan perusahaan kami. Tidak hanya sampai disitu saja. Para bujangers itu dipecat dari perusahaan mereka. Dan abang yang bernama Koci itu dikeluarkan dari sekolahnya. Dan kamipun tidak terlepas dari hukuman ustadz Zai. Aku, Indri, Wati, Gian, Pahing, dan Dodi, dihukum membersihkan musala setiap pulang sekolah. Sementara Christy, Egi, dan Eko dihukum oleh orang tua mereka masing-masing.
 

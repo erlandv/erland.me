@@ -25,7 +25,7 @@ Sejatinya, konflik antara Gudang Garam dan Gudang Baru telah berlangsung dalam r
 
 Pada tanggal 22 Maret, Gudang Garam (GGRM) kembali mengajukan gugatan terhadap perusahaan rokok Gudang Baru terkait hak kekayaan intelektual. Gugatan ini ditujukan kepada pemilik Gudang Baru, Ali Khosin, dan diajukan di Pengadilan Negeri Surabaya dengan nomor perkara 3/Pdt.Sus-HKI/Merek/2021/PN Niaga Surabaya.
 
-![](./images/gudang-garam-menang-atas-gugatan-gudang-baru.webp 'Source: https://www.freepik.com/free-photo/still-life-with-scales-justice\_33123987.htm')
+![](./images/gudang-garam-menang-atas-gugatan-gudang-baru.webp 'Source: https://www.freepik.com/free-photo/still-life-with-scales-justice_33123987.htm')
 
 GGRM menegaskan bahwa gugatan Gudang Garam tersebut merupakan kasus perdata yang menyoroti masalah merek dagang. Gudang Garam mengajukan tuntutan yang panjang dan rumit, menghasilkan proses hukum yang berlangsung selama enam tahun.
 

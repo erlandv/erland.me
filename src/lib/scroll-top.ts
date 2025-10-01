@@ -68,7 +68,10 @@ function setupRouterReinit() {
 }
 
 export function autoInit() {
-  const run = () => { initScrollTop(); setupRouterReinit(); };
+  const run = () => {
+    initScrollTop();
+    setupRouterReinit();
+  };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
@@ -77,4 +80,3 @@ export function autoInit() {
 }
 
 export default initScrollTop;
-

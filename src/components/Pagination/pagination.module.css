@@ -65,11 +65,25 @@
 
 /* Responsive behavior: keep layout fluid */
 @media (max-width: 640px) {
-  .pagination { gap: 6px; }
-  .page-link { width: 36px; height: 36px; }
-  .icon { width: 36px; height: 36px; }
-  .ellipsis { width: 36px; height: 36px; }
-  .iconSvg { width: 18px; height: 18px; }
+  .pagination {
+    gap: 6px;
+  }
+  .page-link {
+    width: 36px;
+    height: 36px;
+  }
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+  .ellipsis {
+    width: 36px;
+    height: 36px;
+  }
+  .iconSvg {
+    width: 18px;
+    height: 18px;
+  }
   .mobileHide {
     display: none;
   }

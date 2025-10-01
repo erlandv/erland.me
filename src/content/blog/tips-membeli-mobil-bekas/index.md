@@ -55,8 +55,6 @@ Memeriksa bagian bodi mobil juga merupakan hal vital yang harus dicermati. Terut
 
 Tidak semua orang dapat menilai dengan tepat kondisi mobil yang diperiksa, jika Anda termasuk orang yang awam tentang dunia otomotif, sebaiknya Anda mengajak teman yang berpengalaman atau minimal paham tentang mobil. Orang yang berpengalaman dapat menilai dengan tepat kondisi-kondisi hingga ke bagian terkecil. Dengan begitu, dapat mengurangi kemungkinan adanya kerusakan mobil yang terlewat dari pemeriksaan.
 
-* * *
-
 Itulah beberapa tips yang dapat Anda lakukan sebelum membeli mobil bekas. Untuk mengurangi risiko membeli mobil bekas yang kondisinya sudah buruk, Anda dapat memanfaatkan _marketplace_ otomotif terpercaya seperti [SEVA pusat mobil murah](/blog/seva-pusat-mobil-murah/) yang dikelola oleh Astra Digital.  
 Mobil-mobil bekas yang dijual di sana sudah dijamin kondisinya masih dalam keadaan bagus karena sudah melalui tahap inspeksi dan pemeriksaan oleh tim yang berpengalaman di bidang otomotif. Selain itu juga banyak dijual mobil dengan harga yang terjangkau.
 

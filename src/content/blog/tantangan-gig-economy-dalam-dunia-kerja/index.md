@@ -24,7 +24,7 @@ Kehadirannya cenderung mampu menarik minat pencari kerja untuk bergabung dengan 
 
 Gig economy adalah konsep baru yang muncul seiring perkembangan ekonomi di era industri 4.0. Sederhananya, gig economy adalah pasar tenaga kerja bebas, di mana pekerja lepas atau berbasis proyek.
 
-![](./images/gig-economy-dalam-dunia-kerja.webp 'Source: https://www.freepik.com/free-photo/beautiful-women-wearing-new-long-sleeved-white-carpet-holding-notebook-house-dollar-banknote-symbols-blue-trading\_5601781.htm')
+![](./images/gig-economy-dalam-dunia-kerja.webp 'Source: https://www.freepik.com/free-photo/beautiful-women-wearing-new-long-sleeved-white-carpet-holding-notebook-house-dollar-banknote-symbols-blue-trading_5601781.htm')
 
 Misalnya saja seperti seorang freelancer, dimana mereka mendapatkan bayaran per proyek, mirip musisi yang dibayar tiap kali tampil. Meski tak memiliki pendapatan tetap, sekali proyek selesai, penghasilannya bisa melebihi gaji bulanan pekerja full-time.
 

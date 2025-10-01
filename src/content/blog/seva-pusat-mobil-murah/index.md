@@ -238,4 +238,4 @@ Telepon: (0361) 4713347
 Jl. Andi Pangeran Pettarani No. 98A, Makassar  
 Telepon: (0411) 466 9495
 
-* * *
+---

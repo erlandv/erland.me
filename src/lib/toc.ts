@@ -40,7 +40,9 @@ function collectHeadings(prose: HTMLElement): HeadingInfo[] {
     if (!id) {
       const base = slugify(text);
       id = ensureUniqueId(base, prose);
-      try { el.setAttribute('id', id); } catch {}
+      try {
+        el.setAttribute('id', id);
+      } catch {}
     }
     if (text) out.push({ el, level: level as 2 | 3, text, id });
   }
@@ -136,7 +138,10 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   const setExpanded = (next: boolean) => {
     container.setAttribute('data-expanded', String(next));
     toggle.setAttribute('aria-expanded', String(next));
-    toggle.setAttribute('aria-label', next ? 'Hide table of contents' : 'Show table of contents');
+    toggle.setAttribute(
+      'aria-label',
+      next ? 'Hide table of contents' : 'Show table of contents'
+    );
     toggle.innerHTML = next
       ? normalizeSvg(arrowUpRaw, 'toc__toggle-icon')
       : normalizeSvg(arrowDownRaw, 'toc__toggle-icon');
@@ -151,7 +156,7 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   });
 
   // Keyboard support on header
-  header.addEventListener('keydown', (ev) => {
+  header.addEventListener('keydown', ev => {
     const key = (ev as KeyboardEvent).key;
     if (key === 'Enter' || key === ' ') {
       ev.preventDefault();
@@ -161,14 +166,14 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   });
 
   // Button toggles too; stop bubbling to header to avoid double toggle
-  toggle.addEventListener('click', (ev) => {
+  toggle.addEventListener('click', ev => {
     ev.stopPropagation();
     const next = !getExpanded();
     setExpanded(next);
   });
 
   // Smooth scroll for TOC anchors
-  container.addEventListener('click', (ev) => {
+  container.addEventListener('click', ev => {
     const target = ev.target as HTMLElement | null;
     if (!target) return;
     const anchor = target.closest('a.toc__anchor') as HTMLAnchorElement | null;
@@ -201,7 +206,9 @@ export function initToc() {
   if (!(prose instanceof HTMLElement)) return;
   if (prose.dataset.tocInitialized === 'true') return;
 
-  const headings = collectHeadings(prose).filter(h => h.level === 2 || h.level === 3);
+  const headings = collectHeadings(prose).filter(
+    h => h.level === 2 || h.level === 3
+  );
   const tocEl = buildTocElement(headings);
   if (!tocEl) return;
 
@@ -217,13 +224,19 @@ let routerSetup = false;
 function setupRouterReinit() {
   if (routerSetup) return;
   routerSetup = true;
-  const run = () => { if (isBlogArticleRoute()) initToc(); };
+  const run = () => {
+    if (isBlogArticleRoute()) initToc();
+  };
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
   window.addEventListener('popstate', run);
   const _push = history.pushState?.bind(history);
   if (_push) {
-    history.pushState = function (data: any, unused: string, url?: string | URL | null) {
+    history.pushState = function (
+      data: any,
+      unused: string,
+      url?: string | URL | null
+    ) {
       const ret = _push(data, unused, url);
       setTimeout(run, 10);
       return ret;
@@ -232,7 +245,11 @@ function setupRouterReinit() {
 }
 
 export function autoInit() {
-  const run = () => { if (!isBlogArticleRoute()) return; initToc(); setupRouterReinit(); };
+  const run = () => {
+    if (!isBlogArticleRoute()) return;
+    initToc();
+    setupRouterReinit();
+  };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
@@ -251,17 +268,33 @@ function normalizeSvg(svg: string, extraClass = ''): string {
       .replace(/<\?xml[\s\S]*?\?>/g, '')
       .replace(/<!--([\s\S]*?)-->/g, '')
       .replace(/<style[\s\S]*?<\/style>/g, '')
-      .replace(/fill\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi, 'fill:currentColor')
-      .replace(/stroke\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi, 'stroke:currentColor')
-      .replace(/fill\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi, 'fill="currentColor"')
-      .replace(/stroke\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi, 'stroke="currentColor"');
+      .replace(
+        /fill\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
+        'fill:currentColor'
+      )
+      .replace(
+        /stroke\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
+        'stroke:currentColor'
+      )
+      .replace(
+        /fill\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
+        'fill="currentColor"'
+      )
+      .replace(
+        /stroke\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
+        'stroke="currentColor"'
+      );
 
-    s = s.replace(/<svg(\s[^>]*)?>/i, (match) => {
-      let tag = match.replace(/\s(width|height)\s*=\s*"[^"]*"/gi, '')
+    s = s.replace(/<svg(\s[^>]*)?>/i, match => {
+      let tag = match
+        .replace(/\s(width|height)\s*=\s*"[^"]*"/gi, '')
         .replace(/\sfill\s*=\s*"[^"]*"/i, '');
       const cls = extraClass ? ` ${extraClass}` : '';
       if (/class\s*=\s*"[^"]*"/i.test(tag)) {
-        tag = tag.replace(/class\s*=\s*"([^"]*)"/i, (_m, c) => `class="${c}${cls}"`);
+        tag = tag.replace(
+          /class\s*=\s*"([^"]*)"/i,
+          (_m, c) => `class="${c}${cls}"`
+        );
       } else {
         tag = tag.replace(/<svg/i, `<svg class="${extraClass}"`);
       }

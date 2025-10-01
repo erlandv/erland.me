@@ -69,27 +69,27 @@ Di Ranggawarsita Tour, <a href="https://ranggawarsitatour.co.id/sewa-bus-pariwis
 
 ### Harga Sewa Bus Dalam Kota Semarang
 
-| Jenis Armanda | Kapasitas | Harga |
-| --- | --- | --- |
-| Elf Short | 14 seat | Rp1.300.000 |
-| Toyota Hiace | 14 seat | Rp1.400.000 |
-| Elf Long | 19 seat | Rp1.400.000 |
-| Bus Medium | 35 seat | Rp1.800.000 |
-| Bus Pariwisata New Setra | 47 seat | Rp2.500.000 |
-| Bus Pariwisata HD | 59 seat | Rp2.700.000 |
-| Bus Pariwisata SHD Jet 3+ | 45 set | Rp2.800.000 |
+| Jenis Armanda             | Kapasitas | Harga       |
+| ------------------------- | --------- | ----------- |
+| Elf Short                 | 14 seat   | Rp1.300.000 |
+| Toyota Hiace              | 14 seat   | Rp1.400.000 |
+| Elf Long                  | 19 seat   | Rp1.400.000 |
+| Bus Medium                | 35 seat   | Rp1.800.000 |
+| Bus Pariwisata New Setra  | 47 seat   | Rp2.500.000 |
+| Bus Pariwisata HD         | 59 seat   | Rp2.700.000 |
+| Bus Pariwisata SHD Jet 3+ | 45 set    | Rp2.800.000 |
 
 ### Harga Sewa Bus Luar Kota Semarang
 
-| Jenis Armanda | Kapasitas | Harga |
-| --- | --- | --- |
-| Elf Short | 14 seat | Rp1.500.000 |
-| Toyota Hiace | 14 seat | Rp1.700.000 |
-| Elf Long | 19 seat | Rp1.700.000 |
-| Bus Medium | 35 seat | Rp2.000.000 |
-| Bus Pariwisata New Setra | 47 seat | Rp3.000.000 |
-| Bus Pariwisata HD | 59 seat | Rp3.000.000 |
-| Bus Pariwisata SHD Jet 3+ | 45 set | Rp3.500.000 |
+| Jenis Armanda             | Kapasitas | Harga       |
+| ------------------------- | --------- | ----------- |
+| Elf Short                 | 14 seat   | Rp1.500.000 |
+| Toyota Hiace              | 14 seat   | Rp1.700.000 |
+| Elf Long                  | 19 seat   | Rp1.700.000 |
+| Bus Medium                | 35 seat   | Rp2.000.000 |
+| Bus Pariwisata New Setra  | 47 seat   | Rp3.000.000 |
+| Bus Pariwisata HD         | 59 seat   | Rp3.000.000 |
+| Bus Pariwisata SHD Jet 3+ | 45 set    | Rp3.500.000 |
 
 Harga di atas adalah harga sewa yang saya ringkas secara garis besar karena terdapat banyak tarif sewa berdasarkan jenis armanda, kapasitas armanda, tujuan wisata, dan paket wisata. Ya, mereka juga menyediakan harga paket perjalanan (yang tentunya lebih murah) ke berbagai destinasi wisata di kota-kota besar Pulau Jawa, dan bahkan luar Pulau Jawa seperti Bali dan Lombok. Saking lengkapnya penawaran harga menarik dari mereka, saya memilih untuk tidak mencantumkan semuanya di sini dan sangat merekomendasikan Anda menanyakan langsung ke _customer service_ mereka yang ramah, atau mengunjungi _website_ resmi mereka untuk mengetahui lebih lengkap terkait harga penyewaan bus yang mereka tawarkan.
 
@@ -131,17 +131,17 @@ Pilihan paket menarik tersebut tentu saja memiliki keunggulan harga yang lebih m
 
 Seperti yang saya bilang tadi, Ranggawarsita Tour memiliki banyak mitra, salah satunya adalah kemitraan dengan beberapa PO. bus ternama. Dengan banyaknya koneksi dengan berbagai PO. bus, akan menjamin ketersediaan armanda yang memandai untuk melayani Anda yang akan menggunakan jasa sewa bus di Ranggawarsita Tour. Berikut ini saya lampirkan ringkasannya.
 
-| PO. 44 Trans | PO. Barito | PO. Falisa |
-| --- | --- | --- |
-| PO. Ababil | PO. Bromo Indah | PO. Galatama |
-| PO. Agam Tunggal Jaya | PO. Cahaya Borneo | PO. Haryanto |
-| PO. Alina | PO. Cipta Raharjo | PO. Jaya Slamet |
-| PO. Alimun Hidayah | PO. Citra Dewi | PO. Kurnia Jaya |
-| PO. Anaking | PO. Clariss | PO. Makmur Mandiri |
-| PO. Arwania | PO. Dadi Berkah Jaya | PO. Nusa Bhakti |
-| PO. Aurel | PO. Dana Trans | PO. Putra Malindo |
-| PO. Bagus Jaya | PO. Dream Liner | PO. Subur Jaya |
-| PO. Bangun Rejeki | PO. Endah Trans | PO. Trans Wijaya |
+| PO. 44 Trans          | PO. Barito           | PO. Falisa         |
+| --------------------- | -------------------- | ------------------ |
+| PO. Ababil            | PO. Bromo Indah      | PO. Galatama       |
+| PO. Agam Tunggal Jaya | PO. Cahaya Borneo    | PO. Haryanto       |
+| PO. Alina             | PO. Cipta Raharjo    | PO. Jaya Slamet    |
+| PO. Alimun Hidayah    | PO. Citra Dewi       | PO. Kurnia Jaya    |
+| PO. Anaking           | PO. Clariss          | PO. Makmur Mandiri |
+| PO. Arwania           | PO. Dadi Berkah Jaya | PO. Nusa Bhakti    |
+| PO. Aurel             | PO. Dana Trans       | PO. Putra Malindo  |
+| PO. Bagus Jaya        | PO. Dream Liner      | PO. Subur Jaya     |
+| PO. Bangun Rejeki     | PO. Endah Trans      | PO. Trans Wijaya   |
 
 Daftar di atas hanya sebagian kecil dari mitra PO. bus yang bermitra dengan Ranggawarsita Tour, sebenarnya lebih banyak lagi. Jika Anda ingin mengetahui daftar lengkapnya, Anda dapat mengunjungi situs web Ranggawarsita Tour secara langsung.
 
@@ -177,11 +177,11 @@ Saya rasa sudah banyak alasan kuat untuk memilih Ranggawarsita Tour sebagai pili
 Telepon/WhatsApp: **0822-2515-0321**  
 Telepon/SMS: **0857-2644-6121**
 
-* * *
+---
 
 ## _Frequently Asked Questions_
 
-* * *
+---
 
 ### Bagaimana prosedur untuk sewa bus pariwisata?
 

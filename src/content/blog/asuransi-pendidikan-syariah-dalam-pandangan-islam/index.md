@@ -21,7 +21,7 @@ Islam mengatur aturan atau hukum jual beli agar pembeli maupun penjual tidak ter
 Aturan hukum jual beli dalam islam dikenal sebagai hukum muamalah. Hukum ini pada awalnya diterapkan untuk menjaga hak-hak muslim dalam melakukan transaksi. Kegiatan jual beli terbilang sah apabila pembeli dan penjual sudah bersepakat. Jika berpijak pada hukum jual beli dengan merujuk pada Al-Qur’an, maka aktivitas perdagangan adalah kegiatan yang halal dilakukan. Hal tersebut dijelaskan di surat Al-Baqarah ayat 275, Allah SWT berfirman:
 
 > “…Allah telah menghalalkan jual beli dan mengharamkan riba (bunga).”
-> 
+>
 > Al-Baqarah ayat 275
 
 Riba adalah tambahan dalam aktivitas hutang piutang dan jual beli. Terdapat macam-macam riba dalam kehidupan sehari-hari yang perlu ditinggalkan, seperti riba fadhl, riba al-yadh, dan riba nasi’ah. Riba fadhl adalah tambahan yang ada pada pertukaran barang riba dengan barang riba sejenisnya. Misalnya: menjual satu ton beras dengan satu seperempat ton beras. Riba nasi’ah merupakan penangguhan penyerahan atau penerimaan jenis barang riba yang dipertukarkan dengan jenis barang riba lainnya. Sementara riba al-yadh adalah riba yang terjadi akibat jual beli barang riba yang disertai dengan penundaan serah terima kedua barang yang ditukar atau ditunda terhadap penerima riba.
@@ -46,7 +46,7 @@ Dengan memahami nilai-nilai dasar muamalah serta asuransi syariah, maka dapat di
 Di dalam surat Al-Hasyr ayat 18, Allah berfirman.
 
 > “Hai orang yang beriman! Bertaqwalah kepada Allah dan hendaklah setiap diri memperhatikan apa yang telah dibuat untuk hari esok (masa depan). Dan bertaqwalah kepada Allah. Sesungguhnya Allah Maha Mengetahui apa yang kamu kerjakan.”
-> 
+>
 > Al-Hasyr ayat 18
 
 Sudah saatnya sekarang, umat menyiapkan masa depan pendidikan anak-anak dengan asuransi pendidikan syariah.

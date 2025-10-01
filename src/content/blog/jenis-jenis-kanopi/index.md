@@ -45,8 +45,6 @@ Menjadi sebuah terobosan baru atap kanopi dengan bahan kayu juga bagus dan terli
 
 Di masa kini atap transparan sangat popular untuk keindahan rumah bahkan Gedung sekalipun. Ke empat bahan itu adalah bahan yang paling popular di pasaran. Pasti kalian sering sekali lihat rumah-rumah mewah atau Gedung-gedung mewah yang memakai kanopi transparan. Tapi sebenarnya atap transparan ini bukan untuk rumah mewah atau Gedung mewah saja, desain rumah minimalis juga cocok memakai atap ini. Selain bentuknya yang indah namun juga terlihat mewah.
 
-Semua bahan di atas sudah dilengkapi dengan lapisan pelindung UV. Tentu akan menjaga rumah kalian dari paparan terik sinar matahari. Sebagai rekomendasi atap kanopi ini kalian bisa aplikasikan di samping rumah dengan lahan kosong atau bisa juga dijadikan atap rumah. Sangat indah jika malam hari yang cerah bisa memandang _skylight_.
-
-* * *
+Semua bahan di atas sudah dilengkapi dengan lapisan pelindung UV. Tentu akan menjaga rumah kalian dari paparan terik sinar matahari. Sebagai rekomendasi atap kanopi ini kalian bisa aplikasikan di samping rumah dengan lahan kosong atau bisa juga dijadikan atap rumah. Sangat indah jika malam hari yang cerah bisa memandang _skylight_.S
 
 Banyak sekali kegunaan, jenis, dan cara pemakaian untuk kanopi. Penjelasan di atas semoga dapat membantu kalian semua yang bingung untuk memasang atau menggunakan kanopi seperti apa yang cocok di pasang untuk di rumah. Semua jenis kanopi bagus dan bermanfaat untuk kenyaman rumah kalian semua. Fungsi dan jenisnya bisa disesuaikan dengan apa yang kalian perlukan. Semoga artikel ini bermanfaat dan membantu kalian semua, ya.

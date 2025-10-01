@@ -90,7 +90,7 @@ Hanya kau yang mengerti
 Siapa pemilik hati pelangi  
 Ambillah pelangimu wahai matahari_
 
-Dengan puisi yang hanya terdiri dari 3 bait itu, Siti berhasil mengundang decak kagum karena pembawaannya yang luar biasa bagus. Aku tak yakin puisiku itu bagus, yang aku yakini semua itu karena Siti bersifat ekpresif. Kali ini aku yang dibuat minder dengan ekspresi pede berlebihan dari Siti. Aku pun maju satu langkah setelah Siti selesai dengan puisinya. Tanpa melupakan petuah ustadz Zai, bacalah _basmallah_ sebelum memulai sesuatu.
+Dengan puisi yang hanya terdiri dari 3 bait itu, Siti berhasil mengundang decak kagum karena pembawaannya yang luar biasa bagus. Aku tak yakin puisiku itu bagus, yang aku yakini semua itu karena Siti bersifat ekpresif. Kali ini aku yang dibuat minder dengan ekspresi pede berlebihan dari Siti. Aku pun maju satu langkah setelah Siti selesai dengan puisinya. Tanpa melupakan petuah ustadz Zai, bacalah *basmallah* sebelum memulai sesuatu.
 
 ### NEGERI LAYAKNYA KAPAL PESIAR
 
@@ -120,7 +120,7 @@ Tapi kamu kumpulan gelombang
 Kalian hanya membayar panah  
 Pegasnya pun penuh nanah_
 
-Kuhembuskan nafas ketegangan yang melilit urat nadiku. Emosiku perlahan-lahan menurun selesai membaca puisi itu. Suara tepuk tangan dari penonton mulai menyadarkanku ke dunia nyata. Siti bilang, saat aku membaca puisi tadi sungguh bersemangat. Dia juga bilang kalau aku menghembuskan semangat “45” dari bilik-bilik kursi penonton. Bahkan ibu Dewi bilang kalau dia _merinding disko_ melihat semangatku yang berlebih. Meskipun ibu Dewi sebenarnya punya sejuta kritik terhadap puisiku tersebut.
+Kuhembuskan nafas ketegangan yang melilit urat nadiku. Emosiku perlahan-lahan menurun selesai membaca puisi itu. Suara tepuk tangan dari penonton mulai menyadarkanku ke dunia nyata. Siti bilang, saat aku membaca puisi tadi sungguh bersemangat. Dia juga bilang kalau aku menghembuskan semangat “45” dari bilik-bilik kursi penonton. Bahkan ibu Dewi bilang kalau dia *merinding disko* melihat semangatku yang berlebih. Meskipun ibu Dewi sebenarnya punya sejuta kritik terhadap puisiku tersebut.
 
 Selama ini tidak ada orang yang pernah memujiku selain nenek. Bahkan orang tuakupun jarang memberikan semangat atau pujian. Mungkin terakhir kali mereka memberi pujian saat aku belajar berjalan. Ternyata kata “Semangat yah” atau “Kamu hebat sekali” atau apapun itu kata yang berarti memuji atau memberi semangat merupakan kata yang menjadi ujung tombak dunia. Namun terkadang sebuah pujian yang berlebih juga bisa membuat kita terperosok pada jurang kesombongan. Maka dari itu nikmatilah pujian dengan semestinya.
 
@@ -163,22 +163,22 @@ Di mess kami disambut oleh barang-barang yang bergelatak di atas batang. Inilah 
 
 “_Coba kamu lihat warna putih di mess kita ini,_” katanya menunjuk salah satu mess.
 
-“_Warnanya tidak_ full _putih kan! Ada bercak-bercak dan goresan-goresan kuning kecoklatan dicatnya karena rembesan air hujan. Itulah lukisan yang dibuat oleh alam,_” katanya mantap.
+“*Warnanya tidak* full *putih kan! Ada bercak-bercak dan goresan-goresan kuning kecoklatan dicatnya karena rembesan air hujan. Itulah lukisan yang dibuat oleh alam,*” katanya mantap.
 
 Aku terdiam dan kucoba menutup mata untuk membuka pintu imajinasi. Perlahan kucoba membuka pelupuk mataku dan kutatap kembali dinding itu. Benar. Di situlah sebuah lukisan panaroma pantai di sore hari yang tertutupi. Aku sungguh kagum. Dinding yang bercat putih itu memang sudah lama tidak pernah diperbaharui lagi, terciptalah warna alam yang menghiasi. Daya imajinasi Siti sudah merajalela di luar kendali. Kupeluk dirinya lagi untuk yang terakhir kalinya.
 
-Selamat tinggal Pahing yang ceroboh. Selamat tinggal Egi yang sok dewasa. Selamat tinggal Dimas yang culun. Selamat tinggal Gian yang gendut. Selamat tinggal Siti yang cuek. Dan selamat tinggal Christy yang cerewet. _I love you all_. Kuharap di masa yang akan datang kita bisa bertemu kembali dengan wajah yang sukses sesuai dengan impian. Itulah kiranya isi hatiku saat itu.
+Selamat tinggal Pahing yang ceroboh. Selamat tinggal Egi yang sok dewasa. Selamat tinggal Dimas yang culun. Selamat tinggal Gian yang gendut. Selamat tinggal Siti yang cuek. Dan selamat tinggal Christy yang cerewet. *I love you all*. Kuharap di masa yang akan datang kita bisa bertemu kembali dengan wajah yang sukses sesuai dengan impian. Itulah kiranya isi hatiku saat itu.
 
-* * *
+---
 
 ## Masa-masa Sulit
 
-Setelah ayah melepas pekerjaan itu. Keuangan keluarga sungguh sudah di luar kendali. Beberapa kali ayah melamar pekerjaan namun selalu saja ditolak. Ayah terpaksa ikut menjadi nelayan yang meraup rezeki dari laut. Nilai sekolahku pun berangsur-angsur merosot. Inilah yang ditakutkan nenek. Semakin dewasa semakin tidak bersemangat. Apalagi sekarang di zaman globalisasi yang berusaha menguasai unsur pergaulan manusia.  
-  
+Setelah ayah melepas pekerjaan itu. Keuangan keluarga sungguh sudah di luar kendali. Beberapa kali ayah melamar pekerjaan namun selalu saja ditolak. Ayah terpaksa ikut menjadi nelayan yang meraup rezeki dari laut. Nilai sekolahku pun berangsur-angsur merosot. Inilah yang ditakutkan nenek. Semakin dewasa semakin tidak bersemangat. Apalagi sekarang di zaman globalisasi yang berusaha menguasai unsur pergaulan manusia.
+
 Aku merasa asing di tempat kelahiranku sendiri. Aku merasa hidup sendirian di muka bumi ini tanpa ada kawan yang bisa mengerti. Beberapa kali aku sempat akrab pada orang yang aku akui sebagai sahabat. Namun akhirnya berujung pula pada perkelahian. Inikah sahabat yang menjatuhkan kawannya sendiri?
 
-Sungguh, mencari kawan yang bisa dibilang sahabat karena kesetiaan, pengertian, dan pengorbanan itu sangat sulit. Kita harus terhisap dulu ke dalam pasir hisap, menembus gua yang gelap, terjun dari atas bukit, dan menyelam ke dasar laut. Aku hampir saja terjebak ke dalam lembah hitam narkoba karena yang namanya sahabat, sebelum akhirnya aku disadarkan oleh origami pemberian nenek. Wanita itu bagaikan berlian. Memancarkan sinar kecantikan dari pantulan kilauannya. Indah memang, tapi tak ada yang tahu kalau kesombongan menguasai pemiliknya. Dan yang terjadi di masa sekarang, banyak berlian yang sudah tak karuan.  
-  
+Sungguh, mencari kawan yang bisa dibilang sahabat karena kesetiaan, pengertian, dan pengorbanan itu sangat sulit. Kita harus terhisap dulu ke dalam pasir hisap, menembus gua yang gelap, terjun dari atas bukit, dan menyelam ke dasar laut. Aku hampir saja terjebak ke dalam lembah hitam narkoba karena yang namanya sahabat, sebelum akhirnya aku disadarkan oleh origami pemberian nenek. Wanita itu bagaikan berlian. Memancarkan sinar kecantikan dari pantulan kilauannya. Indah memang, tapi tak ada yang tahu kalau kesombongan menguasai pemiliknya. Dan yang terjadi di masa sekarang, banyak berlian yang sudah tak karuan.
+
 Sebelumya aku juga sempat merasakan manis, asam, pahitnya cinta. Beberapa kali aku jatuh cinta pada seorang laki-laki. Namun semuanya berakhir dengan kekecewaan. Bagiku laki-laki adalah sebuah misteri tersendiri. Mereka jinak di depan, namun ganas di belakang. Laki-laki adalah permata hitam, mereka memperlihatkan kejantananya dengan warna hitamnya, namun tetap tidak lupa memperlihatkan kualitasnya. Tapi tidak semua laki-laki itu permata. Di dunia ini banyak laki-laki permata palsu. Hanya sedikit yang benar-benar permata.   
 Beberapa mata pelajaranku berwarna merah. Aku terancam tidak bisa naik kelas. Tapi entah kenapa, semakin aku tersudut semakin aku merindukan Allah. Moment inilah kujadikan ajang menguatkan iman dan minta petunjuknya. Entah ini mukjizat atau apa. Nenek hadir di mimpiku pada malam menjelang ulangan. Beliau bicara panjang lebar memarahiku.
 
@@ -192,15 +192,15 @@ Beberapa mata pelajaranku berwarna merah. Aku terancam tidak bisa naik kelas. Ta
 
 “_May, janganlah memiliki mental pohon cabe yang tidak bisa tumbuh tinggi sepeti pohon jati. Janganlah menjadi seorang penghayal yang tidak bisa berbuat banyak. Kamu tidak menyadari kebiasaanmu melihat awan itu, sebenarnya hanya ilusi semata. Sudah lama awan-awan itu mengolokmu. Bangkitlah cucuku, jangan terlalu lama tertidur dalam mimpi-mimpimu._”
 
-Aku terkejut dari mimpi itu. Perlahan aku mulai merasakan gelombang semangat datang bergejolak memenuhi ruang jiwa ragaku. Sejak itulah, kesadaranku akan pentingnya ilmu berangsur-angsur pulih. Aku pun mulai giat belajar walaupun sudah hampir terlambat. Namun sebenarnya, belajar itu tidak mengenal kata terlambat, kawan.  
-  
-Lulus SMA keluargaku masih dalam masa sulit. Rumah idaman kami tak kunjung terbangun jua. Sebuah rumah kontrakan sempit masih menjadi haluan kami. Aku iri melihat semua teman-temanku bisa melanjutkan kuliah semaunya. Sementara aku masih terdampar di lautan kegalauan. Pesan nenek selalu kuingat untuk pantang kehilangan asa. Aku mencoba untuk berpikir ke masa depan.  
-  
-Seringku berpikir untuk pergi meninggalkan dunia ini dan pergi menyusul nenek. Aku tidak ubahnya remaja yang frustasi, yang kehilangan arah angin, tak punya pegangan. Aku butuh pelukan hangat dari orang-orang yang ada dalam kenangan tempo dulu.  
-  
+Aku terkejut dari mimpi itu. Perlahan aku mulai merasakan gelombang semangat datang bergejolak memenuhi ruang jiwa ragaku. Sejak itulah, kesadaranku akan pentingnya ilmu berangsur-angsur pulih. Aku pun mulai giat belajar walaupun sudah hampir terlambat. Namun sebenarnya, belajar itu tidak mengenal kata terlambat, kawan.
+
+Lulus SMA keluargaku masih dalam masa sulit. Rumah idaman kami tak kunjung terbangun jua. Sebuah rumah kontrakan sempit masih menjadi haluan kami. Aku iri melihat semua teman-temanku bisa melanjutkan kuliah semaunya. Sementara aku masih terdampar di lautan kegalauan. Pesan nenek selalu kuingat untuk pantang kehilangan asa. Aku mencoba untuk berpikir ke masa depan.
+
+Seringku berpikir untuk pergi meninggalkan dunia ini dan pergi menyusul nenek. Aku tidak ubahnya remaja yang frustasi, yang kehilangan arah angin, tak punya pegangan. Aku butuh pelukan hangat dari orang-orang yang ada dalam kenangan tempo dulu.
+
 Tak ada persaingan menggapai prestasi. Sungguh hidup terasa statis. Tulisan yang pernah kutulis dalam skenario hidupku, kini tak bisa kukembalikan karena semuanya telah aku adegankan. Dihadapanku kini terbuka lembaran baru, tinggal bagaimana pena kehidupan ini mengarahkannya.
 
-* * *
+---
 
 ## Cinta Segitiga di Simpang Lima
 
@@ -208,7 +208,7 @@ Sepulang bekerja dari toko sembako jelek itu aku tak kuasa menahan lelah dan mer
 
 ![](./images/cinta-segitiga.jpeg)
 
-Aku benar-benar merasa minder berada di antara mereka semua. Mungkin hanya aku yang tidak bisa menggapai cita-cita. Aku merasa kalau seharusnya aku mundur dari persaingan ini. Aku memang tak sama dengan yang lain. Mereka semua bercita-cita menciptakan uang dengan jerih payah mereka sendiri sementara diriku ini bercita-cita untuk menghabiskan uang, _traveling_ kemana-mana dan menulis naskah novel yang tak tau arahnya kemana.
+Aku benar-benar merasa minder berada di antara mereka semua. Mungkin hanya aku yang tidak bisa menggapai cita-cita. Aku merasa kalau seharusnya aku mundur dari persaingan ini. Aku memang tak sama dengan yang lain. Mereka semua bercita-cita menciptakan uang dengan jerih payah mereka sendiri sementara diriku ini bercita-cita untuk menghabiskan uang, *traveling* kemana-mana dan menulis naskah novel yang tak tau arahnya kemana.
 
 “_Aku memang gila,_” pikirku.
 
@@ -232,7 +232,7 @@ Sesampainya di kota Semarang, aku masih harus melanjutkan perjalanan menemani bu
 
 Aku duduk sendirian menunggu dua pria yang pernah menyentuh hidupku. Aku tak tau pasti kapan mereka akan datang atau mereka tidak akan datang sama sekali. Yang jelas aku akan menunggu sambil mengotak-atik puisiku yang terbaru. 2 jam, 3 jam, 4 jam terlalui sendiri. Hari sudah menjelang malam. Aku masih setia menunggu mereka. Bu Nia beberapa kali menelponku untuk pulang. Tapi aku sudah terlanjur ingin menunggu mereka.
 
-“_Maya... kamu Maya, kan_?”. Terdengar panggilan seseorang bersuara nge-_bass_ dari belakang. Suara itu terdengar seperti suara bapak-bapak yang sudah punya dua anak. Aku mencoba untuk berbalik ke belakang. Seorang pria rinjang, kurus, berkumis tipis, dengan celana panjang, memakai jaket hitam, dan sebuah tas yang hinggap di pundaknya, mempesona mataku. 
+“_Maya... kamu Maya, kan_?”. Terdengar panggilan seseorang bersuara nge-*bass* dari belakang. Suara itu terdengar seperti suara bapak-bapak yang sudah punya dua anak. Aku mencoba untuk berbalik ke belakang. Seorang pria rinjang, kurus, berkumis tipis, dengan celana panjang, memakai jaket hitam, dan sebuah tas yang hinggap di pundaknya, mempesona mataku. 
 
 “_Siapa yah?_” tanyaku.
 
@@ -254,7 +254,7 @@ Belum sempat aku membalas pertanyaan Pahing. Seseorang yang gagah, tampan, dan b
 
 Kemudian tangan mereka berdua kusatukan menjadi bersalam-salaman. Dian kemudian memeluk Pahing dan Pahing membalas pelukan itu.
 
-Aku bahagia bisa menyatukan mereka berdua. Tapi masalah baru muncul. Mereka berdua tiba-tiba menyatakan cinta padaku. Aku dibuat _shock_ dan kalang kabut. Apa yang mereka lihat dari diriku ini. Aku sungguh tak memiliki kelebihan. Masih banyak wanita cantik yang memiliki kelebihan dan bisa mencintai mereka sepenuh hati.
+Aku bahagia bisa menyatukan mereka berdua. Tapi masalah baru muncul. Mereka berdua tiba-tiba menyatakan cinta padaku. Aku dibuat *shock* dan kalang kabut. Apa yang mereka lihat dari diriku ini. Aku sungguh tak memiliki kelebihan. Masih banyak wanita cantik yang memiliki kelebihan dan bisa mencintai mereka sepenuh hati.
 
 “_Bodoh kalian berdua. Kenapa sih kalian tidak menggunakan keadaan kalian sekarang untuk mendapatkan wanita yang lebih cantik._”
 
@@ -272,12 +272,12 @@ Aku pikir-pikir lagi, ternyata betul juga yah. Aku diam sejenak membiarkan hati 
 
 “_Bodoh kamu, Hing. Kamu belum bisa menyaingiku sampai saat ini ternyata. Ini namanya cincin. Selipkan di jari Maya, cepat! Biar aku yang jadi saksi cinta kalian berdua,_” kata Dian dengan semangat.
 
-Untuk ini aku benar-benar dibuat semakin _shock_. Kalau bisa pingsan, pingsan deh. Aku mencoba menarik nafas panjang dan kuhembuskan pelan. Kemudian tangan Pahing yang dingin menyentuh jari manisku. Aku mencoba pasrah saat itu. Diselipkannya cincin pemberian Dian itu di tanganku. Aku sedikit lega, inilah tanda cinta monyetku yang berubah menjadi cinta gorilla atau cinta yang sesungguhnya.
+Untuk ini aku benar-benar dibuat semakin *shock*. Kalau bisa pingsan, pingsan deh. Aku mencoba menarik nafas panjang dan kuhembuskan pelan. Kemudian tangan Pahing yang dingin menyentuh jari manisku. Aku mencoba pasrah saat itu. Diselipkannya cincin pemberian Dian itu di tanganku. Aku sedikit lega, inilah tanda cinta monyetku yang berubah menjadi cinta gorilla atau cinta yang sesungguhnya.
 
 Kami habiskan malam itu untuk mengenang masa lalu kami. Aku bahagia malam itu. Tapi aku akan lebih bahagia bila kelima temanku yang lainnya bisa berkumpul di tempat ini juga. Entah kenapa sosok Lijuan melintas dipikiranku malam itu. Mungkinkah Egi telah berhasil mendapatkan cinta Lijuan. Entahlah.
 
 Mereka berada di tempat yang jauh sekarang. Kuharap mereka bisa menemukan cintanya dan bisa mengapai cita-citanya. Dari cerita Dian, bang Usup dan ibu Dewi sekarang telah memiliki 2 orang anak yang lucu-lucu. Aku sungguh terharu. Andai aku bisa bertemu dengan kedua adikku yang baru itu.  Dan untuk nenek yang berada di sisi Tuhan sekarang, aku ucapkan terima kasih banyak. Kuharap kita bisa bertemu di akhirat nanti.
 
-* * *
+---
 
 **\-TAMAT-**

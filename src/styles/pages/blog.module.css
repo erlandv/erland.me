@@ -109,7 +109,7 @@
   display: none;
 }
 
-:global(.prose .toc[data-expanded="true"] .toc__list) {
+:global(.prose .toc[data-expanded='true'] .toc__list) {
   display: block;
 }
 
@@ -136,7 +136,9 @@
   padding-left: 0;
 }
 
-:global(.prose .toc__item--h3) { margin-left: 0; }
+:global(.prose .toc__item--h3) {
+  margin-left: 0;
+}
 :global(.prose .toc__item--h3)::before {
   background: transparent;
   border: 2px solid currentColor;
@@ -144,9 +146,15 @@
   height: 5px;
 }
 
-:global(.prose .toc__item--h2) { margin: 8px 0 2px; }
-:global(.prose .toc__sublist) { margin-top: 2px; }
-:global(.prose .toc__item--h3) { margin: 2px 0; }
+:global(.prose .toc__item--h2) {
+  margin: 8px 0 2px;
+}
+:global(.prose .toc__sublist) {
+  margin-top: 2px;
+}
+:global(.prose .toc__item--h3) {
+  margin: 2px 0;
+}
 
 :global(.prose .toc__anchor) {
   color: var(--color-primary);
@@ -167,7 +175,9 @@
 }
 
 /* anchor underline hover effect scoped to prose */
-:global(.prose .toc__anchor) { border-bottom: 1px solid transparent; }
+:global(.prose .toc__anchor) {
+  border-bottom: 1px solid transparent;
+}
 
 :global(.prose .toc__anchor:hover) {
   border-bottom-color: var(--color-secondary);

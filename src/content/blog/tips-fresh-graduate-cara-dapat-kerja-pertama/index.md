@@ -117,15 +117,15 @@ Ada beberapa tips untuk membuat portofolio yang mampu bersaing:
 
 1. Buat studi kasus dari karya yang kamu bikin (alur pembuatan, permasalahan, dll)
 
-3. Lakukan _revamp_/rombak karya dari produk yang kamu suka menjadi lebih epik lagi
+2. Lakukan _revamp_/rombak karya dari produk yang kamu suka menjadi lebih epik lagi
 
-5. Tunjukkan bagaimana kamu mengeksekusi pekerjaan dari awal sampai jadi
+3. Tunjukkan bagaimana kamu mengeksekusi pekerjaan dari awal sampai jadi
 
-7. Tunjukkan kegagalan kamu saat membuat karya dan pelajaran apa yang dipetik
+4. Tunjukkan kegagalan kamu saat membuat karya dan pelajaran apa yang dipetik
 
-9. Buat alur portofolio sebagai sebuah cerita bersambung yang mirip dengan novel
+5. Buat alur portofolio sebagai sebuah cerita bersambung yang mirip dengan novel
 
-11. Cobalah membuat portofolio menggunakan [bahasa Inggris](/blog/ef-adults-kursus-bahasa-inggris-profesional/) karena itu dapat menjadi nilai lebih di mata perusahaan
+6. Cobalah membuat portofolio menggunakan [bahasa Inggris](/blog/ef-adults-kursus-bahasa-inggris-profesional/) karena itu dapat menjadi nilai lebih di mata perusahaan
 
 Inti dari portofolio adalah menunjukkan bagaimana cara kamu menganalisis dan memetakan masalah, merumuskan solusi, dan mengeksekusi pekerjaan sampai masalah tersebut berhasil dituntaskan.
 

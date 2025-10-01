@@ -34,11 +34,11 @@ Tapi ngga semua tempat wisata Bogor ya karena jumlahnya terlampau banyak, bisa-b
 ## Kebun Raya Bogor
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BltKJKansaF/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/BltKJKansaF/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Kebun Raya Bogor (@kebunrayabogor)</a> pada 26 Jul 2018 jam 11:52 PDT
 
 Rasanya Kebun Raya Bogor ini harus banget ada di urutan pertama. Pasalnya, KRB ini salah satu ikon kota Bogor, tempat wisata Bogor paling terkenal di Bogor. Pokoknya belum ke Bogor kalau belum ke Kebun Raya Bogor. Lokasinya strategis banget, tepat berada di pusat kota Bogor, tepat berada di jantung kota Bogor. Serius, lihat aja deh peta kota Bogor, lihat posisi Kebun Raya Bogor, benar-benar tepat di tengah.
@@ -48,11 +48,11 @@ Jadi ngga perlu risau kalau mau ke KRB sekali pun naik kendaraan umum, saking st
 ## Istana Bogor
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BiDr5IQFpIg/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/BiDr5IQFpIg/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Kebun Raya Bogor (@kebunrayabogor)</a> pada 26 Apr 2018 jam 7:44 PDT
 
 Urutan kedua, Istana Bogor. Istana ini merupakan istana kepresidenan. Istana ini tepat berada di sebelah Kebun Raya Bogor. Dulu aku suka berkhayal bisa punya rumah semegah Istana Bogor dan di sampingnya ada taman seluas Kebun Raya Bogor. Dan impian itu belum tercapai sampai sekarang. Huhuhu
@@ -62,11 +62,11 @@ Kemegahan Istana Bogor sungguh _instagramable_ banget. Untuk masuk ke Istana Bog
 ## Wisata Perkebunan Teh Puncak
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/B7BONF4Blj-/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/B7BONF4Blj-/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Tri Yuniati (@tri.yuniati.7165)</a> pada 7 Jan 2020 jam 4:51 PST
 
 Ini rekomendasi tempat wisata di Bogor selanjutnya, perkebunan teh Puncak Bogor. Karena apa? Karena GRATIS! Nuansa sejuk sangat terasa di sini, ada sensasi dingin-dinginnya juga, persiapkan jaket hangat aja. Wisata Bogor Puncak ini panjang dan megah, kamu bisa _exploring_ sepuasnya, berfoto-foto di perkebunan teh nan hijau. Kalau lapar juga tenang, berderet warung makan yang daftar harganya masih terjangkau, beberapa spot warung menawarkan _view_ kota Bogor dari ketinggian. Cobain deh malam-malam ke Puncak saat langit cerah, kamu bisa melihat _citylight_ kota Bogor yang indah.
@@ -74,11 +74,11 @@ Ini rekomendasi tempat wisata di Bogor selanjutnya, perkebunan teh Puncak Bogor.
 ## Paralayang Bukit Gantole
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BsNt7fBn6vG/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/BsNt7fBn6vG/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Mardi (@itsmardi)</a> pada 4 Jan 2019 jam 5:29 PST
 
 Masih berkaitan dengan kawasan Puncak Bogor, destinasi bisa dibilang wisata khusus yang suka kegiatan ekstrim. Aku masukan rekomendasi karena memang seru. Kamu bisa merasakan sendiri sensasinya melayang di ketinggian 1.300 meter dari permukaan sambil melihat pemandangan Puncak Bogor yang menghijau luas. Kegiatan paralayang ini didampingi oleh instruktur yang sudah berpengalaman dalam olahraga paralayang. Di Indonesia, paralayang berinduk pada organisasi PLGI (Persatuan Layang Gantung Indonesia), dan berada di bawah Federasi Aero Sport Indonesia.
@@ -88,11 +88,11 @@ Lokasi Bukit Gantole tidak jauh dari Masjid At-Ta'awun, sekitar kurang lebih 300
 ## Kampung Budaya Sindang Barang
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BgaFlD9Aqal/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/BgaFlD9Aqal/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh indoflashlightjabar (@indoflashlightjabar)</a> pada 16 Mar 2018 jam 7:29 PDT
 
 Bosan wisata di perkotaan? Ini solusinya, berkunjung ke Kampung Budaya Sindang Barang! Di sini kamu bukan sekedar wisata, lebih dari itu, kamu bisa dapat wawasan sejarah dan budaya. Wisata budaya di Kampung ini cocok bagi anak-anak, karena di sana Anda dan anak-anak dapat belajar banyak hal mengenai Budaya Sunda, melihat pertunjukkan dan atraksi khas Sunda dan tentunya menikmati keindahan alam Bogor yang masih asri.
@@ -110,11 +110,11 @@ Harga tiket masuk wisata Kampung Budaya Sindang Barang adalah Rp15.000 (_weekday
 ## Taman Bunga Nusantara
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/CAEz5HOBaXn/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/CAEz5HOBaXn/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Taman Bunga Nusantara (@tamanbunganusantara)</a> pada 11 Mei 2020 jam 9:55 PDT
 
 Hmm. Secara administratif, sebenarnya lokasi ini masuk ke wilayah Cianjur. Tapi ngga apa-apa lah ya dicantumkan, karena secara geografis masih dekat dengan Bogor, berada di wilayah perbatasan.  
@@ -128,12 +128,12 @@ Oh iya, harga tiket masuk Taman Bunga Nusantara cukup murah, cuma Rp40.000 per-o
 ## Little Venice Kota Bunga
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BsMhRLDFk9f/?utm_source=ig_embed&utm_campaign=loading)
-> 
-> <a href="https://www.instagram.com/p/BsMhRLDFk9f/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh LITTLE VENICE (@littlevenice\_puncak)</a> pada 3 Jan 2019 jam 6:19 PST
+>
+> <a href="https://www.instagram.com/p/BsMhRLDFk9f/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh LITTLE VENICE (@littlevenice_puncak)</a> pada 3 Jan 2019 jam 6:19 PST
 
 Ini nih salah satu wisata _hits_ di Bogor. Ngga perlu jauh-jauh ke Italia kalau mau menikmati pemandangan khas kota Vanessia. Ngga sekadar desain pada bangunan, objek wisata yang dikenal sebagai "Little Venice" ini juga memiliki sungai buatan layaknya di Kota Venesia. Berbagai bangunan ala Venesia yang ditawarkan bisa kamu jadikan sebagai spot berfoto. Selain itu, ada juga replika ikon negera-negara lain di sini. Mulai dari Patung Merlion, Menara Eiffel hingga Kuil Itsukushima dapat kamu temukan di sini untuk dijadikan spot foto yang menarik. Dan pastinya, banyak wahana-wahana menarik yang bisa kamu nikmati, cocok untuk kamu yang ingin liburan keluarga, kecuali kamu belum berkeluarga.
 
@@ -142,11 +142,11 @@ Harga tiket masuk Little Venice adalah Rp25. 000 per-orang. Lokasinya berada di 
 ## Devoyage
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/Brecg7QHNy-/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/Brecg7QHNy-/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Devoyage Bogor (@devoyagebogor)</a> pada 16 Des 2018 jam 8:52 PST
 
 Ini juga termasuk destinasi wisata Bogor yang menawarkan konsep luar negeri. Devoyage adalah tempat wisata yang mengusung konsep lingkungan eropa mulai dari bangunannya, (warna, bentuk dan juga tata letak) serta miniatur kicirangin dan lainnya ada di tempat wisata ini. Selain menjual lokasi bernuansa eropa, ternyata di sini juga menyediakan menu makanan yang juga berbumbu eropa.
@@ -158,12 +158,12 @@ Harga tiket masuk Devoyage adalah Rp25.000 untuk _weekday_ dan Rp35. 000 untuk _
 ## Curug Cilember
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/BsLWI6enr5u/?utm_source=ig_embed&utm_campaign=loading)
-> 
-> <a href="https://www.instagram.com/p/BsLWI6enr5u/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh nico gunawan (@nico\_aerial\_drone)</a> pada 3 Jan 2019 jam 7:22 PST
+>
+> <a href="https://www.instagram.com/p/BsLWI6enr5u/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh nico gunawan (@nico_aerial_drone)</a> pada 3 Jan 2019 jam 7:22 PST
 
 Soal curug, Bogor bisa dibilang rajanya. Sangat banyak wisata curug di Bogor yang kalau harus disebutkan satu-satu itu setara dengan menghabiskan masa belajar S1. Karena itu, aku hanya berikan satu rekomendasi wisata Bogor curug untuk kamu kunjungi. Buat kamu yang belum tau, curug itu adalah air terjun. Karena Bogor adalah daerah pegunungan dan dataran tinggi, Bogor termasuk salah satu kota yang memiliki banyak air terjun indah, khususnya yang dapat dikunjungi untuk wisata.
 
@@ -174,11 +174,11 @@ Harga tiket masuk Curug Cilember adalah Rp6.000 per-orang, lokasinya berada di J
 ## Gunung Pancar
 
 > [
-> 
+>
 > Lihat postingan ini di Instagram
-> 
+>
 > ](https://www.instagram.com/p/_A9jdOqcIU/?utm_source=ig_embed&utm_campaign=loading)
-> 
+>
 > <a href="https://www.instagram.com/p/_A9jdOqcIU/?utm_source=ig_embed&utm_campaign=loading">Sebuah kiriman dibagikan oleh Gunung Pancar (@gunungpancar)</a> pada 7 Des 2015 jam 7:02 PST
 
 <script async src="//www.instagram.com/embed.js"></script>
@@ -187,7 +187,7 @@ Satu lagi konsep wisata alam di Bogor yang harus kamu kunjungi. Gunung Pancar me
 
 Harga tiket masuk kawasan Gunung Pancar adalah Rp7.500 per-orang. Lokasinya berada di kawasan Sentul.
 
-* * *
+---
 
 Nah, cukup itu rekomendasi wisata Bogor terbaik. Sejujurnya aku menghabiskan waktu cukup lama untuk memilah tempat-tempat wisata di Bogor yang sangaaaaat banyak, saking banyaknya aku berjalan keluar rumah beberapa langkah aja udah masuk ke kawasan wisata. Dengan berbagai pertimbangan aku pilih sepuluh tempat tersebut, walaupun menyayangkan tempat-tempat wisata lain yang ngga kalah menarik.
 
