@@ -74,6 +74,7 @@ This documentation provides a comprehensive guide for developers to run, develop
 - `npm run format`: Format code with Prettier.
 - `npm run format:check`: Check formatting.
 - `npm run validate`: Lint + type-check + format check.
+- `npm run generate:robots`: Generate robots.txt
 
 ---
 
