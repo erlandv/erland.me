@@ -1,11 +1,13 @@
 # erland.me Astro Project Documentation
 
 ## Overview
+
 This documentation provides a comprehensive guide for developers to run, develop, and maintain the `erland.me` Astro project. It covers project structure, setup, development workflow, coding conventions, CSS modules, build commands, and best practices.
 
 ---
 
 ## Table of Contents
+
 1. [Project Structure](#project-structure)
 2. [Setup & Installation](#setup--installation)
 3. [Development Workflow](#development-workflow)
@@ -90,6 +92,7 @@ This documentation provides a comprehensive guide for developers to run, develop
 ## 6. CSS Modules Guide
 
 See [CSS Modules Migration Guide](./css-modules.md) for:
+
 - Directory structure for global, page, and component styles
 - Naming conventions (BEM-like, descriptive route-focused)
 - How to use `class:list` for combining module and global classes
@@ -151,6 +154,7 @@ See [CSS Modules Migration Guide](./css-modules.md) for:
 ---
 
 ## References
+
 - [Astro Documentation](https://docs.astro.build/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Prettier](https://prettier.io/)

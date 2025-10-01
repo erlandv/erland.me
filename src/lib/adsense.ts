@@ -83,7 +83,10 @@ export function insertAdAfterMiddle(
   }
 }
 
-export function insertPlaceholderAfterMiddle(container: Element, label?: string) {
+export function insertPlaceholderAfterMiddle(
+  container: Element,
+  label?: string
+) {
   if (!container) return;
   try {
     // Prevent duplicate placeholder for mid position
@@ -155,7 +158,10 @@ export function autoInitDownloadAds(
     const existingGlobal = document.querySelector(
       `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
     );
-    if (existingGlobal) { w.__ads_dl_end.add(key); return; }
+    if (existingGlobal) {
+      w.__ads_dl_end.add(key);
+      return;
+    }
 
     // Target: between files section and share -> insert before share if present
     const share = document.querySelector('section.share');
@@ -213,8 +219,13 @@ export function autoInitDownloadPlaceholders() {
     w.__ph_dl_end = w.__ph_dl_end || false;
     if (w.__ph_dl_end) return;
 
-    const phExists = document.querySelector('.ad-placeholder[data-ad-pos="end"]');
-    if (phExists) { w.__ph_dl_end = true; return; }
+    const phExists = document.querySelector(
+      '.ad-placeholder[data-ad-pos="end"]'
+    );
+    if (phExists) {
+      w.__ph_dl_end = true;
+      return;
+    }
 
     const share = document.querySelector('section.share');
     if (share && share.parentNode) {
