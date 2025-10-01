@@ -1,0 +1,149 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import BackNav from "../../../components/BackNav.astro";
+import PostCard from "../../../components/PostCard.astro";
+import Pagination from "../../../components/Pagination.astro";
+import SearchInput from "../../../components/SearchInput.astro";
+import { loadAllPosts, slicePage } from '../../../lib/blog';
+import { postToSearchable } from '../../../lib/search';
+import { collectionPageJsonLd } from '../../../lib/seo';
+import listing from "../../../styles/pages/listing.module.css";
+
+// Build-time static paths for each category found in content
+export async function getStaticPaths() {
+  const posts = await loadAllPosts();
+  const categories = Array.from(
+    new Set(posts.map((p) => (p.data?.category ?? '').toString().trim()).filter(Boolean))
+  );
+  return categories.map((c) => ({ params: { category: c.toLowerCase() } }));
+}
+
+const allPosts = await loadAllPosts();
+const categoryParam = (Astro.params.category ?? '').toString().toLowerCase();
+
+// Filter posts by category (case-insensitive compare)
+const filtered = allPosts.filter((p) => {
+  const cat = (p.data?.category ?? '').toString().toLowerCase();
+  return cat === categoryParam;
+});
+
+// Convert posts to searchable format
+const searchablePosts = filtered.map(postToSearchable);
+
+const pageSize = 10;
+const page = 1;
+const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+const paginated = slicePage(filtered, page, pageSize);
+const pageHref = (n: number) => (n === 1 ? `/blog/category/${categoryParam}/` : `/blog/category/${categoryParam}/page/${n}/`);
+
+const normalizeHero = (hero: any) => {
+  if (!hero) return null;
+  if (typeof hero === 'string') {
+    return { src: hero, width: 512, height: 512 };
+  }
+  const { src, width, height } = hero;
+  return { src, width, height };
+};
+
+const getHero = (post: any) => normalizeHero(post.data?.hero ?? post.hero);
+const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+const getCategory = (post: any) => post.data?.category ?? null;
+---
+
+<SiteLayout
+  title={`Blog Posts in "${categoryParam}"`}
+  canonical={`/blog/category/${categoryParam}/`}
+  description={`Arsip blog berdasarkan kategori "${categoryParam}".`}
+  nextHref={totalPages > 1 ? pageHref(2) : undefined}
+  jsonLd={collectionPageJsonLd(
+    `Blog Category: ${categoryParam}`,
+    `/blog/category/${categoryParam}/`,
+    paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
+  )}
+  selectedItem="blog"
+>
+  <BackNav href="/" label="Back" />
+
+  <div class="content-container">
+    <h1>Blog Posts</h1>
+
+    <!-- Search Component (scoped to filtered posts) -->
+    <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${categoryParam}\"...`} />
+
+    <section class={listing['items-container']}>
+      <div class={listing['resouce-items']}>
+        {paginated.map((post) => {
+          const hero = getHero(post);
+          const excerpt = getExcerpt(post);
+          const dateLabel = post.date
+            ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+            : null;
+          return (
+            <PostCard
+              href={`/blog/${post.slug}/`}
+              title={post.data.title}
+              hero={hero}
+              alt={post.data.heroAlt ?? post.data.title}
+              category={getCategory(post)}
+              dateLabel={dateLabel}
+              excerpt={excerpt}
+            />
+          );
+        })}
+
+        {filtered.length === 0 && (
+          <p style="opacity:.8;">Tidak ada artikel dalam kategori ini.</p>
+        )}
+      </div>
+    </section>
+    {filtered.length > pageSize && (
+      <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
+    )}
+  </div>
+</SiteLayout>
+
+<script define:vars={{ searchablePosts }} is:inline>
+  // Initialize scoped search data for this category page
+  function initSearchData() {
+    try {
+      window.__SEARCH_POSTS__ = searchablePosts;
+    } catch (error) {
+      console.error('Failed to initialize search posts data:', error);
+    }
+  }
+
+  // Setup router reinit for ClientRouter compatibility
+  let routerSetup = false;
+  function setupRouterReinit() {
+    if (routerSetup) return;
+    routerSetup = true;
+
+    const run = () => {
+      if (window.location.pathname.startsWith('/blog/category')) {
+        initSearchData();
+      }
+    };
+
+    document.addEventListener('astro:page-load', run);
+    document.addEventListener('astro:after-swap', run);
+    window.addEventListener('popstate', run);
+    const _push = history.pushState && history.pushState.bind(history);
+    if (_push) {
+      history.pushState = function (data, unused, url) {
+        const ret = _push(data, unused, url);
+        setTimeout(run, 10);
+        return ret;
+      };
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initSearchData();
+      setupRouterReinit();
+    });
+  } else {
+    initSearchData();
+    setupRouterReinit();
+  }
+</script>

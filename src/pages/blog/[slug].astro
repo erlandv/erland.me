@@ -75,7 +75,7 @@ const jsonLd = blogPostingJsonLd({
           {frontmatter.category && (
             <div class={blogStyles['blog-post__meta-item']}>
               <Icon name="tags" class={blogStyles['blog-post__meta-icon']} />
-              <span class={blogStyles['blog-post__meta-text']}>{frontmatter.category}</span>
+              <a href={`/blog/category/${String(frontmatter.category).toLowerCase()}/`} class={blogStyles['blog-post__meta-text']}>{frontmatter.category}</a>
             </div>
           )}
           {frontmatter.publishDate && (

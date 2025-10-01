@@ -19,6 +19,7 @@ interface Props {
 }
 
 const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
+const categoryHref = category ? `/blog/category/${category.toLowerCase()}/` : null;
 ---
 
 <article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>
@@ -46,7 +47,7 @@ const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as 
           {category && (
             <div class={styles["post-card__meta-item"]}>
               <Icon name="tags" class={styles["post-card__meta-icon"]} />
-              <span class={styles["post-card__category"]}>{category}</span>
+              <a href={categoryHref!} class={styles["post-card__category"]}>{category}</a>
             </div>
           )}
           {dateLabel && (
