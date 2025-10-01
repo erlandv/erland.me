@@ -1,6 +1,6 @@
 ---
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '../lib/seo';
-import { GTM_ID } from '../lib/env';
+import { GTM_ID, ADSENSE_CLIENT } from '../lib/env';
 // Global styles imported at layout level
 import { ClientRouter } from 'astro:transitions';
 
@@ -50,6 +50,7 @@ const metaTags = generateMetaTags({
 const websiteSchema = websiteJsonLd();
 
 const enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
+const enableAdsense = import.meta.env.PROD && isProductionSite() && Boolean(ADSENSE_CLIENT);
 ---
 
 <head>
@@ -114,6 +115,12 @@ const enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','${GTM_ID}');`}
     </script>
+  )}
+  {enableAdsense && (
+    <>
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
+      <script is:inline>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
+    </>
   )}
   
   <ClientRouter fallback="swap" />

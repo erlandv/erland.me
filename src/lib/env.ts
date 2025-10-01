@@ -19,3 +19,10 @@ export function isProdSite(): boolean {
 // Prefer `PUBLIC_GTM_ID` via `import.meta.env`, fall back to process.env for scripts.
 export const GTM_ID: string =
   (import.meta as any).env?.PUBLIC_GTM_ID || process.env.PUBLIC_GTM_ID || '';
+
+// Google AdSense client ID (public)
+// Use `PUBLIC_ADSENSE_CLIENT` to expose to client bundles
+export const ADSENSE_CLIENT: string =
+  (import.meta as any).env?.PUBLIC_ADSENSE_CLIENT ||
+  process.env.PUBLIC_ADSENSE_CLIENT ||
+  '';
