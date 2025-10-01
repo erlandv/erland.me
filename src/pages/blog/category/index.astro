@@ -1,8 +1,10 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import BackNav from "../../../components/BackNav.astro";
-import { loadAllPosts, slugifyCategory } from '../../../lib/blog';
+import Icon from "../../../components/Icon.astro";
+import postCardStyles from "../../../components/PostCard/post-card.module.css";
 import listing from "../../../styles/pages/listing.module.css";
+import { loadAllPosts, slugifyCategory } from '../../../lib/blog';
 
 const posts = await loadAllPosts();
 
@@ -16,9 +18,19 @@ type CatInfo = {
     excerpt: string | null;
     date: Date | null;
   } | null;
+  hero: { src: string; width: number; height: number } | null;
 };
 
 const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+
+const normalizeHero = (hero: any) => {
+  if (!hero) return null;
+  if (typeof hero === 'string') {
+    return { src: hero, width: 512, height: 512 };
+  }
+  const { src, width, height } = hero;
+  return { src, width, height };
+};
 
 const categoriesMap = new Map<string, CatInfo>();
 for (const p of posts) {
@@ -40,6 +52,7 @@ for (const p of posts) {
             date: p.date ?? null,
           }
         : null,
+      hero: normalizeHero(p.data?.hero ?? p.hero) as any,
     });
   } else {
     existing.count += 1;
@@ -53,6 +66,7 @@ for (const p of posts) {
         excerpt: getExcerpt(p),
         date: p.date ?? null,
       };
+      existing.hero = normalizeHero(p.data?.hero ?? p.hero) as any;
     }
   }
 }
@@ -88,21 +102,46 @@ const categories = Array.from(categoriesMap.values()).sort((a, b) =>
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']} id="category-list">
         {categories.map((cat) => (
-          <article class="resource-card" data-name={cat.name.toLowerCase()} style="padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:10px;">
-            <header style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-              <h2 style="margin:0;font-size:1.15rem;">
-                <a href={`/blog/category/${cat.slug}/`} style="text-decoration:none;color:#fff;">{cat.name}</a>
-              </h2>
-              <span style="opacity:.8;font-size:.95rem;">{cat.count} artikel</span>
-            </header>
-            {cat.latest && (
-              <div style="opacity:.95;">
-                <a href={`/blog/${cat.latest.slug}/`} style="text-decoration:none;color:var(--color-secondary);font-weight:600;">{cat.latest.title}</a>
-                {cat.latest.excerpt && (
-                  <p style="margin:.35rem 0 0 0;opacity:.9;">{cat.latest.excerpt}</p>
+          <article class:list={[postCardStyles['resource-card'], 'resource-card', 'post-card']} data-name={cat.name.toLowerCase()}>
+            <div class={postCardStyles["post-card__inner"]}>
+              <div class={postCardStyles["post-card__thumb"]}>
+                {cat.hero ? (
+                  <img
+                    src={cat.hero.src}
+                    width={cat.hero.width}
+                    height={cat.hero.height}
+                    alt={cat.name}
+                    loading="lazy"
+                    class={postCardStyles["post-card__img"]}
+                  />
+                ) : (
+                  <div class={postCardStyles["post-card__thumb--placeholder"]} aria-hidden="true"></div>
                 )}
               </div>
-            )}
+              <div class={postCardStyles["post-card__body"]}>
+                <header class={postCardStyles["post-card__header"]}>
+                  <h2 class={postCardStyles["post-card__title"]}>
+                    <a href={`/blog/category/${cat.slug}/`} class={postCardStyles["post-card__title-link"]}>{cat.name}</a>
+                  </h2>
+                  <div class={postCardStyles["post-card__meta"]}>
+                    <div class={postCardStyles["post-card__meta-item"]}>
+                      <Icon name="tags" class={postCardStyles["post-card__meta-icon"]} />
+                      <span class={postCardStyles["post-card__category"]}>{cat.count} artikel</span>
+                    </div>
+                  </div>
+                </header>
+                {cat.latest && (
+                  <p class={postCardStyles["post-card__excerpt"]}>
+                    <a href={`/blog/${cat.latest.slug}/`} style="text-decoration:none;color:var(--color-secondary);font-weight:600;">{cat.latest.title}</a>
+                    {cat.latest.excerpt ? ` — ${cat.latest.excerpt}` : ''}
+                  </p>
+                )}
+                <a href={`/blog/category/${cat.slug}/`} class={postCardStyles["post-card__readmore"]}>
+                  <span>Lihat kategori</span>
+                  <Icon name="readmore" class={postCardStyles["post-card__readmore-icon"]} />
+                </a>
+              </div>
+            </div>
           </article>
         ))}
         {categories.length === 0 && (
