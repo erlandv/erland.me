@@ -1,0 +1,147 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import BackNav from "../../../components/BackNav.astro";
+import { loadAllPosts, slugifyCategory } from '../../../lib/blog';
+import listing from "../../../styles/pages/listing.module.css";
+
+const posts = await loadAllPosts();
+
+type CatInfo = {
+  name: string;
+  slug: string;
+  count: number;
+  latest: {
+    slug: string;
+    title: string;
+    excerpt: string | null;
+    date: Date | null;
+  } | null;
+};
+
+const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+
+const categoriesMap = new Map<string, CatInfo>();
+for (const p of posts) {
+  const raw = (p.data?.category ?? '').toString();
+  if (!raw) continue;
+  const slug = slugifyCategory(raw);
+  if (!slug) continue;
+  const existing = categoriesMap.get(slug);
+  if (!existing) {
+    categoriesMap.set(slug, {
+      name: raw,
+      slug,
+      count: 1,
+      latest: p
+        ? {
+            slug: p.slug,
+            title: p.data?.title,
+            excerpt: getExcerpt(p),
+            date: p.date ?? null,
+          }
+        : null,
+    });
+  } else {
+    existing.count += 1;
+    // posts is sorted desc by date; ensure latest is the most recent
+    const pDate = p.date?.valueOf() ?? 0;
+    const eDate = existing.latest?.date?.valueOf() ?? -1;
+    if (pDate > eDate) {
+      existing.latest = {
+        slug: p.slug,
+        title: p.data?.title,
+        excerpt: getExcerpt(p),
+        date: p.date ?? null,
+      };
+    }
+  }
+}
+
+const categories = Array.from(categoriesMap.values()).sort((a, b) =>
+  a.name.localeCompare(b.name, 'id')
+);
+---
+
+<SiteLayout
+  title="Blog Categories"
+  canonical="/blog/category/"
+  description="Daftar kategori blog dan jumlah artikelnya, lengkap dengan artikel terbaru per kategori."
+  selectedItem="blog"
+>
+  <BackNav href="/blog/" label="Back to blog" />
+
+  <div class="content-container">
+    <h1>Blog Categories</h1>
+
+    <!-- Simple search/filter for categories -->
+    <div style="margin: 16px 0 24px 0;">
+      <label for="category-search" class="sr-only">Cari kategori</label>
+      <input
+        id="category-search"
+        type="text"
+        placeholder="Cari kategori..."
+        style="width:100%;max-width:520px;padding:10px 12px;border-radius:8px;border:1px solid rgba(138,180,255,.25);background:#0b1020;color:#fff;"
+        aria-label="Cari kategori"
+      />
+    </div>
+
+    <section class={listing['items-container']}>
+      <div class={listing['resouce-items']} id="category-list">
+        {categories.map((cat) => (
+          <article class="resource-card" data-name={cat.name.toLowerCase()} style="padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:10px;">
+            <header style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <h2 style="margin:0;font-size:1.15rem;">
+                <a href={`/blog/category/${cat.slug}/`} style="text-decoration:none;color:#fff;">{cat.name}</a>
+              </h2>
+              <span style="opacity:.8;font-size:.95rem;">{cat.count} artikel</span>
+            </header>
+            {cat.latest && (
+              <div style="opacity:.95;">
+                <a href={`/blog/${cat.latest.slug}/`} style="text-decoration:none;color:var(--color-secondary);font-weight:600;">{cat.latest.title}</a>
+                {cat.latest.excerpt && (
+                  <p style="margin:.35rem 0 0 0;opacity:.9;">{cat.latest.excerpt}</p>
+                )}
+              </div>
+            )}
+          </article>
+        ))}
+        {categories.length === 0 && (
+          <p style="opacity:.8;">Tidak ada kategori yang tersedia.</p>
+        )}
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<script define:vars={{ categories }} is:inline>
+  // Filter category cards by the input value
+  function setupCategoryFilter() {
+    /** @type {any} */
+    const input = document.getElementById('category-search');
+    /** @type {any} */
+    const list = document.getElementById('category-list');
+    if (!input || !list) return;
+
+    const handle = () => {
+      const q = String((input && input.value) || '').trim().toLowerCase();
+      const items = Array.from(list.querySelectorAll('[data-name]'));
+      if (!q) {
+        items.forEach((el) => {
+          if (el && el.style) el.style.display = '';
+        });
+        return;
+      }
+      items.forEach((el) => {
+        const name = String((el.getAttribute && el.getAttribute('data-name')) || '').toLowerCase();
+        if (el && el.style) el.style.display = name.includes(q) ? '' : 'none';
+      });
+    };
+    input.addEventListener('input', handle);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCategoryFilter);
+  } else {
+    setupCategoryFilter();
+  }
+</script>
