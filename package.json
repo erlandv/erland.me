@@ -16,7 +16,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate": "npm run lint && npm run type-check && npm run format:check",
-    "generate:robots": "node --loader ts-node/esm scripts/generate-robots.ts",
+    "generate:robots": "node scripts/generate-robots.js",
     "generate:robots:ts-node": "node --loader ts-node/esm scripts/generate-robots.ts",
     "generate:robots:bun": "bun scripts/generate-robots.ts"
   },
