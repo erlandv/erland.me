@@ -153,6 +153,33 @@ ul {
   }
 }
 
+/* AdSense units: minimal spacing in article prose */
+#blog-content .adsbygoogle,
+#download-content .adsbygoogle {
+  display: block !important;
+  margin: 1.25rem auto; /* balanced vertical spacing */
+  padding: 0.5rem 0;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Responsive tuning for AdSense blocks */
+@media screen and (max-width: 640px) {
+  #blog-content .adsbygoogle,
+  #download-content .adsbygoogle {
+    margin: 0.75rem auto;
+    padding: 0.25rem 0;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  #blog-content .adsbygoogle,
+  #download-content .adsbygoogle {
+    margin: 1rem auto;
+    padding: 0.4rem 0;
+  }
+}
+
 .w-richtext:before,
 .w-richtext:after {
   content: ' ';
