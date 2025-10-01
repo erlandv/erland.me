@@ -109,16 +109,17 @@
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: clamp(0.8rem, 2vw, 0.9rem);
   font-weight: 400;
   line-height: 1.4;
+  text-transform: capitalize;
 }
 
 .post-card__meta-icon {
   width: 16px;
   height: 16px;
-  color: rgba(var(--color-primary-rgb), 0.8);
+  color: var(--text-muted);
 }
 
 .post-card__tags {

@@ -71,6 +71,12 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
   // Initialize search functionality
   function initSearch() {
+    // Only initialize if the SearchInput component exists on the page
+    const container = document.getElementById('search-container');
+    if (!container) {
+      return;
+    }
+
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const searchClear = document.getElementById('search-clear') as HTMLButtonElement;
     const searchResults = document.getElementById('search-results') as HTMLDivElement;
@@ -78,7 +84,6 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     const searchLoading = document.getElementById('search-loading') as HTMLDivElement;
 
     if (!searchInput || !searchClear || !searchResults || !searchResultsContent || !searchLoading) {
-      console.error('Search elements not found');
       return;
     }
 
@@ -355,11 +360,9 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
   // Initialize search function
   function initSearchFunction() {
-    // Check if we're on the blog page
-    if (!window.location.pathname.startsWith('/blog')) {
-      return;
-    }
-    
+    // Only run when the component's container is present
+    const container = document.getElementById('search-container');
+    if (!container) return;
     initSearch();
   }
 
