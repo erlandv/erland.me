@@ -8,12 +8,6 @@
     "Contact form integrated with the customer-service mailbox",
     "Managed staging → production migration with proper checks and rollbacks"
   ],
-  "tech": [
-    "Figma",
-    "Tailwind CSS",
-    "SvelteKit",
-    "Next.js",
-    "Nginx"
-  ],
+  "tech": ["Figma", "Tailwind CSS", "SvelteKit", "Next.js", "Nginx"],
   "order": 1
 }

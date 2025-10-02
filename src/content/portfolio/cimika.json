@@ -9,12 +9,6 @@
     "On-page SEO collaboration with dynamic, crawl-friendly content.",
     "Performance tuning: lean code, optimized assets, and fast page loads."
   ],
-  "tech": [
-    "PHP",
-    "JavaScript",
-    "MySQL",
-    "Redis",
-    "WordPress"
-  ],
+  "tech": ["PHP", "JavaScript", "MySQL", "Redis", "WordPress"],
   "order": 2
 }

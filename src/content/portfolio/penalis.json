@@ -8,13 +8,6 @@
     "Reader-first blog UI (readability, hierarchy, and UX polish).",
     "Backend/database managed for authoring operations and comment integrity."
   ],
-  "tech": [
-    "Node.js",
-    "TypeScript",
-    "Vite",
-    "CSS",
-    "PostgreSQL",
-    "Astro"
-  ],
+  "tech": ["Node.js", "TypeScript", "Vite", "CSS", "PostgreSQL", "Astro"],
   "order": 3
 }

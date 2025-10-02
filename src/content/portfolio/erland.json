@@ -9,12 +9,6 @@
     "Dynamic SEO: per-page meta + JSON-LD generation",
     "Performance-first build: smaller bundle, fewer client scripts, faster TTFB"
   ],
-  "tech": [
-    "Astro",
-    "TypeScript",
-    "React",
-    "CSS Modules",
-    "Vite"
-  ],
+  "tech": ["Astro", "TypeScript", "React", "CSS Modules", "Vite"],
   "order": 1
 }
