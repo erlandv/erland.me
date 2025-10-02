@@ -33,7 +33,7 @@ downloadFiles:
     href: 'https://asset.erland.me/template/kalender-2025-perbulan.zip'
     size: '4.07 MB'
 downloadNote: |
-  Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, beri tahu saya melalui kolom komentar di bawah ini, akan saya usahakan respons secepatnya. Butuh komunikasi lebih lanjut? Hubungi saya melalui email hello@erland.me
+  Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, hubungi saya melalui email hello@erland.me
 downloadIntro:
   - 'Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama.'
   - 'Silakan download file template kalender 2025 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!'
@@ -85,6 +85,6 @@ Pembuatan template kalender 2025 ini membutuhkan ketelitian yang tinggi, khususn
 
 Seperti yang sudah saya katakan bahwa template kalender 2025 ini saya buat sendiri dari nol dan dibagikan secara gratis tanpa perlu membayar apapun dan berapapun, oleh sebab itu saya merasa berhak membuat ketentuan penggunaan untuk kalian yang akan download file template kalender 2025 di web ini. Berikut ketentuan penggunaannya:
 
-1. Saya mengizinkan kalian untuk mengedit bentuk tampilan desain kalender ini sesuai dengan selera dan kebutuhan.
-2. Saya mengizinkan kalian untuk membagikan ulang file template kalender ini di blog, web, sosial media, atau platform manapun dengan syarat harus mencantumkan link sumbernya.
-3. Saya TIDAK MENGIZINKAN kalian untuk menjual file template kalender ini dengan cara dan alasan apapun. Jika yang dijual adalah kalender hasil cetak dari file template kalender ini, hal tersebut diperbolehkan. Yang tidak boleh adalah menjual file template kalender ini.
+- Saya mengizinkan kalian untuk mengedit bentuk tampilan desain kalender ini sesuai dengan selera dan kebutuhan.
+- Saya mengizinkan kalian untuk membagikan ulang file template kalender ini di blog, web, sosial media, atau platform manapun dengan syarat harus mencantumkan link sumbernya.
+- Saya TIDAK MENGIZINKAN kalian untuk menjual file template kalender ini dengan cara dan alasan apapun. Jika yang dijual adalah kalender hasil cetak dari file template kalender ini, hal tersebut diperbolehkan. Yang tidak boleh adalah menjual file template kalender ini.

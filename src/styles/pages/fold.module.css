@@ -6,6 +6,12 @@
   margin-bottom: 26px;
 }
 
+.fold-content ul {
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .lead {
   max-width: 620px;
   color: #e8e8e8;
