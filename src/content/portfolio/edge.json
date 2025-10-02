@@ -1,0 +1,19 @@
+{
+  "title": "EdgeDC",
+  "category": "web-development",
+  "desc": "I collaborated on layout, visual styling, and on-page copy, then translated the Figma designs into a responsive, accessible frontend. To reach international audiences, I added full multilingual support (language switcher, content loading, URL handling).\n\n I also built a contact form that routes messages straight to the company’s customer-service inbox to speed up support. After QA on staging, I handled the migration and go-live, ensuring a clean cutover and stable performance.",
+  "highlights": [
+    "Figma → pixel-accurate, accessible UI (responsive, keyboard-friendly)",
+    "Multilingual experience for international visitors",
+    "Contact form integrated with the customer-service mailbox",
+    "Managed staging → production migration with proper checks and rollbacks"
+  ],
+  "tech": [
+    "Figma",
+    "Tailwind CSS",
+    "SvelteKit",
+    "Next.js",
+    "Nginx"
+  ],
+  "order": 1
+}

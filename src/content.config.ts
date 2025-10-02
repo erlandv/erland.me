@@ -54,7 +54,8 @@ const portfolio = defineCollection({
   schema: z.object({
     title: z.string(),
     category: z.enum(['web-development', 'cloud-infra', 'personal-projects']),
-    desc: z.array(z.string()),
+    desc: z.string(),
+    highlights: z.array(z.string()).default([]),
     tech: z.array(z.string()),
     order: z.number().default(0),
   }),

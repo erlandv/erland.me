@@ -1,11 +1,20 @@
 {
   "title": "Cimika",
   "category": "web-development",
-  "desc": [
-    "Developed a conversion-focused landing page tailored for Google Ads.",
-    "Set up Google Analytics with key events for funnel analysis.",
-    "Added customer reviews to provide social proof and boost trust."
+  "desc": "I built a conversion-focused landing page designed for paid acquisition. Using Google Tag Manager, I configured tags, triggers, and variables to capture key visitor events and analyze them in Google Analytics.\n\n To boost trust, I added a customer reviews section so prospects see real testimonials. I worked with the SEO team on on-page strategy (dynamic meta, crawlable sections, and structured content) and optimized code and assets to keep page load fast for ad traffic.",
+  "highlights": [
+    "Conversion-oriented landing page tailored for Google Ads traffic.",
+    "GTM setup (tags/triggers/variables) feeding into Google Analytics.",
+    "Customer reviews/testimonials for stronger social proof.",
+    "On-page SEO collaboration with dynamic, crawl-friendly content.",
+    "Performance tuning: lean code, optimized assets, and fast page loads."
   ],
-  "tech": ["PHP", "JavaScript", "MySQL", "Redis", "WordPress"],
+  "tech": [
+    "PHP",
+    "JavaScript",
+    "MySQL",
+    "Redis",
+    "WordPress"
+  ],
   "order": 2
 }

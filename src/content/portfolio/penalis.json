@@ -1,13 +1,20 @@
 {
   "title": "Penalis",
   "category": "web-development",
-  "desc": [
-    "Built a CMS workflow that lets editors publish fast and safely.",
-    "Delivered a clean, reader-first blog UI for comfortable reading.",
-    "Maintained backend/database powering posts, users, and comments.",
-    "Implemented SEO best practices to improve organic search visibility.",
-    "Implemented anti-spam and moderation to keep comments healthy."
+  "desc": "I designed and implemented a lightweight content management workflow so the editorial team can publish quickly and consistently. On the reader side, I built a comments system to enable discussions between writers and readers, including moderation tools and spam mitigation.\n\n The blog UI focuses on clarity and readability, while the backend and database are structured to keep authoring and comment activity reliable and maintainable over time.",
+  "highlights": [
+    "Custom content management flow for a faster editorial cadence.",
+    "Native comments with moderation and anti-spam controls.",
+    "Reader-first blog UI (readability, hierarchy, and UX polish).",
+    "Backend/database managed for authoring operations and comment integrity."
   ],
-  "tech": ["MySQL", "PHP", "Redis", "WordPress", "Github"],
+  "tech": [
+    "Node.js",
+    "TypeScript",
+    "Vite",
+    "CSS",
+    "PostgreSQL",
+    "Astro"
+  ],
   "order": 3
 }

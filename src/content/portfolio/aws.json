@@ -1,0 +1,14 @@
+{
+  "title": "Data Analytics Platform on AWS",
+  "category": "cloud-infra",
+  "desc": "I provisioned compute, networking, and storage on AWS, then deployed a multi-node Kubernetes cluster on EC2. The cluster was tuned for heavy ingestion and processing with horizontal scaling and resource quotas to keep workloads stable during bursts.\n\n Prometheus scraped application and node metrics, while Grafana dashboards provided real-time visibility and SLO tracking. The design emphasized fault isolation, rolling updates, and cost awareness.",
+  "highlights": [
+    "AWS on EC2: VPC, subnets, security groups, Auto Scaling Groups, load balancing",
+    "Kubernetes on VMs: multi-node setup with HPA, taints and tolerations, and quotas",
+    "Throughput target: approximately five million data points per day with headroom for bursts",
+    "Monitoring: Prometheus metrics with Grafana dashboards and alerting",
+    "Reliability: rolling deployments, highly available control plane where applicable, backup and restore runbooks"
+  ],
+  "tech": ["Docker", "Kubernetes", "AWS", "Node.js", "RabbitMQ"],
+  "order": 2
+}

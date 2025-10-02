@@ -1,0 +1,20 @@
+{
+  "title": "erland.me",
+  "category": "personal-projects",
+  "desc": "I led a full migration from WordPress to Astro to achieve a faster, low-overhead architecture. I ported pages, posts, categories, and media into a Markdown-driven content model and rebuilt the theme from scratch. The UI is componentized with CSS Modules for predictable styling and easy reuse across pages.\n\n Features that previously depended on heavy WP plugins were reimplemented with a lighter, more powerful stack. I also built a site-wide SEO layer that renders dynamic meta tags and JSON-LD schemas for every route.",
+  "highlights": [
+    "WordPress → Astro migration with Markdown content like pages, posts, categories, media, etc.",
+    "Fresh design system with reusable layouts & components (CSS Modules)",
+    "Plugin features re-implemented with a slimmer, more maintainable stack",
+    "Dynamic SEO: per-page meta + JSON-LD generation",
+    "Performance-first build: smaller bundle, fewer client scripts, faster TTFB"
+  ],
+  "tech": [
+    "Astro",
+    "TypeScript",
+    "React",
+    "CSS Modules",
+    "Vite"
+  ],
+  "order": 1
+}

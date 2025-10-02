@@ -1,15 +1,26 @@
 ---
-const { title, desc, tech } = Astro.props;
+const { title, desc, highlights = [], tech } = Astro.props;
+const paragraphs: string[] = typeof desc === 'string'
+  ? desc.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
+  : [];
 import styles from "./Project/project.module.css";
 ---
 
 <div class={styles["single-item"]}>
-  <h3>{title}</h3>
-  <div class:list={[styles["project-desc"], styles["project-desc-list"], 'w-richtext']}>
-    <ul role="list">
-      {desc.map((item: string) => <li>{item}</li>)}
-    </ul>
+  <h2>{title}</h2>
+  <div class:list={[styles["project-desc"], 'w-richtext']}>
+    {paragraphs.length > 0 ? paragraphs.map((p: string) => <p>{p}</p>) : <p>{desc}</p>}
   </div>
+  {highlights.length > 0 && (
+    <>
+      <h3>Highlights</h3>
+      <div class:list={[styles["project-desc"], styles["project-desc-list"], 'w-richtext']}>
+        <ul role="list">
+          {highlights.map((item: string) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </>
+  )}
   <div class={styles["mini-label-white"]}>Technologies &amp; tools</div>
   <div class={styles["chips-container"]}>
     {tech.map((techItem: string) => <div class={styles["single-chip"]}>{techItem}</div>)}

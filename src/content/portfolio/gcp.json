@@ -1,0 +1,14 @@
+{
+  "title": "CRM Cloud Migration to GCP",
+  "category": "cloud-infra",
+  "desc": "I planned and executed a provider-to-provider migration of a CRM system to GCP. The new foundation was defined in Terraform for consistent and reviewable changes. Workloads were containerized and deployed to GKE with environment-specific configuration and secrets management.\n\n I set up cluster logging, metrics, and alerting to give the operations team clear visibility. Cutover used a staged data sync and a short maintenance window to minimize downtime.",
+  "highlights": [
+    "GCP build-out with Terraform: networks, IAM, storage, and managed services",
+    "GKE deployment: containerized CRM with configuration and secrets per environment",
+    "Observability: GKE logging and metrics plus Prometheus exporters and alerting",
+    "Migration playbook: staged data sync, verification steps, and a rollback plan",
+    "Security and compliance: service accounts with least privilege, encryption at rest and in transit"
+  ],
+  "tech": ["GCP", "Terraform", "Kubernetes", "GitLab"],
+  "order": 3
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Telemedicine Infra on Azure",
+  "category": "cloud-infra",
+  "desc": "I built a greenfield Azure environment using Infrastructure as Code with Terraform to support remote patient monitoring. The baseline covered network segmentation, private endpoints, key management, and automated backups.\n\n I then implemented a CI/CD pipeline for the mobile app to streamline releases: automated builds, tests, signing, artifact storage, and gated promotions to the stores. The stack follows HIPAA-aligned practices with RBAC, least privilege, encryption in transit and at rest, and audit logging to protect PHI.",
+  "highlights": [
+    "Azure landing zone: VNets and subnets, private endpoints, Key Vault, backups",
+    "Terraform IaC: reproducible environments and reviewable change history",
+    "Mobile CI/CD: build → test → sign → staged release with manual approvals",
+    "Security baseline: RBAC and least privilege, TLS everywhere, encrypted storage, audit logs",
+    "Observability: core logs and alerts for infrastructure and pipeline health"
+  ],
+  "tech": ["Terraform", "Azure", "Docker", "Nginx", "GitLab CI/CD"],
+  "order": 1
+}

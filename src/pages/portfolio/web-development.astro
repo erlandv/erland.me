@@ -17,7 +17,7 @@ const projects: ProjectData[] = allProjects
   title="Web Development"
   canonical="/portfolio/web-development/"
   selectedItem="web-development"
-  description="Showcase of web builds from landing pages and blogs to dashboards. I turn web into fast, accessible sites with clean UI, solid SEO, and maintainable code"
+  description="Showcase of web builds from landing pages and blogs to dashboards. I turn web into fast, accessible sites with clean UI, solid SEO, and maintainable code."
 >
   <BackNav href="/portfolio/" label="See Other Portfolios" />
   <div class="content-container">
@@ -28,6 +28,7 @@ const projects: ProjectData[] = allProjects
           <Project 
             title={project.title} 
             desc={project.desc}
+            highlights={project.highlights}
             tech={project.tech}
           />
         ))}
