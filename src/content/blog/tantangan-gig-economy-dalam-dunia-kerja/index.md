@@ -1,13 +1,11 @@
 ---
 title: Tantangan Gig Economy dalam Dunia Kerja
 description: >-
-  sebuah kondisi yang sudah cukup lama terjadi, tak terkecuali di Indonesia.
-  Bahkan di Indonesia sendiri, gig economy tumbuh dengan cepat. Bukan tanpa
-  alasan,…
+  Gig economy, konsep baru yang muncul pada pasar tenaga kerja bebas,
+  hadirnya pekerja lepas atau berbasis proyek.
 excerpt: >-
-  sebuah kondisi yang sudah cukup lama terjadi, tak terkecuali di Indonesia.
-  Bahkan di Indonesia sendiri, gig economy tumbuh dengan cepat. Bukan tanpa
-  alasan, dimana salah satu faktor pendorongnya…
+  Gig economy, konsep baru yang muncul pada pasar tenaga kerja bebas,
+  hadirnya pekerja lepas atau berbasis proyek.
 publishDate: 2024-11-08T00:00:00.000Z
 hero: ./hero.png
 heroAlt: Tantangan Gig Economy dalam Dunia Kerja
@@ -62,8 +60,8 @@ Perkembangan gig economy yang pesat di Indonesia memang membuka banyak peluang. 
 
 Selain itu mengingat tantangan bagi gig worker terus berkembang, Anda perlu mengenali potensi diri, membangun personal branding dan reputasi melalui kerja berkualitas dan komunikasi baik. Teruslah belajar agar tetap relevan di industri yang dinamis ini.
 
-Referensi:  
-\- https://arsjadrasjid.com/gig-economy/  
-\- https://glints.com/id/lowongan/gig-economy-adalah/  
-\- https://www.ruangmenyala.com/article/read/apa-itu-gig-economy-pengertian-jenis-aktor-dan-dampaknya  
-\- https://www.prakerja.go.id/artikel/insight/kenali-fenomena-gig-economy-solusi-keluar-dari-useless-generation
+Referensi:
+- https://arsjadrasjid.com/gig-economy/  
+- https://glints.com/id/lowongan/gig-economy-adalah/  
+- https://www.ruangmenyala.com/article/read/apa-itu-gig-economy-pengertian-jenis-aktor-dan-dampaknya  
+- https://www.prakerja.go.id/artikel/insight/kenali-fenomena-gig-economy-solusi-keluar-dari-useless-generation

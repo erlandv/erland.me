@@ -1,12 +1,9 @@
 ---
 title: 'Ketok Palu! Gudang Garam Menang atas Gugatan Gudang Baru, Ini Kasusnya'
 description: >-
-  , kembali mencuat. Pengadilan Negeri (PN) Surabaya telah memberikan keputusan
-  yang mendukung sebagian dari gugatan Gudang Garam, atau PT Gudang Garam Tbk…
+  Gudang Garam menang atas gugatan Gudang Baru pada sangketa merk dan logo setelah PN Surabaya memberi putusan yang mendukung sebagian dari gugatan Gudang Garam.
 excerpt: >-
-  , kembali mencuat. Pengadilan Negeri (PN) Surabaya telah memberikan keputusan
-  yang mendukung sebagian dari gugatan Gudang Garam, atau PT Gudang Garam Tbk
-  (GGRM, terkait sengketa merek dan logo dengan…
+  Gudang Garam menang atas gugatan Gudang Baru pada sangketa merk dan logo setelah PN Surabaya memberi putusan.
 publishDate: 2024-04-06T00:00:00.000Z
 hero: ./hero.png
 heroAlt: 'Ketok Palu! Gudang Garam Menang atas Gugatan Gudang Baru, Ini Kasusnya'

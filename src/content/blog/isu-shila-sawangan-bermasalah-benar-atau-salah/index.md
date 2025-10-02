@@ -1,13 +1,9 @@
 ---
 title: 'Isu Shila Sawangan Bermasalah, Benar atau Salah?'
 description: >-
-  Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan
-  banyak pihak. Benarkah Shila Sawangan bermasalah terkait kasus lahan
-  sangketa?…
+  Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan banyak pihak. Benarkah Shila Sawangan bermasalah terkait kasus lahan sangketa?
 excerpt: >-
-  Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan
-  banyak pihak. Benarkah Shila Sawangan bermasalah terkait kasus lahan sangketa?
-  erland.me Jika kita membahas kawasan hunian…
+  Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan banyak pihak. Benarkah bermasalah kasus lahan sangketa?
 publishDate: 2024-05-30T00:00:00.000Z
 hero: ./hero.png
 heroAlt: 'Isu Shila Sawangan Bermasalah, Benar atau Salah?'
@@ -15,10 +11,6 @@ tags: []
 category: info
 draft: false
 ---
-
-> Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan banyak pihak. Benarkah Shila Sawangan bermasalah terkait kasus lahan sangketa?
->
-> erland.me
 
 Jika kita membahas kawasan hunian strategis di Depok, nama Shila Sawangan tidak akan bisa lepas dari pembahasan, karena komplek perumahan yang beralamat di Jl. Raya Bojongsari No.53, Bojongsari Lama, Kec. Bojongsari, Kota Depok ini menjadi incaran banyak orang. Bagaimana tidak? Perumahan Shila Sawangan memiliki banyak sekali fasilitas-fasilitas yang menggiurkan untuk menjadi tempat hunian di bagian Selatan Jakarta.
 

@@ -1,12 +1,9 @@
 ---
 title: 50+ Istilah Dalam Saham yang Perlu Diketahui oleh Pemula
 description: >-
-  Saham adalah dokumen bukti kepemilikan nilai sebuah perusahaan, saham juga
-  dapat diartikan sebagai tanda penyertaan modal dari seseorang kepada suatu…
+  Ada 50+ istilah dalam saham yang perlu diketahui oleh pemula sebelum terjun berinvestasi saham. Ketahui terlebih dahulu istilah-istilah dalam saham.
 excerpt: >-
-  Saham adalah dokumen bukti kepemilikan nilai sebuah perusahaan, saham juga
-  dapat diartikan sebagai tanda penyertaan modal dari seseorang kepada suatu
-  perusahaan. Dengan memiliki suatu saham, berarti…
+  Ketahui terlebih dahulu istilah-istilah dalam saham yang perlu diketahui pemula sebelum terjun berinvestasi di pasar modal.
 publishDate: 2024-10-27T00:00:00.000Z
 hero: ./hero.png
 heroAlt: 50+ Istilah Dalam Saham yang Perlu Diketahui oleh Pemula
@@ -199,15 +196,25 @@ Reverse Split adalah penggabungan saham untuk menaikkan harga per saham tanpa me
 
 IPO (Initial Public Offering) adalah penawaran saham perdana oleh perusahaan kepada publik untuk pertama kalinya. Sebelum IPO, ada beberapa tahap yang dilalui, yaitu:
 
-1. **Penawaran Awal**: Pada tahap ini, perusahaan melalui underwriter memberikan rentang harga saham yang akan IPO. Misalnya, rentang harga yang ditawarkan adalah Rp900 - Rp1.150 per lembar saham. Kemudian para investor yang tertarik mengikuti IPO saham tersebut mengajukan penawaran harga saham. Katakanlah ada investor mengajukan harga Rp1.000 per lembar saham dan tertarik membelinya sebanyak 100 lot saham, pengajuan tersebut akan digabungkan dengan investor lainnya untuk kemudian diambil harga rata-rata yang nantinya akan menjadi harga final pada saham yang akan IPO tersebut. Yang pasti, harga final hanya akan berada pada rentang harga yang ditawarkan melalui prospektus.
+### 1. **Penawaran Awal**:
 
-2. **Penawaran Umum**: Pada tahap ini, harga IPO sebuah saham telah ditentukan setelah melalui penawaran awal. Katakanlah dari rentang harga Rp900 - Rp1.150 pada penawaran umum, harga finalnya adalah Rp1.000 per lembar saham. Jika pengajuan seorang investor pada penawaran awal sesuai harganya dengan harga final, maka investor akan diminta konfirmasi pemesanan. Jika tidak sesuai, maka investor akan diminta untuk melakukan kembali pesanan sesuai dengan harga final Rp1.000 per lembar saham dan memasukkan ulang jumlah saham lot saham yang akan dipesan.
+Pada tahap ini, perusahaan melalui underwriter memberikan rentang harga saham yang akan IPO. Misalnya, rentang harga yang ditawarkan adalah Rp900 - Rp1.150 per lembar saham. Kemudian para investor yang tertarik mengikuti IPO saham tersebut mengajukan penawaran harga saham. Katakanlah ada investor mengajukan harga Rp1.000 per lembar saham dan tertarik membelinya sebanyak 100 lot saham, pengajuan tersebut akan digabungkan dengan investor lainnya untuk kemudian diambil harga rata-rata yang nantinya akan menjadi harga final pada saham yang akan IPO tersebut. Yang pasti, harga final hanya akan berada pada rentang harga yang ditawarkan melalui prospektus.
 
-3. **Penjatahan Efek**: Pada tahap ini akan dilakukan penjatahan saham. Pada IPO saham yang populer, terkadang investor tidak diberikan jatah 100% dari pemesanan karena tingginya permintaan dan terbatasnya jumlah saham yang tersedia. Misalnya jika memesan saham IPO sebanyak 100 lot, bisa jadi saat penjatahan hanya mendapatkan 50 lot saja atau hanya 50% dari pemesanan. Penjatahan saham IPO berdasarkan SID, jadi jika investor mencoba memesan saham IPO dari berbagai sekuritas, itu tidak akan berpengaruh karena dari hanya ada 1 SID walau terdaftar dari berbagai sekuritas.
+### 2. **Penawaran Umum**:
 
-4. **Distribusi Saham**: Pada tahap ini, saham IPO yang telah berhasil dipesan dan diberikan penjatahan akan segera didistribusikan kepada pembeli. Saham akan dibagikan ke para investor pemesan IPO sesuai dengan sekuritasnya masing-masing dan saham akan mulai masuk ke portofolio investor di sekuritasnya masing-masing.
+Pada tahap ini, harga IPO sebuah saham telah ditentukan setelah melalui penawaran awal. Katakanlah dari rentang harga Rp900 - Rp1.150 pada penawaran umum, harga finalnya adalah Rp1.000 per lembar saham. Jika pengajuan seorang investor pada penawaran awal sesuai harganya dengan harga final, maka investor akan diminta konfirmasi pemesanan. Jika tidak sesuai, maka investor akan diminta untuk melakukan kembali pesanan sesuai dengan harga final Rp1.000 per lembar saham dan memasukkan ulang jumlah saham lot saham yang akan dipesan.
 
-5. **Listing**: Pada tahap ini, saham IPO sudah bisa mulai diperdagangkan di bursa dan para investor bisa melakukan jual-beli saham IPO tersebut di pasar reguler, maupun di pasar negosiasi.
+### 3. **Penjatahan Efek**:
+
+Pada tahap ini akan dilakukan penjatahan saham. Pada IPO saham yang populer, terkadang investor tidak diberikan jatah 100% dari pemesanan karena tingginya permintaan dan terbatasnya jumlah saham yang tersedia. Misalnya jika memesan saham IPO sebanyak 100 lot, bisa jadi saat penjatahan hanya mendapatkan 50 lot saja atau hanya 50% dari pemesanan. Penjatahan saham IPO berdasarkan SID, jadi jika investor mencoba memesan saham IPO dari berbagai sekuritas, itu tidak akan berpengaruh karena dari hanya ada 1 SID walau terdaftar dari berbagai sekuritas.
+
+### 4. **Distribusi Saham**:
+
+Pada tahap ini, saham IPO yang telah berhasil dipesan dan diberikan penjatahan akan segera didistribusikan kepada pembeli. Saham akan dibagikan ke para investor pemesan IPO sesuai dengan sekuritasnya masing-masing dan saham akan mulai masuk ke portofolio investor di sekuritasnya masing-masing.
+
+### 5. **Listing**:
+
+Pada tahap ini, saham IPO sudah bisa mulai diperdagangkan di bursa dan para investor bisa melakukan jual-beli saham IPO tersebut di pasar reguler, maupun di pasar negosiasi.
 
 ## Right Issue
 

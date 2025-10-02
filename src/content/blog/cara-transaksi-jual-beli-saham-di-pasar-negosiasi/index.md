@@ -2,9 +2,10 @@
 title: Cara Transaksi Jual-Beli Saham di Pasar Negosiasi
 description: >-
   Mau jual-beli saham di pasar negosiasi?
-  Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula
+  Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula.
 excerpt: >-
-  Bursa Efek Indonesia memiliki 3 jenis pasar untuk transaksi jual-beli saham: Pasar Reguler, Pasar Tunai, dan Pasar Negosiasi. Nah, artikel ini membahas khusus soal pasar negosiasi...
+  Mau jual-beli saham di pasar negosiasi?
+  Artikel ini membahas lengkap cara bertransaksi jual-beli saham di pasar nego untuk pemula.
 publishDate: 2025-07-16
 updatedDate: 2025-09-16
 hero: ./hero.png

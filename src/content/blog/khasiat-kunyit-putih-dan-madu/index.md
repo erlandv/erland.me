@@ -1,13 +1,9 @@
 ---
 title: 10 Khasiat Kunyit Putih dan Madu untuk Kesehatan Tubuh
 description: >-
-  Kombinasi bahan alami seperti kunyit putih dan madu telah digunakan secara
-  tradisional selama berabadabad untuk mendukung kesehatan. Kedua bahan ini
-  dikenal…
+  Ada banyak sekali khasiat kunyit putih dan madu untuk kesehatan tubuh, berikut ini simak 10 khasiat kunyit putih dan madu yang perlu diketahui.
 excerpt: >-
-  Kombinasi bahan alami seperti kunyit putih dan madu telah digunakan secara
-  tradisional selama berabadabad untuk mendukung kesehatan. Kedua bahan ini
-  dikenal karena khasiatnya yang luar biasa dalam…
+  Ada banyak sekali khasiat kunyit putih dan madu untuk kesehatan tubuh, berikut ini simak 10 khasiat kunyit putih dan madu yang perlu diketahui.
 publishDate: 2024-10-09T00:00:00.000Z
 hero: ./hero.png
 heroAlt: 10 Khasiat Kunyit Putih dan Madu untuk Kesehatan Tubuh
