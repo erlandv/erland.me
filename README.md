@@ -401,6 +401,72 @@ Common options:
   ```
   Note `trailingSlash: "always"` is enabled. Ensure `try_files` serves folder indexes.
 
+--------------------------------------------------------------------------------
+
+## CI: Auto Deploy to VPS via GitHub Actions
+
+This pipeline builds on a GitHub Actions runner (Ubuntu) and uploads static build artifacts in `dist/` to the VPS via SSH + rsync. Workflow file: [".github/workflows/deploy.yml"](./.github/workflows/deploy.yml).
+
+### Flow
+- Trigger on push to `main`, or manually via `workflow_dispatch`.
+- CI steps:
+  - Checkout repository
+  - Setup Node 20 with npm cache
+  - `npm ci`
+  - `npm run build:clean` (generates robots.txt and ads.txt, then builds Astro)
+  - Add SSH key to agent
+  - `ssh-keyscan` the remote host (populate known_hosts)
+  - Ensure target directory exists on the server
+  - `rsync -az --delete` from `./dist/` to `/var/www/astro/dist/` on the VPS (remote `rsync` runs as `sudo`)
+
+### Required GitHub Repository Secrets
+Configure at: Repository Settings → Secrets and variables → Actions → New repository secret.
+
+- `SSH_HOST` — VPS IP/domain (e.g., `123.45.67.89` or `erland.me`)
+- `SSH_PORT` — SSH port (e.g., `1313`)
+- `SSH_USER` — SSH user (e.g., `erland`)
+- `SSH_PRIVATE_KEY` — OpenSSH private key for VPS login (PEM/OPENSSH multiline). Example:
+  ```
+  -----BEGIN OPENSSH PRIVATE KEY-----
+  ...
+  -----END OPENSSH PRIVATE KEY-----
+  ```
+
+Build-time env (optional, based on site needs):
+- `SITE_URL`, `SITE_DOMAIN`
+- `PUBLIC_GTM_ID`, `PUBLIC_ADSENSE_CLIENT`
+- `PUBLIC_ADSENSE_SLOT_BLOG_MID`, `PUBLIC_ADSENSE_SLOT_BLOG_END`
+- `PUBLIC_ADSENSE_SLOT_DL_MID`, `PUBLIC_ADSENSE_SLOT_DL_END`
+- `IMAGE_SERVICE` (e.g., `passthrough` if the runner lacks native sharp)
+- `MINIFY_ENGINE` (e.g., `terser` for Terser-based minification)
+
+Note: Secrets are exposed as job `env` as defined in [".github/workflows/deploy.yml"](./.github/workflows/deploy.yml).
+
+### VPS Preparation
+- `sudo NOPASSWD` for user `erland` is configured (`erland ALL=(ALL) NOPASSWD:ALL` via `visudo`).
+- Ensure the web root target exists:
+  - `sudo mkdir -p /var/www/astro/dist`
+- Optional: restrict sudoers to allow only `rsync`, `mkdir`, `chown`, `chmod` for specific paths.
+
+### Upload Mechanics
+- CI invokes `rsync` with:
+  - `-a` (archive, preserve)
+  - `-z` (compress)
+  - `--delete` (sync; removes files not present in source)
+- Remote `rsync` via `--rsync-path="sudo rsync"` to write to `/var/www/astro/dist/` owned by root.
+- Remote directory is ensured before upload.
+
+### Manual Test
+- Open the Actions tab in GitHub → select the "Deploy to VPS" workflow → `Run workflow`.
+- Inspect job logs to confirm build and upload succeeded.
+- Verify on VPS: `ls -la /var/www/astro/dist/` should reflect the latest build contents.
+
+### Troubleshooting
+- SSH failures: verify `SSH_HOST`, `SSH_PORT`, `SSH_USER`, and that `SSH_PRIVATE_KEY` matches the public key on the VPS (`~/.ssh/authorized_keys`).
+- Known hosts: if `ssh-keyscan` fails due to firewall, add the host fingerprint manually or ensure the port is open.
+- Build errors due to `sharp`: set `IMAGE_SERVICE=squoosh` in secrets to use WASM-based image transforms.
+- Permissions: if writing to `/var/www/astro/dist/` is denied, ensure `NOPASSWD` works (test `ssh erland@host -p 1313` then run `sudo ls /var/www/astro` without a password).
+
 -------------------------------------------------------------------------------
 
 ## Performance & Optimization
@@ -421,7 +487,7 @@ Image service:
 ## Troubleshooting
 
 - Sharp missing / image errors:
-  - Set `IMAGE_SERVICE=squoosh` in `.env` (WASM-based image transforms)
+  - Set `IMAGE_SERVICE=passthrough` in `.env` (WASM-based image transforms)
 - Broken links or incorrect canonical:
   - Verify `SITE_URL` and `SITE_DOMAIN` in environment
 - Excessive JS bundle size:
