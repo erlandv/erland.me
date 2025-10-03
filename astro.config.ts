@@ -147,27 +147,27 @@ export default defineConfig({
     },
   },
 
-    // Image optimization
-    image: {
-      // Optional: switch image service via env to avoid native Sharp issues on some hosts
-      // IMAGE_SERVICE options:
-      // - "squoosh" (WASM) via deep entrypoint (supported)
-      // - "passthrough" via passthroughImageService() (no transforms, safe in Astro v5)
-      // - unset => default Sharp (if available)
-      service:
-        process.env.IMAGE_SERVICE === 'squoosh'
-          ? { entrypoint: 'astro/assets/services/squoosh' }
-          : process.env.IMAGE_SERVICE === 'passthrough'
-            ? passthroughImageService()
-            : undefined,
-      domains: [process.env.SITE_DOMAIN || 'erland.me'],
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: process.env.SITE_DOMAIN || 'erland.me',
-        },
-      ],
-    },
+  // Image optimization
+  image: {
+    // Optional: switch image service via env to avoid native Sharp issues on some hosts
+    // IMAGE_SERVICE options:
+    // - "squoosh" (WASM) via deep entrypoint (supported)
+    // - "passthrough" via passthroughImageService() (no transforms, safe in Astro v5)
+    // - unset => default Sharp (if available)
+    service:
+      process.env.IMAGE_SERVICE === 'squoosh'
+        ? { entrypoint: 'astro/assets/services/squoosh' }
+        : process.env.IMAGE_SERVICE === 'passthrough'
+          ? passthroughImageService()
+          : undefined,
+    domains: [process.env.SITE_DOMAIN || 'erland.me'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.SITE_DOMAIN || 'erland.me',
+      },
+    ],
+  },
 
   // Compress configuration
   compressHTML: true,

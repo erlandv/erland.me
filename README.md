@@ -8,7 +8,7 @@ A static site built with Astro 5 and TypeScript. This repository powers a person
 - Build tooling: Vite, esbuild/Terser, PostCSS, Astro integrations
 - Scripts: robots.txt and ads.txt generators via ts-node
 
--------------------------------------------------------------------------------
+---
 
 ## Table of Contents
 
@@ -32,13 +32,13 @@ A static site built with Astro 5 and TypeScript. This repository powers a person
 - Contributing
 - License & Credits
 
--------------------------------------------------------------------------------
+---
 
 ## Overview
 
 This codebase uses Astro’s content collections for structured Markdown content, a single shared layout, and a set of reusable components. The site is generated as a static export and can be deployed to any static host (e.g., Netlify, Vercel, Cloudflare Pages, GitHub Pages, or Nginx).
 
--------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -53,7 +53,7 @@ This codebase uses Astro’s content collections for structured Markdown content
 - Strong DX: TypeScript, Prettier, Astro checks, PostCSS optimizations
 - Sitemap integration for search engines
 
--------------------------------------------------------------------------------
+---
 
 ## Requirements
 
@@ -61,37 +61,44 @@ This codebase uses Astro’s content collections for structured Markdown content
 - npm (bundled with Node) or alternative package managers (npm scripts are provided)
 
 Optional (for development or CI):
+
 - Git
 - A modern browser for dev/preview
 
--------------------------------------------------------------------------------
+---
 
 ## Quick Start (Local Development)
 
-1) Clone and install dependencies:
+1. Clone and install dependencies:
+
 ```
 git clone https://github.com/erlandv/erland.me.git
 cd erland.me
 npm install
 ```
 
-2) Create your environment file:
+2. Create your environment file:
+
 ```
 cp .env.example .env
 ```
+
 Update values as needed (see “Configuration & Environment Variables”).
 
-3) Start the dev server:
+3. Start the dev server:
+
 ```
 npm run dev
 ```
+
 Astro dev server will start and provide a local URL. Hot Module Replacement (HMR) is enabled with overlay for errors.
 
--------------------------------------------------------------------------------
+---
 
 ## Scripts & Workflow
 
 Core scripts (see package.json):
+
 - Development:
   - `npm run dev` — start local dev server (predev runs robots generator)
 - Build & Preview:
@@ -109,11 +116,12 @@ Core scripts (see package.json):
   - `npm run generate:robots` — robots.txt via ts-node loader
   - `npm run generate:ads` — ads.txt via ts-node loader
 
--------------------------------------------------------------------------------
+---
 
 ## Project Structure
 
 Top-level overview:
+
 ```
 .
 ├─ astro.config.ts
@@ -141,6 +149,7 @@ Top-level overview:
 ```
 
 Key files:
+
 - `astro.config.ts` — site configuration, Vite build options, PostCSS, image handling, sitemap integration
 - `src/content.config.ts` — Astro collections and schemas
 - `scripts/generate-robots.ts`, `scripts/generate-ads.ts` — generators run before build
@@ -149,7 +158,7 @@ Key files:
 - `src/components/...` — reusable UI
 - `src/styles/base.css`, `src/styles/gallery.css`, `src/styles/lightbox.css` — global stylesheets
 
--------------------------------------------------------------------------------
+---
 
 ## Content Collections
 
@@ -169,6 +178,7 @@ Configured in `src/content.config.ts` using `defineCollection` and `zod` schemas
   - `draft` (boolean, default false)
 
   Example frontmatter:
+
   ```
   ---
   title: "My First Post"
@@ -203,6 +213,7 @@ Configured in `src/content.config.ts` using `defineCollection` and `zod` schemas
   - `downloadIntro` (string[], optional)
 
   Example frontmatter:
+
   ```
   ---
   title: "Tooling Bundle"
@@ -233,6 +244,7 @@ Configured in `src/content.config.ts` using `defineCollection` and `zod` schemas
   - `order` (number, default 0)
 
   Example (JSON):
+
   ```
   {
     "title": "Static Site Generator",
@@ -244,7 +256,7 @@ Configured in `src/content.config.ts` using `defineCollection` and `zod` schemas
   }
   ```
 
--------------------------------------------------------------------------------
+---
 
 ## Pages & Routing
 
@@ -262,19 +274,21 @@ Astro page routes live under `src/pages/`:
 
 Trailing slash is enforced (`trailingSlash: "always"` in config).
 
--------------------------------------------------------------------------------
+---
 
 ## Components & Layouts
 
 Common components:
+
 - `Header.astro`, `Footer.astro`, `Sidebar.astro`, `BackNav.astro`
 - Content helpers: `PostCard.astro`, `Pagination.astro`, `ShareButtons.astro`, `SearchInput.astro`, `ScrollTopButton.astro`, `Project.astro`
 - Hero and images: `HeroImage.astro`, `ContentImage.astro`, `Icon.astro`
 
 Layout:
+
 - `src/layouts/SiteLayout.astro` — shared site layout with head tags, metadata, and global styles. All routes typically use this layout to ensure consistent SEO and UI.
 
--------------------------------------------------------------------------------
+---
 
 ## Styles & Assets
 
@@ -291,26 +305,29 @@ Layout:
   - OG images under `public/assets/social/`
   - Fonts under `public/fonts/`
 
--------------------------------------------------------------------------------
+---
 
 ## Markdown & Remark Plugins
 
 Configured in `astro.config.ts`:
+
 - `remark-directive` — enables `:::` directives in Markdown
 - Custom `remark-gallery` and `remarkFigure` (from `src/lib/remark-gallery`)
 - Shiki syntax highlighting (`github-dark-dimmed`, wrapped lines)
 - GFM enabled and smartypants set for typography
 
 Directives support galleries like:
+
 ```
 :::gallery
 ![Alt text](./images/pic-1.webp)
 ![Alt text](./images/pic-2.webp)
 :::
 ```
+
 Images and single figures can open a lightbox overlay on click.
 
--------------------------------------------------------------------------------
+---
 
 ## SEO & Sitemap
 
@@ -322,11 +339,12 @@ Images and single figures can open a lightbox overlay on click.
 
 Ensure `SITE_URL` and `SITE_DOMAIN` are correctly set in environment variables for proper canonical and sitemap URLs.
 
--------------------------------------------------------------------------------
+---
 
 ## Configuration & Environment Variables
 
 See `.env.example` and set values in `.env`:
+
 - Site config:
   - `SITE_URL` — full site URL (e.g., `https://erland.me`)
   - `SITE_DOMAIN` — domain (e.g., `erland.me`)
@@ -341,23 +359,27 @@ See `.env.example` and set values in `.env`:
 - Minification:
   - `MINIFY_ENGINE` — set to `terser` to switch Vite minification from `esbuild` to `terser`
 
--------------------------------------------------------------------------------
+---
 
 ## Build & Preview
 
 - Build:
+
 ```
 npm run build
 ```
+
 Artifacts output to `dist/`. Robots and ads files are generated before the build.
 
 - Preview:
+
 ```
 npm run preview
 ```
+
 Starts a local server to serve files from `dist/`.
 
--------------------------------------------------------------------------------
+---
 
 ## Deployment
 
@@ -388,6 +410,7 @@ Common options:
 - Nginx:
   - Copy `dist/` to web root and serve statically
   - Example server block:
+
   ```
   server {
     listen 80;
@@ -399,15 +422,17 @@ Common options:
     }
   }
   ```
+
   Note `trailingSlash: "always"` is enabled. Ensure `try_files` serves folder indexes.
 
---------------------------------------------------------------------------------
+---
 
 ## CI: Auto Deploy to VPS via GitHub Actions
 
 This pipeline builds on a GitHub Actions runner (Ubuntu) and uploads static build artifacts in `dist/` to the VPS via SSH + rsync. Workflow file: [".github/workflows/deploy.yml"](./.github/workflows/deploy.yml).
 
 ### Flow
+
 - Trigger on push to `main`, or manually via `workflow_dispatch`.
 - CI steps:
   - Checkout repository
@@ -420,6 +445,7 @@ This pipeline builds on a GitHub Actions runner (Ubuntu) and uploads static buil
   - `rsync -az --delete` from `./dist/` to the directory configured via the `DEPLOY_TARGET_DIR` secret on the VPS (remote `rsync` runs as `sudo`)
 
 ### Required GitHub Repository Secrets
+
 Configure at: Repository Settings → Secrets and variables → Actions → New repository secret.
 
 - `SSH_HOST` — VPS IP/domain (e.g., `123.45.67.89` or `erland.me`)
@@ -434,6 +460,7 @@ Configure at: Repository Settings → Secrets and variables → Actions → New 
 - `DEPLOY_TARGET_DIR` — absolute path to the deployment target directory on the VPS (e.g., `/var/www/astro/dist`). Recommended: set without a trailing slash. The workflow appends a slash for rsync, so both `/var/www/astro/dist` and `/var/www/astro/dist/` will work; using no trailing slash avoids double slashes in logs.
 
 Build-time env (optional, based on site needs):
+
 - `SITE_URL`, `SITE_DOMAIN`
 - `PUBLIC_GTM_ID`, `PUBLIC_ADSENSE_CLIENT`
 - `PUBLIC_ADSENSE_SLOT_BLOG_MID`, `PUBLIC_ADSENSE_SLOT_BLOG_END`
@@ -444,12 +471,14 @@ Build-time env (optional, based on site needs):
 Note: Secrets are exposed as job `env` as defined in [".github/workflows/deploy.yml"](./.github/workflows/deploy.yml).
 
 ### VPS Preparation
+
 - `sudo NOPASSWD` for user `erland` is configured (`erland ALL=(ALL) NOPASSWD:ALL` via `visudo`).
 - Ensure the web root target exists:
   - `sudo mkdir -p $DEPLOY_TARGET_DIR`
 - Optional: restrict sudoers to allow only `rsync`, `mkdir`, `chown`, `chmod` for specific paths.
 
 ### Upload Mechanics
+
 - CI invokes `rsync` with:
   - `-a` (archive, preserve)
   - `-z` (compress)
@@ -458,21 +487,24 @@ Note: Secrets are exposed as job `env` as defined in [".github/workflows/deploy.
 - Remote directory is ensured before upload.
 
 ### Manual Test
+
 - Open the Actions tab in GitHub → select the "Deploy to VPS" workflow → `Run workflow`.
 - Inspect job logs to confirm build and upload succeeded.
 - Verify on VPS: `ls -la $DEPLOY_TARGET_DIR` should reflect the latest build contents.
 
 ### Troubleshooting
+
 - SSH failures: verify `SSH_HOST`, `SSH_PORT`, `SSH_USER`, and that `SSH_PRIVATE_KEY` matches the public key on the VPS (`~/.ssh/authorized_keys`).
 - Known hosts: if `ssh-keyscan` fails due to firewall, add the host fingerprint manually or ensure the port is open.
 - Build errors due to `sharp`: set `IMAGE_SERVICE=squoosh` in secrets to use WASM-based image transforms.
 - Permissions: if writing to the `DEPLOY_TARGET_DIR` directory is denied, ensure `NOPASSWD` works (test `ssh erland@host -p 1313` then run `sudo ls /var/www/astro` without a password).
 
--------------------------------------------------------------------------------
+---
 
 ## Performance & Optimization
 
 Configured in `astro.config.ts`:
+
 - Minify via `esbuild` by default; switch to `terser` with `MINIFY_ENGINE=terser` for advanced compression
 - PostCSS with `autoprefixer` and conditional `cssnano` in production
 - Rollup chunking strategy: vendor split for `astro`, `markdown`, and others
@@ -481,9 +513,10 @@ Configured in `astro.config.ts`:
 - Optional production drops of `console` and `debugger` via esbuild in prod
 
 Image service:
+
 - Use `squoosh` on hosts without native Sharp support (e.g., older CPUs or Alpine), or `passthrough` to disable transforms.
 
--------------------------------------------------------------------------------
+---
 
 ## Troubleshooting
 
@@ -500,7 +533,7 @@ Image service:
 - Formatting differences:
   - Run `npm run format` before commits to minimize diffs
 
--------------------------------------------------------------------------------
+---
 
 ## Contributing
 
@@ -520,7 +553,7 @@ Image service:
   - Screenshots for UI changes and a preview link if available
   - Checklist: `npm run validate` passes; no console noise; routes build
 
--------------------------------------------------------------------------------
+---
 
 ## License & Credits
 
