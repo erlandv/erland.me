@@ -149,6 +149,12 @@ export default defineConfig({
 
   // Image optimization
   image: {
+    // Optional: switch image service via env to avoid native Sharp issues on some hosts
+    // Set IMAGE_SERVICE=squoosh in production to use WASM-based optimizer (no native deps)
+    service:
+      process.env.IMAGE_SERVICE === 'squoosh'
+        ? { entrypoint: 'astro/assets/services/squoosh' }
+        : undefined,
     domains: [process.env.SITE_DOMAIN || 'erland.me'],
     remotePatterns: [
       {
