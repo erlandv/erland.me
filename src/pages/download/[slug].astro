@@ -6,6 +6,7 @@ import { creativeWorkJsonLd } from "../../lib/seo";
 import ShareButtons from "../../components/ShareButtons.astro";
 import dl from "../../styles/pages/download.module.css";
 import ScrollTopButton from "../../components/ScrollTopButton.astro";
+import ContentImage from "../../components/ContentImage.astro";
 import HeroImage from "../../components/HeroImage.astro";
 import { getOgImageUrl } from "../../lib/images";
 
@@ -76,7 +77,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
     </header>
 
   <article class={dl["download-richtext"]} id="download-content">
-    <Content />
+    <Content components={{ img: ContentImage }} />
   </article>
 
     {downloadRows.length > 0 && (

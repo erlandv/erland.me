@@ -8,6 +8,7 @@ import ShareButtons from "../../components/ShareButtons.astro";
 import { SITE_URL } from '../../lib/env';
 import blogStyles from "../../styles/pages/blog.module.css";
 import ScrollTopButton from "../../components/ScrollTopButton.astro";
+import ContentImage from "../../components/ContentImage.astro";
 import HeroImage from "../../components/HeroImage.astro";
 import { getOgImageUrl, resolveHero } from "../../lib/images";
 
@@ -84,7 +85,7 @@ const jsonLd = blogPostingJsonLd({
       )}
     </header>
     <div class="prose" id="blog-content">
-      <Content />
+      <Content components={{ img: ContentImage }} />
     </div>
     <ShareButtons title={frontmatter.title} url={canonicalUrl} description={frontmatter.description || frontmatter.excerpt} />
   </article>
