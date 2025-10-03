@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
@@ -150,12 +150,15 @@ export default defineConfig({
     // Image optimization
     image: {
       // Optional: switch image service via env to avoid native Sharp issues on some hosts
-      // IMAGE_SERVICE options: "squoosh" (WASM), "passthrough" (no transforms)
+      // IMAGE_SERVICE options:
+      // - "squoosh" (WASM) via deep entrypoint (supported)
+      // - "passthrough" via passthroughImageService() (no transforms, safe in Astro v5)
+      // - unset => default Sharp (if available)
       service:
         process.env.IMAGE_SERVICE === 'squoosh'
           ? { entrypoint: 'astro/assets/services/squoosh' }
           : process.env.IMAGE_SERVICE === 'passthrough'
-            ? { entrypoint: 'astro/assets/services/passthrough' }
+            ? passthroughImageService()
             : undefined,
       domains: [process.env.SITE_DOMAIN || 'erland.me'],
       remotePatterns: [
