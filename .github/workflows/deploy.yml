@@ -38,21 +38,45 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_PATH: ${{ secrets.SERVER_PATH }}
         run: |
-          ssh -i ~/.ssh/deploy_key -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" bash -lc "
-            set -euo pipefail
-            cd \"$SERVER_PATH\"
-            # Ensure repo exists
-            git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 1
-            # Update to latest main
-            git fetch --all
-            if git show-ref --verify --quiet refs/remotes/origin/main; then
-              git reset --hard origin/main
-            else
-              git pull origin main --rebase
-            fi
-            # Build with production env on server
-            export NODE_ENV=production
-            export IMAGE_SERVICE=passthrough
+          ssh -i ~/.ssh/deploy_key -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" 'bash -s' << 'REMOTE'
+          set -euo pipefail
+
+          cd "$SERVER_PATH"
+          git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 1
+
+          # Update repo to latest main
+          git fetch origin main
+          git pull --rebase origin main
+
+          # Load shell profiles to restore PATH (non-interactive shell)
+          [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+          [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+
+          # Initialize Node/npm via NVM if available
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+          if command -v nvm >/dev/null 2>&1; then
+            nvm install 20 >/dev/null 2>&1 || true
+            nvm use 20 || nvm use --lts || true
+          fi
+
+          # Fallback: ensure npm is in PATH for common locations
+          if ! command -v npm >/dev/null 2>&1; then
+            for p in /usr/bin /usr/local/bin; do
+              if [ -x "$p/npm" ]; then export PATH="$p:$PATH"; break; fi
+            done
+          fi
+
+          node -v || true
+          npm -v || true
+
+          # Build with production env on server
+          export NODE_ENV=production
+          export IMAGE_SERVICE=passthrough
+          if [ -f package-lock.json ]; then
             npm ci
-            npm run build
-          "
+          else
+            npm install --no-audit --no-fund
+          fi
+          npm run build
+          REMOTE
