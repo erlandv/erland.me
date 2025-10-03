@@ -118,10 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script is:inline set:html={gtmSnippet} />
   )}
   {enableAdsense && (
-    <>
-      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
-      <script is:inline>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
-    </>
+    <Fragment set:html={`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`} />
   )}
   
   <ClientRouter fallback="swap" />
