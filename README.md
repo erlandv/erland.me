@@ -417,7 +417,7 @@ This pipeline builds on a GitHub Actions runner (Ubuntu) and uploads static buil
   - Add SSH key to agent
   - `ssh-keyscan` the remote host (populate known_hosts)
   - Ensure target directory exists on the server
-  - `rsync -az --delete` from `./dist/` to `/var/www/astro/dist/` on the VPS (remote `rsync` runs as `sudo`)
+  - `rsync -az --delete` from `./dist/` to the directory configured via the `DEPLOY_TARGET_DIR` secret on the VPS (remote `rsync` runs as `sudo`)
 
 ### Required GitHub Repository Secrets
 Configure at: Repository Settings → Secrets and variables → Actions → New repository secret.
@@ -431,6 +431,7 @@ Configure at: Repository Settings → Secrets and variables → Actions → New 
   ...
   -----END OPENSSH PRIVATE KEY-----
   ```
+- `DEPLOY_TARGET_DIR` — absolute path to the deployment target directory on the VPS (e.g., `/var/www/astro/dist`)
 
 Build-time env (optional, based on site needs):
 - `SITE_URL`, `SITE_DOMAIN`
@@ -445,7 +446,7 @@ Note: Secrets are exposed as job `env` as defined in [".github/workflows/deploy.
 ### VPS Preparation
 - `sudo NOPASSWD` for user `erland` is configured (`erland ALL=(ALL) NOPASSWD:ALL` via `visudo`).
 - Ensure the web root target exists:
-  - `sudo mkdir -p /var/www/astro/dist`
+  - `sudo mkdir -p $DEPLOY_TARGET_DIR`
 - Optional: restrict sudoers to allow only `rsync`, `mkdir`, `chown`, `chmod` for specific paths.
 
 ### Upload Mechanics
@@ -453,19 +454,19 @@ Note: Secrets are exposed as job `env` as defined in [".github/workflows/deploy.
   - `-a` (archive, preserve)
   - `-z` (compress)
   - `--delete` (sync; removes files not present in source)
-- Remote `rsync` via `--rsync-path="sudo rsync"` to write to `/var/www/astro/dist/` owned by root.
+- Remote `rsync` via `--rsync-path="sudo rsync"` to write to the directory configured via `DEPLOY_TARGET_DIR` (typically owned by root).
 - Remote directory is ensured before upload.
 
 ### Manual Test
 - Open the Actions tab in GitHub → select the "Deploy to VPS" workflow → `Run workflow`.
 - Inspect job logs to confirm build and upload succeeded.
-- Verify on VPS: `ls -la /var/www/astro/dist/` should reflect the latest build contents.
+- Verify on VPS: `ls -la $DEPLOY_TARGET_DIR` should reflect the latest build contents.
 
 ### Troubleshooting
 - SSH failures: verify `SSH_HOST`, `SSH_PORT`, `SSH_USER`, and that `SSH_PRIVATE_KEY` matches the public key on the VPS (`~/.ssh/authorized_keys`).
 - Known hosts: if `ssh-keyscan` fails due to firewall, add the host fingerprint manually or ensure the port is open.
 - Build errors due to `sharp`: set `IMAGE_SERVICE=squoosh` in secrets to use WASM-based image transforms.
-- Permissions: if writing to `/var/www/astro/dist/` is denied, ensure `NOPASSWD` works (test `ssh erland@host -p 1313` then run `sudo ls /var/www/astro` without a password).
+- Permissions: if writing to the `DEPLOY_TARGET_DIR` directory is denied, ensure `NOPASSWD` works (test `ssh erland@host -p 1313` then run `sudo ls /var/www/astro` without a password).
 
 -------------------------------------------------------------------------------
 

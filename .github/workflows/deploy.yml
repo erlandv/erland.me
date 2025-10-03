@@ -54,11 +54,11 @@ jobs:
       - name: Ensure remote directory exists
         run: |
           ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            "sudo mkdir -p /var/www/astro/dist && sudo chown root:root /var/www/astro/dist && sudo chmod 755 /var/www/astro/dist"
+            "sudo mkdir -p '${{ secrets.DEPLOY_TARGET_DIR }}' && sudo chown root:root '${{ secrets.DEPLOY_TARGET_DIR }}' && sudo chmod 755 '${{ secrets.DEPLOY_TARGET_DIR }}'"
 
       - name: Rsync dist to server
         run: |
           rsync -az --delete \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
             --rsync-path="sudo rsync" \
-            ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/astro/dist/"
+            ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_TARGET_DIR }}/"
