@@ -1,4 +1,4 @@
-name: Deploy via SSH
+name: Deploy (CI build + upload)
 
 on:
   push:
@@ -15,7 +15,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Remote deploy over SSH
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (clean)
+        run: npm run build:clean
+
+      - name: Prepare remote paths (clean staging & dest)
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -26,22 +41,31 @@ jobs:
           command_timeout: 30m
           script: |
             set -euo pipefail
-            # Pastikan Node/npm tersedia pada shell non-interaktif
-            [ -f "$HOME/.profile" ] && . "$HOME/.profile" || true
-            [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc" || true
-            if ! command -v npm >/dev/null 2>&1; then
-              if [ -s "$HOME/.nvm/nvm.sh" ]; then
-                . "$HOME/.nvm/nvm.sh"
-                nvm use --lts >/dev/null 2>&1 || nvm install --lts
-              else
-                export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH"
-              fi
-            fi
-            node -v
-            npm -v
-            cd ${{ secrets.PROD_REPO }}
-            git pull origin main
-            npm ci
-            npm run build:clean
+            mkdir -p ${{ secrets.PROD_REPO }}/dist
+            rm -rf ${{ secrets.PROD_REPO }}/dist/*
+            sudo mkdir -p ${{ secrets.PROD_PATH }}
             sudo rm -rf ${{ secrets.PROD_PATH }}/*
-            sudo rsync -av ${{ secrets.PROD_REPO }}/dist/ ${{ secrets.PROD_PATH }}
+
+      - name: Upload dist via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          source: "dist/*"
+          target: "${{ secrets.PROD_REPO }}/dist"
+          overwrite: true
+
+      - name: Publish to web root via rsync
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script_stop: true
+          command_timeout: 30m
+          script: |
+            set -euo pipefail
+            sudo rsync -av --delete ${{ secrets.PROD_REPO }}/dist/ ${{ secrets.PROD_PATH }}
