@@ -431,7 +431,7 @@ Configure at: Repository Settings → Secrets and variables → Actions → New 
   ...
   -----END OPENSSH PRIVATE KEY-----
   ```
-- `DEPLOY_TARGET_DIR` — absolute path to the deployment target directory on the VPS (e.g., `/var/www/astro/dist`)
+- `DEPLOY_TARGET_DIR` — absolute path to the deployment target directory on the VPS (e.g., `/var/www/astro/dist`). Recommended: set without a trailing slash. The workflow appends a slash for rsync, so both `/var/www/astro/dist` and `/var/www/astro/dist/` will work; using no trailing slash avoids double slashes in logs.
 
 Build-time env (optional, based on site needs):
 - `SITE_URL`, `SITE_DOMAIN`
