@@ -29,16 +29,7 @@ const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Mat
 const paginated = posts.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
 
-const normalizeHero = (hero: any) => {
-  if (!hero) return null;
-  if (typeof hero === 'string') {
-    return { src: hero, width: 512, height: 512 };
-  }
-  const { src, width, height } = hero;
-  return { src, width, height };
-};
-
-const getHero = (post: any) => normalizeHero(post.data?.hero ?? post.hero);
+const getHero = (post: any) => post.data?.hero ?? null;
 const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 

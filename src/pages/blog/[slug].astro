@@ -8,6 +8,8 @@ import ShareButtons from "../../components/ShareButtons.astro";
 import { SITE_URL } from '../../lib/env';
 import blogStyles from "../../styles/pages/blog.module.css";
 import ScrollTopButton from "../../components/ScrollTopButton.astro";
+import HeroImage from "../../components/HeroImage.astro";
+import { getOgImageUrl, resolveHero } from "../../lib/images";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -23,17 +25,9 @@ if (!entry) {
 const { Content } = await entry.render();
 const frontmatter = entry.data;
 
-const heroMap = import.meta.glob('../../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}', {
-  query: '?url',
-  import: 'default',
-  eager: true,
-});
-const heroFallback = Object.entries(heroMap).find(([p]) => p.startsWith(`../../content/blog/${slug}/hero.`))?.[1] as string | undefined;
-const heroData = frontmatter.hero ?? heroFallback;
-const heroSrc = typeof heroData === 'string' ? heroData : heroData?.src;
-const heroWidth = typeof heroData === 'object' ? heroData.width : undefined;
-const heroHeight = typeof heroData === 'object' ? heroData.height : undefined;
+const hero = resolveHero(frontmatter.hero);
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
+const optimizedHero = hero ? await getOgImageUrl(hero, 1200, 'avif') : undefined;
 const canonical = `/blog/${slug}/`;
 const canonicalUrl = `${SITE_URL}${canonical}`;
 
@@ -42,7 +36,7 @@ const jsonLd = blogPostingJsonLd({
   canonical,
   publishDate: frontmatter.publishDate,
   updatedDate: frontmatter.updatedDate,
-  image: heroSrc ? [heroSrc] : undefined,
+  image: optimizedHero ? [optimizedHero] : undefined,
   description: frontmatter.description,
   excerpt: frontmatter.excerpt,
   tags: frontmatter.tags,
@@ -50,13 +44,13 @@ const jsonLd = blogPostingJsonLd({
 });
 ---
 
-<SiteLayout 
-  title={frontmatter.title} 
-  canonical={canonical} 
-  jsonLd={jsonLd} 
+<SiteLayout
+  title={frontmatter.title}
+  canonical={canonical}
+  jsonLd={jsonLd}
   selectedItem="blog"
   description={frontmatter.description || frontmatter.excerpt}
-  image={heroSrc}
+  image={optimizedHero}
   type="article"
   publishedTime={frontmatter.publishDate}
   modifiedTime={frontmatter.updatedDate}
@@ -66,8 +60,8 @@ const jsonLd = blogPostingJsonLd({
   <BackNav href="/blog/" label="Back to Blog" />
   <article class="content-container blog-post">
     <header class={blogStyles['blog-post__header']}>
-      {heroSrc && (
-        <img src={heroSrc} width={heroWidth} height={heroHeight} alt={heroAlt} loading="eager" class="hero-image" />
+      {hero && (
+        <HeroImage image={hero} alt={heroAlt} loading="eager" />
       )}
       <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
       {(frontmatter.category || frontmatter.publishDate) && (

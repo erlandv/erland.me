@@ -3,6 +3,7 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import BackNav from "../../components/BackNav.astro";
 import { getCollection } from "astro:content";
 import dl from "../../styles/pages/download.module.css";
+import { Image } from "astro:assets";
 
 const downloads = (await getCollection("downloads"))
   .filter((item: any) => !item.data.draft)
@@ -29,21 +30,28 @@ const downloads = (await getCollection("downloads"))
     <section class={dl["download-grid"]}>
       {downloads.map((item: any) => {
         const data = item.data;
-        const thumbSrc = data.hero ? data.hero.src : "/assets/social/og-default-1200x630.png";
-        const thumbWidth = data.hero?.width ?? 240;
-        const thumbHeight = data.hero?.height ?? 180;
         const alt = data.heroAlt ?? data.title;
         const detailHref = `/download/${item.slug}/`;
         return (
           <article class={dl["download-card"]}>
             <a href={detailHref} class={dl["download-card-thumb"]} aria-label={`Buka halaman ${data.title}`}>
-              <img
-                src={thumbSrc}
-                width={thumbWidth}
-                height={thumbHeight}
-                alt={alt}
-                loading="lazy"
-              />
+              {data.hero ? (
+                <Image
+                  src={data.hero}
+                  alt={alt}
+                  loading="lazy"
+                  widths={[240, 360, 480]}
+                  sizes="(max-width: 540px) 80vw, 240px"
+                />
+              ) : (
+                <img
+                  src="/assets/social/og-default-1200x630.png"
+                  width={240}
+                  height={180}
+                  alt={alt}
+                  loading="lazy"
+                />
+              )}
             </a>
             <div class={dl["download-card-body"]}>
               <h2 class={dl["download-card-title"]}>
