@@ -26,10 +26,22 @@ jobs:
           command_timeout: 30m
           script: |
             set -euo pipefail
+            # Pastikan Node/npm tersedia pada shell non-interaktif
+            [ -f "$HOME/.profile" ] && . "$HOME/.profile" || true
+            [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc" || true
+            if ! command -v npm >/dev/null 2>&1; then
+              if [ -s "$HOME/.nvm/nvm.sh" ]; then
+                . "$HOME/.nvm/nvm.sh"
+                nvm use --lts >/dev/null 2>&1 || nvm install --lts
+              else
+                export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH"
+              fi
+            fi
+            node -v
+            npm -v
             cd ${{ secrets.PROD_REPO }}
             git pull origin main
             npm ci
             npm run build:clean
             sudo rm -rf ${{ secrets.PROD_PATH }}/*
             sudo rsync -av ${{ secrets.PROD_REPO }}/dist/ ${{ secrets.PROD_PATH }}
-
