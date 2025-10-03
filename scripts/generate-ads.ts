@@ -33,7 +33,8 @@ loadEnvFromFile(join(process.cwd(), '.env'));
 const siteUrl: string = process.env.SITE_URL || 'https://erland.me';
 const siteDomain: string = process.env.SITE_DOMAIN || 'erland.me';
 
-const isProd: boolean = siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
+const isProd: boolean =
+  siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
 
 // AdSense publisher/client ID, typically like "ca-pub-XXXXXXXXXXXXXXXX"
 const rawClient: string = process.env.PUBLIC_ADSENSE_CLIENT || '';
@@ -59,7 +60,9 @@ if (!isProd) {
 }
 
 if (!pubId) {
-  console.error('⚠️ PUBLIC_ADSENSE_CLIENT not set or invalid; cannot generate ads.txt');
+  console.error(
+    '⚠️ PUBLIC_ADSENSE_CLIENT not set or invalid; cannot generate ads.txt'
+  );
   process.exit(1);
 }
 
@@ -69,5 +72,6 @@ const adsContent = `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
 
 writeFileSync(adsPath, adsContent);
 
-console.log(`✅ Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`);
-
+console.log(
+  `✅ Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`
+);

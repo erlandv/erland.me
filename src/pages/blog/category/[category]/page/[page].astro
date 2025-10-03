@@ -49,16 +49,9 @@ const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Mat
 const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/category/${categoryParam}/` : `/blog/category/${categoryParam}/page/${n}/`);
 
-const normalizeHero = (hero: any) => {
-  if (!hero) return null;
-  if (typeof hero === 'string') {
-    return { src: hero, width: 512, height: 512 };
-  }
-  const { src, width, height } = hero;
-  return { src, width, height };
-};
+/* normalizeHero removed: frontmatter hero is ImageMetadata via schema(image()) */
 
-const getHero = (post: any) => normalizeHero(post.data?.hero ?? post.hero);
+const getHero = (post: any) => post.data?.hero ?? null;
 const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 

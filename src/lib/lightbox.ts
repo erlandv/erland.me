@@ -138,7 +138,10 @@ function selectTargetImages(containers: string[]): HTMLImageElement[] {
     ) as HTMLImageElement[];
     for (const img of found) {
       // Skip non-content images like hero
-      if (img.classList.contains('hero-image')) continue;
+      // Note: Astro Image may place the 'hero-image' class on the <picture> wrapper;
+      // ensure we skip when either the <img> or any ancestor has this class.
+      if (img.classList.contains('hero-image') || img.closest('.hero-image'))
+        continue;
       imgs.push(img);
     }
   }

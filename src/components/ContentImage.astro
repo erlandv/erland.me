@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: string;
+  alt?: string;
+  width?: number | string;
+  height?: number | string;
+  loading?: "eager" | "lazy";
+  class?: string;
+}
+
+/**
+ * ContentImage: Override untuk tag <img> di Markdown/MDX.
+ * - Mencoba resolve gambar lokal di koleksi blog/downloads menjadi ImageMetadata agar dapat dirender via astro:assets.Image.
+ * - Bila gagal resolve (mis. URL eksternal/public), fallback ke <img> biasa dengan atribut yang sama.
+ * - CSS global .prose img dan modul .download-richtext img akan tetap mengenai <img> hasil <Image> karena output <picture><img>.
+ */
+const {
+  src,
+  alt = "",
+  loading = "lazy",
+  class: cls,
+} = Astro.props as Props;
+
+// Normalisasi path relatif seperti "./images/foo.jpg" -> "images/foo.jpg"
+const normalized = src.replace(/^\.\/+/, "").replace(/^\//, "");
+
+// Eager import metadata untuk semua gambar lokal di konten
+const blogMap = import.meta.glob("../../content/blog/**/*.{jpg,jpeg,png,webp,gif,svg}", {
+  eager: true,
+  import: "default",
+});
+const dlMap = import.meta.glob("../../content/downloads/**/*.{jpg,jpeg,png,webp,gif,svg}", {
+  eager: true,
+  import: "default",
+});
+
+function resolveLocalImage(path: string): ImageMetadata | null {
+  for (const [p, meta] of Object.entries(blogMap)) {
+    if (p.endsWith(path)) return meta as ImageMetadata;
+  }
+  for (const [p, meta] of Object.entries(dlMap)) {
+    if (p.endsWith(path)) return meta as ImageMetadata;
+  }
+  return null;
+}
+
+const meta = resolveLocalImage(normalized);
+---
+
+{meta ? (
+  <Image
+    src={meta}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+    widths={[480, 720, 1024]}
+    sizes="(min-width: 720px) 720px, 100vw"
+    class={cls}
+  />
+) : (
+  <img src={src} alt={alt} loading={loading} decoding="async" class={cls} />
+)}

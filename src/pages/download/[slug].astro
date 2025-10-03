@@ -6,6 +6,9 @@ import { creativeWorkJsonLd } from "../../lib/seo";
 import ShareButtons from "../../components/ShareButtons.astro";
 import dl from "../../styles/pages/download.module.css";
 import ScrollTopButton from "../../components/ScrollTopButton.astro";
+import ContentImage from "../../components/ContentImage.astro";
+import HeroImage from "../../components/HeroImage.astro";
+import { getOgImageUrl } from "../../lib/images";
 
 export async function getStaticPaths() {
   const downloads = await getCollection("downloads");
@@ -26,6 +29,7 @@ const data = entry.data;
 
 const hero = data.hero;
 const heroAlt = data.heroAlt ?? data.title;
+const optimizedHero = hero ? await getOgImageUrl(hero, 1200, 'avif') : undefined;
 const canonicalPath = `/download/${entry.slug}/`;
 import { SITE_URL } from '../../lib/env';
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
@@ -41,7 +45,7 @@ const jsonLd = creativeWorkJsonLd({
   tags: data.tags,
   downloadUrl: data.file,
   url: canonicalPath,
-  image: hero ? new URL(hero.src, canonicalUrl).toString() : undefined,
+  image: optimizedHero ?? undefined,
 });
 
 const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
@@ -58,20 +62,13 @@ const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
 const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 ---
 
-<SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download" image={hero?.src}>
+<SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download" image={optimizedHero}>
   <BackNav href="/download/" label="Back" />
   <div class:list={["content-container", dl["download-page"]]}>
     <header class={dl["download-header"]}>
       <div class={dl["download-hero"]}>
         {hero ? (
-          <img
-            src={hero.src}
-            width={hero.width}
-            height={hero.height}
-            alt={heroAlt}
-            loading="lazy"
-            class="hero-image"
-          />
+          <HeroImage image={hero} alt={heroAlt} loading="lazy" />
         ) : (
           <div class="hero-image hero-placeholder" aria-hidden="true">📦</div>
         )}
@@ -80,7 +77,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
     </header>
 
   <article class={dl["download-richtext"]} id="download-content">
-    <Content />
+    <Content components={{ img: ContentImage }} />
   </article>
 
     {downloadRows.length > 0 && (

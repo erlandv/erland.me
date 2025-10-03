@@ -2,17 +2,13 @@
 import Icon from "./Icon.astro";
 import styles from "./PostCard/post-card.module.css";
 import { slugifyCategory } from "../lib/blog";
-
-interface Hero {
-  src: string;
-  width: number;
-  height: number;
-}
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
   href: string;
   title: string;
-  hero?: Hero | null;
+  hero?: ImageMetadata | null;
   alt: string;
   category?: string | null;
   dateLabel?: string | null;
@@ -27,12 +23,12 @@ const categoryHref = category ? `/blog/category/${slugifyCategory(category)}/` :
   <div class={styles["post-card__inner"]}>
     <div class={styles["post-card__thumb"]}>
       {hero ? (
-        <img
-          src={hero.src}
-          width={hero.width}
-          height={hero.height}
+        <Image
+          src={hero}
           alt={alt}
           loading="lazy"
+          widths={[128, 256, 320]}
+          sizes="(max-width: 600px) 260px, 128px"
           class={styles["post-card__img"]}
         />
       ) : (
