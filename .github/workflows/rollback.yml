@@ -1,0 +1,62 @@
+name: Rollback Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_sha:
+        description: 'Target release SHA (empty for previous)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      # --- SSH setup ---
+      - name: Start ssh-agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # --- List available releases ---
+      - name: Show available releases (top ${{ vars.KEEP_RELEASES }})
+        run: |
+          set -euo pipefail
+          # List releases sorted by newest first, then show only the top N
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "ls -1dt ${{ vars.DEPLOY_BASE_DIR }}/releases/*/ 2>/dev/null | head -n ${{ vars.KEEP_RELEASES }} || true"
+
+      # --- Execute rollback ---
+      - name: Rollback
+        env:
+          TARGET_SHA: ${{ github.event.inputs.target_sha }}
+        run: |
+          set -euo pipefail
+          # Build rollback command: use specific SHA if provided, otherwise fallback to previous release
+          CMD="sudo astro-rollback"
+          if [[ -n "${TARGET_SHA}" ]]; then
+            CMD="$CMD --to ${TARGET_SHA}"
+          else
+            CMD="$CMD --previous"
+          fi
+          # Show command and execute it on the remote host
+          echo "Running: $CMD"
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "$CMD"
+
+      # --- Health check ---
+      - name: Sanity check index.html exists
+        run: |
+          set -euo pipefail
+          # Verify main entrypoint exists in the active deployment
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "test -f ${{ vars.DEPLOY_BASE_DIR }}/current/index.html || { echo '❌ index.html not found in current'; exit 1; }"
