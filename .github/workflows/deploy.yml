@@ -1,9 +1,12 @@
-name: Deploy to VPS
+name: Deploy to Production
 
 on:
   push:
     branches: ['main']
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: deploy-prod
@@ -13,21 +16,25 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: ${{ secrets.SITE_URL }}
-      SITE_DOMAIN: ${{ secrets.SITE_DOMAIN }}
-      PUBLIC_GTM_ID: ${{ secrets.PUBLIC_GTM_ID }}
-      PUBLIC_ADSENSE_CLIENT: ${{ secrets.PUBLIC_ADSENSE_CLIENT }}
-      PUBLIC_ADSENSE_SLOT_BLOG_MID: ${{ secrets.PUBLIC_ADSENSE_SLOT_BLOG_MID }}
-      PUBLIC_ADSENSE_SLOT_BLOG_END: ${{ secrets.PUBLIC_ADSENSE_SLOT_BLOG_END }}
-      PUBLIC_ADSENSE_SLOT_DL_MID: ${{ secrets.PUBLIC_ADSENSE_SLOT_DL_MID }}
-      PUBLIC_ADSENSE_SLOT_DL_END: ${{ secrets.PUBLIC_ADSENSE_SLOT_DL_END }}
-      IMAGE_SERVICE: ${{ secrets.IMAGE_SERVICE }}
-      MINIFY_ENGINE: ${{ secrets.MINIFY_ENGINE }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+      PUBLIC_GTM_ID: ${{ vars.PUBLIC_GTM_ID }}
+      PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
+      PUBLIC_ADSENSE_SLOT_BLOG_MID: ${{ vars.PUBLIC_ADSENSE_SLOT_BLOG_MID }}
+      PUBLIC_ADSENSE_SLOT_BLOG_END: ${{ vars.PUBLIC_ADSENSE_SLOT_BLOG_END }}
+      PUBLIC_ADSENSE_SLOT_DL_MID: ${{ vars.PUBLIC_ADSENSE_SLOT_DL_MID }}
+      PUBLIC_ADSENSE_SLOT_DL_END: ${{ vars.PUBLIC_ADSENSE_SLOT_DL_END }}
+      IMAGE_SERVICE: ${{ vars.IMAGE_SERVICE }}
+      MINIFY_ENGINE: ${{ vars.MINIFY_ENGINE }}
+      DEPLOY_BASE_DIR: ${{ vars.DEPLOY_BASE_DIR }}
+      RELEASES_DIR: ${{ vars.DEPLOY_BASE_DIR }}/releases
+      CURRENT_LINK: ${{ vars.DEPLOY_BASE_DIR }}/current
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -39,6 +46,14 @@ jobs:
       - name: Build
         run: npm run build:clean
 
+      - name: Verify build output & stamp release
+        run: |
+          set -euo pipefail
+          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
+          echo "${GITHUB_SHA}" > dist/.release
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > dist/.built_at
+
+      # --- SSH setup ---
       - name: Start ssh-agent and add key
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -46,19 +61,70 @@ jobs:
 
       - name: Add server to known_hosts
         run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
-      - name: Ensure remote directory exists
+      # --- Prepare remote dirs ---
+      - name: Prepare remote folders
         run: |
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            "sudo mkdir -p '${{ secrets.DEPLOY_TARGET_DIR }}' && sudo chown root:root '${{ secrets.DEPLOY_TARGET_DIR }}' && sudo chmod 755 '${{ secrets.DEPLOY_TARGET_DIR }}'"
+          set -euo pipefail
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+            set -euo pipefail
+            mkdir -p '${{ env.RELEASES_DIR }}'
+          "
 
-      - name: Rsync dist to server
+      # --- Upload to releases/<sha> ---
+      - name: Rsync dist to releases/<sha>
+        env:
+          REL_PATH: ${{ github.sha }}
         run: |
-          rsync -az --delete \
+          set -euo pipefail
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
+          RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
+          rsync $RSYNC_OPTS \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
-            --rsync-path="sudo rsync" \
-            ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_TARGET_DIR }}/"
+            ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.RELEASES_DIR }}/${REL_PATH}/"
+
+      # --- Atomic switch: point `current` to the new release ---
+      - name: Activate new release (symlink swap)
+        env:
+          REL_PATH: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+            set -euo pipefail
+            ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
+          "
+
+      # --- Health check ---
+      - name: Sanity check index.html exists
+        run: |
+          set -euo pipefail
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+            test -f '${{ env.CURRENT_LINK }}/index.html' || { echo '❌ index.html not found in current'; exit 1; }
+          "
+
+      # --- Reload Nginx ---
+      - name: Reload Nginx
+        run: |
+           ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo systemctl reload nginx"
+
+      # --- Clean up old releases: keep last 5 ---
+      - name: Cleanup old releases (keep last 5)
+        run: |
+          set -euo pipefail
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+            set -euo pipefail
+            cd '${{ env.RELEASES_DIR }}' || exit 0
+            ls -1dt */ 2>/dev/null | tail -n +6 | xargs -r rm -rf --
+          "
+
+      # --- Upload artifact untuk arsip ---
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+          retention-days: 7
