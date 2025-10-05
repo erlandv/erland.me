@@ -29,7 +29,6 @@ jobs:
       PUBLIC_ADSENSE_SLOT_BLOG_END: ${{ vars.PUBLIC_ADSENSE_SLOT_BLOG_END }}
       PUBLIC_ADSENSE_SLOT_DL_MID: ${{ vars.PUBLIC_ADSENSE_SLOT_DL_MID }}
       PUBLIC_ADSENSE_SLOT_DL_END: ${{ vars.PUBLIC_ADSENSE_SLOT_DL_END }}
-      IMAGE_SERVICE: ${{ vars.IMAGE_SERVICE }}
       MINIFY_ENGINE: ${{ vars.MINIFY_ENGINE }}
       KEEP_RELEASES: ${{ vars.KEEP_RELEASES }}
       DEPLOY_BASE_DIR: ${{ vars.DEPLOY_BASE_DIR }}
@@ -50,7 +49,7 @@ jobs:
 
       # --- Install and build ---
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build:clean
@@ -63,7 +62,10 @@ jobs:
           # Record commit SHA for traceability
           echo "${GITHUB_SHA}" > dist/.release
           # Record UTC build timestamp
-          date -u +"%Y-%m-%dT%H:%M:%SZ" > dist/.built_at
+          BUILT_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "${BUILT_AT}" > dist/.built_at
+          # Publish version.json for deterministic health checks
+          printf '{\n  "sha": "%s",\n  "built_at": "%s"\n}\n' "${GITHUB_SHA}" "${BUILT_AT}" > dist/version.json
 
       # --- SSH setup ---
       - name: Start ssh-agent and add key
@@ -130,8 +132,20 @@ jobs:
       - name: Reload Nginx
         run: |
           set -euo pipefail
-          # Reload Nginx to apply static file changes
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo systemctl reload nginx"
+          # Validate Nginx configuration then reload to apply static file changes
+          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo nginx -t && sudo systemctl reload nginx"
+
+      # --- HTTP Health checks ---
+      - name: HTTP health checks
+        run: |
+          set -euo pipefail
+          ROOT_URL="${{ env.SITE_URL }}"
+          # Ensure root returns HTTP 200 (follow redirects); bypass caches with unique query
+          STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
+          test "$STATUS" -eq 200 || { echo "❌ Root did not return 200 (got $STATUS)"; exit 1; }
+          # Ensure version.json exists and matches current SHA
+          VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
+          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json does not contain current SHA"; echo "$VERSION_JSON"; exit 1; }
 
       # --- Clean up old releases: keep last 5 ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})

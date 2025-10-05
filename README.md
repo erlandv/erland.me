@@ -36,24 +36,27 @@ This repository hosts my personal website with a blog and portfolio built with A
 
 Production deployment runs on a GitHub Actions Ubuntu runner and uploads the built static assets from the dist/ directory to the VPS over SSH using rsync. Workflow file: `.github/workflows/deploy.yml`
 
-### FLow
+### Flow
 
 - Trigger on push to `main`, or manually via `workflow_dispatch`.
 - CI steps:
   - Check out the repository (`actions/checkout@v4`)
   - Set up Node.js 20 with npm cache (`actions/setup-node@v4`)
-  - Install dependencies (`npm ci`)
+  - Install dependencies (`npm install`)
   - Perform a clean full build (`npm run build:clean`)
-  - Verify the build output and write release stamps (`.release` contains the commit SHA, `.built_at` contains a UTC timestamp)
+  - Verify the build output and write release stamps: `.release` (commit SHA), `.built_at` (UTC timestamp), and publish `version.json` with `sha` and `built_at`
   - Start ssh-agent and add the private key (`webfactory/ssh-agent@v0.9.0`)
   - Add the server to known_hosts (`ssh-keyscan -p $SSH_PORT -H $SSH_HOST`)
   - Prepare the remote directory (`mkdir -p $RELEASES_DIR`)
-  - Upload the artifact via rsync to releases/<sha> (options: `-az --delete-delay --partial --mkpath; SSH connection -p $SSH_PORT`)
-  - Activate the new release: swap the `current` symlink to point to releases/<sha> (`ln -sfn`)
+  - Upload the artifact via rsync to `releases/<sha>` (options: `-az --delete-delay --partial --mkpath`; SSH connection `-p $SSH_PORT`)
+  - Activate the new release: swap the `current` symlink to point to `releases/<sha>` (`ln -sfn`)
   - Sanity check: ensure `index.html` exists at `$CURRENT_LINK`
-  - Reload Nginx (`sudo systemctl reload nginx`)
+  - Validate Nginx configuration and reload (`sudo nginx -t && sudo systemctl reload nginx`)
+  - HTTP health checks:
+    - Ensure root `$SITE_URL` returns HTTP 200 with explicit cache-bypass
+    - Ensure `/version.json` is accessible and contains the current `GITHUB_SHA`
   - Clean up old releases: keep only the last `$KEEP_RELEASES`
-  - Upload the artifact to GitHub (`actions/upload-artifact@v4, name: dist-<sha>, retention: 7 days`)
+  - Upload the artifact to GitHub (`actions/upload-artifact@v4`, name: `dist-<sha>`, retention: 7 days)
 
 ### Live Site
 
