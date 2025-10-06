@@ -19,7 +19,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     environment:
       name: Production
       url: ${{ env.SITE_URL }}
@@ -38,6 +37,7 @@ jobs:
       DEPLOY_BASE_DIR: ${{ vars.DEPLOY_BASE_DIR }}
       RELEASES_DIR: ${{ vars.DEPLOY_BASE_DIR }}/releases
       CURRENT_LINK: ${{ vars.DEPLOY_BASE_DIR }}/current
+      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=120 -o ConnectionAttempts=6 -o ServerAliveInterval=30 -o ServerAliveCountMax=10 -o StrictHostKeyChecking=no -o AddressFamily=inet -o PreferredAuthentications=publickey
 
     steps:
       # --- Repository checkout ---
@@ -90,7 +90,7 @@ jobs:
       - name: Prepare remote folders
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Ensure releases directory exists on remote host
             mkdir -p '${{ env.RELEASES_DIR }}'
@@ -103,12 +103,12 @@ jobs:
         run: |
           set -euo pipefail
           # Create release directory on remote
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
           # Rsync options: archive+compress, delayed delete, partial transfers, auto-create dirs, stats/progress
           RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
           # Upload build artifacts to the remote release path
           rsync $RSYNC_OPTS \
-            -e "ssh -p ${{ secrets.SSH_PORT }} -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes" \
+            -e "ssh -p ${{ secrets.SSH_PORT }} $SSH_OPTS" \
             ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.RELEASES_DIR }}/${REL_PATH}/"
 
       # --- Atomic switch: point `current` to the new release ---
@@ -117,7 +117,7 @@ jobs:
           REL_PATH: ${{ github.sha }}
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Atomically update 'current' symlink to point to the new release
             ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
@@ -127,7 +127,7 @@ jobs:
       - name: Sanity check index.html exists
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             # Verify main entrypoint exists in the active release
             test -f '${{ env.CURRENT_LINK }}/index.html' || { echo '❌ index.html not found in current'; exit 1; }
           "
@@ -138,7 +138,7 @@ jobs:
         run: |
           set -euo pipefail
           # Validate Nginx configuration then reload to apply static file changes (optional)
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo -n nginx -t && sudo -n systemctl reload nginx"
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo -n nginx -t && sudo -n systemctl reload nginx"
 
       # --- HTTP Health checks ---
       - name: HTTP health checks
@@ -164,7 +164,7 @@ jobs:
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Navigate to releases directory; exit if it does not exist (fresh server)
             cd '${{ env.RELEASES_DIR }}' || exit 0
