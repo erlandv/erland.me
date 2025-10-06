@@ -105,10 +105,36 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     return [];
   }
   async function ensureFuse(postsData: any[]): Promise<void> {
-    if (fuse) return;
+    const arr = Array.isArray(postsData) ? postsData : [];
+    const signatureOf = (list: any[]): string => {
+      try {
+        return list.length + ':' + list.map((it: any) => it.slug || it.id || '').join('|');
+      } catch {
+        return `${Date.now()}:${list.length}`;
+      }
+    };
+    const nextSig = signatureOf(arr);
+
     const mod: any = await import('fuse.js');
-    const Fuse = mod.default || mod;
-    fuse = new Fuse(postsData, FUSE_OPTS);
+    const FuseCtor = mod.default || mod;
+
+    if (!fuse) {
+      fuse = new FuseCtor(arr, FUSE_OPTS);
+      (fuse as any).__signature = nextSig;
+      fuseReady = true;
+      return;
+    }
+
+    const prevSig = (fuse as any).__signature;
+    if (prevSig !== nextSig) {
+      if (typeof (fuse as any).setCollection === 'function') {
+        (fuse as any).setCollection(arr);
+        (fuse as any).__signature = nextSig;
+      } else {
+        fuse = new FuseCtor(arr, FUSE_OPTS);
+        (fuse as any).__signature = nextSig;
+      }
+    }
     fuseReady = true;
   }
 
