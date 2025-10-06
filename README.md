@@ -41,7 +41,7 @@ A lean, performance-first toolkit that keeps builds fast and maintenance simple.
 
 Production builds run on **GitHub Actions (Ubuntu runner)** and are uploaded to the VPS over SSH using **`rsync`**. The workflow file lives at: `.github/workflows/deploy.yml`.
 
-### Flow
+### Prod Flow
 
 - **Trigger & context**: push to `main` or manual `workflow_dispatch`; Environment **Production** (`$SITE_URL`); timeout **30m**.
 - **Build**: checkout (`actions/checkout@v4`), Node.js **20.18.x** (`actions/setup-node@v4`), `npm ci`, then `npm run build:clean`.
@@ -50,9 +50,21 @@ Production builds run on **GitHub Actions (Ubuntu runner)** and are uploaded to 
 - **Activate & verify**: `ln -sfn` `releases/<sha>` → `current`; ensure `$CURRENT_LINK/index.html`; reload Nginx only if `vars.RELOAD_NGINX == 'true'` (validate first); health checks: HEAD/GET `/`=200, key assets=200, `version.json` contains `GITHUB_SHA`.
 - **Housekeeping**: keep last **`$KEEP_RELEASES`** (default **5**); upload artifact `dist-<sha>` via `actions/upload-artifact@v4` (retention **7 days**).
 
-### Live Site
-
 The production site is available at **[https://erland.me](https://erland.me)**.
+
+## Staging Deployment
+
+Staging builds run on GitHub Actions and publish to Cloudflare Pages via `cloudflare/pages-action`. The workflow file lives at: `.github/workflows/staging.yml`.
+
+### Staging Flow
+
+- **Trigger & context**: push to branches `staging` or `testing`, or manual `workflow_dispatch`; Environment: Staging; concurrency group `pages-staging-${{ github.ref }}`; paths filter to only run on relevant changes (`src/**`, `public/**`, `astro.config.ts`, `package.json`, `package-lock.json`, `scripts/**`, `.github/workflows/staging.yml`).
+- **Build**: checkout (`actions/checkout@v4`), set up Node.js `20.18.x` (`actions/setup-node@v4`) with npm cache, install dependencies deterministically (`npm ci`), then build (`npm run build`).
+- **Verify build output**: ensure `dist/` exists and has files before publishing (fails fast if empty).
+- **Publish to Cloudflare Pages**: `cloudflare/pages-action@v1` with `apiToken` = `secrets.CLOUDFLARE_API_TOKEN`, `accountId` = `secrets.CLOUDFLARE_ACCOUNT_ID`, `projectName` = `vars.CLOUDFLARE_PROJECT_NAME`, `directory` = `./dist`, `gitHubToken` = `${{ secrets.GITHUB_TOKEN }}`, `branch` = `${{ github.ref_name }}` (maps `staging`/`testing` to Cloudflare preview).
+- **Summary**: append deployment summary (project, branch, commit) to `GITHUB_STEP_SUMMARY` for quick reference in the Actions UI.
+
+The staging/testing site is available at **[https://staging.erland.pages.dev](https://staging.erland.pages.dev)**.
 
 ## License & Credits
 

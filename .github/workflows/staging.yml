@@ -1,0 +1,92 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - staging
+      - testing
+    paths:
+      - src/**
+      - public/**
+      - astro.config.ts
+      - package.json
+      - package-lock.json
+      - scripts/**
+      - .github/workflows/staging.yml
+  workflow_dispatch:
+
+concurrency:
+  group: pages-staging-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment:
+      name: Staging
+      url: ${{ env.SITE_URL }}
+    permissions:
+      contents: read
+      deployments: write
+
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+      CLOUDFLARE_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preflight env availability
+        run: |
+          set -euo pipefail
+          # Validate Environment 'Staging' secrets/vars are mapped into job env
+          for v in CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_PROJECT_NAME; do
+            if [ -z "${!v:-}" ]; then
+              echo "❌ Missing $v (ensure Environment 'Staging' secrets/vars exist and names match)"
+              echo "Required: secrets.CLOUDFLARE_ACCOUNT_ID, secrets.CLOUDFLARE_API_TOKEN, vars.CLOUDFLARE_PROJECT_NAME"
+              exit 1
+            fi
+          done
+          echo "✅ Required envs are present for Staging deploy"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.18.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          set -euo pipefail
+          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ env.CLOUDFLARE_PROJECT_NAME }}
+          directory: ./dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Cloudflare Pages Staging Deployment"
+            echo ""
+            echo "- Project: ${{ env.CLOUDFLARE_PROJECT_NAME }}"
+            echo "- Branch: ${{ github.ref_name }}"
+            echo "- Commit: ${{ github.sha }}"
+          } >> "$GITHUB_STEP_SUMMARY"
