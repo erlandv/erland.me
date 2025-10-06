@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "predev": "npm run generate:robots",
+    "predev": "npm run generate:robots && npm run generate:ads && npm run generate:search",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run generate:robots && npm run generate:ads && npm run generate:search && astro build",

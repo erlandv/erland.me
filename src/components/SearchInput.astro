@@ -143,22 +143,20 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
     // Initialize search
     // Wait for data to be available
-    const initSearch = async () => {
-      let postsData = (window as any).__SEARCH_POSTS__ || [];
+    const initOnce = async () => {
+      const postsData = (window as any).__SEARCH_POSTS__ || [];
       
       if (!postsData || postsData.length === 0) {
-        postsData = await loadSearchIndex();
+        // Fire-and-forget fetch to prime the cache; performSearch will also fetch on demand
+        loadSearchIndex().catch(() => {});
       }
 
-      if (postsData && postsData.length > 0) {
-        searchState.isInitialized = true;
-      } else {
-        setTimeout(initSearch, 400);
-      }
+      // Always enable search immediately to avoid dev polling loop
+      searchState.isInitialized = true;
     };
     
     // Start initialization
-    initSearch();
+    initOnce();
 
     // Search input event handlers
     let searchTimeout: number;
