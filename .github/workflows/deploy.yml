@@ -19,6 +19,10 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: Production
+      url: ${{ env.SITE_URL }}
     # --- Environment variables used by build and remote deployment ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
@@ -44,12 +48,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.18.x'
           cache: 'npm'
 
       # --- Install and build ---
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build:clean
@@ -86,7 +90,7 @@ jobs:
       - name: Prepare remote folders
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Ensure releases directory exists on remote host
             mkdir -p '${{ env.RELEASES_DIR }}'
@@ -99,12 +103,12 @@ jobs:
         run: |
           set -euo pipefail
           # Create release directory on remote
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
           # Rsync options: archive+compress, delayed delete, partial transfers, auto-create dirs, stats/progress
           RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
           # Upload build artifacts to the remote release path
           rsync $RSYNC_OPTS \
-            -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes" \
             ./dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.RELEASES_DIR }}/${REL_PATH}/"
 
       # --- Atomic switch: point `current` to the new release ---
@@ -113,7 +117,7 @@ jobs:
           REL_PATH: ${{ github.sha }}
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Atomically update 'current' symlink to point to the new release
             ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
@@ -123,26 +127,35 @@ jobs:
       - name: Sanity check index.html exists
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             # Verify main entrypoint exists in the active release
             test -f '${{ env.CURRENT_LINK }}/index.html' || { echo '❌ index.html not found in current'; exit 1; }
           "
 
       # --- Reload Nginx ---
       - name: Reload Nginx
+        if: ${{ vars.RELOAD_NGINX == 'true' }}
         run: |
           set -euo pipefail
-          # Validate Nginx configuration then reload to apply static file changes
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo nginx -t && sudo systemctl reload nginx"
+          # Validate Nginx configuration then reload to apply static file changes (optional)
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "sudo -n nginx -t && sudo -n systemctl reload nginx"
 
       # --- HTTP Health checks ---
       - name: HTTP health checks
         run: |
           set -euo pipefail
           ROOT_URL="${{ env.SITE_URL }}"
-          # Ensure root returns HTTP 200 (follow redirects); bypass caches with unique query
-          STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
-          test "$STATUS" -eq 200 || { echo "❌ Root did not return 200 (got $STATUS)"; exit 1; }
+          # HEAD check on root (lightweight)
+          STATUS_HEAD="$(curl -fsS -o /dev/null -w "%{http_code}" -I -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
+          test "$STATUS_HEAD" -eq 200 || { echo "❌ HEAD / did not return 200 (got $STATUS_HEAD)"; exit 1; }
+          # GET check on root (content retrieval)
+          STATUS_GET="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
+          test "$STATUS_GET" -eq 200 || { echo "❌ GET / did not return 200 (got $STATUS_GET)"; exit 1; }
+          # Asset HEAD checks to validate static files are served via new symlink
+          ASSET1_STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -I --max-time 15 --retry 5 --retry-connrefused "${ROOT_URL}/assets/favicon/favicon.ico?t=${GITHUB_SHA}")"
+          test "$ASSET1_STATUS" -eq 200 || { echo "❌ Asset favicon.ico not reachable (got $ASSET1_STATUS)"; exit 1; }
+          ASSET2_STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -I --max-time 15 --retry 5 --retry-connrefused "${ROOT_URL}/assets/profile/logo.svg?t=${GITHUB_SHA}")"
+          test "$ASSET2_STATUS" -eq 200 || { echo "❌ Asset logo.svg not reachable (got $ASSET2_STATUS)"; exit 1; }
           # Ensure version.json exists and matches current SHA
           VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
           echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json does not contain current SHA"; echo "$VERSION_JSON"; exit 1; }
@@ -151,12 +164,15 @@ jobs:
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
         run: |
           set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+          ssh -p "${{ secrets.SSH_PORT }}" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=4 -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
             # Navigate to releases directory; exit if it does not exist (fresh server)
             cd '${{ env.RELEASES_DIR }}' || exit 0
-            # Keep only the latest ${{ vars.KEEP_RELEASES }} releases; remove older ones
-            ls -1dt */ 2>/dev/null | tail -n +$(( ${{ vars.KEEP_RELEASES }} + 1 )) | xargs -r rm -rf --
+            # Determine how many releases to keep; default to 5 if not provided
+            KEEP='${{ vars.KEEP_RELEASES }}'
+            KEEP=\"\${KEEP:-5}\"
+            # Keep only the latest KEEP releases; remove older ones
+            ls -1dt */ 2>/dev/null | tail -n +\$(( KEEP + 1 )) | xargs -r rm -rf --
           "
 
       # --- Upload build artifact (archive) ---

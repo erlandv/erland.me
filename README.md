@@ -3,11 +3,14 @@
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository hosts my personal website with a blog and portfolio built with Astro, a cutting-edge static site builder that combines speed, flexibility, and simplicity. This is my small corner on the interweb where I’ll post my notes, achievements, and whatever I want to post.
+This repository hosts my personal website with a blog and portfolio built with **Astro**, a cutting-edge static site builder that combines speed, flexibility, and simplicity. This is my small corner on the interweb where I’ll post my notes, achievements, and whatever I want to post.
 
 ## Tech Stack
 
+A lean, performance-first toolkit that keeps builds fast and maintenance simple.
+
 ### Core Framework
+
 - **Astro 5.1.5** — Core framework for static site generation.
 - **TypeScript** — Type-safe development across site and scripts.
 - **Vite** — Dev server and build tooling (via Astro).
@@ -17,6 +20,7 @@ This repository hosts my personal website with a blog and portfolio built with A
 - **Terser** — Optional JavaScript minifier toggled via `MINIFY_ENGINE=terser`.
 
 ### Content & Styling
+
 - **Markdown (Astro Content Collections)** — Structured content schemas and validation (see `src/content.config.ts`).
 - **Vanilla CSS + CSS Modules** — Styles colocated with components where possible.
 - **PostCSS** — Autoprefixer and cssnano for CSS optimization.
@@ -24,6 +28,7 @@ This repository hosts my personal website with a blog and portfolio built with A
 - **Agave Nerd Font** — Font for code/technical sections.
 
 ### Utilities & Configuration
+
 - **@astrojs/check** — Diagnostics, lint hints, and type checks.
 - **Prettier** — Code formatting.
 - **remark-directive** — Extended Markdown directives support.
@@ -34,33 +39,20 @@ This repository hosts my personal website with a blog and portfolio built with A
 
 ## Production Deployment
 
-Production deployment runs on a GitHub Actions Ubuntu runner and uploads the built static assets from the dist/ directory to the VPS over SSH using rsync. Workflow file: `.github/workflows/deploy.yml`
+Production builds run on **GitHub Actions (Ubuntu runner)** and are uploaded to the VPS over SSH using **`rsync`**. The workflow file lives at: `.github/workflows/deploy.yml`.
 
 ### Flow
 
-- Trigger on push to `main`, or manually via `workflow_dispatch`.
-- CI steps:
-  - Check out the repository (`actions/checkout@v4`)
-  - Set up Node.js 20 with npm cache (`actions/setup-node@v4`)
-  - Install dependencies (`npm install`)
-  - Perform a clean full build (`npm run build:clean`)
-  - Verify the build output and write release stamps: `.release` (commit SHA), `.built_at` (UTC timestamp), and publish `version.json` with `sha` and `built_at`
-  - Start ssh-agent and add the private key (`webfactory/ssh-agent@v0.9.0`)
-  - Add the server to known_hosts (`ssh-keyscan -p $SSH_PORT -H $SSH_HOST`)
-  - Prepare the remote directory (`mkdir -p $RELEASES_DIR`)
-  - Upload the artifact via rsync to `releases/<sha>` (options: `-az --delete-delay --partial --mkpath`; SSH connection `-p $SSH_PORT`)
-  - Activate the new release: swap the `current` symlink to point to `releases/<sha>` (`ln -sfn`)
-  - Sanity check: ensure `index.html` exists at `$CURRENT_LINK`
-  - Validate Nginx configuration and reload (`sudo nginx -t && sudo systemctl reload nginx`)
-  - HTTP health checks:
-    - Ensure root `$SITE_URL` returns HTTP 200 with explicit cache-bypass
-    - Ensure `/version.json` is accessible and contains the current `GITHUB_SHA`
-  - Clean up old releases: keep only the last `$KEEP_RELEASES`
-  - Upload the artifact to GitHub (`actions/upload-artifact@v4`, name: `dist-<sha>`, retention: 7 days)
+- **Trigger & context**: push to `main` or manual `workflow_dispatch`; Environment **Production** (`$SITE_URL`); timeout **30m**.
+- **Build**: checkout (`actions/checkout@v4`), Node.js **20.18.x** (`actions/setup-node@v4`), `npm ci`, then `npm run build:clean`.
+- **Release metadata**: write `.release` (SHA) & `.built_at` (UTC); publish `version.json` with `{ sha, built_at }`.
+- **SSH & upload**: start ssh-agent + add key; add `known_hosts`; ensure `$RELEASES_DIR`; `rsync` `dist/` → `releases/<sha>` with `-az --delete-delay --partial --mkpath --info=stats2,progress2` (over SSH with hardened options).
+- **Activate & verify**: `ln -sfn` `releases/<sha>` → `current`; ensure `$CURRENT_LINK/index.html`; reload Nginx only if `vars.RELOAD_NGINX == 'true'` (validate first); health checks: HEAD/GET `/`=200, key assets=200, `version.json` contains `GITHUB_SHA`.
+- **Housekeeping**: keep last **`$KEEP_RELEASES`** (default **5**); upload artifact `dist-<sha>` via `actions/upload-artifact@v4` (retention **7 days**).
 
 ### Live Site
 
-You can see live site at [https://erland.me](https://erland.me).
+The production site is available at **[https://erland.me](https://erland.me)**.
 
 ## License & Credits
 
