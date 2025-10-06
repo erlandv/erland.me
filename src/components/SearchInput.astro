@@ -87,6 +87,23 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
   let fuse: any = null;
   let fuseReady = false;
 
+
+  async function loadSearchIndex(): Promise<any[]> {
+    try {
+      const res = await fetch('/search-index.json', {
+        headers: { Accept: 'application/json' },
+      });
+      if (!res || !res.ok) return [];
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        (window as any).__SEARCH_POSTS__ = data;
+        return data;
+      }
+    } catch (e) {
+      console.error('Failed to fetch search index:', e);
+    }
+    return [];
+  }
   async function ensureFuse(postsData: any[]): Promise<void> {
     if (fuse) return;
     const mod: any = await import('fuse.js');
@@ -126,13 +143,17 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
     // Initialize search
     // Wait for data to be available
-    const initSearch = () => {
-      const postsData = (window as any).__SEARCH_POSTS__ || [];
+    const initSearch = async () => {
+      let postsData = (window as any).__SEARCH_POSTS__ || [];
       
-      if (postsData.length > 0) {
+      if (!postsData || postsData.length === 0) {
+        postsData = await loadSearchIndex();
+      }
+
+      if (postsData && postsData.length > 0) {
         searchState.isInitialized = true;
       } else {
-        setTimeout(initSearch, 200);
+        setTimeout(initSearch, 400);
       }
     };
     
@@ -224,7 +245,10 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
     // Fuse-based client-side search with lazy import
     setTimeout(async () => {
-      const postsData = (window as any).__SEARCH_POSTS__ || [];
+      let postsData = (window as any).__SEARCH_POSTS__ || [];
+      if (!postsData || postsData.length === 0) {
+        postsData = await loadSearchIndex();
+      }
       try {
         await ensureFuse(postsData);
       } catch (e) {

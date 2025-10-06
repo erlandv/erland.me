@@ -31,6 +31,7 @@ A static-first, type-safe stack with predictable builds, clean content workflows
 
 - **@astrojs/check**: Diagnostics, lint hints, and type checks.
 - **Prettier**: Code formatting.
+- **Fuse.js**: Client-side fuzzy search for blog articles.
 - **remark-directive**: Extended Markdown directives support.
 - **Custom remark-gallery**: Markdown image gallery support.
 - **ts-node**: Run TypeScript-based generators (robots.txt, ads.txt).
