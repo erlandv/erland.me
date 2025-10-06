@@ -3,7 +3,7 @@ import Icon from "./Icon.astro";
 import styles from "./SearchInput/search-input.module.css";
 
 interface Props {
-  posts: any[];
+  posts?: any[];
   placeholder?: string;
 }
 
@@ -258,7 +258,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       let results: SearchResult[] = [];
       if (fuseReady && fuse) {
         const raw = fuse.search(query);
-        // Fuse mengembalikan hasil sudah terurut (score lebih kecil = lebih relevan)
+        // Fuse returns sorted results (lower score = more relevant)
         results = raw.map((r: any) => ({
           item: r.item,
           score: r.score,
@@ -268,10 +268,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       handleSearchResults(results);
     }, 100);
   }
- 
-  // Digantikan oleh pencarian berbasis Fuse.js (lihat performSearch)
-  // Fungsi ini tidak lagi digunakan.
- 
+
   function handleSearchResults(results: SearchResult[]) {
     searchState.isSearching = false;
     hideLoading();
@@ -331,7 +328,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     const match = matches.find((m) => m.key === key);
     if (!match || !match.indices || match.indices.length === 0) return escapeHtml(text);
 
-    // Pastikan indeks terurut naik
+    // Sort indices to ensure correct order
     const indices: [number, number][] = match.indices.slice().sort((a: [number, number], b: [number, number]) => a[0] - b[0]);
 
     let highlighted = '';

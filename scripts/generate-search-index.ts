@@ -24,7 +24,9 @@ async function exists(p: string): Promise<boolean> {
   }
 }
 
-async function listBlogEntries(): Promise<Array<{ slug: string; file: string }>> {
+async function listBlogEntries(): Promise<
+  Array<{ slug: string; file: string }>
+> {
   const entries: Array<{ slug: string; file: string }> = [];
   const dirs = await readdir(BLOG_DIR, { withFileTypes: true });
   for (const dirent of dirs) {
@@ -39,30 +41,80 @@ async function listBlogEntries(): Promise<Array<{ slug: string; file: string }>>
   return entries;
 }
 
-function parseFrontmatter(raw: string): { data: Record<string, any>; body: string } {
+function parseFrontmatter(raw: string): {
+  data: Record<string, any>;
+  body: string;
+} {
   let data: Record<string, any> = {};
   let body = raw;
 
   if (raw.startsWith('---')) {
     const end = raw.indexOf('\n---');
     if (end !== -1) {
-      const fm = raw.slice(3, end).trim();
-      body = raw.slice(end + '\n---'.length).trim();
+      const fmBlock = raw.slice(3, end).trimEnd();
+      body = raw.slice(end + '\n---'.length).trimStart();
 
-      const lines = fm.split('\n');
-      for (const line of lines) {
+      const lines = fmBlock.split('\n');
+      let i = 0;
+
+      const isTopLevel = (s: string) => /^\S/.test(s);
+
+      while (i < lines.length) {
+        const line = lines[i];
         const m = line.match(/^([A-Za-z0-9_]+):\s*(.*)$/);
-        if (m) {
-          const key = m[1];
-          let value = m[2].trim();
-          if (
-            (value.startsWith('"') && value.endsWith('"')) ||
-            (value.startsWith("'") && value.endsWith("'"))
-          ) {
-            value = value.slice(1, -1);
-          }
-          data[key] = value;
+        if (!m) {
+          i++;
+          continue;
         }
+
+        const key = m[1];
+        let value = m[2].trim();
+
+        // YAML block scalars (folded/literal): '>', '>-', '|', '|-'
+        if (
+          value === '>' ||
+          value === '>-' ||
+          value === '|' ||
+          value === '|-'
+        ) {
+          const literal = value.startsWith('|');
+          const chomp = value.endsWith('-');
+          i++;
+
+          const blockLines: string[] = [];
+          while (i < lines.length) {
+            const next = lines[i];
+            if (isTopLevel(next)) break;
+            blockLines.push(next.replace(/^\s+/, ''));
+            i++;
+          }
+
+          let blockText: string;
+          if (literal) {
+            // Literal: keep newline
+            blockText = blockLines.join('\n');
+            if (!chomp) blockText += '\n';
+          } else {
+            // Folded: replace newlines with space
+            blockText = blockLines
+              .join(' ')
+              .replace(/\s{2,}/g, ' ')
+              .trim();
+          }
+
+          data[key] = blockText;
+          continue;
+        }
+
+        // Single line
+        if (
+          (value.startsWith('"') && value.endsWith('"')) ||
+          (value.startsWith("'") && value.endsWith("'"))
+        ) {
+          value = value.slice(1, -1);
+        }
+        data[key] = value;
+        i++;
       }
     }
   }
@@ -93,7 +145,10 @@ function stripMarkdown(md: string): string {
 }
 
 function summarize(text: string, maxChars = 800): string {
-  const paras = text.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const paras = text
+    .split(/\n{2,}/)
+    .map(p => p.trim())
+    .filter(Boolean);
   const first = paras[0] || text;
   if (first.length <= maxChars) return first;
   return first.slice(0, maxChars) + '…';
@@ -116,7 +171,9 @@ function toDateLabel(input: string | undefined): string | null {
 
 function pickExcerpt(data: Record<string, any>, bodyPlain: string): string {
   const fallback = summarize(bodyPlain, 280);
-  return (data['excerpt'] as string) || (data['description'] as string) || fallback;
+  return (
+    (data['excerpt'] as string) || (data['description'] as string) || fallback
+  );
 }
 
 async function buildIndex(): Promise<SearchIndexItem[]> {
@@ -132,7 +189,7 @@ async function buildIndex(): Promise<SearchIndexItem[]> {
 
     const plain = stripMarkdown(body);
     const excerpt = pickExcerpt(data, plain);
-    const content = summarize(plain, 1000); // ringkas untuk payload
+    const content = summarize(plain, 1000);
 
     const item: SearchIndexItem = {
       slug,
@@ -141,10 +198,10 @@ async function buildIndex(): Promise<SearchIndexItem[]> {
       category,
       dateLabel,
       content,
-      heroSrc: null, // optional; biarkan null agar komponen menampilkan tanpa thumb bila tidak tersedia
+      heroSrc: null,
     };
 
-    // Draft filtering: jika ada draft: true, skip
+    // Draft filtering
     const draftVal = `${data['draft'] || ''}`.toLowerCase();
     const isDraft = draftVal === 'true';
     if (!isDraft) {
@@ -165,7 +222,7 @@ async function main() {
   console.log(`Search index written: ${OUTPUT_PATH} (${items.length} items)`);
 }
 
-main().catch((err) => {
+main().catch(err => {
   console.error('Failed to generate search index:', err);
   process.exitCode = 1;
 });

@@ -145,6 +145,7 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word; /* avoid awkward truncation when highlight spans */
   transition: color 0.2s ease;
 }
 
@@ -162,6 +163,7 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word; /* avoid awkward truncation when highlight spans */
   transition: color 0.2s ease;
 }
 
@@ -217,12 +219,13 @@
 }
 
 :global(.search-highlight) {
-  background: rgba(107, 182, 255, 0.4);
-  color: #ffffff;
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 700;
-  box-shadow: 0 1px 2px rgba(107, 182, 255, 0.2);
+  background: rgba(107, 182, 255, 0.25);
+  color: inherit;
+  padding: 0;
+  border-radius: 2px;
+  font-weight: inherit;
+  box-shadow: none;
+  display: inline;
 }
 
 .search-loading {
