@@ -286,10 +286,8 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       `;
     } else {
       searchResultsContent.innerHTML = results.map(result => {
-        const img = result.item.heroSrc ? `<img src="${result.item.heroSrc}" alt="${result.item.title}" class="search-result-thumb" loading="lazy" />` : '';
         return `
         <div class="search-result-item" role="option" tabindex="0" data-slug="${result.item.slug}">
-          ${img}
           <div class="search-result-body">
             <h3 class="search-result-title">${highlightMatches(result.item.title, result.matches, 'title')}</h3>
             ${result.item.excerpt ? `<p class="search-result-excerpt">${highlightMatches(result.item.excerpt, result.matches, 'excerpt')}</p>` : ''}
@@ -328,13 +326,38 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     const match = matches.find((m) => m.key === key);
     if (!match || !match.indices || match.indices.length === 0) return escapeHtml(text);
 
-    // Sort indices to ensure correct order
-    const indices: [number, number][] = match.indices.slice().sort((a: [number, number], b: [number, number]) => a[0] - b[0]);
+    const isWordChar = (ch: string) => /\p{L}|\p{N}|_/u.test(ch);
+    const expandToWordBoundaries = (t: string, s: number, e: number): [number, number] => {
+      let start = s;
+      let end = e;
+      while (start > 0 && isWordChar(t[start - 1])) start--;
+      while (end + 1 < t.length && isWordChar(t[end + 1])) end++;
+      return [start, end];
+    };
+
+    // Extend to word boundaries and merge intersecting ranges
+    const ranges: [number, number][] = match.indices
+      .map(([s, e]: [number, number]) => expandToWordBoundaries(text, s, e))
+      .sort((a: [number, number], b: [number, number]) => a[0] - b[0]);
+
+    const merged: [number, number][] = [];
+    for (const [s, e] of ranges) {
+      if (merged.length === 0) {
+        merged.push([s, e]);
+      } else {
+        const last = merged[merged.length - 1];
+        if (s <= last[1] + 1) {
+          last[1] = Math.max(last[1], e);
+        } else {
+          merged.push([s, e]);
+        }
+      }
+    }
 
     let highlighted = '';
     let lastIndex = 0;
 
-    for (const [start, end] of indices) {
+    for (const [start, end] of merged) {
       highlighted += escapeHtml(text.slice(lastIndex, start));
       highlighted += `<mark class="search-highlight">${escapeHtml(text.slice(start, end + 1))}</mark>`;
       lastIndex = end + 1;

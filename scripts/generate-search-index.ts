@@ -8,7 +8,6 @@ type SearchIndexItem = {
   category?: string | null;
   dateLabel?: string | null;
   content: string;
-  heroSrc?: string | null;
 };
 
 const BLOG_DIR = path.resolve('src/content/blog');
@@ -198,7 +197,6 @@ async function buildIndex(): Promise<SearchIndexItem[]> {
       category,
       dateLabel,
       content,
-      heroSrc: null,
     };
 
     // Draft filtering
