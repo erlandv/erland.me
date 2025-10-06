@@ -7,35 +7,42 @@ This repository hosts my personal website with a blog and portfolio built with *
 
 ## Tech Stack
 
-A lean, performance-first toolkit that keeps builds fast and maintenance simple.
+A static-first, type-safe stack with predictable builds, clean content workflows, minimal styling overhead, and straightforward deploys to staging and production.
 
 ### Core Framework
 
-- **Astro 5.1.5** — Core framework for static site generation.
-- **TypeScript** — Type-safe development across site and scripts.
-- **Vite** — Dev server and build tooling (via Astro).
-- **Shiki** — Markdown code syntax highlighting.
-- **@astrojs/sitemap** — Automatic sitemap generation.
-- **Sharp** — Default image optimization service; configurable via `IMAGE_SERVICE` to use Squoosh or passthrough.
-- **Terser** — Optional JavaScript minifier toggled via `MINIFY_ENGINE=terser`.
+- **Astro 5.1.5**: Core framework for static site generation.
+- **TypeScript**: Type-safe development across site and scripts.
+- **Vite**: Dev server and build tooling (via Astro).
+- **Shiki**: Markdown code syntax highlighting.
+- **@astrojs/sitemap**: Automatic sitemap generation.
+- **Sharp**: Default image optimization service; configurable via `IMAGE_SERVICE` to use Squoosh or passthrough.
+- **Terser**: Optional JavaScript minifier toggled via `MINIFY_ENGINE=terser`.
 
 ### Content & Styling
 
-- **Markdown (Astro Content Collections)** — Structured content schemas and validation (see `src/content.config.ts`).
-- **Vanilla CSS + CSS Modules** — Styles colocated with components where possible.
-- **PostCSS** — Autoprefixer and cssnano for CSS optimization.
-- **SVG Icons** — Dynamic imports with normalized color for consistent theming.
-- **Agave Nerd Font** — Font for code/technical sections.
+- **Markdown (Astro Content Collections)**: Structured content schemas and validation (see `src/content.config.ts`).
+- **Vanilla CSS + CSS Modules**: Styles colocated with components where possible.
+- **PostCSS**: Autoprefixer and cssnano for CSS optimization.
+- **SVG Icons**: Dynamic imports with normalized color for consistent theming.
+- **Agave Nerd Font**: Font for code/technical sections.
 
 ### Utilities & Configuration
 
-- **@astrojs/check** — Diagnostics, lint hints, and type checks.
-- **Prettier** — Code formatting.
-- **remark-directive** — Extended Markdown directives support.
-- **Custom remark-gallery** — Markdown image gallery support.
-- **ts-node** — Run TypeScript-based generators (robots.txt, ads.txt).
-- **npm scripts** — Build, preview, lint, format, and validate workflows.
-- **Client-side utilities** — Lightbox, code copy, share buttons.
+- **@astrojs/check**: Diagnostics, lint hints, and type checks.
+- **Prettier**: Code formatting.
+- **remark-directive**: Extended Markdown directives support.
+- **Custom remark-gallery**: Markdown image gallery support.
+- **ts-node**: Run TypeScript-based generators (robots.txt, ads.txt).
+- **npm scripts**: Build, preview, lint, format, and validate workflows.
+- **Client-side utilities**: Lightbox, code copy, share buttons, and more.
+
+### Deployment
+
+- **GitHub Actions**: CI for production & staging, builds `dist/`, uploads artifacts, writes summaries.
+- **Nginx**: Serves static from `current/`, zero‑downtime swaps via `ln -sfn`.
+- **Atlantic Cloud**: VPS provider powering the production environment hosting the static site behind Nginx.
+- **Cloudflare Pages**: Staging/testing deploys via `cloudflare/pages-action`.
 
 ## Production Deployment
 
@@ -61,7 +68,7 @@ Staging builds run on GitHub Actions and publish to Cloudflare Pages via `cloudf
 - **Trigger & context**: push to branches `staging` or `testing`, or manual `workflow_dispatch`; Environment: Staging; concurrency group `pages-staging-${{ github.ref }}`; paths filter to only run on relevant changes (`src/**`, `public/**`, `astro.config.ts`, `package.json`, `package-lock.json`, `scripts/**`, `.github/workflows/staging.yml`).
 - **Build**: checkout (`actions/checkout@v4`), set up Node.js `20.18.x` (`actions/setup-node@v4`) with npm cache, install dependencies deterministically (`npm ci`), then build (`npm run build`).
 - **Verify build output**: ensure `dist/` exists and has files before publishing (fails fast if empty).
-- **Publish to Cloudflare Pages**: `cloudflare/pages-action@v1` with `apiToken` = `secrets.CLOUDFLARE_API_TOKEN`, `accountId` = `secrets.CLOUDFLARE_ACCOUNT_ID`, `projectName` = `vars.CLOUDFLARE_PROJECT_NAME`, `directory` = `./dist`, `gitHubToken` = `${{ secrets.GITHUB_TOKEN }}`, `branch` = `${{ github.ref_name }}` (maps `staging`/`testing` to Cloudflare preview).
+- **Publish to Cloudflare Pages**: `cloudflare/pages-action@v1` with `apiToken` = `secrets.CLOUDFLARE_API_TOKEN`, `accountId` = `secrets.CLOUDFLARE_ACCOUNT_ID`, `projectName` = `vars.CLOUDFLARE_PROJECT_NAME`, `directory` = `./dist`, `branch` = `${{ github.ref_name }}` (maps `staging`/`testing` to Cloudflare preview).
 - **Summary**: append deployment summary (project, branch, commit) to `GITHUB_STEP_SUMMARY` for quick reference in the Actions UI.
 
 The staging/testing site is available at **[https://staging.erland.pages.dev](https://staging.erland.pages.dev)**.
