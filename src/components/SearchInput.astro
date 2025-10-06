@@ -114,10 +114,10 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
   function escapeHtml(s: string): string {
     const map: Record<string, string> = {
-      '&': '&',
-      '<': '<',
-      '>': '>',
-      '"': '"',
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
       "'": '&#39;',
     };
     return String(s).replace(/[&<>"']/g, (c) => map[c] || c);
