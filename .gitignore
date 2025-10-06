@@ -53,3 +53,4 @@ shrinkwrap.yaml
 AGENTS.md
 public/robots.txt
 public/ads.txt
+public/*.json
