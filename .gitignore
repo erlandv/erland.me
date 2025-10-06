@@ -53,3 +53,6 @@ shrinkwrap.yaml
 AGENTS.md
 public/robots.txt
 public/ads.txt
+
+# generated search index
+public/search-index.json

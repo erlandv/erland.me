@@ -3,11 +3,11 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "predev": "npm run generate:robots",
+    "predev": "npm run generate:robots && npm run generate:ads && npm run generate:search",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run generate:robots && npm run generate:ads && astro build",
-    "build:clean": "rm -rf dist && npm run generate:robots && npm run generate:ads && astro build",
+    "build": "npm run generate:robots && npm run generate:ads && npm run generate:search && astro build",
+    "build:clean": "rm -rf dist && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "astro check",
@@ -19,10 +19,12 @@
     "generate:robots": "node --loader ts-node/esm scripts/generate-robots.ts",
     "generate:robots:ts-node": "node --loader ts-node/esm scripts/generate-robots.ts",
     "generate:robots:bun": "bun scripts/generate-robots.ts",
-    "generate:ads": "node --loader ts-node/esm scripts/generate-ads.ts"
+    "generate:ads": "node --loader ts-node/esm scripts/generate-ads.ts",
+    "generate:search": "node --loader ts-node/esm scripts/generate-search-index.ts"
   },
   "dependencies": {
     "astro": "^5.1.5",
+    "fuse.js": "^7.1.0",
     "sharp": "^0.34.4"
   },
   "devDependencies": {

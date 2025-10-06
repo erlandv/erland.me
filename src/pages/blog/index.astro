@@ -5,14 +5,10 @@ import PostCard from "../../components/PostCard.astro";
 import Pagination from "../../components/Pagination.astro";
 import SearchInput from "../../components/SearchInput.astro";
 import { loadAllPosts, slicePage } from '../../lib/blog';
-import { postToSearchable } from '../../lib/search';
 import { collectionPageJsonLd } from '../../lib/seo';
 import listing from "../../styles/pages/listing.module.css";
 
 const posts = await loadAllPosts();
-
-// Convert posts to searchable format
-const searchablePosts = posts.map(postToSearchable);
 
 const pageSize = 10;
 const page = 1;
@@ -37,13 +33,13 @@ const getCategory = (post: any) => post.data?.category ?? null;
   )}
   selectedItem="blog"
 >
-  <BackNav href="/" label="Back" />
+  <BackNav href="/" label="Back to Home" />
 
   <div class="content-container">
     <h1>Blog Posts</h1>
     
     <!-- Search Component -->
-    <SearchInput posts={searchablePosts} placeholder="Cari artikel..." />
+    <SearchInput placeholder="Cari artikel..." />
     
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
@@ -77,54 +73,3 @@ const getCategory = (post: any) => post.data?.category ?? null;
   </div>
 </SiteLayout>
 
-<script define:vars={{ searchablePosts }} is:inline>
-  // Make searchable posts available to the search component
-  function initSearchData() {
-    try {
-      window.__SEARCH_POSTS__ = searchablePosts;
-    } catch (error) {
-      console.error('Failed to initialize search posts data:', error);
-    }
-  }
-
-  // Setup router reinit for ClientRouter compatibility
-  let routerSetup = false;
-  function setupRouterReinit() {
-    if (routerSetup) return;
-    routerSetup = true;
-
-    const run = () => {
-      // Only initialize on blog pages
-      if (window.location.pathname.startsWith('/blog')) {
-        initSearchData();
-      }
-    };
-
-    // Astro transitions events (if ClientRouter is used)
-    document.addEventListener('astro:page-load', run);
-    document.addEventListener('astro:after-swap', run);
-
-    // Navigation via history
-    window.addEventListener('popstate', run);
-    const _push = history.pushState && history.pushState.bind(history);
-    if (_push) {
-      history.pushState = function (data, unused, url) {
-        const ret = _push(data, unused, url);
-        // re-bind after navigation
-        setTimeout(run, 10);
-        return ret;
-      };
-    }
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initSearchData();
-      setupRouterReinit();
-    });
-  } else {
-    initSearchData();
-    setupRouterReinit();
-  }
-</script>
