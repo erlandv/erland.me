@@ -16,11 +16,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate": "npm run lint && npm run type-check && npm run format:check",
-    "generate:robots": "node --loader ts-node/esm scripts/generate-robots.ts",
-    "generate:robots:ts-node": "node --loader ts-node/esm scripts/generate-robots.ts",
-    "generate:robots:bun": "bun scripts/generate-robots.ts",
-    "generate:ads": "node --loader ts-node/esm scripts/generate-ads.ts",
-    "generate:search": "node --loader ts-node/esm scripts/generate-search-index.ts"
+    "generate:robots": "node scripts/generate-robots.mjs",
+    "generate:ads": "node scripts/generate-ads.mjs",
+    "generate:search": "node scripts/generate-search-index.mjs"
   },
   "dependencies": {
     "astro": "^5.1.5",
@@ -36,7 +34,6 @@
     "prettier": "^3.6.2",
     "remark-directive": "^4.0.0",
     "terser": "^5.44.0",
-    "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "unist-util-visit": "^5.0.0"
   }

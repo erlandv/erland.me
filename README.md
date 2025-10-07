@@ -52,8 +52,8 @@ A static-first, type-safe stack with predictable builds, clean content workflows
 - **Fuse.js**: Client-side fuzzy search for blog articles.
 - **remark-directive**: Extended Markdown directives support.
 - **Custom remark-gallery**: Markdown image gallery support.
-- **ts-node**: Run TypeScript-based generators (robots.txt, ads.txt).
-- **npm scripts**: Build, preview, lint, format, and validate workflows.
+- **ESM Node Scripts (.mjs)**: Run the generators for `robots.txt`, `ads.txt`, and `search-index.json` without the experimental loader.
+- **npm scripts**: All the build, test, and setup commands.
 
 ### Deployment
 

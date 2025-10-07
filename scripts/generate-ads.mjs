@@ -1,7 +1,9 @@
-import { writeFileSync, existsSync, readFileSync, unlinkSync } from 'fs';
-import { join } from 'path';
+// ESM script to generate ads.txt without ts-node
 
-function loadEnvFromFile(filePath: string): void {
+import { writeFileSync, existsSync, readFileSync, unlinkSync } from 'node:fs';
+import { join } from 'node:path';
+
+function loadEnvFromFile(filePath) {
   try {
     if (!existsSync(filePath)) return;
     const content = readFileSync(filePath, 'utf-8');
@@ -30,14 +32,13 @@ function loadEnvFromFile(filePath: string): void {
 // Attempt to load from .env in project root
 loadEnvFromFile(join(process.cwd(), '.env'));
 
-const siteUrl: string = process.env.SITE_URL || 'https://erland.me';
-const siteDomain: string = process.env.SITE_DOMAIN || 'erland.me';
+const siteUrl = process.env.SITE_URL || 'https://erland.me';
+const siteDomain = process.env.SITE_DOMAIN || 'erland.me';
 
-const isProd: boolean =
-  siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
+const isProd = siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
 
 // AdSense publisher/client ID, typically like "ca-pub-XXXXXXXXXXXXXXXX"
-const rawClient: string = process.env.PUBLIC_ADSENSE_CLIENT || '';
+const rawClient = process.env.PUBLIC_ADSENSE_CLIENT || '';
 
 // Derive pub ID for ads.txt: "pub-XXXXXXXXXXXXXXXX" (strip optional "ca-")
 let pubId = '';
@@ -55,13 +56,13 @@ if (!isProd) {
   } catch {
     // ignore
   }
-  console.log('ℹ️ Skipping ads.txt generation (non-production environment)');
+  console.log('Skipping ads.txt generation (non-production environment)');
   process.exit(0);
 }
 
 if (!pubId) {
   console.error(
-    '⚠️ PUBLIC_ADSENSE_CLIENT not set or invalid; cannot generate ads.txt'
+    'PUBLIC_ADSENSE_CLIENT not set or invalid; cannot generate ads.txt'
   );
   process.exit(1);
 }
@@ -73,5 +74,5 @@ const adsContent = `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
 writeFileSync(adsPath, adsContent);
 
 console.log(
-  `✅ Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`
+  `Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`
 );
