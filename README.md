@@ -13,14 +13,14 @@ There aren't many advanced features available in this project because it was int
 - **Portfolio Showcase**: Display portfolio items with flexible layouts and content types.
 - **Full-Text Search**: Client-side fuzzy search with auto-generated search index and instant result filtering.
 - **Image Gallery in Markdown**: Supports image galleries and extended Markdown directives via custom remark plugins.
-- **Syntax Highlighting**: Beautiful code blocks with Shiki syntax highlighting.
-- **SEO & Structured Data**: Auto-generated meta tags and JSON-LD for person/organization, sitemap, robots.txt generator, and Open Graph support.
+- **Syntax Highlighting**: Makes code snippets look nice because nobody wants to read ugly code.
+- **SEO & Structured Data**: Auto-generated meta tags and `JSON-LD` for person/organization, sitemap, `robots.txt` generator, and Open Graph support.
 - **Lightbox & Code Copy**: Built-in lightbox for images and one-click copy buttons for code snippets.
 - **Toast Notifications**: Lightweight, customizable toast messages for user feedback.
 - **Share Buttons**: Easy sharing of blog posts and downloads to social media.
 - **Pagination**: Automatic pagination of blog posts.
-- **Adsense/Placeholder Integration**: Adsense support (for production) and placeholder ads (for dev/testing) on download pages.
-- **Utilities & Scripts**: Includes generator scripts for robots.txt, ads.txt, and search index, all type-safe with TypeScript.
+- **Adsense/Placeholder Integration**: Adsense support for production and placeholder ads for dev/staging on blog pages.
+- **Utilities & Scripts**: Includes generator scripts for `robots.txt`, `ads.txt`, and search index, all type-safe with TypeScript.
 
 ## Tech Stack
 
@@ -43,6 +43,7 @@ A static-first, type-safe stack with predictable builds, clean content workflows
 - **PostCSS**: Autoprefixer and cssnano for CSS optimization.
 - **SVG Icons**: Dynamic imports with normalized color for consistent theming.
 - **Agave Nerd Font**: Font for code/technical sections.
+- **Flaticon**: All images for blog content are sourced from [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) by Flaticon.
 
 ### Utilities & Configuration
 
@@ -63,16 +64,16 @@ A static-first, type-safe stack with predictable builds, clean content workflows
 
 ## Production Deployment
 
-Production builds run on **GitHub Actions (Ubuntu runner)** and are uploaded to the VPS over SSH using **`rsync`**. The workflow file lives at: `.github/workflows/deploy.yml`.
+Production builds run on GitHub Actions (Ubuntu runner) and are uploaded to the VPS over SSH using **`rsync`**. The workflow file lives at: `.github/workflows/deploy.yml`.
 
 ### Prod Flow
 
-- **Trigger & context**: push to `main` or manual `workflow_dispatch`; Environment **Production** (`$SITE_URL`); timeout **30m**.
+- **Trigger & context**: push to `main` or manual `workflow_dispatch`; Environment **Production** (`$SITE_URL`); Concurrency group: `deploy-prod`; Paths filter to only run on relevant changes: (`astro.config.ts`, `content.config.ts`, `package.json`, `package-lock.json`, `public/**`, `src/**`, `scripts/**`).
 - **Build**: checkout (`actions/checkout@v4`), Node.js **20.18.x** (`actions/setup-node@v4`), `npm ci`, then `npm run build:clean`.
 - **Release metadata**: write `.release` (SHA) & `.built_at` (UTC); publish `version.json` with `{ sha, built_at }`.
 - **SSH & upload**: start ssh-agent + add key; add `known_hosts`; ensure `$RELEASES_DIR`; `rsync` `dist/` → `releases/<sha>` with `-az --delete-delay --partial --mkpath --info=stats2,progress2` (over SSH with hardened options).
-- **Activate & verify**: `ln -sfn` `releases/<sha>` → `current`; ensure `$CURRENT_LINK/index.html`; reload Nginx only if `vars.RELOAD_NGINX == 'true'` (validate first); health checks: HEAD/GET `/`=200, key assets=200, `version.json` contains `GITHUB_SHA`.
-- **Housekeeping**: keep last **`$KEEP_RELEASES`** (default **5**); upload artifact `dist-<sha>` via `actions/upload-artifact@v4` (retention **7 days**).
+- **Activate & verify**: `ln -sfn` `releases/<sha>` → `current`; ensure `$CURRENT_LINK/index.html`; reload Nginx only if `vars.RELOAD_NGINX == 'true'` (validate first); health checks: HEAD/GET `/`=200, key assets=`200`, `version.json` contains `GITHUB_SHA`.
+- **Housekeeping**: keep last `$KEEP_RELEASES` (default **5**); upload artifact `dist-<sha>` via `actions/upload-artifact@v4` (retention **7 days**).
 
 The production site is available at **[https://erland.me](https://erland.me)**.
 
@@ -82,7 +83,7 @@ Staging builds run on GitHub Actions and publish to Cloudflare Pages via `cloudf
 
 ### Staging Flow
 
-- **Trigger & context**: push to branches `staging` or `testing`, or manual `workflow_dispatch`; Environment: Staging; concurrency group `pages-staging-${{ github.ref }}`; paths filter to only run on relevant changes (`src/**`, `public/**`, `astro.config.ts`, `package.json`, `package-lock.json`, `scripts/**`, `.github/workflows/staging.yml`).
+- **Trigger & context**: push to branches `staging` or `testing`, or manual `workflow_dispatch`; Environment: Staging; concurrency group `pages-staging-${{ github.ref }}`; Paths filter to only run on relevant changes: (`astro.config.ts`, `content.config.ts`, `package.json`, `package-lock.json`, `public/**`, `src/**`, `scripts/**`).
 - **Build**: checkout (`actions/checkout@v4`), set up Node.js `20.18.x` (`actions/setup-node@v4`) with npm cache, install dependencies deterministically (`npm ci`), then build (`npm run build`).
 - **Verify build output**: ensure `dist/` exists and has files before publishing (fails fast if empty).
 - **Publish to Cloudflare Pages**: `cloudflare/pages-action@v1` with `apiToken` = `secrets.CLOUDFLARE_API_TOKEN`, `accountId` = `secrets.CLOUDFLARE_ACCOUNT_ID`, `projectName` = `vars.CLOUDFLARE_PROJECT_NAME`, `directory` = `./dist`, `branch` = `${{ github.ref_name }}` (maps `staging`/`testing` to Cloudflare preview).
