@@ -5,6 +5,23 @@
 
 This repository hosts my personal website with a blog and portfolio built with **Astro**, a cutting-edge static site builder that combines speed, flexibility, and simplicity. This is my small corner on the interweb where I’ll post my notes, achievements, and whatever I want to post.
 
+## Features
+
+There aren't many advanced features available in this project because it was intentionally designed to be minimal. Come on, it's just a personal web, what did you expect?
+
+- **Personal Blog**: Write and publish articles using Markdown with rich content validation, excerpt generation, custom tags, categories, and hero images.
+- **Portfolio Showcase**: Display portfolio items with flexible layouts and content types.
+- **Full-Text Search**: Client-side fuzzy search with auto-generated search index and instant result filtering.
+- **Image Gallery in Markdown**: Supports image galleries and extended Markdown directives via custom remark plugins.
+- **Syntax Highlighting**: Beautiful code blocks with Shiki syntax highlighting.
+- **SEO & Structured Data**: Auto-generated meta tags and JSON-LD for person/organization, sitemap, robots.txt generator, and Open Graph support.
+- **Lightbox & Code Copy**: Built-in lightbox for images and one-click copy buttons for code snippets.
+- **Toast Notifications**: Lightweight, customizable toast messages for user feedback.
+- **Share Buttons**: Easy sharing of blog posts and downloads to social media.
+- **Pagination**: Automatic pagination of blog posts.
+- **Adsense/Placeholder Integration**: Adsense support (for production) and placeholder ads (for dev/testing) on download pages.
+- **Utilities & Scripts**: Includes generator scripts for robots.txt, ads.txt, and search index, all type-safe with TypeScript.
+
 ## Tech Stack
 
 A static-first, type-safe stack with predictable builds, clean content workflows, minimal styling overhead, and straightforward deploys to staging and production.
@@ -36,7 +53,6 @@ A static-first, type-safe stack with predictable builds, clean content workflows
 - **Custom remark-gallery**: Markdown image gallery support.
 - **ts-node**: Run TypeScript-based generators (robots.txt, ads.txt).
 - **npm scripts**: Build, preview, lint, format, and validate workflows.
-- **Client-side utilities**: Lightbox, code copy, share buttons, and more.
 
 ### Deployment
 
