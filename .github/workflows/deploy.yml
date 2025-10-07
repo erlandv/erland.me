@@ -4,6 +4,14 @@ name: Deploy to Production
 on:
   push:
     branches: ['main']
+    paths:
+      - 'astro.config.ts'
+      - 'content.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'public/**'
+      - 'src/**'
+      - 'scripts/**'
   workflow_dispatch:
 
 # --- Minimal permissions required for this workflow ---

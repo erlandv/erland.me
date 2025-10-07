@@ -1,34 +1,39 @@
 name: Deploy to Staging
 
+# --- Triggers: automatic on push to staging/testing; manual via workflow_dispatch ---
 on:
   push:
     branches:
       - staging
       - testing
     paths:
-      - src/**
-      - public/**
-      - astro.config.ts
-      - package.json
-      - package-lock.json
-      - scripts/**
-      - .github/workflows/staging.yml
+      - 'astro.config.ts'
+      - 'content.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'public/**'
+      - 'src/**'
+      - 'scripts/**'
   workflow_dispatch:
 
+# --- Concurrency: ensure only one staging deploy per branch runs at a time ---
 concurrency:
   group: pages-staging-${{ github.ref }}
   cancel-in-progress: true
 
+# --- Jobs: build and publish to Cloudflare Pages ---
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
     environment:
       name: Staging
       url: ${{ env.SITE_URL }}
+    # --- Minimal permissions required for this job ---
     permissions:
       contents: read
       deployments: write
 
+    # --- Environment variables used by build and Cloudflare Pages ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
       SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
@@ -37,9 +42,11 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
     steps:
+      # --- Repository checkout ---
       - name: Checkout
         uses: actions/checkout@v4
 
+      # --- Validate required staging environment secrets/vars are available ---
       - name: Preflight env availability
         run: |
           set -euo pipefail
@@ -53,23 +60,27 @@ jobs:
           done
           echo "✅ Required envs are present for Staging deploy"
 
+      # --- Node.js setup ---
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.18.x'
           cache: 'npm'
 
+      # --- Install and build ---
       - name: Install dependencies
         run: npm ci
 
       - name: Build
         run: npm run build
 
+      # --- Verify build output ---
       - name: Verify build output
         run: |
           set -euo pipefail
           test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
 
+      # --- Publish to Cloudflare Pages ---
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
@@ -79,6 +90,7 @@ jobs:
           directory: ./dist
           branch: ${{ github.ref_name }}
 
+      # --- Summary ---
       - name: Summary
         if: always()
         run: |
