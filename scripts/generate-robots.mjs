@@ -1,7 +1,9 @@
-import { writeFileSync, existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+// ESM script to generate robots.txt without ts-node
 
-function loadEnvFromFile(filePath: string): void {
+import { writeFileSync, existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+function loadEnvFromFile(filePath) {
   try {
     if (!existsSync(filePath)) return;
     const content = readFileSync(filePath, 'utf-8');
@@ -30,13 +32,12 @@ function loadEnvFromFile(filePath: string): void {
 // Attempt to load from .env in project root
 loadEnvFromFile(join(process.cwd(), '.env'));
 
-const siteUrl: string = process.env.SITE_URL || 'https://erland.me';
-const siteDomain: string = process.env.SITE_DOMAIN || 'erland.me';
+const siteUrl = process.env.SITE_URL || 'https://erland.me';
+const siteDomain = process.env.SITE_DOMAIN || 'erland.me';
 
-const isProd: boolean =
-  siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
+const isProd = siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
 
-const robotsContent: string = isProd
+const robotsContent = isProd
   ? `User-agent: *
 Allow: /
 
@@ -58,6 +59,7 @@ Allow: /portfolio/
 Allow: /portfolio/web-development/
 Allow: /portfolio/cloud-infra/
 Allow: /portfolio/personal-projects/
+Allow: /privacy-policy/
 `
   : `User-agent: *
 Disallow: /
@@ -67,5 +69,5 @@ const robotsPath = join(process.cwd(), 'public', 'robots.txt');
 writeFileSync(robotsPath, robotsContent);
 
 console.log(
-  `✅ Generated robots.txt for ${isProd ? 'production' : 'staging/testing'} (site URL: ${siteUrl})`
+  `Generated robots.txt for ${isProd ? 'production' : 'staging/testing'} (site URL: ${siteUrl})`
 );
