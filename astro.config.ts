@@ -4,7 +4,7 @@ import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-
+import { minify } from 'html-minifier-terser';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -94,6 +94,56 @@ export default defineConfig({
       // Target modern browsers
       target: ['es2020', 'chrome80', 'firefox78', 'safari14'],
     },
+    // HTML minify with html-minifier-terser via Rollup generateBundle
+    plugins: [
+      {
+        name: 'html-minifier-terser',
+        apply: 'build',
+        enforce: 'post',
+        async generateBundle(_, bundle) {
+          // Only run in production
+          if (process.env.NODE_ENV !== 'production') return;
+
+          for (const [fileName, chunk] of Object.entries(bundle)) {
+            if (
+              fileName.endsWith('.html') &&
+              chunk &&
+              (chunk as any).type === 'asset'
+            ) {
+              const source =
+                typeof (chunk as any).source === 'string'
+                  ? (chunk as any).source
+                  : ((chunk as any).source?.toString?.() ?? '');
+              const minified = await minify(source, {
+                collapseWhitespace: true,
+                conservativeCollapse: false,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeEmptyAttributes: true,
+                removeOptionalTags: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true,
+                minifyCSS: true,
+                minifyJS: true,
+                sortAttributes: true,
+                sortClassName: true,
+                keepClosingSlash: false,
+                removeAttributeQuotes: false,
+                collapseBooleanAttributes: true,
+                decodeEntities: true,
+                processConditionalComments: true,
+                caseSensitive: true,
+                minifyURLs: true,
+                preventAttributesEscaping: true,
+                quoteCharacter: '"',
+              });
+              (chunk as any).source = minified;
+            }
+          }
+        },
+      },
+    ],
     // Esbuild options (apply drops only in production)
     esbuild:
       process.env.NODE_ENV === 'production'
@@ -170,7 +220,7 @@ export default defineConfig({
   },
 
   // Compress configuration
-  compressHTML: true,
+  compressHTML: false,
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
@@ -183,7 +233,7 @@ export default defineConfig({
   // Integrations for additional features
   integrations: [
     sitemap({
-      filter: page => !page.includes('404'),
+      filter: (page: string) => !page.includes('404'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
