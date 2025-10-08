@@ -39,10 +39,8 @@ const socials: Array<{ name: string; href: string; label: string }> = [
       </div>
     </div>
 
-    <!-- Hidden checkbox to drive CSS-only toggle -->
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
     
-    <!-- Hidden checkbox for sidebar expand/collapse (desktop only) -->
     <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar" />
 
     <nav id="site-nav" role="navigation" class="w-nav-menu">
@@ -92,7 +90,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         <Icon name="blog" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
         <div class="nav-text">Blog Posts</div>
       </a>
-      <!-- Sidebar toggle as a nav item (desktop only). Acts as a label for the hidden checkbox. -->
+
       <label
         for="sidebar-toggle"
         class:list={[navStyles['nav-link-container'], 'nav-link-container', 'sidebar-toggle-button', 'w-inline-block']}
@@ -309,7 +307,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
     }
   </style>
 
-  <!-- Consolidated scripts are loaded once in Header.astro -->
 </aside>
 
 <style is:global>
@@ -341,6 +338,7 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 
   .sidebar .profile-text,
   .sidebar .nav-text {
+    font-family: 'Agave Nerd Font', ui-monospace, monospace;
     opacity: 1;
     max-width: 220px;
     inline-size: auto;
