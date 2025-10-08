@@ -101,6 +101,9 @@ export default defineConfig({
         apply: 'build',
         enforce: 'post',
         async generateBundle(_, bundle) {
+          // Only run in production
+          if (process.env.NODE_ENV !== 'production') return;
+
           const require = createRequire(import.meta.url);
           const { minify } = require('html-minifier-terser');
           for (const [fileName, chunk] of Object.entries(bundle)) {
@@ -115,9 +118,12 @@ export default defineConfig({
                   : ((chunk as any).source?.toString?.() ?? '');
               const minified = await minify(source, {
                 collapseWhitespace: true,
+                conservativeCollapse: false,
                 removeComments: true,
+                removeCommentsFromCDATA: true,
                 removeRedundantAttributes: true,
                 removeEmptyAttributes: true,
+                removeOptionalTags: true,
                 removeScriptTypeAttributes: true,
                 removeStyleLinkTypeAttributes: true,
                 useShortDoctype: true,
@@ -127,6 +133,15 @@ export default defineConfig({
                 sortClassName: true,
                 keepClosingSlash: false,
                 removeAttributeQuotes: false,
+                collapseBooleanAttributes: true,
+                decodeEntities: true,
+                processConditionalComments: true,
+                caseSensitive: true,
+                minifyURLs: true,
+                preventAttributesEscaping: true,
+                quoteCharacter: '"',
+                ignoreCustomComments: [],
+                ignoreCustomFragments: [],
               });
               (chunk as any).source = minified;
             }
@@ -209,7 +224,7 @@ export default defineConfig({
     ],
   },
 
-  // Compress configuration (disabled; handled by html-minifier-terser integration)
+  // Compress configuration
   compressHTML: false,
 
   // Scoped style strategy
