@@ -156,3 +156,9 @@ Look, even a minimal personal web needs to be legal.
 - **Credit**: This isn't entirely my original idea. I just tweaked the heck out of a theme to make it minimal (and totally over-engineered).
   - The OG theme: [Codefolio](https://github.com/danielunited/codefolio) by Daniel Alter. Big thanks!
   - The Tweaker: Modified and simplified (wink) by Erland
+
+---
+
+> _Wait, you actually read this entire personal static site README? It must have felt like reading the Terms of Service. Your free time is truly immense._
+>
+> _My deepest admiration!_

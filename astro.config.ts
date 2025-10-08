@@ -4,7 +4,6 @@ import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import { minify } from 'html-minifier-terser';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -52,8 +51,8 @@ export default defineConfig({
           : undefined,
       // Optimize chunk splitting
       rollupOptions: {
-        output: {
-          manualChunks: id => {
+            output: {
+              manualChunks: id => {
             // Vendor chunks
             if (id.includes('node_modules')) {
               if (id.includes('astro')) {
@@ -65,24 +64,36 @@ export default defineConfig({
               return 'vendor';
             }
           },
-          // Configure asset output locations
+          // Configure asset output locations (dot-separated, cleaned names)
           assetFileNames: assetInfo => {
-            const name = assetInfo.name || '';
-            if (name.endsWith('.css')) {
-              // CSS to assets/css
-              return 'assets/css/[name]-[hash][extname]';
+            const original = (assetInfo.name || '').replace(/\0/g, '');
+            const ext = original.includes('.')
+              ? original.slice(original.lastIndexOf('.'))
+              : '';
+            const base = ext
+              ? original.slice(0, original.length - ext.length)
+              : original;
+            const cleanBase = base.replace(/^_+|_+$/g, '');
+            // CSS: hashed-only (professional, avoids dynamic route placeholders)
+            if (ext === '.css' || original.endsWith('.css')) {
+              return 'assets/css/[hash][extname]';
             }
-            if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico|webp|avif)$/i.test(name)) {
-              return 'assets/images/[name]-[hash][extname]';
+            // Images: keep readable names + hash
+            if (
+              /\.(png|jpe?g|svg|gif|tiff|bmp|ico|webp|avif)$/i.test(original)
+            ) {
+              return `assets/images/${cleanBase}.[hash][extname]`;
             }
-            if (/\.(woff2?|eot|ttf|otf)$/i.test(name)) {
-              return 'assets/fonts/[name]-[hash][extname]';
+            // Fonts: keep readable names + hash
+            if (/\.(woff2?|eot|ttf|otf)$/i.test(original)) {
+              return `assets/fonts/${cleanBase}.[hash][extname]`;
             }
-            return 'assets/[name]-[hash][extname]';
+            // Other assets: readable names + hash
+            return `assets/${cleanBase}.[hash][extname]`;
           },
-          // JS output location
-          chunkFileNames: 'assets/js/[name]-[hash].js',
-          entryFileNames: 'assets/js/[name]-[hash].js',
+          // JS output location: hashed-only to avoid route placeholders
+          chunkFileNames: 'assets/js/[hash].js',
+          entryFileNames: 'assets/js/[hash].js',
         },
       },
       // Enable source maps for production debugging
@@ -94,56 +105,7 @@ export default defineConfig({
       // Target modern browsers
       target: ['es2020', 'chrome80', 'firefox78', 'safari14'],
     },
-    // HTML minify with html-minifier-terser via Rollup generateBundle
-    plugins: [
-      {
-        name: 'html-minifier-terser',
-        apply: 'build',
-        enforce: 'post',
-        async generateBundle(_, bundle) {
-          // Only run in production
-          if (process.env.NODE_ENV !== 'production') return;
-
-          for (const [fileName, chunk] of Object.entries(bundle)) {
-            if (
-              fileName.endsWith('.html') &&
-              chunk &&
-              (chunk as any).type === 'asset'
-            ) {
-              const source =
-                typeof (chunk as any).source === 'string'
-                  ? (chunk as any).source
-                  : ((chunk as any).source?.toString?.() ?? '');
-              const minified = await minify(source, {
-                collapseWhitespace: true,
-                conservativeCollapse: false,
-                removeComments: true,
-                removeRedundantAttributes: true,
-                removeEmptyAttributes: true,
-                removeOptionalTags: true,
-                removeScriptTypeAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                useShortDoctype: true,
-                minifyCSS: true,
-                minifyJS: true,
-                sortAttributes: true,
-                sortClassName: true,
-                keepClosingSlash: false,
-                removeAttributeQuotes: false,
-                collapseBooleanAttributes: true,
-                decodeEntities: true,
-                processConditionalComments: true,
-                caseSensitive: true,
-                minifyURLs: true,
-                preventAttributesEscaping: true,
-                quoteCharacter: '"',
-              });
-              (chunk as any).source = minified;
-            }
-          }
-        },
-      },
-    ],
+    plugins: [],
     // Esbuild options (apply drops only in production)
     esbuild:
       process.env.NODE_ENV === 'production'
@@ -162,8 +124,9 @@ export default defineConfig({
           autoprefixer({
             overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
           }),
-          // Add cssnano for CSS minification in production
-          ...(process.env.NODE_ENV === 'production'
+          // Add cssnano for CSS minification when enabled
+          ...(process.env.ENABLE_MINIFY === 'true' ||
+          process.env.NODE_ENV === 'production'
             ? [
                 cssnano({
                   preset: [
@@ -219,8 +182,10 @@ export default defineConfig({
     ],
   },
 
-  // Compress configuration
-  compressHTML: false,
+  // Compress configuration for Astro components - enabled in production or when ENABLE_MINIFY is true
+  compressHTML:
+    process.env.ENABLE_MINIFY === 'true' ||
+    process.env.NODE_ENV === 'production',
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
