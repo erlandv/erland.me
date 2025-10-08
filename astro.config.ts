@@ -4,7 +4,7 @@ import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import { createRequire } from 'node:module';
+import { minify } from 'html-minifier-terser';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -104,7 +104,6 @@ export default defineConfig({
           // Only run in production
           if (process.env.NODE_ENV !== 'production') return;
 
-          const { minify } = await import('html-minifier-terser');
           for (const [fileName, chunk] of Object.entries(bundle)) {
             if (
               fileName.endsWith('.html') &&
