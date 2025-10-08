@@ -104,8 +104,7 @@ export default defineConfig({
           // Only run in production
           if (process.env.NODE_ENV !== 'production') return;
 
-          const require = createRequire(import.meta.url);
-          const { minify } = require('html-minifier-terser');
+          const { minify } = await import('html-minifier-terser');
           for (const [fileName, chunk] of Object.entries(bundle)) {
             if (
               fileName.endsWith('.html') &&
@@ -120,7 +119,6 @@ export default defineConfig({
                 collapseWhitespace: true,
                 conservativeCollapse: false,
                 removeComments: true,
-                removeCommentsFromCDATA: true,
                 removeRedundantAttributes: true,
                 removeEmptyAttributes: true,
                 removeOptionalTags: true,
@@ -140,8 +138,6 @@ export default defineConfig({
                 minifyURLs: true,
                 preventAttributesEscaping: true,
                 quoteCharacter: '"',
-                ignoreCustomComments: [],
-                ignoreCustomFragments: [],
               });
               (chunk as any).source = minified;
             }
