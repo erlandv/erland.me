@@ -37,6 +37,7 @@ jobs:
     env:
       SITE_URL: ${{ vars.SITE_URL }}
       SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+      ENABLE_MINIFY: ${{ vars.ENABLE_MINIFY }}
       CLOUDFLARE_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -97,50 +97,43 @@ export default defineConfig({
     // HTML minify with html-minifier-terser via Rollup generateBundle
     plugins: [
       {
-        name: 'html-minifier-terser',
+        name: 'vite-plugin-html-minifier-terser',
         apply: 'build',
         enforce: 'post',
-        async generateBundle(_, bundle) {
-          // Only run in production
-          if (process.env.NODE_ENV !== 'production') return;
+        transformIndexHtml: {
+          enforce: 'post',
+          async transform(html) {
+            // Enable minification if ENABLE_MINIFY is true or if we're in production
+            const shouldMinify =
+              process.env.ENABLE_MINIFY === 'true' ||
+              process.env.NODE_ENV === 'production';
+            if (!shouldMinify) return html;
 
-          for (const [fileName, chunk] of Object.entries(bundle)) {
-            if (
-              fileName.endsWith('.html') &&
-              chunk &&
-              (chunk as any).type === 'asset'
-            ) {
-              const source =
-                typeof (chunk as any).source === 'string'
-                  ? (chunk as any).source
-                  : ((chunk as any).source?.toString?.() ?? '');
-              const minified = await minify(source, {
-                collapseWhitespace: true,
-                conservativeCollapse: false,
-                removeComments: true,
-                removeRedundantAttributes: true,
-                removeEmptyAttributes: true,
-                removeOptionalTags: true,
-                removeScriptTypeAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                useShortDoctype: true,
-                minifyCSS: true,
-                minifyJS: true,
-                sortAttributes: true,
-                sortClassName: true,
-                keepClosingSlash: false,
-                removeAttributeQuotes: false,
-                collapseBooleanAttributes: true,
-                decodeEntities: true,
-                processConditionalComments: true,
-                caseSensitive: true,
-                minifyURLs: true,
-                preventAttributesEscaping: true,
-                quoteCharacter: '"',
-              });
-              (chunk as any).source = minified;
-            }
-          }
+            return await minify(html, {
+              collapseWhitespace: true,
+              conservativeCollapse: false,
+              removeComments: true,
+              removeRedundantAttributes: true,
+              removeEmptyAttributes: true,
+              removeOptionalTags: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+              minifyCSS: true,
+              minifyJS: true,
+              sortAttributes: true,
+              sortClassName: true,
+              keepClosingSlash: false,
+              removeAttributeQuotes: false,
+              collapseBooleanAttributes: true,
+              decodeEntities: true,
+              processConditionalComments: true,
+              caseSensitive: true,
+              minifyURLs: true,
+              preventAttributesEscaping: true,
+              quoteCharacter: '"',
+            });
+          },
         },
       },
     ],
@@ -162,8 +155,9 @@ export default defineConfig({
           autoprefixer({
             overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
           }),
-          // Add cssnano for CSS minification in production
-          ...(process.env.NODE_ENV === 'production'
+          // Add cssnano for CSS minification when enabled
+          ...(process.env.ENABLE_MINIFY === 'true' ||
+          process.env.NODE_ENV === 'production'
             ? [
                 cssnano({
                   preset: [
@@ -219,8 +213,10 @@ export default defineConfig({
     ],
   },
 
-  // Compress configuration
-  compressHTML: false,
+  // Compress configuration for Astro components - enabled in production or when ENABLE_MINIFY is true
+  compressHTML:
+    process.env.ENABLE_MINIFY === 'true' ||
+    process.env.NODE_ENV === 'production',
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
