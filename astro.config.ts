@@ -51,12 +51,8 @@ export default defineConfig({
           : undefined,
       // Optimize chunk splitting
       rollupOptions: {
-        output: {
-          // Normalize filenames: remove Rollup virtual module marker (\0)
-          // and trim leading/trailing underscores (e.g., _slug_ -> slug)
-          sanitizeFileName: (fileName: string) =>
-            fileName.replace(/\0/g, '').replace(/^_+|_+$/g, ''),
-          manualChunks: id => {
+            output: {
+              manualChunks: id => {
             // Vendor chunks
             if (id.includes('node_modules')) {
               if (id.includes('astro')) {
