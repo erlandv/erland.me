@@ -17,20 +17,22 @@ interface HeaderProps {
   modifiedTime?: Date | string;
   tags?: string[];
   author?: string;
+  preloadSearch?: boolean;
 }
-const { 
-  title, 
-  canonical, 
-  prevHref, 
-  nextHref, 
-  jsonLd, 
+const {
+  title,
+  canonical,
+  prevHref,
+  nextHref,
+  jsonLd,
   description,
   image,
   type = 'website',
   publishedTime,
   modifiedTime,
   tags,
-  author
+  author,
+  preloadSearch = false,
 } = Astro.props as HeaderProps;
 
 // Generate comprehensive meta tags
@@ -100,6 +102,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  {preloadSearch && (<link rel="preload" as="fetch" href="/search-index.json" type="application/json" crossorigin />)}
   <link rel="canonical" href={metaTags.canonical} />
   {prevHref && <link rel="prev" href={prevHref} />}
   {nextHref && <link rel="next" href={nextHref} />}

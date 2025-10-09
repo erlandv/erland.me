@@ -27,14 +27,15 @@ interface Props {
   tags?: string[];
   author?: string;
   showSidebar?: boolean;
+  preloadSearch?: boolean;
 }
 
-const { 
-  title, 
-  selectedItem, 
-  canonical, 
-  prevHref, 
-  nextHref, 
+const {
+  title,
+  selectedItem,
+  canonical,
+  prevHref,
+  nextHref,
   jsonLd,
   description,
   image,
@@ -43,17 +44,18 @@ const {
   modifiedTime,
   tags,
   author,
-  showSidebar = true
+  showSidebar = true,
+  preloadSearch = false
 } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
 <html lang="id">
-  <Header 
-    title={title} 
-    canonical={canonical} 
-    prevHref={prevHref} 
-    nextHref={nextHref} 
+  <Header
+    title={title}
+    canonical={canonical}
+    prevHref={prevHref}
+    nextHref={nextHref}
     jsonLd={jsonLd}
     description={description}
     image={image}
@@ -62,6 +64,7 @@ const {
     modifiedTime={modifiedTime}
     tags={tags}
     author={author}
+    preloadSearch={preloadSearch}
   />
   <body>
     {import.meta.env.PROD && isProductionSite() && GTM_ID && (

@@ -78,7 +78,7 @@ This is where all the over-engineered minimal code lives. If you get lost, just 
 │   ├── lib/           # Random helper functions that keep things type-safe and clean.
 │   ├── pages/         # This is how Astro figures out the website URLs (the routes).
 │   └── styles/        # Where the fancy (but minimal) CSS lives.
-├── astro.config.mjs   # Tells Astro how to build the site (the master settings file).
+├── astro.config.ts    # Tells Astro how to build the site (the master settings file).
 ├── package.json       # List of all the dependencies (the necessary tools).
 ├── tsconfig.json      # The strict rules for TypeScript.
 ├── README.md          # You are here.
