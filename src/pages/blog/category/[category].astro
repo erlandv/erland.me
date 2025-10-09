@@ -59,13 +59,13 @@ const getCategory = (post: any) => post.data?.category ?? null;
     ]),
   ]}
   selectedItem="blog"
+  preloadSearch
 >
   <BackNav href="/blog/category/" label="Back to Category" />
 
   <div class="content-container">
     <h1 style="text-transform: capitalize;">Category: {categoryParam}</h1>
 
-    <!-- Search Component (scoped to filtered posts) -->
     <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${categoryParam}\"...`} />
 
     <section class={listing['items-container']}>

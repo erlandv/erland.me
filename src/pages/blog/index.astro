@@ -32,13 +32,13 @@ const getCategory = (post: any) => post.data?.category ?? null;
     paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
   )}
   selectedItem="blog"
+  preloadSearch
 >
   <BackNav href="/" label="Back to Home" />
 
   <div class="content-container">
     <h1>Blog Posts</h1>
     
-    <!-- Search Component -->
     <SearchInput placeholder="Cari artikel..." />
     
     <section class={listing['items-container']}>
