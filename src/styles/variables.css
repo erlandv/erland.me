@@ -38,6 +38,20 @@
   --overlay-024: rgba(255, 255, 255, 0.24);
   --overlay-030: rgba(255, 255, 255, 0.3);
   --overlay-035: rgba(255, 255, 255, 0.35);
+  /* Dark (black) overlays and shadows */
+  --shadow-006: rgba(0, 0, 0, 0.06);
+  --shadow-010: rgba(0, 0, 0, 0.10);
+  --shadow-015: rgba(0, 0, 0, 0.15);
+  --shadow-020: rgba(0, 0, 0, 0.20);
+  --shadow-022: rgba(0, 0, 0, 0.22);
+  --shadow-024: rgba(0, 0, 0, 0.24);
+  --shadow-025: rgba(0, 0, 0, 0.25);
+  --shadow-030: rgba(0, 0, 0, 0.30);
+  --shadow-040: rgba(0, 0, 0, 0.40);
+  --overlay-black-000: rgba(0, 0, 0, 0);
+  --overlay-black-004: rgba(0, 0, 0, 0.04);
+  --overlay-black-055: rgba(0, 0, 0, 0.55);
+  --overlay-black-075: rgba(0, 0, 0, 0.75);
   /* Accent success */
   --success-green: #238636;
 }

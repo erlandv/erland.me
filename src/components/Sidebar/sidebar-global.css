@@ -228,5 +228,5 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
 .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active:hover {
   background-color: var(--surface-hover);
   border-color: var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px var(--shadow-030);
 }

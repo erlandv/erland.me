@@ -14,7 +14,7 @@
   grid-row-gap: 12px;
   color: var(--text-gray);
   text-transform: capitalize;
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid var(--overlay-black-000);
   border-radius: 8px;
   justify-content: flex-start;
   align-items: center;
@@ -34,7 +34,7 @@
   background-color: var(--sidebar-nav-hover-bg, var(--bg-tertiary));
   border-color: var(--sidebar-nav-hover-border, var(--border-color));
   transform: translateX(0) scale(1.02);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px var(--shadow-030);
 }
 
 .nav-link-container a {

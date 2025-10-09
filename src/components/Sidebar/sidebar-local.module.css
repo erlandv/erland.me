@@ -88,7 +88,7 @@
     max-width: 100%;
     padding: 24px !important;
     border-right: none;
-    border-bottom: 1px solid #353535;
+    border-bottom: 1px solid var(--border-color);
   }
 
   :global(.nav-content) {
@@ -216,9 +216,9 @@
     justify-content: flex-start;
     gap: 18px;
     padding: 12px 28px 12px 32px;
-    border-top: 1px solid #353535;
+    border-top: 1px solid var(--border-color);
     margin-top: auto;
-    background-color: #1c1c1c;
+    background-color: var(--bg-overlay);
   }
 
   :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--menu) {

@@ -60,7 +60,7 @@
     justify-content: flex-start;
     gap: 18px;
     padding: 4%;
-    border-top: 1px solid #353535;
+    border-top: 1px solid var(--border-color);
     margin-top: auto;
     background-color: var(--bg-overlay);
   }
