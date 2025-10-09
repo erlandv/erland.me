@@ -24,7 +24,7 @@
   width: 46px;
   height: 46px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--overlay-015);
   border-radius: 12px;
   background: transparent;
   color: inherit;
@@ -83,7 +83,7 @@
 }
 @media (hover: none) {
   .share__btn:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.24);
+    background: var(--overlay-008);
+    border-color: var(--overlay-024);
   }
 }

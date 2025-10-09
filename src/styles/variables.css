@@ -27,6 +27,17 @@
   --surface-hover: #252525;
   --surface-active: #2b2b2b;
   --divider-weak: #2f2f2f;
+  /* Translucent overlays (white-on-dark) */
+  --overlay-005: rgba(255, 255, 255, 0.05);
+  --overlay-008: rgba(255, 255, 255, 0.08);
+  --overlay-010: rgba(255, 255, 255, 0.1);
+  --overlay-012: rgba(255, 255, 255, 0.12);
+  --overlay-015: rgba(255, 255, 255, 0.15);
+  --overlay-018: rgba(255, 255, 255, 0.18);
+  --overlay-020: rgba(255, 255, 255, 0.2);
+  --overlay-024: rgba(255, 255, 255, 0.24);
+  --overlay-030: rgba(255, 255, 255, 0.3);
+  --overlay-035: rgba(255, 255, 255, 0.35);
   /* Accent success */
   --success-green: #238636;
 }

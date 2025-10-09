@@ -36,18 +36,18 @@
   line-height: 1.5;
   font-style: italic;
   margin-top: 0.5rem;
-  padding: 0.5rem 1rem; /* match desktop-like paddings */
+  padding: 0.5rem 1rem;
   opacity: 0.9;
   transition: all 0.2s ease;
   word-wrap: break-word;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--overlay-005);
+  border: 1px solid var(--overlay-010);
 }
 
 .content-image-grid figure:hover figcaption,
 .download-image-grid figure:hover figcaption {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--overlay-008);
+  border-color: var(--overlay-010);
 }

@@ -41,7 +41,7 @@
   width: 100%;
   padding-top: 100%;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay-005);
   position: relative;
 }
 
@@ -54,7 +54,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border: 2px dashed var(--overlay-035);
 }
 
 .post-card__body {
