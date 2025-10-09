@@ -86,9 +86,13 @@ const {
       </nav>
     </div>
     <script>
+      // @ts-nocheck
       // Global UI gate: import '../lib/ui-init' only when needed
       (() => {
-        const has = (sel: string): boolean => !!document.querySelector(sel);
+        // Checks if a CSS selector matches any element in the document.
+        function has(sel) {
+          return !!document.querySelector(sel);
+        }
         const check = () => ({
           share: has('section.share') || has('.share__btn--copy') || has('.share__btn--native'),
           copy: has('pre code') || has('pre[class*="language-"]'),
