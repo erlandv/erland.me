@@ -1,45 +1,63 @@
 ---
-import Icon from "./Icon.astro";
-import styles from "./SearchInput/search-input.module.css";
+import Icon from './Icon.astro';
+import styles from './SearchInput/search-input.module.css';
 
 interface Props {
   posts?: any[];
   placeholder?: string;
 }
 
-const { placeholder = "Search articles..." } = Astro.props as Props;
+const { placeholder = 'Search articles...' } = Astro.props as Props;
 ---
 
-<div id="search-container" class={styles['search-container']} role="search" aria-label="Cari artikel">
+<div
+  id='search-container'
+  class={styles['search-container']}
+  role='search'
+  aria-label='Cari artikel'
+>
   <div class={styles['search-input-wrapper']}>
-    <Icon name="search" class={styles['search-icon']} />
+    <Icon name='search' class={styles['search-icon']} />
     <input
-      type="text"
+      type='text'
       placeholder={placeholder}
       class={styles['search-input']}
-      id="search-input"
-      autocomplete="off"
-      aria-autocomplete="list"
-      aria-controls="search-results"
-      aria-expanded="false"
-      aria-label="Cari di blog"
+      id='search-input'
+      autocomplete='off'
+      aria-autocomplete='list'
+      aria-controls='search-results'
+      aria-expanded='false'
+      aria-label='Cari di blog'
     />
     <button
-      type="button"
+      type='button'
       class={styles['search-clear']}
-      id="search-clear"
-      aria-label="Clear search"
-      style="display: none;"
+      id='search-clear'
+      aria-label='Clear search'
+      style='display: none;'
     >
-      <Icon name="close" class={styles['clear-icon']} />
+      <Icon name='close' class={styles['clear-icon']} />
     </button>
   </div>
-  <div class={styles['search-results']} id="search-results" style="display: none;" role="listbox" aria-label="Hasil pencarian">
-    <div class={styles['search-results-content']} id="search-results-content" aria-live="polite">
-      <!-- Results will be populated by JavaScript -->
+  <div
+    class={styles['search-results']}
+    id='search-results'
+    style='display: none;'
+    role='listbox'
+    aria-label='Hasil pencarian'
+  >
+    <div
+      class={styles['search-results-content']}
+      id='search-results-content'
+      aria-live='polite'
+    >
     </div>
   </div>
-  <div class={styles['search-loading']} id="search-loading" style="display: none;">
+  <div
+    class={styles['search-loading']}
+    id='search-loading'
+    style='display: none;'
+  >
     <div class={styles['search-loading-spinner']}></div>
     <span>Mencari...</span>
   </div>
@@ -87,7 +105,6 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
   let fuse: any = null;
   let fuseReady = false;
 
-
   async function loadSearchIndex(): Promise<any[]> {
     try {
       const res = await fetch('/search-index.json', {
@@ -108,7 +125,11 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     const arr = Array.isArray(postsData) ? postsData : [];
     const signatureOf = (list: any[]): string => {
       try {
-        return list.length + ':' + list.map((it: any) => it.slug || it.id || '').join('|');
+        return (
+          list.length +
+          ':' +
+          list.map((it: any) => it.slug || it.id || '').join('|')
+        );
       } catch {
         return `${Date.now()}:${list.length}`;
       }
@@ -146,9 +167,9 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       '"': '&quot;',
       "'": '&#39;',
     };
-    return String(s).replace(/[&<>"']/g, (c) => map[c] || c);
+    return String(s).replace(/[&<>"']/g, c => map[c] || c);
   }
- 
+
   // Initialize search functionality
   function initSearch() {
     // Only initialize if the SearchInput component exists on the page
@@ -157,13 +178,29 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       return;
     }
 
-    const searchInput = document.getElementById('search-input') as HTMLInputElement;
-    const searchClear = document.getElementById('search-clear') as HTMLButtonElement;
-    const searchResults = document.getElementById('search-results') as HTMLDivElement;
-    const searchResultsContent = document.getElementById('search-results-content') as HTMLDivElement;
-    const searchLoading = document.getElementById('search-loading') as HTMLDivElement;
+    const searchInput = document.getElementById(
+      'search-input'
+    ) as HTMLInputElement;
+    const searchClear = document.getElementById(
+      'search-clear'
+    ) as HTMLButtonElement;
+    const searchResults = document.getElementById(
+      'search-results'
+    ) as HTMLDivElement;
+    const searchResultsContent = document.getElementById(
+      'search-results-content'
+    ) as HTMLDivElement;
+    const searchLoading = document.getElementById(
+      'search-loading'
+    ) as HTMLDivElement;
 
-    if (!searchInput || !searchClear || !searchResults || !searchResultsContent || !searchLoading) {
+    if (
+      !searchInput ||
+      !searchClear ||
+      !searchResults ||
+      !searchResultsContent ||
+      !searchLoading
+    ) {
       return;
     }
 
@@ -171,7 +208,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     // Wait for data to be available
     const initOnce = async () => {
       const postsData = (window as any).__SEARCH_POSTS__ || [];
-      
+
       if (!postsData || postsData.length === 0) {
         // Fire-and-forget fetch to prime the cache; performSearch will also fetch on demand
         loadSearchIndex().catch(() => {});
@@ -180,19 +217,19 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       // Always enable search immediately to avoid dev polling loop
       searchState.isInitialized = true;
     };
-    
+
     // Start initialization
     initOnce();
 
     // Search input event handlers
     let searchTimeout: number;
-    searchInput.addEventListener('input', (e) => {
+    searchInput.addEventListener('input', e => {
       const query = (e.target as HTMLInputElement).value.trim();
       searchState.currentQuery = query;
-      
+
       // Clear previous timeout
       clearTimeout(searchTimeout);
-      
+
       // Show/hide clear button
       if (query.length > 0) {
         searchClear.style.display = 'flex';
@@ -201,7 +238,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
         hideResults();
         return;
       }
-      
+
       // Debounce search
       searchTimeout = window.setTimeout(() => {
         performSearch(query);
@@ -217,7 +254,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     });
 
     // Hide results when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       const target = e.target as Element;
       // Use stable container id for click-outside detection
       const container = document.getElementById('search-container');
@@ -227,7 +264,7 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     });
 
     // Handle escape key
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         hideResults();
         searchInput.blur();
@@ -235,11 +272,16 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
 
       // Keyboard navigation
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        const items = Array.from(document.querySelectorAll('.search-result-item')) as HTMLElement[];
+        const items = Array.from(
+          document.querySelectorAll('.search-result-item')
+        ) as HTMLElement[];
         if (items.length === 0) return;
-        const active = items.findIndex(el => el.classList.contains('is-active'));
+        const active = items.findIndex(el =>
+          el.classList.contains('is-active')
+        );
         let nextIndex = e.key === 'ArrowDown' ? active + 1 : active - 1;
-        if (active === -1) nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;
+        if (active === -1)
+          nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;
         if (nextIndex < 0) nextIndex = items.length - 1;
         if (nextIndex >= items.length) nextIndex = 0;
         items.forEach(el => el.classList.remove('is-active'));
@@ -250,7 +292,9 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
       }
 
       if (e.key === 'Enter') {
-        const active = document.querySelector('.search-result-item.is-active') as HTMLElement | null;
+        const active = document.querySelector(
+          '.search-result-item.is-active'
+        ) as HTMLElement | null;
         if (active) {
           const slug = active.getAttribute('data-slug');
           if (slug) window.location.href = `/blog/${slug}/`;
@@ -296,12 +340,16 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
   function handleSearchResults(results: SearchResult[]) {
     searchState.isSearching = false;
     hideLoading();
-    
-    const searchResults = document.getElementById('search-results') as HTMLDivElement;
-    const searchResultsContent = document.getElementById('search-results-content') as HTMLDivElement;
-    
+
+    const searchResults = document.getElementById(
+      'search-results'
+    ) as HTMLDivElement;
+    const searchResultsContent = document.getElementById(
+      'search-results-content'
+    ) as HTMLDivElement;
+
     if (!searchResults || !searchResultsContent) return;
-    
+
     if (results.length === 0) {
       searchResultsContent.innerHTML = `
         <div class="search-no-results">
@@ -309,8 +357,9 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
         </div>
       `;
     } else {
-      searchResultsContent.innerHTML = results.map(result => {
-        return `
+      searchResultsContent.innerHTML = results
+        .map(result => {
+          return `
         <div class="search-result-item" role="option" tabindex="0" data-slug="${result.item.slug}">
           <div class="search-result-body">
             <h3 class="search-result-title">${highlightMatches(result.item.title, result.matches, 'title')}</h3>
@@ -321,37 +370,53 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
             </div>
           </div>
         </div>`;
-      }).join('');
-      
+        })
+        .join('');
+
       // Add click handlers to result items
-      searchResultsContent.querySelectorAll('.search-result-item').forEach(item => {
-        item.addEventListener('click', () => {
-          const slug = item.getAttribute('data-slug');
-          if (slug) {
-            window.location.href = `/blog/${slug}/`;
-          }
+      searchResultsContent
+        .querySelectorAll('.search-result-item')
+        .forEach(item => {
+          item.addEventListener('click', () => {
+            const slug = item.getAttribute('data-slug');
+            if (slug) {
+              window.location.href = `/blog/${slug}/`;
+            }
+          });
+          item.addEventListener('mouseover', () => {
+            document
+              .querySelectorAll('.search-result-item')
+              .forEach(el => el.classList.remove('is-active'));
+            item.classList.add('is-active');
+          });
         });
-        item.addEventListener('mouseover', () => {
-          document.querySelectorAll('.search-result-item').forEach(el => el.classList.remove('is-active'));
-          item.classList.add('is-active');
-        });
-      });
     }
-    
+
     showResults();
     // Update ARIA expanded
-    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const searchInput = document.getElementById(
+      'search-input'
+    ) as HTMLInputElement | null;
     if (searchInput) searchInput.setAttribute('aria-expanded', 'true');
   }
 
-  function highlightMatches(text: string, matches: any[] | undefined, key: string): string {
+  function highlightMatches(
+    text: string,
+    matches: any[] | undefined,
+    key: string
+  ): string {
     if (!matches) return escapeHtml(text);
 
-    const match = matches.find((m) => m.key === key);
-    if (!match || !match.indices || match.indices.length === 0) return escapeHtml(text);
+    const match = matches.find(m => m.key === key);
+    if (!match || !match.indices || match.indices.length === 0)
+      return escapeHtml(text);
 
     const isWordChar = (ch: string) => /\p{L}|\p{N}|_/u.test(ch);
-    const expandToWordBoundaries = (t: string, s: number, e: number): [number, number] => {
+    const expandToWordBoundaries = (
+      t: string,
+      s: number,
+      e: number
+    ): [number, number] => {
       let start = s;
       let end = e;
       while (start > 0 && isWordChar(t[start - 1])) start--;
@@ -390,32 +455,42 @@ const { placeholder = "Search articles..." } = Astro.props as Props;
     highlighted += escapeHtml(text.slice(lastIndex));
     return highlighted;
   }
- 
+
   function showResults() {
-    const searchResults = document.getElementById('search-results') as HTMLDivElement;
+    const searchResults = document.getElementById(
+      'search-results'
+    ) as HTMLDivElement;
     if (searchResults) {
       searchResults.style.display = 'block';
     }
   }
 
   function hideResults() {
-    const searchResults = document.getElementById('search-results') as HTMLDivElement;
+    const searchResults = document.getElementById(
+      'search-results'
+    ) as HTMLDivElement;
     if (searchResults) {
       searchResults.style.display = 'none';
     }
-    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const searchInput = document.getElementById(
+      'search-input'
+    ) as HTMLInputElement | null;
     if (searchInput) searchInput.setAttribute('aria-expanded', 'false');
   }
 
   function showLoading() {
-    const searchLoading = document.getElementById('search-loading') as HTMLDivElement;
+    const searchLoading = document.getElementById(
+      'search-loading'
+    ) as HTMLDivElement;
     if (searchLoading) {
       searchLoading.style.display = 'flex';
     }
   }
 
   function hideLoading() {
-    const searchLoading = document.getElementById('search-loading') as HTMLDivElement;
+    const searchLoading = document.getElementById(
+      'search-loading'
+    ) as HTMLDivElement;
     if (searchLoading) {
       searchLoading.style.display = 'none';
     }

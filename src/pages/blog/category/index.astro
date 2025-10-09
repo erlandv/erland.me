@@ -1,11 +1,11 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
-import BackNav from "../../../components/BackNav.astro";
-import PostCard from "../../../components/PostCard.astro";
-import Pagination from "../../../components/Pagination.astro";
+import BackNav from '../../../components/BackNav.astro';
+import PostCard from '../../../components/PostCard.astro';
+import Pagination from '../../../components/Pagination.astro';
 //
-import listing from "../../../styles/pages/listing.module.css";
-import catStyles from "../../../styles/pages/category.module.css";
+import listing from '../../../styles/pages/listing.module.css';
+import catStyles from '../../../styles/pages/category.module.css';
 import { loadAllPosts, slugifyCategory, slicePage } from '../../../lib/blog';
 import { categoriesIndexJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
 import type { ImageMetadata } from 'astro';
@@ -25,7 +25,8 @@ type CatInfo = {
   hero: ImageMetadata | null;
 };
 
-const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+const getExcerpt = (post: any) =>
+  post.data?.excerpt ?? post.data?.description ?? '';
 
 /* normalizeHero removed: frontmatter already provides ImageMetadata via schema(image()) */
 
@@ -49,7 +50,7 @@ for (const p of posts) {
             date: p.date ?? null,
           }
         : null,
-      hero: (p.data?.hero ?? null),
+      hero: p.data?.hero ?? null,
     });
   } else {
     existing.count += 1;
@@ -63,7 +64,7 @@ for (const p of posts) {
         excerpt: getExcerpt(p),
         date: p.date ?? null,
       };
-      existing.hero = (p.data?.hero ?? null);
+      existing.hero = p.data?.hero ?? null;
     }
   }
 }
@@ -74,19 +75,23 @@ const categories = Array.from(categoriesMap.values()).sort((a, b) =>
 
 // Build paginated posts for each category to mirror /blog/
 const pageSize = 10;
-const byCategory = categories.map((cat) => {
-  const catPosts = posts.filter((p) => slugifyCategory(String(p.data?.category || '')) === cat.slug);
+const byCategory = categories.map(cat => {
+  const catPosts = posts.filter(
+    p => slugifyCategory(String(p.data?.category || '')) === cat.slug
+  );
   const totalPages = Math.max(1, Math.ceil(catPosts.length / pageSize));
-  const pages = Array.from({ length: totalPages }, (_, i) => slicePage(catPosts, i + 1, pageSize));
+  const pages = Array.from({ length: totalPages }, (_, i) =>
+    slicePage(catPosts, i + 1, pageSize)
+  );
   return { cat, pages, totalPages };
 });
 ---
 
 <SiteLayout
-  title="Blog Categories"
-  canonical="/blog/category/"
-  description="Daftar kategori blog dan jumlah artikelnya, lengkap dengan artikel terbaru per kategori."
-  selectedItem="blog"
+  title='Blog Categories'
+  canonical='/blog/category/'
+  description='Daftar kategori blog dan jumlah artikelnya, lengkap dengan artikel terbaru per kategori.'
+  selectedItem='blog'
   jsonLd={[
     categoriesIndexJsonLd(
       'Blog Categories',
@@ -103,58 +108,79 @@ const byCategory = categories.map((cat) => {
     ]),
   ]}
 >
-  <BackNav href="/blog/" label="Back to Blog" />
+  <BackNav href='/blog/' label='Back to Blog' />
 
-  <div class="content-container">
+  <div class='content-container'>
     <h1>Blog Categories</h1>
 
-    <!-- Category filter buttons -->
-    <div id="category-filter" class={catStyles.filterContainer}>
-      {categories.map((c) => (
-        <a href={`#cat-${c.slug}-page-1`} class="cat-filter-btn" data-cat={c.slug}>
-          {c.name}
-        </a>
-      ))}
+    <div id='category-filter' class={catStyles.filterContainer}>
+      {
+        categories.map(c => (
+          <a
+            href={`#cat-${c.slug}-page-1`}
+            class='cat-filter-btn'
+            data-cat={c.slug}
+          >
+            {c.name}
+          </a>
+        ))
+      }
     </div>
 
     <section class={listing['items-container']}>
-      {byCategory.map(({ cat, pages, totalPages }) => (
-        pages.map((pagePosts, idx) => {
-          const page = idx + 1;
-          const pageHref = (n: number) => `#cat-${cat.slug}-page-${n}`;
-          return (
-            <div class={listing['resouce-items']} data-cat-page data-cat={cat.slug} data-page={String(page)} style="display:none;">
-              {pagePosts.map((post) => {
-                const hero = post.data?.hero ?? null;
-                const excerpt = getExcerpt(post);
-                const dateLabel = post.date
-                  ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
-                  : null;
-                return (
-                  <PostCard
-                    href={`/blog/${post.slug}/`}
-                    title={post.data.title}
-                    hero={hero}
-                    alt={post.data.heroAlt ?? post.data.title}
-                    category={post.data?.category ?? null}
-                    dateLabel={dateLabel}
-                    excerpt={excerpt}
+      {
+        byCategory.map(({ cat, pages, totalPages }) =>
+          pages.map((pagePosts, idx) => {
+            const page = idx + 1;
+            const pageHref = (n: number) => `#cat-${cat.slug}-page-${n}`;
+            return (
+              <div
+                class={listing['resouce-items']}
+                data-cat-page
+                data-cat={cat.slug}
+                data-page={String(page)}
+                style='display:none;'
+              >
+                {pagePosts.map(post => {
+                  const hero = post.data?.hero ?? null;
+                  const excerpt = getExcerpt(post);
+                  const dateLabel = post.date
+                    ? post.date.toLocaleDateString('id-ID', {
+                        dateStyle: 'medium',
+                      })
+                    : null;
+                  return (
+                    <PostCard
+                      href={`/blog/${post.slug}/`}
+                      title={post.data.title}
+                      hero={hero}
+                      alt={post.data.heroAlt ?? post.data.title}
+                      category={post.data?.category ?? null}
+                      dateLabel={dateLabel}
+                      excerpt={excerpt}
+                    />
+                  );
+                })}
+                {pagePosts.length === 0 && (
+                  <p style='opacity:.8;'>Tidak ada artikel.</p>
+                )}
+                {totalPages > 1 && (
+                  <Pagination
+                    page={page}
+                    totalPages={totalPages}
+                    pageHref={pageHref}
                   />
-                );
-              })}
-              {pagePosts.length === 0 && (
-                <p style="opacity:.8;">Tidak ada artikel.</p>
-              )}
-              {totalPages > 1 && (
-                <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
-              )}
-            </div>
-          );
-        })
-      ))}
-      {categories.length === 0 && (
-        <p style="opacity:.8;">Tidak ada kategori yang tersedia.</p>
-      )}
+                )}
+              </div>
+            );
+          })
+        )
+      }
+      {
+        categories.length === 0 && (
+          <p style='opacity:.8;'>Tidak ada kategori yang tersedia.</p>
+        )
+      }
     </section>
   </div>
 </SiteLayout>
@@ -168,20 +194,26 @@ const byCategory = categories.map((cat) => {
 
   function showCatPage(cat, page) {
     const all = document.querySelectorAll('[data-cat-page]');
-    all.forEach((el) => (el instanceof HTMLElement ? (el.style.display = 'none') : null));
-    const active = document.querySelector(`[data-cat-page][data-cat="${cat}"][data-page="${page}"]`);
+    all.forEach(el =>
+      el instanceof HTMLElement ? (el.style.display = 'none') : null
+    );
+    const active = document.querySelector(
+      `[data-cat-page][data-cat="${cat}"][data-page="${page}"]`
+    );
     if (active instanceof HTMLElement) active.style.display = '';
 
     // toggle active state on filter buttons
-    document.querySelectorAll('#category-filter .cat-filter-btn').forEach((btn) => {
-      if (!(btn instanceof HTMLElement)) return;
-      const slug = btn.getAttribute('data-cat');
-      if (slug === cat) {
-        btn.classList.add('is-active');
-      } else {
-        btn.classList.remove('is-active');
-      }
-    });
+    document
+      .querySelectorAll('#category-filter .cat-filter-btn')
+      .forEach(btn => {
+        if (!(btn instanceof HTMLElement)) return;
+        const slug = btn.getAttribute('data-cat');
+        if (slug === cat) {
+          btn.classList.add('is-active');
+        } else {
+          btn.classList.remove('is-active');
+        }
+      });
   }
 
   function init() {
@@ -189,7 +221,7 @@ const byCategory = categories.map((cat) => {
     if (!hp) {
       // pick random category
       const cats = Array.from(document.querySelectorAll('[data-cat-page]'))
-        .map((el) => el.getAttribute('data-cat'))
+        .map(el => el.getAttribute('data-cat'))
         .filter(Boolean);
       const unique = Array.from(new Set(cats));
       if (unique.length > 0) {
@@ -201,18 +233,20 @@ const byCategory = categories.map((cat) => {
     if (hp) showCatPage(hp.cat, hp.page);
 
     // Bind filter buttons clicks
-    document.querySelectorAll('#category-filter .cat-filter-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const cat = btn.getAttribute('data-cat');
-        if (!cat) return;
-        const target = `#cat-${cat}-page-1`;
-        if (location.hash !== target) {
-          location.hash = target;
-        }
-        showCatPage(cat, 1);
+    document
+      .querySelectorAll('#category-filter .cat-filter-btn')
+      .forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const cat = btn.getAttribute('data-cat');
+          if (!cat) return;
+          const target = `#cat-${cat}-page-1`;
+          if (location.hash !== target) {
+            location.hash = target;
+          }
+          showCatPage(cat, 1);
+        });
       });
-    });
   }
 
   window.addEventListener('hashchange', () => {
@@ -221,7 +255,7 @@ const byCategory = categories.map((cat) => {
   });
 
   // Delegate clicks for pagination links with hash targets
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     const t = e.target;
     if (!t) return;
     var a = null;

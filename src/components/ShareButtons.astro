@@ -9,7 +9,12 @@ interface Props {
   heading?: string;
 }
 
-const { title, url, description, heading = 'Share this article:' }: Props = Astro.props as Props;
+const {
+  title,
+  url,
+  description,
+  heading = 'Share this article:',
+}: Props = Astro.props as Props;
 
 function withUtm(baseUrl: string, source: string) {
   const u = new URL(baseUrl);
@@ -72,7 +77,11 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         rel='noopener noreferrer'
         aria-label='Share on WhatsApp'
       >
-        <Icon name='whatsapp' class={styles['share__icon']} ariaLabel='WhatsApp' />
+        <Icon
+          name='whatsapp'
+          class={styles['share__icon']}
+          ariaLabel='WhatsApp'
+        />
       </a>
       <a
         class={styles['share__btn']}
@@ -81,7 +90,11 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         rel='noopener noreferrer'
         aria-label='Share on Telegram'
       >
-        <Icon name='telegram' class={styles['share__icon']} ariaLabel='Telegram' />
+        <Icon
+          name='telegram'
+          class={styles['share__icon']}
+          ariaLabel='Telegram'
+        />
       </a>
       <a
         class={styles['share__btn']}
@@ -99,7 +112,11 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         rel='noopener noreferrer'
         aria-label='Share on Facebook'
       >
-        <Icon name='facebook' class={styles['share__icon']} ariaLabel='Facebook' />
+        <Icon
+          name='facebook'
+          class={styles['share__icon']}
+          ariaLabel='Facebook'
+        />
       </a>
       <a
         class={styles['share__btn']}
@@ -108,12 +125,12 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         rel='noopener noreferrer'
         aria-label='Share on LinkedIn'
       >
-        <Icon name='linkedin' class={styles['share__icon']} ariaLabel='LinkedIn' />
+        <Icon
+          name='linkedin'
+          class={styles['share__icon']}
+          ariaLabel='LinkedIn'
+        />
       </a>
     </div>
   </div>
-
-  <!-- Events bound globally via src/lib/share-buttons.ts -->
-
-  
 </section>
