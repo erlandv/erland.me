@@ -81,46 +81,45 @@ const {
       </nav>
     </div>
     <script>
-      // Initialize router-safe share buttons globally
-      (async () => {
-        try {
-          const mod = await import('../lib/share-buttons');
-          mod.autoInit();
-        } catch (e) {
-          console.error('ShareButtons init error:', e);
-        }
-      })();
-    </script>
-    <script>
-      // Initialize toast container early
-      (async () => {
-        try {
-          const mod = await import('../lib/toast');
-          mod.initToasts();
-        } catch (e) {
-          console.error('Toast init error:', e);
-        }
-      })();
-    </script>
-    <script>
-      // Initialize router-safe code copy buttons globally
-      (async () => {
-        try {
-          const mod = await import('../lib/code-copy');
-          mod.autoInit();
-        } catch (e) {
-          console.error('CodeCopy init error:', e);
-        }
-      })();
-    </script>
-    <script>
-      // Initialize router-safe image lightbox globally
-      (async () => {
-        try {
-          const mod = await import('../lib/lightbox');
-          mod.autoInit();
-        } catch (e) {
-          console.error('Lightbox init error:', e);
+      // Global UI gate: import '../lib/ui-init' only when needed
+      (() => {
+        const has = (sel: string) => !!document.querySelector(sel);
+        const check = () => ({
+          share: has('section.share') || has('.share__btn--copy') || has('.share__btn--native'),
+          copy: has('pre code') || has('pre[class*="language-"]'),
+          lightbox:
+            has('.prose img:not(.hero-image)') ||
+            has('[class*="download-richtext"] img:not(.hero-image)') ||
+            has('.content-image-grid img:not(.hero-image)'),
+        });
+
+        const runImport = () => {
+          import('../lib/ui-init')
+            .then(m => m.initUi && m.initUi())
+            .catch(e => console.error('ui-init import error:', e));
+        };
+
+        const s = check();
+        if (s.share || s.copy || s.lightbox) {
+          runImport();
+        } else {
+          const reGate = () => {
+            const q = check();
+            if (q.share || q.copy || q.lightbox) {
+              document.removeEventListener('astro:page-load', reGate);
+              document.removeEventListener('astro:after-swap', reGate);
+              import('../lib/ui-init')
+                .then(m => m.initUi && m.initUi())
+                .catch(e => console.error('ui-init import error:', e));
+            }
+          };
+          document.addEventListener('astro:page-load', reGate);
+          document.addEventListener('astro:after-swap', reGate);
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', reGate, { once: true });
+          } else {
+            setTimeout(reGate, 50);
+          }
         }
       })();
     </script>
