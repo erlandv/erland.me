@@ -81,9 +81,12 @@ const {
       </nav>
     </div>
     <script>
+      // @ts-nocheck
       // Global UI gate: import '../lib/ui-init' only when needed
       (() => {
-        const has = (sel: string) => !!document.querySelector(sel);
+        /** @param {string} sel */
+        /** @type {(sel: string) => boolean} */
+        const has = (sel) => !!document.querySelector(sel);
         const check = () => ({
           share: has('section.share') || has('.share__btn--copy') || has('.share__btn--native'),
           copy: has('pre code') || has('pre[class*="language-"]'),
