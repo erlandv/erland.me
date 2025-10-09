@@ -110,8 +110,6 @@ export default defineConfig({
       assetsInlineLimit: 4096,
       // Split CSS into separate files
       cssCodeSplit: true,
-      // Target modern browsers
-      target: ['es2020', 'chrome80', 'firefox78', 'safari14'],
     },
     plugins: [],
     // Esbuild options (apply drops only in production)
