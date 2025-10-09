@@ -1,9 +1,9 @@
 .pagination {
   display: flex;
-  gap: 8px;
+  gap: var(--space-2);
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: var(--space-4);
 }
 
 .page-link {
@@ -17,7 +17,7 @@
   font-weight: 600;
   color: var(--color-secondary);
   border: 1px solid rgba(var(--color-primary-rgb), 0.35);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: transparent;
   transition:
     background-color 0.15s ease,
@@ -54,7 +54,7 @@
   width: 45px;
   height: 45px;
   border: 1px solid rgba(var(--color-primary-rgb), 0.35);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: #cccccc;
 }
 
@@ -66,7 +66,7 @@
 /* Responsive behavior: keep layout fluid */
 @media (max-width: 640px) {
   .pagination {
-    gap: 6px;
+    gap: var(--space-2);
   }
   .page-link {
     width: 36px;

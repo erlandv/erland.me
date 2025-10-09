@@ -17,14 +17,14 @@
 .download-image-grid figure {
   margin: 0;
   display: grid;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .content-image-grid img,
 .download-image-grid img {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   display: block;
 }
 
@@ -36,11 +36,11 @@
   line-height: 1.5;
   font-style: italic;
   margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: var(--space-2) var(--space-4);
   opacity: 0.9;
   transition: all 0.2s ease;
   word-wrap: break-word;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: var(--overlay-005);
   border: 1px solid var(--overlay-010);
 }
