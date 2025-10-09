@@ -871,8 +871,8 @@ p {
 .single-chip {
   color: #ffffff;
   background-color: var(--border-color);
-  border-radius: 8px;
-  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2vw, 14px);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
   font-family:
     'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
     'Liberation Mono', monospace;
@@ -882,7 +882,7 @@ p {
 }
 
 .single-chip.small-chip {
-  padding: clamp(4px, 1vw, 8px) clamp(8px, 1.5vw, 12px);
+  padding: var(--space-2) var(--space-3);
   font-size: clamp(12px, 1.8vw, 13px);
 }
 
