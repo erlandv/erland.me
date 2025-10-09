@@ -154,11 +154,6 @@ export default defineConfig({
         ],
       },
     },
-    // Optimize dependencies
-    optimizeDeps: {
-      // keep default; explicit include not necessary
-      include: [],
-    },
     // Server configuration
     server: {
       fs: {
