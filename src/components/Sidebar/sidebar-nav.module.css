@@ -19,7 +19,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: clamp(10px, 2vw, 14px);
-  min-height: 44px; /* unify item height across states (expanded/collapsed) */
+  min-height: 44px;
   text-decoration: none;
   display: flex;
   transition: all 0.2s ease;
@@ -31,8 +31,8 @@
 
 .nav-link-container:hover {
   color: #ffffff !important;
-  background-color: var(--bg-tertiary);
-  border-color: var(--border-color);
+  background-color: var(--sidebar-nav-hover-bg, var(--bg-tertiary));
+  border-color: var(--sidebar-nav-hover-border, var(--border-color));
   transform: translateX(0) scale(1.02);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -48,12 +48,11 @@
 
 .nav-link-container:global(.w--current) {
   color: #ffffff;
-  background-color: #2b2b2b;
-  border-color: var(--border-color);
+  background-color: var(--sidebar-nav-active-bg, #2b2b2b);
+  border-color: var(--sidebar-nav-active-border, var(--border-color));
   transform: translateX(0);
 }
 
-/* Preserve collapsed-state behaviors via global ancestry selectors */
 html.sidebar-collapsed-global .sidebar :global(.nav-link-container),
 html[data-sidebar='collapsed'] .sidebar :global(.nav-link-container),
 body.sidebar-collapsed .sidebar :global(.nav-link-container) {
@@ -64,6 +63,9 @@ body.sidebar-collapsed .sidebar :global(.nav-link-container) {
   width: 60px !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  margin-bottom: 8px !important;
+  gap: 0 !important;
+  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
 }
 
 html.sidebar-collapsed-global .sidebar :global(.nav-link-image),
@@ -81,9 +83,8 @@ body.sidebar-collapsed .sidebar :global(.nav-link-image) {
 }
 
 @media (max-width: 1024px) {
-  /* Overlay menu item look */
   .nav-link-container {
-    background-color: var(--bg-secondary);
+    background-color: var(--sidebar-nav-mobile-item-bg, var(--bg-secondary));
     border-radius: 0;
     padding: 18px 28px 18px 32px;
   }
@@ -92,6 +93,29 @@ body.sidebar-collapsed .sidebar :global(.nav-link-image) {
     color: #fff;
     background-color: #2b2b2b;
   }
+
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-link-container) {
+    width: auto !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 28px 12px 32px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.sidebar:global(:has(#sidebar-toggle:checked)) :global(.nav-link-container) {
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 10px 6px !important;
+  margin-bottom: 8px !important;
+  min-height: 44px !important;
+  width: 60px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  gap: 0 !important;
+  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
 }
 
 @media (max-width: 767px) {
@@ -99,4 +123,12 @@ body.sidebar-collapsed .sidebar :global(.nav-link-image) {
     padding-left: 24px;
     padding-right: 18px;
   }
+}
+
+:global(.sidebar) {
+  --sidebar-nav-hover-bg: var(--bg-tertiary);
+  --sidebar-nav-hover-border: var(--border-color);
+  --sidebar-nav-active-bg: #2b2b2b;
+  --sidebar-nav-active-border: var(--border-color);
+  --sidebar-nav-mobile-item-bg: var(--bg-secondary);
 }

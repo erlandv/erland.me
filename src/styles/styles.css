@@ -58,8 +58,7 @@ img {
 
 @font-face {
   font-family: webflow-icons;
-  src: url('data:application/x-font-ttf;charset=utf-8;base64,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')
-    format('truetype');
+  src: url('data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBiUAAAC8AAAAYGNtYXDpP+a4AAABHAAAAFxnYXNwAAAAEAAAAXgAAAAIZ2x5ZmhS2XEAAAGAAAADHGhlYWQTFw3HAAAEnAAAADZoaGVhCXYFgQAABNQAAAAkaG10eCe4A1oAAAT4AAAAMGxvY2EDtALGAAAFKAAAABptYXhwABAAPgAABUQAAAAgbmFtZSoCsMsAAAVkAAABznBvc3QAAwAAAAAHNAAAACAAAwP4AZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpAwPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAQAAAAAwACAACAAQAAQAg5gPpA//9//8AAAAAACDmAOkA//3//wAB/+MaBBcIAAMAAQAAAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEBIAAAAyADgAAFAAAJAQcJARcDIP5AQAGA/oBAAcABwED+gP6AQAABAOAAAALgA4AABQAAEwEXCQEH4AHAQP6AAYBAAcABwED+gP6AQAAAAwDAAOADQALAAA8AHwAvAAABISIGHQEUFjMhMjY9ATQmByEiBh0BFBYzITI2PQE0JgchIgYdARQWMyEyNj0BNCYDIP3ADRMTDQJADRMTDf3ADRMTDQJADRMTDf3ADRMTDQJADRMTAsATDSANExMNIA0TwBMNIA0TEw0gDRPAEw0gDRMTDSANEwAAAAABAJ0AtAOBApUABQAACQIHCQEDJP7r/upcAXEBcgKU/usBFVz+fAGEAAAAAAL//f+9BAMDwwAEAAkAABcBJwEXAwE3AQdpA5ps/GZsbAOabPxmbEMDmmz8ZmwDmvxmbAOabAAAAgAA/8AEAAPAAB0AOwAABSInLgEnJjU0Nz4BNzYzMTIXHgEXFhUUBw4BBwYjNTI3PgE3NjU0Jy4BJyYjMSIHDgEHBhUUFx4BFxYzAgBqXV6LKCgoKIteXWpqXV6LKCgoKIteXWpVSktvICEhIG9LSlVVSktvICEhIG9LSlVAKCiLXl1qal1eiygoKCiLXl1qal1eiygoZiEgb0tKVVVKS28gISEgb0tKVVVKS28gIQABAAABwAIAA8AAEgAAEzQ3PgE3NjMxFSIHDgEHBhUxIwAoKIteXWpVSktvICFmAcBqXV6LKChmISBvS0pVAAAAAgAA/8AFtgPAADIAOgAAARYXHgEXFhUUBw4BBwYHIxUhIicuAScmNTQ3PgE3NjMxOAExNDc+ATc2MzIXHgEXFhcVATMJATMVMzUEjD83NlAXFxYXTjU1PQL8kz01Nk8XFxcXTzY1PSIjd1BQWlJJSXInJw3+mdv+2/7c25MCUQYcHFg5OUA/ODlXHBwIAhcXTzY1PTw1Nk8XF1tQUHcjIhwcYUNDTgL+3QFt/pOTkwABAAAAAQAAmM7nP18PPPUACwQAAAAAANciZKUAAAAA1yJkpf/9/70FtgPDAAAACAACAAAAAAAAAAEAAAPA/8AAAAW3//3//QW2AAEAAAAAAAAAAAAAAAAAAAAMBAAAAAAAAAAAAAAAAgAAAAQAASAEAADgBAAAwAQAAJ0EAP/9BAAAAAQAAAAFtwAAAAAAAAAKABQAHgAyAEYAjACiAL4BFgE2AY4AAAABAAAADAA8AAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEADQAAAAEAAAAAAAIABwCWAAEAAAAAAAMADQBIAAEAAAAAAAQADQCrAAEAAAAAAAUACwAnAAEAAAAAAAYADQBvAAEAAAAAAAoAGgDSAAMAAQQJAAEAGgANAAMAAQQJAAIADgCdAAMAAQQJAAMAGgBVAAMAAQQJAAQAGgC4AAMAAQQJAAUAFgAyAAMAAQQJAAYAGgB8AAMAAQQJAAoANADsd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzVmVyc2lvbiAxLjAAVgBlAHIAcwBpAG8AbgAgADEALgAwd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzUmVndWxhcgBSAGUAZwB1AGwAYQByd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzRm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -153,18 +152,16 @@ ul {
   }
 }
 
-/* AdSense units: minimal spacing in article prose */
 #blog-content .adsbygoogle,
 #download-content .adsbygoogle,
-.content-container > .adsbygoogle {
+.content-container>.adsbygoogle {
   display: block !important;
-  margin: 1.25rem auto; /* balanced vertical spacing */
+  margin: 1.25rem auto;
   padding: 0.5rem 0;
   max-width: 100%;
   text-align: center;
 }
 
-/* Placeholder styling for dev/staging */
 .ad-placeholder {
   display: block;
   width: 100%;
@@ -187,20 +184,21 @@ ul {
   }
 }
 
-/* Responsive tuning for AdSense blocks */
 @media screen and (max-width: 640px) {
+
   #blog-content .adsbygoogle,
   #download-content .adsbygoogle,
-  .content-container > .adsbygoogle {
+  .content-container>.adsbygoogle {
     margin: 0.75rem auto;
     padding: 0.25rem 0;
   }
 }
 
 @media screen and (min-width: 641px) and (max-width: 1024px) {
+
   #blog-content .adsbygoogle,
   #download-content .adsbygoogle,
-  .content-container > .adsbygoogle {
+  .content-container>.adsbygoogle {
     margin: 1rem auto;
     padding: 0.4rem 0;
   }
@@ -259,13 +257,13 @@ ul {
 .w-nav-menu.is-open {
   display: block !important;
   position: fixed;
-  z-index: 1200; /* ensure overlays main content */
+  z-index: 1200;
   left: 0;
   right: 0;
-  top: 0; /* ensure no gap at the very top */
+  top: 0;
   height: 100vh;
   height: 100dvh;
-  padding-top: 92px; /* push contents below header */
+  padding-top: 92px;
 }
 
 .w-nav-button {
@@ -294,10 +292,10 @@ ul {
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible {
     display: block;
     position: fixed;
-    z-index: 1200; /* overlay main content in mobile */
+    z-index: 1200;
     left: 0;
     right: 0;
-    top: 0; /* attach to top to avoid background showing */
+    top: 0;
     height: 100vh;
     height: 100dvh;
     padding-top: 92px;
@@ -499,14 +497,12 @@ p {
 }
 
 .prose figcaption {
-  /* Smaller caption text and tighter box */
   font-size: clamp(0.75rem, 1.4vw, 0.85rem);
   color: #a0a0a0;
   text-align: center;
   line-height: 1.35;
   font-style: italic;
   padding: 0.5rem;
-  /* Improve wrapping for long captions */
   word-wrap: break-word;
   overflow-wrap: anywhere;
   text-wrap: balance;
@@ -722,7 +718,7 @@ p {
   height: 100vh;
   background-color: #1c1c1c;
   border-right: 1px solid #353535;
-  padding: 32px; /* baseline vertical padding used to align collapsed */
+  padding: 32px;
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -737,7 +733,6 @@ p {
   will-change: width, padding;
 }
 
-/* Collapsed sidebar state - simple width change */
 .sidebar.sidebar-collapsed {
   width: 80px;
   padding: 20px 8px;
@@ -767,7 +762,6 @@ p {
   font-weight: 400;
 }
 
-/* Toast notifications */
 .toast-container {
   position: fixed;
   bottom: 20px;
@@ -781,7 +775,7 @@ p {
 }
 
 .toast {
-  background: #21262d; /* matches code block controls */
+  background: #21262d;
   color: var(--text-primary);
   border: 1px solid var(--color-primary);
   box-shadow:
@@ -801,9 +795,11 @@ p {
 .toast.toast--success {
   border-color: var(--color-primary);
 }
+
 .toast.toast--error {
   border-color: var(--color-primary);
 }
+
 .toast.toast--info {
   border-color: var(--color-primary);
 }
@@ -830,7 +826,7 @@ p {
   padding: 46px 48px 0px;
   display: flex;
   overflow: auto;
-  position: relative; /* create stacking context but below fixed overlay since overlay has higher z-index */
+  position: relative;
 }
 
 .container {
@@ -896,60 +892,6 @@ p {
   line-height: 1.5;
 }
 
-.nav-link-image {
-  width: 24px;
-  opacity: 0.48;
-  transition: opacity 0.2s ease;
-}
-
-.nav-link-container:hover .nav-link-image {
-  opacity: 1;
-}
-
-.nav-link-container {
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
-  color: #c0c0c0;
-  text-transform: capitalize;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 8px;
-  justify-content: flex-start;
-  align-items: center;
-  padding: clamp(10px, 2vw, 14px);
-  min-height: 44px; /* unify item height across states (expanded/collapsed) */
-  text-decoration: none;
-  display: flex;
-  transition: all 0.2s ease;
-  transform: translateX(0);
-  font-size: clamp(14px, 2vw, 16px);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.nav-link-container:hover {
-  color: #ffffff !important;
-  background-color: #252525;
-  border-color: #353535;
-  transform: translateX(0) scale(1.02);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.nav-link-container a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.nav-link-container:hover a {
-  color: inherit;
-}
-
-.nav-link-container.w--current {
-  color: #ffffff;
-  background-color: #2b2b2b;
-  border-color: #353535;
-  transform: translateX(0);
-}
-
 .tech-tools-container {
   flex-direction: column;
   justify-content: flex-end;
@@ -1010,11 +952,9 @@ p {
   border-radius: 18px;
   margin: 0 auto 1.5rem;
   padding: 18px;
-  background: radial-gradient(
-    circle at top,
-    rgba(79, 148, 255, 0.16),
-    transparent 70%
-  );
+  background: radial-gradient(circle at top,
+      rgba(79, 148, 255, 0.16),
+      transparent 70%);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
   object-fit: contain;
 }
@@ -1042,16 +982,9 @@ p {
 }
 
 @media screen and (max-width: 1024px) {
-  /* Mobile: revert to normal layout */
   .content {
     flex-direction: column;
   }
-
-  /* Sidebar-specific mobile styles moved to component */
-}
-
-@media (min-width: 1025px) {
-  /* Sidebar-specific desktop styles moved to component */
 }
 
 @media screen and (max-width: 767px) {
@@ -1069,6 +1002,7 @@ p {
   .fold-content {
     margin-bottom: 24px;
   }
+
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible .socials--menu {
     padding: 12px 18px 12px 24px;
   }
@@ -1090,9 +1024,6 @@ p {
   .download-hero {
     padding: 24px;
   }
-}
-
-@media screen and (max-width: 540px) {
 }
 
 .socials {
@@ -1123,15 +1054,14 @@ p {
   background-color: rgba(255, 255, 255, 0.06);
 }
 
-/* --- Blog code block label stability --- */
-/* Ensure label positions within pre and never blocks interaction */
 .prose pre {
   position: relative;
 }
+
 .prose pre::before {
   pointer-events: none;
 }
-/* Add top padding whenever a language label is present (before copy button mounts) */
+
 .prose pre[data-language],
 .prose pre[class*='language-'] {
   padding-top: 3rem;
@@ -1160,7 +1090,7 @@ p {
 
 @media screen and (max-width: 1024px) {
   .sidebar .socials--sidebar {
-    display: none !important; /* hidden on mobile; space is handled inside component CSS */
+    display: none !important;
   }
 
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible {
@@ -1186,8 +1116,6 @@ p {
 .blog-post {
   max-width: 780px;
 }
-
-/* moved theme variables to variables.css */
 
 a:focus-visible,
 button:focus-visible,

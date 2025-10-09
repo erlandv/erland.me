@@ -1,6 +1,5 @@
 /* Sidebar component-scoped styles migrated from inline <style> */
 
-/* Hide the checkbox drivers */
 :global(.nav-toggle),
 :global(.sidebar-toggle) {
   position: absolute;
@@ -15,8 +14,6 @@
   margin: -1px;
 }
 
-/* Icon animations and alignment: both icons overlap exactly */
-/* Default: hide the toggle; show it only on mobile in media query below */
 :global(.navbar-icon-button) {
   position: relative;
   width: 44px;
@@ -25,31 +22,47 @@
   align-items: center;
   justify-content: center;
 }
+
 :global(.navbar-icon) {
   width: 26px;
   height: 26px;
   display: block;
 }
+
 :global(.icon-switch) {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* base placement and animated transform via variable */
   --icon-xform: rotate(0deg) scale(1);
   transform: translate(-50%, -50%) var(--icon-xform);
   transform-origin: center;
   transition: opacity 200ms ease, transform 200ms ease;
 }
-/* initial states */
-:global(.icon-switch--menu) { opacity: 1; --icon-xform: rotate(0deg) scale(1); }
-:global(.icon-switch--close) { opacity: 0; --icon-xform: rotate(-90deg) scale(0.9); }
 
-/* Sidebar toggle is now styled as a nav-link item */
-:global(.sidebar-toggle-button) { cursor: pointer; }
-:global(.sidebar-toggle-button:hover) :global(.sidebar-toggle-icon) { opacity: 1; }
+:global(.icon-switch--menu) {
+  opacity: 1;
+  --icon-xform: rotate(0deg) scale(1);
+}
 
-/* Flip/mirror animation only for the sidebar toggle icon (not all nav icons) */
-:global(.sidebar) { perspective: 800px; }
+:global(.icon-switch--close) {
+  opacity: 0;
+  --icon-xform: rotate(-90deg) scale(0.9);
+}
+
+
+:global(.sidebar-toggle-button) {
+  cursor: pointer;
+}
+
+:global(.sidebar-toggle-button:hover) :global(.sidebar-toggle-icon) {
+  opacity: 1;
+}
+
+
+:global(.sidebar) {
+  perspective: 800px;
+}
+
 :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image) {
   transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform-origin: 50% 50%;
@@ -57,7 +70,7 @@
   -webkit-backface-visibility: visible;
   will-change: transform;
 }
-/* Collapsed state: mirror the toggle icon horizontally */
+
 :global(html.sidebar-collapsed-global) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
 :global(html[data-sidebar="collapsed"]) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
 :global(body.sidebar-collapsed) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
@@ -66,9 +79,8 @@
   transform: scaleX(-1) scale(0.96);
 }
 
-/* Mobile-only menu toggle behavior */
+
 @media (max-width: 1024px) {
-  /* Sidebar mobile layout + borders */
   :global(.sidebar) {
     position: relative;
     width: 100% !important;
@@ -79,7 +91,6 @@
     border-bottom: 1px solid #353535;
   }
 
-  /* Header/content row layout on mobile */
   :global(.nav-content) {
     height: auto;
     grid-column-gap: 0px;
@@ -89,7 +100,6 @@
     align-items: center;
   }
 
-  /* Mobile icon visual tweaks */
   :global(.navbar-icon) {
     color: #fff;
     font-size: 32px;
@@ -114,25 +124,22 @@
   :global(.navbar-icon[data-icon='menu']) {
     transform: rotate(0deg);
   }
-  /* Ensure mobile overlay anchors to the viewport, not the sidebar
-     Fix: remove transforms/contain that create a containing block for position: fixed */
+
   :global(.sidebar) {
     transform: none !important;
     -webkit-transform: none !important;
     will-change: auto !important;
     contain: none !important;
-    /* Also drop perspective to avoid creating a containing block for fixed children */
     perspective: none !important;
   }
 
-  /* On mobile, ignore desktop collapsed width/padding */
   :global(html.sidebar-collapsed-global) :global(.sidebar),
   :global(html[data-sidebar="collapsed"]) :global(.sidebar),
   :global(body.sidebar-collapsed) :global(.sidebar) {
     width: 100% !important;
     padding: 24px !important;
   }
-  /* Hide sidebar toggle button on mobile regardless of collapsed state */
+
   :global(.sidebar-toggle-button),
   :global(.sidebar:has(#sidebar-toggle:checked)) :global(.sidebar-toggle-button),
   :global(html.sidebar-collapsed-global) :global(.sidebar) :global(.sidebar-toggle-button),
@@ -140,32 +147,35 @@
   :global(body.sidebar-collapsed) :global(.sidebar) :global(.sidebar-toggle-button) {
     display: none !important;
   }
-  
-  /* Ensure header (brand) and toggle stay above the overlay */
-  :global(.w-nav-brand) { position: relative; z-index: 1301; }
-  :global(.navbar-icon-button) { position: relative; z-index: 1301; display: inline-flex; }
-  /* Mobile overlay panel: present in DOM, hidden by opacity/visibility/transform */
+
+  :global(.w-nav-brand) {
+    position: relative;
+    z-index: 1301;
+  }
+
+  :global(.navbar-icon-button) {
+    position: relative;
+    z-index: 1301;
+    display: inline-flex;
+  }
+
   :global(.sidebar) :global(.w-nav-menu) {
-    display: flex !important; /* override global collapse */
+    display: flex !important;
     flex-direction: column;
-    align-items: stretch;
+    align-items: stretch !important;
     position: fixed;
     left: 0;
     right: 0;
-    top: 0; /* start at very top to avoid visible gap */
+    top: 0;
     bottom: 0;
-    /* Fill full viewport and scroll internally */
     height: 100vh;
     height: 100dvh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Reserve space for the header area so menu items start below it */
     padding-top: 92px;
     padding-bottom: 8px;
     background-color: #1c1c1c;
-    /* Ensure overlay sits above main content but below brand/toggle */
     z-index: 1200;
-    /* Hidden state */
     opacity: 0;
     transform: translateY(-10px);
     visibility: hidden;
@@ -173,23 +183,24 @@
     transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
     will-change: transform, opacity;
   }
-  /* Open state */
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) {
+
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
     pointer-events: auto;
     transition: opacity 220ms ease, transform 220ms ease;
+    align-items: stretch !important;
   }
-  /* When mobile menu is open, override any collapsed-state text hiding */
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-text),
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.profile-text) {
+
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-text),
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.profile-text) {
     opacity: 1 !important;
     max-width: 100% !important;
     pointer-events: auto !important;
   }
-  /* Mobile menu items should be full width */
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-link-container) {
+
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
     align-items: center !important;
@@ -198,8 +209,8 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  /* Ensure social icons appear inside the mobile menu */
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.socials--menu) {
+
+  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.socials--menu) {
     display: flex !important;
     position: static;
     justify-content: flex-start;
@@ -209,19 +220,19 @@
     margin-top: auto;
     background-color: #1c1c1c;
   }
-  /* Swap icons with animation (preserve centering via CSS var) */
-  :global(.nav-toggle:checked) ~ :global(.navbar-icon-button) :global(.icon-switch--menu) {
+
+  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--menu) {
     opacity: 0;
     --icon-xform: rotate(90deg) scale(0.9);
   }
-  :global(.nav-toggle:checked) ~ :global(.navbar-icon-button) :global(.icon-switch--close) {
+
+  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--close) {
     opacity: 1;
     --icon-xform: rotate(0deg) scale(1);
   }
 }
 
 @media (min-width: 1025px) {
-  /* Desktop: sidebar is sticky positioned */
   :global(.sidebar) {
     position: sticky;
     top: 0;
@@ -230,12 +241,11 @@
     overflow-y: auto;
   }
 
-  /* Hide mobile toggle icon on desktop */
+
   :global(.navbar-icon-button) {
     display: none;
   }
 
-  /* Show sidebar toggle button on desktop */
   :global(.sidebar-toggle-button) {
     display: flex !important;
   }

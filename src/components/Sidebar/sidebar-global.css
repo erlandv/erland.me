@@ -1,18 +1,15 @@
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
-/* Prevent body from scrolling when the mobile menu is open (modern browsers) */
 body:has(.sidebar .nav-toggle:checked) {
   overflow: hidden;
   touch-action: none;
 }
 
-/* Smooth collapsed/expanded transitions */
 .sidebar {
   transition: width 300ms ease, padding 300ms ease;
   overflow-x: clip;
 }
 
-/* Also honor root-level collapsed flags so state applies before component init */
 html.sidebar-collapsed-global .sidebar,
 html[data-sidebar="collapsed"] .sidebar,
 body.sidebar-collapsed .sidebar {
@@ -68,12 +65,12 @@ body.sidebar-collapsed .sidebar .socials--menu {
   border-top-color: transparent;
 }
 
-/* Orchestrated step: hide text first during animation */
 .sidebar.sidebar-animating.hiding-text .profile-text,
 .sidebar.sidebar-animating.hiding-text .nav-text {
   opacity: 0;
   max-width: 0;
 }
+
 .sidebar.sidebar-animating.hiding-text .socials--sidebar,
 .sidebar.sidebar-animating.hiding-text .socials--menu {
   opacity: 0;
@@ -82,14 +79,11 @@ body.sidebar-collapsed .sidebar .socials--menu {
   border-top-color: transparent;
 }
 
-/* Collapsed state: slider-like fold */
 .sidebar.sidebar-collapsed {
   width: 80px;
-  /* Match expanded vertical padding for consistent vertical positions */
   padding: 32px 8px;
 }
 
-/* Pure-CSS fallback: collapse when the hidden checkbox is checked */
 .sidebar:has(#sidebar-toggle:checked) {
   width: 80px;
   padding: 32px 8px;
@@ -107,7 +101,6 @@ body.sidebar-collapsed .sidebar .socials--menu {
   max-width: 0;
 }
 
-/* Preserve vertical layout when collapsed: keep a spacer where socials would be */
 .sidebar.sidebar-collapsed .socials--sidebar {
   opacity: 0;
   visibility: hidden;
@@ -115,9 +108,9 @@ body.sidebar-collapsed .sidebar .socials--menu {
   margin-top: auto !important;
   border-top-color: transparent;
   padding-top: 0;
-  /* Reserve space equal to expanded socials area: border (1) + padding-top (12) + row (22 icon + 16 vertical padding) = 51px */
   min-height: 51px;
 }
+
 .sidebar.sidebar-collapsed .socials--menu {
   opacity: 0;
   max-height: 0;
@@ -134,6 +127,7 @@ body.sidebar-collapsed .sidebar .socials--menu {
   padding-top: 0;
   min-height: 51px;
 }
+
 .sidebar:has(#sidebar-toggle:checked) .socials--menu {
   opacity: 0;
   max-height: 0;
@@ -141,13 +135,13 @@ body.sidebar-collapsed .sidebar .socials--menu {
   border-top-color: transparent;
 }
 
-/* Alignment adjustments during collapse */
 html.sidebar-collapsed-global .sidebar .w-nav-brand,
 html[data-sidebar="collapsed"] .sidebar .w-nav-brand,
 body.sidebar-collapsed .sidebar .w-nav-brand {
   justify-content: center !important;
   margin-bottom: 20px !important;
 }
+
 .sidebar.sidebar-collapsed .w-nav-brand {
   justify-content: center !important;
   margin-bottom: 20px !important;
@@ -157,6 +151,7 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   justify-content: center !important;
   margin-bottom: 20px !important;
 }
+
 .sidebar.sidebar-collapsed .niv-data {
   justify-content: center !important;
   align-items: center !important;
@@ -166,6 +161,7 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   justify-content: center !important;
   align-items: center !important;
 }
+
 .sidebar.sidebar-collapsed .niv-image {
   margin-right: 0 !important;
   margin: 0 auto !important;
@@ -175,9 +171,7 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   margin-right: 0 !important;
   margin: 0 auto !important;
 }
-html.sidebar-collapsed-global .sidebar .nav-link-container,
-html[data-sidebar="collapsed"] .sidebar .nav-link-container,
-body.sidebar-collapsed .sidebar .nav-link-container,
+
 .sidebar.sidebar-collapsed .nav-link-container {
   justify-content: center !important;
   align-items: center !important;
@@ -191,27 +185,17 @@ body.sidebar-collapsed .sidebar .nav-link-container,
   transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
 }
 
-.sidebar:has(#sidebar-toggle:checked) .nav-link-container {
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 10px 6px !important;
-  margin-bottom: 8px !important;
-  min-height: 44px !important;
-  width: 60px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  gap: 0 !important;
-  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+.sidebar.sidebar-collapsed .nav-link-image {
+  margin: 0 auto !important;
 }
-.sidebar.sidebar-collapsed .nav-link-image { margin: 0 auto !important; }
-.sidebar.sidebar-collapsed .nav-text { pointer-events: none; }
-.sidebar.sidebar-collapsed .w-nav-menu { align-items: center !important; }
 
-.sidebar:has(#sidebar-toggle:checked) .nav-link-image { margin: 0 auto !important; }
-.sidebar:has(#sidebar-toggle:checked) .nav-text { pointer-events: none; }
-.sidebar:has(#sidebar-toggle:checked) .w-nav-menu { align-items: center !important; }
+.sidebar.sidebar-collapsed .nav-text {
+  pointer-events: none;
+}
 
-/* Toggle button sizing in collapsed view uses nav-link defaults; no extra overrides needed */
+.sidebar.sidebar-collapsed .w-nav-menu {
+  align-items: flex-start !important;
+}
 
 .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button {
   display: inline-flex !important;
@@ -224,28 +208,25 @@ body.sidebar-collapsed .sidebar .nav-link-container,
   padding: 0 !important;
   margin-bottom: 8px !important;
   border-radius: 8px !important;
-  /* Let base/hover styles inherit from .nav-link-container */
 }
-/* Collapse hover size: match nav menu icon */
-.sidebar.sidebar-collapsed .sidebar-toggle-button .nav-link-image { opacity: 0.48; }
-.sidebar.sidebar-collapsed .sidebar-toggle-button:hover .nav-link-image { opacity: 1; }
 
-/* Collapsed hover appearance: match nav-link hover */
-/* Hover styles inherited from .nav-link-container */
+.sidebar.sidebar-collapsed .sidebar-toggle-button .nav-link-image {
+  opacity: 0.48;
+}
 
-/* Active state for toggle when collapsed: mimic nav-link active */
-/* Base styles inherit from .nav-link-container; no overrides here to keep hover identical */
-/* Visually mark toggle as active when sidebar is collapsed */
+.sidebar.sidebar-collapsed .sidebar-toggle-button:hover .nav-link-image {
+  opacity: 1;
+}
+
 .sidebar.sidebar-collapsed .sidebar-toggle-button.is-active,
 .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active {
   background-color: #2b2b2b;
   border-color: #353535;
 }
-/* Hover on active toggle: same as nav-link active + hover */
+
 .sidebar.sidebar-collapsed .sidebar-toggle-button.is-active:hover,
 .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active:hover {
   background-color: #252525;
   border-color: #353535;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
