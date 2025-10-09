@@ -2,10 +2,10 @@
   position: fixed;
   right: 1rem;
   bottom: 1rem;
-  z-index: 1600;
+  z-index: var(--z-fab);
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: rgba(20, 20, 20, 0.85);
   color: #fff;
   border: 1px solid var(--border);
@@ -15,9 +15,9 @@
   opacity: 0;
   transform: translateY(8px) scale(0.98);
   transition:
-    opacity 160ms ease,
-    transform 160ms ease,
-    visibility 160ms ease;
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    visibility var(--dur-base) var(--ease-out);
   visibility: hidden;
   pointer-events: none;
   cursor: pointer;

@@ -174,7 +174,7 @@
     -webkit-overflow-scrolling: touch;
     padding-top: 92px;
     padding-bottom: 8px;
-    background-color: #1c1c1c;
+    background-color: var(--bg-overlay);
     z-index: 1200;
     opacity: 0;
     transform: translateY(-10px);

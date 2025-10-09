@@ -24,7 +24,7 @@
   line-height: 1.4;
   text-decoration: none;
   text-transform: capitalize;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay-005);
 }
 
 :global(.cat-filter-btn:hover) {
