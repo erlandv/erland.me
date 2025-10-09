@@ -104,7 +104,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
                 <td data-label="File Name">{item.label}</td>
                 {hasSizeColumn && <td data-label="Size">{item.size ?? "-"}</td>}
                 <td data-label="Download">
-                  <a class={dl["download-files-link"]} href={item.href} download>
+                  <a class={dl["download-files-link"]} href={item.href} rel="noopener" target="_blank" download>
                     Download
                   </a>
                 </td>
