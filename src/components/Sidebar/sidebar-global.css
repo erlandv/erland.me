@@ -6,12 +6,14 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 .sidebar {
-  transition: width 300ms ease, padding 300ms ease;
+  transition:
+    width 300ms ease,
+    padding 300ms ease;
   overflow-x: clip;
 }
 
 html.sidebar-collapsed-global .sidebar,
-html[data-sidebar="collapsed"] .sidebar,
+html[data-sidebar='collapsed'] .sidebar,
 body.sidebar-collapsed .sidebar {
   width: 80px;
   padding: 20px 8px;
@@ -19,7 +21,13 @@ body.sidebar-collapsed .sidebar {
 
 .sidebar .nav-link-container {
   box-sizing: border-box;
-  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  transition:
+    width 220ms ease,
+    padding 220ms ease,
+    margin 220ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .sidebar .profile-text,
@@ -30,15 +38,17 @@ body.sidebar-collapsed .sidebar {
   inline-size: auto;
   white-space: nowrap;
   overflow: hidden;
-  transition: opacity 200ms ease, max-width 220ms ease;
+  transition:
+    opacity 200ms ease,
+    max-width 220ms ease;
   will-change: opacity, max-width;
 }
 
 html.sidebar-collapsed-global .sidebar .profile-text,
-html[data-sidebar="collapsed"] .sidebar .profile-text,
+html[data-sidebar='collapsed'] .sidebar .profile-text,
 body.sidebar-collapsed .sidebar .profile-text,
 html.sidebar-collapsed-global .sidebar .nav-text,
-html[data-sidebar="collapsed"] .sidebar .nav-text,
+html[data-sidebar='collapsed'] .sidebar .nav-text,
 body.sidebar-collapsed .sidebar .nav-text {
   opacity: 0;
   max-width: 0;
@@ -48,16 +58,20 @@ body.sidebar-collapsed .sidebar .nav-text {
 .sidebar .socials--menu {
   opacity: 1;
   max-height: 200px;
-  transition: opacity 220ms ease, max-height 240ms ease, padding-top 240ms ease, border-color 240ms ease;
+  transition:
+    opacity 220ms ease,
+    max-height 240ms ease,
+    padding-top 240ms ease,
+    border-color 240ms ease;
   will-change: opacity, max-height;
   overflow: hidden;
 }
 
 html.sidebar-collapsed-global .sidebar .socials--sidebar,
-html[data-sidebar="collapsed"] .sidebar .socials--sidebar,
+html[data-sidebar='collapsed'] .sidebar .socials--sidebar,
 body.sidebar-collapsed .sidebar .socials--sidebar,
 html.sidebar-collapsed-global .sidebar .socials--menu,
-html[data-sidebar="collapsed"] .sidebar .socials--menu,
+html[data-sidebar='collapsed'] .sidebar .socials--menu,
 body.sidebar-collapsed .sidebar .socials--menu {
   opacity: 0;
   max-height: 0;
@@ -136,7 +150,7 @@ body.sidebar-collapsed .sidebar .socials--menu {
 }
 
 html.sidebar-collapsed-global .sidebar .w-nav-brand,
-html[data-sidebar="collapsed"] .sidebar .w-nav-brand,
+html[data-sidebar='collapsed'] .sidebar .w-nav-brand,
 body.sidebar-collapsed .sidebar .w-nav-brand {
   justify-content: center !important;
   margin-bottom: 20px !important;
@@ -182,7 +196,11 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   margin-left: auto !important;
   margin-right: auto !important;
   gap: 0 !important;
-  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+  transition:
+    width 220ms ease,
+    padding 220ms ease,
+    margin 220ms ease,
+    gap 220ms ease;
 }
 
 .sidebar.sidebar-collapsed .nav-link-image {

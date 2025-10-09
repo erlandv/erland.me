@@ -65,7 +65,11 @@ body.sidebar-collapsed .sidebar :global(.nav-link-container) {
   margin-right: auto !important;
   margin-bottom: 8px !important;
   gap: 0 !important;
-  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+  transition:
+    width 220ms ease,
+    padding 220ms ease,
+    margin 220ms ease,
+    gap 220ms ease;
 }
 
 html.sidebar-collapsed-global .sidebar :global(.nav-link-image),
@@ -94,7 +98,9 @@ body.sidebar-collapsed .sidebar :global(.nav-link-image) {
     background-color: #2b2b2b;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-link-container) {
+  :global(.nav-toggle:checked)
+    ~ :global(.w-nav-menu)
+    :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
     align-items: center !important;
@@ -115,7 +121,11 @@ body.sidebar-collapsed .sidebar :global(.nav-link-image) {
   margin-left: auto !important;
   margin-right: auto !important;
   gap: 0 !important;
-  transition: width 220ms ease, padding 220ms ease, margin 220ms ease, gap 220ms ease;
+  transition:
+    width 220ms ease,
+    padding 220ms ease,
+    margin 220ms ease,
+    gap 220ms ease;
 }
 
 @media (max-width: 767px) {

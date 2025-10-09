@@ -36,7 +36,9 @@
   --icon-xform: rotate(0deg) scale(1);
   transform: translate(-50%, -50%) var(--icon-xform);
   transform-origin: center;
-  transition: opacity 200ms ease, transform 200ms ease;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
 }
 
 :global(.icon-switch--menu) {
@@ -49,7 +51,6 @@
   --icon-xform: rotate(-90deg) scale(0.9);
 }
 
-
 :global(.sidebar-toggle-button) {
   cursor: pointer;
 }
@@ -57,7 +58,6 @@
 :global(.sidebar-toggle-button:hover) :global(.sidebar-toggle-icon) {
   opacity: 1;
 }
-
 
 :global(.sidebar) {
   perspective: 800px;
@@ -71,14 +71,26 @@
   will-change: transform;
 }
 
-:global(html.sidebar-collapsed-global) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
-:global(html[data-sidebar="collapsed"]) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
-:global(body.sidebar-collapsed) :global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image),
-:global(.sidebar.sidebar-collapsed) :global(.sidebar-toggle-button) :global(.nav-link-image),
-:global(.sidebar:has(#sidebar-toggle:checked)) :global(.sidebar-toggle-button) :global(.nav-link-image) {
+:global(html.sidebar-collapsed-global)
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(html[data-sidebar='collapsed'])
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(body.sidebar-collapsed)
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(.sidebar.sidebar-collapsed)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(.sidebar:has(#sidebar-toggle:checked))
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image) {
   transform: scaleX(-1) scale(0.96);
 }
-
 
 @media (max-width: 1024px) {
   :global(.sidebar) {
@@ -134,17 +146,24 @@
   }
 
   :global(html.sidebar-collapsed-global) :global(.sidebar),
-  :global(html[data-sidebar="collapsed"]) :global(.sidebar),
+  :global(html[data-sidebar='collapsed']) :global(.sidebar),
   :global(body.sidebar-collapsed) :global(.sidebar) {
     width: 100% !important;
     padding: 24px !important;
   }
 
   :global(.sidebar-toggle-button),
-  :global(.sidebar:has(#sidebar-toggle:checked)) :global(.sidebar-toggle-button),
-  :global(html.sidebar-collapsed-global) :global(.sidebar) :global(.sidebar-toggle-button),
-  :global(html[data-sidebar="collapsed"]) :global(.sidebar) :global(.sidebar-toggle-button),
-  :global(body.sidebar-collapsed) :global(.sidebar) :global(.sidebar-toggle-button) {
+  :global(.sidebar:has(#sidebar-toggle:checked))
+    :global(.sidebar-toggle-button),
+  :global(html.sidebar-collapsed-global)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(html[data-sidebar='collapsed'])
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(body.sidebar-collapsed)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button) {
     display: none !important;
   }
 
@@ -180,27 +199,34 @@
     transform: translateY(-10px);
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease,
+      visibility 0s linear 220ms;
     will-change: transform, opacity;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
     pointer-events: auto;
-    transition: opacity 220ms ease, transform 220ms ease;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
     align-items: stretch !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-text),
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.profile-text) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-text),
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.profile-text) {
     opacity: 1 !important;
     max-width: 100% !important;
     pointer-events: auto !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-link-container) {
+  :global(.nav-toggle:checked)
+    ~ :global(.w-nav-menu)
+    :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
     align-items: center !important;
@@ -210,7 +236,7 @@
     margin-right: 0 !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.socials--menu) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.socials--menu) {
     display: flex !important;
     position: static;
     justify-content: flex-start;
@@ -221,12 +247,16 @@
     background-color: var(--bg-overlay);
   }
 
-  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--menu) {
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--menu) {
     opacity: 0;
     --icon-xform: rotate(90deg) scale(0.9);
   }
 
-  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--close) {
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--close) {
     opacity: 1;
     --icon-xform: rotate(0deg) scale(1);
   }
@@ -240,7 +270,6 @@
     align-self: flex-start;
     overflow-y: auto;
   }
-
 
   :global(.navbar-icon-button) {
     display: none;
