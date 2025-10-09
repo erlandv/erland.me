@@ -39,20 +39,28 @@ export default defineConfig({
       terserOptions:
         process.env.MINIFY_ENGINE === 'terser'
           ? {
-              compress: {
-                drop_console: true,
-                drop_debugger: true,
-                dead_code: true,
-                pure_funcs: ['console.log', 'console.info', 'console.debug'],
-              },
+              ...(process.env.ENABLE_STRIP_CONSOLE === 'true'
+                ? {
+                    compress: {
+                      drop_console: true,
+                      drop_debugger: true,
+                      dead_code: true,
+                      pure_funcs: [
+                        'console.log',
+                        'console.info',
+                        'console.debug',
+                      ],
+                    },
+                  }
+                : {}),
               mangle: { safari10: true },
               format: { comments: false },
             }
           : undefined,
       // Optimize chunk splitting
       rollupOptions: {
-            output: {
-              manualChunks: id => {
+        output: {
+          manualChunks: id => {
             // Vendor chunks
             if (id.includes('node_modules')) {
               if (id.includes('astro')) {
@@ -110,9 +118,14 @@ export default defineConfig({
     esbuild:
       process.env.NODE_ENV === 'production'
         ? {
-            drop: ['console', 'debugger'],
-            pure: ['console.log', 'console.info', 'console.debug'],
             legalComments: 'none',
+            ...(process.env.ENABLE_STRIP_CONSOLE === 'true' &&
+            process.env.MINIFY_ENGINE !== 'terser'
+              ? {
+                  drop: ['console', 'debugger'],
+                  pure: ['console.log', 'console.info', 'console.debug'],
+                }
+              : {}),
           }
         : undefined,
     // CSS optimization
