@@ -1047,100 +1047,14 @@ p {
     flex-direction: column;
   }
 
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    padding: 18px 28px 18px 24px;
-    border-right: none;
-    border-bottom: 1px solid #353535;
-  }
-
-  /* Hide sidebar collapse feature on mobile */
-  .sidebar-toggle-button {
-    display: none !important;
-  }
-
-  .nav-content {
-    height: auto;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fold-content {
-    margin-bottom: 32px;
-  }
-
-  .nav-link-container {
-    background-color: #1c1c1c;
-    border-radius: 0;
-    padding: 18px 28px 18px 32px;
-  }
-
-  .nav-link-container:active {
-    color: #fff;
-    background-color: #2b2b2b;
-  }
-
-  .navbar-icon {
-    width: 26px;
-    height: 26px;
-    color: #fff;
-    font-size: 32px;
-    transition: all 0.2s ease-in-out;
-    transform-origin: center;
-  }
-
-  .navbar-icon-button {
-    padding: 12px;
-    transition: all 0.24s;
-  }
-
-  .navbar-icon.icon-transitioning {
-    transform: scale(0.8);
-    opacity: 0.7;
-  }
-
-  .navbar-icon[data-icon='close'] {
-    transform: rotate(0deg);
-  }
-
-  .navbar-icon[data-icon='menu'] {
-    transform: rotate(0deg);
-  }
+  /* Sidebar-specific mobile styles moved to component */
 }
 
 @media (min-width: 1025px) {
-  /* Desktop: sidebar is sticky positioned */
-  .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    align-self: flex-start;
-    overflow-y: auto;
-  }
-
-  /* Hide mobile toggle icon on desktop */
-  .navbar-icon-button {
-    display: none;
-  }
-
-  /* Show sidebar toggle button on desktop */
-  .sidebar-toggle-button {
-    display: flex !important;
-  }
+  /* Sidebar-specific desktop styles moved to component */
 }
 
 @media screen and (max-width: 767px) {
-  .sidebar {
-    padding-left: 24px;
-    padding-right: 18px;
-  }
-
   .main {
     background-position: center center;
     padding-left: 28px;
@@ -1155,12 +1069,6 @@ p {
   .fold-content {
     margin-bottom: 24px;
   }
-
-  .nav-link-container {
-    padding-left: 24px;
-    padding-right: 18px;
-  }
-
   .w-nav[data-collapse='medium'] .w-nav-menu.is-visible .socials--menu {
     padding: 12px 18px 12px 24px;
   }
