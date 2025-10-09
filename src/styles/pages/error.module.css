@@ -12,26 +12,26 @@
 .error-icon-svg {
   width: 80px;
   height: 80px;
-  color: #6bb6ff;
+  color: var(--color-primary);
   opacity: 0.8;
   font-size: 3rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #6bb6ff;
+  border: 3px solid var(--color-primary);
   border-radius: 50%;
   margin: 0 auto;
-  background: rgba(107, 182, 255, 0.1);
+  background: rgba(var(--color-primary-rgb), 0.1);
 }
 
 .error-title {
   font-size: 6rem;
   font-weight: 700;
-  color: #6bb6ff;
+  color: var(--color-primary);
   margin: 0 0 1rem 0;
   line-height: 1;
-  text-shadow: 0 0 20px rgba(107, 182, 255, 0.3);
+  text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
 }
 
 .error-subtitle {
@@ -60,7 +60,7 @@
 }
 
 .error-actions .homepage-button {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #4a9eff 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: #ffffff;
   border: none;
   padding: 12px 24px;
@@ -76,7 +76,7 @@
 }
 
 .error-actions .homepage-button:hover {
-  background: linear-gradient(135deg, #4a9eff 0%, #3a8eef 100%);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(var(--color-primary-rgb), 0.4);
   color: #ffffff;
