@@ -206,8 +206,8 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   justify-content: center !important;
   align-items: center !important;
   padding: 0 !important;
-  margin-bottom: 8px !important;
-  border-radius: 8px !important;
+  margin-bottom: var(--space-2) !important;
+  border-radius: var(--radius-md) !important;
 }
 
 .sidebar.sidebar-collapsed .sidebar-toggle-button .nav-link-image {
