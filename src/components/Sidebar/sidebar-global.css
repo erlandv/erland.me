@@ -7,8 +7,8 @@ body:has(.sidebar .nav-toggle:checked) {
 
 .sidebar {
   transition:
-    width 300ms ease,
-    padding 300ms ease;
+    width var(--dur-slow) var(--ease-standard),
+    padding var(--dur-slow) var(--ease-standard);
   overflow-x: clip;
 }
 
@@ -16,18 +16,18 @@ html.sidebar-collapsed-global .sidebar,
 html[data-sidebar='collapsed'] .sidebar,
 body.sidebar-collapsed .sidebar {
   width: 80px;
-  padding: 20px 8px;
+  padding: var(--space-5) var(--space-2);
 }
 
 .sidebar .nav-link-container {
   box-sizing: border-box;
   transition:
-    width 220ms ease,
-    padding 220ms ease,
-    margin 220ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+    width var(--dur-medium) var(--ease-standard),
+    padding var(--dur-medium) var(--ease-standard),
+    margin var(--dur-medium) var(--ease-standard),
+    background-color 180ms var(--ease-standard),
+    border-color 180ms var(--ease-standard),
+    transform 180ms var(--ease-standard);
 }
 
 .sidebar .profile-text,
@@ -39,8 +39,8 @@ body.sidebar-collapsed .sidebar {
   white-space: nowrap;
   overflow: hidden;
   transition:
-    opacity 200ms ease,
-    max-width 220ms ease;
+    opacity 200ms var(--ease-standard),
+    max-width var(--dur-medium) var(--ease-standard);
   will-change: opacity, max-width;
 }
 
@@ -59,10 +59,10 @@ body.sidebar-collapsed .sidebar .nav-text {
   opacity: 1;
   max-height: 200px;
   transition:
-    opacity 220ms ease,
-    max-height 240ms ease,
-    padding-top 240ms ease,
-    border-color 240ms ease;
+    opacity var(--dur-medium) var(--ease-standard),
+    max-height 240ms var(--ease-standard),
+    padding-top 240ms var(--ease-standard),
+    border-color 240ms var(--ease-standard);
   will-change: opacity, max-height;
   overflow: hidden;
 }
@@ -95,12 +95,12 @@ body.sidebar-collapsed .sidebar .socials--menu {
 
 .sidebar.sidebar-collapsed {
   width: 80px;
-  padding: 32px 8px;
+  padding: var(--space-8) var(--space-2);
 }
 
 .sidebar:has(#sidebar-toggle:checked) {
   width: 80px;
-  padding: 32px 8px;
+  padding: var(--space-8) var(--space-2);
 }
 
 .sidebar.sidebar-collapsed .profile-text,
@@ -197,10 +197,10 @@ body.sidebar-collapsed .sidebar .w-nav-brand {
   margin-right: auto !important;
   gap: 0 !important;
   transition:
-    width 220ms ease,
-    padding 220ms ease,
-    margin 220ms ease,
-    gap 220ms ease;
+    width var(--dur-medium) var(--ease-standard),
+    padding var(--dur-medium) var(--ease-standard),
+    margin var(--dur-medium) var(--ease-standard),
+    gap var(--dur-medium) var(--ease-standard);
 }
 
 .sidebar.sidebar-collapsed .nav-link-image {

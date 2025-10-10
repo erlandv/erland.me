@@ -102,7 +102,7 @@
   font-weight: 600;
   border: 1px solid rgba(var(--color-primary-rgb), 0.35);
   border-radius: 8px;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
+  padding: clamp(var(--space-2), 1.8vw, var(--space-3)) clamp(14px, 2.5vw, var(--space-5));
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
@@ -120,8 +120,8 @@
 }
 
 .download-card-button-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   color: currentColor;
 }
 

@@ -6,7 +6,7 @@
   font-size: clamp(12px, 2vw, 14px);
   line-height: 1.6;
   width: 100%;
-  margin-top: clamp(24px, 4vw, 32px); /* give a bit more breathing room */
+  margin-top: clamp(var(--space-6), 4vw, var(--space-8)); /* give a bit more breathing room */
   padding-bottom: 12px;
   font-weight: 400;
 }
@@ -63,7 +63,7 @@
     text-align: left;
     gap: 0;
     align-items: center;
-    padding: 24px 0px;
+    padding: var(--space-6) 0px;
   }
   .footer-copy,
   .footer-powered {
@@ -77,6 +77,6 @@
     margin-top: 60px;
   }
   .footer-inner {
-    padding: 20px 0px;
+    padding: var(--space-5) 0px;
   }
 }
