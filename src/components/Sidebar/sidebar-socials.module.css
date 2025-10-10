@@ -6,7 +6,7 @@
 }
 
 .social-link {
-  color: #d6d6d6;
+  color: var(--text-secondary);
   opacity: 0.9;
   display: inline-flex;
   align-items: center;
@@ -21,9 +21,9 @@
 }
 
 .social-link:hover {
-  color: #fff;
+  color: var(--text-primary);
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--overlay-008);
 }
 
 .social-icon {
@@ -37,7 +37,6 @@
   height: 22px !important;
 }
 
-/* Sidebar placement variants */
 :global(.sidebar) .socials--sidebar {
   margin-top: auto;
   padding-top: 12px;
@@ -50,7 +49,7 @@
 
 @media screen and (max-width: 1024px) {
   :global(.sidebar) .socials--sidebar {
-    display: none !important; /* hidden on mobile; space is handled inside component CSS */
+    display: none !important;
   }
 
   :global(.w-nav[data-collapse='medium'])
@@ -61,8 +60,8 @@
     justify-content: flex-start;
     gap: 18px;
     padding: 4%;
-    border-top: 1px solid #353535;
+    border-top: 1px solid var(--border-color);
     margin-top: auto;
-    background-color: #1c1c1c;
+    background-color: var(--bg-overlay);
   }
 }

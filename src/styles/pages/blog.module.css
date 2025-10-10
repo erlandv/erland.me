@@ -23,7 +23,7 @@
 /* subtle divider between items for better readability */
 .blog-post__meta-item + .blog-post__meta-item {
   padding-left: 12px;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 1px solid var(--overlay-012);
 }
 
 .blog-post__meta-icon {
@@ -88,7 +88,7 @@
   border-radius: 8px;
   padding: 12px 14px;
   margin: 16px 0;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--overlay-005);
 }
 
 :global(.prose .toc__header) {

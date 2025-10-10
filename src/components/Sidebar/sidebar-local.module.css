@@ -1,0 +1,288 @@
+/* Sidebar component-scoped styles migrated from inline <style> */
+
+:global(.nav-toggle),
+:global(.sidebar-toggle) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+:global(.navbar-icon-button) {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.navbar-icon) {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+:global(.icon-switch) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  --icon-xform: rotate(0deg) scale(1);
+  transform: translate(-50%, -50%) var(--icon-xform);
+  transform-origin: center;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+:global(.icon-switch--menu) {
+  opacity: 1;
+  --icon-xform: rotate(0deg) scale(1);
+}
+
+:global(.icon-switch--close) {
+  opacity: 0;
+  --icon-xform: rotate(-90deg) scale(0.9);
+}
+
+:global(.sidebar-toggle-button) {
+  cursor: pointer;
+}
+
+:global(.sidebar-toggle-button:hover) :global(.sidebar-toggle-icon) {
+  opacity: 1;
+}
+
+:global(.sidebar) {
+  perspective: 800px;
+}
+
+:global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image) {
+  transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: 50% 50%;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  will-change: transform;
+}
+
+:global(html.sidebar-collapsed-global)
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(html[data-sidebar='collapsed'])
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(body.sidebar-collapsed)
+  :global(.sidebar)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(.sidebar.sidebar-collapsed)
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image),
+:global(.sidebar:has(#sidebar-toggle:checked))
+  :global(.sidebar-toggle-button)
+  :global(.nav-link-image) {
+  transform: scaleX(-1) scale(0.96);
+}
+
+@media (max-width: 1024px) {
+  :global(.sidebar) {
+    position: relative;
+    width: 100% !important;
+    height: auto;
+    max-width: 100%;
+    padding: 24px !important;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  :global(.nav-content) {
+    height: auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.navbar-icon) {
+    color: #fff;
+    font-size: 32px;
+    transition: all 0.2s ease-in-out;
+    transform-origin: center;
+  }
+
+  :global(.navbar-icon-button) {
+    padding: 12px;
+    transition: all 0.24s;
+  }
+
+  :global(.navbar-icon.icon-transitioning) {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+
+  :global(.navbar-icon[data-icon='close']) {
+    transform: rotate(0deg);
+  }
+
+  :global(.navbar-icon[data-icon='menu']) {
+    transform: rotate(0deg);
+  }
+
+  :global(.sidebar) {
+    transform: none !important;
+    -webkit-transform: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    perspective: none !important;
+  }
+
+  :global(html.sidebar-collapsed-global) :global(.sidebar),
+  :global(html[data-sidebar='collapsed']) :global(.sidebar),
+  :global(body.sidebar-collapsed) :global(.sidebar) {
+    width: 100% !important;
+    padding: 24px !important;
+  }
+
+  :global(.sidebar-toggle-button),
+  :global(.sidebar:has(#sidebar-toggle:checked))
+    :global(.sidebar-toggle-button),
+  :global(html.sidebar-collapsed-global)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(html[data-sidebar='collapsed'])
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(body.sidebar-collapsed)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button) {
+    display: none !important;
+  }
+
+  :global(.w-nav-brand) {
+    position: relative;
+    z-index: 1301;
+  }
+
+  :global(.navbar-icon-button) {
+    position: relative;
+    z-index: 1301;
+    display: inline-flex;
+  }
+
+  :global(.sidebar) :global(.w-nav-menu) {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 92px;
+    padding-bottom: 8px;
+    background-color: var(--bg-overlay);
+    z-index: 1200;
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease,
+      visibility 0s linear 220ms;
+    will-change: transform, opacity;
+  }
+
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+    align-items: stretch !important;
+  }
+
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-text),
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.profile-text) {
+    opacity: 1 !important;
+    max-width: 100% !important;
+    pointer-events: auto !important;
+  }
+
+  :global(.nav-toggle:checked)
+    ~ :global(.w-nav-menu)
+    :global(.nav-link-container) {
+    width: auto !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 28px 12px 32px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.socials--menu) {
+    display: flex !important;
+    position: static;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 12px 28px 12px 32px;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+    background-color: var(--bg-overlay);
+  }
+
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--menu) {
+    opacity: 0;
+    --icon-xform: rotate(90deg) scale(0.9);
+  }
+
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--close) {
+    opacity: 1;
+    --icon-xform: rotate(0deg) scale(1);
+  }
+}
+
+@media (min-width: 1025px) {
+  :global(.sidebar) {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    align-self: flex-start;
+    overflow-y: auto;
+  }
+
+  :global(.navbar-icon-button) {
+    display: none;
+  }
+
+  :global(.sidebar-toggle-button) {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 767px) {
+  :global(.sidebar) {
+    padding-left: 24px;
+    padding-right: 18px;
+  }
+}

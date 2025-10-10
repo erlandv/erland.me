@@ -55,13 +55,13 @@ section {
 
 a {
   background-color: rgba(0, 0, 0, 0);
-  color: #428dff;
+  color: var(--color-primary);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 a:hover {
-  color: #33e1ff;
+  color: var(--color-secondary);
 }
 
 a:active,

@@ -1,6 +1,5 @@
 .download-intro {
   max-width: 620px;
-  color: #d6d6d6;
   line-height: 26px;
   display: grid;
   gap: 16px;
@@ -64,7 +63,7 @@
   margin: 0;
   font-size: clamp(1.1rem, 3vw, 1.3rem);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
   line-height: 1.3;
 }
 
@@ -80,7 +79,7 @@
 
 .download-card-desc {
   margin: 0;
-  color: #d0d0d0;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: clamp(0.9rem, 2.2vw, 1rem);
   font-weight: 400;
@@ -116,7 +115,7 @@
 
 .download-card-button:hover {
   background: rgba(var(--color-primary-rgb), 0.12);
-  color: #fff;
+  color: var(--text-primary);
   border-color: rgba(var(--color-primary-rgb), 0.6);
 }
 
@@ -157,13 +156,13 @@
 }
 
 .download-richtext h2 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.6rem;
   margin: 1.2rem 0 0.6rem;
 }
 
 .download-richtext h3 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.3rem;
   margin: 1rem 0 0.5rem;
 }
@@ -194,7 +193,7 @@
 
 .download-richtext figcaption {
   font-size: clamp(0.85rem, 2vw, 0.95rem);
-  color: #a0a0a0;
+  color: var(--text-muted);
   text-align: center;
   line-height: 1.5;
   font-style: italic;
@@ -206,14 +205,14 @@
   transition: all 0.2s ease;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--overlay-005);
 }
 
 .download-richtext figure:hover figcaption,
 .download-richtext .prose-figure:hover figcaption {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--overlay-005);
+  border-color: var(--overlay-010);
 }
 
 .download-richtext a {
@@ -229,7 +228,7 @@
 }
 
 .download-richtext strong {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .download-files {
@@ -253,7 +252,7 @@
 .download-files-title {
   margin: 0;
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .download-gallery {
@@ -271,8 +270,8 @@
 
 .download-files-table th,
 .download-files-table td {
-  border-top: 1px solid #2f2f2f;
-  border-right: 1px solid #2f2f2f;
+  border-top: 1px solid var(--divider-weak);
+  border-right: 1px solid var(--divider-weak);
   padding: 16px 18px;
   text-align: left;
   color: #d6d6d6;
@@ -302,7 +301,7 @@
 }
 
 .download-files-link {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 600;
   text-decoration: underline;
 }
@@ -313,7 +312,7 @@
 
 .download-files-note {
   margin: 0;
-  color: #b0b0b0;
+  color: var(--text-subtle);
   line-height: 1.7;
 }
 
@@ -417,7 +416,7 @@
 .content-image-grid figcaption,
 .download-image-grid figcaption {
   font-size: clamp(0.85rem, 2vw, 0.95rem);
-  color: #a0a0a0;
+  color: var(--text-muted);
   text-align: center;
   line-height: 1.5;
   font-style: italic;
@@ -428,14 +427,14 @@
   word-wrap: break-word;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--overlay-005);
 }
 
 .content-image-grid figure:hover figcaption,
 .download-image-grid figure:hover figcaption {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--overlay-005);
+  border-color: var(--overlay-010);
 }
 .download-richtext a::after {
   content: '';
