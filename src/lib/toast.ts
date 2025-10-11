@@ -1,3 +1,5 @@
+import '../styles/toast.css';
+
 // Lightweight toast notification utility
 // Creates a container and shows ephemeral messages matching site theme.
 

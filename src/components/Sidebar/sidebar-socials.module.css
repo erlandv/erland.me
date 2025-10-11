@@ -43,6 +43,24 @@
   border-top: 1px solid var(--border-color);
 }
 
+:global(html.sidebar-collapsed-global)
+  :global(.sidebar)
+  :global(.socials--sidebar),
+:global(html[data-sidebar='collapsed'])
+  :global(.sidebar)
+  :global(.socials--sidebar),
+:global(body.sidebar-collapsed) :global(.sidebar) :global(.socials--sidebar),
+:global(.sidebar.sidebar-collapsed) :global(.socials--sidebar),
+:global(.sidebar:has(#sidebar-toggle:checked)) :global(.socials--sidebar) {
+  width: var(--sidebar-collapsed-item-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--sidebar-collapsed-item-padding);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
 :global(.w-nav) :global(.socials--menu) {
   display: none;
 }
