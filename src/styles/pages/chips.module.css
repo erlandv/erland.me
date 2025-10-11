@@ -47,3 +47,9 @@
   padding: var(--space-2) var(--space-3);
   font-size: clamp(12px, 1.8vw, 13px);
 }
+
+.tech-tools-container {
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
+}

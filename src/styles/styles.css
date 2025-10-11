@@ -649,26 +649,9 @@ p {
 
 /* Chips styles migrated to src/styles/pages/chips.module.css */
 
-.single-item {
-  font-size: clamp(16px, 2vw, 17px);
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
+/* single-item provided by component module; tech-tools moved to chips.module.css */
 
-.tech-tools-container {
-  flex-direction: column;
-  justify-content: flex-end;
-  display: flex;
-}
-
-.project-desc {
-  color: var(--text-gray);
-  line-height: 28px;
-}
-
-.project-desc.project-desc-list {
-  margin-left: -24px;
-}
+/* project-desc styles are handled in src/components/Project/project.module.css */
 
 .content-container {
   grid-column-gap: 32px;
@@ -709,11 +692,7 @@ p {
   }
 }
 
-.projects-category-image {
-  width: 82px;
-  height: 82px;
-  color: #fff;
-}
+/* projects-category-image now provided by portfolio.module.css */
 
 @media screen and (max-width: 1024px) {
   .content {
@@ -742,10 +721,7 @@ p {
     grid-row-gap: 68px;
   }
 
-  .projects-category-image {
-    width: 64px;
-    height: 64px;
-  }
+  /* projects-category-image responsive sizing handled in portfolio.module.css */
 
   .download-page {
     gap: 32px;
@@ -762,9 +738,7 @@ p {
   padding-top: 3rem;
 }
 
-.blog-post {
-  max-width: 780px;
-}
+/* blog-post class removed (unused) */
 
 a:focus-visible,
 button:focus-visible,

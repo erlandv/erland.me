@@ -31,12 +31,12 @@ import btn from '../styles/pages/button.module.css';
     <div class={pf['projects-container']}>
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container']}>
-          <Icon name='browser' class='projects-category-image' />
+          <Icon name='browser' class={pf['projects-category-image']} />
         </div>
       </div>
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
-        <div class='tech-tools-container'>
+        <div class={chips['tech-tools-container']}>
           <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
           <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
             <div class:list={[chips['single-chip'], chips['small-chip']]}>Node.js</div>
@@ -54,12 +54,12 @@ import btn from '../styles/pages/button.module.css';
     <div class={pf['projects-container']}>
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container'] + ' devops-img'}>
-          <Icon name='database' class='projects-category-image' />
+          <Icon name='database' class={pf['projects-category-image']} />
         </div>
       </div>
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
-        <div class='tech-tools-container'>
+        <div class={chips['tech-tools-container']}>
           <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
           <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
             <div class:list={[chips['single-chip'], chips['small-chip']]}>Terraform</div>
