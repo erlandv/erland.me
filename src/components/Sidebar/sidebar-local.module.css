@@ -231,7 +231,7 @@
     justify-content: flex-start !important;
     align-items: center !important;
     gap: 12px !important;
-    padding: 12px 28px 12px 32px !important;
+    padding: 12px 18px 12px 24px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
@@ -241,7 +241,7 @@
     position: static;
     justify-content: flex-start;
     gap: 18px;
-    padding: 12px 28px 12px 32px;
+    padding: 12px 18px 12px 24px;
     border-top: 1px solid var(--border-color);
     margin-top: auto;
     background-color: var(--bg-overlay);
