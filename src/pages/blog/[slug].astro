@@ -59,7 +59,7 @@ const jsonLd = blogPostingJsonLd({
   author="Erland Ramdhani"
 >
   <BackNav href="/blog/" label="Back to Blog" />
-  <article class="content-container blog-post">
+  <article class:list={["content-container", blogStyles.blogPost]}>
     <header class={blogStyles['blog-post__header']}>
       {hero && (
         <HeroImage image={hero} alt={heroAlt} loading="eager" />

@@ -4,6 +4,7 @@ import Icon from '../components/Icon.astro';
 import BackNav from '../components/BackNav.astro';
 import pf from '../styles/pages/portfolio.module.css';
 import fold from '../styles/pages/fold.module.css';
+import chips from '../styles/pages/chips.module.css';
 ---
 
 <SiteLayout
@@ -27,24 +28,24 @@ import fold from '../styles/pages/fold.module.css';
     <div class={pf['projects-container']}>
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container']}>
-          <Icon name='browser' class='projects-category-image' />
+          <Icon name='browser' class={pf['projects-category-image']} />
         </div>
       </div>
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
-        <div class='tech-tools-container'>
-          <div class='mini-label-white gray-color'>
+        <div class={chips['tech-tools-container']}>
+          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
             Technologies &amp; tools
           </div>
-          <div class='chips-container chips-container-small-width'>
-            <div class='single-chip small-chip'>Node.js</div>
-            <div class='single-chip small-chip'>TypeScript</div>
-            <div class='single-chip small-chip'>Next.js</div>
-            <div class='single-chip small-chip'>React</div>
-            <div class='single-chip small-chip'>Tailwind CSS</div>
-            <div class='single-chip small-chip'>PostgreSQL</div>
-            <div class='single-chip small-chip'>Vite</div>
-            <div class='single-chip small-chip'>Git</div>
+          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Node.js</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>TypeScript</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Next.js</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>React</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Tailwind CSS</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>PostgreSQL</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Vite</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Git</div>
           </div>
         </div>
       </div>
@@ -52,24 +53,24 @@ import fold from '../styles/pages/fold.module.css';
     <div class={pf['projects-container']}>
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container'] + ' devops-img'}>
-          <Icon name='database' class='projects-category-image' />
+          <Icon name='database' class={pf['projects-category-image']} />
         </div>
       </div>
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
-        <div class='tech-tools-container'>
-          <div class='mini-label-white gray-color'>
+        <div class={chips['tech-tools-container']}>
+          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
             Technologies &amp; tools
           </div>
-          <div class='chips-container chips-container-small-width'>
-            <div class='single-chip small-chip'>Terraform</div>
-            <div class='single-chip small-chip'>Docker</div>
-            <div class='single-chip small-chip'>Kubernetes</div>
-            <div class='single-chip small-chip'>Bash</div>
-            <div class='single-chip small-chip'>Github Actions</div>
-            <div class='single-chip small-chip'>AWS</div>
-            <div class='single-chip small-chip'>Azure</div>
-            <div class='single-chip small-chip'>GCP</div>
+          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Terraform</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Docker</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Kubernetes</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Bash</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Github Actions</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>AWS</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Azure</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>GCP</div>
           </div>
         </div>
       </div>
@@ -77,25 +78,25 @@ import fold from '../styles/pages/fold.module.css';
     <div class={pf['projects-container']}>
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container']}>
-          <Icon name='personal' class='projects-category-image' />
+          <Icon name='personal' class={pf['projects-category-image']} />
         </div>
       </div>
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/personal-projects/'>Personal Projects</a></h3>
-        <div class='tech-tools-container'>
-          <div class='mini-label-white gray-color'>
+        <div class={chips['tech-tools-container']}>
+          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
             Technologies &amp; tools
           </div>
-          <div class='chips-container chips-container-small-width'>
-            <div class='single-chip small-chip'>Nginx</div>
-            <div class='single-chip small-chip'>Apache</div>
-            <div class='single-chip small-chip'>Redis</div>
-            <div class='single-chip small-chip'>PHP</div>
-            <div class='single-chip small-chip'>CSS</div>
-            <div class='single-chip small-chip'>JavaScript</div>
-            <div class='single-chip small-chip'>MySQL</div>
-            <div class='single-chip small-chip'>MariaDB</div>
-            <div class='single-chip small-chip'>Certbot</div>
+          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Nginx</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Apache</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Redis</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>PHP</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>CSS</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>JavaScript</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>MySQL</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>MariaDB</div>
+            <div class:list={[chips['single-chip'], chips['small-chip']]}>Certbot</div>
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@ const byCategory = categories.map(cat => {
         categories.map(c => (
           <a
             href={`#cat-${c.slug}-page-1`}
-            class='cat-filter-btn'
+            class:list={['cat-filter-btn', 'btn']}
             data-cat={c.slug}
           >
             {c.name}

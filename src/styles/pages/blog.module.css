@@ -1,13 +1,13 @@
 .blog-post__header {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .blog-post__meta {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
   color: rgba(214, 214, 214, 0.9);
   margin-top: 6px;
@@ -22,7 +22,7 @@
 
 /* subtle divider between items for better readability */
 .blog-post__meta-item + .blog-post__meta-item {
-  padding-left: 12px;
+  padding-left: var(--space-3);
   border-left: 1px solid var(--overlay-012);
 }
 
@@ -40,8 +40,8 @@
   text-transform: capitalize;
   border-bottom: 1px dashed var(--text-muted);
   transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+    color 0.15s var(--ease-standard),
+    border-color 0.15s var(--ease-standard);
 }
 
 .blog-post__meta time {
@@ -55,7 +55,7 @@
   text-decoration: none;
   position: relative;
   display: inline-block;
-  transition: color 0.3s ease;
+  transition: color 0.3s var(--ease-standard);
 }
 
 :global(.prose) a::after {
@@ -66,7 +66,7 @@
   width: 0;
   height: 1.5px;
   background: var(--color-secondary);
-  transition: width 0.3s ease;
+  transition: width 0.3s var(--ease-standard);
 }
 
 :global(.prose) a:hover {
@@ -85,9 +85,9 @@
 /* --- Table of Contents styles --- */
 :global(.prose .toc) {
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   padding: 12px 14px;
-  margin: 16px 0;
+  margin: var(--space-4) 0;
   background: var(--overlay-005);
 }
 
@@ -97,7 +97,8 @@
   justify-content: space-between;
   gap: 8px;
   vertical-align: middle;
-  cursor: pointer; /* header clickable */
+  cursor: pointer;
+  /* header clickable */
 }
 
 :global(.prose .toc__title) {
@@ -163,6 +164,7 @@
 :global(.prose .toc__item--h3) {
   margin-left: 0;
 }
+
 :global(.prose .toc__item--h3)::before {
   background: transparent;
   border: 2px solid currentColor;
@@ -171,11 +173,13 @@
 }
 
 :global(.prose .toc__item--h2) {
-  margin: 8px 0 2px;
+  margin: var(--space-2) 0 2px;
 }
+
 :global(.prose .toc__sublist) {
   margin-top: 2px;
 }
+
 :global(.prose .toc__item--h3) {
   margin: 2px 0;
 }

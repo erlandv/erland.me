@@ -37,24 +37,24 @@
   height: 22px !important;
 }
 
-:global(.sidebar) .socials--sidebar {
+:global(.sidebar) :global(.socials--sidebar) {
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid var(--border-color);
 }
 
-:global(.w-nav) .socials--menu {
+:global(.w-nav) :global(.socials--menu) {
   display: none;
 }
 
 @media screen and (max-width: 1024px) {
-  :global(.sidebar) .socials--sidebar {
+  :global(.sidebar) :global(.socials--sidebar) {
     display: none !important;
   }
 
   :global(.w-nav[data-collapse='medium'])
     :global(.w-nav-menu.is-visible)
-    .socials--menu {
+    :global(.socials--menu) {
     display: flex !important;
     position: static;
     justify-content: flex-start;
