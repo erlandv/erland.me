@@ -38,7 +38,10 @@
   margin-top: 0.5rem;
   padding: var(--space-2) var(--space-4);
   opacity: 0.9;
-  transition: all 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   word-wrap: break-word;
   border-radius: var(--radius-sm);
   background: var(--overlay-005);

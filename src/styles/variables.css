@@ -5,6 +5,7 @@
   --color-primary-rgb: 66, 141, 255;
   --color-secondary: #33e1ff;
   --color-secondary-rgb: 51, 225, 255;
+  --text-accent: rgba(var(--color-primary-rgb), 0.85);
   /* Theme neutrals */
   --text-primary: #ffffff;
   --text-secondary: #d0d0d0;

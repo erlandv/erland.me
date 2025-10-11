@@ -1,17 +1,9 @@
-/* Base resets and element defaults live in src/styles/base.css.
-   Keep only project-specific overrides here. */
-
 .w-inline-block {
   max-width: 100%;
   display: inline-block;
 }
 
-/* Heading scale is defined in base.css; color/margins are adjusted below. */
-
-/* Paragraph spacing handled in base.css; keep color overrides later. */
-
 ul {
-  /* Override base.css indent to tighter 30px without touching margins */
   padding-left: 30px;
 }
 
@@ -21,14 +13,11 @@ ul {
   }
 }
 
-#blog-content .adsbygoogle,
-#download-content .adsbygoogle,
-.content-container > .adsbygoogle {
+:is(#blog-content, #download-content, .content-container > .adsbygoogle) {
   display: block !important;
   margin: 1.25rem auto;
   padding: 0.5rem 0;
   max-width: 100%;
-  text-align: center;
 }
 
 .ad-placeholder {
@@ -54,18 +43,14 @@ ul {
 }
 
 @media screen and (max-width: 640px) {
-  #blog-content .adsbygoogle,
-  #download-content .adsbygoogle,
-  .content-container > .adsbygoogle {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
     margin: 0.75rem auto;
     padding: 0.25rem 0;
   }
 }
 
 @media screen and (min-width: 641px) and (max-width: 1024px) {
-  #blog-content .adsbygoogle,
-  #download-content .adsbygoogle,
-  .content-container > .adsbygoogle {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
     margin: 1rem auto;
     padding: 0.4rem 0;
   }
@@ -122,9 +107,6 @@ ul {
 
 .w-nav-button:focus {
   outline: 0;
-}
-
-@media screen and (max-width: 1024px) {
 }
 
 body {
@@ -748,4 +730,15 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
   font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

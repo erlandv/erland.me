@@ -118,13 +118,19 @@
   :global(.navbar-icon) {
     color: #fff;
     font-size: 32px;
-    transition: all 0.2s ease-in-out;
+    transition:
+      transform 0.2s ease-in-out,
+      opacity 0.2s ease-in-out,
+      color 0.2s ease-in-out;
     transform-origin: center;
   }
 
   :global(.navbar-icon-button) {
     padding: 12px;
-    transition: all 0.24s;
+    transition:
+      background-color 0.24s ease,
+      box-shadow 0.24s ease,
+      transform 0.24s ease;
   }
 
   :global(.navbar-icon.icon-transitioning) {

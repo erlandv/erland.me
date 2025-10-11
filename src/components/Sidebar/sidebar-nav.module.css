@@ -22,7 +22,12 @@
   min-height: 44px;
   text-decoration: none;
   display: flex;
-  transition: all 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   transform: translateX(0);
   font-size: clamp(14px, 2vw, 16px);
   font-weight: 500;
@@ -53,9 +58,13 @@
   transform: translateX(0);
 }
 
-html.sidebar-collapsed-global .sidebar :global(.nav-link-container),
-html[data-sidebar='collapsed'] .sidebar :global(.nav-link-container),
-body.sidebar-collapsed .sidebar :global(.nav-link-container) {
+:is(
+    html.sidebar-collapsed-global,
+    html[data-sidebar='collapsed'],
+    body.sidebar-collapsed
+  )
+  .sidebar
+  :global(.nav-link-container) {
   justify-content: center !important;
   align-items: center !important;
   padding: 12px 8px !important;
@@ -72,9 +81,13 @@ body.sidebar-collapsed .sidebar :global(.nav-link-container) {
     gap 220ms ease;
 }
 
-html.sidebar-collapsed-global .sidebar :global(.nav-link-image),
-html[data-sidebar='collapsed'] .sidebar :global(.nav-link-image),
-body.sidebar-collapsed .sidebar :global(.nav-link-image) {
+:is(
+    html.sidebar-collapsed-global,
+    html[data-sidebar='collapsed'],
+    body.sidebar-collapsed
+  )
+  .sidebar
+  :global(.nav-link-image) {
   margin: 0 auto !important;
   width: 24px;
   height: 24px;
