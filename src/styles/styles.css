@@ -647,7 +647,6 @@ p {
   display: flex;
 }
 
-
 .content-container {
   grid-column-gap: 32px;
   grid-row-gap: 32px;
@@ -687,7 +686,6 @@ p {
   }
 }
 
-
 @media screen and (max-width: 1024px) {
   .content {
     flex-direction: column;
@@ -715,7 +713,6 @@ p {
     grid-row-gap: 68px;
   }
 
-
   .download-page {
     gap: 32px;
   }
@@ -730,7 +727,6 @@ p {
 .prose pre[class*='language-'] {
   padding-top: 3rem;
 }
-
 
 a:focus-visible,
 button:focus-visible,

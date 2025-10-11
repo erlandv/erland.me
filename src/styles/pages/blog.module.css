@@ -21,7 +21,7 @@
 }
 
 /* subtle divider between items for better readability */
-.blog-post__meta-item+.blog-post__meta-item {
+.blog-post__meta-item + .blog-post__meta-item {
   padding-left: var(--space-3);
   border-left: 1px solid var(--overlay-012);
 }
