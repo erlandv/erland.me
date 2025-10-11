@@ -1,5 +1,10 @@
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
+:root {
+  --sidebar-collapsed-item-width: 60px;
+  --sidebar-collapsed-item-padding: var(--space-3);
+}
+
 body:has(.sidebar .nav-toggle:checked) {
   overflow: hidden;
   touch-action: none;
@@ -177,10 +182,10 @@ body:has(.sidebar .nav-toggle:checked) {
   .nav-link-container {
   justify-content: center !important;
   align-items: center !important;
-  padding: 10px 6px !important;
+  padding: var(--sidebar-collapsed-item-padding) !important;
   margin-bottom: 8px !important;
   min-height: 44px !important;
-  width: 60px !important;
+  width: var(--sidebar-collapsed-item-width) !important;
   margin-left: auto !important;
   margin-right: auto !important;
   gap: 0 !important;
@@ -201,17 +206,18 @@ body:has(.sidebar .nav-toggle:checked) {
 
 .sidebar.sidebar-collapsed .w-nav-menu {
   align-items: flex-start !important;
+  gap: 0px !important;
 }
 
 .sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button {
   display: inline-flex !important;
-  width: 60px !important;
-  height: 44px !important;
+  width: var(--sidebar-collapsed-item-width) !important;
+  min-height: 44px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   justify-content: center !important;
   align-items: center !important;
-  padding: 0 !important;
+  padding: var(--sidebar-collapsed-item-padding) !important;
   margin-bottom: var(--space-2) !important;
   border-radius: var(--radius-md) !important;
 }
