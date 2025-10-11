@@ -1,0 +1,49 @@
+/* Chips and mini label styles extracted from global styles */
+
+.mini-label-white {
+  color: var(--text-primary);
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  margin-top: clamp(20px, 4vw, 28px);
+  font-family:
+    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.gray-color {
+  color: var(--text-gray);
+}
+
+.chips-container {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 8px;
+  display: flex;
+}
+
+.chips-container-small-width {
+  max-width: 380px;
+}
+
+.single-chip {
+  color: #ffffff;
+  background-color: var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-family:
+    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.small-chip {
+  padding: var(--space-2) var(--space-3);
+  font-size: clamp(12px, 1.8vw, 13px);
+}

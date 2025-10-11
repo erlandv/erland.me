@@ -71,21 +71,6 @@ ul {
   }
 }
 
-.w-richtext:before,
-.w-richtext:after {
-  content: ' ';
-  grid-area: 1 / 1 / 2 / 2;
-  display: table;
-}
-
-.w-richtext:after {
-  clear: both;
-}
-
-.w-richtext ul {
-  overflow: hidden;
-}
-
 .w-nav {
   z-index: 1000;
   background: #ddd;
@@ -120,8 +105,6 @@ ul {
   flex-direction: column;
   gap: 8px;
 }
-
-/* Mobile nav/menu is handled by sidebar-local.module.css */
 
 .w-nav-button {
   float: right;
@@ -664,53 +647,7 @@ p {
   display: flex;
 }
 
-.mini-label-white {
-  color: #ffffff;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  margin-top: clamp(20px, 4vw, 28px);
-  font-family:
-    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
-  font-size: clamp(12px, 2vw, 14px);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.mini-label-white.gray-color {
-  color: var(--text-gray);
-}
-
-.chips-container {
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  margin-top: 8px;
-  display: flex;
-}
-
-.chips-container.chips-container-small-width {
-  max-width: 380px;
-}
-
-.single-chip {
-  color: #ffffff;
-  background-color: var(--border-color);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  font-family:
-    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
-  font-size: clamp(12px, 2vw, 14px);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.single-chip.small-chip {
-  padding: var(--space-2) var(--space-3);
-  font-size: clamp(12px, 1.8vw, 13px);
-}
+/* Chips styles migrated to src/styles/pages/chips.module.css */
 
 .single-item {
   font-size: clamp(16px, 2vw, 17px);
@@ -723,8 +660,6 @@ p {
   justify-content: flex-end;
   display: flex;
 }
-
-/* BackNav styles are provided by back-nav.module.css */
 
 .project-desc {
   color: var(--text-gray);
@@ -802,8 +737,6 @@ p {
     margin-bottom: 24px;
   }
 
-  /* Mobile socials menu padding handled by sidebar-local.module.css */
-
   .projects-section {
     grid-column-gap: 68px;
     grid-row-gap: 68px;
@@ -823,19 +756,11 @@ p {
   }
 }
 
-/* Socials styles are scoped in src/components/Sidebar/sidebar-socials.module.css */
-
 .prose pre:has(.code-copy-btn),
 .prose pre[data-language],
 .prose pre[class*='language-'] {
   padding-top: 3rem;
 }
-
-/* Social icon sizing handled by sidebar-socials.module.css */
-
-/* Socials container rules are in module */
-
-/* Mobile menu + socials visibility handled by sidebar-local.module.css */
 
 .blog-post {
   max-width: 780px;
