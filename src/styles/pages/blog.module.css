@@ -206,3 +206,6 @@
 :global(.prose .toc__anchor:hover) {
   border-bottom-color: var(--color-secondary);
 }
+:global(.blog-post) {
+  max-width: 780px;
+}
