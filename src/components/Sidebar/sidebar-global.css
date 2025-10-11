@@ -300,6 +300,7 @@ body:has(.sidebar .nav-toggle:checked) {
   border-color: var(--border-color);
   box-shadow: 0 2px 8px var(--shadow-030);
 }
+
 /* Ensure the nav menu inside sidebar uses a vertical flex layout by default */
 :global(.sidebar) :global(.w-nav-menu) {
   display: flex;

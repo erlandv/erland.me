@@ -1,117 +1,3 @@
-/* Utility elements */
-.w-inline-block {
-  max-width: 100%;
-  display: inline-block;
-}
-
-ul {
-  padding-left: 30px;
-}
-
-/* Advertising placements */
-:is(#blog-content, #download-content, .content-container > .adsbygoogle) {
-  display: block !important;
-  margin: 1.25rem auto;
-  padding: 0.5rem 0;
-  max-width: 100%;
-}
-
-.ad-placeholder {
-  display: block;
-  width: 100%;
-  margin: 1rem auto;
-  padding: 0.75rem 1rem;
-  border: 2px dashed var(--border);
-  border-radius: 8px;
-  color: var(--text-muted);
-  background: var(--bg-tertiary);
-  text-align: center;
-  font-size: 0.95rem;
-  font-family: 'Agave Nerd Font', ui-monospace, monospace;
-}
-
-@media screen and (max-width: 640px) {
-  .ad-placeholder {
-    margin: 0.5rem auto;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
-    margin: 0.75rem auto;
-    padding: 0.25rem 0;
-  }
-}
-
-@media screen and (min-width: 641px) and (max-width: 1024px) {
-  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
-    margin: 1rem auto;
-    padding: 0.4rem 0;
-  }
-}
-
-/* Navigation scaffold */
-.w-nav {
-  z-index: 1000;
-  background: #ddd;
-  position: relative;
-}
-
-.w-nav:before,
-.w-nav:after {
-  content: ' ';
-  grid-area: 1 / 1 / 2 / 2;
-  display: table;
-}
-
-.w-nav:after {
-  clear: both;
-}
-
-.w-nav-brand {
-  float: left;
-  color: #333;
-  text-decoration: none;
-  position: relative;
-}
-
-.w-nav-menu {
-  float: right;
-  position: relative;
-}
-
-.sidebar .w-nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.w-nav-button {
-  float: right;
-  cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  padding: 18px;
-  font-size: 24px;
-  display: none;
-  position: relative;
-}
-
-.w-nav-button:focus {
-  outline: 0;
-}
-
-@media screen and (max-width: 767px) {
-  .w-nav-brand {
-    padding-left: 10px;
-  }
-}
-
 /* Base typography */
 body {
   color: var(--text-secondary);
@@ -467,5 +353,119 @@ code {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Navigation scaffold */
+.w-nav {
+  z-index: 1000;
+  background: #ddd;
+  position: relative;
+}
+
+.w-nav:before,
+.w-nav:after {
+  content: ' ';
+  grid-area: 1 / 1 / 2 / 2;
+  display: table;
+}
+
+.w-nav:after {
+  clear: both;
+}
+
+.w-nav-brand {
+  float: left;
+  color: #333;
+  text-decoration: none;
+  position: relative;
+}
+
+.w-nav-menu {
+  float: right;
+  position: relative;
+}
+
+.sidebar .w-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.w-nav-button {
+  float: right;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 18px;
+  font-size: 24px;
+  display: none;
+  position: relative;
+}
+
+.w-nav-button:focus {
+  outline: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .w-nav-brand {
+    padding-left: 10px;
+  }
+}
+
+/* Utility elements */
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
+
+ul {
+  padding-left: 30px;
+}
+
+/* Advertising placements */
+:is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+  display: block !important;
+  margin: 1.25rem auto;
+  padding: 0.5rem 0;
+  max-width: 100%;
+}
+
+.ad-placeholder {
+  display: block;
+  width: 100%;
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  text-align: center;
+  font-size: 0.95rem;
+  font-family: 'Agave Nerd Font', ui-monospace, monospace;
+}
+
+@media screen and (max-width: 640px) {
+  .ad-placeholder {
+    margin: 0.5rem auto;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+    margin: 0.75rem auto;
+    padding: 0.25rem 0;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+    margin: 1rem auto;
+    padding: 0.4rem 0;
   }
 }

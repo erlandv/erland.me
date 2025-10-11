@@ -20,7 +20,6 @@
   font-size: 0.9rem;
 }
 
-/* subtle divider between items for better readability */
 .blog-post__meta-item + .blog-post__meta-item {
   padding-left: var(--space-3);
   border-left: 1px solid var(--overlay-012);
@@ -32,7 +31,6 @@
   color: var(--text-muted);
 }
 
-/* Link + date styles within meta */
 .blog-post__meta a {
   color: var(--text-muted);
   font-size: 16px;
@@ -49,7 +47,6 @@
   font-size: 16px;
 }
 
-/* Link styling inside blog content (prose) */
 :global(.prose) a {
   color: var(--color-primary);
   text-decoration: none;
@@ -82,7 +79,6 @@
   white-space: nowrap;
 }
 
-/* --- Table of Contents styles --- */
 :global(.prose .toc) {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -98,7 +94,6 @@
   gap: 8px;
   vertical-align: middle;
   cursor: pointer;
-  /* header clickable */
 }
 
 :global(.prose .toc__title) {
@@ -202,7 +197,6 @@
   content: none;
 }
 
-/* anchor underline hover effect scoped to prose */
 :global(.prose .toc__anchor) {
   border-bottom: 1px solid transparent;
 }
