@@ -1,0 +1,31 @@
+.hero-image {
+  display: block;
+  width: clamp(220px, 45vw, 320px);
+  height: auto;
+  border-radius: 18px;
+  margin: 0 auto 1.5rem;
+  padding: 18px;
+  background: radial-gradient(
+    circle at top,
+    rgba(79, 148, 255, 0.16),
+    transparent 70%
+  );
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+  object-fit: contain;
+}
+
+.hero-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(214, 214, 214, 0.9);
+  min-height: clamp(200px, 45vw, 280px);
+}
+
+@media (max-width: 640px) {
+  .hero-image {
+    width: clamp(180px, 60vw, 320px);
+    padding: 14px;
+  }
+}

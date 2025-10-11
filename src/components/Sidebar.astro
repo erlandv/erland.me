@@ -1,10 +1,10 @@
 ---
 const { selectedItem } = Astro.props;
 import Icon from "./Icon.astro";
+import "./Sidebar/sidebar-global.css";
 import socialsStyles from "./Sidebar/sidebar-socials.module.css";
 import navStyles from "./Sidebar/sidebar-nav.module.css";
 import "./Sidebar/sidebar-local.module.css";
-import "./Sidebar/sidebar-global.css";
 
 const socials: Array<{ name: string; href: string; label: string }> = [
   { name: "x", href: "https://x.com/erlandzz", label: "X" },

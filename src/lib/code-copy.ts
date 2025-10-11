@@ -3,6 +3,7 @@
 
 import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
+import '../styles/code-copy.css';
 
 function findCodeBlocks(): NodeListOf<HTMLElement> {
   let list = document.querySelectorAll(

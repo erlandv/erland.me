@@ -5,6 +5,64 @@
   --sidebar-collapsed-item-padding: var(--space-3);
 }
 
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: var(--bg-overlay);
+  border-right: 1px solid var(--border-color);
+  padding: 32px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition:
+    width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  contain: layout style;
+}
+
+.nav-content {
+  width: 100%;
+  height: 100%;
+  grid-column-gap: 36px;
+  grid-row-gap: 36px;
+  flex-direction: column;
+  display: flex;
+}
+
+.label-white {
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  font-size: clamp(16px, 2.5vw, 18px);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.label-gray {
+  color: var(--text-gray);
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.niv-data {
+  align-items: center;
+  display: flex;
+}
+
+.niv-image {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  margin-right: 12px;
+}
+
 body:has(.sidebar .nav-toggle:checked) {
   overflow: hidden;
   touch-action: none;

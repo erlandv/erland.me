@@ -28,3 +28,9 @@
   display: block;
   font-weight: 500;
 }
+
+@media screen and (max-width: 767px) {
+  .fold-content {
+    margin-bottom: 24px;
+  }
+}

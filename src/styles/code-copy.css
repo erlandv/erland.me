@@ -1,0 +1,76 @@
+.prose pre:has(.code-copy-btn),
+.prose pre[data-language],
+.prose pre[class*='language-'] {
+  padding-top: 3rem;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--bg-code-2);
+  border: 1px solid var(--border-code);
+  color: var(--text-code-muted);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  z-index: 10;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+.code-copy-btn:hover {
+  background: var(--bg-code-hover);
+  color: var(--text-code);
+  border-color: var(--color-primary);
+}
+
+.code-copy-btn:active {
+  transform: scale(0.95);
+}
+
+.code-copy-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.code-copy-btn.copied {
+  background: var(--success-green);
+  border-color: var(--success-green);
+  color: #ffffff;
+}
+
+.code-copy-btn.copied::after {
+  content: 'Copied!';
+  position: absolute;
+  top: -2rem;
+  right: 0;
+  background: var(--bg-code-2);
+  color: var(--text-code);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  border: 1px solid var(--border-code);
+  box-shadow: 0 4px 6px -1px var(--shadow-010);
+}
+
+.prose pre:has(.code-copy-btn)::before {
+  left: 0;
+  max-width: calc(100% - 4rem);
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+}

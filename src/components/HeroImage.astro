@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import "../styles/components/hero.css";
 
 interface Props {
   image: ImageMetadata;
@@ -10,12 +11,6 @@ interface Props {
   widths?: number[];
 }
 
-/**
- * HeroImage: pembungkus Astro Image untuk hero dengan kelas img "hero-image"
- * - Menjaga styling global .hero-image dan perilaku lightbox skip.
- * - Default widths: mengikuti clamp width di CSS global .hero-image
- * - Default sizes: layout hero di blog (desktop 45vw, mobile 60vw)
- */
 const {
   image,
   alt,
