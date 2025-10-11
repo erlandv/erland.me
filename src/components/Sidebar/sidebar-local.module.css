@@ -93,6 +93,9 @@
 }
 
 @media (max-width: 1024px) {
+  :global(.w-nav-brand) {
+    padding-left: 10px;
+  }
   :global(.sidebar) {
     position: relative;
     width: 100% !important;

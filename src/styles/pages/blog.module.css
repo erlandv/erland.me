@@ -21,7 +21,7 @@
 }
 
 /* subtle divider between items for better readability */
-.blog-post__meta-item + .blog-post__meta-item {
+.blog-post__meta-item+.blog-post__meta-item {
   padding-left: var(--space-3);
   border-left: 1px solid var(--overlay-012);
 }
@@ -97,7 +97,8 @@
   justify-content: space-between;
   gap: 8px;
   vertical-align: middle;
-  cursor: pointer; /* header clickable */
+  cursor: pointer;
+  /* header clickable */
 }
 
 :global(.prose .toc__title) {
@@ -163,6 +164,7 @@
 :global(.prose .toc__item--h3) {
   margin-left: 0;
 }
+
 :global(.prose .toc__item--h3)::before {
   background: transparent;
   border: 2px solid currentColor;
@@ -173,9 +175,11 @@
 :global(.prose .toc__item--h2) {
   margin: var(--space-2) 0 2px;
 }
+
 :global(.prose .toc__sublist) {
   margin-top: 2px;
 }
+
 :global(.prose .toc__item--h3) {
   margin: 2px 0;
 }
@@ -205,7 +209,4 @@
 
 :global(.prose .toc__anchor:hover) {
   border-bottom-color: var(--color-secondary);
-}
-:global(.blog-post) {
-  max-width: 780px;
 }
