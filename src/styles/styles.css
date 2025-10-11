@@ -1,113 +1,17 @@
-html {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0;
-}
-
-aside,
-main,
-nav,
-section {
-  display: block;
-}
-
-a {
-  background-color: rgba(0, 0, 0, 0);
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-a:hover {
-  color: var(--color-secondary);
-}
-
-a:active,
-a:hover {
-  outline: 0;
-}
-
-h1 {
-  margin: 0.67em 0;
-  font-size: 2em;
-}
-
-img {
-  border: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  height: 100%;
-}
-
-:root {
-  --border: rgba(255, 255, 255, 0.12);
-}
-
-img {
-  max-width: 100%;
-  vertical-align: middle;
-  display: inline-block;
-}
+/* Base resets and element defaults live in src/styles/base.css.
+   Keep only project-specific overrides here. */
 
 .w-inline-block {
   max-width: 100%;
   display: inline-block;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 10px;
-}
+/* Heading scale is defined in base.css; color/margins are adjusted below. */
 
-h1 {
-  margin-top: 20px;
-  font-weight: 700;
-  font-size: clamp(2rem, 5.5vw + 0.25rem, 3.5rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  margin-top: 18px;
-  font-weight: 700;
-  font-size: clamp(1.5rem, 2.8vw + 0.5rem, 2.25rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-h3 {
-  margin-top: 16px;
-  font-weight: 600;
-  font-size: clamp(1.25rem, 1.6vw + 0.6rem, 2rem);
-  line-height: 1.25;
-}
-
-h4 {
-  margin-top: 12px;
-  font-weight: 600;
-  font-size: clamp(1.25rem, 1vw + 0.8rem, 1.5rem);
-  line-height: 1.35;
-}
-
-p {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
+/* Paragraph spacing handled in base.css; keep color overrides later. */
 
 ul {
-  margin-top: 0;
-  margin-bottom: 10px;
+  /* Override base.css indent to tighter 30px without touching margins */
   padding-left: 30px;
 }
 
@@ -262,6 +166,13 @@ h1 {
   letter-spacing: -0.02em;
   margin-top: 0;
   margin-bottom: clamp(16px, 4vw, 24px);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: clamp(12px, 3vw, 18px);
   font-weight: 700;
 }
 
