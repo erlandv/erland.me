@@ -6,7 +6,11 @@
   font-size: clamp(12px, 2vw, 14px);
   line-height: 1.6;
   width: 100%;
-  margin-top: clamp(var(--space-6), 4vw, var(--space-8)); /* give a bit more breathing room */
+  margin-top: clamp(
+    var(--space-6),
+    4vw,
+    var(--space-8)
+  ); /* give a bit more breathing room */
   padding-bottom: 12px;
   font-weight: 400;
 }

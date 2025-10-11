@@ -102,7 +102,8 @@
   font-weight: 600;
   border: 1px solid rgba(var(--color-primary-rgb), 0.35);
   border-radius: 8px;
-  padding: clamp(var(--space-2), 1.8vw, var(--space-3)) clamp(14px, 2.5vw, var(--space-5));
+  padding: clamp(var(--space-2), 1.8vw, var(--space-3))
+    clamp(14px, 2.5vw, var(--space-5));
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
@@ -202,7 +203,10 @@
   max-width: 100%;
   word-wrap: break-word;
   opacity: 0.9;
-  transition: all 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--overlay-005);
@@ -316,20 +320,9 @@
   line-height: 1.7;
 }
 
-.content-image-grid,
-.download-image-grid {
-  display: grid;
-  gap: 20px;
-  width: 100%;
-}
+/* layout moved to gallery.css to avoid duplication */
 
-@media (min-width: 720px) {
-  .content-image-grid,
-  .download-image-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
-}
+/* layout moved to gallery.css to avoid duplication */
 
 /* Tablet adjustments */
 @media screen and (max-width: 767px) {
@@ -398,20 +391,7 @@
   }
 }
 
-.content-image-grid figure,
-.download-image-grid figure {
-  margin: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.content-image-grid img,
-.download-image-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-}
+/* figure/img layout moved to gallery.css to avoid duplication */
 
 .content-image-grid figcaption,
 .download-image-grid figcaption {
@@ -423,7 +403,10 @@
   margin-top: 0.5rem;
   padding: 0.4rem 0.5rem;
   opacity: 0.9;
-  transition: all 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   word-wrap: break-word;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.02);
