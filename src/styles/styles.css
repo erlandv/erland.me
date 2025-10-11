@@ -280,12 +280,6 @@ ul {
   }
 }
 
-@media screen and (max-width: 767px) {
-  .w-nav-brand {
-    padding-left: 10px;
-  }
-}
-
 body {
   color: var(--text-secondary);
   background-color: var(--bg-primary);
@@ -375,7 +369,7 @@ p {
 
 .prose ul,
 .prose ol {
-  margin: clamp(0.6rem, 2vw, 1rem) 0 clamp(0.6rem, 2vw, 1rem) 1.25rem;
+  margin: clamp(0.6rem, 2vw, 1rem) 0 clamp(0.6rem, 2vw, 1rem) 0.25rem;
   line-height: 1.75;
   color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
@@ -647,10 +641,6 @@ p {
   box-shadow: 0 4px 6px -1px var(--shadow-010);
 }
 
-.prose pre:has(.code-copy-btn) {
-  padding-top: 3rem;
-}
-
 .prose pre:has(.code-copy-btn)::before {
   left: 0;
   max-width: calc(100% - 4rem);
@@ -763,14 +753,8 @@ p {
   will-change: opacity, transform;
 }
 
-.toast.toast--success {
-  border-color: var(--color-primary);
-}
-
-.toast.toast--error {
-  border-color: var(--color-primary);
-}
-
+.toast.toast--success,
+.toast.toast--error,
 .toast.toast--info {
   border-color: var(--color-primary);
 }
@@ -1027,14 +1011,7 @@ p {
   background-color: var(--overlay-005);
 }
 
-.prose pre {
-  position: relative;
-}
-
-.prose pre::before {
-  pointer-events: none;
-}
-
+.prose pre:has(.code-copy-btn),
 .prose pre[data-language],
 .prose pre[class*='language-'] {
   padding-top: 3rem;
@@ -1111,8 +1088,3 @@ code {
   font-size: 0.9em;
   font-weight: 500;
 }
-
-.prose :is(p, ul, ol) {
-  line-height: 1.75;
-}
-
