@@ -8,6 +8,7 @@ export type Post = {
   data: any;
   date: Date | null;
   hero?: HeroType;
+  body: string;
   Content: any;
 };
 
@@ -31,6 +32,7 @@ export async function loadAllPosts(): Promise<Post[]> {
   const posts: Post[] = [];
   for (const entry of entries) {
     const { Content } = await entry.render();
+    const body = 'body' in entry ? String((entry as any).body ?? '') : '';
     const heroEntry = Object.entries(heroMap).find(([p]) =>
       p.startsWith(`../content/blog/${entry.slug}/hero.`)
     );
@@ -42,6 +44,7 @@ export async function loadAllPosts(): Promise<Post[]> {
       data: entry.data,
       date: safeDate(entry.data?.publishDate),
       hero,
+      body,
       Content,
     });
   }
