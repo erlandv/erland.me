@@ -32,8 +32,6 @@ export interface SearchConfig {
   ignoreLocation: boolean;
 }
 
-// Web Worker interfaces removed - using client-side search only
-
 // Default search configuration
 export const DEFAULT_SEARCH_CONFIG: SearchConfig = {
   keys: [
@@ -49,17 +47,45 @@ export const DEFAULT_SEARCH_CONFIG: SearchConfig = {
   ignoreLocation: true,
 };
 
+function markdownToPlainText(md: string | null | undefined): string {
+  if (!md) return '';
+  let txt = md;
+  // Remove code fences
+  txt = txt.replace(/```[\s\S]*?```/g, '');
+  // Remove HTML tags
+  txt = txt.replace(/<[^>]+>/g, '');
+  // Remove images ![alt](url)
+  txt = txt.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
+  // Replace links [text](url) -> text
+  txt = txt.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  // Remove heading markers
+  txt = txt.replace(/^#{1,6}\s+/gm, '');
+  // Remove emphasis and inline code markers
+  txt = txt.replace(/[*_~`]/g, '');
+  // Normalize whitespace
+  txt = txt.replace(/\r/g, '');
+  txt = txt.replace(/\t/g, ' ');
+  txt = txt.replace(/[ ]{2,}/g, ' ');
+  txt = txt.replace(/\n{3,}/g, '\n\n');
+  return txt.trim();
+}
+
+function summarize(text: string, maxChars = 280): string {
+  const normalized = text.trim();
+  if (!normalized) return '';
+  if (normalized.length <= maxChars) return normalized;
+  const paragraphs = normalized
+    .split(/\n{2,}/)
+    .map(p => p.trim())
+    .filter(Boolean);
+  const first = paragraphs[0] || normalized;
+  if (first.length <= maxChars) return first;
+  return first.slice(0, maxChars).trimEnd() + '…';
+}
+
 // Convert Post to SearchablePost
 export function postToSearchable(post: Post): SearchablePost {
-  // Extract text content from the rendered content for better search
-  let content = '';
-  try {
-    // This is a simplified content extraction
-    // In a real implementation, you might want to extract text from the rendered HTML
-    content = post.data?.excerpt ?? post.data?.description ?? '';
-  } catch (error) {
-    // Silent fail for content extraction
-  }
+  const bodyPlain = markdownToPlainText(post.body);
 
   // Try to normalize hero to a usable src string
   let heroSrc: string | null = null;
@@ -77,12 +103,13 @@ export function postToSearchable(post: Post): SearchablePost {
   return {
     slug: post.slug,
     title: post.data.title || '',
-    excerpt: post.data?.excerpt ?? post.data?.description ?? '',
+    excerpt:
+      post.data?.excerpt ?? post.data?.description ?? summarize(bodyPlain, 280),
     category: post.data?.category ?? null,
     dateLabel: post.date
       ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
       : null,
-    content: content,
+    content: bodyPlain,
     heroSrc,
   };
 }

@@ -95,22 +95,40 @@ const jsonLd = blogPostingJsonLd({
 </SiteLayout>
 
 <script>
-  import { autoInitBlogAds, autoInitBlogPlaceholders } from "../../lib/adsense";
+  import { autoInitBlogAds, autoInitBlogPlaceholders, shouldRenderAds } from "../../lib/adsense";
   import { autoInit as autoInitToc } from "../../lib/toc";
   // Initialize dynamic TOC after content renders
-  try { autoInitToc(); } catch {}
-  try {
-    if (import.meta.env.PROD) {
+  const runToc = () => {
+    try {
+      autoInitToc();
+    } catch {}
+  };
+  const runAds = () => {
+    try {
       const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
       const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_MID || '';
       const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_END || '';
-      autoInitBlogAds(client, slotMid, slotEnd);
-    } else {
-      autoInitBlogPlaceholders();
-    }
-  } catch {}
-  document.addEventListener('astro:page-load', () => { try { autoInitToc(); } catch {} });
-  document.addEventListener('astro:page-load', () => { try { if (import.meta.env.PROD) { const c = import.meta.env.PUBLIC_ADSENSE_CLIENT || ''; const m = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_MID || ''; const e = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_END || ''; autoInitBlogAds(c, m, e); } else autoInitBlogPlaceholders(); } catch {} });
-  document.addEventListener('astro:after-swap', () => { try { autoInitToc(); } catch {} });
-  document.addEventListener('astro:after-swap', () => { try { if (import.meta.env.PROD) { const c = import.meta.env.PUBLIC_ADSENSE_CLIENT || ''; const m = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_MID || ''; const e = import.meta.env.PUBLIC_ADSENSE_SLOT_BLOG_END || ''; autoInitBlogAds(c, m, e); } else autoInitBlogPlaceholders(); } catch {} });
+      if (
+        shouldRenderAds({
+          client,
+          slots: [slotMid, slotEnd],
+        })
+      ) {
+        autoInitBlogAds(client, slotMid, slotEnd);
+      } else {
+        autoInitBlogPlaceholders();
+      }
+    } catch {}
+  };
+
+  runToc();
+  runAds();
+
+  const rebroadcast = () => {
+    runToc();
+    runAds();
+  };
+
+  document.addEventListener('astro:page-load', rebroadcast);
+  document.addEventListener('astro:after-swap', rebroadcast);
 </script>

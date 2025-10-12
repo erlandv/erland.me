@@ -256,3 +256,52 @@ export function autoInitDownloadPlaceholders() {
     insertPlaceholderUnit(container, 'Ad Placeholder (end)');
   }
 }
+
+type AdsSlots = Array<string | null | undefined>;
+
+function getProductionHosts(): string[] {
+  const envHosts =
+    ((import.meta as any).env?.PUBLIC_PRODUCTION_HOSTS as string | undefined) ||
+    '';
+  const parsed = envHosts
+    .split(',')
+    .map(h => h.trim().toLowerCase())
+    .filter(Boolean);
+  if (parsed.length > 0) return parsed;
+  return ['erland.me', 'www.erland.me'];
+}
+
+function resolveRuntimeEnvironment(): 'production' | 'preview' {
+  if (!(import.meta as any).env?.PROD) return 'preview';
+
+  const siteEnv =
+    ((import.meta as any).env?.PUBLIC_SITE_ENV as string | undefined) || '';
+  if (siteEnv) {
+    return siteEnv.toLowerCase() === 'production' ? 'production' : 'preview';
+  }
+
+  if (typeof window === 'undefined') return 'preview';
+  const host = window.location.hostname?.toLowerCase() ?? '';
+  if (!host) return 'preview';
+  const allowed = getProductionHosts();
+  return allowed.includes(host) ? 'production' : 'preview';
+}
+
+const hasSlotConfigured = (slots?: AdsSlots): boolean =>
+  Array.isArray(slots) &&
+  slots.some(slot => typeof slot === 'string' && slot.trim().length > 0);
+
+interface AdsRenderConfig {
+  client?: string | null;
+  slots?: AdsSlots;
+}
+
+export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
+  const client = (config.client ?? '').trim();
+  if (!client) return false;
+  if (resolveRuntimeEnvironment() !== 'production') return false;
+  if (config.slots && !hasSlotConfigured(config.slots)) {
+    return false;
+  }
+  return true;
+}

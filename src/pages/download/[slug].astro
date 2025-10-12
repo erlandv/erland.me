@@ -130,39 +130,31 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 </SiteLayout>
 
 <script>
-  import { autoInitDownloadAds, autoInitDownloadPlaceholders } from "../../lib/adsense";
-  try {
-    if (import.meta.env.PROD) {
+  import {
+    autoInitDownloadAds,
+    autoInitDownloadPlaceholders,
+    shouldRenderAds,
+  } from "../../lib/adsense";
+
+  const runAds = () => {
+    try {
       const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
       const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
       const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
-      autoInitDownloadAds(client, slotMid, slotEnd);
-    } else {
-      autoInitDownloadPlaceholders();
-    }
-  } catch {}
-  document.addEventListener('astro:page-load', () => {
-    try {
-      if (import.meta.env.PROD) {
-        const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
-        const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
-        const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
+      if (
+        shouldRenderAds({
+          client,
+          slots: [slotMid, slotEnd],
+        })
+      ) {
         autoInitDownloadAds(client, slotMid, slotEnd);
       } else {
         autoInitDownloadPlaceholders();
       }
     } catch {}
-  });
-  document.addEventListener('astro:after-swap', () => {
-    try {
-      if (import.meta.env.PROD) {
-        const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
-        const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
-        const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
-        autoInitDownloadAds(client, slotMid, slotEnd);
-      } else {
-        autoInitDownloadPlaceholders();
-      }
-    } catch {}
-  });
+  };
+
+  runAds();
+  document.addEventListener('astro:page-load', runAds);
+  document.addEventListener('astro:after-swap', runAds);
 </script>

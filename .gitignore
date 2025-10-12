@@ -17,10 +17,10 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
- .env.development
- .env.test
- .env.local
- .env.*.local
+.env.development
+.env.test
+.env.local
+.env.*.local
 
 # test coverage
 coverage/
@@ -50,9 +50,8 @@ shrinkwrap.yaml
 .vercel/
 .netlify/
 .output/
-AGENTS.md
-public/robots.txt
-public/ads.txt
 
-# generated search index
-public/search-index.json
+# static files that get generated
+AGENTS.md
+public/*.txt
+public/*.json

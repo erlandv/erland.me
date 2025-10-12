@@ -32,10 +32,54 @@ function loadEnvFromFile(filePath) {
 // Attempt to load from .env in project root
 loadEnvFromFile(join(process.cwd(), '.env'));
 
-const siteUrl = process.env.SITE_URL || 'https://erland.me';
-const siteDomain = process.env.SITE_DOMAIN || 'erland.me';
+const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
 
-const isProd = siteUrl === 'https://erland.me' && siteDomain === 'erland.me';
+function resolveMode() {
+  const siteEnvRaw =
+    process.env.PUBLIC_SITE_ENV ||
+    process.env.SITE_ENV ||
+    process.env.DEPLOYMENT_ENV ||
+    '';
+  const siteEnv = siteEnvRaw.trim().toLowerCase();
+  if (siteEnv) {
+    if (['production', 'prod', 'live'].includes(siteEnv)) return 'production';
+    return 'preview';
+  }
+
+  const arg = process.argv.find(a => a.startsWith('--mode='));
+  if (arg) {
+    const value = arg.split('=')[1]?.trim().toLowerCase();
+    if (value) return value;
+  }
+
+  const envMode =
+    process.env.ASTRO_MODE || process.env.MODE || process.env.NODE_ENV || '';
+  if (envMode) return envMode.toLowerCase();
+
+  const url = process.env.SITE_URL || '';
+  if (url && !LOCAL_PATTERNS.test(url)) {
+    return 'production';
+  }
+  const domain = process.env.SITE_DOMAIN || '';
+  if (domain && !LOCAL_PATTERNS.test(domain)) {
+    return 'production';
+  }
+
+  return 'development';
+}
+
+const mode = resolveMode();
+const forceProd =
+  process.env.FORCE_PRODUCTION === 'true' ||
+  process.argv.includes('--force-production');
+const isProd = forceProd || mode === 'production';
+
+const defaults = isProd
+  ? { siteUrl: 'https://erland.me', siteDomain: 'erland.me' }
+  : { siteUrl: 'http://localhost:4321', siteDomain: 'localhost' };
+
+const siteUrl = process.env.SITE_URL || defaults.siteUrl;
+const siteDomain = process.env.SITE_DOMAIN || defaults.siteDomain;
 
 // AdSense publisher/client ID, typically like "ca-pub-XXXXXXXXXXXXXXXX"
 const rawClient = process.env.PUBLIC_ADSENSE_CLIENT || '';

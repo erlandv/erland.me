@@ -2,6 +2,7 @@
 
 import { readdir, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
+import matter from 'gray-matter';
 
 const BLOG_DIR = path.resolve('src/content/blog');
 const OUTPUT_DIR = path.resolve('public');
@@ -31,85 +32,8 @@ async function listBlogEntries() {
   return entries;
 }
 
-function parseFrontmatter(raw) {
-  let data = {};
-  let body = raw;
-
-  if (raw.startsWith('---')) {
-    const end = raw.indexOf('\n---');
-    if (end !== -1) {
-      const fmBlock = raw.slice(3, end).trimEnd();
-      body = raw.slice(end + '\n---'.length).trimStart();
-
-      const lines = fmBlock.split('\n');
-      let i = 0;
-
-      const isTopLevel = s => /^\S/.test(s);
-
-      while (i < lines.length) {
-        const line = lines[i];
-        const m = line.match(/^([A-Za-z0-9_]+):\s*(.*)$/);
-        if (!m) {
-          i++;
-          continue;
-        }
-
-        const key = m[1];
-        let value = m[2].trim();
-
-        // YAML block scalars (folded/literal): '>', '>-', '|', '|-'
-        if (
-          value === '>' ||
-          value === '>-' ||
-          value === '|' ||
-          value === '|-'
-        ) {
-          const literal = value.startsWith('|');
-          const chomp = value.endsWith('-');
-          i++;
-
-          const blockLines = [];
-          while (i < lines.length) {
-            const next = lines[i];
-            if (isTopLevel(next)) break;
-            blockLines.push(next.replace(/^\s+/, ''));
-            i++;
-          }
-
-          let blockText;
-          if (literal) {
-            // Literal: keep newline
-            blockText = blockLines.join('\n');
-            if (!chomp) blockText += '\n';
-          } else {
-            // Folded: replace newlines with space
-            blockText = blockLines
-              .join(' ')
-              .replace(/\s{2,}/g, ' ')
-              .trim();
-          }
-
-          data[key] = blockText;
-          continue;
-        }
-
-        // Single line
-        if (
-          (value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))
-        ) {
-          value = value.slice(1, -1);
-        }
-        data[key] = value;
-        i++;
-      }
-    }
-  }
-
-  return { data, body };
-}
-
 function stripMarkdown(md) {
+  if (!md) return '';
   let txt = md;
   // Remove code fences
   txt = txt.replace(/```[\s\S]*?```/g, '');
@@ -132,13 +56,15 @@ function stripMarkdown(md) {
 }
 
 function summarize(text, maxChars = 800) {
-  const paras = text
+  const normalized = text.trim();
+  if (!normalized) return '';
+  const paras = normalized
     .split(/\n{2,}/)
     .map(p => p.trim())
     .filter(Boolean);
-  const first = paras[0] || text;
+  const first = paras[0] || normalized;
   if (first.length <= maxChars) return first;
-  return first.slice(0, maxChars) + '…';
+  return first.slice(0, maxChars).trimEnd() + '…';
 }
 
 function toDateLabel(input) {
@@ -158,7 +84,13 @@ function toDateLabel(input) {
 
 function pickExcerpt(data, bodyPlain) {
   const fallback = summarize(bodyPlain, 280);
-  return data['excerpt'] || data['description'] || fallback;
+  const excerpt =
+    typeof data['excerpt'] === 'string' ? data['excerpt'].trim() : '';
+  if (excerpt) return excerpt;
+  const description =
+    typeof data['description'] === 'string' ? data['description'].trim() : '';
+  if (description) return description;
+  return fallback;
 }
 
 async function buildIndex() {
@@ -167,14 +99,16 @@ async function buildIndex() {
 
   for (const { slug, file } of entries) {
     const raw = await readFile(file, 'utf8');
-    const { data, body } = parseFrontmatter(raw);
+    const parsed = matter(raw);
+    const data = parsed.data ?? {};
+    const body = parsed.content ?? '';
     const title = data['title'] || '';
     const category = data['category'] || null;
     const dateLabel = toDateLabel(data['publishDate']);
 
     const plain = stripMarkdown(body);
     const excerpt = pickExcerpt(data, plain);
-    const content = summarize(plain, 1000);
+    const content = plain;
 
     const item = {
       slug,
