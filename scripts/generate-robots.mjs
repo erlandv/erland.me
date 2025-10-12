@@ -35,6 +35,17 @@ loadEnvFromFile(join(process.cwd(), '.env'));
 const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
 
 function resolveMode() {
+  const siteEnvRaw =
+    process.env.PUBLIC_SITE_ENV ||
+    process.env.SITE_ENV ||
+    process.env.DEPLOYMENT_ENV ||
+    '';
+  const siteEnv = siteEnvRaw.trim().toLowerCase();
+  if (siteEnv) {
+    if (['production', 'prod', 'live'].includes(siteEnv)) return 'production';
+    return 'preview';
+  }
+
   const arg = process.argv.find(a => a.startsWith('--mode='));
   if (arg) {
     const value = arg.split('=')[1]?.trim().toLowerCase();
