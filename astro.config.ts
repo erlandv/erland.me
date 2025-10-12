@@ -157,7 +157,7 @@ export default defineConfig({
     // Server configuration
     server: {
       fs: {
-        strict: false,
+        strict: true,
       },
       // Enable overlay for Vite HMR errors in dev
       hmr: {
