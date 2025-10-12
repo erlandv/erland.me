@@ -59,6 +59,16 @@ export default defineConfig({
           : undefined,
       // Optimize chunk splitting
       rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (
+            warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
+            typeof warning.message === 'string' &&
+            warning.message.includes('@astrojs/internal-helpers/remote')
+          ) {
+            return;
+          }
+          defaultHandler(warning);
+        },
         output: {
           manualChunks: id => {
             // Vendor chunks
