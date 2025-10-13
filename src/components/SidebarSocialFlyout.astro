@@ -1,0 +1,291 @@
+---
+import Icon from './Icon.astro';
+import styles from './SidebarSocialFlyout/SidebarSocialFlyout.module.css';
+import socialsStyles from './Sidebar/sidebar-socials.module.css';
+import { sidebarSocialLinks } from './Sidebar/social-links';
+
+const flyoutId = 'sidebar-social-flyout';
+---
+
+<div class={styles.wrapper} data-sidebar-social-flyout data-open='false'>
+  <button
+    type='button'
+    class={styles.trigger}
+    aria-haspopup='menu'
+    aria-expanded='false'
+    aria-controls={flyoutId}
+    aria-label='Open social links menu'
+    data-socials-trigger
+  >
+    <span class={styles.triggerIconOpen}>
+      <Icon name='userplus' class={styles.triggerIcon} />
+    </span>
+    <span class={styles.triggerIconClose}>
+      <Icon name='userminus' class={styles.triggerIcon} />
+    </span>
+  </button>
+
+  <div
+    id={flyoutId}
+    role='menu'
+    class={styles.flyout}
+    data-socials-flyout
+    aria-hidden='true'
+    data-open='false'
+  >
+    {
+      sidebarSocialLinks.map(s => (
+        <a
+          href={s.href}
+          aria-label={s.label}
+          class:list={[socialsStyles['social-link'], styles.flyoutItem]}
+          target='_blank'
+          rel='noopener noreferrer'
+          role='menuitem'
+          data-socials-flyout-item
+        >
+          <Icon
+            name={s.name}
+            class:list={[socialsStyles['social-icon'], styles.flyoutItemIcon]}
+            ariaLabel={s.label}
+          />
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const WRAPPER_SELECTOR = '[data-sidebar-social-flyout]';
+  const TRIGGER_SELECTOR = '[data-socials-trigger]';
+  const FLYOUT_SELECTOR = '[data-socials-flyout]';
+  const ITEM_SELECTOR = '[data-socials-flyout-item]';
+  const HTML_ATTR = 'data-sidebar';
+
+  type FlyoutGlobalState = { teardown?: () => void };
+
+  declare global {
+    interface Window {
+      __sidebarSocialFlyout?: FlyoutGlobalState;
+      __sidebarSocialFlyoutEventsBound?: boolean;
+    }
+  }
+
+  function init(): boolean {
+    try {
+      const wrapper = document.querySelector<HTMLElement>(WRAPPER_SELECTOR);
+      if (!wrapper) return false;
+
+      window.__sidebarSocialFlyout?.teardown?.();
+
+      const trigger = wrapper.querySelector<HTMLElement>(TRIGGER_SELECTOR);
+      const flyout = wrapper.querySelector<HTMLElement>(FLYOUT_SELECTOR);
+      if (!(trigger instanceof HTMLElement) || !(flyout instanceof HTMLElement))
+        return false;
+
+      const getItems = () =>
+        Array.from(flyout.querySelectorAll<HTMLElement>(ITEM_SELECTOR)).filter(
+          el => !el.hasAttribute('disabled')
+        );
+
+      let isOpen = false;
+
+      const setTriggerLabel = (expanded: boolean) => {
+        trigger.setAttribute(
+          'aria-label',
+          expanded ? 'Close social links menu' : 'Open social links menu'
+        );
+      };
+      setTriggerLabel(false);
+
+      const focusFirstItem = () => {
+        const items = getItems();
+        if (!items.length) return;
+        const first = items[0];
+        if (!first) return;
+        requestAnimationFrame(() => {
+          try {
+            first.focus();
+          } catch {}
+        });
+      };
+
+      const setOpen = (
+        open: boolean,
+        opts: { focusFirst?: boolean; focusTrigger?: boolean } = {}
+      ) => {
+        if (isOpen === open) {
+          if (open && opts.focusFirst) focusFirstItem();
+          if (!open && opts.focusTrigger)
+            requestAnimationFrame(() => {
+              try {
+                trigger.focus();
+              } catch {}
+            });
+          return;
+        }
+        isOpen = open;
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        setTriggerLabel(open);
+        flyout.setAttribute('aria-hidden', open ? 'false' : 'true');
+        flyout.setAttribute('data-open', open ? 'true' : 'false');
+        wrapper.setAttribute('data-open', open ? 'true' : 'false');
+        if (open && opts.focusFirst) focusFirstItem();
+        if (!open && opts.focusTrigger)
+          requestAnimationFrame(() => {
+            try {
+              trigger.focus();
+            } catch {}
+          });
+      };
+
+      const handleDocumentPointer = (event: PointerEvent | MouseEvent) => {
+        try {
+          if (!isOpen) return;
+          const target = event.target as Node | null;
+          if (!target) return;
+          if (wrapper.contains(target)) return;
+          setOpen(false);
+        } catch {}
+      };
+
+      const handleDocumentKeyDown = (event: KeyboardEvent) => {
+        try {
+          if (!isOpen) return;
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            setOpen(false, { focusTrigger: true });
+          }
+        } catch {}
+      };
+
+      const handleSidebarStateChange = () => {
+        try {
+          const collapsed =
+            document.documentElement.getAttribute(HTML_ATTR) === 'collapsed' ||
+            document.documentElement.classList.contains(
+              'sidebar-collapsed-global'
+            ) ||
+            document.body.classList.contains('sidebar-collapsed');
+          if (!collapsed) {
+            setOpen(false);
+          }
+        } catch {}
+      };
+
+      document.addEventListener('pointerdown', handleDocumentPointer);
+      document.addEventListener('keydown', handleDocumentKeyDown);
+
+      const observer = new MutationObserver(handleSidebarStateChange);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: [HTML_ATTR, 'class'],
+      });
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+
+      handleSidebarStateChange();
+
+      const handleTriggerClick = (event: MouseEvent) => {
+        try {
+          event.preventDefault();
+          const next = !isOpen;
+          setOpen(next, { focusFirst: next, focusTrigger: !next });
+        } catch {}
+      };
+
+      const handleTriggerKeyDown = (event: KeyboardEvent) => {
+        try {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            const next = !isOpen;
+            setOpen(next, { focusFirst: next, focusTrigger: !next });
+          } else if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            if (!isOpen) setOpen(true, { focusFirst: true });
+            else focusFirstItem();
+          } else if (event.key === 'Escape' && isOpen) {
+            event.preventDefault();
+            setOpen(false, { focusTrigger: true });
+          }
+        } catch {}
+      };
+
+      const handleFlyoutKeyDown = (event: KeyboardEvent) => {
+        try {
+          if (event.key === 'Escape' && isOpen) {
+            event.preventDefault();
+            setOpen(false, { focusTrigger: true });
+          }
+        } catch {}
+      };
+
+      const handleFlyoutFocusOut = (event: FocusEvent) => {
+        try {
+          const related = event.relatedTarget as HTMLElement | null;
+          if (related && (flyout.contains(related) || related === trigger))
+            return;
+          requestAnimationFrame(() => {
+            try {
+              const active = document.activeElement as HTMLElement | null;
+              if (active && (flyout.contains(active) || active === trigger))
+                return;
+              setOpen(false);
+            } catch {}
+          });
+        } catch {}
+      };
+
+      trigger.addEventListener('click', handleTriggerClick);
+      trigger.addEventListener('keydown', handleTriggerKeyDown);
+      flyout.addEventListener('keydown', handleFlyoutKeyDown);
+      flyout.addEventListener('focusout', handleFlyoutFocusOut);
+
+      window.__sidebarSocialFlyout = {
+        teardown: () => {
+          document.removeEventListener('pointerdown', handleDocumentPointer);
+          document.removeEventListener('keydown', handleDocumentKeyDown);
+          observer.disconnect();
+          trigger.removeEventListener('click', handleTriggerClick);
+          trigger.removeEventListener('keydown', handleTriggerKeyDown);
+          flyout.removeEventListener('keydown', handleFlyoutKeyDown);
+          flyout.removeEventListener('focusout', handleFlyoutFocusOut);
+        },
+      };
+
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function ensureInit(attempt = 0): void {
+    const MAX_ATTEMPTS = 10;
+    if (init()) return;
+    if (attempt >= MAX_ATTEMPTS) return;
+    setTimeout(() => ensureInit(attempt + 1), 50);
+  }
+
+  if (typeof window !== 'undefined') {
+    const bootstrap = () => {
+      requestAnimationFrame(() => ensureInit());
+    };
+
+    if (
+      document.readyState === 'complete' ||
+      document.readyState === 'interactive'
+    ) {
+      bootstrap();
+    } else {
+      document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
+    }
+
+    if (!window.__sidebarSocialFlyoutEventsBound) {
+      window.__sidebarSocialFlyoutEventsBound = true;
+      document.addEventListener('astro:page-load', bootstrap);
+      document.addEventListener('astro:after-swap', bootstrap);
+    }
+  }
+</script>

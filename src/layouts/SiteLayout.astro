@@ -11,6 +11,8 @@ import "../styles/pages/button.module.css";
 import Sidebar from "../components/Sidebar.astro";
 import SidebarController from "../components/SidebarController.astro";
 import Footer from "../components/Footer.astro";
+import SidebarToggleButton from "../components/SidebarToggleButton.astro";
+import SidebarSocialFlyout from "../components/SidebarSocialFlyout.astro";
 import { GTM_ID } from "../lib/env";
 import { isProductionSite } from "../lib/seo";
 
@@ -80,6 +82,8 @@ const {
     <div class="content">
       {showSidebar && <Sidebar selectedItem={selectedItem} />}
       {showSidebar && <SidebarController />}
+      {showSidebar && <SidebarToggleButton />}
+      {showSidebar && <SidebarSocialFlyout />}
       <nav class="main">
         <div class="container">
           <slot />

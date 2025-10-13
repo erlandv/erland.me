@@ -1,0 +1,74 @@
+---
+import Icon from "./Icon.astro";
+import styles from "./SidebarToggleButton/SidebarToggleButton.module.css";
+---
+
+<div class:list={[styles.wrapper, "sidebar-edge-toggle-wrapper"]}>
+  <div class={styles.divider} aria-hidden="true" />
+  <label
+    for="sidebar-toggle"
+    class:list={[styles.toggle, "sidebar-toggle-button", "sidebar-edge-toggle"]}
+    aria-label="Toggle sidebar width"
+    tabindex="0"
+  >
+    <div class={styles.iconWrapper}>
+      <Icon
+        name="arrowleft"
+        class:list={[styles.icon, styles.iconLeft]}
+      />
+      <Icon
+        name="arrowright"
+        class:list={[styles.icon, styles.iconRight]}
+      />
+    </div>
+  </label>
+</div>
+
+<script>
+  const WRAPPER_SELECTOR = '.sidebar-edge-toggle-wrapper';
+  const TOGGLE_SELECTOR = '.sidebar-edge-toggle';
+  const HTML_ATTR = 'data-sidebar';
+
+  const updateState = () => {
+    try {
+      const wrapper = document.querySelector(WRAPPER_SELECTOR);
+      const toggle = document.querySelector(TOGGLE_SELECTOR);
+      if (!wrapper || !toggle) return;
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const attrValue = document.documentElement.getAttribute(HTML_ATTR);
+      let collapsed = attrValue === 'collapsed';
+      if (!collapsed && sidebarToggle instanceof HTMLInputElement) {
+        collapsed = sidebarToggle.checked;
+      }
+      console.debug('[SidebarToggleButton] updateState', {
+        attrValue,
+        checkboxChecked: sidebarToggle instanceof HTMLInputElement ? sidebarToggle.checked : undefined,
+        collapsed,
+      });
+      wrapper.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
+      toggle.classList.toggle('is-active', collapsed);
+    } catch {}
+  };
+
+  const init = () => {
+    try {
+      updateState();
+      const observer = new MutationObserver(updateState);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: [HTML_ATTR] });
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      if (sidebarToggle instanceof HTMLInputElement) {
+        sidebarToggle.addEventListener('change', updateState);
+      }
+      document.addEventListener('astro:after-swap', updateState);
+      document.addEventListener('astro:page-load', updateState);
+    } catch {}
+  };
+
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      init();
+    } else {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    }
+  }
+</script>

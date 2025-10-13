@@ -1,0 +1,156 @@
+.wrapper {
+  position: fixed;
+  bottom: 28px;
+  left: 0;
+  width: var(--sidebar-collapsed-width);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  gap: 0;
+  z-index: calc(var(--z-overlay, 1200) + 30);
+  transition:
+    opacity var(--dur-base) var(--ease-standard),
+    width var(--dur-medium) var(--ease-standard);
+}
+
+.wrapper[data-open='true'] {
+  pointer-events: auto;
+}
+
+:global(html.sidebar-collapsed-global) .wrapper,
+:global(html[data-sidebar='collapsed']) .wrapper,
+:global(body.sidebar-collapsed) .wrapper {
+  display: flex;
+  width: var(--sidebar-collapsed-width);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sidebar-collapsed-item-width);
+  min-height: 44px;
+  padding: var(--sidebar-collapsed-item-padding);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard),
+    box-shadow var(--dur-base) var(--ease-standard);
+  pointer-events: auto;
+  box-shadow: none;
+}
+
+.trigger:hover,
+.trigger:focus-visible {
+  color: var(--text-primary);
+  background-color: var(--sidebar-nav-hover-bg, var(--bg-tertiary));
+  border-color: var(--sidebar-nav-hover-border, var(--border-color));
+  box-shadow: 0 2px 8px var(--shadow-030);
+}
+
+.trigger[aria-expanded='true'] {
+  color: var(--text-primary);
+  background-color: var(--overlay-012);
+  border-color: var(--overlay-024);
+  box-shadow: 0 6px 18px var(--shadow-030);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 3px;
+}
+
+.triggerIconOpen,
+.triggerIconClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triggerIconClose {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.trigger[aria-expanded='true'] .triggerIconClose {
+  opacity: 1;
+}
+
+.trigger[aria-expanded='true'] .triggerIconOpen {
+  opacity: 0;
+}
+
+.triggerIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.flyout {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 16px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--overlay-024);
+  background-color: var(--bg-overlay);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.48);
+  transform: translate3d(-12px, -50%, 0) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 180ms var(--ease-standard),
+    transform 220ms var(--ease-out),
+    visibility 180ms var(--ease-standard);
+  min-width: 220px;
+  will-change: transform, opacity;
+}
+
+.flyout[data-open='true'] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, -50%, 0) scale(1);
+}
+
+.flyoutItem {
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    opacity 120ms ease;
+}
+
+.flyoutItem:hover,
+.flyoutItem:focus-visible {
+  background-color: var(--overlay-012);
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.flyoutItemIcon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    display: none;
+  }
+}

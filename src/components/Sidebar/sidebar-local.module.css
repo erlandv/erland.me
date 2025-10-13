@@ -14,6 +14,15 @@
   margin: -1px;
 }
 
+:global(.profile-header) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 60px;
+}
+
 :global(.navbar-icon-button) {
   position: relative;
   width: 44px;
@@ -55,46 +64,29 @@
   cursor: pointer;
 }
 
-:global(.sidebar-toggle-button:hover) :global(.sidebar-toggle-icon) {
-  opacity: 1;
-}
-
 :global(.sidebar) {
   perspective: 800px;
 }
 
-:global(.sidebar) :global(.sidebar-toggle-button) :global(.nav-link-image) {
-  transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-origin: 50% 50%;
-  backface-visibility: visible;
-  -webkit-backface-visibility: visible;
-  will-change: transform;
-}
-
-:global(html.sidebar-collapsed-global)
+:is(
+    html.sidebar-collapsed-global,
+    html[data-sidebar='collapsed'],
+    body.sidebar-collapsed
+  )
   :global(.sidebar)
-  :global(.sidebar-toggle-button)
-  :global(.nav-link-image),
-:global(html[data-sidebar='collapsed'])
-  :global(.sidebar)
-  :global(.sidebar-toggle-button)
-  :global(.nav-link-image),
-:global(body.sidebar-collapsed)
-  :global(.sidebar)
-  :global(.sidebar-toggle-button)
-  :global(.nav-link-image),
-:global(.sidebar.sidebar-collapsed)
-  :global(.sidebar-toggle-button)
-  :global(.nav-link-image),
-:global(.sidebar:has(#sidebar-toggle:checked))
-  :global(.sidebar-toggle-button)
-  :global(.nav-link-image) {
-  transform: scaleX(-1) scale(0.96);
+  :global(.profile-header),
+:global(.sidebar.sidebar-collapsed) :global(.profile-header),
+:global(.sidebar:has(#sidebar-toggle:checked)) :global(.profile-header) {
+  justify-content: center;
+  padding-right: 0;
 }
 
 @media (max-width: 1024px) {
   :global(.w-nav-brand) {
     padding-left: 10px;
+  }
+  :global(.profile-header) {
+    padding-right: 0;
   }
   :global(.sidebar) {
     position: relative;
