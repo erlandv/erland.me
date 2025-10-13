@@ -1,9 +1,9 @@
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
 :root {
-  --sidebar-expanded-width: 304px;
-  --sidebar-collapsed-width: 120px;
-  --sidebar-collapsed-item-width: 76px;
+  --sidebar-expanded-width: 300px;
+  --sidebar-collapsed-width: 100px;
+  --sidebar-collapsed-item-width: 70px;
   --sidebar-collapsed-item-padding: var(--space-3);
 }
 
