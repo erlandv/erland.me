@@ -1,5 +1,5 @@
 .wrapper {
-  position: absolute;
+  position: fixed;
   top: calc(36px + 25px);
   left: var(--sidebar-expanded-width);
   transform: translate(calc(-100% - 12px), -50%);
@@ -18,12 +18,11 @@
   height: 48px;
   background-color: var(--overlay-012);
   border-radius: var(--radius-md);
-  opacity: 0.5; /* Subtle visibility in default/expanded state */
+  opacity: 0.5;
   transition: opacity var(--dur-base) var(--ease-standard);
   z-index: -1;
 }
 
-/* Hover effects for better interaction feedback */
 .wrapper:hover .divider {
   opacity: 0.8;
 }
@@ -143,13 +142,12 @@
 
 .wrapper[data-collapsed='true'] .divider,
 :global(html:has(#sidebar-toggle:checked)) .divider {
-  opacity: 1; /* Full visibility in collapsed state */
+  opacity: 1;
 }
 
-/* Ensure hover state is more prominent than default state but less than collapsed */
 .wrapper[data-collapsed='true']:hover .divider,
 :global(html:has(#sidebar-toggle:checked)) .wrapper:hover .divider {
-  opacity: 1; /* Maintain full visibility on hover in collapsed state */
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {

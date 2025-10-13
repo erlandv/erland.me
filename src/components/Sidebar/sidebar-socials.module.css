@@ -1,8 +1,8 @@
 .socials {
   display: flex;
-  gap: 5px;
+  gap: 8px;
   align-items: center;
-  color: #d6d6d6;
+  color: var(--text-secondary);
 }
 
 .social-link {
@@ -11,8 +11,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
   text-decoration: none;
   transition:
     background-color 0.15s ease,
@@ -41,6 +41,7 @@
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid var(--border-color);
+  justify-content: center;
 }
 
 :global(html.sidebar-collapsed-global)
