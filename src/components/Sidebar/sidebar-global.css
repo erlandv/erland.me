@@ -217,13 +217,28 @@ body:has(.sidebar .nav-toggle:checked) {
   .sidebar
   .w-nav-brand {
   justify-content: center !important;
-  margin-bottom: 20px !important;
+  margin-bottom: var(--space-3) !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
   .w-nav-brand {
   justify-content: center !important;
-  margin-bottom: 20px !important;
+  margin-bottom: var(--space-3) !important;
+}
+
+:is(
+    html.sidebar-collapsed-global,
+    html[data-sidebar='collapsed'],
+    body.sidebar-collapsed
+  )
+  .sidebar
+  .nav-content,
+:is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
+  .nav-content {
+  grid-row-gap: var(--space-4) !important;
+  row-gap: var(--space-4) !important;
+  grid-column-gap: var(--space-4) !important;
+  column-gap: var(--space-4) !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
