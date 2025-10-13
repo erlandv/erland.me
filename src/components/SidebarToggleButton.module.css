@@ -1,0 +1,159 @@
+.wrapper {
+  position: absolute;
+  top: calc(36px + 25px);
+  left: var(--sidebar-expanded-width);
+  transform: translate(calc(-100% - 12px), -50%);
+  pointer-events: none;
+  z-index: var(--z-fab);
+  transition:
+    left var(--dur-slow) var(--ease-standard),
+    transform var(--dur-base) var(--ease-standard);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.divider {
+  width: 3px;
+  height: 48px;
+  background-color: var(--overlay-012);
+  border-radius: var(--radius-md);
+  opacity: 0.5; /* Subtle visibility in default/expanded state */
+  transition: opacity var(--dur-base) var(--ease-standard);
+  z-index: -1;
+}
+
+/* Hover effects for better interaction feedback */
+.wrapper:hover .divider {
+  opacity: 0.8;
+}
+
+.toggle {
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--text-gray);
+  box-shadow: none;
+  transition:
+    background-color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard),
+    box-shadow var(--dur-base) var(--ease-standard);
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: -6px;
+  width: 10px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-overlay);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-standard);
+  z-index: -1;
+}
+
+.toggle:hover {
+  color: var(--text-primary);
+}
+
+.toggle.is-active {
+  background-color: var(--overlay-012);
+  border-color: var(--overlay-024);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px var(--shadow-015);
+}
+
+.toggle.is-active:hover {
+  background-color: var(--overlay-018);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transition: opacity var(--dur-base) var(--ease-standard);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.iconLeft {
+  opacity: 0.85;
+}
+
+.iconRight {
+  opacity: 0;
+}
+
+/* Collapsed state */
+.wrapper[data-collapsed='true'] .iconLeft,
+:global(html:has(#sidebar-toggle:checked)) .iconLeft {
+  opacity: 0;
+}
+
+.wrapper[data-collapsed='true'] .iconRight,
+:global(html:has(#sidebar-toggle:checked)) .iconRight {
+  opacity: 0.85;
+}
+
+/* Position adjustments for collapsed state */
+.wrapper[data-collapsed='true'],
+:global(html:has(#sidebar-toggle:checked)) .wrapper {
+  left: var(--sidebar-collapsed-width);
+  transform: translate(-6px, -50%);
+}
+
+.wrapper[data-collapsed='true'] .sidebar-edge-toggle,
+:global(html:has(#sidebar-toggle:checked)) .wrapper .sidebar-edge-toggle {
+  background-color: var(--overlay-012);
+  border-color: var(--overlay-024);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px var(--shadow-015);
+}
+
+.wrapper[data-collapsed='true'] .sidebar-edge-toggle::after,
+:global(html:has(#sidebar-toggle:checked))
+  .wrapper
+  .sidebar-edge-toggle::after {
+  opacity: 1;
+}
+
+.wrapper[data-collapsed='true'] .divider,
+:global(html:has(#sidebar-toggle:checked)) .divider {
+  opacity: 1; /* Full visibility in collapsed state */
+}
+
+/* Ensure hover state is more prominent than default state but less than collapsed */
+.wrapper[data-collapsed='true']:hover .divider,
+:global(html:has(#sidebar-toggle:checked)) .wrapper:hover .divider {
+  opacity: 1; /* Maintain full visibility on hover in collapsed state */
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    display: none;
+  }
+}

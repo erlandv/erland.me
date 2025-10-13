@@ -27,16 +27,18 @@ const socials: Array<{ name: string; href: string; label: string }> = [
 >
   <div class="nav-content">
     <div class="w-nav-brand">
-      <div class="niv-data">
-        <img
-          src="/assets/profile/avatar.webp"
-          loading="eager"
-          alt="Profile picture"
-          class="niv-image"
-        />
-        <div class="profile-text">
-          <div class="label-white">Erland Ramdhani</div>
-          <div class="label-gray">Web Developer</div>
+      <div class="profile-header">
+        <div class="niv-data">
+          <img
+            src="/assets/profile/avatar.webp"
+            loading="eager"
+            alt="Profile picture"
+            class="niv-image"
+          />
+          <div class="profile-text">
+            <div class="label-white">Erland Ramdhani</div>
+            <div class="label-gray">Web Developer</div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,16 +101,6 @@ const socials: Array<{ name: string; href: string; label: string }> = [
         <div class="nav-text">Blog Posts</div>
       </a>
 
-      <label
-        for="sidebar-toggle"
-        data-label="Collapse Sidebar"
-        class:list={[navStyles['nav-link-container'], 'nav-link-container', 'sidebar-toggle-button', 'w-inline-block']}
-        aria-label="Toggle sidebar width"
-        tabindex="0"
-      >
-        <Icon name="sidebar" class:list={[navStyles['nav-link-image'], 'nav-link-image']} />
-        <div class="nav-text">Collapse Sidebar</div>
-      </label>
       <div class:list={[socialsStyles.socials, 'socials--menu']}>
         {socials.map((s) => (
           <a href={s.href} aria-label={s.label} class={socialsStyles['social-link']} target="_blank" rel="noopener noreferrer">

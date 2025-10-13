@@ -60,13 +60,13 @@
 
   function syncToggleActive(): void {
     try {
-      const toggleButton = document.querySelector('.sidebar .sidebar-toggle-button') as HTMLElement | null;
+      const toggleButtons = document.querySelectorAll<HTMLElement>('.sidebar-toggle-button');
       const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
-      if (!toggleButton || !sidebar) return;
+      if (!toggleButtons.length || !sidebar) return;
       const isCollapsedNow =
         document.documentElement.getAttribute('data-sidebar') === 'collapsed' ||
         sidebar.classList.contains('sidebar-collapsed');
-      toggleButton.classList.toggle('is-active', isCollapsedNow);
+      toggleButtons.forEach((btn) => btn.classList.toggle('is-active', isCollapsedNow));
     } catch {}
   }
 

@@ -1,12 +1,14 @@
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
 :root {
-  --sidebar-collapsed-item-width: 60px;
+  --sidebar-expanded-width: 304px;
+  --sidebar-collapsed-width: 120px;
+  --sidebar-collapsed-item-width: 76px;
   --sidebar-collapsed-item-padding: var(--space-3);
 }
 
 .sidebar {
-  width: 280px;
+  width: var(--sidebar-expanded-width);
   height: 100vh;
   background-color: var(--bg-overlay);
   border-right: 1px solid var(--border-color);
@@ -72,7 +74,7 @@ body:has(.sidebar .nav-toggle:checked) {
   transition:
     width var(--dur-slow) var(--ease-standard),
     padding var(--dur-slow) var(--ease-standard);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 :is(
@@ -81,7 +83,7 @@ body:has(.sidebar .nav-toggle:checked) {
     body.sidebar-collapsed
   )
   .sidebar {
-  width: 80px;
+  width: var(--sidebar-collapsed-width);
   padding: var(--space-5) var(--space-2);
 }
 
@@ -176,7 +178,7 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked)) {
-  width: 80px;
+  width: var(--sidebar-collapsed-width);
   padding: var(--space-8) var(--space-2);
 }
 
@@ -265,40 +267,6 @@ body:has(.sidebar .nav-toggle:checked) {
 .sidebar.sidebar-collapsed .w-nav-menu {
   align-items: flex-start !important;
   gap: 0px !important;
-}
-
-.sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button {
-  display: inline-flex !important;
-  width: var(--sidebar-collapsed-item-width) !important;
-  min-height: 44px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: var(--sidebar-collapsed-item-padding) !important;
-  margin-bottom: var(--space-2) !important;
-  border-radius: var(--radius-md) !important;
-}
-
-.sidebar.sidebar-collapsed .sidebar-toggle-button .nav-link-image {
-  opacity: 0.48;
-}
-
-.sidebar.sidebar-collapsed .sidebar-toggle-button:hover .nav-link-image {
-  opacity: 1;
-}
-
-.sidebar.sidebar-collapsed .sidebar-toggle-button.is-active,
-.sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active {
-  background-color: var(--surface-active);
-  border-color: var(--border-color);
-}
-
-.sidebar.sidebar-collapsed .sidebar-toggle-button.is-active:hover,
-.sidebar:has(#sidebar-toggle:checked) .sidebar-toggle-button.is-active:hover {
-  background-color: var(--surface-hover);
-  border-color: var(--border-color);
-  box-shadow: 0 2px 8px var(--shadow-030);
 }
 
 /* Ensure the nav menu inside sidebar uses a vertical flex layout by default */
