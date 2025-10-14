@@ -117,6 +117,8 @@ const searchablePosts = filtered.map(postToSearchable);
 </SiteLayout>
 
 <script define:vars={{ searchablePosts }} is:inline>
+  import { onRouteChange } from '../../../../../lib/router-events';
+
   // Make searchable posts available to the search component
   function initSearchData() {
     try {
@@ -140,15 +142,7 @@ const searchablePosts = filtered.map(postToSearchable);
 
     document.addEventListener('astro:page-load', run);
     document.addEventListener('astro:after-swap', run);
-    window.addEventListener('popstate', run);
-    const _push = history.pushState && history.pushState.bind(history);
-    if (_push) {
-      history.pushState = function (data, unused, url) {
-        const ret = _push(data, unused, url);
-        setTimeout(run, 10);
-        return ret;
-      };
-    }
+    onRouteChange(run);
   }
 
   if (document.readyState === 'loading') {

@@ -3,6 +3,7 @@
 
 import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
+import { onRouteChange } from './router-events';
 import '../styles/code-copy.css';
 
 function findCodeBlocks(): NodeListOf<HTMLElement> {
@@ -107,19 +108,7 @@ function setupRouterReinit() {
 
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
-  window.addEventListener('popstate', run);
-  const _push = history.pushState?.bind(history);
-  if (_push) {
-    history.pushState = function (
-      data: any,
-      unused: string,
-      url?: string | URL | null
-    ) {
-      const ret = _push(data, unused, url);
-      setTimeout(run, 10);
-      return ret;
-    } as typeof history.pushState;
-  }
+  onRouteChange(run);
 
   const observer = new MutationObserver(() => {
     setTimeout(run, 0);

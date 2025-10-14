@@ -64,6 +64,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 </div>
 
 <script>
+  import { onRouteChange } from '../lib/router-events';
+
   // SearchResult type is used in the script below
   interface SearchResult {
     item: any;
@@ -542,21 +544,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     document.addEventListener('astro:page-load', run);
     document.addEventListener('astro:after-swap', run);
 
-    // Navigation via history
-    window.addEventListener('popstate', run);
-    const _push = history.pushState?.bind(history);
-    if (_push) {
-      history.pushState = function (
-        data: any,
-        unused: string,
-        url?: string | URL | null
-      ) {
-        const ret = _push(data, unused, url);
-        // re-bind after navigation
-        setTimeout(run, 10);
-        return ret;
-      } as typeof history.pushState;
-    }
+    onRouteChange(run);
 
     // Observe DOM changes to catch newly injected content
     const debounced = (() => {
