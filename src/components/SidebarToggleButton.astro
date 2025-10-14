@@ -40,11 +40,6 @@ import styles from "./SidebarToggleButton/SidebarToggleButton.module.css";
       if (!collapsed && sidebarToggle instanceof HTMLInputElement) {
         collapsed = sidebarToggle.checked;
       }
-      console.debug('[SidebarToggleButton] updateState', {
-        attrValue,
-        checkboxChecked: sidebarToggle instanceof HTMLInputElement ? sidebarToggle.checked : undefined,
-        collapsed,
-      });
       wrapper.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
       toggle.classList.toggle('is-active', collapsed);
     } catch {}
