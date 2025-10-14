@@ -3,6 +3,8 @@
 ---
 
 <script>
+  import { onRouteChange } from '../lib/router-events';
+
   const STORAGE_KEY: string = 'sidebar-collapsed';
   const MOBILE_QUERY: string = '(max-width: 1024px)';
   function isMobile(): boolean {
@@ -278,6 +280,7 @@
       };
       document.addEventListener('astro:after-swap', reapply);
       document.addEventListener('astro:page-load', reapply);
+      onRouteChange(reapply);
     } catch {}
   }
 
@@ -371,59 +374,20 @@
       updateActiveNav();
       attachNavClickHandlers();
     }
-    // History hooks
-    try {
-      const _push =
-        history.pushState &&
-        (history.pushState.bind(history) as (
-          data: any,
-          unused: string,
-          url?: string | URL | null
-        ) => any);
-      if (_push) {
-        history.pushState = function (
-          data: any,
-          unused: string,
-          url?: string | URL | null
-        ) {
-          const r = _push(data, unused, url);
-          try {
-            queueMicrotask(() => {
-              closeMobileMenu();
-              updateActiveNav();
-            });
-          } catch {}
-          return r;
-        };
+    const refreshNavState = () => {
+      try {
+        queueMicrotask(() => {
+          closeMobileMenu();
+          updateActiveNav();
+        });
+      } catch {
+        setTimeout(() => {
+          closeMobileMenu();
+          updateActiveNav();
+        }, 0);
       }
-      const _replace =
-        history.replaceState &&
-        (history.replaceState.bind(history) as (
-          data: any,
-          unused: string,
-          url?: string | URL | null
-        ) => any);
-      if (_replace) {
-        history.replaceState = function (
-          data: any,
-          unused: string,
-          url?: string | URL | null
-        ) {
-          const r = _replace(data, unused, url);
-          try {
-            queueMicrotask(() => {
-              closeMobileMenu();
-              updateActiveNav();
-            });
-          } catch {}
-          return r;
-        };
-      }
-    } catch {}
-    window.addEventListener('popstate', () => {
-      closeMobileMenu();
-      updateActiveNav();
-    });
+    };
+    onRouteChange(refreshNavState);
   }
 
   // Run once on load; sidebar persists via data-astro-transition-persist

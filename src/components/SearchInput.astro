@@ -64,6 +64,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 </div>
 
 <script>
+  import { onRouteChange } from '../lib/router-events';
+
   // SearchResult type is used in the script below
   interface SearchResult {
     item: any;
@@ -104,6 +106,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   let fuse: any = null;
   let fuseReady = false;
+  let cleanupSearch: (() => void) | null = null;
 
   async function loadSearchIndex(): Promise<any[]> {
     try {
@@ -172,6 +175,12 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   // Initialize search functionality
   function initSearch() {
+    // Remove any existing listeners before re-initializing
+    if (cleanupSearch) {
+      cleanupSearch();
+      cleanupSearch = null;
+    }
+
     // Only initialize if the SearchInput component exists on the page
     const container = document.getElementById('search-container');
     if (!container) {
@@ -222,13 +231,16 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     initOnce();
 
     // Search input event handlers
-    let searchTimeout: number;
-    searchInput.addEventListener('input', e => {
+    let searchTimeout: number | null = null;
+    const onInput = (e: Event) => {
       const query = (e.target as HTMLInputElement).value.trim();
       searchState.currentQuery = query;
 
       // Clear previous timeout
-      clearTimeout(searchTimeout);
+      if (searchTimeout !== null) {
+        clearTimeout(searchTimeout);
+        searchTimeout = null;
+      }
 
       // Show/hide clear button
       if (query.length > 0) {
@@ -243,28 +255,31 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       searchTimeout = window.setTimeout(() => {
         performSearch(query);
       }, 300);
-    });
+    };
+    searchInput.addEventListener('input', onInput);
 
     // Clear search
-    searchClear.addEventListener('click', () => {
+    const onClearClick = () => {
       searchInput.value = '';
       searchState.currentQuery = '';
       searchClear.style.display = 'none';
       hideResults();
-    });
+    };
+    searchClear.addEventListener('click', onClearClick);
 
     // Hide results when clicking outside
-    document.addEventListener('click', e => {
+    const onDocumentClick = (e: MouseEvent) => {
       const target = e.target as Element;
       // Use stable container id for click-outside detection
       const container = document.getElementById('search-container');
       if (container && !container.contains(target)) {
         hideResults();
       }
-    });
+    };
+    document.addEventListener('click', onDocumentClick);
 
     // Handle escape key
-    document.addEventListener('keydown', e => {
+    const onDocumentKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         hideResults();
         searchInput.blur();
@@ -300,7 +315,20 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
           if (slug) window.location.href = `/blog/${slug}/`;
         }
       }
-    });
+    };
+    document.addEventListener('keydown', onDocumentKeyDown);
+
+    cleanupSearch = () => {
+      if (searchTimeout !== null) {
+        clearTimeout(searchTimeout);
+        searchTimeout = null;
+      }
+      searchInput.removeEventListener('input', onInput);
+      searchClear.removeEventListener('click', onClearClick);
+      document.removeEventListener('click', onDocumentClick);
+      document.removeEventListener('keydown', onDocumentKeyDown);
+      cleanupSearch = null;
+    };
   }
 
   function performSearch(query: string) {
@@ -516,21 +544,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     document.addEventListener('astro:page-load', run);
     document.addEventListener('astro:after-swap', run);
 
-    // Navigation via history
-    window.addEventListener('popstate', run);
-    const _push = history.pushState?.bind(history);
-    if (_push) {
-      history.pushState = function (
-        data: any,
-        unused: string,
-        url?: string | URL | null
-      ) {
-        const ret = _push(data, unused, url);
-        // re-bind after navigation
-        setTimeout(run, 10);
-        return ret;
-      } as typeof history.pushState;
-    }
+    onRouteChange(run);
 
     // Observe DOM changes to catch newly injected content
     const debounced = (() => {

@@ -5,6 +5,12 @@ html.image-lightbox--locked body {
   overflow: hidden !important;
 }
 
+html.image-lightbox--locked .sidebar-edge-toggle-wrapper,
+html.image-lightbox--locked [data-sidebar-social-flyout],
+html.image-lightbox--locked #scroll-top {
+  display: none !important;
+}
+
 .lightbox-ready {
   cursor: zoom-in;
 }

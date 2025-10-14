@@ -1,6 +1,8 @@
 // Scroll-to-top button initializer that works with Astro ClientRouter
 // Finds a button with id `scroll-top` and binds show/hide + smooth scroll
 
+import { onRouteChange } from './router-events';
+
 const SHOW_AT_PX = 200;
 
 function updateVisibility(btn: HTMLElement) {
@@ -45,20 +47,7 @@ function setupRouterReinit() {
 
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
-
-  window.addEventListener('popstate', run);
-  const _push = history.pushState?.bind(history);
-  if (_push) {
-    history.pushState = function (
-      data: any,
-      unused: string,
-      url?: string | URL | null
-    ) {
-      const ret = _push(data, unused, url);
-      setTimeout(run, 10);
-      return ret;
-    } as typeof history.pushState;
-  }
+  onRouteChange(run);
 
   const observer = new MutationObserver(() => {
     // debounce minimal

@@ -3,6 +3,7 @@
 import { readdir, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { markdownToPlainText, summarize } from '../src/lib/search-utils.js';
 
 const BLOG_DIR = path.resolve('src/content/blog');
 const OUTPUT_DIR = path.resolve('public');
@@ -30,41 +31,6 @@ async function listBlogEntries() {
     }
   }
   return entries;
-}
-
-function stripMarkdown(md) {
-  if (!md) return '';
-  let txt = md;
-  // Remove code fences
-  txt = txt.replace(/```[\s\S]*?```/g, '');
-  // Remove HTML tags
-  txt = txt.replace(/<[^>]+>/g, '');
-  // Remove images ![alt](url)
-  txt = txt.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
-  // Replace links [text](url) -> text
-  txt = txt.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-  // Remove headings markers
-  txt = txt.replace(/^#{1,6}\s+/gm, '');
-  // Remove emphasis and inline code markers
-  txt = txt.replace(/[*_~`]/g, '');
-  // Normalize whitespace
-  txt = txt.replace(/\r/g, '');
-  txt = txt.replace(/\t/g, ' ');
-  txt = txt.replace(/[ ]{2,}/g, ' ');
-  txt = txt.replace(/\n{3,}/g, '\n\n');
-  return txt.trim();
-}
-
-function summarize(text, maxChars = 800) {
-  const normalized = text.trim();
-  if (!normalized) return '';
-  const paras = normalized
-    .split(/\n{2,}/)
-    .map(p => p.trim())
-    .filter(Boolean);
-  const first = paras[0] || normalized;
-  if (first.length <= maxChars) return first;
-  return first.slice(0, maxChars).trimEnd() + '…';
 }
 
 function toDateLabel(input) {
@@ -106,7 +72,7 @@ async function buildIndex() {
     const category = data['category'] || null;
     const dateLabel = toDateLabel(data['publishDate']);
 
-    const plain = stripMarkdown(body);
+    const plain = markdownToPlainText(body);
     const excerpt = pickExcerpt(data, plain);
     const content = plain;
 

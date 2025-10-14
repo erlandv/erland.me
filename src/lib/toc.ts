@@ -229,19 +229,7 @@ function setupRouterReinit() {
   };
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
-  window.addEventListener('popstate', run);
-  const _push = history.pushState?.bind(history);
-  if (_push) {
-    history.pushState = function (
-      data: any,
-      unused: string,
-      url?: string | URL | null
-    ) {
-      const ret = _push(data, unused, url);
-      setTimeout(run, 10);
-      return ret;
-    } as typeof history.pushState;
-  }
+  onRouteChange(run);
 }
 
 export function autoInit() {
@@ -259,6 +247,7 @@ export function autoInit() {
 
 export default initToc;
 // Inline SVG icons for toggle
+import { onRouteChange } from './router-events';
 import arrowUpRaw from '../icons/arrowup.svg?raw';
 import arrowDownRaw from '../icons/arrowdown.svg?raw';
 

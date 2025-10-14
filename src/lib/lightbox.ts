@@ -6,6 +6,7 @@
 
 import closeIcon from '../icons/close.svg?raw';
 import fullscreenIcon from '../icons/fullscreen.svg?raw';
+import { onRouteChange } from './router-events';
 
 type InitOptions = {
   containerSelectors?: string[];
@@ -65,8 +66,6 @@ function getCaptionForImage(el: HTMLImageElement): string | null {
   }
   return null;
 }
-
-// Note: fullscreen API removed; open icon is used to open lightbox
 
 function disableScroll() {
   document.documentElement.classList.add('image-lightbox--locked');
@@ -200,21 +199,7 @@ function setupRouterReinit() {
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
 
-  // Navigation via history
-  window.addEventListener('popstate', run);
-  const _push = history.pushState?.bind(history);
-  if (_push) {
-    history.pushState = function (
-      data: any,
-      unused: string,
-      url?: string | URL | null
-    ) {
-      const ret = _push(data, unused, url);
-      // re-bind after navigation
-      setTimeout(run, 10);
-      return ret;
-    } as typeof history.pushState;
-  }
+  onRouteChange(run);
 
   // Observe DOM changes to catch newly injected content
   const debounced = (() => {

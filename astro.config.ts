@@ -2,8 +2,6 @@ import { defineConfig, passthroughImageService } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -136,34 +134,6 @@ export default defineConfig({
               : {}),
           }
         : undefined,
-    // CSS optimization
-    css: {
-      devSourcemap: true,
-      postcss: {
-        plugins: [
-          // Add autoprefixer for better browser compatibility
-          autoprefixer({
-            overrideBrowserslist: ['last 2 versions', '> 1%', 'not dead'],
-          }),
-          // Add cssnano for CSS minification when enabled
-          ...(process.env.ENABLE_MINIFY === 'true' ||
-          process.env.NODE_ENV === 'production'
-            ? [
-                cssnano({
-                  preset: [
-                    'default',
-                    {
-                      discardComments: {
-                        removeAll: true,
-                      },
-                    },
-                  ],
-                }),
-              ]
-            : []),
-        ],
-      },
-    },
     // Server configuration
     server: {
       fs: {

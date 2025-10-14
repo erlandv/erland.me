@@ -101,6 +101,8 @@ const getCategory = (post: any) => post.data?.category ?? null;
 </SiteLayout>
 
 <script define:vars={{ searchablePosts }} is:inline>
+  import { onRouteChange } from '../../../lib/router-events';
+
   // Initialize scoped search data for this category page
   function initSearchData() {
     try {
@@ -124,15 +126,7 @@ const getCategory = (post: any) => post.data?.category ?? null;
 
     document.addEventListener('astro:page-load', run);
     document.addEventListener('astro:after-swap', run);
-    window.addEventListener('popstate', run);
-    const _push = history.pushState && history.pushState.bind(history);
-    if (_push) {
-      history.pushState = function (data, unused, url) {
-        const ret = _push(data, unused, url);
-        setTimeout(run, 10);
-        return ret;
-      };
-    }
+    onRouteChange(run);
   }
 
   if (document.readyState === 'loading') {

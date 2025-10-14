@@ -4,6 +4,7 @@
 
 import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
+import { onRouteChange } from './router-events';
 
 type Scope = Document | Element | ParentNode;
 
@@ -92,20 +93,7 @@ function setupRouterReinit() {
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
 
-  // History API navigations
-  window.addEventListener('popstate', run);
-  const _push = history.pushState?.bind(history);
-  if (_push) {
-    history.pushState = function (
-      data: any,
-      unused: string,
-      url?: string | URL | null
-    ) {
-      const ret = _push(data, unused, url);
-      setTimeout(run, 10);
-      return ret;
-    } as typeof history.pushState;
-  }
+  onRouteChange(run);
 
   // Observe DOM changes for new share sections
   const observer = new MutationObserver(() => {
