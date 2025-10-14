@@ -235,7 +235,7 @@ p {
   font-family:
     'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
     'Liberation Mono', monospace;
-  font-size: 0.95em;
+  font-size: 1.1em;
 }
 
 .prose p code,
@@ -264,14 +264,14 @@ p {
   color: var(--text-code);
   border: 1px solid var(--border-code);
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: auto;
   box-shadow:
     0 4px 6px -1px var(--shadow-010),
     0 2px 4px -1px var(--shadow-006);
   margin: 1.5rem 0;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.975rem;
+  line-height: 1.25;
 }
 
 .prose pre:hover {
@@ -290,7 +290,6 @@ p {
   background: var(--bg-code-2);
   color: var(--text-code-muted);
   padding: 0.5rem 1rem;
-  border-radius: 12px 0 12px 0;
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;

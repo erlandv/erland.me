@@ -22,13 +22,13 @@ Jadi sebenarnya artikel ini untuk diri saya sendiri, walau bisa juga untuk kalia
 
 Pertama-tama, akses server dengan [menggunakan SSH](/blog/cara-menggunakan-ssh/). Lalu, login ke MySQL. Setelah itu, ketik perintah berikut.
 
-```
+```sql
 USE namadatabase;
 ```
 
 Kemudian cek value pada `siteurl` dan `home` dengan menggunakan perintah berikut.
 
-```
+```sql
 SELECT option_name, option_value FROM wp_options WHERE option_name IN ('siteurl', 'home');
 ```
 
@@ -36,7 +36,7 @@ Oh iya, pada perintah di atas, jangan lupa ganti bagian `wp_` pada `wp_options` 
 
 Output dari perintah di atas kurang lebih akan seperti di bawah ini.
 
-```
+```sql
 +-------------+----------------------------+
 | option_name | option_value               |
 +-------------+----------------------------+
@@ -48,7 +48,7 @@ Output dari perintah di atas kurang lebih akan seperti di bawah ini.
 
 Sekarang saatnya kita update URL lama tersebut menjadi URL dengan nama domain yang baru. Lakukan dengan menggunakan perintah berikut ini.
 
-```
+```sql
 UPDATE wp_options SET option_value = replace(option_value, 'https://domainlama.com', 'https://domainbaru.com') WHERE option_name = 'home' OR option_name = 'siteurl';
 ```
 
@@ -56,7 +56,7 @@ Dengan itu, URL pada WordPress tersebut akan terganti menjadi URL dengan nama do
 
 Hasilnya akan menjadi seperti di bawah ini kurang lebihnya.
 
-```
+```sql
 +-------------+----------------------------+
 | option_name | option_value               |
 +-------------+----------------------------+
@@ -70,19 +70,19 @@ Namun, masih belum selesai. Ada beberapa value lagi yang harus diubah agar web W
 
 Update value `guid` pada tabel `wp_posts` menggunakan perintah berikut.
 
-```
+```sql
 UPDATE wp_posts SET guid = replace(guid, 'https://domainlama.com','https://domainbaru.com');
 ```
 
 Update value `post_content` pada tabel `wp_posts` dengan menggunakan perintah berikut.
 
-```
+```sql
 UPDATE wp_posts SET post_content = replace(post_content, 'https://domainlama.com', 'https://domainbaru.com');
 ```
 
 Update value `meta_value` pada tabel `wp_postmeta` dengan menggunakan perintah berikut.
 
-```
+```sql
 UPDATE wp_postmeta SET meta_value = replace(meta_value, 'https://domainlama.com', 'https://domainbaru.com');
 ```
 
@@ -92,7 +92,7 @@ Sederhana aja sebenarnya cara menggati URL WordPress di database MySQL. Hanya bu
 
 Okay? Sekarang waktunya ketik perintah berikut.
 
-```
+```bash
 sudo shutdown -h now
 ```
 
