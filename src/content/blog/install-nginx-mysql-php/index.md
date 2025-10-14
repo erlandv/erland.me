@@ -26,31 +26,19 @@ Secara default, webserver <a href="https://www.nginx.com">Nginx</a> sudah ada di
 
 Saya anggap kalian sudah mengerti [cara remote server menggunakan SSH](/blog/cara-menggunakan-ssh/) melalui terminal, ya. Jalankan perintah di bawah ini untuk install Nginx di Ubuntu.
 
-```
-sudo add-apt-repository ppa:nginx/development -y
-```
-
-```
+```bash
 sudo add-apt-repository ppa:nginx/development -y
 ```
 
 Tunggu sampai prosesnya selesai, kemudian jalankan perintah di bawah ini untuk membarui daftar package di system.
 
-```
-sudo apt update
-```
-
-```
+```bash
 sudo apt update
 ```
 
 Setelah update selesai, selanjutnya install Nginx di Ubuntu dengan perintah berikut.
 
-```
-sudo apt install nginx -y
-```
-
-```
+```bash
 sudo apt install nginx -y
 ```
 
@@ -64,37 +52,25 @@ Jika proses install berjalan lancar, kalian bisa buka IP VPS di browser dan hasi
 
 Serupa seperti Nginx, <a href="https://www.php.net">PHP</a> juga sudah tersedia di repository Ubuntu, tapi jarang terdapat update. Akan lebih baik kita menggunakan PHP yang up to date. Jalankan perintah berikut.
 
-```
-sudo add-apt-repository ppa:ondrej/php -y
-```
-
-```
+```bash
 sudo add-apt-repository ppa:ondrej/php -y
 ```
 
 Kemudian perbarui kembali package di system Linux.
 
-```
-sudo apt update
-```
-
-```
+```bash
 sudo apt update
 ```
 
 Setelah update, saatnya install PHP versi 8.4 di Ubuntu dengan menjalankan perintah berikut.
 
-```
-sudo apt install php8.4-fpm php8.4-common php8.4-mysql php8.4-xml php8.4-xmlrpc php8.4-curl php8.4-gd php8.4-imagick php8.4-cli php8.4-dev php8.4-imap php8.4-mbstring php8.4-opcache php8.4-redis php8.4-soap php8.4-zip php8.4-intl -y
-```
-
-```
+```bash
 sudo apt install php8.4-fpm php8.4-common php8.4-mysql php8.4-xml php8.4-xmlrpc php8.4-curl php8.4-gd php8.4-imagick php8.4-cli php8.4-dev php8.4-imap php8.4-mbstring php8.4-opcache php8.4-redis php8.4-soap php8.4-zip php8.4-intl -y
 ```
 
 Tunggu sampai proses instalasi selesai. Untuk memastikan PHP berhasil diinstal, jalankan perintah berikut.
 
-```
+```bash
 php-fpm8.4 -v
 ```
 
@@ -112,11 +88,7 @@ Zend Engine v4.4.11, Copyright (c) Zend Technologies
 
 Setelah PHP berhasil diinstall, selanjutnya kita konfigurasi PHP terlebih dahulu sebelum melakukan instalasi database agar tidak ada kendala saat instalasi website WordPress. Edit file `php.ini` dengan menjalankan perintah berikut.
 
-```
-sudo nano /etc/php/8.4/fpm/php.ini
-```
-
-```
+```bash
 sudo nano /etc/php/8.4/fpm/php.ini
 ```
 
@@ -124,7 +96,7 @@ Cari `upload_max_filesize` dan `post_max_size` lalu ubah parameternya menjadi `6
 
 Jangan lupa simpan perubahan dan cek apakah terdapat syntax error dengan menjalankan perintah berikut.
 
-```
+```bash
 sudo php-fpm8.4 -t
 ```
 
@@ -136,11 +108,11 @@ NOTICE: configuration file /etc/php/8.4/fpm/php-fpm.conf test is successful
 
 Selanjutnya restart PHP dengan menjalankan perintah berikut.
 
-```
+```bash
 sudo systemctl restart php8.4-fpm
 ```
 
-```
+```bash
 sudo systemctl restart php8.4-fpm
 ```
 
@@ -151,11 +123,7 @@ Setelah selesai menginstal Nginx sebagai webserver dan PHP sebagai bahasa pemrog
 Saya memilih menggunakan MySQL aja karena...... Gapapa.  
 Langsung aja install MySQL di VPS Ubuntu dengan mengetik perintah di bawah ini.
 
-```
-sudo apt install mysql-server -y
-```
-
-```
+```bash
 sudo apt install mysql-server -y
 ```
 
@@ -163,31 +131,19 @@ Tunggu sampai proses instalasi selesai dan setelah itu akan muncul prompt passwo
 
 Login ke MySQL.
 
-```
-sudo mysql
-```
-
-```
+```bash
 sudo mysql
 ```
 
 Update password untuk user root.
 
-```
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'rootpassword';
-```
-
-```
+```sql
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'rootpassword';
 ```
 
 Setelah logout dari MySQL dengan perintah `quit;` lalu jalankan perintah di bawah ini.
 
-```
-sudo mysql_secure_installation
-```
-
-```
+```bash
 sudo mysql_secure_installation
 ```
 
@@ -199,47 +155,26 @@ Langkah terakhir sebelum server ini siap digunakan untuk menjalankan website, se
 
 Jalankan perintah di bawah ini untuk menghapus default server block Nginx.
 
-```
-sudo rm /etc/nginx/sites-available/default
-```
-
-```
+```bash
 sudo rm /etc/nginx/sites-available/default
 ```
 
 Dan juga perintah ini.
 
-```
-sudo rm /etc/nginx/sites-enabled/default
-```
-
-```
+```bash
 sudo rm /etc/nginx/sites-enabled/default
 ```
 
 Setelah itu, kita buat siapapun yang membuka IP server di browser akan mendapati halaman error 444. Buka file `nginx.conf` untuk diedit dengan perintah berikut.
 
-```
-sudo nano /etc/nginx/nginx.conf
-```
-
-```
+```bash
 sudo nano /etc/nginx/nginx.conf
 ```
 
 Cari baris yang berisi `include /etc/nginx/sites-enabled/*;`  
 Kemudian tambahkan kode berikut ini di bawahnya.
 
-```
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    server_name _;
-    return 444;
-}
-```
-
-```
+```nginx
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -250,11 +185,7 @@ server {
 
 Jangan lupa simpan perubahan. Lalu cek apakah ada error pada konfigurasi Nginx tersebut dengan cara menjalankan perintah berikut.
 
-```
-sudo nginx -t
-```
-
-```
+```bash
 sudo nginx -t
 ```
 
@@ -267,11 +198,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 Kalau semuanya sudah selesai, restart Nginx dengan perintah berikut.
 
-```
-sudo systemctl restart nginx
-```
-
-```
+```bash
 sudo systemctl restart nginx
 ```
 

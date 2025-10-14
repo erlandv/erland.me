@@ -21,8 +21,8 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkDirective, remarkGallery, remarkFigure],
     shikiConfig: {
-      theme: 'github-dark-dimmed',
-      wrap: true,
+      theme: 'min-dark',
+      wrap: false,
     },
     gfm: true,
     smartypants: true,

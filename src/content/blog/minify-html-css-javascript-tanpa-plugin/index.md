@@ -24,7 +24,7 @@ Sebenarnya fitur minify sudah ada di sebagian besar plugin-plugin cache seperti 
 
 Cara minify HTML, CSS, JavaScript tanpa plugin sangat gampang, kalian nggak perlu punya skill khusus untuk menerapkannya. Cukup copy-paste kode di bawah ini ke dalam file `functions.php` pada theme yang sedang digunakan. Akan lebih baik jika menggunakan <a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/">child theme</a> supaya kode ini tidak terhapus ketika upgrade theme.
 
-```
+```php
 class WP_HTML_Compression
 {
 	// Settings
@@ -180,7 +180,7 @@ Kalau kalian menggunakan shared hosting yang umumnya memakai cPanel, buka file m
 
 Dengan menambahkan kode tersebut, sekarang source code HTML, CSS (inline), dan JavaScript (inline) akan dikompress sehingga ukurannya menjadi lebih kecil dan dapat lebih cepat di-load oleh browser. Untuk memastikan apakah minify code tanpa plugin ini berhasil atau tidak, silakan view source website di browser dengan cara menggunakan shortcut CTRL + U. Jika berhasil, pada bagian paling bawah akan terdapat komentar HTML bertuliskan
 
-```
+```html
 <!-- HTML minified! Size saved ...%, from ... bytes, now ... bytes -->
 ```
 

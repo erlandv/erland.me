@@ -71,15 +71,34 @@ function createCopyButton(): HTMLButtonElement {
   return btn;
 }
 
+function ensureWrapper(pre: HTMLElement): HTMLElement | null {
+  const parent = pre.parentElement;
+  if (!parent) return null;
+
+  if (parent.classList.contains('code-copy-wrapper')) {
+    return parent as HTMLElement;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-copy-wrapper';
+  parent.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  return wrapper;
+}
+
 export function initCodeCopy() {
   const blocks = findCodeBlocks();
   blocks.forEach(codeEl => {
     const pre = codeEl.parentElement as HTMLElement | null;
     if (!pre) return;
-    if (pre.querySelector('.code-copy-btn')) return;
+
+    const wrapper = ensureWrapper(pre);
+    if (!wrapper) return;
+    if (wrapper.querySelector('.code-copy-btn')) return;
 
     const language = detectLanguage(pre, codeEl);
     pre.setAttribute('data-language', language);
+    wrapper.setAttribute('data-language', language);
 
     const btn = createCopyButton();
     btn.addEventListener('click', async () => {
@@ -95,7 +114,7 @@ export function initCodeCopy() {
       }
     });
 
-    pre.appendChild(btn);
+    wrapper.appendChild(btn);
   });
 }
 
