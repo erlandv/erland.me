@@ -5,10 +5,7 @@ export interface SidebarSocialLink {
 }
 
 export const sidebarSocialLinks: SidebarSocialLink[] = [
-  { name: 'x',
-    href: 'https://x.com/erlandzz',
-    label: 'X',
-  },
+  { name: 'x', href: 'https://x.com/erlandzz', label: 'X' },
   {
     name: 'instagram',
     href: 'https://www.instagram.com/erlandramdhani',
@@ -19,10 +16,7 @@ export const sidebarSocialLinks: SidebarSocialLink[] = [
     href: 'https://www.facebook.com/erlandramdhani',
     label: 'Facebook',
   },
-  { name: 'github',
-    href: 'https://github.com/erlandv',
-    label: 'GitHub',
-  },
+  { name: 'github', href: 'https://github.com/erlandv', label: 'GitHub' },
   {
     name: 'bluesky',
     href: 'https://bsky.app/profile/erland.me',
