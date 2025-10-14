@@ -1,4 +1,5 @@
 import type { Post } from './blog';
+import { markdownToPlainText, summarize } from './search-utils.js';
 
 export interface SearchablePost {
   slug: string;
@@ -46,42 +47,6 @@ export const DEFAULT_SEARCH_CONFIG: SearchConfig = {
   minMatchCharLength: 2,
   ignoreLocation: true,
 };
-
-function markdownToPlainText(md: string | null | undefined): string {
-  if (!md) return '';
-  let txt = md;
-  // Remove code fences
-  txt = txt.replace(/```[\s\S]*?```/g, '');
-  // Remove HTML tags
-  txt = txt.replace(/<[^>]+>/g, '');
-  // Remove images ![alt](url)
-  txt = txt.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
-  // Replace links [text](url) -> text
-  txt = txt.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-  // Remove heading markers
-  txt = txt.replace(/^#{1,6}\s+/gm, '');
-  // Remove emphasis and inline code markers
-  txt = txt.replace(/[*_~`]/g, '');
-  // Normalize whitespace
-  txt = txt.replace(/\r/g, '');
-  txt = txt.replace(/\t/g, ' ');
-  txt = txt.replace(/[ ]{2,}/g, ' ');
-  txt = txt.replace(/\n{3,}/g, '\n\n');
-  return txt.trim();
-}
-
-function summarize(text: string, maxChars = 280): string {
-  const normalized = text.trim();
-  if (!normalized) return '';
-  if (normalized.length <= maxChars) return normalized;
-  const paragraphs = normalized
-    .split(/\n{2,}/)
-    .map(p => p.trim())
-    .filter(Boolean);
-  const first = paragraphs[0] || normalized;
-  if (first.length <= maxChars) return first;
-  return first.slice(0, maxChars).trimEnd() + '…';
-}
 
 // Convert Post to SearchablePost
 export function postToSearchable(post: Post): SearchablePost {
