@@ -154,7 +154,12 @@ p {
   background-color: var(--bg-primary);
 }
 
-/* First column - narrower for labels, allow nowrap */
+/* First column - auto-sized to content width
+ * The width: 1% is a CSS trick that forces the column to shrink to the minimum
+ * width needed to fit the content (respecting white-space: nowrap).
+ * This allows other columns to share the remaining table width proportionally.
+ * Works for both 2-column tables (blog specs) and multi-column tables (downloads).
+ */
 .prose table th:first-child,
 .prose table td:first-child {
   font-weight: 600;
