@@ -2,14 +2,11 @@
 title: 'Template Kalender 2024'
 description: 'Mentahan file template kalender 2024 CDR, AI, PDF, PNG HD sekali klik link download gratis 100% full 12 bulan lengkap hari libur nasional.'
 excerpt: 'Free download file template kalender 2024 berformat vector'
+publishDate: 2023-11-01
+updatedDate: 2024-01-10
 hero: ./hero.png
 heroAlt: 'Template Kalender 2024'
-file: 'https://asset.erland.me/template/kalender-2024.zip'
-version: 'v1.0.0'
-lastUpdated: 2024-12-12
-ctaLabel: 'Download template'
-order: 2
-tags: ['kalender', 'template', 'desain']
+draft: false
 downloadFiles:
   - label: 'kalender-2024.zip'
     href: 'https://asset.erland.me/template/kalender-2024.zip'
@@ -32,11 +29,6 @@ downloadFiles:
   - label: 'kalender-2024-perbulan.png'
     href: 'https://asset.erland.me/template/kalender-2024-png-perbulan.zip'
     size: '4.65 MB'
-downloadNote: |
-  Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, beri tahu saya melalui kolom komentar di bawah ini, akan saya usahakan respons secepatnya. Butuh komunikasi lebih lanjut? Hubungi saya melalui email hello@erland.me
-downloadIntro:
-  - 'Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama.'
-  - 'Silakan download file template kalender 2024 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!'
 ---
 
 Kembali lagi ke edisi berbagi file template kalender 2024 cdr. Lima tahun terakhir saya mencoba konsisten untuk berbagi template kalender secara gratis setiap tahunnya melalui blog pribadi ini, tidak ada tujuan lain selain untuk berbagi kepada kalian yang membutuhkan.
@@ -85,3 +77,18 @@ Template kalender 2024 ini saya buat sendiri dari nol dan dibagikan secara grati
 1. Saya mengizinkan kalian untuk mengedit bentuk tampilan desain kalender ini sesuai dengan selera dan kebutuhan.
 2. Saya mengizinkan kalian untuk membagikan ulang file template kalender ini di blog, web, sosial media, atau platform manapun dengan syarat harus mencantumkan link sumbernya.
 3. Saya TIDAK MENGIZINKAN kalian untuk menjual file template kalender ini dengan cara dan alasan apapun. Jika yang dijual adalah kalender hasil cetak dari file template kalender ini, hal tersebut diperbolehkan. Yang tidak boleh adalah menjual file template kalender ini.
+
+## Link Download
+
+Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semuanya yang menghargai karya saya yang tidak seberapa ini. Sejak awal niat saya hanya untuk membantu dan berbagi ke sesama.
+
+Silakan download file template kalender 2024 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!
+
+:::downloadFiles{note="Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, hubungi saya melalui email hello@erland.me"}
+:::
+
+### Opsional
+
+Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui: <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">https://saweria.co/erlandev</a>
+
+Donasi yang Anda berikan akan saya gunakan sebaik-baiknya untuk membayar tagihan server yang digunakan pada web ini. Terima kasih banyak atas apresiasinya!

@@ -314,10 +314,6 @@
   line-height: 1.7;
 }
 
-/* layout moved to gallery.css to avoid duplication */
-
-/* layout moved to gallery.css to avoid duplication */
-
 /* Tablet adjustments */
 @media screen and (max-width: 767px) {
   .download-page {
@@ -384,8 +380,6 @@
     color: #8a8a8a;
   }
 }
-
-/* figure/img layout moved to gallery.css to avoid duplication */
 
 .content-image-grid figcaption,
 .download-image-grid figcaption {

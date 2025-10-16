@@ -207,7 +207,8 @@ p {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.prose blockquote {
+.prose blockquote,
+#download-content blockquote {
   margin: clamp(1rem, 3vw, 1.5rem) 0;
   padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.25rem);
   border-left: 3px solid var(--border);

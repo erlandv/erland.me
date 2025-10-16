@@ -48,7 +48,7 @@ function buildTableHtml(items: DownloadLink[], note?: string) {
           <tr>
             <th scope="col">File Name</th>
             ${hasSize ? '<th scope="col">Size</th>' : ''}
-            <th scope="col">Download</th>
+            <th scope="col">Link</th>
           </tr>
         </thead>
         <tbody>
