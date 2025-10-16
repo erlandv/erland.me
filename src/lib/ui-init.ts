@@ -12,7 +12,6 @@ const SELECTORS = {
   copy: ['pre code', 'pre[class*="language-"]'],
   lightbox: [
     '.prose img:not(.hero-image)',
-    '[class*="download-richtext"] img:not(.hero-image)',
     '.content-image-grid img:not(.hero-image)',
   ],
 } as const;

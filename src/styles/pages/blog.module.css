@@ -47,33 +47,6 @@
   font-size: 16px;
 }
 
-:global(.prose) a {
-  color: var(--color-primary);
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  transition: color 0.3s var(--ease-standard);
-}
-
-:global(.prose) a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 1.5px;
-  background: var(--color-secondary);
-  transition: width 0.3s var(--ease-standard);
-}
-
-:global(.prose) a:hover {
-  color: var(--color-secondary);
-}
-
-:global(.prose) a:hover::after {
-  width: 100%;
-}
-
 .blog-post__meta-text {
   display: inline-block;
   white-space: nowrap;

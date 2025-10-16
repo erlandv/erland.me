@@ -220,13 +220,30 @@ p {
 }
 
 .prose a {
-  color: #6bb6ff;
+  color: var(--color-primary);
   text-decoration: none;
-  transition: color 0.15s ease;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s var(--ease-standard);
+}
+
+.prose a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-secondary);
+  transition: width 0.3s var(--ease-standard);
 }
 
 .prose a:hover {
   color: var(--color-secondary);
+}
+
+.prose a:hover::after {
+  width: 100%;
 }
 
 .prose code {

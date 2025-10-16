@@ -15,7 +15,7 @@ interface Props {
  * ContentImage: Override untuk tag <img> di Markdown/MDX.
  * - Mencoba resolve gambar lokal di koleksi blog/downloads menjadi ImageMetadata agar dapat dirender via astro:assets.Image.
  * - Bila gagal resolve (mis. URL eksternal/public), fallback ke <img> biasa dengan atribut yang sama.
- * - CSS global .prose img dan modul .download-richtext img akan tetap mengenai <img> hasil <Image> karena output <picture><img>.
+ * - CSS global .prose img akan tetap mengenai <img> hasil <Image> karena output <picture><img>.
  */
 const {
   src,
