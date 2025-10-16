@@ -126,24 +126,6 @@
   color: currentColor;
 }
 
-.download-page {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.download-header {
-  display: grid;
-  gap: 12px;
-}
-
-.download-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
 :global(.download-files) {
   display: grid;
   gap: 20px;
@@ -225,12 +207,6 @@
 
 /* Tablet adjustments */
 @media screen and (max-width: 767px) {
-  .download-page {
-    gap: 32px;
-  }
-  .download-hero {
-    padding: 24px;
-  }
   .download-files-table {
     font-size: 0.95rem;
   }

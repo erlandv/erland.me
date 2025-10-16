@@ -7,6 +7,7 @@ import { blogPostingJsonLd } from '../../lib/seo';
 import ShareButtons from "../../components/ShareButtons.astro";
 import { SITE_URL } from '../../lib/env';
 import blogStyles from "../../styles/pages/blog.module.css";
+import "../../styles/components/article-detail.css";
 import ScrollTopButton from "../../components/ScrollTopButton.astro";
 import ContentImage from "../../components/ContentImage.astro";
 import HeroImage from "../../components/HeroImage.astro";
@@ -59,8 +60,8 @@ const jsonLd = blogPostingJsonLd({
   author="Erland Ramdhani"
 >
   <BackNav href="/blog/" label="Back to Blog" />
-  <article class:list={["content-container", blogStyles.blogPost]}>
-    <header class={blogStyles['blog-post__header']}>
+  <article class:list={["content-container", "article-detail"]}>
+    <header class="article-header">
       {hero && (
         <HeroImage image={hero} alt={heroAlt} loading="eager" />
       )}
