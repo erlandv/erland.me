@@ -102,21 +102,18 @@ p {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
-/* Table wrapper for responsive scroll */
+/* Table container */
 .prose > table {
-  display: block;
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background-color: var(--bg-secondary);
+  overflow: hidden;
 }
 
 .prose table {
   width: 100%;
-  min-width: 100%;
   border-collapse: collapse;
   table-layout: auto;
   background-color: var(--bg-secondary);
@@ -137,9 +134,6 @@ p {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
   font-weight: 600;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 
 .prose table tr:first-child th,
@@ -171,39 +165,86 @@ p {
   padding-right: clamp(14px, 3vw, 20px);
 }
 
+/* Disable default link underline animation for table links */
 .prose table a {
   color: var(--color-primary);
   white-space: nowrap;
   text-decoration: none;
   transition: color 0.2s ease;
+  display: inline;
+}
+
+.prose table a::after {
+  display: none;
 }
 
 .prose table a:hover {
   color: var(--color-secondary);
-  text-decoration: underline;
 }
 
-/* Mobile responsive adjustments */
+/* Mobile: Stack table vertically */
 @media screen and (max-width: 767px) {
   .prose > table {
     border-radius: 8px;
-    font-size: 14px;
   }
 
-  .prose table th,
+  .prose table,
+  .prose table thead,
+  .prose table tbody,
+  .prose table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .prose table thead {
+    display: none;
+  }
+
+  .prose table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #2f2f2f;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+  }
+
+  .prose table tr:last-child {
+    margin-bottom: 0;
+  }
+
   .prose table td {
-    padding: 8px 10px;
-    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: none;
+    border-bottom: 1px solid #2f2f2f;
+    white-space: normal;
+    text-align: right;
+    min-height: 44px;
   }
 
-  .prose table th:first-child,
-  .prose table td:first-child {
-    padding-left: 12px;
-  }
-
-  .prose table th:last-child,
   .prose table td:last-child {
-    padding-right: 12px;
+    border-bottom: none;
+  }
+
+  .prose table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    padding-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .prose table td:first-child,
+  .prose table td:last-child {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .prose table tr:nth-child(even) td {
+    background-color: var(--bg-secondary);
   }
 }
 
