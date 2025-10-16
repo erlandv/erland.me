@@ -235,35 +235,29 @@
   color: var(--text-primary);
 }
 
-.download-files {
+:global(.download-files) {
   display: grid;
   gap: 20px;
   max-width: 720px;
   width: 100%;
 }
 
-.download-files-intro {
+:global(.download-files-intro) {
   display: grid;
   gap: 16px;
   color: var(--text-secondary);
   line-height: 1.75;
 }
 
-.download-files-intro p {
+:global(.download-files-intro p) {
   margin: 0;
 }
 
-.download-files-title {
-  margin: 0;
-  font-size: 1.4rem;
-  color: var(--text-primary);
-}
-
-.download-gallery {
+:global(.download-gallery) {
   width: 100%;
 }
 
-.download-files-table {
+:global(.download-files-table) {
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -272,8 +266,8 @@
   background-color: var(--bg-secondary);
 }
 
-.download-files-table th,
-.download-files-table td {
+:global(.download-files-table th),
+:global(.download-files-table td) {
   border-top: 1px solid var(--divider-weak);
   border-right: 1px solid var(--divider-weak);
   padding: 16px 18px;
@@ -281,40 +275,40 @@
   color: #d6d6d6;
 }
 
-.download-files-table th {
+:global(.download-files-table th) {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
   font-weight: 600;
 }
 
-.download-files-table tr:first-child th {
+:global(.download-files-table tr:first-child th) {
   border-top: none;
 }
 
-.download-files-table tr:first-child td {
+:global(.download-files-table tr:first-child td) {
   border-top: none;
 }
 
-.download-files-table tr td:last-child,
-.download-files-table tr th:last-child {
+:global(.download-files-table tr td:last-child),
+:global(.download-files-table tr th:last-child) {
   border-right: none;
 }
 
-.download-files-table tr:nth-child(even) td {
+:global(.download-files-table tr:nth-child(even) td) {
   background-color: var(--bg-primary);
 }
 
-.download-files-link {
+:global(.download-files-link) {
   color: var(--text-primary);
   font-weight: 600;
   text-decoration: underline;
 }
 
-.download-files-link:hover {
+:global(.download-files-link:hover) {
   color: var(--color-secondary);
 }
 
-.download-files-note {
+:global(.download-files-note) {
   margin: 0;
   color: var(--text-subtle);
   line-height: 1.7;

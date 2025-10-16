@@ -1,132 +1,91 @@
 ---
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import BackNav from "../../components/BackNav.astro";
-import { getCollection, getEntryBySlug } from "astro:content";
-import { creativeWorkJsonLd } from "../../lib/seo";
-import ShareButtons from "../../components/ShareButtons.astro";
-import dl from "../../styles/pages/download.module.css";
-import "../../styles/components/hero.css";
-import ScrollTopButton from "../../components/ScrollTopButton.astro";
-import ContentImage from "../../components/ContentImage.astro";
-import HeroImage from "../../components/HeroImage.astro";
-import { getOgImageUrl } from "../../lib/images";
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import BackNav from '../../components/BackNav.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+import { creativeWorkJsonLd } from '../../lib/seo';
+import ShareButtons from '../../components/ShareButtons.astro';
+import dl from '../../styles/pages/download.module.css';
+import '../../styles/components/hero.css';
+import ScrollTopButton from '../../components/ScrollTopButton.astro';
+import ContentImage from '../../components/ContentImage.astro';
+import HeroImage from '../../components/HeroImage.astro';
+import { getOgImageUrl, resolveHero } from '../../lib/images';
+import { SITE_URL } from '../../lib/env';
 
 export async function getStaticPaths() {
-  const downloads = await getCollection("downloads");
+  const downloads = await getCollection('downloads');
   return downloads
     .filter((item: any) => !item.data.draft)
     .map((item: any) => ({ params: { slug: item.slug } }));
 }
 
 const { slug } = Astro.params;
-const entry = await getEntryBySlug("downloads", slug ?? "");
+const entry = await getEntryBySlug('downloads', slug ?? '');
 
 if (!entry || entry.data.draft) {
-  return Astro.redirect("/download/");
+  return Astro.redirect('/download/');
 }
 
 const { Content } = await entry.render();
 const data = entry.data;
 
-const hero = data.hero;
+const hero = resolveHero(data.hero);
 const heroAlt = data.heroAlt ?? data.title;
-const optimizedHero = hero ? await getOgImageUrl(hero, 1200, 'avif') : undefined;
-const canonicalPath = `/download/${entry.slug}/`;
-import { SITE_URL } from '../../lib/env';
-const canonicalUrl = `${SITE_URL}${canonicalPath}`;
-const lastUpdated = data.lastUpdated
-  ? new Date(data.lastUpdated)
+const optimizedHero = hero
+  ? await getOgImageUrl(hero, 1200, 'avif')
   : undefined;
+const canonicalPath = `/download/${entry.slug}/`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
 const jsonLd = creativeWorkJsonLd({
   title: data.title,
-  description: data.description,
-  lastUpdated,
-  version: data.version,
-  tags: data.tags,
-  downloadUrl: data.file,
+  description: data.description ?? data.excerpt,
+  publishDate: data.publishDate,
+  lastUpdated: data.updatedDate,
   url: canonicalPath,
   image: optimizedHero ?? undefined,
 });
-
-const downloadRows = (data.downloadFiles && data.downloadFiles.length > 0
-  ? data.downloadFiles
-  : data.file
-    ? [{ label: data.file.split("/").pop() ?? data.title, href: data.file }]
-    : []
-).map((item: any) => ({
-  label: item.label,
-  href: item.href,
-  size: item.size,
-}));
-
-const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
 ---
 
-<SiteLayout title={data.title} canonical={canonicalPath} jsonLd={jsonLd} selectedItem="download" image={optimizedHero}>
-  <BackNav href="/download/" label="Back" />
-  <div class:list={["content-container", dl["download-page"]]}>
-    <header class={dl["download-header"]}>
-      <div class={dl["download-hero"]}>
-        {hero ? (
-          <HeroImage image={hero} alt={heroAlt} loading="lazy" />
+<SiteLayout
+  title={data.title}
+  description={data.description || data.excerpt}
+  canonical={canonicalPath}
+  jsonLd={jsonLd}
+  selectedItem='download'
+  image={optimizedHero}
+  author="Erland Ramdhani"
+  type="article"
+  publishedTime={data.publishDate}
+  modifiedTime={data.updatedDate ?? data.publishDate}
+>
+  <BackNav href='/download/' label='Back' />
+  <article class:list={['content-container', dl['download-page']]}>
+    <header class={dl['download-header']}>
+      {
+        hero ? (
+          <HeroImage image={hero} alt={heroAlt} loading='eager' />
         ) : (
-          <div class="hero-image hero-placeholder" aria-hidden="true">📦</div>
-        )}
-      </div>
+          <div class='hero-image hero-placeholder' aria-hidden='true'>
+            📦
+          </div>
+        )
+      }
       <h1>{data.title}</h1>
     </header>
 
-  <article class={dl["download-richtext"]} id="download-content">
-    <Content components={{ img: ContentImage }} />
-  </article>
+    <div class={dl['download-richtext']} id='download-content'>
+      <Content components={{ img: ContentImage }} />
+    </div>
 
-    {downloadRows.length > 0 && (
-      <section class={dl["download-files"]} id="download-files-section">
-        <h2 class={dl["download-files-title"]}>Link Download</h2>
-        {data.downloadIntro && data.downloadIntro.length > 0 && (
-          <div class={dl["download-files-intro"]}>
-            {data.downloadIntro.map((paragraph: string) => (
-              <p>{paragraph}</p>
-            ))}
-          </div>
-        )}
-        <table class={dl["download-files-table"]}>
-          <thead>
-            <tr>
-              <th scope="col">File Name</th>
-              {hasSizeColumn && <th scope="col">Size</th>}
-              <th scope="col">Download</th>
-            </tr>
-          </thead>
-          <tbody>
-            {downloadRows.map((item: any) => (
-              <tr>
-                <td data-label="File Name">{item.label}</td>
-                {hasSizeColumn && <td data-label="Size">{item.size ?? "-"}</td>}
-                <td data-label="Download">
-                  <a class={dl["download-files-link"]} href={item.href} rel="noopener" target="_blank" download>
-                    Download
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {data.downloadNote && (
-          <p class={dl["download-files-note"]}>{data.downloadNote}</p>
-        )}
-      </section>
-    )}
     <ShareButtons
       title={data.title}
       url={canonicalUrl}
-      description={data.description}
-      heading="Share this template:"
+      description={data.description ?? data.excerpt}
+      heading='Share this template:'
     />
-  </div>
+  </article>
   <ScrollTopButton />
-  
 </SiteLayout>
 
 <script>
@@ -134,7 +93,7 @@ const hasSizeColumn = downloadRows.some((item: any) => Boolean(item.size));
     autoInitDownloadAds,
     autoInitDownloadPlaceholders,
     shouldRenderAds,
-  } from "../../lib/adsense";
+  } from '../../lib/adsense';
 
   const runAds = () => {
     try {
