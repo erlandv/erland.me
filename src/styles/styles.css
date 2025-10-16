@@ -102,29 +102,44 @@ p {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
+/* Table wrapper for responsive scroll */
+.prose > table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
 .prose table {
   width: 100%;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  min-width: 100%;
   border-collapse: collapse;
-  overflow: hidden;
+  table-layout: auto;
   background-color: var(--bg-secondary);
-  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
 }
 
 .prose table th,
 .prose table td {
   border-top: 1px solid #2f2f2f;
   border-right: 1px solid #2f2f2f;
-  padding: 16px 18px;
+  padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
   text-align: left;
   color: #d6d6d6;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .prose table th {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
   font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .prose table tr:first-child th,
@@ -141,19 +156,63 @@ p {
   background-color: var(--bg-primary);
 }
 
+/* First column styling - auto width based on content */
 .prose table th:first-child,
 .prose table td:first-child {
-  width: 34%;
   font-weight: 600;
   color: #ffffff;
+  padding-left: clamp(14px, 3vw, 20px);
+  min-width: fit-content;
+}
+
+/* Last column right padding */
+.prose table th:last-child,
+.prose table td:last-child {
+  padding-right: clamp(14px, 3vw, 20px);
 }
 
 .prose table a {
   color: var(--color-primary);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .prose table a:hover {
   color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 767px) {
+  .prose > table {
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .prose table th,
+  .prose table td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .prose table th:first-child,
+  .prose table td:first-child {
+    padding-left: 12px;
+  }
+
+  .prose table th:last-child,
+  .prose table td:last-child {
+    padding-right: 12px;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .prose table th,
+  .prose table td {
+    padding: 12px 14px;
+  }
 }
 
 .prose img {
