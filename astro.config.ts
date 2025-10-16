@@ -2,6 +2,7 @@ import { defineConfig, passthroughImageService } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
+import remarkDownloadFiles from './src/lib/remark-download-files';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -19,7 +20,12 @@ export default defineConfig({
 
   // Markdown configuration
   markdown: {
-    remarkPlugins: [remarkDirective, remarkGallery, remarkFigure],
+    remarkPlugins: [
+      remarkDirective,
+      remarkGallery,
+      remarkFigure,
+      remarkDownloadFiles,
+    ],
     shikiConfig: {
       theme: 'min-dark',
       wrap: false,

@@ -23,16 +23,12 @@ const downloads = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string(),
+      description: z.string().max(160).optional(),
       excerpt: z.string().max(200).optional(),
+      publishDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
       hero: image().optional(),
       heroAlt: z.string().optional(),
-      file: z.string(),
-      version: z.string().optional(),
-      lastUpdated: z.coerce.date().optional(),
-      ctaLabel: z.string().default('Download sekarang'),
-      order: z.number().default(0),
-      tags: z.array(z.string()).default([]),
       draft: z.boolean().default(false),
       downloadFiles: z
         .array(
@@ -43,8 +39,6 @@ const downloads = defineCollection({
           })
         )
         .optional(),
-      downloadNote: z.string().optional(),
-      downloadIntro: z.array(z.string()).optional(),
     }),
 });
 

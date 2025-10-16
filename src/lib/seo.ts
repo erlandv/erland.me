@@ -155,12 +155,18 @@ export function creativeWorkJsonLd(opts: {
   url: string;
   image?: string | null;
   lastUpdated?: Date | string | null;
+  publishDate?: Date | string | null;
   fileSize?: string | null;
   fileFormat?: string | null;
 }) {
+  const datePublished = opts.publishDate
+    ? new Date(opts.publishDate).toISOString()
+    : undefined;
   const dateModified = opts.lastUpdated
     ? new Date(opts.lastUpdated).toISOString()
-    : undefined;
+    : opts.publishDate
+      ? new Date(opts.publishDate).toISOString()
+      : undefined;
   const fullUrl = opts.url.startsWith('http')
     ? opts.url
     : `${SITE_CONFIG.url}${opts.url}`;
@@ -170,6 +176,7 @@ export function creativeWorkJsonLd(opts: {
     '@type': 'CreativeWork',
     name: opts.title,
     description: opts.description ?? undefined,
+    datePublished,
     dateModified,
     version: opts.version ?? undefined,
     keywords: opts.tags?.join(', ') || undefined,
