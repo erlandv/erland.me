@@ -84,11 +84,11 @@ Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semua
 
 Silakan download file template kalender 2024 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!
 
-:::downloadFiles{note="Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract. Jika terdapat kendala, hubungi saya melalui email hello@erland.me"}
+:::downloadFiles{note="Untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract."}
 :::
 
 ### Opsional
 
-Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui: <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">https://saweria.co/erlandev</a>
+Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">Saweria</a>.
 
 Donasi yang Anda berikan akan saya gunakan sebaik-baiknya untuk membayar tagihan server yang digunakan pada web ini. Terima kasih banyak atas apresiasinya!

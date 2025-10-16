@@ -94,6 +94,6 @@ Silakan download file template kalender 2025 gratis melalui link download di baw
 
 ### Opsional
 
-Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui: <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">https://saweria.co/erlandev</a>
+Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">Saweria</a>.
 
 Donasi yang Anda berikan akan saya gunakan sebaik-baiknya untuk membayar tagihan server yang digunakan pada web ini. Terima kasih banyak atas apresiasinya!
