@@ -92,7 +92,7 @@ Saya mengucapkan terima kasih sebesar-besarnya dan setulus-tulusnya kepada semua
 
 Silakan download file template kalender 2026 gratis melalui link download di bawah ini. Link akan langsung terhubung ke file-nya, jadi hanya butuh sekali klik saja tanpa perlu melewati halaman safelink apapun yang merepotkan seperti di web lain. Semoga bermanfaat!
 
-:::downloadFiles{note="* untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract."}
+:::downloadFiles{note="\* untuk yang fullpack dan PNG perbulan, file ter-compress dalam format ZIP, perlu di-extract."}
 :::
 
 ### Opsional
