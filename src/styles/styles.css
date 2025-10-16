@@ -444,67 +444,67 @@ ul {
 }
 
 /* Advertising placements */
-/* Advertising wrapper baseline */
+/* Advertising wrapper baseline - responsive for all screen sizes */
 :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
   display: block !important;
-  margin: 1.25rem auto;
+  margin: clamp(0.75rem, 2vw, 1.25rem) auto;
   padding: 0.5rem 0;
-  max-width: min(100%, 680px);
-  width: min(100%, 680px);
+  max-width: 100%;
+  width: 100%;
 }
 
 ins.adsbygoogle {
   display: block !important;
   margin: 0 auto !important;
-  width: min(100%, 680px) !important;
-  min-height: 180px;
+  width: 100% !important;
   max-width: 100% !important;
+  min-height: clamp(100px, 25vw, 180px);
+  overflow: hidden;
 }
 
 .ad-placeholder {
   display: block;
-  width: min(100%, 680px);
-  margin: 1rem auto;
-  padding: 0.75rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  margin: clamp(0.5rem, 1.5vw, 1rem) auto;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
   border: 2px dashed var(--border);
   border-radius: 8px;
   color: var(--text-muted);
   background: var(--bg-tertiary);
   text-align: center;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 640px) {
-  .ad-placeholder {
-    width: calc(100% - 1.25rem);
-    margin: 0.5rem auto;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-  }
-}
-
+/* Mobile optimization - ensure ads fit within viewport */
 @media screen and (max-width: 640px) {
   :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
-    width: calc(100% - 1.25rem);
-    margin: 0.75rem auto;
+    margin: 0.75rem 0;
     padding: 0.25rem 0;
   }
 
   ins.adsbygoogle {
-    width: calc(100% - 1.25rem) !important;
-    min-height: 160px;
+    min-height: 100px;
+    max-height: 280px;
+  }
+
+  .ad-placeholder {
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
   }
 }
 
+/* Tablet optimization */
 @media screen and (min-width: 641px) and (max-width: 1024px) {
   :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
     margin: 1rem auto;
     padding: 0.4rem 0;
-    width: min(100%, 720px);
   }
 
   ins.adsbygoogle {
-    width: min(100%, 720px) !important;
+    min-height: 140px;
   }
 }
