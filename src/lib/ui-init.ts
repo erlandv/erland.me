@@ -76,12 +76,17 @@ async function maybeLoadLightbox(): Promise<void> {
 }
 
 async function maybeLoadTable(): Promise<void> {
-  if (loaded.table) return;
   if (!hasTarget(SELECTORS.table)) return;
   try {
-    const mod = await import('./table-responsive');
-    loaded.table = true;
-    mod.initResponsiveTables();
+    // Import module once, but always re-run the initializer
+    if (!loaded.table) {
+      const mod = await import('./table-responsive');
+      loaded.table = true;
+      // Store reference to the initializer function for subsequent calls
+      (window as any).__tableResponsiveInit = mod.initResponsiveTables;
+    }
+    // Always execute the initializer to process new tables after navigation
+    (window as any).__tableResponsiveInit?.();
   } catch (e) {
     console.error('ui-init: Table load error', e);
   }
