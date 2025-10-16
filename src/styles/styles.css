@@ -102,29 +102,42 @@ p {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
+/* Table container */
+.prose > table {
+  width: 100%;
+  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+}
+
 .prose table {
   width: 100%;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
   border-collapse: collapse;
-  overflow: hidden;
+  table-layout: auto;
   background-color: var(--bg-secondary);
-  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
 }
 
 .prose table th,
 .prose table td {
   border-top: 1px solid #2f2f2f;
   border-right: 1px solid #2f2f2f;
-  padding: 16px 18px;
+  padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
   text-align: left;
   color: #d6d6d6;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+  line-height: 1.6;
 }
 
 .prose table th {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .prose table tr:first-child th,
@@ -141,19 +154,116 @@ p {
   background-color: var(--bg-primary);
 }
 
+/* First column - auto-sized to content width
+ * The width: 1% is a CSS trick that forces the column to shrink to the minimum
+ * width needed to fit the content (respecting white-space: nowrap).
+ * This allows other columns to share the remaining table width proportionally.
+ * Works for both 2-column tables (blog specs) and multi-column tables (downloads).
+ */
 .prose table th:first-child,
 .prose table td:first-child {
-  width: 34%;
   font-weight: 600;
   color: #ffffff;
+  padding-left: clamp(14px, 3vw, 20px);
+  white-space: nowrap;
+  width: 1%;
 }
 
+/* Last column right padding */
+.prose table th:last-child,
+.prose table td:last-child {
+  padding-right: clamp(14px, 3vw, 20px);
+}
+
+/* Disable default link underline animation for table links */
 .prose table a {
   color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline;
+  word-break: break-word;
+}
+
+.prose table a::after {
+  display: none;
 }
 
 .prose table a:hover {
   color: var(--color-secondary);
+}
+
+/* Mobile: Stack table vertically */
+@media screen and (max-width: 767px) {
+  .prose > table {
+    border-radius: 8px;
+  }
+
+  .prose table,
+  .prose table thead,
+  .prose table tbody,
+  .prose table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .prose table thead {
+    display: none;
+  }
+
+  .prose table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #2f2f2f;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+  }
+
+  .prose table tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: none;
+    border-bottom: 1px solid #2f2f2f;
+    white-space: normal;
+    text-align: right;
+    min-height: 44px;
+  }
+
+  .prose table td:last-child {
+    border-bottom: none;
+  }
+
+  .prose table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    padding-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .prose table td:first-child,
+  .prose table td:last-child {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .prose table tr:nth-child(even) td {
+    background-color: var(--bg-secondary);
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .prose table th,
+  .prose table td {
+    padding: 12px 14px;
+  }
 }
 
 .prose img {
@@ -220,13 +330,30 @@ p {
 }
 
 .prose a {
-  color: #6bb6ff;
+  color: var(--color-primary);
   text-decoration: none;
-  transition: color 0.15s ease;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s var(--ease-standard);
+}
+
+.prose a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-secondary);
+  transition: width 0.3s var(--ease-standard);
 }
 
 .prose a:hover {
   color: var(--color-secondary);
+}
+
+.prose a:hover::after {
+  width: 100%;
 }
 
 .prose code {
@@ -427,67 +554,67 @@ ul {
 }
 
 /* Advertising placements */
-/* Advertising wrapper baseline */
+/* Advertising wrapper baseline - responsive for all screen sizes */
 :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
   display: block !important;
-  margin: 1.25rem auto;
+  margin: clamp(0.75rem, 2vw, 1.25rem) auto;
   padding: 0.5rem 0;
-  max-width: min(100%, 680px);
-  width: min(100%, 680px);
+  max-width: 100%;
+  width: 100%;
 }
 
 ins.adsbygoogle {
   display: block !important;
   margin: 0 auto !important;
-  width: min(100%, 680px) !important;
-  min-height: 180px;
+  width: 100% !important;
   max-width: 100% !important;
+  min-height: clamp(100px, 25vw, 180px);
+  overflow: hidden;
 }
 
 .ad-placeholder {
   display: block;
-  width: min(100%, 680px);
-  margin: 1rem auto;
-  padding: 0.75rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  margin: clamp(0.5rem, 1.5vw, 1rem) auto;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
   border: 2px dashed var(--border);
   border-radius: 8px;
   color: var(--text-muted);
   background: var(--bg-tertiary);
   text-align: center;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 640px) {
-  .ad-placeholder {
-    width: calc(100% - 1.25rem);
-    margin: 0.5rem auto;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-  }
-}
-
+/* Mobile optimization - ensure ads fit within viewport */
 @media screen and (max-width: 640px) {
   :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
-    width: calc(100% - 1.25rem);
-    margin: 0.75rem auto;
+    margin: 0.75rem 0;
     padding: 0.25rem 0;
   }
 
   ins.adsbygoogle {
-    width: calc(100% - 1.25rem) !important;
-    min-height: 160px;
+    min-height: 100px;
+    max-height: 280px;
+  }
+
+  .ad-placeholder {
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
   }
 }
 
+/* Tablet optimization */
 @media screen and (min-width: 641px) and (max-width: 1024px) {
   :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
     margin: 1rem auto;
     padding: 0.4rem 0;
-    width: min(100%, 720px);
   }
 
   ins.adsbygoogle {
-    width: min(100%, 720px) !important;
+    min-height: 140px;
   }
 }

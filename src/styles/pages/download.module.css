@@ -126,115 +126,6 @@
   color: currentColor;
 }
 
-.download-page {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.download-header {
-  display: grid;
-  gap: 12px;
-}
-
-.download-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.download-richtext {
-  display: grid;
-  color: var(--text-secondary);
-  max-width: 720px;
-  width: 100%;
-  justify-items: start;
-}
-
-.download-richtext :is(p, ul, ol) {
-  line-height: 1.75;
-}
-
-.download-richtext h2 {
-  color: var(--text-primary);
-  font-size: 1.6rem;
-  margin: 1.2rem 0 0.6rem;
-}
-
-.download-richtext h3 {
-  color: var(--text-primary);
-  font-size: 1.3rem;
-  margin: 1rem 0 0.5rem;
-}
-
-.download-richtext img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-/* Ensure single-image figures from remarkFigure are styled nicely */
-.download-richtext figure,
-.download-richtext .prose-figure {
-  margin: clamp(1rem, 3vw, 1.5rem) 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.download-richtext figure img,
-.download-richtext .prose-figure img {
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-}
-
-.download-richtext figcaption {
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.5;
-  font-style: italic;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  max-width: 100%;
-  word-wrap: break-word;
-  opacity: 0.9;
-  transition:
-    opacity 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--overlay-005);
-}
-
-.download-richtext figure:hover figcaption,
-.download-richtext .prose-figure:hover figcaption {
-  opacity: 1;
-  background: var(--overlay-005);
-  border-color: var(--overlay-010);
-}
-
-.download-richtext a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.15s ease;
-  position: relative;
-  display: inline-block;
-}
-
-.download-richtext a:hover {
-  color: var(--color-secondary);
-}
-
-.download-richtext strong {
-  color: var(--text-primary);
-}
-
 :global(.download-files) {
   display: grid;
   gap: 20px;
@@ -316,12 +207,6 @@
 
 /* Tablet adjustments */
 @media screen and (max-width: 767px) {
-  .download-page {
-    gap: 32px;
-  }
-  .download-hero {
-    padding: 24px;
-  }
   .download-files-table {
     font-size: 0.95rem;
   }
@@ -406,18 +291,4 @@
   opacity: 1;
   background: var(--overlay-005);
   border-color: var(--overlay-010);
-}
-.download-richtext a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 1.5px;
-  background: var(--color-secondary);
-  transition: width 0.3s ease;
-}
-
-.download-richtext a:hover::after {
-  width: 100%;
 }

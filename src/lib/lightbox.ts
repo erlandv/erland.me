@@ -12,12 +12,7 @@ type InitOptions = {
   containerSelectors?: string[];
 };
 
-const DEFAULT_CONTAINERS = [
-  '.prose',
-  // Download page content uses CSS Modules; class is hashed at runtime
-  '[class*="download-richtext"]',
-  '.content-image-grid',
-];
+const DEFAULT_CONTAINERS = ['.prose', '.content-image-grid'];
 
 function createOverlay() {
   const overlay = document.createElement('div');
