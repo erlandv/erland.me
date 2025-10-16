@@ -126,14 +126,18 @@ p {
   padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
   text-align: left;
   color: #d6d6d6;
-  white-space: nowrap;
-  vertical-align: middle;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+  line-height: 1.6;
 }
 
 .prose table th {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .prose table tr:first-child th,
@@ -150,13 +154,14 @@ p {
   background-color: var(--bg-primary);
 }
 
-/* First column styling - auto width based on content */
+/* First column - narrower for labels, allow nowrap */
 .prose table th:first-child,
 .prose table td:first-child {
   font-weight: 600;
   color: #ffffff;
   padding-left: clamp(14px, 3vw, 20px);
-  min-width: fit-content;
+  white-space: nowrap;
+  width: 1%;
 }
 
 /* Last column right padding */
@@ -168,10 +173,10 @@ p {
 /* Disable default link underline animation for table links */
 .prose table a {
   color: var(--color-primary);
-  white-space: nowrap;
   text-decoration: none;
   transition: color 0.2s ease;
   display: inline;
+  word-break: break-word;
 }
 
 .prose table a::after {
