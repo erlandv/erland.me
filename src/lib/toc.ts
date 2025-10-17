@@ -49,10 +49,13 @@ function collectHeadings(prose: HTMLElement): HeadingInfo[] {
   return out;
 }
 
-function isBlogArticleRoute(): boolean {
+function isArticleRoute(): boolean {
   try {
     const p = window.location?.pathname || '';
-    return p.startsWith('/blog/') && !p.startsWith('/blog/page/');
+    return (
+      (p.startsWith('/blog/') && !p.startsWith('/blog/page/')) ||
+      (p.startsWith('/download/') && !p.startsWith('/download/page/'))
+    );
   } catch {
     return false;
   }
@@ -200,8 +203,8 @@ function findInsertPoint(prose: HTMLElement): ChildNode | null {
 }
 
 export function initToc() {
-  // Guard: only initialize on blog article routes
-  if (!isBlogArticleRoute()) return;
+  // Guard: only initialize on article routes (blog & download)
+  if (!isArticleRoute()) return;
   const prose = document.querySelector('.prose');
   if (!(prose instanceof HTMLElement)) return;
   if (prose.dataset.tocInitialized === 'true') return;
@@ -225,7 +228,7 @@ function setupRouterReinit() {
   if (routerSetup) return;
   routerSetup = true;
   const run = () => {
-    if (isBlogArticleRoute()) initToc();
+    if (isArticleRoute()) initToc();
   };
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
@@ -234,7 +237,7 @@ function setupRouterReinit() {
 
 export function autoInit() {
   const run = () => {
-    if (!isBlogArticleRoute()) return;
+    if (!isArticleRoute()) return;
     initToc();
     setupRouterReinit();
   };
