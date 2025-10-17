@@ -1,7 +1,10 @@
 /**
  * ui-init.ts - global UI initializer gate
  * Consolidates share, code-copy, lightbox, and table-responsive init into a single conditional dynamic import.
+ * Includes error boundary for graceful error handling and recovery.
  */
+
+import { safeFeatureInit, setupGlobalErrorHandler } from './error-boundary';
 
 type LoadedFlags = {
   share: boolean;
@@ -42,54 +45,72 @@ function hasTarget(selectors: readonly string[]): boolean {
 async function maybeLoadShare(): Promise<void> {
   if (loaded.share) return;
   if (!hasTarget(SELECTORS.share)) return;
-  try {
-    const mod = await import('./share-buttons');
-    loaded.share = true;
-    mod.autoInit?.();
-  } catch (e) {
-    console.error('ui-init: Share load error', e);
-  }
+  
+  await safeFeatureInit(
+    'share',
+    async () => {
+      const m = await import('./share-buttons');
+      loaded.share = true;
+      m.autoInit?.();
+      return m;
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
+  
+  // If loading failed and feature is not marked as permanently failed,
+  // the error boundary will handle retry logic automatically
 }
 
 async function maybeLoadCopy(): Promise<void> {
   if (loaded.copy) return;
   if (!hasTarget(SELECTORS.copy)) return;
-  try {
-    const mod = await import('./code-copy');
-    loaded.copy = true;
-    mod.autoInit?.();
-  } catch (e) {
-    console.error('ui-init: CodeCopy load error', e);
-  }
+  
+  await safeFeatureInit(
+    'copy',
+    async () => {
+      const m = await import('./code-copy');
+      loaded.copy = true;
+      m.autoInit?.();
+      return m;
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
 }
 
 async function maybeLoadLightbox(): Promise<void> {
   if (loaded.lightbox) return;
   if (!hasTarget(SELECTORS.lightbox)) return;
-  try {
-    const mod = await import('./lightbox');
-    loaded.lightbox = true;
-    mod.autoInit?.();
-  } catch (e) {
-    console.error('ui-init: Lightbox load error', e);
-  }
+  
+  await safeFeatureInit(
+    'lightbox',
+    async () => {
+      const m = await import('./lightbox');
+      loaded.lightbox = true;
+      m.autoInit?.();
+      return m;
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
 }
 
 async function maybeLoadTable(): Promise<void> {
   if (!hasTarget(SELECTORS.table)) return;
-  try {
-    // Import module once, but always re-run the initializer
-    if (!loaded.table) {
-      const mod = await import('./table-responsive');
-      loaded.table = true;
-      // Store reference to the initializer function for subsequent calls
-      (window as any).__tableResponsiveInit = mod.initResponsiveTables;
-    }
-    // Always execute the initializer to process new tables after navigation
-    (window as any).__tableResponsiveInit?.();
-  } catch (e) {
-    console.error('ui-init: Table load error', e);
-  }
+  
+  await safeFeatureInit(
+    'table',
+    async () => {
+      // Import module once, but always re-run the initializer
+      if (!loaded.table) {
+        const mod = await import('./table-responsive');
+        loaded.table = true;
+        // Store reference to the initializer function for subsequent calls
+        (window as any).__tableResponsiveInit = mod.initResponsiveTables;
+      }
+      // Always execute the initializer to process new tables after navigation
+      (window as any).__tableResponsiveInit?.();
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
 }
 
 function gateAll(): void {
@@ -120,6 +141,9 @@ function setupGateListeners(): void {
 }
 
 export function initUi(): void {
+  // Setup global error handlers once
+  setupGlobalErrorHandler();
+  
   // Initial gate run
   if (document.readyState === 'loading') {
     document.addEventListener(
