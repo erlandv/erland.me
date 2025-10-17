@@ -20,6 +20,10 @@
     "generate:ads": "node scripts/generate-ads.mjs",
     "generate:search": "node scripts/generate-search-index.mjs"
   },
+  "engines": {
+    "node": ">=22.18.0",
+    "npm": ">=10.9.0"
+  },
   "dependencies": {
     "astro": "^5.1.5",
     "fuse.js": "^7.1.0",
