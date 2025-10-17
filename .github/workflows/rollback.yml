@@ -19,7 +19,7 @@ jobs:
       url: ${{ vars.SITE_URL }}
     env:
       SITE_URL: ${{ vars.SITE_URL }}
-      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=30 -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o AddressFamily=inet -o PreferredAuthentications=publickey
+      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=60 -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o AddressFamily=inet -o PreferredAuthentications=publickey
     steps:
       # --- SSH setup ---
       - name: Start ssh-agent and add key
@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 60 -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       # --- List available releases ---

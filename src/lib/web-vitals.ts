@@ -1,9 +1,9 @@
 /**
  * Web Vitals Monitoring
- * 
+ *
  * Tracks Core Web Vitals and sends them to Google Tag Manager for analysis.
  * Metrics tracked: CLS, LCP, INP, FCP, TTFB
- * 
+ *
  * Only runs in production to avoid polluting analytics with dev data.
  */
 
@@ -25,7 +25,12 @@ function isGTMAvailable(): boolean {
 function sendToGTM(metric: Metric): void {
   if (!isGTMAvailable()) {
     if (import.meta.env.DEV) {
-      console.log('[Web Vitals]', metric.name, Math.round(metric.value), metric);
+      console.log(
+        '[Web Vitals]',
+        metric.name,
+        Math.round(metric.value),
+        metric
+      );
     }
     return;
   }
@@ -149,7 +154,9 @@ export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
     webVitals.onLCP(m => (snapshot.LCP = m.value), { reportAllChanges: true });
     webVitals.onINP(m => (snapshot.INP = m.value), { reportAllChanges: true });
     webVitals.onFCP(m => (snapshot.FCP = m.value), { reportAllChanges: true });
-    webVitals.onTTFB(m => (snapshot.TTFB = m.value), { reportAllChanges: true });
+    webVitals.onTTFB(m => (snapshot.TTFB = m.value), {
+      reportAllChanges: true,
+    });
 
     return snapshot;
   } catch (error) {
@@ -160,7 +167,7 @@ export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
 
 /**
  * Report web vitals for specific navigation
- * 
+ *
  * Usage in browser console:
  * import('./lib/web-vitals').then(m => m.reportWebVitals())
  */
@@ -171,7 +178,7 @@ export async function reportWebVitals(): Promise<void> {
 
 /**
  * Helper to send custom performance events to GTM
- * 
+ *
  * @example
  * sendPerformanceEvent('resource_timing', {
  *   resource_name: 'hero-image.jpg',

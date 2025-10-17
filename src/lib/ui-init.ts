@@ -45,7 +45,7 @@ function hasTarget(selectors: readonly string[]): boolean {
 async function maybeLoadShare(): Promise<void> {
   if (loaded.share) return;
   if (!hasTarget(SELECTORS.share)) return;
-  
+
   await safeFeatureInit(
     'share',
     async () => {
@@ -56,7 +56,7 @@ async function maybeLoadShare(): Promise<void> {
     },
     { operation: 'load-and-init', recoverable: true }
   );
-  
+
   // If loading failed and feature is not marked as permanently failed,
   // the error boundary will handle retry logic automatically
 }
@@ -64,7 +64,7 @@ async function maybeLoadShare(): Promise<void> {
 async function maybeLoadCopy(): Promise<void> {
   if (loaded.copy) return;
   if (!hasTarget(SELECTORS.copy)) return;
-  
+
   await safeFeatureInit(
     'copy',
     async () => {
@@ -80,7 +80,7 @@ async function maybeLoadCopy(): Promise<void> {
 async function maybeLoadLightbox(): Promise<void> {
   if (loaded.lightbox) return;
   if (!hasTarget(SELECTORS.lightbox)) return;
-  
+
   await safeFeatureInit(
     'lightbox',
     async () => {
@@ -95,7 +95,7 @@ async function maybeLoadLightbox(): Promise<void> {
 
 async function maybeLoadTable(): Promise<void> {
   if (!hasTarget(SELECTORS.table)) return;
-  
+
   await safeFeatureInit(
     'table',
     async () => {
@@ -143,7 +143,7 @@ function setupGateListeners(): void {
 export function initUi(): void {
   // Setup global error handlers once
   setupGlobalErrorHandler();
-  
+
   // Initial gate run
   if (document.readyState === 'loading') {
     document.addEventListener(

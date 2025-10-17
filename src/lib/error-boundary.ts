@@ -1,6 +1,6 @@
 /**
  * Error Boundary Utility for Client-Side Features
- * 
+ *
  * Provides graceful error handling with user feedback and recovery mechanisms.
  * Integrates with toast notifications for non-intrusive error reporting.
  */
@@ -46,8 +46,8 @@ function isRecoverableError(error: Error): boolean {
     /dynamically imported module/i,
   ];
 
-  return recoverablePatterns.some(pattern => 
-    pattern.test(error.message) || pattern.test(error.name)
+  return recoverablePatterns.some(
+    pattern => pattern.test(error.message) || pattern.test(error.name)
   );
 }
 
@@ -56,7 +56,7 @@ function isRecoverableError(error: Error): boolean {
  */
 function logError(error: Error, context: ErrorContext): void {
   const isDev = import.meta.env.DEV;
-  
+
   if (isDev) {
     console.group(`🔴 Error Boundary: ${context.feature}`);
     console.error('Error:', error);
@@ -74,7 +74,7 @@ function logError(error: Error, context: ErrorContext): void {
  */
 function notifyUser(context: ErrorContext): void {
   const message = ERROR_MESSAGES[context.feature] || ERROR_MESSAGES.default;
-  
+
   // Only show toast in production or if explicitly enabled
   if (!import.meta.env.DEV) {
     showToast(message, { type: 'error', duration: 3000 });
@@ -86,12 +86,12 @@ function notifyUser(context: ErrorContext): void {
  */
 function shouldRetry(featureName: string): boolean {
   const attempts = retryAttempts.get(featureName) || 0;
-  
+
   if (attempts >= MAX_RETRIES) {
     failedFeatures.add(featureName);
     return false;
   }
-  
+
   retryAttempts.set(featureName, attempts + 1);
   return true;
 }
@@ -114,10 +114,7 @@ export function resetFeatureFailure(featureName: string): void {
 /**
  * Main error handler with recovery logic
  */
-export function handleFeatureError(
-  error: Error,
-  context: ErrorContext
-): void {
+export function handleFeatureError(error: Error, context: ErrorContext): void {
   // Log error for debugging
   logError(error, context);
 
@@ -157,7 +154,7 @@ export async function safeFeatureInit<T>(
     return await initFn();
   } catch (error) {
     const err = error instanceof Error ? error : new Error(String(error));
-    
+
     if (!options.silent) {
       handleFeatureError(err, {
         feature: featureName,
@@ -165,7 +162,7 @@ export async function safeFeatureInit<T>(
         recoverable: options.recoverable,
       });
     }
-    
+
     return null;
   }
 }
@@ -182,11 +179,7 @@ export function withErrorBoundary<T extends (...args: any[]) => Promise<any>>(
   } = {}
 ): T {
   return (async (...args: any[]) => {
-    return safeFeatureInit(
-      featureName,
-      () => fn(...args),
-      options
-    );
+    return safeFeatureInit(featureName, () => fn(...args), options);
   }) as T;
 }
 
@@ -195,11 +188,12 @@ export function withErrorBoundary<T extends (...args: any[]) => Promise<any>>(
  */
 export function setupGlobalErrorHandler(): void {
   // Handle unhandled promise rejections
-  window.addEventListener('unhandledrejection', (event) => {
-    const error = event.reason instanceof Error 
-      ? event.reason 
-      : new Error(String(event.reason));
-    
+  window.addEventListener('unhandledrejection', event => {
+    const error =
+      event.reason instanceof Error
+        ? event.reason
+        : new Error(String(event.reason));
+
     handleFeatureError(error, {
       feature: 'global',
       operation: 'unhandled-rejection',
@@ -208,16 +202,15 @@ export function setupGlobalErrorHandler(): void {
   });
 
   // Handle global errors
-  window.addEventListener('error', (event) => {
+  window.addEventListener('error', event => {
     // Ignore script loading errors (already handled by feature loaders)
     if (event.filename && event.message.includes('Script error')) {
       return;
     }
 
-    const error = event.error instanceof Error 
-      ? event.error 
-      : new Error(event.message);
-    
+    const error =
+      event.error instanceof Error ? event.error : new Error(event.message);
+
     handleFeatureError(error, {
       feature: 'global',
       operation: 'runtime-error',
