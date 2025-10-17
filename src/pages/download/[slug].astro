@@ -6,6 +6,7 @@ import { creativeWorkJsonLd } from '../../lib/seo';
 import ShareButtons from '../../components/ShareButtons.astro';
 import '../../styles/components/hero.css';
 import '../../styles/components/article-detail.css';
+import '../../styles/components/toc.css';
 import ScrollTopButton from '../../components/ScrollTopButton.astro';
 import ContentImage from '../../components/ContentImage.astro';
 import HeroImage from '../../components/HeroImage.astro';
@@ -94,6 +95,14 @@ const jsonLd = creativeWorkJsonLd({
     autoInitDownloadPlaceholders,
     shouldRenderAds,
   } from '../../lib/adsense';
+  import { autoInit as autoInitToc } from '../../lib/toc';
+
+  // Initialize dynamic TOC after content renders
+  const runToc = () => {
+    try {
+      autoInitToc();
+    } catch {}
+  };
 
   const runAds = () => {
     try {
@@ -113,7 +122,14 @@ const jsonLd = creativeWorkJsonLd({
     } catch {}
   };
 
+  runToc();
   runAds();
-  document.addEventListener('astro:page-load', runAds);
-  document.addEventListener('astro:after-swap', runAds);
+
+  const rebroadcast = () => {
+    runToc();
+    runAds();
+  };
+
+  document.addEventListener('astro:page-load', rebroadcast);
+  document.addEventListener('astro:after-swap', rebroadcast);
 </script>
