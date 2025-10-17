@@ -18,7 +18,8 @@ jobs:
       name: Production
       url: ${{ vars.SITE_URL }}
     env:
-      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=120 -o ConnectionAttempts=6 -o ServerAliveInterval=30 -o ServerAliveCountMax=10 -o StrictHostKeyChecking=no -o AddressFamily=inet -o PreferredAuthentications=publickey
+      SITE_URL: ${{ vars.SITE_URL }}
+      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=30 -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o AddressFamily=inet -o PreferredAuthentications=publickey
     steps:
       # --- SSH setup ---
       - name: Start ssh-agent and add key
@@ -58,10 +59,14 @@ jobs:
           echo "Running: $CMD"
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "$CMD"
 
-      # --- Health check ---
-      - name: Sanity check index.html exists
+      # --- HTTP Health checks after rollback ---
+      - name: Verify rollback success
         run: |
           set -euo pipefail
-          # Verify main entrypoint exists in the active deployment
-          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            "test -f ${{ vars.DEPLOY_BASE_DIR }}/current/index.html || { echo '❌ index.html not found in current'; exit 1; }"
+          ROOT_URL="${{ env.SITE_URL }}"
+          echo "Waiting 5 seconds for rollback to complete..."
+          sleep 5
+          # Verify site is accessible after rollback
+          STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=$(date +%s)")"
+          test "$STATUS" -eq 200 || { echo "❌ Site not accessible after rollback (HTTP $STATUS)"; exit 1; }
+          echo "✅ Rollback successful - site is accessible"
