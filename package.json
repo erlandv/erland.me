@@ -24,7 +24,8 @@
     "astro": "^5.1.5",
     "fuse.js": "^7.1.0",
     "gray-matter": "^4.0.3",
-    "sharp": "^0.34.4"
+    "sharp": "^0.34.4",
+    "web-vitals": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

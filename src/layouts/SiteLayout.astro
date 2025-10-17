@@ -137,6 +137,15 @@ const {
         }
       })();
     </script>
+    <script>
+      // Web Vitals Performance Monitoring
+      // Only runs in production, sends metrics to GTM
+      if (import.meta.env.PROD) {
+        import('../lib/web-vitals')
+          .then(m => m.initWebVitals && m.initWebVitals())
+          .catch(e => console.error('web-vitals init error:', e));
+      }
+    </script>
   </body>
   
 </html>
