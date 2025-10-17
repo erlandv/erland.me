@@ -137,6 +137,13 @@ const {
         }
       })();
     </script>
+    <script>
+      // Web Vitals Performance Monitoring
+      // Runs unconditionally - module handles prod check internally
+      import('../lib/web-vitals')
+        .then(m => m.initWebVitals && m.initWebVitals())
+        .catch(e => console.error('web-vitals init error:', e));
+    </script>
   </body>
   
 </html>

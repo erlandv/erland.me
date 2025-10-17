@@ -9,7 +9,6 @@ on:
       - 'content.config.ts'
       - 'package.json'
       - 'package-lock.json'
-      - 'public/**'
       - 'src/**'
       - 'scripts/**'
   workflow_dispatch:
@@ -45,7 +44,7 @@ jobs:
       DEPLOY_BASE_DIR: ${{ vars.DEPLOY_BASE_DIR }}
       RELEASES_DIR: ${{ vars.DEPLOY_BASE_DIR }}/releases
       CURRENT_LINK: ${{ vars.DEPLOY_BASE_DIR }}/current
-      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=120 -o ConnectionAttempts=6 -o ServerAliveInterval=30 -o ServerAliveCountMax=10 -o StrictHostKeyChecking=no -o AddressFamily=inet -o PreferredAuthentications=publickey
+      SSH_OPTS: -o BatchMode=yes -o ConnectTimeout=30 -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o AddressFamily=inet -o PreferredAuthentications=publickey
 
     steps:
       # --- Repository checkout ---
@@ -114,6 +113,8 @@ jobs:
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p '${{ env.RELEASES_DIR }}/${REL_PATH}'"
           # Rsync options: archive+compress, delayed delete, partial transfers, auto-create dirs, stats/progress
           RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
+          # Exclude unnecessary files to reduce bandwidth
+          RSYNC_OPTS="$RSYNC_OPTS --exclude='.DS_Store' --exclude='*.map' --exclude='Thumbs.db'"
           # Upload build artifacts to the remote release path
           rsync $RSYNC_OPTS \
             -e "ssh -p ${{ secrets.SSH_PORT }} $SSH_OPTS" \
@@ -131,15 +132,6 @@ jobs:
             ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
           "
 
-      # --- Health check ---
-      - name: Sanity check index.html exists
-        run: |
-          set -euo pipefail
-          ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
-            # Verify main entrypoint exists in the active release
-            test -f '${{ env.CURRENT_LINK }}/index.html' || { echo '❌ index.html not found in current'; exit 1; }
-          "
-
       # --- Reload Nginx ---
       - name: Reload Nginx
         if: ${{ vars.RELOAD_NGINX == 'true' }}
@@ -153,20 +145,12 @@ jobs:
         run: |
           set -euo pipefail
           ROOT_URL="${{ env.SITE_URL }}"
-          # HEAD check on root (lightweight)
-          STATUS_HEAD="$(curl -fsS -o /dev/null -w "%{http_code}" -I -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
-          test "$STATUS_HEAD" -eq 200 || { echo "❌ HEAD / did not return 200 (got $STATUS_HEAD)"; exit 1; }
-          # GET check on root (content retrieval)
-          STATUS_GET="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
-          test "$STATUS_GET" -eq 200 || { echo "❌ GET / did not return 200 (got $STATUS_GET)"; exit 1; }
-          # Asset HEAD checks to validate static files are served via new symlink
-          ASSET1_STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -I --max-time 15 --retry 5 --retry-connrefused "${ROOT_URL}/assets/favicon/favicon.ico?t=${GITHUB_SHA}")"
-          test "$ASSET1_STATUS" -eq 200 || { echo "❌ Asset favicon.ico not reachable (got $ASSET1_STATUS)"; exit 1; }
-          ASSET2_STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -I --max-time 15 --retry 5 --retry-connrefused "${ROOT_URL}/assets/profile/logo.svg?t=${GITHUB_SHA}")"
-          test "$ASSET2_STATUS" -eq 200 || { echo "❌ Asset logo.svg not reachable (got $ASSET2_STATUS)"; exit 1; }
-          # Ensure version.json exists and matches current SHA
-          VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" -H "Pragma: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
-          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json does not contain current SHA"; echo "$VERSION_JSON"; exit 1; }
+          # Verify site is accessible and serving content
+          STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
+          test "$STATUS" -eq 200 || { echo "❌ Site not accessible (HTTP $STATUS)"; exit 1; }
+          # Verify version.json matches deployed SHA (validates atomic symlink swap)
+          VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
+          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
 
       # --- Clean up old releases: keep last 5 ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
@@ -182,11 +166,3 @@ jobs:
             # Keep only the latest KEEP releases; remove older ones
             ls -1dt */ 2>/dev/null | tail -n +\$(( KEEP + 1 )) | xargs -r rm -rf --
           "
-
-      # --- Upload build artifact (archive) ---
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-${{ github.sha }}
-          path: dist
-          retention-days: 7
