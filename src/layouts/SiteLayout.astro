@@ -1,20 +1,20 @@
 ---
-import Header from "../components/Header.astro";
+import Header from "@components/Header.astro";
 /* Consolidated global styles at layout level: load variables first for clarity and cascade */
-import "../styles/variables.css";
-import "../styles/base.css";
-import "../styles/styles.css";
-import "../styles/layout/site-layout.css";
-import "../styles/gallery.css";
-import "../styles/lightbox.css";
-import "../styles/pages/button.module.css";
-import Sidebar from "../components/Sidebar.astro";
-import SidebarController from "../components/SidebarController.astro";
-import Footer from "../components/Footer.astro";
-import SidebarToggleButton from "../components/SidebarToggleButton.astro";
-import SidebarSocialFlyout from "../components/SidebarSocialFlyout.astro";
-import { GTM_ID } from "../lib/env";
-import { isProductionSite } from "../lib/seo";
+import "@/styles/variables.css";
+import "@/styles/base.css";
+import "@/styles/styles.css";
+import "@/styles/layout/site-layout.css";
+import "@/styles/gallery.css";
+import "@/styles/lightbox.css";
+import "@/styles/pages/button.module.css";
+import Sidebar from "@components/Sidebar.astro";
+import SidebarController from "@components/SidebarController.astro";
+import Footer from "@components/Footer.astro";
+import SidebarToggleButton from "@components/SidebarToggleButton.astro";
+import SidebarSocialFlyout from "@components/SidebarSocialFlyout.astro";
+import { GTM_ID } from "@lib/env";
+import { isProductionSite } from "@lib/seo";
 
 interface Props {
   title: string;
@@ -143,6 +143,13 @@ const {
       import('../lib/web-vitals')
         .then(m => m.initWebVitals && m.initWebVitals())
         .catch(e => console.error('web-vitals init error:', e));
+    </script>
+    <script>
+      // Service Worker Registration for offline support
+      // Runs unconditionally - module handles prod check internally
+      import('../lib/sw-register')
+        .then(m => m.initServiceWorker && m.initServiceWorker())
+        .catch(e => console.error('sw-register init error:', e));
     </script>
   </body>
   

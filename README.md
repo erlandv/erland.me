@@ -77,12 +77,98 @@ This is where all the type-safe, over-complicated, yet somehow minimal code live
 │   ├── lib/         # Helper functions that keep TypeScript happy
 │   ├── pages/       # Routes (how URLs work, revolutionary concept)
 │   └── styles/      # CSS that's minimal yet somehow still 50KB
+├── .nvmrc           # Node.js version lock (22.18.0) for nvm/fnm
+├── .node-version    # Node.js version lock for asdf/nodenv users
 ├── astro.config.ts  # The master config file (one file to rule them all)
 ├── package.json     # Dependency manifest (my trust issues in JSON format)
 ├── tsconfig.json    # TypeScript rules set to "paranoid" mode
 ├── README.md        # You are here (why though)
 └── ...              # Configuration files nobody remembers the purpose of
 ```
+
+## Development Setup
+
+Because apparently "just clone and run" is too simple for modern development. Here's how to get this unnecessarily sophisticated static site running locally without crying (much).
+
+### Prerequisites
+
+- **Node.js v22.18.0+**: Not optional. The project uses strict version requirements via `.nvmrc` and `package.json` engines field. Use [nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm), or suffer the consequences of version mismatches.
+- **npm v10.9.0+**: Comes with Node.js, but double-check because life is full of disappointments.
+- **Git**: Obviously. You're reading this on GitHub, so I assume you've figured this part out.
+
+### Quick Start
+
+```bash
+# Clone the masterpiece
+git clone https://github.com/erlandv/erland.me.git
+cd erland.me
+
+# Auto-switch to correct Node.js version (if using nvm/fnm)
+# Should happen automatically if your version manager is properly configured
+# Otherwise: nvm use or fnm use
+
+# Verify you're on the right Node.js version
+node --version  # Should output v22.18.0
+
+# Install dependencies (use ci for reproducible builds)
+npm ci
+
+# Start dev server with hot reload
+npm run dev
+```
+
+The dev server runs at `http://localhost:4321` (because Astro thinks it's funny). Hot reload works. TypeScript yells at you in real-time. Life is good.
+
+### Available Commands
+
+```bash
+npm run dev         # Dev server with auto-reload (alias: npm start)
+npm run build       # Production build with metadata generation
+npm run build:clean # Nuclear option: clean dist + full rebuild
+npm run preview     # Serve production build locally for QA
+
+# Quality checks (run these before committing unless you enjoy CI failures)
+npm run validate    # All checks: lint + type-check + format:check
+npm run lint        # Astro check for errors/warnings
+npm run type-check  # TypeScript validation only
+npm run format      # Auto-format with Prettier
+npm run format:check # Verify Prettier compliance (CI uses this)
+
+# Metadata generation (usually automatic via pre-hooks)
+npm run generate:robots  # Regenerate robots.txt
+npm run generate:ads     # Regenerate ads.txt
+npm run generate:search  # Rebuild search index from content
+```
+
+### Version Management
+
+The project enforces strict Node.js version consistency across all environments:
+
+- **`.nvmrc`**: Stores `22.18.0` for [nvm](https://github.com/nvm-sh/nvm) and [fnm](https://github.com/Schniz/fnm) users. Auto-switches when entering directory (if shell integration enabled).
+- **`.node-version`**: Same version for [asdf](https://asdf-vm.com/) and [nodenv](https://github.com/nodenv/nodenv) users. Because the ecosystem has 47 ways to manage Node.js versions.
+- **`package.json` engines**: Requires `node >= 22.18.0` and `npm >= 10.9.0`. Use `npm install --engine-strict` if you want npm to actually enforce this (it's opt-in because npm is too polite by default).
+- **GitHub Actions**: CI/CD workflows read from `.nvmrc` via `node-version-file` parameter. Single source of truth, zero version drift.
+
+Why this paranoia? Because "it works on my machine" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Version locks eliminate an entire category of bugs before they happen.
+
+### Environment Variables
+
+Create `.env` if you want to override defaults (optional, everything has sane fallbacks):
+
+```bash
+# Site configuration
+SITE_URL=http://localhost:4321  # Base URL (default: https://erland.me)
+
+# Build optimization
+MINIFY_ENGINE=esbuild            # 'esbuild' or 'terser' (default: esbuild)
+ENABLE_STRIP_CONSOLE=false       # Remove console.log in prod (requires terser)
+
+# Third-party integrations (production only)
+PUBLIC_GTM_ID=GTM-XXXXXXX        # Google Tag Manager ID
+PUBLIC_ADSENSE_CLIENT=ca-pub-... # AdSense publisher ID
+```
+
+All environment variables are optional. Defaults are production-ready. Check `src/env.d.ts` for the complete list with TypeScript types.
 
 ## Production Deployment
 

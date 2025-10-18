@@ -1,6 +1,6 @@
 ---
-import { generateMetaTags, websiteJsonLd, isProductionSite } from '../lib/seo';
-import { GTM_ID, ADSENSE_CLIENT } from '../lib/env';
+import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
+import { GTM_ID, ADSENSE_CLIENT } from '@lib/env';
 // Global styles imported at layout level
 import { ClientRouter } from 'astro:transitions';
 
@@ -98,9 +98,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:creator" content={metaTags.twitter.creator} />
   <meta name="twitter:site" content={metaTags.twitter.site} />
   
-  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {enableGTM && (
+    <>
+      <link rel="preconnect" href="https://www.googletagmanager.com">
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    </>
+  )}
+  {enableAdsense && (
+    <>
+      <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+      <link rel="preconnect" href="https://adservice.google.com">
+      <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+      <link rel="dns-prefetch" href="https://adservice.google.com">
+    </>
+  )}
+  
+  <link rel="preload" href="/fonts/agave-nerd/AgaveNerdFontMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/agave-nerd/AgaveNerdFontMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
   
   {preloadSearch && (<link rel="preload" as="fetch" href="/search-index.json" type="application/json" crossorigin />)}
   <link rel="canonical" href={metaTags.canonical} />

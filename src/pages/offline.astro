@@ -1,0 +1,63 @@
+---
+import SiteLayout from '@layouts/SiteLayout.astro';
+import BackNav from '@components/BackNav.astro';
+import Icon from '@components/Icon.astro';
+import fold from '@/styles/pages/fold.module.css';
+import btn from '@/styles/pages/button.module.css';
+---
+
+<SiteLayout
+  title='You are offline'
+  canonical='/offline/'
+  description='This page is shown when you are offline. Please check your internet connection and try again.'
+  showSidebar={true}
+>
+  <BackNav href='/' label='Back to Home' />
+  <main class={fold['fold-content-container']}>
+    <div class={fold['fold-content']}>
+      <h1>You're Offline</h1>
+
+      <p>
+        It looks like you've lost your internet connection. Don't worry, some
+        pages you've visited before are still available to read.
+      </p>
+
+      <h2>What you can do:</h2>
+      <ul>
+        <li>Check your internet connection</li>
+        <li>Try refreshing the page when you're back online</li>
+        <li>Browse previously visited pages from cache</li>
+      </ul>
+
+      <p>
+        This site works offline for pages you've already visited. Once you're
+        back online, you'll have access to all content again.
+      </p>
+
+      <a href='/' class:list={[btn.button, btn['contact-button'], 'offline-button']}>
+        <Icon name='home' class={btn['button-icon']} />
+        <span>Go to Homepage</span>
+      </a>
+    </div>
+  </main>
+</SiteLayout>
+
+<style>
+  ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+
+  .offline-button :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .offline-button {
+    gap: 8px;
+  }
+</style>

@@ -251,8 +251,8 @@ export function autoInit() {
 export default initToc;
 // Inline SVG icons for toggle
 import { onRouteChange } from './router-events';
-import arrowUpRaw from '../icons/arrowup.svg?raw';
-import arrowDownRaw from '../icons/arrowdown.svg?raw';
+import arrowUpRaw from '@/icons/arrowup.svg?raw';
+import arrowDownRaw from '@/icons/arrowdown.svg?raw';
 
 function normalizeSvg(svg: string, extraClass = ''): string {
   try {

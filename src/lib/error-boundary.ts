@@ -6,6 +6,9 @@
  */
 
 import { showToast } from './toast';
+import { createLogger } from './logger';
+
+const log = createLogger('ErrorBoundary');
 
 export type ErrorContext = {
   feature: string;
@@ -55,18 +58,10 @@ function isRecoverableError(error: Error): boolean {
  * Log error details for debugging in development
  */
 function logError(error: Error, context: ErrorContext): void {
-  const isDev = import.meta.env.DEV;
-
-  if (isDev) {
-    console.group(`🔴 Error Boundary: ${context.feature}`);
-    console.error('Error:', error);
-    console.error('Context:', context);
-    console.error('Stack:', error.stack);
-    console.groupEnd();
-  } else {
-    // In production, use minimal logging
-    console.error(`Error in ${context.feature}:`, error.message);
-  }
+  log.error(`${context.feature} error`, error, {
+    operation: context.operation,
+    recoverable: context.recoverable,
+  });
 }
 
 /**
