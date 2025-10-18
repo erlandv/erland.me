@@ -8,6 +8,9 @@
  */
 
 import type { Metric } from 'web-vitals';
+import { createLogger } from './logger';
+
+const log = createLogger('WebVitals');
 
 /**
  * Check if GTM dataLayer is available
@@ -24,14 +27,10 @@ function isGTMAvailable(): boolean {
  */
 function sendToGTM(metric: Metric): void {
   if (!isGTMAvailable()) {
-    if (import.meta.env.DEV) {
-      console.log(
-        '[Web Vitals]',
-        metric.name,
-        Math.round(metric.value),
-        metric
-      );
-    }
+    log.debug(`${metric.name}: ${Math.round(metric.value)}`, {
+      rating: metric.rating,
+      delta: metric.delta,
+    });
     return;
   }
 
@@ -48,15 +47,11 @@ function sendToGTM(metric: Metric): void {
     metric_navigation_type: metric.navigationType,
   });
 
-  // Also log in development for debugging
-  if (import.meta.env.DEV) {
-    console.log('[Web Vitals → GTM]', {
-      name: metric.name,
-      value: Math.round(metric.value),
-      rating: metric.rating,
-      id: metric.id,
-    });
-  }
+  log.debug(`Sent to GTM: ${metric.name}`, {
+    value: Math.round(metric.value),
+    rating: metric.rating,
+    id: metric.id,
+  });
 }
 
 /**
@@ -84,7 +79,7 @@ function sendToGA4(metric: Metric): void {
 export async function initWebVitals(): Promise<void> {
   // Only run in production
   if (!import.meta.env.PROD) {
-    console.log('[Web Vitals] Skipping in development mode');
+    log.info('Skipping in development mode');
     return;
   }
 
@@ -112,9 +107,9 @@ export async function initWebVitals(): Promise<void> {
     // Measures server response time - good < 800ms
     webVitals.onTTFB(sendToGTM);
 
-    console.log('[Web Vitals] Monitoring initialized');
+    log.info('Monitoring initialized');
   } catch (error) {
-    console.error('[Web Vitals] Failed to initialize:', error);
+    log.error('Failed to initialize', error);
   }
 }
 
@@ -138,7 +133,7 @@ export async function initWebVitalsWithGA4(): Promise<void> {
     webVitals.onFCP(sendToBoth);
     webVitals.onTTFB(sendToBoth);
   } catch (error) {
-    console.error('[Web Vitals] Failed to initialize:', error);
+    log.error('Failed to initialize', error);
   }
 }
 
@@ -160,7 +155,7 @@ export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
 
     return snapshot;
   } catch (error) {
-    console.error('[Web Vitals] Failed to get snapshot:', error);
+    log.error('Failed to get snapshot', error);
     return {};
   }
 }

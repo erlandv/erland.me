@@ -1,3 +1,7 @@
+import { createLogger } from './logger';
+
+const log = createLogger('AdSense');
+
 export function insertAdUnit(container: Element, client: string, slot: string) {
   if (!container || !client || !slot) return;
   try {
@@ -19,7 +23,7 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
     (window as any).adsbygoogle = (window as any).adsbygoogle || [];
     (window as any).adsbygoogle.push({});
   } catch (e) {
-    console.warn('AdSense insertAdUnit error:', e);
+    log.warn('insertAdUnit failed', { error: e, slot });
   }
 }
 
@@ -79,7 +83,7 @@ export function insertAdAfterMiddle(
     (window as any).adsbygoogle = (window as any).adsbygoogle || [];
     (window as any).adsbygoogle.push({});
   } catch (e) {
-    console.warn('AdSense insertAdAfterMiddle error:', e);
+    log.warn('insertAdAfterMiddle failed', { error: e, slot });
   }
 }
 
@@ -116,7 +120,7 @@ export function insertPlaceholderAfterMiddle(
       target.parentNode!.insertBefore(box, target.nextSibling);
     }
   } catch (e) {
-    console.warn('AdSense insertPlaceholderAfterMiddle error:', e);
+    log.warn('insertPlaceholderAfterMiddle failed', { error: e });
   }
 }
 
@@ -199,7 +203,10 @@ export function autoInitDownloadAds(
     insertAdUnit(container, client, slotEnd);
     w.__ads_dl_end.add(key);
   } catch (e) {
-    console.warn('AdSense end placement (download) error:', e);
+    log.warn('autoInitDownloadAds end placement failed', {
+      error: e,
+      slot: slotEnd,
+    });
     const exists = document.querySelector(
       `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
     );
@@ -252,7 +259,7 @@ export function autoInitDownloadPlaceholders() {
     insertPlaceholderUnit(container, 'Ad Placeholder (end)');
     w.__ph_dl_end = true;
   } catch (e) {
-    console.warn('Placeholder end placement (download) error:', e);
+    log.warn('autoInitDownloadPlaceholders end placement failed', { error: e });
     insertPlaceholderUnit(container, 'Ad Placeholder (end)');
   }
 }

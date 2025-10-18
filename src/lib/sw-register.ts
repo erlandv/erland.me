@@ -5,6 +5,10 @@
  * Only runs in production to avoid caching dev content.
  */
 
+import { createLogger } from './logger';
+
+const log = createLogger('ServiceWorker');
+
 type ServiceWorkerConfig = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
@@ -25,12 +29,12 @@ export async function registerServiceWorker(
   config: ServiceWorkerConfig = {}
 ): Promise<ServiceWorkerRegistration | null> {
   if (!isSupported()) {
-    console.log('[SW] Service workers not supported');
+    log.info('Service workers not supported');
     return null;
   }
 
   if (!import.meta.env.PROD) {
-    console.log('[SW] Skipping registration in development');
+    log.info('Skipping registration in development');
     return null;
   }
 
@@ -39,14 +43,14 @@ export async function registerServiceWorker(
       scope: '/',
     });
 
-    console.log('[SW] Service worker registered:', registration.scope);
+    log.info('Service worker registered', { scope: registration.scope });
 
     // Check for updates
     registration.addEventListener('updatefound', () => {
       const newWorker = registration.installing;
       if (!newWorker) return;
 
-      console.log('[SW] Update found, installing new version...');
+      log.info('Update found, installing new version...');
 
       newWorker.addEventListener('statechange', () => {
         if (
@@ -54,7 +58,7 @@ export async function registerServiceWorker(
           navigator.serviceWorker.controller
         ) {
           // New service worker available
-          console.log('[SW] New version available');
+          log.info('New version available');
           config.onUpdate?.(registration);
         }
       });
@@ -68,7 +72,7 @@ export async function registerServiceWorker(
     return registration;
   } catch (error) {
     const err = error instanceof Error ? error : new Error(String(error));
-    console.error('[SW] Registration failed:', err);
+    log.error('Registration failed', err);
     config.onError?.(err);
     return null;
   }
@@ -84,12 +88,12 @@ export async function unregisterServiceWorker(): Promise<boolean> {
     const registration = await navigator.serviceWorker.getRegistration();
     if (registration) {
       const success = await registration.unregister();
-      console.log('[SW] Unregistered:', success);
+      log.info('Unregistered', { success });
       return success;
     }
     return false;
   } catch (error) {
-    console.error('[SW] Unregister failed:', error);
+    log.error('Unregister failed', error);
     return false;
   }
 }
@@ -119,8 +123,8 @@ function showUpdateNotification(): void {
       });
     })
     .catch(() => {
-      // Fallback to console if toast fails
-      console.log('[SW] New version available. Please refresh the page.');
+      // Fallback to logger if toast fails
+      log.info('New version available. Please refresh the page.');
     });
 }
 
@@ -134,14 +138,14 @@ export function initServiceWorker(): void {
   window.addEventListener('load', () => {
     registerServiceWorker({
       onSuccess: () => {
-        console.log('[SW] Active and ready');
+        log.info('Active and ready');
       },
       onUpdate: () => {
-        console.log('[SW] Update available');
+        log.info('Update available');
         showUpdateNotification();
       },
       onError: error => {
-        console.error('[SW] Registration error:', error.message);
+        log.error('Registration error', error);
       },
     });
   });
