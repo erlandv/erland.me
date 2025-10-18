@@ -1,13 +1,13 @@
 ---
-import SiteLayout from '../../../layouts/SiteLayout.astro';
-import BackNav from '../../../components/BackNav.astro';
-import PostCard from '../../../components/PostCard.astro';
-import Pagination from '../../../components/Pagination.astro';
+import SiteLayout from '@layouts/SiteLayout.astro';
+import BackNav from '@components/BackNav.astro';
+import PostCard from '@components/PostCard.astro';
+import Pagination from '@components/Pagination.astro';
 //
-import listing from '../../../styles/pages/listing.module.css';
-import catStyles from '../../../styles/pages/category.module.css';
-import { loadAllPosts, slugifyCategory, slicePage } from '../../../lib/blog';
-import { categoriesIndexJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
+import listing from '@/styles/pages/listing.module.css';
+import catStyles from '@/styles/pages/category.module.css';
+import { loadAllPosts, slugifyCategory, slicePage } from '@lib/blog';
+import { categoriesIndexJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import type { ImageMetadata } from 'astro';
 
 const posts = await loadAllPosts();

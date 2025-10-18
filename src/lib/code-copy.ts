@@ -4,7 +4,7 @@
 import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
 import { onRouteChange } from './router-events';
-import '../styles/code-copy.css';
+import '@/styles/code-copy.css';
 
 function findCodeBlocks(): NodeListOf<HTMLElement> {
   let list = document.querySelectorAll(

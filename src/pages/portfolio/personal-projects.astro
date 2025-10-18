@@ -1,8 +1,8 @@
 ---
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import Project from '../../components/Project.astro';
-import BackNav from "../../components/BackNav.astro";
-import listing from "../../styles/pages/listing.module.css";
+import SiteLayout from "@layouts/SiteLayout.astro";
+import Project from '@components/Project.astro';
+import BackNav from "@components/BackNav.astro";
+import listing from "@/styles/pages/listing.module.css";
 import { getCollection, type CollectionEntry } from 'astro:content';
 type ProjectEntry = CollectionEntry<'portfolio'>;
 type ProjectData = ProjectEntry['data'];
