@@ -170,7 +170,7 @@ async function cacheFirstStrategy(request, maxAge = CACHE_MAX_AGE.static) {
 
     // No cache available, show offline page for HTML
     if (request.headers.get('accept')?.includes('text/html')) {
-      const offlineResponse = await cache.match('/offline/');
+      const offlineResponse = await caches.match('/offline/');
       if (offlineResponse) return offlineResponse;
     }
 
@@ -203,7 +203,7 @@ async function networkFirstStrategy(request) {
 
     // Show offline page for HTML requests
     if (request.headers.get('accept')?.includes('text/html')) {
-      const offlineResponse = await cache.match('/offline/');
+      const offlineResponse = await caches.match('/offline/');
       if (offlineResponse) return offlineResponse;
     }
 
