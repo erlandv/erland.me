@@ -10,6 +10,41 @@
  * - API/external: Network Only
  */
 
+/**
+ * Simple logging abstraction for service worker
+ * Consistent with centralized logger utility pattern
+ */
+const logger = (() => {
+  const PREFIX = '[SW]';
+  
+  // Service workers are only active in production-like contexts
+  // so we always log info/debug for visibility during development
+  const isDevMode = self.location.hostname === 'localhost' || 
+                    self.location.hostname === '127.0.0.1';
+  
+  return {
+    info: (message, ...args) => {
+      if (isDevMode) {
+        console.log(`${PREFIX} ℹ️`, message, ...args);
+      }
+    },
+    warn: (message, ...args) => {
+      console.warn(`${PREFIX} ⚠️`, message, ...args);
+    },
+    error: (message, error, ...args) => {
+      console.error(`${PREFIX} ❌`, message, ...args);
+      if (error) {
+        console.error('Error:', error);
+      }
+    },
+    debug: (message, ...args) => {
+      if (isDevMode) {
+        console.debug(`${PREFIX} 🔍`, message, ...args);
+      }
+    },
+  };
+})();
+
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `erland-me-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
@@ -28,19 +63,19 @@ const CACHE_MAX_AGE = {
  * Install event - precache critical assets
  */
 self.addEventListener('install', event => {
-  console.log('[SW] Installing service worker...');
+  logger.info('Installing service worker...');
 
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then(cache => {
-        console.log('[SW] Precaching assets');
+        logger.info('Precaching assets');
         return cache.addAll(
           PRECACHE_ASSETS.map(url => new Request(url, { cache: 'reload' }))
         );
       })
       .then(() => self.skipWaiting())
-      .catch(err => console.error('[SW] Precache failed:', err))
+      .catch(err => logger.error('Precache failed', err))
   );
 });
 
@@ -48,7 +83,7 @@ self.addEventListener('install', event => {
  * Activate event - cleanup old caches
  */
 self.addEventListener('activate', event => {
-  console.log('[SW] Activating service worker...');
+  logger.info('Activating service worker...');
 
   event.waitUntil(
     caches
@@ -63,7 +98,7 @@ self.addEventListener('activate', event => {
               name => name.startsWith('runtime-') && name !== RUNTIME_CACHE
             )
             .map(name => {
-              console.log('[SW] Deleting old cache:', name);
+              logger.info('Deleting old cache:', name);
               return caches.delete(name);
             })
         );
