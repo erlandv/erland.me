@@ -5,6 +5,13 @@ import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import remarkDownloadFiles from './src/lib/remark-download-files';
 import { getSitemapConfig } from './src/lib/seo';
+
+// Determine if we're in production based on environment variables
+const SITE_URL = process.env.SITE_URL || 'https://erland.me';
+const SITE_DOMAIN = process.env.SITE_DOMAIN || 'erland.me';
+const isProduction =
+  SITE_URL === 'https://erland.me' && SITE_DOMAIN === 'erland.me';
+
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -190,22 +197,25 @@ export default defineConfig({
   },
 
   // Integrations for additional features
-  integrations: [
-    sitemap({
-      // Exclude 404 page from sitemap
-      filter: (page: string) => !page.includes('404'),
-      // Customize priority and changefreq based on page type
-      serialize: item => {
-        const config = getSitemapConfig(item.url);
+  // Only include sitemap in production builds
+  integrations: isProduction
+    ? [
+        sitemap({
+          // Exclude 404 page from sitemap
+          filter: (page: string) => !page.includes('404'),
+          // Customize priority and changefreq based on page type
+          serialize: item => {
+            const config = getSitemapConfig(item.url);
 
-        return {
-          url: item.url,
-          changefreq: config.changefreq,
-          lastmod: new Date().toISOString(),
-          priority: config.priority,
-          links: item.links,
-        };
-      },
-    }),
-  ],
+            return {
+              url: item.url,
+              changefreq: config.changefreq,
+              lastmod: new Date().toISOString(),
+              priority: config.priority,
+              links: item.links,
+            };
+          },
+        }),
+      ]
+    : [],
 });

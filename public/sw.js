@@ -16,12 +16,13 @@
  */
 const logger = (() => {
   const PREFIX = '[SW]';
-  
+
   // Service workers are only active in production-like contexts
   // so we always log info/debug for visibility during development
-  const isDevMode = self.location.hostname === 'localhost' || 
-                    self.location.hostname === '127.0.0.1';
-  
+  const isDevMode =
+    self.location.hostname === 'localhost' ||
+    self.location.hostname === '127.0.0.1';
+
   return {
     info: (message, ...args) => {
       if (isDevMode) {
