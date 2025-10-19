@@ -6,8 +6,8 @@
     "predev": "npm run generate:robots && npm run generate:ads && npm run generate:search",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run generate:robots && npm run generate:ads && npm run generate:search && astro build",
-    "build:clean": "rm -rf dist && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build",
+    "build": "npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
+    "build:clean": "rm -rf dist && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "astro check",
@@ -18,7 +18,8 @@
     "validate": "npm run lint && npm run type-check && npm run format:check",
     "generate:robots": "node scripts/generate-robots.mjs",
     "generate:ads": "node scripts/generate-ads.mjs",
-    "generate:search": "node scripts/generate-search-index.mjs"
+    "generate:search": "node scripts/generate-search-index.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs"
   },
   "engines": {
     "node": ">=22.18.0",
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.6.0",
     "@types/node": "^24.5.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",

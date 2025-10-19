@@ -1,10 +1,7 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-import { EnumChangefreq } from 'sitemap';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import remarkDownloadFiles from './src/lib/remark-download-files';
-import { getSitemapConfig } from './src/lib/seo';
 // https://astro.build/config
 export default defineConfig({
   // Site configuration
@@ -190,22 +187,5 @@ export default defineConfig({
   },
 
   // Integrations for additional features
-  integrations: [
-    sitemap({
-      // Exclude 404 page from sitemap
-      filter: (page: string) => !page.includes('404'),
-      // Customize priority and changefreq based on page type
-      serialize: item => {
-        const config = getSitemapConfig(item.url);
-
-        return {
-          url: item.url,
-          changefreq: config.changefreq,
-          lastmod: new Date().toISOString(),
-          priority: config.priority,
-          links: item.links,
-        };
-      },
-    }),
-  ],
+  integrations: [],
 });
