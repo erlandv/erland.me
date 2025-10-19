@@ -23,6 +23,7 @@ const downloads = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      heading: z.string().optional(),
       description: z.string().max(160).optional(),
       excerpt: z.string().max(200).optional(),
       publishDate: z.coerce.date(),

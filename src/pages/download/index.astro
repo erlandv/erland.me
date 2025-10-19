@@ -60,7 +60,7 @@ const downloads = (await getCollection("downloads"))
             </a>
             <div class={dl["download-card-body"]}>
               <h2 class={dl["download-card-title"]}>
-                <a href={detailHref}>{data.title}</a>
+                <a href={detailHref}>{data.heading ?? data.title}</a>
               </h2>
               <p class={dl["download-card-desc"]}>{data.excerpt ?? data.description}</p>
               <div class={dl["download-card-actions"]}>

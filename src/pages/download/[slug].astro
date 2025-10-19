@@ -72,7 +72,7 @@ const jsonLd = creativeWorkJsonLd({
           </div>
         )
       }
-      <h1>{data.title}</h1>
+      <h1>{data.heading ?? data.title}</h1>
     </header>
 
     <div class='prose' id='download-content'>
