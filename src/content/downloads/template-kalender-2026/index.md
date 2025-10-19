@@ -1,5 +1,6 @@
 ---
-title: 'Template Kalender 2026'
+title: 'Template Kalender 2026 CDR AI PDF PNG HD Free Download'
+heading: 'Template Kalender 2026'
 description: 'Free download file template kalender 2026 CDR, AI, PDF, PNG HD transparan, cukup sekali klik link download. Full 12 bulan lengkap hari libur nasional.'
 excerpt: 'Free download file template kalender 2026 berformat vector'
 publishDate: 2025-10-01
