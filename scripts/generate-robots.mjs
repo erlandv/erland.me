@@ -86,15 +86,10 @@ const robotsContent = isProd
 Allow: /
 
 # Sitemap
-Sitemap: ${siteUrl}/sitemap-index.xml
+Sitemap: ${siteUrl}/sitemap_index.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
-
-# Disallow admin or private areas (if any)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /_astro/
 
 # Allow all other content
 Allow: /blog/

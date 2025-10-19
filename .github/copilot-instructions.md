@@ -47,7 +47,8 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 - **Production pipeline**: GitHub Actions on `main` → build → rsync to VPS → atomic symlink swap (`current` → `releases/<sha>`) → health checks
 - **Staging**: Push to `staging`/`testing` branches → Cloudflare Pages (auto-preview)
-- **Metadata generation**: `predev` hook auto-runs scripts before `npm run dev`; `build` commands regenerate robots.txt, ads.txt, search-index.json
+- **Metadata generation**: `predev` hook auto-runs scripts before `npm run dev`; `build` commands regenerate robots.txt, ads.txt, search-index.json, sitemaps
+- **Sitemap structure**: Custom sitemaps (`sitemap_index.xml`, `post-sitemap.xml`, `page-sitemap.xml`) for GSC backward compatibility; generated via `scripts/generate-sitemap.mjs` post-build; **only generated in production environment**
 - **Environment-aware**: Use `import.meta.env.SITE` (Astro components), `process.env.SITE_URL` (config files), or `SITE_URL` env var
 
 ## Critical Commands
@@ -69,6 +70,7 @@ npm run format:check # Verify Prettier compliance
 npm run generate:search  # Rebuild search-index.json from content
 npm run generate:robots  # Rebuild robots.txt (env-aware)
 npm run generate:ads     # Rebuild ads.txt (prod only)
+npm run generate:sitemap # Rebuild sitemaps (post-build only)
 ```
 
 ## Astro Component Patterns

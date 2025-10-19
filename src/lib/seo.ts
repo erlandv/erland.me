@@ -1,6 +1,5 @@
 // Base site configuration
 import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
-import { EnumChangefreq } from 'sitemap';
 
 const SITE_CONFIG = {
   name: 'erland.me',
@@ -331,85 +330,4 @@ export function generateMetaTags(opts: {
       site: '@erlandzz',
     },
   };
-}
-
-/**
- * Get sitemap priority and changefreq for a URL
- * Used by @astrojs/sitemap serialize function
- *
- * Priority scale (0.0 - 1.0):
- * - 1.0: Homepage
- * - 0.9: Main content hubs (blog index, downloads index)
- * - 0.8: Individual content (blog posts, download pages)
- * - 0.7: Category pages, portfolio sections
- * - 0.6: Secondary portfolio pages
- * - 0.5: Static pages (privacy policy, about, 404)
- *
- * Changefreq guidance:
- * - daily: Content hubs that get new posts frequently
- * - weekly: Individual posts that may get updates
- * - monthly: Static pages and portfolio
- */
-export function getSitemapConfig(url: string): {
-  priority: number;
-  changefreq: EnumChangefreq;
-} {
-  const path = new URL(url).pathname;
-
-  // Homepage - highest priority, check daily for updates
-  if (path === '/') {
-    return { priority: 1.0, changefreq: EnumChangefreq.DAILY };
-  }
-
-  // Main content hubs - high priority, updated daily with new posts
-  if (path === '/blog/' || path === '/download/') {
-    return { priority: 0.9, changefreq: EnumChangefreq.DAILY };
-  }
-
-  // Blog-related pages - must be checked in order from most specific to least specific
-
-  // Category pagination pages (e.g., /blog/category/teknologi/page/2/)
-  if (path.match(/^\/blog\/category\/[^/]+\/page\/\d+\/$/)) {
-    return { priority: 0.65, changefreq: EnumChangefreq.WEEKLY };
-  }
-
-  // Category index page (/blog/category/)
-  if (path === '/blog/category/') {
-    return { priority: 0.7, changefreq: EnumChangefreq.WEEKLY };
-  }
-
-  // Category pages (e.g., /blog/category/teknologi/)
-  if (path.match(/^\/blog\/category\/[^/]+\/$/)) {
-    return { priority: 0.7, changefreq: EnumChangefreq.WEEKLY };
-  }
-
-  // Blog pagination pages (e.g., /blog/page/2/)
-  if (path.match(/^\/blog\/page\/\d+\/$/)) {
-    return { priority: 0.85, changefreq: EnumChangefreq.DAILY };
-  }
-
-  // Individual blog posts - high priority, may receive updates
-  // This must be last blog check to avoid matching pagination/category URLs
-  if (path.startsWith('/blog/')) {
-    return { priority: 0.8, changefreq: EnumChangefreq.WEEKLY };
-  }
-
-  // Individual download pages - high priority, content updates
-  if (path.startsWith('/download/') && path !== '/download/') {
-    return { priority: 0.8, changefreq: EnumChangefreq.WEEKLY };
-  }
-
-  // Main portfolio page
-  if (path === '/portfolio/') {
-    return { priority: 0.7, changefreq: EnumChangefreq.MONTHLY };
-  }
-
-  // Portfolio sections - moderate priority, updated occasionally
-  if (path.startsWith('/portfolio/')) {
-    return { priority: 0.6, changefreq: EnumChangefreq.MONTHLY };
-  }
-
-  // Static pages - lower priority, rarely updated
-  // (privacy-policy, about, contact, etc.)
-  return { priority: 0.5, changefreq: EnumChangefreq.MONTHLY };
 }

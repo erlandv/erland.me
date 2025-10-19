@@ -3,23 +3,42 @@
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository hosts just my personal website with a little blog and portfolio. It's built with **Astro**, a cutting-edge static site builder designed for modern web apps (deployed here for what is essentially a digital diary with extra steps). This is my small corner on the interweb where I dump my notes, my achievements, and whatever else I feel like posting. Yes, I'm aware of the irony.
+This repository hosts just my personal website with a little blog and portfolio. It's built with **Astro**, a cutting-edge static site builder designed for modern web apps (deployed here for what is essentially a digital diary with extra steps).
+
+This is my small corner on the interweb where I dump my notes, my achievements, and whatever else I feel like posting. Yes, I'm aware of the irony.
 
 ## Features
 
-There aren't many advanced features here because it was intentionally designed to be minimal. I mean, come on, it's just a personal web. What were you expecting? User authentication? Payment processing? Push notifications for new blog posts nobody reads?
+There aren't many advanced features here because it was intentionally designed to be minimal. I mean, come on, it's just a personal web. What were you expecting? User authentication? Payment processing? Push notifications for new blog posts nobody reads? Get real.
 
-- **Personal Blog**: Just a place to write stuff using Markdown. Yeah, it has tags, categories, and hero images, but let's not pretend—it's basically a glorified text file with extra steps.
+- **Personal Blog**: Just a place to write stuff using Markdown. Yeah, it has tags, categories, and hero images, but let's not pretend-it's basically a glorified text file with extra compilation steps. The server is furious about this.
 - **Portfolio Showcase**: Where I flex my work. Some different layouts, nothing that'll win awards. But it works, and that's more than most portfolio sites can say.
+- **Offline Support (PWA)**: Has a service worker that caches everything so you can read my mediocre content even when your internet dies. It's technically a PWA now. I know, revolutionary for a blog that updates twice a month.
 - **"Search"**: It can find things! I know, truly revolutionary for 2025. It's instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like nothing).
-- **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Someone give me a medal.
+- **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Breakthrough innovation right here. Nobel Prize pending.
 - **Syntax Highlighting**: Makes code snippets actually readable instead of looking like a JSON file threw up. You're welcome.
-- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap-index.xml`, and `robots.txt` so Google's crawlers don't get confused and cry.
+- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, and `robots.txt` so Google's crawlers don't get confused and cry.
 - **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't default everywhere yet. I'm as confused as you are.
 - **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful for feedback. It's called UX, look it up.
 - **Share Buttons**: Standard social media sharing icons. Because clearly my dozen readers are dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
 - **Pagination**: The blog splits posts across pages instead of creating one endless scroll of regret. Apparently this counts as a feature now.
-- **Adsense/Placeholder Integration**: Reserved space for ads (if I ever feel like monetizing my dozen visitors) or just melancholic placeholders for dev environments.
+- **Adsense/Placeholder Integration**: Reserved space for ads (if I ever feel like monetizing my dozen visitors) or just placeholder slots for dev environments.
+- **Error Boundary**: Catches JS errors before they ruin everyone's day. Shows a friendly fallback UI instead of letting the entire page implode. It's called "not being a jerk to your users."
+- **Web Vitals Tracking**: Obsessively monitors every Core Web Vital metric and sends them to Google Tag Manager. Because apparently I need hard data to confirm that yes, the site is fast. Peak perfectionism.
+
+## What's Intentionally NOT Here
+
+Because apparently listing what you _didn't_ build is the new humble brag:
+
+- **✗** **No Database**: Not MySQL, not PostgreSQL, not even SQLite. Just markdown files like it's 2010. And you know what? It works better this way.
+- **✗** **No CMS**: No WordPress, no Contentful, no Strapi. I edit markdown in VS Code like our ancestors intended. I am the CMS.
+- **✗** **No User Authentication**: There's nothing to log into. No accounts, no passwords, no "forgot password" flow. Blissfully simple. You're not that important.
+- **✗** **No API Endpoints**: This is a static site. The only API calls happening here are from your browser to my CDN. That's it.
+- **✗** **No Comment System**: Want to leave feedback? Email exists. Social media exists. I'm not running a Disqus instance for my dozen readers.
+- **✗** **No Real-Time Features**: No WebSockets, no Server-Sent Events, no live updates. Content updates when I push to `main`. That's the "real-time" you get.
+- **✗** **No Server-Side Rendering**: Everything's pre-rendered at build time. No edge functions, no serverless lambdas, no "hybrid rendering modes." Just plain HTML, fast and dumb.
+
+The best code is the code you don't write. This README is already 10x longer than necessary, so at least the codebase stayed minimal.
 
 ## Tech Stack
 
@@ -27,12 +46,11 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 
 ### Core Framework
 
-- **Astro**: The main engine that powers this beast. It spits out static files faster than you can say "_why not just use WordPress?_"
-- **TypeScript**: Aggressive type checking everywhere because I don't trust JavaScript. Or anyone. Or myself. Especially myself.
-- **Vite**: The blazing-fast build tool that Astro uses. It's fast. I'm fast. We're all fast. Speed matters when you're rebuilding for the 47th time today.
-- **Shiki**: The syntax highlighter that makes code blocks look professional instead of like someone sneezed RegEx onto the screen.
-- **@astrojs/sitemap**: Auto-generates sitemaps for search engine robots. Because apparently robots need GPS too.
-- **Sharp**: The image optimizer that does in milliseconds what Photoshop users spend 10 minutes doing manually. Automatic WebP conversion, responsive sizing, compression.
+- **Astro**: The framework that finally answered the question "what if we just... didn't ship JavaScript unless absolutely necessary?" Revolutionary concept in 2025, apparently.
+- **TypeScript**: Because I don't trust JS. Or myself. Or you. Especially myself. Every variable is typed. Every function returns exactly what it promises. This is a dictatorship, not a democracy.
+- **Vite**: Blazing-fast build tool that's faster than my attention span. Rebuilds in milliseconds. Which is good, because I break things constantly.
+- **Shiki**: Makes code blocks actually readable instead of looking like regex had a baby with a JSON error. Syntax highlighting that doesn't make your eyes bleed.
+- **Sharp**: The image optimizer that does in milliseconds what Photoshop users spend 10 minutes doing manually. Automatic WebP conversion, responsive sizing, compression. It's a gift.
 - **Terser**: Optional JavaScript minifier that squeezes files smaller than necessary. Because I'm petty about kilobytes.
 
 ### Content & Styling
@@ -42,6 +60,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **PostCSS**: The automated janitor that cleans up my CSS, adds vendor prefixes I always forget, and minifies everything. Doing the Lord's work.
 - **SVG Icons**: Vector icons that scale infinitely and never look pixelated. Unlike my career trajectory.
 - **Flaticon**: Where I stole—sorry, _licensed_—all the hero images from the [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) pack. They're cute. Sue me. (Please don't.)
+- **remark-directive**: Markdown plugins that add superpowers like gallery embeds (`remark-gallery`). Because regular Markdown is too mainstream.
 - **Agave Nerd Font**: That ridiculously fancy monospace font for code blocks. Because Comic Sans wasn't an option.
 
 ### Utilities & Configuration
@@ -49,7 +68,6 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.
-- **remark-directive**: Markdown plugins that add superpowers like gallery embeds (`remark-gallery`). Because regular Markdown is too mainstream.
 - **ESM Node Scripts (.mjs)**: Modern Node scripts because `.js` is so 2019 and I have a personal brand to maintain.
 - **npm scripts**: All the build, test, and deploy commands. The console commands I type 500 times a day and still somehow typo.
 
@@ -77,8 +95,6 @@ This is where all the type-safe, over-complicated, yet somehow minimal code live
 │   ├── lib/         # Helper functions that keep TypeScript happy
 │   ├── pages/       # Routes (how URLs work, revolutionary concept)
 │   └── styles/      # CSS that's minimal yet somehow still 50KB
-├── .nvmrc           # Node.js version lock (22.18.0) for nvm/fnm
-├── .node-version    # Node.js version lock for asdf/nodenv users
 ├── astro.config.ts  # The master config file (one file to rule them all)
 ├── package.json     # Dependency manifest (my trust issues in JSON format)
 ├── tsconfig.json    # TypeScript rules set to "paranoid" mode
@@ -92,9 +108,12 @@ Because apparently "just clone and run" is too simple for modern development. He
 
 ### Prerequisites
 
-- **Node.js v22.18.0+**: Not optional. The project uses strict version requirements via `.nvmrc` and `package.json` engines field. Use [nvm](https://github.com/nvm-sh/nvm), [fnm](https://github.com/Schniz/fnm), or suffer the consequences of version mismatches.
-- **npm v10.9.0+**: Comes with Node.js, but double-check because life is full of disappointments.
-- **Git**: Obviously. You're reading this on GitHub, so I assume you've figured this part out.
+Let's start with the obvious stuff you should already have installed (but let's be real, you probably don't):
+
+- **Node.js v22.18.0+**: Not optional. Not negotiable. The project will yell at you via `.nvmrc` and `package.json` engines. Use [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) like a civilized developer, or prepare for version mismatch hell.
+- **npm v10.9.0+**: Comes with Node, but double-check anyway. Life is full of disappointments, and outdated package managers are one of them.
+- **Git**: If you don't have Git installed but somehow ended up reading this on GitHub, I have questions. Many questions.
+- **Basic Terminal Skills**: Can you `cd` into a directory? Can you read error messages without panicking? Good enough.
 
 ### Quick Start
 
@@ -102,13 +121,6 @@ Because apparently "just clone and run" is too simple for modern development. He
 # Clone the masterpiece
 git clone https://github.com/erlandv/erland.me.git
 cd erland.me
-
-# Auto-switch to correct Node.js version (if using nvm/fnm)
-# Should happen automatically if your version manager is properly configured
-# Otherwise: nvm use or fnm use
-
-# Verify you're on the right Node.js version
-node --version  # Should output v22.18.0
 
 # Install dependencies (use ci for reproducible builds)
 npm ci
@@ -149,7 +161,7 @@ The project enforces strict Node.js version consistency across all environments:
 - **`package.json` engines**: Requires `node >= 22.18.0` and `npm >= 10.9.0`. Use `npm install --engine-strict` if you want npm to actually enforce this (it's opt-in because npm is too polite by default).
 - **GitHub Actions**: CI/CD workflows read from `.nvmrc` via `node-version-file` parameter. Single source of truth, zero version drift.
 
-Why this paranoia? Because "it works on my machine" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Version locks eliminate an entire category of bugs before they happen.
+Why this paranoia? Because "it works on my machine" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Also because I've been burned before. Multiple times. I don't want to talk about it..
 
 ### Environment Variables
 
@@ -157,7 +169,7 @@ Create `.env` if you want to override defaults (optional, everything has sane fa
 
 ```bash
 # Site configuration
-SITE_URL=http://localhost:4321  # Base URL (default: https://erland.me)
+SITE_URL=http://localhost:4321  # Base URL (or whatever universe you're in)
 
 # Build optimization
 MINIFY_ENGINE=esbuild            # 'esbuild' or 'terser' (default: esbuild)
@@ -176,12 +188,14 @@ The serious, enterprise-grade deployment pipeline for what is fundamentally a gl
 
 ### Prod Flow
 
-- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday). Runs in the `Production` environment with a generous 30-minute timeout (static sites build fast, but paranoia doesn't). Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit).
-- **Build**: Checks out code with `actions/checkout@v4`, sets up Node 20.18.x (because version pinning is how we avoid 3am debugging sessions), runs `npm ci` for deterministic installs (trust no one, not even npm), and executes `npm run build:clean` like it's launching a rocket.
-- **Release Metadata**: Writes `.release` with the commit SHA and `.built_at` with UTC timestamp. Also publishes `version.json` so you can verify exactly how stale my content is. Transparency is key.
-- **SSH & Upload**: Loads the SSH key with maximum paranoia, then `rsync` pushes `dist/` to `releases/<sha>` with enough flags (`-az --delete-delay --partial --mkpath`) to make it look like I'm deploying nuclear launch codes.
-- **Activate & Verify**: The grand atomic swap: `ln -sfn` points `current` to the new release SHA. Zero downtime. Probably. Then runs health checks: homepage must return `200`, key assets must exist, `version.json` must match `GITHUB_SHA`. Because trust, but verify. Mostly verify.
-- **Housekeeping**: Keeps only the last 5 releases (configurable via `$KEEP_RELEASES` for the truly paranoid). Also uploads `dist-<sha>` as an artifact for 7 days because I like having backups of my backups.
+- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday). Runs in the `Production` environment. Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit). Also enforces concurrency limits—only one production deploy at a time because chaos is not a deployment strategy.
+- **Build**: Checks out code with `actions/checkout@v4`, sets up Node from `.nvmrc`, runs `npm ci` for deterministic installs (trust no one, not even npm), and executes `npm run build:clean` like it's launching a rocket.
+- **Release Metadata**: Verifies `dist/` actually has files (because deploying an empty directory is embarrassing), then writes `.release` with the commit SHA and `.built_at` with UTC timestamp. Also publishes `version.json` so you can verify exactly how stale my content is. Transparency is key.
+- **SSH Setup**: Loads the SSH key with maximum paranoia using `webfactory/ssh-agent`, pre-populates `known_hosts` with extended 60-second timeout (because slow networks exist), then prepares remote `releases/` directory. Security theater with actual security.
+- **Upload**: Creates release directory at `releases/<sha>` on remote, then `rsync` pushes `dist/` with enough flags (`-az --delete-delay --partial --mkpath`) to make it look like I'm deploying nuclear launch codes. Excludes `.DS_Store` and source maps because bandwidth is precious.
+- **Activate & Verify**: The grand atomic swap: `ln -sfn` points `current` to the new release SHA. Zero downtime. Probably. Then runs HTTP health checks: homepage must return `200` with 5 retry attempts, `version.json` must match `GITHUB_SHA`. Because trust, but verify. Mostly verify.
+- **Optional Nginx Reload**: If `RELOAD_NGINX` is enabled, validates and reloads Nginx config. Because sometimes static file serving needs a gentle nudge.
+- **Housekeeping**: Keeps only the last 5 releases (configurable via `$KEEP_RELEASES` for the truly paranoid). Old releases get purged automatically. No artifacts uploaded—this workflow believes in living dangerously (or disk space conservation, same thing).
 
 The final, minimalist, over-engineered result lives here: **[https://erland.me](https://erland.me)**
 
@@ -191,11 +205,12 @@ The sandbox where I break things safely before they embarrass me in production. 
 
 ### Staging Flow
 
-- **Trigger & Context**: Activates on push to `staging` or `testing` branches. Path filters ensure it only runs when I change actual code, not when I'm just fixing typos (again).
-- **Build**: Standard choreography: checkout code, setup Node with npm cache (because I'm too impatient for fresh installs every time), `npm ci` for reproducibility, then `npm run build` to generate the static files.
-- **Verify Output**: Sanity check that `dist/` exists and isn't an empty directory. Fail fast if the build exploded. No point deploying nothing.
-- **Publish to Cloudflare**: `cloudflare/pages-action@v1` takes `./dist` and uploads it to Cloudflare's edge network. Uses secrets for `apiToken` and `accountId` because security theater is still theater, and I'm putting on a show.
-- **Summary**: Appends deployment info to `GITHUB_STEP_SUMMARY` so Future Me remembers what Past Me just deployed. Communication with yourself is important.
+- **Trigger & Context**: Activates on push to `staging` or `testing` branches, or manual trigger. Path filters ensure it only runs when actual code changes (config files, source, scripts), not when I'm just fixing typos in documentation. Also has concurrency control—auto-cancels previous deploys if you push again because impatience is a feature.
+- **Preflight Check**: Validates that all required Cloudflare secrets and vars exist before wasting time building. Fail fast philosophy in action—if `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, or `CLOUDFLARE_PROJECT_NAME` are missing, yell immediately.
+- **Build**: Standard choreography: checkout code, setup Node from `.nvmrc` with npm cache enabled (because CI speed matters), `npm ci` for reproducibility, then `npm run build:clean` for a fresh build. No stale artifacts allowed.
+- **Verify Output**: Sanity check that `dist/` exists and actually contains files. Fail fast if the build exploded. No point uploading an empty directory to Cloudflare and calling it a day.
+- **Publish to Cloudflare**: `cloudflare/pages-action@v1` takes `./dist` and uploads it to Cloudflare's edge network. Auto-generates preview URLs per branch. Uses secrets for `apiToken` and `accountId` because security theater is still theater, and I'm putting on a show.
+- **Summary**: Always runs (even if previous steps fail) to append deployment info to `GITHUB_STEP_SUMMARY`. Includes project name, branch, and commit SHA so Future Me remembers what Past Me just deployed. Communication with yourself is important.
 
 Go ahead, try to break it: **[https://staging.erland.pages.dev](https://staging.erland.pages.dev)**
 
@@ -205,37 +220,43 @@ The big red panic button for when I push something catastrophically broken and n
 
 ### Rollback Flow
 
-- **Trigger**: Manual activation only. Can provide a specific release SHA to jump to, or just roll back to the previous deploy if I'm too panicked to remember which version worked.
-- **SSH Setup**: Loads the read-only SSH key (can't login to shell, can only copy files—paranoia breeds security) and updates `known_hosts`. Security even in crisis.
-- **List Releases**: Shows the last 5 available versions currently on the server. So I know my escape routes before jumping.
-- **Execute Rollback**: Runs `astro-rollback` command on the remote server. Uses `--to <SHA>` if I provided one, or `--previous` if I'm having a bad day and can't think straight.
-- **Sanity Check**: Verifies that `index.html` exists in the now-active `current/` symlink. Because if the homepage is missing, we've got existential problems beyond rollback.
+- **Trigger**: Manual activation only via `workflow_dispatch`. Accepts optional `target_sha` input—provide a specific release SHA to jump to that version, or leave empty to automatically roll back to the previous deploy. For when you're either precise or panicking.
+- **SSH Setup**: Loads the SSH key via `webfactory/ssh-agent` with paranoid connection settings (60s timeout, 3 retry attempts, strict host key checking), then updates `known_hosts`. The key can execute remote commands but can't open interactive shells—automation only, no manual meddling.
+- **List Releases**: Shows available releases sorted by newest first, limited to top N versions (configured via `$KEEP_RELEASES`). So you know your escape routes before jumping. Output helps confirm the target SHA actually exists on the server.
+- **Execute Rollback**: Runs `sudo astro-rollback` on the remote server. Uses `--to <SHA>` if you provided a specific target, or `--previous` to jump to the last working version. The command handles the symlink swap and all the low-level details you don't want to think about during a crisis.
+- **Verify Success**: Waits 5 seconds for the rollback to settle (because instant gratification causes race conditions), then runs HTTP health checks. Verifies homepage returns `200` with retry mechanism (5 attempts). No SSH file checks—if the site loads, the rollback worked. Simple.
 
 ## Performance & SEO
 
 It's a static site, so it's already fast by default (cheat codes enabled), but I went completely overboard anyway because apparently having a fast site isn't enough—I need a _ridiculously_ fast site. Here's my checklist for making Google's crawlers feel special:
 
-- **Sitemap & URLs**: `@astrojs/sitemap` handles everything automatically. Every page gets its proper canonical URL. Robots appreciate good organization, and I'm nothing if not organized (this README notwithstanding).
-- **Robot Files**: Auto-generates `robots.txt`—the boring configuration files that search engines actually read and humans pretend to understand.
-- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up).
-- **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses.
-- **Social Tags**: Comprehensive OG and Twitter meta tags so when you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
-- **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know.
+- **Structured Data**: Comprehensive JSON-LD schemas for everything—BlogPosting, CreativeWork, CollectionPage, BreadcrumbList, WebSite with SearchAction. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
+- **Resource Hints**: Strategic `preconnect` for Google Fonts, GTM, and AdSense domains. `dns-prefetch` as fallback. Fonts get `preload` with `crossorigin`. Search index preloads conditionally only on pages that need it. No wasted prefetching—every hint has a purpose.
+- **Robot Files**: Auto-generates `robots.txt` with environment-aware rules. The boring configuration files that search engines actually read and humans pretend to understand.
+- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up). Agave Nerd Font loads in WOFF2 format because we're not savages.
+- **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses. Sharp handles WebP conversion and compression automatically.
+- **Social Tags**: Comprehensive OG and Twitter meta tags with proper image dimensions (1200×630), alt text, and all the metadata social networks demand. When you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
+- **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know. Manual chunk splitting keeps vendor code separate for better caching.
+- **HTML Compression**: Production builds minify HTML output. Because every byte counts when you're obsessing over Lighthouse scores.
+- **Pagination SEO**: Proper `rel="prev"` and `rel="next"` links for paginated content. Google knows how series work. Do you? (Probably not.)
 
 ## Security Notes
 
 It's literally just static HTML files. No database, no server-side code. The worst-case scenario is someone replaces my homepage with a meme. But we still implement proper security measures because doing things properly is a reflex at this point, not a choice:
 
-- **Deploy Key**: Strictly read-only SSH key, scoped exclusively to this project, cannot be used for shell login. It can copy files. That's it. That's the whole permission set.
-- **SSH Protocol**: Modern cipher suites, strict `known_hosts` validation, no deprecated algorithms. No lazy shortcuts like agent-forwarding or password auth. We're doing this properly or not at all.
-- **Server Setup**: Non-root user running the site, tight file permissions (safe `umask 022`), server only sees the currently active directory via symlink. Principle of least privilege taken seriously.
-- **CI Safety**: All secrets properly masked in GitHub Actions logs. No accidental credential leaks when the CI inevitably yells at me for breaking something.
+- **GitHub Actions Permissions**: Workflows locked down with principle of least privilege because I watched one too many "supply chain attack" conference talks. Production and rollback get `contents: read` only. Staging adds `deployments: write` for Cloudflare. No blanket write access unless a workflow is literally begging for it with a signed permission slip.
+- **Environment Protection**: Separate GitHub Environments (Production vs Staging) with isolated secrets because mixing environments is how you accidentally deploy staging credentials to prod and spend your Saturday crying. Production can be gated with required reviewers and wait timers if I ever get important enough to need that level of bureaucracy.
+- **Deploy Key**: SSH key scoped exclusively to deployment operations—can run rsync and rollback scripts but absolutely cannot open interactive shells. It's the digital equivalent of giving someone a key that only opens one specific drawer.
+- **SSH Hardening**: Paranoid SSH config with `BatchMode=yes` (no interactive prompts—automation doesn't have feelings), `StrictHostKeyChecking=yes` (MITM attacks are so 2010), `PreferredAuthentications=publickey` (passwords are for accounts you want compromised), IPv4-only, connection timeouts, and keepalive settings. Non-standard port because script kiddies are lazy and so am I.
+- **Passwordless Sudo (Scoped)**: Server configured with passwordless sudo for exactly two commands: `nginx -t` and `systemctl reload nginx`. No blanket sudo access. Every privilege grant is documented, justified, and minimal. I treat sudo permissions like Michelin stars—hard to get, easy to lose.
+- **Server Setup**: Non-root user running everything, tight file permissions (umask `022` because I'm not an anarchist), symlink isolation so the server only sees active release directory. Releases don't share data or talk to each other. It's like witness protection but for HTML files.
+- **CI Safety**: All secrets properly masked in GitHub Actions logs. No accidental credential leaks when CI inevitably explodes because I forgot a semicolon. Sensitive values never appear in build output, error messages, or my public shame when things break.
 
 ## License & Credits
 
 Even unnecessarily complex personal websites need proper licensing. Lawyers insist on it, apparently.
 
-- **License**: MIT License. Take it, fork it, modify it, do whatever you want. Full legal mumbo-jumbo in [LICENSE](./LICENSE).
+- **License**: MIT License. Copy it, steal it, claim you built it from scratch—I don't care. The only thing I ask is you don't sue me when it breaks. Full legalese in [LICENSE](./LICENSE).
 - **Credit**: This wasn't entirely my original idea. I aggressively modified an existing theme, added a bunch of features, removed others, over-engineered the deployment, and somehow made it both simpler _and_ more complicated.
   - Original theme: [Codefolio](https://github.com/danielunited/codefolio) by Daniel Alter. Solid foundation, big thanks!
   - The Culprit: Modified, "simplified," and over-engineered by Erland (that's me, hi)
