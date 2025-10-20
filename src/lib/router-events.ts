@@ -99,10 +99,6 @@ export function onRouteChange(listener: RouterEventListener): () => void {
     listeners.delete(listener);
   };
 
-  // Auto-cleanup on Astro navigation if not manually unsubscribed
-  // This prevents memory leaks when modules are reloaded during view transitions
-  document.addEventListener('astro:before-swap', unsubscribe, { once: true });
-
   return unsubscribe;
 }
 
