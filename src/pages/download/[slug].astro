@@ -65,7 +65,7 @@ const jsonLd = creativeWorkJsonLd({
     <header class='article-header'>
       {
         hero ? (
-          <HeroImage image={hero} alt={heroAlt} loading='eager' />
+          <HeroImage image={hero} alt={heroAlt} loading='eager' fetchpriority='high' />
         ) : (
           <div class='hero-image hero-placeholder' aria-hidden='true'>
             📦

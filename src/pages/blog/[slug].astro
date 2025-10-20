@@ -64,7 +64,7 @@ const jsonLd = blogPostingJsonLd({
   <article class:list={["content-container", "article-detail"]}>
     <header class="article-header">
       {hero && (
-        <HeroImage image={hero} alt={heroAlt} loading="eager" />
+        <HeroImage image={hero} alt={heroAlt} loading="eager" fetchpriority="high" />
       )}
       <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
       {(frontmatter.category || frontmatter.publishDate) && (
