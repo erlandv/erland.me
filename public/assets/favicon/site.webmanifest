@@ -1,19 +1,23 @@
 {
-  "name": "erland.me",
-  "short_name": "Erland",
+  "name": "Erland's Personal Web",
+  "short_name": "erland.me",
+  "description": "Personal website and blog by Erland Ramdhani",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1a1a1a",
+  "background_color": "#161616",
   "icons": [
     {
       "src": "/assets/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/assets/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ],
-  "theme_color": "#161616",
-  "background_color": "#161616",
-  "display": "standalone"
+  ]
 }
