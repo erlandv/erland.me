@@ -14,6 +14,13 @@ export type RouterEventListener = (event: RouterEvent) => void;
 const listeners = new Set<RouterEventListener>();
 let setupDone = false;
 
+// Cleanup listeners on page unload to prevent memory leaks
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => {
+    listeners.clear();
+  });
+}
+
 function normalizeUrl(input: string | URL | null | undefined): string {
   if (!input) return window.location.href;
   if (typeof input === 'string') return input;
@@ -87,9 +94,16 @@ export function onRouteChange(listener: RouterEventListener): () => void {
   if (typeof window === 'undefined') return () => undefined;
   listeners.add(listener);
   ensureSetup();
-  return () => {
+
+  const unsubscribe = () => {
     listeners.delete(listener);
   };
+
+  // Auto-cleanup on Astro navigation if not manually unsubscribed
+  // This prevents memory leaks when modules are reloaded during view transitions
+  document.addEventListener('astro:before-swap', unsubscribe, { once: true });
+
+  return unsubscribe;
 }
 
 export function triggerRouteChange(
@@ -104,4 +118,20 @@ export function triggerRouteChange(
     url: normalizeUrl(url),
     state,
   });
+}
+
+/**
+ * Clear all registered listeners
+ * Useful for cleanup in test environments or manual memory management
+ */
+export function clearAllListeners(): void {
+  listeners.clear();
+}
+
+/**
+ * Get the current number of registered listeners
+ * Useful for debugging potential memory leaks
+ */
+export function getListenerCount(): number {
+  return listeners.size;
 }
