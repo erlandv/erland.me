@@ -9,14 +9,19 @@ interface Props {
   loading?: "eager" | "lazy";
   sizes?: string;
   widths?: number[];
+  fetchpriority?: "high" | "low" | "auto";
 }
 
 const {
   image,
   alt,
   loading = "eager",
-  sizes = "(max-width: 640px) 60vw, 45vw",
-  widths = [220, 320, 480],
+  // Match CSS: mobile (60vw max 320px), desktop (45vw max 320px)
+  // Breakpoint at 640px where we switch from 60vw to 45vw
+  sizes = "(max-width: 640px) min(60vw, 320px), min(45vw, 320px)",
+  // Cover common densities: 1x (180-320px), 1.5x (270-480px), 2x (360-640px)
+  widths = [180, 220, 270, 320, 480, 640],
+  fetchpriority = "high", // Above-fold hero images should have high priority
 } = Astro.props as Props;
 ---
 
@@ -26,5 +31,6 @@ const {
   loading={loading}
   widths={widths}
   sizes={sizes}
+  fetchpriority={fetchpriority}
   class="hero-image"
 />

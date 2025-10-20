@@ -1,7 +1,6 @@
 ---
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
 import { GTM_ID, ADSENSE_CLIENT } from '@lib/env';
-// Global styles imported at layout level
 import { ClientRouter } from 'astro:transitions';
 
 interface HeaderProps {
@@ -64,14 +63,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{metaTags.title}</title>
+  <meta name="generator" content={Astro.generator} />
+  <meta name="theme-color" content="#1a1a1a" />
+  <meta name="msapplication-TileColor" content="#1a1a1a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content={metaTags.title} />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   
   <meta name="description" content={metaTags.description} />
   <meta name="author" content="Erland" />
-  <meta name="robots" content={isProductionSite() ? 'index, follow' : 'noindex, nofollow'} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#1a1a1a" />
-  <meta name="msapplication-TileColor" content="#1a1a1a" />
+  <meta name="robots" content={isProductionSite() ? 'index, follow, max-snippet:-1, max-image-preview:large' : 'noindex, nofollow'} />
   
   <meta property="og:title" content={metaTags.openGraph.title} />
   <meta property="og:description" content={metaTags.openGraph.description} />
@@ -98,6 +101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:creator" content={metaTags.twitter.creator} />
   <meta name="twitter:site" content={metaTags.twitter.site} />
   
+  <link rel="preconnect" href="https://asset.erland.me" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {enableGTM && (
