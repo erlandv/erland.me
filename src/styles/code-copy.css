@@ -87,5 +87,5 @@
 .code-copy-wrapper .code-copy-btn.copied {
   background: var(--success-green);
   border-color: var(--success-green);
-  color: var(--text-primary);
+  color: var(--success-text);
 }

@@ -24,7 +24,7 @@ html.image-lightbox--locked #scroll-top {
   top: 8px;
   right: 8px;
   background: var(--overlay-black-055);
-  color: var(--lightbox-close-text);
+  color: var(--icon-on-dark);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -106,7 +106,7 @@ html.image-lightbox--locked #scroll-top {
   position: absolute;
   top: 8px;
   background: var(--overlay-black-055);
-  color: var(--lightbox-close-text);
+  color: var(--icon-on-dark);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -134,7 +134,7 @@ html.image-lightbox--locked #scroll-top {
 .image-lightbox__close svg {
   width: 14px;
   height: 14px;
-  fill: var(--lightbox-close-text);
+  fill: var(--icon-on-dark);
 }
 
 @media (max-width: 640px) {
