@@ -147,5 +147,174 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   )}
   
   <ClientRouter fallback="swap" />
+  <script is:inline>
+    (function () {
+      const storageKey = 'theme-preference';
+      const media = window.matchMedia
+        ? window.matchMedia('(prefers-color-scheme: dark)')
+        : null;
+
+      const existing = window.__themeControl;
+      if (existing) {
+        const current = existing.getPreference();
+        if (typeof existing.setPreference === 'function') {
+          existing.setPreference(current);
+        }
+        if (typeof existing.syncDocument === 'function') {
+          existing.syncDocument(document);
+        }
+        return;
+      }
+
+      const subscribers = new Set();
+
+      const readStoredPreference = () => {
+        try {
+          const value = localStorage.getItem(storageKey);
+          return value === 'light' || value === 'dark' || value === 'auto'
+            ? value
+            : 'auto';
+        } catch {
+          return 'auto';
+        }
+      };
+
+      const writeStoredPreference = (value) => {
+        try {
+          localStorage.setItem(storageKey, value);
+        } catch {
+          /* noop */
+        }
+      };
+
+      let preference = readStoredPreference();
+
+      const resolveRoot = (target) => {
+        if (!target) return null;
+        const nodeType = target.nodeType;
+        if (nodeType === 1) return target;
+        if (nodeType === 9 && target.documentElement) {
+          return target.documentElement;
+        }
+        if (target.documentElement) {
+          return target.documentElement;
+        }
+        return null;
+      };
+
+      const resolvePreference = (pref) => {
+        if (pref === 'auto') {
+          if (!media) return 'dark';
+          return media.matches ? 'dark' : 'light';
+        }
+        return pref;
+      };
+
+      const syncDocument = (targetDoc = document) => {
+        const resolved = resolvePreference(preference);
+        const root = resolveRoot(targetDoc);
+        if (root) {
+          if (resolved === 'light') {
+            root.setAttribute('data-theme', 'light');
+          } else {
+            root.removeAttribute('data-theme');
+          }
+          root.setAttribute('data-theme-preference', preference);
+          root.setAttribute('data-theme-resolved', resolved);
+        }
+        return resolved;
+      };
+
+      const notifySubscribers = (resolved) => {
+        subscribers.forEach((callback) => {
+          try {
+            callback({ preference, resolved });
+          } catch (error) {
+            console.error('Theme subscriber error', error);
+          }
+        });
+      };
+
+      const applyPreference = (pref, persist) => {
+        preference = pref;
+        const resolved = syncDocument(document);
+
+        if (persist) {
+          writeStoredPreference(pref);
+        }
+
+        notifySubscribers(resolved);
+      };
+
+      const setPreference = (nextPref) => {
+        applyPreference(nextPref, true);
+      };
+
+      applyPreference(preference, false);
+
+      if (media) {
+        const handleChange = () => {
+          if (preference === 'auto') {
+            applyPreference(preference, false);
+          }
+        };
+        if (typeof media.addEventListener === 'function') {
+          media.addEventListener('change', handleChange);
+        } else if (typeof media.addListener === 'function') {
+          media.addListener(handleChange);
+        }
+      }
+
+      const syncIncomingDocument = (event) => {
+        const newDoc = event?.detail?.newDocument;
+        if (newDoc) {
+          syncDocument(newDoc);
+        }
+      };
+
+      const reapplyCurrent = () => {
+        syncDocument(document);
+      };
+
+      document.addEventListener('astro:before-swap', syncIncomingDocument);
+      document.addEventListener('astro:after-swap', reapplyCurrent);
+      document.addEventListener('astro:page-load', reapplyCurrent);
+
+      const api = {
+        getPreference: () => preference,
+        getResolved: () => resolvePreference(preference),
+        setPreference,
+        cyclePreference: () => {
+          const order = ['auto', 'light', 'dark'];
+          const index = order.indexOf(preference);
+          const next = order[(index + 1) % order.length];
+          setPreference(next);
+          return next;
+        },
+        subscribe: (callback) => {
+          if (typeof callback !== 'function') {
+            return () => {};
+          }
+          subscribers.add(callback);
+          callback({
+            preference,
+            resolved: resolvePreference(preference),
+          });
+          return () => {
+            subscribers.delete(callback);
+          };
+        },
+        syncDocument,
+      };
+
+      if (!window.__themeControl) {
+        Object.defineProperty(window, '__themeControl', {
+          value: api,
+          writable: false,
+          configurable: false,
+        });
+      }
+    })();
+  </script>
 
 </head>

@@ -1,0 +1,113 @@
+---
+import Icon from './Icon.astro';
+import styles from './ThemeToggle/ThemeToggle.module.css';
+---
+
+<div class:list={[styles.wrapper, 'theme-toggle']}>
+  <button
+    type='button'
+    class:list={[styles.button, 'theme-toggle__button']}
+    data-theme-toggle
+    data-mode='auto'
+    aria-label='Switch Theme'
+    title='Switch Theme'
+  >
+    <span
+      class:list={[
+        styles.icon,
+        styles.iconAuto,
+        'theme-toggle__icon',
+        'theme-toggle__icon--auto',
+      ]}
+      data-theme-icon='auto'
+      aria-hidden='true'
+    >
+      <Icon name='auto' class={styles.svg} />
+    </span>
+    <span
+      class:list={[
+        styles.icon,
+        styles.iconLight,
+        'theme-toggle__icon',
+        'theme-toggle__icon--light',
+      ]}
+      data-theme-icon='light'
+      aria-hidden='true'
+      hidden
+    >
+      <Icon name='sun' class={styles.svg} />
+    </span>
+    <span
+      class:list={[
+        styles.icon,
+        styles.iconDark,
+        'theme-toggle__icon',
+        'theme-toggle__icon--dark',
+      ]}
+      data-theme-icon='dark'
+      aria-hidden='true'
+      hidden
+    >
+      <Icon name='moon' class={styles.svg} />
+    </span>
+  </button>
+</div>
+<script is:inline>
+  (() => {
+    const script = document.currentScript;
+    const host = script?.previousElementSibling;
+    if (!host) return;
+    const button = host.querySelector('[data-theme-toggle]');
+    if (!button || button.dataset.initialized === 'true') return;
+    const control = window.__themeControl;
+    if (!control) return;
+
+    const stateLabels = {
+      auto: 'System Default',
+      light: 'Light Mode',
+      dark: 'Dark Mode',
+    };
+
+    /** @type {Record<'auto' | 'light' | 'dark', HTMLElement | null>} */
+    const iconMap = {
+      auto: button.querySelector('[data-theme-icon="auto"]'),
+      light: button.querySelector('[data-theme-icon="light"]'),
+      dark: button.querySelector('[data-theme-icon="dark"]'),
+    };
+
+    const updateIcons = active => {
+      ['auto', 'light', 'dark'].forEach(key => {
+        const icon = iconMap[key];
+        if (!icon) return;
+        icon.hidden = key !== active;
+      });
+    };
+
+    const update = ({ preference, resolved }) => {
+      button.setAttribute('data-mode', preference);
+      button.setAttribute('data-resolved', resolved);
+      const text = stateLabels[preference] || stateLabels.auto;
+      const title = `Switch Theme (currently ${text.toLowerCase()})`;
+      button.setAttribute('aria-label', title);
+      button.setAttribute('title', title);
+      updateIcons(preference);
+    };
+
+    const unsubscribe = control.subscribe(update);
+
+    button.dataset.initialized = 'true';
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      control.cyclePreference();
+    });
+
+    document.addEventListener(
+      'astro:after-swap',
+      () => {
+        button.dataset.initialized = '';
+        unsubscribe?.();
+      },
+      { once: true }
+    );
+  })();
+</script>

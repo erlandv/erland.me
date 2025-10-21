@@ -1,0 +1,89 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition:
+        background-color var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out),
+        color var(--dur-base) var(--ease-out),
+        transform var(--dur-base) var(--ease-out);
+}
+
+.button:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--border);
+}
+
+.button:active {
+    transform: translateY(1px);
+    background-color: var(--surface-active);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 2px;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+}
+
+.svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.icon[hidden] {
+    display: none !important;
+}
+
+:global(html.sidebar-collapsed-global) :global(.sidebar) .wrapper,
+:global(html[data-sidebar='collapsed']) :global(.sidebar) .wrapper,
+:global(body.sidebar-collapsed) :global(.sidebar) .wrapper,
+:global(.sidebar.sidebar-collapsed) .wrapper,
+:global(.sidebar:has(#sidebar-toggle:checked)) .wrapper {
+    justify-content: center;
+}
+
+:global(html.sidebar-collapsed-global) :global(.sidebar) .button,
+:global(html[data-sidebar='collapsed']) :global(.sidebar) .button,
+:global(body.sidebar-collapsed) :global(.sidebar) .button,
+:global(.sidebar.sidebar-collapsed) .button,
+:global(.sidebar:has(#sidebar-toggle:checked)) .button {
+    width: var(--sidebar-collapsed-item-width, 44px);
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        width: auto;
+        margin: 0 0 0 auto;
+        justify-content: flex-end;
+    }
+
+    .button {
+        width: 40px;
+        height: 40px;
+        background-color: var(--sidebar-nav-mobile-item-bg, var(--bg-secondary));
+    }
+}
