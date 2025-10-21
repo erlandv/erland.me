@@ -1,5 +1,5 @@
 .back-nav-container {
-  color: #fff;
+  color: var(--text-primary);
   letter-spacing: normal;
   text-transform: none;
   align-items: center;
@@ -13,8 +13,8 @@
 }
 
 .back-nav-button {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0);
+  color: var(--text-primary);
+  background-color: var(--overlay-black-000);
   border-radius: 8px;
   margin-top: -12px;
   padding: 12px 16px;
@@ -28,5 +28,5 @@
 .back-nav-button:hover {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  background-color: rgba(8, 8, 8, 0.24);
+  background-color: var(--overlay-black-024);
 }

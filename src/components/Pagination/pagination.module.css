@@ -28,7 +28,7 @@
 .active,
 .page-link:hover {
   background: rgba(var(--color-primary-rgb), 0.12);
-  color: #ffffff;
+  color: var(--text-primary);
   border-color: rgba(var(--color-primary-rgb), 0.6);
 }
 
@@ -55,12 +55,12 @@
   height: 45px;
   border: 1px solid rgba(var(--color-primary-rgb), 0.35);
   border-radius: var(--radius-md);
-  color: #cccccc;
+  color: var(--text-gray);
 }
 
 /* Hover styles */
 .page-link:hover {
-  background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  background: var(--surface-hover);
 }
 
 /* Responsive behavior: keep layout fluid */

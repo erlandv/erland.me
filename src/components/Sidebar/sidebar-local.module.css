@@ -108,7 +108,7 @@
   }
 
   :global(.navbar-icon) {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 32px;
     transition:
       transform 0.2s ease-in-out,

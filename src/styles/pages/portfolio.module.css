@@ -22,15 +22,15 @@
   min-width: 180px;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  background-color: rgba(53, 53, 53, 0.12);
-  border: 1px #000;
+  background-color: var(--overlay-012);
+  border: 1px solid var(--overlay-black-000);
   border-radius: 12px;
   justify-content: center;
   align-items: center;
   display: flex;
   box-shadow:
-    0 1px 1px rgba(255, 255, 255, 0.24),
-    0 -1px 1px rgba(255, 255, 255, 0.24);
+    0 1px 1px var(--overlay-024),
+    0 -1px 1px var(--overlay-024);
 }
 
 .projects-category-image-container.devops-img {
@@ -50,13 +50,13 @@
 }
 
 .single-projects-content a {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .projects-category-image {
   width: 82px;
   height: 82px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 @media screen and (max-width: 767px) {

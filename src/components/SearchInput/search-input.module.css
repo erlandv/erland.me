@@ -22,7 +22,7 @@
 
 .search-input-wrapper:focus-within {
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--overlay-010);
   box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.1);
 }
 
@@ -89,7 +89,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(28, 28, 28, 0.98);
+  background: var(--bg-overlay);
   border: 1px solid var(--overlay-015);
   border-radius: var(--radius-lg);
   margin-top: var(--space-2);
@@ -98,7 +98,7 @@
   z-index: 1000;
   backdrop-filter: blur(16px);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 8px 32px var(--shadow-040),
     0 0 0 1px var(--overlay-005);
 }
 
@@ -131,7 +131,7 @@
 :global(.search-result-item.is-active) {
   background: var(--overlay-008);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--shadow-015);
 }
 
 :global(.search-result-item:active) {
@@ -157,7 +157,7 @@
 }
 
 :global(.search-result-item:hover) :global(.search-result-title) {
-  color: #f0f0f0;
+  color: var(--lightbox-text);
 }
 
 :global(.search-result-excerpt) {
@@ -177,7 +177,7 @@
 }
 
 :global(.search-result-item:hover) :global(.search-result-excerpt) {
-  color: #e0e0e0;
+  color: var(--text-secondary);
 }
 
 :global(.search-result-meta) {
@@ -231,7 +231,7 @@
 }
 
 :global(.search-highlight) {
-  background: rgba(107, 182, 255, 0.25);
+  background: var(--overlay-024);
   color: inherit;
   padding: 0;
   border-radius: 2px;
@@ -245,7 +245,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(28, 28, 28, 0.95);
+  background: var(--bg-overlay);
   border: 1px solid var(--overlay-010);
   border-radius: 12px;
   margin-top: 8px;
@@ -309,7 +309,7 @@
 
   :global(.search-result-item:hover) {
     transform: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px var(--shadow-020);
   }
 
   :global(.search-result-title) {
@@ -365,7 +365,7 @@
 
   :global(.search-result-item:hover) {
     transform: none;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 4px var(--shadow-015);
   }
 
   :global(.search-result-title) {
@@ -397,7 +397,7 @@
 }
 
 .search-results::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--overlay-020);
   border-radius: 3px;
 }
 
@@ -410,7 +410,7 @@
   height: 64px;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--overlay-010);
   background: var(--overlay-005);
   flex-shrink: 0;
 }

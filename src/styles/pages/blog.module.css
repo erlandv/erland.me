@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: var(--space-3);
   align-items: center;
-  color: rgba(214, 214, 214, 0.9);
+  color: var(--hero-text-color);
   margin-top: 6px;
 }
 
