@@ -24,7 +24,7 @@ html.image-lightbox--locked #scroll-top {
   top: 8px;
   right: 8px;
   background: var(--overlay-black-055);
-  color: #fff;
+  color: var(--icon-on-dark);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -71,7 +71,11 @@ html.image-lightbox--locked #scroll-top {
 .image-lightbox__backdrop {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #1b1d1c, #0e1412);
+  background: linear-gradient(
+    90deg,
+    var(--lightbox-bg-start),
+    var(--lightbox-bg-end)
+  );
 }
 
 .image-lightbox__figure {
@@ -93,7 +97,7 @@ html.image-lightbox--locked #scroll-top {
 
 .image-lightbox__caption {
   margin-top: 0.5rem;
-  color: #f0f0f0;
+  color: var(--lightbox-text);
   font-size: 0.875rem;
   text-align: center;
 }
@@ -102,7 +106,7 @@ html.image-lightbox--locked #scroll-top {
   position: absolute;
   top: 8px;
   background: var(--overlay-black-055);
-  color: #fff;
+  color: var(--icon-on-dark);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -130,7 +134,7 @@ html.image-lightbox--locked #scroll-top {
 .image-lightbox__close svg {
   width: 14px;
   height: 14px;
-  fill: #fff;
+  fill: var(--icon-on-dark);
 }
 
 @media (max-width: 640px) {

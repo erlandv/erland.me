@@ -55,7 +55,7 @@ p {
 
 /* Rich text content */
 .prose {
-  color: #e0e0e0;
+  color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   line-height: 1.75;
 }
@@ -121,11 +121,11 @@ p {
 
 .prose table th,
 .prose table td {
-  border-top: 1px solid #2f2f2f;
-  border-right: 1px solid #2f2f2f;
+  border-top: 1px solid var(--divider-weak);
+  border-right: 1px solid var(--divider-weak);
   padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
   text-align: left;
-  color: #d6d6d6;
+  color: var(--text-secondary);
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -163,7 +163,7 @@ p {
 .prose table th:first-child,
 .prose table td:first-child {
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   padding-left: clamp(14px, 3vw, 20px);
   white-space: nowrap;
   width: 1%;
@@ -212,7 +212,7 @@ p {
 
   .prose table tr {
     margin-bottom: 1rem;
-    border: 1px solid #2f2f2f;
+    border: 1px solid var(--divider-weak);
     border-radius: 8px;
     overflow: hidden;
     background-color: var(--bg-secondary);
@@ -228,7 +228,7 @@ p {
     align-items: center;
     padding: 12px 14px;
     border: none;
-    border-bottom: 1px solid #2f2f2f;
+    border-bottom: 1px solid var(--divider-weak);
     white-space: normal;
     text-align: right;
     min-height: 44px;
@@ -306,15 +306,15 @@ p {
     background-color 0.2s ease,
     border-color 0.2s ease;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--overlay-005);
   border: 1px solid var(--overlay-005);
 }
 
 .prose figure:hover figcaption,
 .prose .prose-figure:hover figcaption {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--overlay-008);
+  border-color: var(--overlay-010);
 }
 
 .prose blockquote,
@@ -323,7 +323,7 @@ p {
   padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.25rem);
   border-left: 3px solid var(--border);
   background: var(--overlay-005);
-  color: #d5d5d5;
+  color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   line-height: 1.7;
   font-style: italic;
@@ -437,17 +437,17 @@ p {
 }
 
 .prose pre::-webkit-scrollbar-track {
-  background: #21262d;
+  background: var(--scrollbar-track);
   border-radius: 4px;
 }
 
 .prose pre::-webkit-scrollbar-thumb {
-  background: #6e7681;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 .prose pre::-webkit-scrollbar-thumb:hover {
-  background: var(--text-code-muted);
+  background: var(--scrollbar-thumb-hover);
 }
 
 a:focus-visible,
@@ -459,13 +459,13 @@ button:focus-visible,
 }
 
 ::selection {
-  background-color: rgba(138, 180, 255, 0.2);
+  background-color: var(--overlay-020);
   color: var(--text-primary);
 }
 
 code {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #e8e8e8;
+  background-color: var(--overlay-010);
+  color: var(--text-secondary);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.9em;
@@ -486,7 +486,7 @@ code {
 /* Navigation scaffold */
 .w-nav {
   z-index: 1000;
-  background: #ddd;
+  background: var(--bg-secondary);
   position: relative;
 }
 
@@ -503,7 +503,7 @@ code {
 
 .w-nav-brand {
   float: left;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
   position: relative;
 }
@@ -522,8 +522,8 @@ code {
 .w-nav-button {
   float: right;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: var(--overlay-black-000);
+  -tap-highlight-color: var(--overlay-black-000);
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;

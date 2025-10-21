@@ -28,12 +28,12 @@
 
 :global(.cat-filter-btn:hover) {
   background: rgba(var(--color-primary-rgb), 0.12);
-  color: #ffffff;
+  color: var(--text-primary);
   border-color: rgba(var(--color-primary-rgb), 0.6);
 }
 
 :global(.cat-filter-btn.is-active) {
   background: rgba(var(--color-primary-rgb), 0.18);
-  color: #ffffff;
+  color: var(--text-primary);
   border-color: rgba(var(--color-primary-rgb), 0.6);
 }

@@ -11,7 +11,7 @@
 }
 
 .toast {
-  background: #21262d;
+  background: var(--bg-code-2);
   color: var(--text-primary);
   border: 1px solid var(--color-primary);
   box-shadow:
