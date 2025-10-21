@@ -64,7 +64,7 @@ section {
 }
 
 a {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--overlay-black-000);
   color: var(--color-primary);
   text-decoration: none;
   transition: color 0.15s ease;

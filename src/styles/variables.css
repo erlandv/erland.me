@@ -1,33 +1,104 @@
 :root {
-  --border: rgba(255, 255, 255, 0.12);
-  /* Brand blues */
+  /* ========================================
+     BRAND COLORS (theme-independent)
+     ======================================== */
   --color-primary: #428dff;
   --color-primary-rgb: 66, 141, 255;
   --color-secondary: #33e1ff;
   --color-secondary-rgb: 51, 225, 255;
-  --text-accent: rgba(var(--color-primary-rgb), 0.85);
-  /* Theme neutrals */
+  --success-green: #238636;
+  --success-green-rgb: 35, 134, 54;
+
+  /* ========================================
+     SPACING SCALE
+     ======================================== */
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  /* ========================================
+     Z-INDEX LAYERS
+     ======================================== */
+  --z-nav: 1301;
+  --z-overlay: 1200;
+  --z-modal: 1000;
+  --z-toast: 2000;
+  --z-fab: 1600;
+
+  /* ========================================
+     MOTION TOKENS
+     ======================================== */
+  --dur-fast: 120ms;
+  --dur-base: 160ms;
+  --dur-medium: 220ms;
+  --dur-slow: 300ms;
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+     THEME-AWARE SEMANTIC TOKENS (DARK MODE)
+     ======================================== */
+
+  /* Text colors */
   --text-primary: #ffffff;
   --text-secondary: #d0d0d0;
   --text-muted: #a0a0a0;
   --text-subtle: #b0b0b0;
   --text-gray: #c0c0c0;
+  --text-accent: rgba(var(--color-primary-rgb), 0.85);
+
+  /* Background colors */
   --bg-primary: #161616;
   --bg-secondary: #1f1f1f;
   --bg-tertiary: #232323;
+  --bg-overlay: #1c1c1c;
+  --bg-gradient: linear-gradient(90deg, #1b1d1c, #0e1412);
+
+  /* Surface states */
+  --surface-hover: #252525;
+  --surface-active: #2b2b2b;
+
+  /* Border colors */
+  --border: rgba(255, 255, 255, 0.12);
   --border-color: #353535;
-  /* Code block palette */
+  --divider-weak: #2f2f2f;
+
+  /* Code block palette (dark theme optimized) */
   --bg-code: #0d1117;
   --bg-code-2: #21262d;
   --bg-code-hover: #30363d;
   --border-code: #30363d;
   --text-code: #e6edf3;
   --text-code-muted: #8b949e;
-  /* Surfaces and overlays */
-  --bg-overlay: #1c1c1c;
-  --surface-hover: #252525;
-  --surface-active: #2b2b2b;
-  --divider-weak: #2f2f2f;
+  --scrollbar-track: #21262d;
+  --scrollbar-thumb: #6e7681;
+  --scrollbar-thumb-hover: #8b949e;
+
+  /* Hero/feature element colors */
+  --hero-gradient-start: rgba(79, 148, 255, 0.16);
+  --hero-gradient-end: rgba(79, 148, 255, 0);
+  --hero-text-color: rgba(214, 214, 214, 0.9);
+
+  /* Lightbox colors */
+  --lightbox-bg-start: #1b1d1c;
+  --lightbox-bg-end: #0e1412;
+  --lightbox-text: #f0f0f0;
+  --lightbox-close-text: #ffffff;
+
   /* Translucent overlays (white-on-dark) */
   --overlay-005: rgba(255, 255, 255, 0.05);
   --overlay-008: rgba(255, 255, 255, 0.08);
@@ -39,6 +110,7 @@
   --overlay-024: rgba(255, 255, 255, 0.24);
   --overlay-030: rgba(255, 255, 255, 0.3);
   --overlay-035: rgba(255, 255, 255, 0.35);
+
   /* Dark (black) overlays and shadows */
   --shadow-006: rgba(0, 0, 0, 0.06);
   --shadow-010: rgba(0, 0, 0, 0.1);
@@ -53,34 +125,82 @@
   --overlay-black-004: rgba(0, 0, 0, 0.04);
   --overlay-black-055: rgba(0, 0, 0, 0.55);
   --overlay-black-075: rgba(0, 0, 0, 0.75);
-  /* Accent success */
-  --success-green: #238636;
-  /* Spacing scale */
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-pill: 999px;
-  /* Z-index layers */
-  --z-nav: 1301;
-  --z-overlay: 1200;
-  --z-modal: 1000;
-  --z-toast: 2000;
-  --z-fab: 1600;
-  /* Motion tokens */
-  --dur-fast: 120ms;
-  --dur-base: 160ms;
-  --dur-medium: 220ms;
-  --dur-slow: 300ms;
-  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   LIGHT MODE OVERRIDES
+   ======================================== */
+[data-theme='light'] {
+  /* Text colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #404040;
+  --text-muted: #666666;
+  --text-subtle: #757575;
+  --text-gray: #606060;
+  --text-accent: rgba(var(--color-primary-rgb), 0.9);
+
+  /* Background colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #eeeeee;
+  --bg-overlay: #fafafa;
+  --bg-gradient: linear-gradient(90deg, #f7faf9, #eef6f3);
+
+  /* Surface states */
+  --surface-hover: #e8e8e8;
+  --surface-active: #e0e0e0;
+
+  /* Border colors */
+  --border: rgba(0, 0, 0, 0.12);
+  --border-color: #d0d0d0;
+  --divider-weak: #e5e5e5;
+
+  /* Code block palette (light theme) */
+  --bg-code: #f6f8fa;
+  --bg-code-2: #eaeef2;
+  --bg-code-hover: #dfe3e8;
+  --border-code: #d0d7de;
+  --text-code: #24292f;
+  --text-code-muted: #57606a;
+  --scrollbar-track: #eaeef2;
+  --scrollbar-thumb: #afb8c1;
+  --scrollbar-thumb-hover: #8c959f;
+
+  /* Hero/feature element colors */
+  --hero-gradient-start: rgba(66, 141, 255, 0.12);
+  --hero-gradient-end: rgba(66, 141, 255, 0);
+  --hero-text-color: rgba(64, 64, 64, 0.9);
+
+  /* Lightbox colors */
+  --lightbox-bg-start: #f5f5f5;
+  --lightbox-bg-end: #e8e8e8;
+  --lightbox-text: #1a1a1a;
+  --lightbox-close-text: #1a1a1a;
+
+  /* Translucent overlays (black-on-light) */
+  --overlay-005: rgba(0, 0, 0, 0.05);
+  --overlay-008: rgba(0, 0, 0, 0.08);
+  --overlay-010: rgba(0, 0, 0, 0.1);
+  --overlay-012: rgba(0, 0, 0, 0.12);
+  --overlay-015: rgba(0, 0, 0, 0.15);
+  --overlay-018: rgba(0, 0, 0, 0.18);
+  --overlay-020: rgba(0, 0, 0, 0.2);
+  --overlay-024: rgba(0, 0, 0, 0.24);
+  --overlay-030: rgba(0, 0, 0, 0.3);
+  --overlay-035: rgba(0, 0, 0, 0.35);
+
+  /* Light (white) overlays and shadows */
+  --shadow-006: rgba(0, 0, 0, 0.06);
+  --shadow-010: rgba(0, 0, 0, 0.1);
+  --shadow-015: rgba(0, 0, 0, 0.15);
+  --shadow-020: rgba(0, 0, 0, 0.2);
+  --shadow-022: rgba(0, 0, 0, 0.22);
+  --shadow-024: rgba(0, 0, 0, 0.24);
+  --shadow-025: rgba(0, 0, 0, 0.25);
+  --shadow-030: rgba(0, 0, 0, 0.3);
+  --shadow-040: rgba(0, 0, 0, 0.4);
+  --overlay-black-000: rgba(0, 0, 0, 0);
+  --overlay-black-004: rgba(0, 0, 0, 0.04);
+  --overlay-black-055: rgba(0, 0, 0, 0.55);
+  --overlay-black-075: rgba(0, 0, 0, 0.75);
 }
