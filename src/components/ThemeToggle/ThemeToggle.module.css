@@ -58,6 +58,19 @@
     display: none !important;
 }
 
+/* Visually hidden but accessible to screen readers */
+:global(.visually-hidden) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 :global(html.sidebar-collapsed-global) :global(.sidebar) .wrapper,
 :global(html[data-sidebar='collapsed']) :global(.sidebar) .wrapper,
 :global(body.sidebar-collapsed) :global(.sidebar) .wrapper,

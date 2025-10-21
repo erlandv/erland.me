@@ -9,7 +9,10 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
     class:list={[styles.button, 'theme-toggle__button']}
     data-theme-toggle
     data-mode='auto'
+    role='switch'
+    aria-checked='false'
     aria-label='Switch Theme'
+    aria-describedby='theme-status'
     title='Switch Theme'
   >
     <span
@@ -51,6 +54,14 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
       <Icon name='moon' class={styles.svg} />
     </span>
   </button>
+  <!-- Live region for screen reader announcements -->
+  <div
+    id='theme-status'
+    class='visually-hidden'
+    role='status'
+    aria-live='polite'
+    aria-atomic='true'
+  ></div>
 </div>
 <script is:inline>
   (() => {
@@ -100,14 +111,32 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
         });
       };
 
-      const update = ({ preference, resolved }) => {
+      const update = ({ preference, resolved }, announce = false) => {
         newButton.setAttribute('data-mode', preference);
         newButton.setAttribute('data-resolved', resolved);
+        
         const text = stateLabels[preference] || stateLabels.auto;
         const title = `Switch Theme (currently ${text.toLowerCase()})`;
+        
+        // Update ARIA attributes
         newButton.setAttribute('aria-label', title);
+        newButton.setAttribute('aria-checked', String(preference !== 'auto'));
         newButton.setAttribute('title', title);
+        
+        // Update icons
         updateIcons(preference);
+        
+        // Announce to screen readers on user action
+        if (announce) {
+          const statusEl = document.getElementById('theme-status');
+          if (statusEl) {
+            statusEl.textContent = `Theme changed to ${text}`;
+            // Clear after announcement to avoid repetition
+            setTimeout(() => {
+              statusEl.textContent = '';
+            }, 1000);
+          }
+        }
       };
 
       // Subscribe and store unsubscribe function
@@ -117,7 +146,21 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
       // Add fresh click listener
       newButton.addEventListener('click', event => {
         event.preventDefault();
-        control.cyclePreference();
+        const nextPref = control.cyclePreference();
+        // Manually trigger update with announce flag after user action
+        const resolved = control.getResolved();
+        update({ preference: nextPref, resolved }, true);
+      });
+      
+      // Add keyboard support for accessibility
+      newButton.addEventListener('keydown', event => {
+        // Space or Enter key
+        if (event.key === ' ' || event.key === 'Enter') {
+          event.preventDefault();
+          const nextPref = control.cyclePreference();
+          const resolved = control.getResolved();
+          update({ preference: nextPref, resolved }, true);
+        }
       });
     };
 
