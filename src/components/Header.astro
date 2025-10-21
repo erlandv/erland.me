@@ -147,25 +147,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   )}
   
   <ClientRouter fallback="swap" />
+  <!-- Phase 1: Ultra-minimal FOUC prevention (blocking, runs before any paint) -->
+  <script is:inline>
+    !function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"auto";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r))}catch(e){}}();
+  </script>
+  <!-- Phase 2: Full theme control system (non-blocking, runs after initial paint) -->
   <script is:inline>
     (function () {
-      const storageKey = 'theme-preference';
-      const media = window.matchMedia
-        ? window.matchMedia('(prefers-color-scheme: dark)')
-        : null;
-
-      const existing = window.__themeControl;
-      if (existing) {
-        const current = existing.getPreference();
-        if (typeof existing.setPreference === 'function') {
-          existing.setPreference(current);
-        }
-        if (typeof existing.syncDocument === 'function') {
-          existing.syncDocument(document);
-        }
+      // Skip if already initialized (view transitions)
+      if (window.__themeControl) {
+        window.__themeControl.syncDocument(document);
         return;
       }
 
+      const storageKey = 'theme-preference';
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
       const subscribers = new Set();
 
       const readStoredPreference = () => {
@@ -182,37 +178,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const writeStoredPreference = (value) => {
         try {
           localStorage.setItem(storageKey, value);
-        } catch {
-          /* noop */
+        } catch (err) {
+          console.warn('Failed to save theme preference:', err);
         }
       };
 
       let preference = readStoredPreference();
 
-      const resolveRoot = (target) => {
-        if (!target) return null;
-        const nodeType = target.nodeType;
-        if (nodeType === 1) return target;
-        if (nodeType === 9 && target.documentElement) {
-          return target.documentElement;
-        }
-        if (target.documentElement) {
-          return target.documentElement;
-        }
-        return null;
-      };
-
       const resolvePreference = (pref) => {
-        if (pref === 'auto') {
-          if (!media) return 'dark';
-          return media.matches ? 'dark' : 'light';
-        }
-        return pref;
+        return pref === 'auto' ? (media.matches ? 'dark' : 'light') : pref;
       };
 
       const syncDocument = (targetDoc = document) => {
         const resolved = resolvePreference(preference);
-        const root = resolveRoot(targetDoc);
+        const root = targetDoc.documentElement;
+        
         if (root) {
           if (resolved === 'light') {
             root.setAttribute('data-theme', 'light');
@@ -222,6 +202,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           root.setAttribute('data-theme-preference', preference);
           root.setAttribute('data-theme-resolved', resolved);
         }
+        
         return resolved;
       };
 
@@ -230,7 +211,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           try {
             callback({ preference, resolved });
           } catch (error) {
-            console.error('Theme subscriber error', error);
+            console.error('Theme subscriber error:', error);
           }
         });
       };
@@ -250,21 +231,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         applyPreference(nextPref, true);
       };
 
-      applyPreference(preference, false);
-
-      if (media) {
-        const handleChange = () => {
-          if (preference === 'auto') {
-            applyPreference(preference, false);
-          }
-        };
-        if (typeof media.addEventListener === 'function') {
-          media.addEventListener('change', handleChange);
-        } else if (typeof media.addListener === 'function') {
-          media.addListener(handleChange);
+      // System theme change listener
+      const handleMediaChange = () => {
+        if (preference === 'auto') {
+          applyPreference(preference, false);
         }
-      }
+      };
+      
+      media.addEventListener('change', handleMediaChange);
 
+      // View transitions support
       const syncIncomingDocument = (event) => {
         const newDoc = event?.detail?.newDocument;
         if (newDoc) {
@@ -280,6 +256,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       document.addEventListener('astro:after-swap', reapplyCurrent);
       document.addEventListener('astro:page-load', reapplyCurrent);
 
+      // Public API
       const api = {
         getPreference: () => preference,
         getResolved: () => resolvePreference(preference),
@@ -296,6 +273,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             return () => {};
           }
           subscribers.add(callback);
+          // Immediately notify with current state
           callback({
             preference,
             resolved: resolvePreference(preference),
@@ -307,13 +285,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         syncDocument,
       };
 
-      if (!window.__themeControl) {
-        Object.defineProperty(window, '__themeControl', {
-          value: api,
-          writable: false,
-          configurable: false,
-        });
-      }
+      Object.defineProperty(window, '__themeControl', {
+        value: api,
+        writable: false,
+        configurable: false,
+      });
     })();
   </script>
 
