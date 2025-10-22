@@ -109,6 +109,9 @@ const {
           lightbox:
             has('.prose img:not(.hero-image)') ||
             has('.content-image-grid img:not(.hero-image)'),
+          table: has('.prose table'),
+          // Theme toggle is always present, so always true
+          themeToggle: true,
         });
 
         const runImport = () => {
@@ -118,12 +121,14 @@ const {
         };
 
         const s = check();
-        if (s.share || s.copy || s.lightbox) {
+        // Always import because theme toggle is always present
+        if (s.share || s.copy || s.lightbox || s.table || s.themeToggle) {
           runImport();
         } else {
+          // This branch should never be reached now
           const reGate = () => {
             const q = check();
-            if (q.share || q.copy || q.lightbox) {
+            if (q.share || q.copy || q.lightbox || q.table || q.themeToggle) {
               document.removeEventListener('astro:page-load', reGate);
               document.removeEventListener('astro:after-swap', reGate);
               import('../lib/ui-init')

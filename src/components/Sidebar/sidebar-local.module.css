@@ -68,9 +68,13 @@
   perspective: 800px;
 }
 
-:is(html.sidebar-collapsed-global,
-  html[data-sidebar='collapsed'],
-  body.sidebar-collapsed) :global(.sidebar) :global(.profile-header),
+:is(
+    html.sidebar-collapsed-global,
+    html[data-sidebar='collapsed'],
+    body.sidebar-collapsed
+  )
+  :global(.sidebar)
+  :global(.profile-header),
 :global(.sidebar.sidebar-collapsed) :global(.profile-header),
 :global(.sidebar:has(#sidebar-toggle:checked)) :global(.profile-header) {
   justify-content: center;
@@ -154,10 +158,17 @@
   }
 
   :global(.sidebar-toggle-button),
-  :global(.sidebar:has(#sidebar-toggle:checked)) :global(.sidebar-toggle-button),
-  :global(html.sidebar-collapsed-global) :global(.sidebar) :global(.sidebar-toggle-button),
-  :global(html[data-sidebar='collapsed']) :global(.sidebar) :global(.sidebar-toggle-button),
-  :global(body.sidebar-collapsed) :global(.sidebar) :global(.sidebar-toggle-button) {
+  :global(.sidebar:has(#sidebar-toggle:checked))
+    :global(.sidebar-toggle-button),
+  :global(html.sidebar-collapsed-global)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(html[data-sidebar='collapsed'])
+    :global(.sidebar)
+    :global(.sidebar-toggle-button),
+  :global(body.sidebar-collapsed)
+    :global(.sidebar)
+    :global(.sidebar-toggle-button) {
     display: none !important;
   }
 
@@ -200,7 +211,7 @@
     will-change: transform, opacity;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
@@ -211,14 +222,16 @@
     align-items: stretch !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-text),
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.profile-text) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-text),
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.profile-text) {
     opacity: 1 !important;
     max-width: 100% !important;
     pointer-events: auto !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.nav-link-container) {
+  :global(.nav-toggle:checked)
+    ~ :global(.w-nav-menu)
+    :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
     align-items: center !important;
@@ -228,7 +241,7 @@
     margin-right: 0 !important;
   }
 
-  :global(.nav-toggle:checked)~ :global(.w-nav-menu) :global(.socials--menu) {
+  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.socials--menu) {
     display: flex !important;
     position: static;
     justify-content: flex-start;
@@ -239,12 +252,16 @@
     background-color: var(--bg-overlay);
   }
 
-  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--menu) {
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--menu) {
     opacity: 0;
     --icon-xform: rotate(90deg) scale(0.9);
   }
 
-  :global(.nav-toggle:checked)~ :global(.navbar-icon-button) :global(.icon-switch--close) {
+  :global(.nav-toggle:checked)
+    ~ :global(.navbar-icon-button)
+    :global(.icon-switch--close) {
     opacity: 1;
     --icon-xform: rotate(0deg) scale(1);
   }
