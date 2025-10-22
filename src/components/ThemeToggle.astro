@@ -3,10 +3,7 @@ import Icon from './Icon.astro';
 import styles from './ThemeToggle/ThemeToggle.module.css';
 ---
 
-<div 
-  class:list={[styles.wrapper, 'theme-toggle']} 
-  data-placement='floating'
->
+<div class:list={[styles.wrapper, 'theme-toggle']}>
   <button
     type='button'
     class:list={[styles.trigger, 'theme-toggle__trigger']}

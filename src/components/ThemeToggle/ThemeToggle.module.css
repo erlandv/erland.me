@@ -1,4 +1,13 @@
+/* Base wrapper layout */
 .wrapper {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+/* Body-level toggle: fixed to top-right on desktop */
+:global(.theme-toggle-container--body .theme-toggle) {
   position: fixed;
   top: 16px;
   right: 16px;
@@ -7,12 +16,38 @@
   justify-content: flex-end;
 }
 
-.wrapper[data-placement='sidebar'] {
-  position: relative;
-  top: auto;
-  right: auto;
-  margin-left: auto;
-  margin-right: 12px;
+/* Desktop (>1024px): Hide sidebar-level toggle */
+@media (min-width: 1025px) {
+  :global(.theme-toggle-container--sidebar .theme-toggle) {
+    display: none;
+  }
+}
+
+/* Mobile (≤1024px): Hide body-level fixed toggle, show sidebar toggle */
+@media (max-width: 1024px) {
+  /* Hide body-level fixed toggle */
+  :global(.theme-toggle-container--body .theme-toggle) {
+    display: none;
+  }
+
+  /* Show and reset sidebar-level toggle positioning */
+  :global(.theme-toggle-container--sidebar .theme-toggle) {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  :global(.theme-toggle-container--sidebar .theme-toggle__trigger) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .trigger {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 /* Hide theme toggle when lightbox is active */
@@ -197,31 +232,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-@media (max-width: 1024px) {
-  .wrapper[data-placement='floating'] {
-    top: 34px;
-    right: 74px;
-  }
-
-  .wrapper[data-placement='sidebar'] {
-    margin-right: 12px;
-  }
-
-  .trigger {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 767px) {
-  .wrapper[data-placement='floating'] {
-    top: 24px;
-    right: 70px;
-  }
-
-  .wrapper[data-placement='sidebar'] {
-    margin-right: 8px;
-  }
 }

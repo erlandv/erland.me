@@ -1,6 +1,7 @@
 ---
 const { selectedItem } = Astro.props;
 import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import './Sidebar/sidebar-global.css';
 import socialsStyles from './Sidebar/sidebar-socials.module.css';
 import navStyles from './Sidebar/sidebar-nav.module.css';
@@ -34,6 +35,28 @@ import { sidebarSocialLinks as socials } from './Sidebar/social-links';
           </div>
         </div>
       </div>
+    </div>
+
+    <div class='mobile-header-controls'>
+      <div class='theme-toggle-container theme-toggle-container--sidebar'>
+        <ThemeToggle />
+      </div>
+      <label
+        for='nav-toggle'
+        class='navbar-icon-button w-nav-button'
+        style='-webkit-user-select: text;'
+        aria-label='Toggle menu'
+        aria-controls='site-nav'
+        aria-expanded='false'
+        tabindex='0'
+      >
+        <span class='icon-switch icon-switch--menu'
+          ><Icon name='menu' class='navbar-icon' /></span
+        >
+        <span class='icon-switch icon-switch--close'
+          ><Icon name='close' class='navbar-icon' /></span
+        >
+      </label>
     </div>
 
     <input
@@ -190,22 +213,5 @@ import { sidebarSocialLinks as socials } from './Sidebar/social-links';
         ))
       }
     </div>
-
-    <label
-      for='nav-toggle'
-      class='navbar-icon-button w-nav-button'
-      style='-webkit-user-select: text;'
-      aria-label='Toggle menu'
-      aria-controls='site-nav'
-      aria-expanded='false'
-      tabindex='0'
-    >
-      <span class='icon-switch icon-switch--menu'
-        ><Icon name='menu' class='navbar-icon' /></span
-      >
-      <span class='icon-switch icon-switch--close'
-        ><Icon name='close' class='navbar-icon' /></span
-      >
-    </label>
   </div>
 </aside>

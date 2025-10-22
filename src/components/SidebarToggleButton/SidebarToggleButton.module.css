@@ -10,7 +10,6 @@
     transform var(--dur-base) var(--ease-standard);
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
 .divider {

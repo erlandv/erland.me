@@ -80,8 +80,10 @@ const {
     {import.meta.env.PROD && isProductionSite() && GTM_ID && (
       <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     )}
-    <!-- Theme Toggle - Fixed position at top-right -->
-    <ThemeToggle />
+    
+    <div class="theme-toggle-container theme-toggle-container--body">
+      <ThemeToggle />
+    </div>
     
     <div class="content">
       {showSidebar && <Sidebar selectedItem={selectedItem} />}

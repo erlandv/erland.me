@@ -30,146 +30,14 @@ const stateLabels: Record<ThemePreference, string> = {
   dark: 'Dark',
 };
 
-const MOBILE_MEDIA_QUERY = '(max-width: 1024px)';
-
-// Persistent state across re-initializations
-let wrapperElement: HTMLElement | null = null;
-let wrapperParent: HTMLElement | null = null;
-let wrapperNextSibling: Element | null = null;
-let mediaQueryList: MediaQueryList | null = null;
-let mediaListenerAttached = false;
-
 // Per-initialization state (reset on cleanup)
 let isOpen = false;
 let abortController: AbortController | null = null;
-let unsubscribe: (() => void) | null = null;
+let unsubscriptions: Array<() => void> = []; // Changed: Store multiple unsubscribe functions
 let resizeTimeout: number | null = null;
 
 // Pre-cached icon elements (populated once)
 const iconCache = new Map<ThemePreference, SVGElement>();
-
-/**
- * Ensure wrapper element reference is valid and connected
- */
-const ensureWrapperElement = (): boolean => {
-  // If element exists and is still in the DOM, we're good
-  if (wrapperElement?.isConnected) {
-    return true;
-  }
-
-  // Element not connected - need to find it in new DOM (after view transition)
-  const found = document.querySelector<HTMLElement>('.theme-toggle');
-  if (!found) {
-    return false;
-  }
-
-  wrapperElement = found;
-
-  // Always update parent references when re-finding element
-  // (DOM may have changed due to view transitions)
-  wrapperParent = found.parentElement;
-  wrapperNextSibling = found.nextElementSibling;
-
-  if (!wrapperElement.dataset.placement) {
-    wrapperElement.dataset.placement = 'floating';
-  }
-
-  return true;
-};
-
-/**
- * Restore wrapper to original floating position
- */
-const restoreWrapperPlacement = (): void => {
-  if (!ensureWrapperElement() || !wrapperParent || !wrapperElement) {
-    return;
-  }
-
-  if (
-    wrapperParent.contains(wrapperElement) &&
-    wrapperElement.dataset.placement === 'floating'
-  ) {
-    return;
-  }
-
-  wrapperParent.insertBefore(wrapperElement, wrapperNextSibling);
-  wrapperElement.dataset.placement = 'floating';
-};
-
-/**
- * Move wrapper into sidebar navigation (mobile)
- */
-const placeWrapperInSidebar = (): boolean => {
-  if (!ensureWrapperElement() || !wrapperElement) {
-    return false;
-  }
-
-  const navContent = document.querySelector<HTMLElement>(
-    '.sidebar .nav-content'
-  );
-  if (!navContent) {
-    restoreWrapperPlacement();
-    return false;
-  }
-
-  const menuToggle = navContent.querySelector('.navbar-icon-button');
-  if (menuToggle) {
-    if (menuToggle.previousElementSibling !== wrapperElement) {
-      navContent.insertBefore(wrapperElement, menuToggle);
-    }
-  } else if (!navContent.contains(wrapperElement)) {
-    navContent.appendChild(wrapperElement);
-  }
-
-  wrapperElement.dataset.placement = 'sidebar';
-  return true;
-};
-
-/**
- * Update wrapper placement based on viewport size
- */
-const updateWrapperPlacement = (): void => {
-  if (!ensureWrapperElement()) {
-    return;
-  }
-
-  if (!mediaQueryList) {
-    mediaQueryList = window.matchMedia(MOBILE_MEDIA_QUERY);
-  }
-
-  if (mediaQueryList.matches) {
-    const placed = placeWrapperInSidebar();
-    if (!placed) {
-      restoreWrapperPlacement();
-    }
-  } else {
-    restoreWrapperPlacement();
-  }
-};
-
-/**
- * Attach media query listener (once)
- */
-const attachMediaListener = (): void => {
-  if (mediaListenerAttached) {
-    return;
-  }
-
-  if (!mediaQueryList) {
-    mediaQueryList = window.matchMedia(MOBILE_MEDIA_QUERY);
-  }
-
-  const handler = () => updateWrapperPlacement();
-
-  if (typeof mediaQueryList.addEventListener === 'function') {
-    mediaQueryList.addEventListener('change', handler);
-  } else if (typeof mediaQueryList.addListener === 'function') {
-    // Fallback for older browsers
-    mediaQueryList.addListener(handler);
-  }
-
-  mediaListenerAttached = true;
-};
 
 /**
  * Pre-cache icon SVG elements for fast updates
@@ -280,11 +148,25 @@ const closeFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
 
 /**
  * Toggle flyout open/closed
+ * Ensures only one flyout is open at a time
  */
 const toggleFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
   if (isOpen) {
     closeFlyout(trigger, flyout);
   } else {
+    // Close all other open flyouts first
+    const allFlyouts = document.querySelectorAll<HTMLElement>('#theme-flyout');
+    allFlyouts.forEach(f => {
+      if (f !== flyout && !f.hidden) {
+        const otherTrigger = f
+          .closest('.theme-toggle')
+          ?.querySelector<HTMLElement>('[data-theme-trigger]');
+        if (otherTrigger) {
+          closeFlyout(otherTrigger, f);
+        }
+      }
+    });
+
     openFlyout(trigger, flyout);
   }
 };
@@ -344,10 +226,8 @@ const cleanup = (): void => {
   }
 
   // Unsubscribe from theme changes
-  if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
-  }
+  unsubscriptions.forEach(unsub => unsub());
+  unsubscriptions = [];
 
   // Reset state
   isOpen = false;
@@ -359,39 +239,18 @@ const cleanup = (): void => {
 /**
  * Initialize theme toggle UI
  * Can be called multiple times safely (view transitions)
+ * Supports multiple theme toggle instances (desktop + mobile)
  */
 export const init = async (): Promise<void> => {
   // Always cleanup previous initialization
   cleanup();
 
-  // ALWAYS reset wrapper element to force fresh query
-  // This ensures we get the correct element from the new DOM
-  wrapperElement = null;
+  // Get all theme toggle wrappers (we have 2: body-level and sidebar-level)
+  const allToggles = document.querySelectorAll<HTMLElement>('.theme-toggle');
 
-  // Remove all duplicate theme toggle elements (keep only first one)
-  const allToggles = document.querySelectorAll('.theme-toggle');
-
-  if (allToggles.length > 1) {
-    // Remove all except the first one
-    allToggles.forEach((toggle, index) => {
-      if (index > 0) {
-        toggle.remove();
-      }
-    });
-  }
-
-  // Get DOM elements
-  const trigger = document.querySelector<HTMLElement>('[data-theme-trigger]');
-  const flyout = document.getElementById('theme-flyout');
-  const options = document.querySelectorAll<HTMLElement>('[data-theme-option]');
-
-  if (!trigger || !flyout || !options.length) {
+  if (allToggles.length === 0) {
     return;
   }
-
-  // Update wrapper placement
-  updateWrapperPlacement();
-  attachMediaListener();
 
   // Wait for theme control to be available
   let control: ThemeControl;
@@ -402,107 +261,95 @@ export const init = async (): Promise<void> => {
     return;
   }
 
-  // Pre-cache icons for fast updates
+  // Pre-cache icons for fast updates (only once)
   cacheIcons();
 
   // Create new abort controller for this initialization
   abortController = new AbortController();
   const { signal } = abortController;
 
-  // Update UI based on current theme
-  const updateUI = ({
-    preference,
-  }: {
-    preference: ThemePreference;
-    resolved: 'light' | 'dark';
-  }): void => {
-    updateTriggerIcon(preference, trigger);
-    updateOptionsState(preference, options);
-  };
+  // Initialize each theme toggle instance
+  allToggles.forEach(wrapperElement => {
+    const trigger = wrapperElement.querySelector<HTMLElement>(
+      '[data-theme-trigger]'
+    );
+    const flyout = wrapperElement.querySelector<HTMLElement>('#theme-flyout');
+    const options = wrapperElement.querySelectorAll<HTMLElement>(
+      '[data-theme-option]'
+    );
 
-  // Subscribe to theme changes
-  unsubscribe = control.subscribe(updateUI);
+    if (!trigger || !flyout || !options.length) {
+      return;
+    }
 
-  // Initial UI update to sync with current theme
-  updateUI({
-    preference: control.getPreference(),
-    resolved: control.getResolved(),
-  });
+    // Update UI based on current theme
+    const updateUI = ({
+      preference,
+    }: {
+      preference: ThemePreference;
+      resolved: 'light' | 'dark';
+    }): void => {
+      updateTriggerIcon(preference, trigger);
+      updateOptionsState(preference, options);
+    };
 
-  // Trigger click handler
-  trigger.addEventListener(
-    'click',
-    event => {
-      event.preventDefault();
-      event.stopPropagation();
-      toggleFlyout(trigger, flyout);
-    },
-    { signal }
-  );
+    // Subscribe to theme changes (each instance gets its own subscription)
+    const unsubscribe = control.subscribe(updateUI);
+    unsubscriptions.push(unsubscribe);
 
-  // Option click handlers
-  options.forEach(option => {
-    option.addEventListener(
+    // Initial UI update to sync with current theme
+    updateUI({
+      preference: control.getPreference(),
+      resolved: control.getResolved(),
+    });
+
+    // Trigger click handler
+    trigger.addEventListener(
       'click',
       event => {
         event.preventDefault();
-        const theme = option.getAttribute(
-          'data-theme-option'
-        ) as ThemePreference | null;
+        event.stopPropagation();
+        toggleFlyout(trigger, flyout);
+      },
+      { signal }
+    );
 
-        if (
-          theme &&
-          (theme === 'auto' || theme === 'light' || theme === 'dark')
-        ) {
-          control.setPreference(theme);
-          announceThemeChange(theme);
+    // Option click handlers
+    options.forEach(option => {
+      option.addEventListener(
+        'click',
+        event => {
+          event.preventDefault();
+          const theme = option.getAttribute(
+            'data-theme-option'
+          ) as ThemePreference | null;
+
+          if (
+            theme &&
+            (theme === 'auto' || theme === 'light' || theme === 'dark')
+          ) {
+            control.setPreference(theme);
+            announceThemeChange(theme);
+            closeFlyout(trigger, flyout);
+          }
+        },
+        { signal }
+      );
+    });
+
+    // Keyboard navigation
+    flyout.addEventListener(
+      'keydown',
+      (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
           closeFlyout(trigger, flyout);
+          trigger.focus();
         }
       },
       { signal }
     );
   });
-
-  // Click outside to close
-  document.addEventListener(
-    'click',
-    event => {
-      const target = event.target as Node;
-      if (isOpen && !trigger.contains(target) && !flyout.contains(target)) {
-        closeFlyout(trigger, flyout);
-      }
-    },
-    { signal }
-  );
-
-  // ESC key to close
-  document.addEventListener(
-    'keydown',
-    event => {
-      if (isOpen && event.key === 'Escape') {
-        event.preventDefault();
-        closeFlyout(trigger, flyout);
-      }
-    },
-    { signal }
-  );
-
-  // Reposition on resize (debounced)
-  window.addEventListener(
-    'resize',
-    () => {
-      if (resizeTimeout) {
-        clearTimeout(resizeTimeout);
-      }
-      resizeTimeout = window.setTimeout(() => {
-        if (isOpen) {
-          positionFlyout(trigger, flyout);
-        }
-        resizeTimeout = null;
-      }, 100);
-    },
-    { signal }
-  );
 };
 
 /**
