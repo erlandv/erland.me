@@ -147,11 +147,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   )}
   
   <ClientRouter fallback="swap" />
-  <!-- Phase 1: Ultra-minimal FOUC prevention (blocking, runs before any paint) -->
   <script is:inline>
     !function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"auto";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r))}catch(e){}}();
   </script>
-  <!-- Phase 2: Full theme control system (non-blocking, runs after initial paint) -->
   <script is:inline>
     (function () {
       // Skip if already initialized (view transitions)

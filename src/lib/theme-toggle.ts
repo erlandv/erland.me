@@ -3,6 +3,8 @@
  * Manages theme selection flyout menu with proper cleanup and view transition support
  */
 
+import { showToast } from './toast';
+
 type ThemePreference = 'auto' | 'light' | 'dark';
 
 interface ThemeControl {
@@ -74,8 +76,10 @@ const updateTriggerIcon = (
   const cachedIcon = iconCache.get(preference);
   if (cachedIcon) {
     // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     if (prefersReducedMotion) {
       // No animation: instant swap
       triggerIconContainer.innerHTML = '';
@@ -85,14 +89,14 @@ const updateTriggerIcon = (
       const container = triggerIconContainer as HTMLElement;
       container.style.opacity = '0';
       container.style.transition = 'opacity 120ms ease-out';
-      
+
       setTimeout(() => {
         triggerIconContainer.innerHTML = '';
         triggerIconContainer.appendChild(cachedIcon.cloneNode(true));
-        
+
         // Trigger reflow to ensure transition applies
         void container.offsetHeight;
-        
+
         container.style.opacity = '1';
         container.style.transition = 'opacity 150ms ease-in';
       }, 120);
@@ -163,10 +167,12 @@ const openFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
 const closeFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
   isOpen = false;
   trigger.setAttribute('aria-expanded', 'false');
-  
+
   // Check if user prefers reduced motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
   if (prefersReducedMotion) {
     // No animation: instant close
     flyout.hidden = true;
@@ -174,7 +180,7 @@ const closeFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
   } else {
     // Add closing animation class
     flyout.classList.add('theme-toggle__flyout--closing');
-    
+
     // Wait for animation to complete before hiding
     setTimeout(() => {
       flyout.hidden = true;
@@ -210,16 +216,36 @@ const toggleFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
 };
 
 /**
- * Announce theme change to screen readers
+ * Announce theme change to screen readers and show toast notification
  */
-const announceThemeChange = (theme: ThemePreference): void => {
+const announceThemeChange = (
+  theme: ThemePreference,
+  resolved: 'light' | 'dark'
+): void => {
+  // Generate consistent message for both screen reader and toast
+  let message: string;
+  if (theme === 'auto') {
+    message = 'Following your system.';
+  } else {
+    // Capitalize first letter: "Light" or "Dark"
+    const mode = resolved.charAt(0).toUpperCase() + resolved.slice(1);
+    message = `Switched to ${mode} mode.`;
+  }
+
+  // Screen reader announcement (ARIA live region - already polite)
   const statusEl = document.getElementById('theme-status');
   if (statusEl) {
-    statusEl.textContent = `Theme changed to ${stateLabels[theme]}`;
+    statusEl.textContent = message;
     setTimeout(() => {
       statusEl.textContent = '';
     }, 1000);
   }
+
+  // Visual toast notification (consistent message, no icons)
+  showToast(message, {
+    duration: 2000,
+    type: 'info',
+  });
 };
 
 /**
@@ -367,7 +393,11 @@ export const init = async (): Promise<void> => {
             (theme === 'auto' || theme === 'light' || theme === 'dark')
           ) {
             control.setPreference(theme);
-            announceThemeChange(theme);
+
+            // Get resolved theme for toast message
+            const resolved = control.getResolved();
+            announceThemeChange(theme, resolved);
+
             closeFlyout(trigger, flyout);
           }
         },
