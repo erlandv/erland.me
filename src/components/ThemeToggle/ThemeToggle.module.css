@@ -1,45 +1,54 @@
 .wrapper {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9998;
     display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    margin: 0;
+    justify-content: flex-end;
 }
 
-.button {
+/* Hide theme toggle when lightbox is active */
+:global(html.image-lightbox--locked) .wrapper {
+    display: none;
+}
+
+/* Trigger Button */
+.trigger {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
     padding: 10px;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background-color: transparent;
+    border: none;
     border-radius: var(--radius-md);
     color: var(--text-primary);
     cursor: pointer;
     transition:
         background-color var(--dur-base) var(--ease-out),
-        border-color var(--dur-base) var(--ease-out),
         color var(--dur-base) var(--ease-out),
         transform var(--dur-base) var(--ease-out);
 }
 
-.button:hover {
+.trigger:hover {
     background-color: var(--surface-hover);
-    border-color: var(--border);
 }
 
-.button:active {
+.trigger:active {
     transform: translateY(1px);
-    background-color: var(--surface-active);
 }
 
-.button:focus-visible {
+.trigger:focus-visible {
     outline: 2px solid var(--text-accent);
     outline-offset: 2px;
 }
 
-.icon {
+.trigger[aria-expanded="true"] {
+    background-color: var(--surface-hover);
+}
+
+.triggerIcon {
     width: 22px;
     height: 22px;
     display: inline-flex;
@@ -54,8 +63,119 @@
     display: block;
 }
 
-.icon[hidden] {
+/* Flyout Menu */
+.flyout {
+    position: fixed;
+    min-width: 200px;
+    background-color: var(--surface-elevated, var(--bg-secondary));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.flyout[hidden] {
     display: none !important;
+}
+
+.flyout:not([hidden]) {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    animation: flyoutFadeIn 0.2s ease;
+}
+
+@keyframes flyoutFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Flyout Options */
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--text-gray, var(--text-secondary));
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    text-align: left;
+    position: relative;
+}
+
+.option:last-child {
+    margin-bottom: 0;
+}
+
+.option:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-030);
+}
+
+.option:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 2px;
+}
+
+/* Active state - matching nav menu active style */
+.option[data-active="true"] {
+    color: var(--text-primary);
+    background-color: var(--surface-active);
+    border-color: var(--border-color);
+}
+
+.optionIcon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0.48;
+    transition: opacity 0.2s ease;
+}
+
+.option:hover .optionIcon {
+    opacity: 1;
+}
+
+.option[data-active="true"] .optionIcon {
+    opacity: 1;
+}
+
+.optionSvg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.optionLabel {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 /* Visually hidden but accessible to screen readers */
@@ -71,32 +191,23 @@
     border-width: 0;
 }
 
-:global(html.sidebar-collapsed-global) :global(.sidebar) .wrapper,
-:global(html[data-sidebar='collapsed']) :global(.sidebar) .wrapper,
-:global(body.sidebar-collapsed) :global(.sidebar) .wrapper,
-:global(.sidebar.sidebar-collapsed) .wrapper,
-:global(.sidebar:has(#sidebar-toggle:checked)) .wrapper {
-    justify-content: center;
-}
-
-:global(html.sidebar-collapsed-global) :global(.sidebar) .button,
-:global(html[data-sidebar='collapsed']) :global(.sidebar) .button,
-:global(body.sidebar-collapsed) :global(.sidebar) .button,
-:global(.sidebar.sidebar-collapsed) .button,
-:global(.sidebar:has(#sidebar-toggle:checked)) .button {
-    width: var(--sidebar-collapsed-item-width, 44px);
-}
+/* Remove old sidebar-specific rules */
 
 @media (max-width: 1024px) {
     .wrapper {
-        width: auto;
-        margin: 0 0 0 auto;
-        justify-content: flex-end;
+        top: 24px; /* Match sidebar padding-top di mobile */
+        right: 70px; /* Space for mobile menu button (sekitar 56px button + gap) */
     }
 
-    .button {
+    .trigger {
         width: 40px;
-        height: 40px;
-        background-color: var(--sidebar-nav-mobile-item-bg, var(--bg-secondary));
+        height: 60px;
+    }
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        top: 24px;
+        right: 70px;
     }
 }

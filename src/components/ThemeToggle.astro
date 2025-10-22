@@ -6,55 +6,66 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
 <div class:list={[styles.wrapper, 'theme-toggle']}>
   <button
     type='button'
-    class:list={[styles.button, 'theme-toggle__button']}
-    data-theme-toggle
-    data-mode='auto'
-    role='switch'
-    aria-checked='false'
-    aria-label='Switch Theme'
-    aria-describedby='theme-status'
-    title='Switch Theme'
+    class:list={[styles.trigger, 'theme-toggle__trigger']}
+    data-theme-trigger
+    aria-expanded='false'
+    aria-controls='theme-flyout'
+    aria-label='Theme settings'
+    title='Theme settings'
   >
-    <span
-      class:list={[
-        styles.icon,
-        styles.iconAuto,
-        'theme-toggle__icon',
-        'theme-toggle__icon--auto',
-      ]}
-      data-theme-icon='auto'
-      aria-hidden='true'
-    >
-      <Icon name='auto' class={styles.svg} />
-    </span>
-    <span
-      class:list={[
-        styles.icon,
-        styles.iconLight,
-        'theme-toggle__icon',
-        'theme-toggle__icon--light',
-      ]}
-      data-theme-icon='light'
-      aria-hidden='true'
-      hidden
-    >
-      <Icon name='sun' class={styles.svg} />
-    </span>
-    <span
-      class:list={[
-        styles.icon,
-        styles.iconDark,
-        'theme-toggle__icon',
-        'theme-toggle__icon--dark',
-      ]}
-      data-theme-icon='dark'
-      aria-hidden='true'
-      hidden
-    >
-      <Icon name='moon' class={styles.svg} />
+    <span class:list={[styles.triggerIcon, 'theme-toggle__trigger-icon']}>
+      <Icon name='auto' class={styles.svg} data-theme-trigger-icon />
     </span>
   </button>
-  <!-- Live region for screen reader announcements -->
+
+  <div
+    id='theme-flyout'
+    class:list={[styles.flyout, 'theme-toggle__flyout']}
+    role='menu'
+    aria-label='Theme options'
+    hidden
+  >
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='auto'
+      data-active='true'
+      aria-checked='true'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='auto' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>Auto</span>
+    </button>
+
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='light'
+      aria-checked='false'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='sun' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>Light</span>
+    </button>
+
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='dark'
+      aria-checked='false'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='moon' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>Dark</span>
+    </button>
+  </div>
+
   <div
     id='theme-status'
     class='visually-hidden'
@@ -66,24 +77,45 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
 <script is:inline>
   (() => {
     const stateLabels = {
-      auto: 'System Default',
-      light: 'Light Mode',
-      dark: 'Dark Mode',
+      auto: 'Auto',
+      light: 'Light',
+      dark: 'Dark',
+    };
+
+    // Icon mapping for trigger button
+    const iconNames = {
+      auto: 'auto',
+      light: 'sun',
+      dark: 'moon',
     };
 
     // Store unsubscribe function globally to cleanup on re-init
     let currentUnsubscribe = null;
+    let isOpen = false;
+    let initialized = false;
 
     const initThemeToggle = () => {
-      const button = document.querySelector('[data-theme-toggle]');
-      if (!button) return;
+      // Prevent duplicate initialization on same page
+      if (initialized) {
+        return;
+      }
+      
+      const trigger = document.querySelector('[data-theme-trigger]');
+      const flyout = document.getElementById('theme-flyout');
+      const options = document.querySelectorAll('[data-theme-option]');
+      
+      if (!trigger || !flyout || !options.length) {
+        setTimeout(initThemeToggle, 100);
+        return;
+      }
 
       const control = window.__themeControl;
       if (!control) {
-        // Retry after a short delay if control not ready yet
         setTimeout(initThemeToggle, 50);
         return;
       }
+      
+      initialized = true;
 
       // Cleanup previous subscription if exists
       if (currentUnsubscribe) {
@@ -91,77 +123,181 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
         currentUnsubscribe = null;
       }
 
-      // Remove old click listener by cloning FIRST (prevents duplicate listeners)
-      const newButton = button.cloneNode(true);
-      button.parentNode?.replaceChild(newButton, button);
-
-      // NOW query icon elements from the fresh button in DOM
-      /** @type {Record<'auto' | 'light' | 'dark', HTMLElement | null>} */
-      const iconMap = {
-        auto: newButton.querySelector('[data-theme-icon="auto"]'),
-        light: newButton.querySelector('[data-theme-icon="light"]'),
-        dark: newButton.querySelector('[data-theme-icon="dark"]'),
+      // Position flyout
+      const positionFlyout = () => {
+        const rect = trigger.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const flyoutWidth = 200;
+        
+        // Mobile: dropdown below trigger, aligned right
+        if (viewportWidth <= 1024) {
+          flyout.style.top = `${rect.bottom + 8}px`;
+          flyout.style.right = '8px';
+          flyout.style.left = 'auto';
+        } 
+        // Desktop: dropdown below trigger at top-right
+        else {
+          // Position below trigger with gap
+          flyout.style.top = `${rect.bottom + 8}px`;
+          flyout.style.right = '16px';
+          flyout.style.left = 'auto';
+        }
       };
 
-      const updateIcons = active => {
-        ['auto', 'light', 'dark'].forEach(key => {
-          const icon = iconMap[key];
-          if (!icon) return;
-          icon.hidden = key !== active;
+      // Open flyout
+      const openFlyout = () => {
+        isOpen = true;
+        trigger.setAttribute('aria-expanded', 'true');
+        flyout.hidden = false;
+        flyout.removeAttribute('hidden');
+        positionFlyout();
+        
+        // Focus first option
+        const firstOption = flyout.querySelector('[data-theme-option]');
+        if (firstOption) {
+          firstOption.focus();
+        }
+      };
+
+      // Close flyout
+      const closeFlyout = () => {
+        isOpen = false;
+        trigger.setAttribute('aria-expanded', 'false');
+        flyout.hidden = true;
+        trigger.focus();
+      };
+
+      // Toggle flyout
+      const toggleFlyout = () => {
+        if (isOpen) {
+          closeFlyout();
+        } else {
+          openFlyout();
+        }
+      };
+
+      // Update UI based on current theme
+      const updateUI = ({ preference, resolved }) => {
+        // Update trigger icon - replace entire icon container content
+        const triggerIconContainer = trigger.querySelector('.theme-toggle__trigger-icon');
+        if (triggerIconContainer) {
+          const iconName = iconNames[preference];
+          
+          // Get the icon SVG from options as template (they have all the icons we need)
+          const optionButton = document.querySelector(`[data-theme-option="${preference}"]`);
+          if (optionButton) {
+            const optionIconSvg = optionButton.querySelector('svg');
+            if (optionIconSvg) {
+              // Clone the icon SVG
+              const newIcon = optionIconSvg.cloneNode(true);
+              // Clear and replace icon container content
+              triggerIconContainer.innerHTML = '';
+              triggerIconContainer.appendChild(newIcon);
+            }
+          }
+          
+          // Update aria-label and title
+          trigger.setAttribute('aria-label', `Theme: ${stateLabels[preference]}`);
+          trigger.setAttribute('title', `Theme: ${stateLabels[preference]}`);
+        }
+
+        // Update active state on options
+        options.forEach(option => {
+          const optionTheme = option.getAttribute('data-theme-option');
+          const isActive = optionTheme === preference;
+          option.setAttribute('data-active', String(isActive));
+          option.setAttribute('aria-checked', String(isActive));
         });
       };
 
-      const update = ({ preference, resolved }, announce = false) => {
-        newButton.setAttribute('data-mode', preference);
-        newButton.setAttribute('data-resolved', resolved);
-        
-        const text = stateLabels[preference] || stateLabels.auto;
-        const title = `Switch Theme (currently ${text.toLowerCase()})`;
-        
-        // Update ARIA attributes
-        newButton.setAttribute('aria-label', title);
-        newButton.setAttribute('aria-checked', String(preference !== 'auto'));
-        newButton.setAttribute('title', title);
-        
-        // Update icons
-        updateIcons(preference);
-        
-        // Announce to screen readers on user action
-        if (announce) {
-          const statusEl = document.getElementById('theme-status');
-          if (statusEl) {
-            statusEl.textContent = `Theme changed to ${text}`;
-            // Clear after announcement to avoid repetition
-            setTimeout(() => {
-              statusEl.textContent = '';
-            }, 1000);
+      // Subscribe to theme changes
+      currentUnsubscribe = control.subscribe(updateUI);
+
+      // Initial UI update to sync with current theme
+      const currentState = {
+        preference: control.getPreference(),
+        resolved: control.getResolved()
+      };
+      updateUI(currentState);
+
+      // Trigger click handler
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleFlyout();
+      });
+
+      // Option click handlers
+      options.forEach(option => {
+        option.addEventListener('click', (event) => {
+          event.preventDefault();
+          const theme = option.getAttribute('data-theme-option');
+          
+          if (theme && (theme === 'auto' || theme === 'light' || theme === 'dark')) {
+            control.setPreference(theme);
+            
+            // Announce to screen readers
+            const statusEl = document.getElementById('theme-status');
+            if (statusEl) {
+              statusEl.textContent = `Theme changed to ${stateLabels[theme]}`;
+              setTimeout(() => {
+                statusEl.textContent = '';
+              }, 1000);
+            }
+            
+            closeFlyout();
           }
+        });
+      });
+
+      // Click outside to close
+      const handleClickOutside = (event) => {
+        if (isOpen && !trigger.contains(event.target) && !flyout.contains(event.target)) {
+          closeFlyout();
         }
       };
 
-      // Subscribe and store unsubscribe function
-      // This will immediately call update() with current theme state
-      currentUnsubscribe = control.subscribe(update);
+      document.addEventListener('click', handleClickOutside);
 
-      // Add fresh click listener
-      newButton.addEventListener('click', event => {
-        event.preventDefault();
-        const nextPref = control.cyclePreference();
-        // Manually trigger update with announce flag after user action
-        const resolved = control.getResolved();
-        update({ preference: nextPref, resolved }, true);
-      });
-      
-      // Add keyboard support for accessibility
-      newButton.addEventListener('keydown', event => {
-        // Space or Enter key
-        if (event.key === ' ' || event.key === 'Enter') {
+      // ESC key to close
+      const handleEscape = (event) => {
+        if (isOpen && event.key === 'Escape') {
           event.preventDefault();
-          const nextPref = control.cyclePreference();
-          const resolved = control.getResolved();
-          update({ preference: nextPref, resolved }, true);
+          closeFlyout();
         }
-      });
+      };
+
+      document.addEventListener('keydown', handleEscape);
+
+      // Reposition on resize
+      let resizeTimeout;
+      const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (isOpen) {
+            positionFlyout();
+          }
+        }, 100);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      // Cleanup on navigation
+      const cleanup = () => {
+        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener('keydown', handleEscape);
+        window.removeEventListener('resize', handleResize);
+        if (currentUnsubscribe) {
+          currentUnsubscribe();
+          currentUnsubscribe = null;
+        }
+        initialized = false; // Reset for next page
+        isOpen = false;
+      };
+
+      // Store cleanup for view transitions
+      document.addEventListener('astro:before-swap', cleanup, { once: true });
     };
 
     // Initial load
