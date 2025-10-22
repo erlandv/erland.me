@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import styles from './ThemeToggle/ThemeToggle.module.css';
 ---
 
-<div class:list={[styles.wrapper, 'theme-toggle']}>
+<div class:list={[styles.wrapper, 'theme-toggle']} data-placement='floating'>
   <button
     type='button'
     class:list={[styles.trigger, 'theme-toggle__trigger']}
@@ -93,6 +93,111 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
     let currentUnsubscribe = null;
     let isOpen = false;
     let initialized = false;
+    const MOBILE_MEDIA_QUERY = '(max-width: 1024px)';
+    let wrapperElement = null;
+    let wrapperParent = null;
+    let wrapperNextSibling = null;
+    let mediaQueryList = null;
+    let mediaListenerAttached = false;
+
+    const ensureWrapperElement = () => {
+      if (wrapperElement && wrapperElement.isConnected) {
+        return true;
+      }
+
+      const found = document.querySelector('.theme-toggle');
+      if (!found) {
+        return false;
+      }
+
+      wrapperElement = found;
+      if (!wrapperParent) {
+        wrapperParent = found.parentElement;
+        wrapperNextSibling = found.nextElementSibling;
+      }
+
+      if (!wrapperElement.dataset.placement) {
+        wrapperElement.dataset.placement = 'floating';
+      }
+
+      return true;
+    };
+
+    const restoreWrapperPlacement = () => {
+      if (!ensureWrapperElement() || !wrapperParent) {
+        return;
+      }
+
+      if (wrapperParent.contains(wrapperElement) && wrapperElement.dataset.placement === 'floating') {
+        return;
+      }
+
+      wrapperParent.insertBefore(wrapperElement, wrapperNextSibling || null);
+      wrapperElement.dataset.placement = 'floating';
+    };
+
+    const placeWrapperInSidebar = () => {
+      if (!ensureWrapperElement()) {
+        return false;
+      }
+
+      const navContent = document.querySelector('.sidebar .nav-content');
+      if (!navContent) {
+        restoreWrapperPlacement();
+        return false;
+      }
+
+      const menuToggle = navContent.querySelector('.navbar-icon-button');
+      if (menuToggle) {
+        if (menuToggle.previousElementSibling !== wrapperElement) {
+          navContent.insertBefore(wrapperElement, menuToggle);
+        }
+      } else if (!navContent.contains(wrapperElement)) {
+        navContent.appendChild(wrapperElement);
+      }
+
+      wrapperElement.dataset.placement = 'sidebar';
+      return true;
+    };
+
+    const updateWrapperPlacement = () => {
+      if (!ensureWrapperElement()) {
+        return;
+      }
+
+      if (!mediaQueryList) {
+        mediaQueryList = window.matchMedia(MOBILE_MEDIA_QUERY);
+      }
+
+      if (mediaQueryList.matches) {
+        const placed = placeWrapperInSidebar();
+        if (!placed) {
+          restoreWrapperPlacement();
+        }
+      } else {
+        restoreWrapperPlacement();
+      }
+    };
+
+    const attachMediaListener = () => {
+      if (mediaListenerAttached) {
+        return;
+      }
+
+      if (!mediaQueryList) {
+        mediaQueryList = window.matchMedia(MOBILE_MEDIA_QUERY);
+      }
+
+      const handler = () => updateWrapperPlacement();
+
+      if (typeof mediaQueryList.addEventListener === 'function') {
+        mediaQueryList.addEventListener('change', handler);
+      } else if (typeof mediaQueryList.addListener === 'function') {
+        mediaQueryList.addListener(handler);
+      }
+
+      mediaListenerAttached = true;
+    };
 
     const initThemeToggle = () => {
       // Prevent duplicate initialization on same page
@@ -108,6 +213,9 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
         setTimeout(initThemeToggle, 100);
         return;
       }
+
+      updateWrapperPlacement();
+      attachMediaListener();
 
       const control = window.__themeControl;
       if (!control) {
@@ -288,6 +396,7 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
         document.removeEventListener('click', handleClickOutside);
         document.removeEventListener('keydown', handleEscape);
         window.removeEventListener('resize', handleResize);
+        restoreWrapperPlacement();
         if (currentUnsubscribe) {
           currentUnsubscribe();
           currentUnsubscribe = null;

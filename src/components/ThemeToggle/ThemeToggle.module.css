@@ -7,6 +7,14 @@
     justify-content: flex-end;
 }
 
+.wrapper[data-placement='sidebar'] {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-left: auto;
+    margin-right: 12px;
+}
+
 /* Hide theme toggle when lightbox is active */
 :global(html.image-lightbox--locked) .wrapper {
     display: none;
@@ -49,8 +57,8 @@
 }
 
 .triggerIcon {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -58,8 +66,8 @@
 }
 
 .svg {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     display: block;
 }
 
@@ -191,23 +199,29 @@
     border-width: 0;
 }
 
-/* Remove old sidebar-specific rules */
-
 @media (max-width: 1024px) {
-    .wrapper {
-        top: 24px; /* Match sidebar padding-top di mobile */
-        right: 70px; /* Space for mobile menu button (sekitar 56px button + gap) */
+    .wrapper[data-placement='floating'] {
+        top: 34px;
+        right: 74px;
+    }
+
+    .wrapper[data-placement='sidebar'] {
+        margin-right: 12px;
     }
 
     .trigger {
         width: 40px;
-        height: 60px;
+        height: 40px;
     }
 }
 
 @media (max-width: 767px) {
-    .wrapper {
+    .wrapper[data-placement='floating'] {
         top: 24px;
         right: 70px;
+    }
+
+    .wrapper[data-placement='sidebar'] {
+        margin-right: 8px;
     }
 }
