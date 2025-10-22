@@ -1,6 +1,6 @@
 .wrapper {
   position: fixed;
-  top: calc(36px + 25px);
+  top: calc(32px + 24px);
   left: var(--sidebar-expanded-width);
   transform: translate(calc(-100% - 12px), -50%);
   pointer-events: none;

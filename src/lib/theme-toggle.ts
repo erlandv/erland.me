@@ -405,14 +405,58 @@ export const init = async (): Promise<void> => {
       );
     });
 
-    // Keyboard navigation
+    // Keyboard navigation with arrow keys
     flyout.addEventListener(
       'keydown',
       (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-          event.preventDefault();
-          closeFlyout(trigger, flyout);
-          trigger.focus();
+        const currentFocus = document.activeElement as HTMLElement;
+        const optionsArray = Array.from(options);
+        const currentIndex = optionsArray.indexOf(currentFocus);
+
+        switch (event.key) {
+          case 'Escape':
+            event.preventDefault();
+            closeFlyout(trigger, flyout);
+            trigger.focus();
+            break;
+
+          case 'ArrowDown':
+            event.preventDefault();
+            if (currentIndex < optionsArray.length - 1) {
+              optionsArray[currentIndex + 1].focus();
+            } else {
+              // Wrap to first option
+              optionsArray[0].focus();
+            }
+            break;
+
+          case 'ArrowUp':
+            event.preventDefault();
+            if (currentIndex > 0) {
+              optionsArray[currentIndex - 1].focus();
+            } else {
+              // Wrap to last option
+              optionsArray[optionsArray.length - 1].focus();
+            }
+            break;
+
+          case 'Home':
+            event.preventDefault();
+            optionsArray[0].focus();
+            break;
+
+          case 'End':
+            event.preventDefault();
+            optionsArray[optionsArray.length - 1].focus();
+            break;
+
+          case 'Enter':
+          case ' ': // Space
+            event.preventDefault();
+            if (currentFocus && optionsArray.includes(currentFocus)) {
+              currentFocus.click();
+            }
+            break;
         }
       },
       { signal }

@@ -194,9 +194,18 @@
   box-shadow: 0 2px 8px var(--shadow-030);
 }
 
+/* Keyboard focus indicator - enhanced for accessibility */
+.option:focus {
+  outline: none; /* Remove default to use custom styling */
+}
+
 .option:focus-visible {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-accent);
   outline: 2px solid var(--text-accent);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
 }
 
 /* Active state - matching nav menu active style */
@@ -204,6 +213,12 @@
   color: var(--text-primary);
   background-color: var(--surface-active);
   border-color: var(--border-color);
+}
+
+/* Active state when focused (keyboard navigation) */
+.option[data-active='true']:focus-visible {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
 }
 
 .optionIcon {
