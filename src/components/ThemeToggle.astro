@@ -8,11 +8,12 @@ import sunIconRaw from '../icons/sun.svg?raw';
 import moonIconRaw from '../icons/moon.svg?raw';
 
 // Prepare icons for inline script with exact same styles as .svg class
-const iconStyles = 'style="width:20px;height:20px;display:block;margin:0;padding:0"';
+const iconStyles =
+  'style="width:20px;height:20px;display:block;margin:0;padding:0"';
 const icons = {
   auto: autoIconRaw.replace('<svg', `<svg ${iconStyles}`),
   light: sunIconRaw.replace('<svg', `<svg ${iconStyles}`),
-  dark: moonIconRaw.replace('<svg', `<svg ${iconStyles}`)
+  dark: moonIconRaw.replace('<svg', `<svg ${iconStyles}`),
 };
 ---
 
@@ -49,7 +50,7 @@ const icons = {
       <span class={styles.optionIcon}>
         <Icon name='auto' class={styles.optionSvg} />
       </span>
-      <span class={styles.optionLabel}>Auto</span>
+      <span class={styles.optionLabel}>System Default</span>
     </button>
 
     <button
@@ -62,7 +63,7 @@ const icons = {
       <span class={styles.optionIcon}>
         <Icon name='sun' class={styles.optionSvg} />
       </span>
-      <span class={styles.optionLabel}>Light</span>
+      <span class={styles.optionLabel}>Light Mode</span>
     </button>
 
     <button
@@ -75,7 +76,7 @@ const icons = {
       <span class={styles.optionIcon}>
         <Icon name='moon' class={styles.optionSvg} />
       </span>
-      <span class={styles.optionLabel}>Dark</span>
+      <span class={styles.optionLabel}>Dark Mode</span>
     </button>
   </div>
 
@@ -85,22 +86,26 @@ const icons = {
     role='status'
     aria-live='polite'
     aria-atomic='true'
-  ></div>
+  >
+  </div>
 </div>
 
 <script is:inline define:vars={{ icons }}>
-  (function() {
+  (function () {
     try {
       const storageKey = 'theme-preference';
       const stored = localStorage.getItem(storageKey);
-      const preference = stored === 'light' || stored === 'dark' ? stored : 'auto';
-      
+      const preference =
+        stored === 'light' || stored === 'dark' ? stored : 'auto';
+
       // Update icon in current script's context (this theme toggle instance)
       const currentScript = document.currentScript;
       if (currentScript) {
         const wrapper = currentScript.previousElementSibling;
         if (wrapper && wrapper.classList.contains('theme-toggle')) {
-          const triggerIcon = wrapper.querySelector('.theme-toggle__trigger-icon');
+          const triggerIcon = wrapper.querySelector(
+            '.theme-toggle__trigger-icon'
+          );
           if (triggerIcon && icons[preference]) {
             triggerIcon.innerHTML = icons[preference];
           }
