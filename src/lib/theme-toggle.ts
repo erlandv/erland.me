@@ -58,7 +58,7 @@ const cacheIcons = (): void => {
 };
 
 /**
- * Update trigger icon efficiently using cached elements
+ * Update trigger icon efficiently using cached elements with fade animation
  */
 const updateTriggerIcon = (
   preference: ThemePreference,
@@ -73,9 +73,30 @@ const updateTriggerIcon = (
 
   const cachedIcon = iconCache.get(preference);
   if (cachedIcon) {
-    // Clear and replace with cached icon
-    triggerIconContainer.innerHTML = '';
-    triggerIconContainer.appendChild(cachedIcon.cloneNode(true));
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      // No animation: instant swap
+      triggerIconContainer.innerHTML = '';
+      triggerIconContainer.appendChild(cachedIcon.cloneNode(true));
+    } else {
+      // Animated swap: fade out → swap → fade in
+      const container = triggerIconContainer as HTMLElement;
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 120ms ease-out';
+      
+      setTimeout(() => {
+        triggerIconContainer.innerHTML = '';
+        triggerIconContainer.appendChild(cachedIcon.cloneNode(true));
+        
+        // Trigger reflow to ensure transition applies
+        void container.offsetHeight;
+        
+        container.style.opacity = '1';
+        container.style.transition = 'opacity 150ms ease-in';
+      }, 120);
+    }
   }
 
   // Update aria-label and title
@@ -137,13 +158,30 @@ const openFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
 };
 
 /**
- * Close flyout menu
+ * Close flyout menu with animation
  */
 const closeFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
   isOpen = false;
   trigger.setAttribute('aria-expanded', 'false');
-  flyout.hidden = true;
-  trigger.focus();
+  
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  if (prefersReducedMotion) {
+    // No animation: instant close
+    flyout.hidden = true;
+    trigger.focus();
+  } else {
+    // Add closing animation class
+    flyout.classList.add('theme-toggle__flyout--closing');
+    
+    // Wait for animation to complete before hiding
+    setTimeout(() => {
+      flyout.hidden = true;
+      flyout.classList.remove('theme-toggle__flyout--closing');
+      trigger.focus();
+    }, 200); // Match animation duration
+  }
 };
 
 /**

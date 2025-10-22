@@ -134,6 +134,11 @@
   animation: flyoutFadeIn 0.2s ease;
 }
 
+/* Closing animation */
+:global(.theme-toggle__flyout--closing) {
+  animation: flyoutFadeOut 0.2s ease forwards;
+}
+
 @keyframes flyoutFadeIn {
   from {
     opacity: 0;
@@ -142,6 +147,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes flyoutFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
   }
 }
 

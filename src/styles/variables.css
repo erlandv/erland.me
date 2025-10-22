@@ -52,6 +52,14 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ========================================
+     THEME TRANSITION
+     ======================================== */
+  transition:
+    background-color var(--dur-medium) var(--ease-out),
+    color var(--dur-medium) var(--ease-out),
+    border-color var(--dur-medium) var(--ease-out);
+
+  /* ========================================
      THEME-AWARE SEMANTIC TOKENS (DARK MODE)
      ======================================== */
 
@@ -205,4 +213,24 @@
   --overlay-black-004: rgba(0, 0, 0, 0.04);
   --overlay-black-055: rgba(0, 0, 0, 0.55);
   --overlay-black-075: rgba(0, 0, 0, 0.75);
+}
+
+/* ========================================
+   ACCESSIBILITY: REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-theme='light'] {
+    /* Disable theme transition for reduced motion users */
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
