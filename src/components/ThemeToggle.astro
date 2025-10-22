@@ -1,0 +1,118 @@
+---
+import Icon from './Icon.astro';
+import styles from './ThemeToggle/ThemeToggle.module.css';
+
+// Import theme icon SVGs for pre-hydration injection
+import autoIconRaw from '../icons/auto.svg?raw';
+import sunIconRaw from '../icons/sun.svg?raw';
+import moonIconRaw from '../icons/moon.svg?raw';
+
+// Prepare icons for inline script with exact same styles as .svg class
+const iconStyles =
+  'style="width:20px;height:20px;display:block;margin:0;padding:0"';
+const icons = {
+  auto: autoIconRaw.replace('<svg', `<svg ${iconStyles}`),
+  light: sunIconRaw.replace('<svg', `<svg ${iconStyles}`),
+  dark: moonIconRaw.replace('<svg', `<svg ${iconStyles}`),
+};
+---
+
+<div class:list={[styles.wrapper, 'theme-toggle']}>
+  <button
+    type='button'
+    class:list={[styles.trigger, 'theme-toggle__trigger']}
+    data-theme-trigger
+    aria-expanded='false'
+    aria-controls='theme-flyout'
+    aria-label='Theme settings'
+    title='Theme settings'
+  >
+    <span class:list={[styles.triggerIcon, 'theme-toggle__trigger-icon']}>
+      <Icon name='auto' class={styles.svg} data-theme-trigger-icon />
+    </span>
+  </button>
+
+  <div
+    id='theme-flyout'
+    class:list={[styles.flyout, 'theme-toggle__flyout']}
+    role='menu'
+    aria-label='Theme options'
+    hidden
+  >
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='auto'
+      data-active='true'
+      aria-checked='true'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='auto' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>System Default</span>
+    </button>
+
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='light'
+      aria-checked='false'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='sun' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>Light Mode</span>
+    </button>
+
+    <button
+      type='button'
+      class:list={[styles.option, 'theme-toggle__option']}
+      role='menuitemradio'
+      data-theme-option='dark'
+      aria-checked='false'
+    >
+      <span class={styles.optionIcon}>
+        <Icon name='moon' class={styles.optionSvg} />
+      </span>
+      <span class={styles.optionLabel}>Dark Mode</span>
+    </button>
+  </div>
+
+  <div
+    id='theme-status'
+    class='visually-hidden'
+    role='status'
+    aria-live='polite'
+    aria-atomic='true'
+  >
+  </div>
+</div>
+
+<script is:inline define:vars={{ icons }}>
+  (function () {
+    try {
+      const storageKey = 'theme-preference';
+      const stored = localStorage.getItem(storageKey);
+      const preference =
+        stored === 'light' || stored === 'dark' ? stored : 'auto';
+
+      // Update icon in current script's context (this theme toggle instance)
+      const currentScript = document.currentScript;
+      if (currentScript) {
+        const wrapper = currentScript.previousElementSibling;
+        if (wrapper && wrapper.classList.contains('theme-toggle')) {
+          const triggerIcon = wrapper.querySelector(
+            '.theme-toggle__trigger-icon'
+          );
+          if (triggerIcon && icons[preference]) {
+            triggerIcon.innerHTML = icons[preference];
+          }
+        }
+      }
+    } catch (err) {
+      // Silent fail - JS hydration will fix it
+    }
+  })();
+</script>

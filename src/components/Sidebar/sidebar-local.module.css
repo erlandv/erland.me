@@ -14,22 +14,71 @@
   margin: -1px;
 }
 
-:global(.profile-header) {
+/* Profile Header Layout - Desktop: Simple avatar + text */
+:global(.niv-data) {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: var(--space-3);
-  width: 100%;
-  min-height: 60px;
+  gap: 12px;
 }
 
-:global(.navbar-icon-button) {
+/* Mobile Header Controls - Hidden on desktop, absolute positioned on mobile */
+:global(.mobile-header-controls) {
+  display: none;
+}
+
+:global(.mobile-header-controls .navbar-icon-button) {
   position: relative;
   width: 44px;
   height: 44px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease;
+}
+
+:global(.mobile-header-controls .navbar-icon-button:hover) {
+  background-color: var(--hover-bg);
+}
+
+@media (max-width: 1024px) {
+  /* Mobile: Show controls as flex item, naturally aligned with profile */
+  :global(.mobile-header-controls) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  /* Show theme toggle in mobile controls */
+  :global(.mobile-header-controls .theme-toggle-container--sidebar) {
+    display: block;
+  }
+
+  /* Navbar button: properly sized with high z-index for menu overlay */
+  :global(.mobile-header-controls .navbar-icon-button) {
+    width: 40px;
+    height: 40px;
+    z-index: 1301;
+  }
+
+  /* Hide body-level theme toggle on mobile */
+  :global(.theme-toggle-container--body) {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  :global(.theme-toggle-container--body) {
+    display: block;
+  }
+}
+
+:global(.navbar-icon-button:hover) {
+  background-color: var(--surface-hover);
 }
 
 :global(.navbar-icon) {
@@ -68,32 +117,24 @@
   perspective: 800px;
 }
 
-:is(
-    html.sidebar-collapsed-global,
-    html[data-sidebar='collapsed'],
-    body.sidebar-collapsed
-  )
-  :global(.sidebar)
-  :global(.profile-header),
-:global(.sidebar.sidebar-collapsed) :global(.profile-header),
-:global(.sidebar:has(#sidebar-toggle:checked)) :global(.profile-header) {
-  justify-content: center;
-  padding-right: 0;
-}
+/* Collapsed state: No special handling needed for profile-header
+   Global CSS already handles .profile-text and .nav-text opacity/max-width */
 
 @media (max-width: 1024px) {
   :global(.w-nav-brand) {
     padding-left: 10px;
   }
+
   :global(.profile-header) {
     padding-right: 0;
   }
+
   :global(.sidebar) {
     position: relative;
     width: 100% !important;
     height: auto;
     max-width: 100%;
-    padding: 24px !important;
+    padding: 20px !important;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
@@ -105,6 +146,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: var(--space-3);
   }
 
   :global(.navbar-icon) {
@@ -173,6 +216,7 @@
     z-index: 1301;
   }
 
+  /* Default navbar-icon-button for menu overlay */
   :global(.navbar-icon-button) {
     position: relative;
     z-index: 1301;
@@ -192,7 +236,7 @@
     height: 100dvh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-top: 92px;
+    padding-top: 100px;
     padding-bottom: 8px;
     background-color: var(--bg-overlay);
     z-index: 1200;
@@ -248,15 +292,16 @@
     background-color: var(--bg-overlay);
   }
 
-  :global(.nav-toggle:checked)
-    ~ :global(.navbar-icon-button)
+  /* Icon switch for nav toggle in profile header */
+  :global(.nav-content:has(#nav-toggle:checked))
+    :global(.navbar-icon-button)
     :global(.icon-switch--menu) {
     opacity: 0;
     --icon-xform: rotate(90deg) scale(0.9);
   }
 
-  :global(.nav-toggle:checked)
-    ~ :global(.navbar-icon-button)
+  :global(.nav-content:has(#nav-toggle:checked))
+    :global(.navbar-icon-button)
     :global(.icon-switch--close) {
     opacity: 1;
     --icon-xform: rotate(0deg) scale(1);
@@ -272,8 +317,9 @@
     overflow-y: auto;
   }
 
-  :global(.navbar-icon-button) {
-    display: none;
+  /* Desktop: Hide mobile controls completely */
+  :global(.mobile-header-controls) {
+    display: none !important;
   }
 
   :global(.sidebar-toggle-button) {

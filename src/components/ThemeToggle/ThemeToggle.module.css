@@ -1,0 +1,266 @@
+/* Base wrapper layout */
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+/* Body-level toggle: fixed to top-right on desktop */
+:global(.theme-toggle-container--body .theme-toggle) {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9998;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Desktop (>1024px): Hide sidebar-level toggle */
+@media (min-width: 1025px) {
+  :global(.theme-toggle-container--sidebar .theme-toggle) {
+    display: none;
+  }
+}
+
+/* Mobile (≤1024px): Hide body-level fixed toggle, show sidebar toggle */
+@media (max-width: 1024px) {
+  /* Hide body-level fixed toggle */
+  :global(.theme-toggle-container--body .theme-toggle) {
+    display: none;
+  }
+
+  /* Show and reset sidebar-level toggle positioning */
+  :global(.theme-toggle-container--sidebar .theme-toggle) {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  :global(.theme-toggle-container--sidebar .theme-toggle__trigger) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .trigger {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Hide theme toggle when lightbox is active */
+:global(html.image-lightbox--locked) .wrapper {
+  display: none;
+}
+
+/* Trigger Button */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.trigger:hover {
+  background-color: var(--surface-hover);
+}
+
+.trigger:active {
+  transform: translateY(1px);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+.trigger[aria-expanded='true'] {
+  background-color: var(--surface-hover);
+}
+
+.triggerIcon {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* Flyout Menu */
+.flyout {
+  position: fixed;
+  min-width: 200px;
+  background-color: var(--surface-elevated, var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flyout[hidden] {
+  display: none !important;
+}
+
+.flyout:not([hidden]) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: flyoutFadeIn 0.2s ease;
+}
+
+/* Closing animation */
+:global(.theme-toggle__flyout--closing) {
+  animation: flyoutFadeOut 0.2s ease forwards;
+}
+
+@keyframes flyoutFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flyoutFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* Flyout Options */
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-gray, var(--text-secondary));
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  text-align: left;
+  position: relative;
+}
+
+.option:last-child {
+  margin-bottom: 0;
+}
+
+.option:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow-030);
+}
+
+/* Keyboard focus indicator - enhanced for accessibility */
+.option:focus {
+  outline: none; /* Remove default to use custom styling */
+}
+
+.option:focus-visible {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-accent);
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Active state - matching nav menu active style */
+.option[data-active='true'] {
+  color: var(--text-primary);
+  background-color: var(--surface-active);
+  border-color: var(--border-color);
+}
+
+/* Active state when focused (keyboard navigation) */
+.option[data-active='true']:focus-visible {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.optionIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.48;
+  transition: opacity 0.2s ease;
+}
+
+.option:hover .optionIcon {
+  opacity: 1;
+}
+
+.option[data-active='true'] .optionIcon {
+  opacity: 1;
+}
+
+.optionSvg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.optionLabel {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Visually hidden but accessible to screen readers */
+:global(.visually-hidden) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

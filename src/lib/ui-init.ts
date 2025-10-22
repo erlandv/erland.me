@@ -11,6 +11,7 @@ type LoadedFlags = {
   copy: boolean;
   lightbox: boolean;
   table: boolean;
+  themeToggle: boolean;
 };
 
 const loaded: LoadedFlags = {
@@ -18,6 +19,7 @@ const loaded: LoadedFlags = {
   copy: false,
   lightbox: false,
   table: false,
+  themeToggle: false,
 };
 
 const SELECTORS = {
@@ -28,6 +30,7 @@ const SELECTORS = {
     '.content-image-grid img:not(.hero-image)',
   ],
   table: ['.prose table'],
+  themeToggle: ['.theme-toggle'],
 } as const;
 
 function hasTarget(selectors: readonly string[]): boolean {
@@ -113,11 +116,38 @@ async function maybeLoadTable(): Promise<void> {
   );
 }
 
+async function maybeLoadThemeToggle(): Promise<void> {
+  // Theme toggle is always present (rendered in SiteLayout), so no gate check needed
+  // Just ensure we load and init it
+
+  await safeFeatureInit(
+    'themeToggle',
+    async () => {
+      // Import module once, but always re-run the initializer
+      if (!loaded.themeToggle) {
+        const mod = await import('./theme-toggle');
+        loaded.themeToggle = true;
+        // Store reference to the initializer function for subsequent calls
+        (window as any).__themeToggleInit = () => {
+          void mod.init();
+        };
+      }
+      // Always execute the initializer to handle view transitions
+      await (window as any).__themeToggleInit?.();
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
+}
+
 function gateAll(): void {
   void maybeLoadShare();
   void maybeLoadCopy();
   void maybeLoadLightbox();
   void maybeLoadTable();
+}
+
+function gateThemeToggle(): void {
+  void maybeLoadThemeToggle();
 }
 
 function setupGateListeners(): void {
@@ -127,13 +157,20 @@ function setupGateListeners(): void {
   document.addEventListener('astro:page-load', run);
   document.addEventListener('astro:after-swap', run);
 
-  // Debounced MutationObserver for DOM injections
+  // Theme toggle initialization (separate from dynamic content)
+  // Only needs to run on page load, not on DOM mutations
+  const runTheme = () => gateThemeToggle();
+  document.addEventListener('astro:page-load', runTheme);
+  document.addEventListener('astro:after-swap', runTheme);
+
+  // Debounced MutationObserver for dynamic content only
+  // (excludes theme toggle to prevent infinite loops)
   let t: number | null = null;
   const debounced = () => {
     if (t) window.clearTimeout(t);
     t = window.setTimeout(() => {
       t = null;
-      run();
+      run(); // Only runs gateAll(), not theme toggle
     }, 50);
   };
   const observer = new MutationObserver(debounced);
@@ -150,6 +187,7 @@ export function initUi(): void {
       'DOMContentLoaded',
       () => {
         gateAll();
+        gateThemeToggle(); // Theme toggle initial load
         setupGateListeners();
       },
       { once: true }
@@ -158,6 +196,7 @@ export function initUi(): void {
     // Small delay to allow Astro content to hydrate
     setTimeout(() => {
       gateAll();
+      gateThemeToggle(); // Theme toggle initial load
       setupGateListeners();
     }, 50);
   }
