@@ -1,6 +1,19 @@
 ---
 import Icon from './Icon.astro';
 import styles from './ThemeToggle/ThemeToggle.module.css';
+
+// Import theme icon SVGs for pre-hydration injection
+import autoIconRaw from '../icons/auto.svg?raw';
+import sunIconRaw from '../icons/sun.svg?raw';
+import moonIconRaw from '../icons/moon.svg?raw';
+
+// Prepare icons for inline script with exact same styles as .svg class
+const iconStyles = 'style="width:20px;height:20px;display:block;margin:0;padding:0"';
+const icons = {
+  auto: autoIconRaw.replace('<svg', `<svg ${iconStyles}`),
+  light: sunIconRaw.replace('<svg', `<svg ${iconStyles}`),
+  dark: moonIconRaw.replace('<svg', `<svg ${iconStyles}`)
+};
 ---
 
 <div class:list={[styles.wrapper, 'theme-toggle']}>
@@ -74,3 +87,27 @@ import styles from './ThemeToggle/ThemeToggle.module.css';
     aria-atomic='true'
   ></div>
 </div>
+
+<script is:inline define:vars={{ icons }}>
+  (function() {
+    try {
+      const storageKey = 'theme-preference';
+      const stored = localStorage.getItem(storageKey);
+      const preference = stored === 'light' || stored === 'dark' ? stored : 'auto';
+      
+      // Update icon in current script's context (this theme toggle instance)
+      const currentScript = document.currentScript;
+      if (currentScript) {
+        const wrapper = currentScript.previousElementSibling;
+        if (wrapper && wrapper.classList.contains('theme-toggle')) {
+          const triggerIcon = wrapper.querySelector('.theme-toggle__trigger-icon');
+          if (triggerIcon && icons[preference]) {
+            triggerIcon.innerHTML = icons[preference];
+          }
+        }
+      }
+    } catch (err) {
+      // Silent fail - JS hydration will fix it
+    }
+  })();
+</script>
