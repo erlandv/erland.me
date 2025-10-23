@@ -147,8 +147,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   )}
   
   <ClientRouter fallback="swap" />
+  <!-- Theme preference initialization: must run before CSS to prevent FOUC -->
   <script is:inline>
     !function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"auto";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r))}catch(e){}}();
+  </script>
+  <!-- Sidebar collapse state initialization: prevents FOUC on soft reload (CTRL+R)
+       Hybrid approach: Set initial state + disable transitions until JS controller loads.
+       - On hard reload (CTRL+Shift+R): CSS and JS parse together, minimal race condition
+       - On soft reload (CTRL+R): CSS cached and active before JS executes → brief FOUC
+       Solution: Apply state classes immediately and disable transitions via CSS variable.
+       The SidebarController will re-enable transitions after full initialization. -->
+  <script is:inline>
+    (function(){try{var e=window.matchMedia("(min-width: 1025px)");if(!e.matches)return;var t=localStorage.getItem("sidebar-collapsed")==="true";if(!t)return;var a=document.documentElement;a.classList.add("sidebar-collapsed-global");a.setAttribute("data-sidebar","collapsed");a.style.setProperty("--sidebar-init-transition","none")}catch(e){}})();
   </script>
   <script is:inline>
     (function () {
