@@ -54,12 +54,8 @@ const websiteSchema = websiteJsonLd();
 const enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
 const enableAdsense = import.meta.env.PROD && isProductionSite() && Boolean(ADSENSE_CLIENT);
 
-// Precompute GTM inline snippet to ensure server-side interpolation of the ID
-const gtmSnippet = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');`;
+// Minified GTM snippet with server-side GTM_ID interpolation
+const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+new Date,event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=!0,j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl,f.parentNode.insertBefore(j,f)}(window,document,'script','dataLayer','${GTM_ID}');`;
 ---
 
 <head>
