@@ -292,6 +292,16 @@
 
     // Apply root flags ASAP
     applyInitialRootFlags();
+    
+    // Re-enable transitions after initial state is applied
+    // The inline <head> script sets --sidebar-init-transition: none to prevent
+    // animated FOUC on soft reload. After JS controller initializes, we remove
+    // the override so subsequent user interactions have smooth transitions.
+    requestAnimationFrame(() => {
+      try {
+        document.documentElement.style.removeProperty('--sidebar-init-transition');
+      } catch {}
+    });
 
     // Init state and breakpoint handling
     const sidebarToggle = document.getElementById(

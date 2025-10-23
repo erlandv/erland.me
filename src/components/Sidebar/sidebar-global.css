@@ -6,6 +6,9 @@
   --sidebar-collapsed-item-width: 70px;
   --sidebar-collapsed-item-padding: var(--space-3);
   --sidebar-section-gap: 36px;
+  /* --sidebar-init-transition: Set by inline <head> script to 'none' during 
+     initial load to prevent FOUC on soft reload. Removed by SidebarController 
+     after state is applied. When undefined, CSS transitions work normally. */
 }
 
 .sidebar {
@@ -19,9 +22,11 @@
   top: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+  );
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
@@ -72,9 +77,11 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 .sidebar {
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     width var(--dur-slow) var(--ease-standard),
-    padding var(--dur-slow) var(--ease-standard);
+    padding var(--dur-slow) var(--ease-standard)
+  );
   overflow-x: hidden;
 }
 
@@ -90,13 +97,15 @@ body:has(.sidebar .nav-toggle:checked) {
 
 .sidebar .nav-link-container {
   box-sizing: border-box;
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     width var(--dur-medium) var(--ease-standard),
     padding var(--dur-medium) var(--ease-standard),
     margin var(--dur-medium) var(--ease-standard),
     background-color 180ms var(--ease-standard),
     border-color 180ms var(--ease-standard),
-    transform 180ms var(--ease-standard);
+    transform 180ms var(--ease-standard)
+  );
 }
 
 .sidebar .profile-text,
@@ -107,9 +116,11 @@ body:has(.sidebar .nav-toggle:checked) {
   inline-size: auto;
   white-space: nowrap;
   overflow: hidden;
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     opacity 200ms var(--ease-standard),
-    max-width var(--dur-medium) var(--ease-standard);
+    max-width var(--dur-medium) var(--ease-standard)
+  );
   will-change: opacity, max-width;
 }
 
@@ -135,11 +146,13 @@ body:has(.sidebar .nav-toggle:checked) {
 .sidebar .socials--menu {
   opacity: 1;
   max-height: 200px;
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     opacity var(--dur-medium) var(--ease-standard),
     max-height 240ms var(--ease-standard),
     padding-top 240ms var(--ease-standard),
-    border-color 240ms var(--ease-standard);
+    border-color 240ms var(--ease-standard)
+  );
   will-change: opacity, max-height;
   overflow: hidden;
 }
@@ -259,17 +272,18 @@ body:has(.sidebar .nav-toggle:checked) {
   justify-content: center !important;
   align-items: center !important;
   padding: var(--sidebar-collapsed-item-padding) !important;
-  margin-bottom: 8px !important;
   min-height: 44px !important;
   width: var(--sidebar-collapsed-item-width) !important;
   margin-left: auto !important;
   margin-right: auto !important;
   gap: 0 !important;
-  transition:
+  transition: var(
+    --sidebar-init-transition,
     width var(--dur-medium) var(--ease-standard),
     padding var(--dur-medium) var(--ease-standard),
     margin var(--dur-medium) var(--ease-standard),
-    gap var(--dur-medium) var(--ease-standard);
+    gap var(--dur-medium) var(--ease-standard)
+  );
 }
 
 .sidebar.sidebar-collapsed .nav-link-image {
@@ -282,7 +296,6 @@ body:has(.sidebar .nav-toggle:checked) {
 
 .sidebar.sidebar-collapsed .w-nav-menu {
   align-items: flex-start !important;
-  gap: 0px !important;
 }
 
 /* Ensure the nav menu inside sidebar uses a vertical flex layout by default */
