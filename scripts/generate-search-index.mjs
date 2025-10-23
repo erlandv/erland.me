@@ -74,7 +74,9 @@ async function buildIndex() {
 
     const plain = markdownToPlainText(body);
     const excerpt = pickExcerpt(data, plain);
-    const content = plain;
+    // Truncate content to first 1000 chars for search performance
+    // Full article text not needed for fuzzy search
+    const content = plain.slice(0, 1000);
 
     const item = {
       slug,

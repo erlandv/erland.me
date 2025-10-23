@@ -98,14 +98,17 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       { name: 'category', weight: 0.1 },
     ],
     threshold: 0.3,
+    distance: 100,
     includeScore: true,
     includeMatches: true,
     minMatchCharLength: 2,
     ignoreLocation: true,
+    useExtendedSearch: false,
   };
 
   let fuse: any = null;
   let fuseReady = false;
+  let fuseLoadPromise: Promise<void> | null = null;
   let cleanupSearch: (() => void) | null = null;
 
   async function loadSearchIndex(): Promise<any[]> {
@@ -139,6 +142,13 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     };
     const nextSig = signatureOf(arr);
 
+    // Check global cache first (for view transitions)
+    if ((window as any).__FUSE_INSTANCE__) {
+      fuse = (window as any).__FUSE_INSTANCE__;
+      fuseReady = true;
+      return;
+    }
+
     const mod: any = await import('fuse.js');
     const FuseCtor = mod.default || mod;
 
@@ -146,6 +156,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       fuse = new FuseCtor(arr, FUSE_OPTS);
       (fuse as any).__signature = nextSig;
       fuseReady = true;
+      // Cache globally for view transitions
+      (window as any).__FUSE_INSTANCE__ = fuse;
       return;
     }
 
@@ -158,6 +170,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
         fuse = new FuseCtor(arr, FUSE_OPTS);
         (fuse as any).__signature = nextSig;
       }
+      // Update cache
+      (window as any).__FUSE_INSTANCE__ = fuse;
     }
     fuseReady = true;
   }
@@ -229,6 +243,22 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
     // Start initialization
     initOnce();
+
+    // Lazy load Fuse.js on first focus (don't block initial page load)
+    const onFirstFocus = () => {
+      if (!fuseLoadPromise) {
+        fuseLoadPromise = (async () => {
+          let postsData = (window as any).__SEARCH_POSTS__ || [];
+          if (!postsData || postsData.length === 0) {
+            postsData = await loadSearchIndex();
+          }
+          await ensureFuse(postsData);
+        })().catch(err => {
+          console.error('Failed to load Fuse.js:', err);
+        });
+      }
+    };
+    searchInput.addEventListener('focus', onFirstFocus, { once: true });
 
     // Search input event handlers
     let searchTimeout: number | null = null;
@@ -341,14 +371,9 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
     // Fuse-based client-side search with lazy import
     setTimeout(async () => {
-      let postsData = (window as any).__SEARCH_POSTS__ || [];
-      if (!postsData || postsData.length === 0) {
-        postsData = await loadSearchIndex();
-      }
-      try {
-        await ensureFuse(postsData);
-      } catch (e) {
-        console.error('Gagal inisialisasi Fuse:', e);
+      // Wait for Fuse to be ready if still loading
+      if (fuseLoadPromise) {
+        await fuseLoadPromise;
       }
 
       let results: SearchResult[] = [];
