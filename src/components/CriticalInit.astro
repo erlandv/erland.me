@@ -1,0 +1,13 @@
+---
+/**
+ * Critical initialization scripts that must run before CSS to prevent FOUC.
+ * This combines theme and sidebar state initialization in a single minified inline script.
+ * 
+ * IMPORTANT: This script MUST remain inline and execute before any CSS loads.
+ * Do not move to external file or defer execution.
+ */
+---
+
+<script is:inline>
+!function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"auto";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));var a=window.matchMedia("(min-width: 1025px)");if(a.matches){var s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
+</script>

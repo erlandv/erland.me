@@ -1,10 +1,11 @@
 /**
  * ui-init.ts - global UI initializer gate
- * Consolidates share, code-copy, lightbox, and table-responsive init into a single conditional dynamic import.
+ * Consolidates share, code-copy, lightbox, table-responsive, and theme control init into a single conditional dynamic import.
  * Includes error boundary for graceful error handling and recovery.
  */
 
 import { safeFeatureInit, setupGlobalErrorHandler } from './error-boundary';
+import { initThemeControl } from './theme-init';
 
 type LoadedFlags = {
   share: boolean;
@@ -12,6 +13,7 @@ type LoadedFlags = {
   lightbox: boolean;
   table: boolean;
   themeToggle: boolean;
+  themeControl: boolean;
 };
 
 const loaded: LoadedFlags = {
@@ -20,6 +22,7 @@ const loaded: LoadedFlags = {
   lightbox: false,
   table: false,
   themeToggle: false,
+  themeControl: false,
 };
 
 const SELECTORS = {
@@ -150,6 +153,13 @@ function gateThemeToggle(): void {
   void maybeLoadThemeToggle();
 }
 
+function initTheme(): void {
+  // Theme control initialization (runs once, always)
+  if (loaded.themeControl) return;
+  loaded.themeControl = true;
+  initThemeControl();
+}
+
 function setupGateListeners(): void {
   // Re-gate on Astro router events until all features loaded
   const run = () => gateAll();
@@ -180,6 +190,9 @@ function setupGateListeners(): void {
 export function initUi(): void {
   // Setup global error handlers once
   setupGlobalErrorHandler();
+
+  // Initialize theme control API (runs once, always)
+  initTheme();
 
   // Initial gate run
   if (document.readyState === 'loading') {
