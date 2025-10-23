@@ -2,6 +2,7 @@
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
 import { GTM_ID, ADSENSE_CLIENT } from '@lib/env';
 import { ClientRouter } from 'astro:transitions';
+import CriticalInit from './CriticalInit.astro';
 
 interface HeaderProps {
   title: string;
@@ -66,8 +67,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{metaTags.title}</title>
   <meta name="generator" content={Astro.generator} />
-  <meta name="theme-color" content="#1a1a1a" />
-  <meta name="msapplication-TileColor" content="#1a1a1a" />
+  <meta name="theme-color" content="#428dff" />
+  <meta name="msapplication-TileColor" content="#428dff" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content={metaTags.title} />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -147,158 +149,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   )}
   
   <ClientRouter fallback="swap" />
-  <!-- Theme preference initialization: must run before CSS to prevent FOUC -->
-  <script is:inline>
-    !function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"auto";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r))}catch(e){}}();
-  </script>
-  <!-- Sidebar collapse state initialization: prevents FOUC on soft reload (CTRL+R)
-       Hybrid approach: Set initial state + disable transitions until JS controller loads.
-       - On hard reload (CTRL+Shift+R): CSS and JS parse together, minimal race condition
-       - On soft reload (CTRL+R): CSS cached and active before JS executes → brief FOUC
-       Solution: Apply state classes immediately and disable transitions via CSS variable.
-       The SidebarController will re-enable transitions after full initialization. -->
-  <script is:inline>
-    (function(){try{var e=window.matchMedia("(min-width: 1025px)");if(!e.matches)return;var t=localStorage.getItem("sidebar-collapsed")==="true";if(!t)return;var a=document.documentElement;a.classList.add("sidebar-collapsed-global");a.setAttribute("data-sidebar","collapsed");a.style.setProperty("--sidebar-init-transition","none")}catch(e){}})();
-  </script>
-  <script is:inline>
-    (function () {
-      // Skip if already initialized (view transitions)
-      if (window.__themeControl) {
-        window.__themeControl.syncDocument(document);
-        return;
-      }
-
-      const storageKey = 'theme-preference';
-      const media = window.matchMedia('(prefers-color-scheme: dark)');
-      const subscribers = new Set();
-
-      const readStoredPreference = () => {
-        try {
-          const value = localStorage.getItem(storageKey);
-          return value === 'light' || value === 'dark' || value === 'auto'
-            ? value
-            : 'auto';
-        } catch {
-          return 'auto';
-        }
-      };
-
-      const writeStoredPreference = (value) => {
-        try {
-          localStorage.setItem(storageKey, value);
-        } catch (err) {
-          console.warn('Failed to save theme preference:', err);
-        }
-      };
-
-      let preference = readStoredPreference();
-
-      const resolvePreference = (pref) => {
-        return pref === 'auto' ? (media.matches ? 'dark' : 'light') : pref;
-      };
-
-      const syncDocument = (targetDoc = document) => {
-        const resolved = resolvePreference(preference);
-        const root = targetDoc.documentElement;
-        
-        if (root) {
-          if (resolved === 'light') {
-            root.setAttribute('data-theme', 'light');
-          } else {
-            root.removeAttribute('data-theme');
-          }
-          root.setAttribute('data-theme-preference', preference);
-          root.setAttribute('data-theme-resolved', resolved);
-        }
-        
-        return resolved;
-      };
-
-      const notifySubscribers = (resolved) => {
-        subscribers.forEach((callback) => {
-          try {
-            callback({ preference, resolved });
-          } catch (error) {
-            console.error('Theme subscriber error:', error);
-          }
-        });
-      };
-
-      const applyPreference = (pref, persist) => {
-        preference = pref;
-        const resolved = syncDocument(document);
-
-        if (persist) {
-          writeStoredPreference(pref);
-        }
-
-        notifySubscribers(resolved);
-      };
-
-      const setPreference = (nextPref) => {
-        applyPreference(nextPref, true);
-      };
-
-      // System theme change listener
-      const handleMediaChange = () => {
-        if (preference === 'auto') {
-          applyPreference(preference, false);
-        }
-      };
-      
-      media.addEventListener('change', handleMediaChange);
-
-      // View transitions support
-      const syncIncomingDocument = (event) => {
-        const newDoc = event?.detail?.newDocument;
-        if (newDoc) {
-          syncDocument(newDoc);
-        }
-      };
-
-      const reapplyCurrent = () => {
-        syncDocument(document);
-      };
-
-      document.addEventListener('astro:before-swap', syncIncomingDocument);
-      document.addEventListener('astro:after-swap', reapplyCurrent);
-      document.addEventListener('astro:page-load', reapplyCurrent);
-
-      // Public API
-      const api = {
-        getPreference: () => preference,
-        getResolved: () => resolvePreference(preference),
-        setPreference,
-        cyclePreference: () => {
-          const order = ['auto', 'light', 'dark'];
-          const index = order.indexOf(preference);
-          const next = order[(index + 1) % order.length];
-          setPreference(next);
-          return next;
-        },
-        subscribe: (callback) => {
-          if (typeof callback !== 'function') {
-            return () => {};
-          }
-          subscribers.add(callback);
-          // Immediately notify with current state
-          callback({
-            preference,
-            resolved: resolvePreference(preference),
-          });
-          return () => {
-            subscribers.delete(callback);
-          };
-        },
-        syncDocument,
-      };
-
-      Object.defineProperty(window, '__themeControl', {
-        value: api,
-        writable: false,
-        configurable: false,
-      });
-    })();
-  </script>
-
+  
+  <CriticalInit />
 </head>

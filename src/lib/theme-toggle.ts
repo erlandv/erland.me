@@ -7,16 +7,18 @@ import { showToast } from './toast';
 
 type ThemePreference = 'auto' | 'light' | 'dark';
 
+interface ThemeState {
+  preference: ThemePreference;
+  resolved: 'light' | 'dark';
+}
+
 interface ThemeControl {
   getPreference: () => ThemePreference;
   getResolved: () => 'light' | 'dark';
   setPreference: (pref: ThemePreference) => void;
-  subscribe: (
-    callback: (state: {
-      preference: ThemePreference;
-      resolved: 'light' | 'dark';
-    }) => void
-  ) => () => void;
+  cyclePreference: () => ThemePreference;
+  subscribe: (callback: (state: ThemeState) => void) => () => void;
+  syncDocument: (doc?: Document) => 'light' | 'dark';
 }
 
 declare global {
@@ -347,12 +349,7 @@ export const init = async (): Promise<void> => {
     }
 
     // Update UI based on current theme
-    const updateUI = ({
-      preference,
-    }: {
-      preference: ThemePreference;
-      resolved: 'light' | 'dark';
-    }): void => {
+    const updateUI = ({ preference }: ThemeState): void => {
       updateTriggerIcon(preference, trigger);
       updateOptionsState(preference, options);
     };

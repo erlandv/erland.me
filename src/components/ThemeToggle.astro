@@ -90,29 +90,4 @@ const icons = {
   </div>
 </div>
 
-<script is:inline define:vars={{ icons }}>
-  (function () {
-    try {
-      const storageKey = 'theme-preference';
-      const stored = localStorage.getItem(storageKey);
-      const preference =
-        stored === 'light' || stored === 'dark' ? stored : 'auto';
-
-      // Update icon in current script's context (this theme toggle instance)
-      const currentScript = document.currentScript;
-      if (currentScript) {
-        const wrapper = currentScript.previousElementSibling;
-        if (wrapper && wrapper.classList.contains('theme-toggle')) {
-          const triggerIcon = wrapper.querySelector(
-            '.theme-toggle__trigger-icon'
-          );
-          if (triggerIcon && icons[preference]) {
-            triggerIcon.innerHTML = icons[preference];
-          }
-        }
-      }
-    } catch (err) {
-      // Silent fail - JS hydration will fix it
-    }
-  })();
-</script>
+<script is:inline define:vars={{ icons }}>!function(){try{var e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"?e:"auto",r=document.currentScript;if(r){var n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){var i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>
