@@ -55,3 +55,6 @@ shrinkwrap.yaml
 AGENTS.md
 public/*.txt
 public/*.json
+
+# Personal Docs
+TAILWIND_ROADMAP_MIGRATION.md
