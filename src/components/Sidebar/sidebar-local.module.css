@@ -18,7 +18,7 @@
 :global(.niv-data) {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 
 /* Mobile Header Controls - Hidden on desktop, absolute positioned on mobile */
@@ -37,11 +37,22 @@
   background: transparent;
   border: none;
   border-radius: var(--radius-md);
-  transition: background-color 0.2s ease;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
 :global(.mobile-header-controls .navbar-icon-button:hover) {
-  background-color: var(--hover-bg);
+  background-color: var(--surface-hover);
+}
+
+:global(.mobile-header-controls .navbar-icon-button:active) {
+  transform: translateY(1px);
+}
+
+:global(.mobile-header-controls .navbar-icon-button:focus-visible) {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 1024px) {
@@ -65,6 +76,11 @@
     z-index: 1301;
   }
 
+  :global(.mobile-header-controls .navbar-icon-button:active) {
+    transform: translateY(1px);
+    background-color: var(--surface-hover);
+  }
+
   /* Hide body-level theme toggle on mobile */
   :global(.theme-toggle-container--body) {
     display: none;
@@ -82,8 +98,8 @@
 }
 
 :global(.navbar-icon) {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   display: block;
 }
 
@@ -163,9 +179,12 @@
   :global(.navbar-icon-button) {
     padding: 12px;
     transition:
-      background-color 0.24s ease,
-      box-shadow 0.24s ease,
-      transform 0.24s ease;
+      background-color var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  :global(.navbar-icon-button:active) {
+    transform: translateY(1px);
   }
 
   :global(.navbar-icon.icon-transitioning) {
@@ -293,6 +312,10 @@
   }
 
   /* Icon switch for nav toggle in profile header */
+  :global(.nav-content:has(#nav-toggle:checked)) :global(.navbar-icon-button) {
+    background-color: var(--surface-hover);
+  }
+
   :global(.nav-content:has(#nav-toggle:checked))
     :global(.navbar-icon-button)
     :global(.icon-switch--menu) {
