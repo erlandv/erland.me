@@ -1,25 +1,25 @@
 .site-footer {
-  /* transparent to let grid background show through */
   background: transparent;
   border-top: none;
   color: var(--text-secondary);
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: clamp(14px, 2vw, 16px);
+  font-family: 'Agave Nerd Font', ui-monospace, monospace;
   line-height: 1.6;
   width: 100%;
   margin-top: clamp(
     var(--space-6),
     4vw,
     var(--space-8)
-  ); /* give a bit more breathing room */
+  );
   padding-bottom: 12px;
   font-weight: 400;
 }
 
 .footer-inner {
   width: 100%;
-  max-width: 680px; /* match .container */
+  max-width: 720px;
   margin: 0 auto;
-  padding: 0; /* we'll control spacing below */
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,10 +33,10 @@
   display: none;
 }
 .footer-inner {
-  border-top: 1px solid var(--border-color); /* same as .sidebar .socials--sidebar */
-  padding-top: 14px; /* slightly larger to avoid crowding on some DPIs */
-  padding-bottom: 28px; /* ensure top-of-border aligns closer to sidebar */
-  min-height: 38px; /* approximate socials row height for visual alignment */
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+  padding-bottom: 28px;
+  min-height: 38px;
 }
 
 .footer-powered {
