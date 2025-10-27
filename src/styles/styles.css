@@ -410,27 +410,6 @@ p {
     0 0 0 1px rgba(var(--color-primary-rgb), 0.1);
 }
 
-.prose pre::before {
-  content: attr(data-language);
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: var(--bg-code-2);
-  color: var(--text-code-muted);
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-right: 1px solid var(--border-code);
-  border-bottom: 1px solid var(--border-code);
-  z-index: 5;
-  max-width: calc(100% - 4rem);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .prose pre::-webkit-scrollbar {
   height: 8px;
   width: 8px;
@@ -464,12 +443,20 @@ button:focus-visible,
 }
 
 code {
-  background-color: var(--overlay-010);
-  color: var(--text-secondary);
+  background-color: var(--bg-code);
+  color: var(--text-code);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.9em;
   font-weight: 500;
+}
+
+code span {
+  color: #fafafa;
+}
+
+code span ::selection {
+  background-color: rgba(var(--color-primary-rgb), 0.9);
 }
 
 @media (prefers-reduced-motion: reduce) {

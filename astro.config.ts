@@ -26,7 +26,7 @@ export default defineConfig({
       remarkDownloadFiles,
     ],
     shikiConfig: {
-      theme: 'min-dark',
+      theme: 'material-theme-darker',
       wrap: false,
     },
     gfm: true,
