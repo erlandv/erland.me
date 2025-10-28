@@ -136,7 +136,5 @@ p {
 ul {
   margin-top: 0;
   margin-bottom: 10px;
-  padding-left: 40px;
+  padding-left: 30px;
 }
-
-/* Dark theme overrides applied later in styles.css; keep light base here. */
