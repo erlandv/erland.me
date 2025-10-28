@@ -573,8 +573,13 @@ button:focus-visible,
 
 ===== END MIGRATION ===== */
 
+/* ===== MIGRATED TO utilities/navigation.css (Phase 8) =====
+   .w-inline-block utility merged with navigation utilities
+   ul padding rule removed (unused, browser default sufficient)
+   Imported via Sidebar/sidebar-global.css
+===== BEGIN COMMENTED CODE =====
 
-/* Utility elements */
+/* Utility elements *‍/
 .w-inline-block {
   max-width: 100%;
   display: inline-block;
@@ -583,6 +588,8 @@ button:focus-visible,
 ul {
   padding-left: 30px;
 }
+
+===== END MIGRATION ===== */
 
 /* Advertising placements */
 /* Advertising wrapper baseline - responsive for all screen sizes */

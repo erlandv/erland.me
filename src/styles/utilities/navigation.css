@@ -4,6 +4,12 @@
  * Legacy Webflow-style navigation structure
  */
 
+/* Webflow-legacy inline-block utility used by navigation components */
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
+
 /* Navigation scaffold */
 .w-nav {
   z-index: 1000;
