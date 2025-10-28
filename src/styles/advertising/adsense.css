@@ -1,0 +1,70 @@
+/**
+ * AdSense Advertising Placements
+ * Responsive ad containers and placeholders for blog and download pages
+ * Imported conditionally in blog/[slug].astro and download/[slug].astro
+ */
+
+/* Advertising wrapper baseline - responsive for all screen sizes */
+:is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+  display: block !important;
+  margin: clamp(0.75rem, 2vw, 1.25rem) auto;
+  padding: 0.5rem 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+ins.adsbygoogle {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: clamp(100px, 25vw, 180px);
+  overflow: hidden;
+}
+
+.ad-placeholder {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: clamp(0.5rem, 1.5vw, 1rem) auto;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  text-align: center;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  overflow: hidden;
+}
+
+/* Mobile optimization - ensure ads fit within viewport */
+@media screen and (max-width: 640px) {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+    margin: 0.75rem 0;
+    padding: 0.25rem 0;
+  }
+
+  ins.adsbygoogle {
+    min-height: 100px;
+    max-height: 280px;
+  }
+
+  .ad-placeholder {
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet optimization */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  :is(#blog-content, #download-content, .content-container > .adsbygoogle) {
+    margin: 1rem auto;
+    padding: 0.4rem 0;
+  }
+
+  ins.adsbygoogle {
+    min-height: 140px;
+  }
+}

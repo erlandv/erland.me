@@ -1,3 +1,6 @@
+/* Import navigation scaffold utilities */
+@import '../../styles/utilities/navigation.css';
+
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
 :root {

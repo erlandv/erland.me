@@ -1,26 +1,25 @@
 ---
-import Header from "@components/Header.astro";
-import Icon from "@components/Icon.astro";
-import btn from "@/styles/pages/button.module.css";
-import fold from "@/styles/pages/fold.module.css";
-import err from "@/styles/pages/error.module.css";
-import "@/styles/base.css";
-import "@/styles/variables.css";
-import "@/styles/styles.css";
-import "@/styles/layout/site-layout.css";
+import Header from '@components/Header.astro';
+import Icon from '@components/Icon.astro';
+import btn from '@/styles/pages/button.module.css';
+import fold from '@/styles/pages/fold.module.css';
+import err from '@/styles/pages/error.module.css';
+import '@/styles/layout/base.css';
+import '@/styles/variables.css';
+import '@/styles/layout/site-layout.css';
 ---
 
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang='id'>
   <Header
-    title="404 - Page Not Found"
-    canonical="/404/"
+    title='404 - Page Not Found'
+    canonical='/404/'
     description="Page Not Found! That path doesn't exist, but your journey still does. Let's find your way back."
   />
   <body>
-    <div class="content">
-      <nav class="main">
-        <div class="container">
+    <div class='content'>
+      <nav class='main'>
+        <div class='container'>
           <main class={fold['fold-content-container']}>
             <div class={fold['fold-content']}>
               <div class={err['error-content']}>
@@ -30,16 +29,36 @@ import "@/styles/layout/site-layout.css";
                 <h1 class={err['error-title']}>404</h1>
                 <h2 class={err['error-subtitle']}>Page Not Found</h2>
                 <p class={err['error-description']}>
-                  That path doesn't exist, but your journey still does.
-                  Let's find your way back.
+                  That path doesn't exist, but your journey still does. Let's
+                  find your way back.
                 </p>
                 <div class={err['error-actions']}>
-                  <a href="/" class:list={[btn.button, err['homepage-button'], 'homepage-button']}>
-                    <Icon name="home" class:list={[btn['button-icon'], err['button-icon']]} />
+                  <a
+                    href='/'
+                    class:list={[
+                      btn.button,
+                      err['homepage-button'],
+                      'homepage-button',
+                    ]}
+                  >
+                    <Icon
+                      name='home'
+                      class:list={[btn['button-icon'], err['button-icon']]}
+                    />
                     <span>Go Home</span>
                   </a>
-                  <a href="javascript:history.back()" class:list={[btn.button, err['secondary-button'], 'secondary-button']}>
-                    <Icon name="back" class:list={[btn['button-icon'], err['button-icon']]} />
+                  <a
+                    href='javascript:history.back()'
+                    class:list={[
+                      btn.button,
+                      err['secondary-button'],
+                      'secondary-button',
+                    ]}
+                  >
+                    <Icon
+                      name='back'
+                      class:list={[btn['button-icon'], err['button-icon']]}
+                    />
                     <span>Go Back</span>
                   </a>
                 </div>
@@ -48,6 +67,6 @@ import "@/styles/layout/site-layout.css";
           </main>
         </div>
       </nav>
-    </div>    
+    </div>
   </body>
 </html>

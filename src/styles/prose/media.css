@@ -1,0 +1,72 @@
+/**
+ * Media Elements for Prose Content
+ * Images, figures, figcaptions, and blockquotes
+ * Used in blog posts and download pages for markdown content
+ */
+
+/* Images */
+.prose img {
+  border-radius: 12px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+}
+
+/* Figures */
+.prose figure,
+.prose .prose-figure {
+  margin: clamp(1rem, 3vw, 1.5rem) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.prose figure img,
+.prose .prose-figure img {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Figcaptions */
+.prose figcaption {
+  font-size: clamp(0.75rem, 1.4vw, 0.85rem);
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.35;
+  font-style: italic;
+  padding: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  opacity: 0.9;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  border-radius: 6px;
+  background: var(--overlay-005);
+  border: 1px solid var(--overlay-005);
+}
+
+.prose figure:hover figcaption,
+.prose .prose-figure:hover figcaption {
+  opacity: 1;
+  background: var(--overlay-008);
+  border-color: var(--overlay-010);
+}
+
+/* Blockquotes */
+.prose blockquote,
+#download-content blockquote {
+  margin: clamp(1rem, 3vw, 1.5rem) 0;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.25rem);
+  border-left: 3px solid var(--border);
+  background: var(--overlay-005);
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.7;
+  font-style: italic;
+}
