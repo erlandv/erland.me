@@ -351,6 +351,10 @@ p {
 
 ===== END MIGRATION ===== */
 
+/* ===== MIGRATED TO prose/links.css & prose/code.css (Phase 5) =====
+   Links with animated underline and code block styles
+   Imported globally via SiteLayout.astro
+===== BEGIN COMMENTED CODE =====
 
 .prose a {
   color: var(--color-primary);
@@ -452,19 +456,6 @@ p {
   background: var(--scrollbar-thumb-hover);
 }
 
-a:focus-visible,
-button:focus-visible,
-.nav-link-container:focus-visible {
-  outline: 2px solid var(--text-accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-::selection {
-  background-color: var(--overlay-020);
-  color: var(--text-primary);
-}
-
 code {
   background-color: var(--bg-code);
   color: var(--text-code);
@@ -481,6 +472,9 @@ code span {
 code span ::selection {
   background-color: rgba(var(--color-primary-rgb), 0.9);
 }
+
+===== END MIGRATION ===== */
+
 
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,0 +1,99 @@
+/**
+ * Code Block Styles
+ * Syntax highlighting and inline code styles
+ * Used in blog posts and download pages
+ */
+
+/* Inline code in prose */
+.prose code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-family:
+    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+  font-size: 1.1em;
+}
+
+.prose p code,
+.prose li code,
+.prose h1 code,
+.prose h2 code,
+.prose h3 code,
+.prose h4 code,
+.prose h5 code,
+.prose h6 code {
+  background: var(--overlay-005);
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Code blocks */
+.prose pre {
+  position: relative;
+  background: var(--bg-code);
+  color: var(--text-code);
+  border: 1px solid var(--border-code);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: auto;
+  box-shadow:
+    0 4px 6px -1px var(--shadow-010),
+    0 2px 4px -1px var(--shadow-006);
+  margin: 1.5rem 0;
+  font-size: 0.975rem;
+  line-height: 1.25;
+}
+
+.prose pre:hover {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 4px 6px -1px var(--shadow-010),
+    0 2px 4px -1px var(--shadow-006),
+    0 0 0 1px rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Scrollbar styling */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Global code styles (outside prose) */
+code {
+  background-color: var(--bg-code);
+  color: var(--text-code);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+code span {
+  color: #fafafa;
+}
+
+code span ::selection {
+  background-color: rgba(var(--color-primary-rgb), 0.9);
+}
