@@ -1,12 +1,13 @@
 ---
+import Icon from '@components/Icon.astro';
+import ThemeToggle from '@components/ThemeToggle/ThemeToggle.astro';
+import './sidebar-global.css';
+import './sidebar-local.module.css';
+import socialsStyles from './sidebar-socials.module.css';
+import navStyles from './sidebar-nav.module.css';
+import { sidebarSocialLinks as socials } from './social-links';
+
 const { selectedItem } = Astro.props;
-import Icon from './Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
-import './Sidebar/sidebar-global.css';
-import socialsStyles from './Sidebar/sidebar-socials.module.css';
-import navStyles from './Sidebar/sidebar-nav.module.css';
-import './Sidebar/sidebar-local.module.css';
-import { sidebarSocialLinks as socials } from './Sidebar/social-links';
 ---
 
 <aside
