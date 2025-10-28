@@ -1,4 +1,10 @@
-/* Base typography */
+/* ===== MIGRATED TO prose/typography.css (Phase 1 & 2) =====
+   Base typography (body, h1-h4, p) and prose typography (.prose h1-h4, p, ul/ol)
+   are now in src/styles/prose/typography.css
+   Imported globally via SiteLayout.astro
+===== BEGIN COMMENTED CODE =====
+
+/* Base typography *‍/
 body {
   color: var(--text-secondary);
   background-color: var(--bg-primary);
@@ -53,7 +59,7 @@ p {
   font-weight: 400;
 }
 
-/* Rich text content */
+/* Rich text content *‍/
 .prose {
   color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
@@ -101,6 +107,8 @@ p {
   color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
+
+===== END MIGRATION ===== */
 
 /* Table container */
 .prose > table {

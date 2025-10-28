@@ -1,0 +1,109 @@
+/**
+ * Base Typography Styles
+ * Defines global typography for body, headings (h1-h4), and paragraphs
+ * Used across all pages via SiteLayout.astro
+ */
+
+/* Base typography */
+body {
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
+  font-family:
+    'Albert Sans',
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: clamp(16px, 2.5vw, 18px);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+h1 {
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  margin-bottom: clamp(16px, 4vw, 24px);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: clamp(12px, 3vw, 18px);
+  font-weight: 700;
+}
+
+h3 {
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: clamp(10px, 2.5vw, 16px);
+  font-weight: 600;
+}
+
+h4 {
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: clamp(8px, 2vw, 12px);
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: clamp(12px, 3vw, 18px);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+/* Rich text content */
+.prose {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.75;
+}
+
+.prose h1 {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  line-height: 1.2;
+  margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(0.5rem, 2vw, 0.75rem);
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.prose h2 {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  line-height: 1.3;
+  margin: clamp(1rem, 3vw, 1.25rem) 0 clamp(0.5rem, 2vw, 0.75rem);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.35;
+  margin: clamp(0.75rem, 2.5vw, 1rem) 0 clamp(0.4rem, 1.5vw, 0.6rem);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose p {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.75;
+  margin: clamp(0.7rem, 2vw, 1rem) 0;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.prose ul,
+.prose ol {
+  margin: clamp(0.6rem, 2vw, 1rem) 0 clamp(0.6rem, 2vw, 1rem) 0.25rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
