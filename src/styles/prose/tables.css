@@ -1,0 +1,174 @@
+/**
+ * Table Styles for Prose Content
+ * Responsive table layouts with desktop grid and mobile vertical stack
+ * Used in blog posts (specs tables) and download pages (file lists)
+ * 
+ * Key features:
+ * - Desktop: Standard table layout with auto column sizing
+ * - Mobile (≤767px): Vertical stack with data-label attributes
+ * - First column uses width: 1% trick for auto-sizing to content
+ */
+
+/* Table container */
+.prose > table {
+  width: 100%;
+  margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background-color: var(--bg-secondary);
+}
+
+.prose table th,
+.prose table td {
+  border-top: 1px solid var(--divider-weak);
+  border-right: 1px solid var(--divider-weak);
+  padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
+  text-align: left;
+  color: var(--text-secondary);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.prose table th {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.prose table tr:first-child th,
+.prose table tr:first-child td {
+  border-top: none;
+}
+
+.prose table tr td:last-child,
+.prose table tr th:last-child {
+  border-right: none;
+}
+
+.prose table tr:nth-child(even) td {
+  background-color: var(--bg-primary);
+}
+
+/* First column - auto-sized to content width
+ * The width: 1% is a CSS trick that forces the column to shrink to the minimum
+ * width needed to fit the content (respecting white-space: nowrap).
+ * This allows other columns to share the remaining table width proportionally.
+ * Works for both 2-column tables (blog specs) and multi-column tables (downloads).
+ */
+.prose table th:first-child,
+.prose table td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  padding-left: clamp(14px, 3vw, 20px);
+  white-space: nowrap;
+  width: 1%;
+}
+
+/* Last column right padding */
+.prose table th:last-child,
+.prose table td:last-child {
+  padding-right: clamp(14px, 3vw, 20px);
+}
+
+/* Disable default link underline animation for table links */
+.prose table a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline;
+  word-break: break-word;
+}
+
+.prose table a::after {
+  display: none;
+}
+
+.prose table a:hover {
+  color: var(--color-secondary);
+}
+
+/* Mobile: Stack table vertically */
+@media screen and (max-width: 767px) {
+  .prose > table {
+    border-radius: 8px;
+  }
+
+  .prose table,
+  .prose table thead,
+  .prose table tbody,
+  .prose table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .prose table thead {
+    display: none;
+  }
+
+  .prose table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--divider-weak);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+  }
+
+  .prose table tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: none;
+    border-bottom: 1px solid var(--divider-weak);
+    white-space: normal;
+    text-align: right;
+    min-height: 44px;
+  }
+
+  .prose table td:last-child {
+    border-bottom: none;
+  }
+
+  .prose table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    padding-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .prose table td:first-child,
+  .prose table td:last-child {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .prose table tr:nth-child(even) td {
+    background-color: var(--bg-secondary);
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .prose table th,
+  .prose table td {
+    padding: 12px 14px;
+  }
+}

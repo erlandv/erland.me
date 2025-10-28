@@ -110,7 +110,12 @@ p {
 
 ===== END MIGRATION ===== */
 
-/* Table container */
+/* ===== MIGRATED TO prose/tables.css (Phase 3) =====
+   Table styles for blog posts and download pages
+   Imported conditionally in blog/[slug].astro and download/[slug].astro
+===== BEGIN COMMENTED CODE =====
+
+/* Table container *‍/
 .prose > table {
   width: 100%;
   margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
@@ -167,7 +172,7 @@ p {
  * width needed to fit the content (respecting white-space: nowrap).
  * This allows other columns to share the remaining table width proportionally.
  * Works for both 2-column tables (blog specs) and multi-column tables (downloads).
- */
+ *‍/
 .prose table th:first-child,
 .prose table td:first-child {
   font-weight: 600;
@@ -177,13 +182,13 @@ p {
   width: 1%;
 }
 
-/* Last column right padding */
+/* Last column right padding *‍/
 .prose table th:last-child,
 .prose table td:last-child {
   padding-right: clamp(14px, 3vw, 20px);
 }
 
-/* Disable default link underline animation for table links */
+/* Disable default link underline animation for table links *‍/
 .prose table a {
   color: var(--color-primary);
   text-decoration: none;
@@ -200,7 +205,7 @@ p {
   color: var(--color-secondary);
 }
 
-/* Mobile: Stack table vertically */
+/* Mobile: Stack table vertically *‍/
 @media screen and (max-width: 767px) {
   .prose > table {
     border-radius: 8px;
@@ -266,13 +271,16 @@ p {
   }
 }
 
-/* Tablet adjustments */
+/* Tablet adjustments *‍/
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .prose table th,
   .prose table td {
     padding: 12px 14px;
   }
 }
+
+===== END MIGRATION ===== */
+
 
 .prose img {
   border-radius: 12px;
