@@ -1,0 +1,65 @@
+/**
+ * Navigation Scaffold Utilities
+ * Base styles for .w-nav-* classes used by Sidebar component
+ * Legacy Webflow-style navigation structure
+ */
+
+/* Navigation scaffold */
+.w-nav {
+  z-index: 1000;
+  background: var(--bg-secondary);
+  position: relative;
+}
+
+.w-nav:before,
+.w-nav:after {
+  content: ' ';
+  grid-area: 1 / 1 / 2 / 2;
+  display: table;
+}
+
+.w-nav:after {
+  clear: both;
+}
+
+.w-nav-brand {
+  float: left;
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative;
+}
+
+.w-nav-menu {
+  float: right;
+  position: relative;
+}
+
+.sidebar .w-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.w-nav-button {
+  float: right;
+  cursor: pointer;
+  -webkit-tap-highlight-color: var(--overlay-black-000);
+  -tap-highlight-color: var(--overlay-black-000);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 18px;
+  font-size: 24px;
+  display: none;
+  position: relative;
+}
+
+.w-nav-button:focus {
+  outline: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .w-nav-brand {
+    padding-left: 10px;
+  }
+}

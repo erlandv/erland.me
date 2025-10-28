@@ -506,8 +506,12 @@ button:focus-visible,
 
 ===== END MIGRATION ===== */
 
+/* ===== MIGRATED TO utilities/navigation.css (Phase 7) =====
+   Navigation scaffold utilities (.w-nav-* classes)
+   Imported via Sidebar/sidebar-global.css
+===== BEGIN COMMENTED CODE =====
 
-/* Navigation scaffold */
+/* Navigation scaffold *‍/
 .w-nav {
   z-index: 1000;
   background: var(--bg-secondary);
@@ -566,6 +570,9 @@ button:focus-visible,
     padding-left: 10px;
   }
 }
+
+===== END MIGRATION ===== */
+
 
 /* Utility elements */
 .w-inline-block {
