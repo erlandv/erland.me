@@ -281,6 +281,10 @@ p {
 
 ===== END MIGRATION ===== */
 
+/* ===== MIGRATED TO prose/media.css (Phase 4) =====
+   Media elements: images, figures, figcaptions, and blockquotes
+   Imported globally via SiteLayout.astro
+===== BEGIN COMMENTED CODE =====
 
 .prose img {
   border-radius: 12px;
@@ -344,6 +348,9 @@ p {
   line-height: 1.7;
   font-style: italic;
 }
+
+===== END MIGRATION ===== */
+
 
 .prose a {
   color: var(--color-primary);
