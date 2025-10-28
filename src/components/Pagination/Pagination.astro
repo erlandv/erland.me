@@ -1,4 +1,7 @@
 ---
+import styles from './pagination.module.css';
+import Icon from '@components/Icon.astro';
+
 interface Props {
   page: number;
   totalPages: number;
@@ -6,8 +9,6 @@ interface Props {
 }
 
 const { page, totalPages, pageHref } = Astro.props as Props;
-import styles from './Pagination/pagination.module.css';
-import Icon from './Icon.astro';
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(n, max));

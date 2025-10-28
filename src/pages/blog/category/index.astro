@@ -1,9 +1,8 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav.astro';
-import PostCard from '@components/PostCard.astro';
-import Pagination from '@components/Pagination.astro';
-//
+import BackNav from '@components/BackNav/BackNav.astro';
+import PostCard from '@components/PostCard/PostCard.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
 import listing from '@/styles/pages/listing.module.css';
 import catStyles from '@/pages/blog/styles/_category.module.css';
 import { loadAllPosts, slugifyCategory, slicePage } from '@lib/blog';
@@ -27,8 +26,6 @@ type CatInfo = {
 
 const getExcerpt = (post: any) =>
   post.data?.excerpt ?? post.data?.description ?? '';
-
-/* normalizeHero removed: frontmatter already provides ImageMetadata via schema(image()) */
 
 const categoriesMap = new Map<string, CatInfo>();
 for (const p of posts) {

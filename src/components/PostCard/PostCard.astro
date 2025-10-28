@@ -1,10 +1,10 @@
 ---
-import Icon from "./Icon.astro";
-import styles from "./PostCard/post-card.module.css";
-import { slugifyCategory } from "@lib/blog";
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
-import { getCardImageConfig } from "@lib/images";
+import Icon from '@components/Icon.astro';
+import { slugifyCategory } from '@lib/blog';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getCardImageConfig } from '@lib/images';
+import styles from './post-card.module.css';
 
 interface Props {
   href: string;

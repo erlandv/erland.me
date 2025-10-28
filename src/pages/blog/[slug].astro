@@ -1,17 +1,17 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
-import BackNav from '@components/BackNav.astro';
+import BackNav from '@components/BackNav/BackNav.astro';
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '@lib/seo';
-import ShareButtons from '@components/ShareButtons.astro';
+import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import { SITE_URL } from '@lib/env';
 import blogStyles from './styles/_blog.module.css';
 import '@/styles/components/article-detail.css';
 import '@/styles/components/toc.css';
 import '@/styles/prose/tables.css';
 import '@/styles/advertising/adsense.css';
-import ScrollTopButton from '@components/ScrollTopButton.astro';
+import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
 import { getOgImageUrl, resolveHero } from '@lib/images';
