@@ -1,5 +1,5 @@
 import type { Post } from './blog';
-import { markdownToPlainText, summarize } from './search-utils.ts';
+import { markdownToPlainText, summarize } from './search-utils.js';
 
 export interface SearchablePost {
   slug: string;

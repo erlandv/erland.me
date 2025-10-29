@@ -2,26 +2,8 @@
 
 import { readdir, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
-import ts from 'typescript';
 import matter from 'gray-matter';
-
-const SEARCH_UTILS_TS_PATH = new URL('../src/lib/search-utils.ts', import.meta.url);
-
-async function loadSearchUtils() {
-  const source = await readFile(SEARCH_UTILS_TS_PATH, 'utf8');
-  const { outputText } = ts.transpileModule(source, {
-    compilerOptions: {
-      module: ts.ModuleKind.ES2020,
-      target: ts.ScriptTarget.ES2020,
-    },
-    fileName: 'search-utils.ts',
-  });
-  const moduleHref =
-    'data:text/javascript;charset=utf-8,' + encodeURIComponent(outputText);
-  return import(moduleHref);
-}
-
-const { markdownToPlainText, summarize } = await loadSearchUtils();
+import { markdownToPlainText, summarize } from '../src/lib/search-utils.js';
 
 const BLOG_DIR = path.resolve('src/content/blog');
 const OUTPUT_DIR = path.resolve('public');
