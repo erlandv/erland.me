@@ -1,4 +1,5 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import remarkDownloadFiles from './src/lib/remark-download-files';
@@ -125,6 +126,11 @@ export default defineConfig({
       cssCodeSplit: true,
     },
     plugins: [],
+    resolve: {
+      alias: {
+        '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
+      },
+    },
     // Esbuild options (apply drops only in production)
     esbuild:
       process.env.NODE_ENV === 'production'

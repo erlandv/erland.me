@@ -1,11 +1,11 @@
 ---
-import Icon from './Icon.astro';
-import styles from './ThemeToggle/ThemeToggle.module.css';
+import Icon from '@components/Icon.astro';
+import styles from './ThemeToggle.module.css';
 
 // Import theme icon SVGs for pre-hydration injection
-import autoIconRaw from '../icons/auto.svg?raw';
-import sunIconRaw from '../icons/sun.svg?raw';
-import moonIconRaw from '../icons/moon.svg?raw';
+import autoIconRaw from '@/icons/auto.svg?raw';
+import sunIconRaw from '@/icons/sun.svg?raw';
+import moonIconRaw from '@/icons/moon.svg?raw';
 
 // Prepare icons for inline script with exact same styles as .svg class
 const iconStyles =

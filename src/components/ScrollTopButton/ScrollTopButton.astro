@@ -1,6 +1,6 @@
 ---
-import Icon from "./Icon.astro";
-import styles from "./ScrollTopButton/scroll-top-button.module.css";
+import Icon from '@components/Icon.astro';
+import styles from './scroll-top-button.module.css';
 ---
 
 <button
@@ -16,7 +16,7 @@ import styles from "./ScrollTopButton/scroll-top-button.module.css";
 <script>
   (async () => {
     try {
-      const mod = await import('../lib/scroll-top');
+      const mod = await import('@lib/scroll-top');
       mod.autoInit();
     } catch (e) {
       console.error('ScrollTop init error:', e);
