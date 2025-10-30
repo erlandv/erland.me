@@ -46,7 +46,9 @@ const logger = (() => {
   };
 })();
 
-const CACHE_VERSION = 'v1';
+// Bump this value to force clients to refresh caches when deploying breaking changes.
+// Increment manually (e.g., 'v2' or a timestamp/sha) on deploy.
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `erland-me-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 
@@ -87,24 +89,24 @@ self.addEventListener('activate', event => {
   logger.info('Activating service worker...');
 
   event.waitUntil(
-    caches
-      .keys()
-      .then(cacheNames => {
-        return Promise.all(
-          cacheNames
-            .filter(
-              name => name.startsWith('erland-me-') && name !== CACHE_NAME
-            )
-            .filter(
-              name => name.startsWith('runtime-') && name !== RUNTIME_CACHE
-            )
-            .map(name => {
-              logger.info('Deleting old cache:', name);
-              return caches.delete(name);
-            })
-        );
-      })
-      .then(() => self.clients.claim())
+    (async () => {
+      const cacheNames = await caches.keys();
+      const cachesToDelete = cacheNames.filter(name => {
+        const isAppCache = name.startsWith('erland-me-') && name !== CACHE_NAME;
+        const isRuntimeCache =
+          name.startsWith('runtime-') && name !== RUNTIME_CACHE;
+        return isAppCache || isRuntimeCache;
+      });
+
+      await Promise.all(
+        cachesToDelete.map(name => {
+          logger.info('Deleting old cache:', name);
+          return caches.delete(name);
+        })
+      );
+
+      await self.clients.claim();
+    })()
   );
 });
 
@@ -164,11 +166,12 @@ async function handleFetch(request) {
  * Try cache first, fallback to network, update cache
  */
 async function cacheFirstStrategy(request, maxAge = CACHE_MAX_AGE.static) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
+  // First check all caches (including the precache `CACHE_NAME`).
+  // `caches.match` searches across all cache stores.
+  const cached = await caches.match(request);
 
   if (cached) {
-    // Check if cache is still fresh
+    // Check if cache is still fresh (may be precached without our header)
     const cachedDate = new Date(cached.headers.get('sw-cached-date') || 0);
     const now = new Date();
     const age = (now - cachedDate) / 1000;
@@ -182,19 +185,23 @@ async function cacheFirstStrategy(request, maxAge = CACHE_MAX_AGE.static) {
   try {
     const response = await fetch(request);
 
-    // Cache successful responses
+    // Cache successful responses (store in runtime cache)
     if (response.ok) {
       const responseToCache = response.clone();
+
+      // Read body to make a fresh Response we can modify headers on.
+      const buffer = await responseToCache.arrayBuffer();
       const headers = new Headers(responseToCache.headers);
       headers.set('sw-cached-date', new Date().toISOString());
 
-      const modifiedResponse = new Response(responseToCache.body, {
+      const modifiedResponse = new Response(buffer, {
         status: responseToCache.status,
         statusText: responseToCache.statusText,
-        headers: headers,
+        headers,
       });
 
-      cache.put(request, modifiedResponse);
+      const runtimeCache = await caches.open(RUNTIME_CACHE);
+      runtimeCache.put(request, modifiedResponse);
     }
 
     return response;
@@ -224,15 +231,15 @@ async function networkFirstStrategy(request) {
   try {
     const response = await fetch(request);
 
-    // Cache successful HTML responses
+    // Cache successful HTML responses into runtime cache
     if (response.ok && request.headers.get('accept')?.includes('text/html')) {
       cache.put(request, response.clone());
     }
 
     return response;
   } catch (error) {
-    // Network failed, try cache
-    const cached = await cache.match(request);
+    // Network failed, try any cache (including precache)
+    const cached = await caches.match(request);
     if (cached) {
       return cached;
     }
@@ -284,15 +291,14 @@ function isImage(url) {
  * Message handler for SW updates
  */
 self.addEventListener('message', event => {
-  if (event.data === 'SKIP_WAITING') {
+  const data = event.data;
+  if (data === 'SKIP_WAITING') {
     self.skipWaiting();
+    return;
   }
-
-  if (event.data === 'CACHE_URLS') {
+  if (data && data.type === 'CACHE_URLS' && Array.isArray(data.urls)) {
     event.waitUntil(
-      caches
-        .open(RUNTIME_CACHE)
-        .then(cache => cache.addAll(event.data.urls || []))
+      caches.open(RUNTIME_CACHE).then(cache => cache.addAll(data.urls))
     );
   }
 });

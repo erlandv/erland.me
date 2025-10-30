@@ -249,7 +249,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       if (!fuseLoadPromise) {
         fuseLoadPromise = (async () => {
           let postsData = (window as any).__SEARCH_POSTS__ || [];
-          if (!postsData || postsData.length === 0) {
+          // If no data, or items don't include `content` (we inlined only metadata), fetch the canonical index
+          if (!postsData || postsData.length === 0 || typeof postsData[0]?.content === 'undefined') {
             postsData = await loadSearchIndex();
           }
           await ensureFuse(postsData);

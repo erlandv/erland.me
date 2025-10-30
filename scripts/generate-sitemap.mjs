@@ -11,55 +11,20 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import matter from 'gray-matter';
+import { loadEnv, resolveMode, isProd as isProdMode } from './utils/env.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+loadEnv();
+
 const SITE_URL = process.env.SITE_URL || 'https://erland.me';
 const DIST_DIR = path.join(__dirname, '../dist');
-
-// Environment detection
-const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
-
-function resolveMode() {
-  const siteEnvRaw =
-    process.env.PUBLIC_SITE_ENV ||
-    process.env.SITE_ENV ||
-    process.env.DEPLOYMENT_ENV ||
-    '';
-  const siteEnv = siteEnvRaw.trim().toLowerCase();
-  if (siteEnv) {
-    if (['production', 'prod', 'live'].includes(siteEnv)) return 'production';
-    return 'preview';
-  }
-
-  const arg = process.argv.find(a => a.startsWith('--mode='));
-  if (arg) {
-    const value = arg.split('=')[1]?.trim().toLowerCase();
-    if (value) return value;
-  }
-
-  const envMode =
-    process.env.ASTRO_MODE || process.env.MODE || process.env.NODE_ENV || '';
-  if (envMode) return envMode.toLowerCase();
-
-  const url = process.env.SITE_URL || '';
-  if (url && !LOCAL_PATTERNS.test(url)) {
-    return 'production';
-  }
-  const domain = process.env.SITE_DOMAIN || '';
-  if (domain && !LOCAL_PATTERNS.test(domain)) {
-    return 'production';
-  }
-
-  return 'development';
-}
+const CONTENT_DIR = path.join(__dirname, '../src/content');
 
 const mode = resolveMode();
-const forceProd =
-  process.env.FORCE_PRODUCTION === 'true' ||
-  process.argv.includes('--force-production');
-const isProd = forceProd || mode === 'production';
+const isProd = isProdMode(mode);
 
 // Pretty print XML with proper indentation
 function formatXML(xml) {
@@ -235,6 +200,106 @@ function getPageConfig(url) {
   };
 }
 
+const DATE_FIELDS = ['updatedDate', 'publishDate', 'date', 'modifiedDate'];
+
+function parseDate(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.valueOf()) ? null : date;
+}
+
+function pickLatestDate(...dates) {
+  return dates.filter(Boolean).reduce((latest, current) => {
+    if (!latest) return current;
+    return current.valueOf() > latest.valueOf() ? current : latest;
+  }, null);
+}
+
+async function findContentEntryFile(baseDir, slug) {
+  const candidates = [
+    path.join(baseDir, 'index.md'),
+    path.join(baseDir, 'index.mdx'),
+    path.join(baseDir, 'index.mdoc'),
+    path.join(baseDir, `${slug}.md`),
+    path.join(baseDir, `${slug}.mdx`),
+    path.join(baseDir, `${slug}.mdoc`),
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      await fs.access(candidate);
+      return candidate;
+    } catch {
+      // Ignore missing files and continue checking candidates
+    }
+  }
+
+  return null;
+}
+
+async function loadCollectionDates(collectionName, urlPrefix) {
+  const collectionDir = path.join(CONTENT_DIR, collectionName);
+  const map = new Map();
+
+  let entries;
+  try {
+    entries = await fs.readdir(collectionDir, { withFileTypes: true });
+  } catch {
+    return map;
+  }
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+
+    const slug = entry.name;
+    const entryDir = path.join(collectionDir, slug);
+    const contentFile = await findContentEntryFile(entryDir, slug);
+    if (!contentFile) continue;
+
+    try {
+      const raw = await fs.readFile(contentFile, 'utf8');
+      const { data } = matter(raw);
+      if (data?.draft) continue;
+
+      const candidateDates = DATE_FIELDS.map(field => parseDate(data?.[field]));
+      const lastmodDate = pickLatestDate(...candidateDates);
+      if (lastmodDate) {
+        map.set(`${urlPrefix}${slug}/`, lastmodDate);
+      }
+    } catch {
+      // Ignore parsing errors and continue with other entries
+    }
+  }
+
+  return map;
+}
+
+async function buildContentDateIndex() {
+  const index = new Map();
+  const collections = [
+    { name: 'blog', prefix: '/blog/' },
+    { name: 'downloads', prefix: '/download/' },
+  ];
+
+  for (const { name, prefix } of collections) {
+    const map = await loadCollectionDates(name, prefix);
+    for (const [url, date] of map.entries()) {
+      index.set(url, date);
+    }
+  }
+
+  return index;
+}
+
+function getLatestLastmod(pages) {
+  return pages.reduce((latest, page) => {
+    const date = parseDate(page.lastmod);
+    if (!date) return latest;
+    if (!latest) return date;
+    return date.valueOf() > latest.valueOf() ? date : latest;
+  }, null);
+}
+
 async function generateSitemaps() {
   // Skip sitemap generation in non-production environments
   if (!isProd) {
@@ -246,25 +311,43 @@ async function generateSitemaps() {
 
   console.log('Generating sitemaps...');
 
-  const now = new Date().toISOString();
+  const nowDate = new Date();
 
   try {
+    const contentDateIndex = await buildContentDateIndex();
+
     // Get all HTML files
     const htmlFiles = await getHTMLFiles(DIST_DIR);
 
     // Convert to URLs and categorize
-    const allPages = htmlFiles.map(file => {
-      const url = filePathToURL(file, DIST_DIR);
-      const config = getPageConfig(url);
+    const allPages = await Promise.all(
+      htmlFiles.map(async file => {
+        const url = filePathToURL(file, DIST_DIR);
+        const config = getPageConfig(url);
+        const pathname = new URL(url).pathname;
 
-      return {
-        loc: url,
-        lastmod: now,
-        changefreq: config.changefreq,
-        priority: config.priority,
-        type: config.type,
-      };
-    });
+        let lastmodDate = contentDateIndex.get(pathname) || null;
+        if (!lastmodDate) {
+          try {
+            const stat = await fs.stat(file);
+            if (stat?.mtime) {
+              lastmodDate = stat.mtime;
+            }
+          } catch {
+            // Ignore stat errors and fallback to current timestamp
+          }
+        }
+
+        const lastmod = (lastmodDate || nowDate).toISOString();
+        return {
+          loc: url,
+          lastmod,
+          changefreq: config.changefreq,
+          priority: config.priority,
+          type: config.type,
+        };
+      })
+    );
 
     // Filter out 404 and offline pages from sitemap
     const validPages = allPages.filter(page => {
@@ -277,6 +360,9 @@ async function generateSitemaps() {
     const pages = validPages.filter(page => page.type === 'page');
 
     console.log(`Found ${posts.length} posts and ${pages.length} pages`);
+
+    const latestPostLastmod = getLatestLastmod(posts) || nowDate;
+    const latestPageLastmod = getLatestLastmod(pages) || nowDate;
 
     // Generate post-sitemap.xml
     const postSitemapContent = createURLSet(posts);
@@ -300,11 +386,11 @@ async function generateSitemaps() {
     const sitemapIndex = createSitemapIndex([
       {
         loc: `${SITE_URL}/post-sitemap.xml`,
-        lastmod: now,
+        lastmod: latestPostLastmod.toISOString(),
       },
       {
         loc: `${SITE_URL}/page-sitemap.xml`,
-        lastmod: now,
+        lastmod: latestPageLastmod.toISOString(),
       },
     ]);
     await fs.writeFile(

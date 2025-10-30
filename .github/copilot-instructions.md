@@ -16,10 +16,11 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 ### Styling Architecture
 
-- **Global CSS**: `src/styles/styles.css` defines `.prose` typography, table layouts, and ad containers
-- **CSS Modules**: Component-specific scoped styles co-located (e.g., `Sidebar/sidebar-local.module.css`)
-- **Shared layouts**: `src/styles/components/article-detail.css` for patterns used by both blog and download pages
+- **Global styles**: Styles are organized under `src/styles/` rather than a single `styles.css` file. Global typography, table layouts, and ad container patterns live in subfolders such as `src/styles/prose/`, `src/styles/layout/`, and `src/styles/advertising/` while `src/styles/variables.css` holds design tokens.
+- **CSS Modules**: Component-scoped styles are co-located with components using CSS Modules (e.g., `src/components/Sidebar/sidebar-local.module.css`).
+- **Shared patterns**: Reusable page-level patterns live in `src/styles/components/` (for example an `article-detail` stylesheet or related modules used by blog and download pages).
 - **Design tokens**: `src/styles/variables.css` centralizes CSS custom properties; never hardcode colors/spacing
+- **Page-scoped styles**: Individual pages often include their own scoped styles under `src/pages/<route>/styles/` (examples: `src/pages/blog/styles/_blog.module.css`, `src/pages/download/styles/_download.module.css`, `src/pages/portfolio/styles/_portfolio.module.css`). Pages also import shared page patterns from `src/styles/pages/` (e.g., `listing.module.css`, `chips.module.css`). Pages may import `src/styles/variables.css` and layout CSS directly when needed.
 
 ### Client-Side JavaScript Pattern
 
@@ -351,7 +352,7 @@ This catches cases where:
 - **Components**: `src/components/` (PascalCase.astro + co-located CSS modules)
 - **Content**: `src/content/{blog,downloads,portfolio}/` (collections with frontmatter schemas)
 - **Utilities**: `src/lib/` (camelCase.ts helpers)
-- **Global styles**: `src/styles/styles.css` + `variables.css`
+- **Global styles**: `src/styles/` (for example `variables.css`, and subfolders such as `prose/`, `layout/`, `components/`, `advertising/`, and `utilities/`)
 - **Component styles**: Co-located `src/components/{Component}/{component}.module.css`
 - **Build scripts**: `scripts/*.mjs` (ESM Node.js)
 - **Type definitions**: `src/env.d.ts` for `import.meta.env` inference
