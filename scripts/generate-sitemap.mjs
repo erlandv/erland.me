@@ -12,56 +12,23 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import {
+  loadEnv,
+  resolveMode,
+  isProd as isProdMode,
+} from './utils/env.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+loadEnv();
 
 const SITE_URL = process.env.SITE_URL || 'https://erland.me';
 const DIST_DIR = path.join(__dirname, '../dist');
 const CONTENT_DIR = path.join(__dirname, '../src/content');
 
-// Environment detection
-const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
-
-function resolveMode() {
-  const siteEnvRaw =
-    process.env.PUBLIC_SITE_ENV ||
-    process.env.SITE_ENV ||
-    process.env.DEPLOYMENT_ENV ||
-    '';
-  const siteEnv = siteEnvRaw.trim().toLowerCase();
-  if (siteEnv) {
-    if (['production', 'prod', 'live'].includes(siteEnv)) return 'production';
-    return 'preview';
-  }
-
-  const arg = process.argv.find(a => a.startsWith('--mode='));
-  if (arg) {
-    const value = arg.split('=')[1]?.trim().toLowerCase();
-    if (value) return value;
-  }
-
-  const envMode =
-    process.env.ASTRO_MODE || process.env.MODE || process.env.NODE_ENV || '';
-  if (envMode) return envMode.toLowerCase();
-
-  const url = process.env.SITE_URL || '';
-  if (url && !LOCAL_PATTERNS.test(url)) {
-    return 'production';
-  }
-  const domain = process.env.SITE_DOMAIN || '';
-  if (domain && !LOCAL_PATTERNS.test(domain)) {
-    return 'production';
-  }
-
-  return 'development';
-}
-
 const mode = resolveMode();
-const forceProd =
-  process.env.FORCE_PRODUCTION === 'true' ||
-  process.argv.includes('--force-production');
-const isProd = forceProd || mode === 'production';
+const isProd = isProdMode(mode);
 
 // Pretty print XML with proper indentation
 function formatXML(xml) {
