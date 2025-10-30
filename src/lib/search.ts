@@ -7,8 +7,7 @@ export interface SearchablePost {
   excerpt: string;
   category?: string | null;
   dateLabel?: string | null;
-  content: string; // Will be used for full-text search
-  heroSrc?: string | null;
+  content: string;
 }
 
 export interface SearchResult {
@@ -51,20 +50,6 @@ export const DEFAULT_SEARCH_CONFIG: SearchConfig = {
 // Convert Post to SearchablePost
 export function postToSearchable(post: Post): SearchablePost {
   const bodyPlain = markdownToPlainText(post.body);
-
-  // Try to normalize hero to a usable src string
-  let heroSrc: string | null = null;
-  try {
-    const hero: any = (post as any).hero;
-    if (typeof hero === 'string') {
-      heroSrc = hero;
-    } else if (hero && typeof hero.src === 'string') {
-      heroSrc = hero.src as string;
-    }
-  } catch {
-    // ignore hero extraction errors
-  }
-
   return {
     slug: post.slug,
     title: post.data.title || '',
@@ -75,6 +60,5 @@ export function postToSearchable(post: Post): SearchablePost {
       ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
       : null,
     content: bodyPlain,
-    heroSrc,
   };
 }
