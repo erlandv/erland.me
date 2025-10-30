@@ -1,20 +1,22 @@
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 
+type BlogEntry = CollectionEntry<'blog'>;
+type BlogRender = Awaited<ReturnType<BlogEntry['render']>>;
 type HeroType = string | ImageMetadata | undefined;
 
 export type Post = {
-  slug: string;
-  data: any;
+  slug: BlogEntry['slug'];
+  data: BlogEntry['data'];
   date: Date | null;
   hero?: HeroType;
-  body: string;
-  Content: any;
+  body: BlogEntry['body'];
+  Content: BlogRender['Content'];
 };
 
 const safeDate = (value: unknown): Date | null => {
   if (!value) return null;
-  const d = new Date(value as any);
+  const d = new Date(value as string | number | Date);
   return isNaN(d.valueOf()) ? null : d;
 };
 
@@ -32,17 +34,16 @@ export async function loadAllPosts(): Promise<Post[]> {
   const posts: Post[] = [];
   for (const entry of entries) {
     const { Content } = await entry.render();
-    const body = 'body' in entry ? String((entry as any).body ?? '') : '';
+    const body = entry.body;
     const heroEntry = Object.entries(heroMap).find(([p]) =>
       p.startsWith(`../content/blog/${entry.slug}/hero.`)
     );
     const fallbackHero = heroEntry?.[1] as string | undefined;
-    const hero =
-      (entry.data?.hero as ImageMetadata | undefined) ?? fallbackHero;
+    const hero = entry.data.hero ?? fallbackHero;
     posts.push({
       slug: entry.slug,
       data: entry.data,
-      date: safeDate(entry.data?.publishDate),
+      date: safeDate(entry.data.publishDate),
       hero,
       body,
       Content,
@@ -50,7 +51,7 @@ export async function loadAllPosts(): Promise<Post[]> {
   }
 
   return posts
-    .filter(p => !p.data?.draft)
+    .filter(p => !p.data.draft)
     .sort((a, b) => (b.date?.valueOf() ?? 0) - (a.date?.valueOf() ?? 0));
 }
 
