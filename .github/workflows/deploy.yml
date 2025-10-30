@@ -28,11 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: ${{ env.SITE_URL }}
+      url: ${{ vars.SITE_URL }}
     # --- Environment variables used by build and remote deployment ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
       SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+      PUBLIC_SITE_ENV: ${{ vars.PUBLIC_SITE_ENV }}
       PUBLIC_GTM_ID: ${{ vars.PUBLIC_GTM_ID }}
       PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
       PUBLIC_ADSENSE_SLOT_BLOG_MID: ${{ vars.PUBLIC_ADSENSE_SLOT_BLOG_MID }}
