@@ -131,3 +131,29 @@ export function clearAllListeners(): void {
 export function getListenerCount(): number {
   return listeners.size;
 }
+
+// Expose a tiny runtime-safe bridge for inline scripts that cannot use
+// resolved import specifiers at runtime (Astro client-side script reinsertion
+// may execute module text directly in the browser). Attach minimal APIs to
+// window so inline <script type="module"> can call them without needing
+// Vite/Server path resolution.
+if (typeof window !== 'undefined') {
+  // Put behind a short, unique namespace to avoid collisions
+  (window as any).__erland_router_events = {
+    onRouteChange,
+    triggerRouteChange,
+    clearAllListeners,
+    getListenerCount,
+  };
+}
+
+declare global {
+  interface Window {
+    __erland_router_events?: {
+      onRouteChange: typeof onRouteChange;
+      triggerRouteChange: typeof triggerRouteChange;
+      clearAllListeners: typeof clearAllListeners;
+      getListenerCount: typeof getListenerCount;
+    };
+  }
+}

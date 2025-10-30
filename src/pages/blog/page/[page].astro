@@ -94,8 +94,16 @@ const searchablePosts = posts.map(postToSearchable);
   </div>
 </SiteLayout>
 
-<script define:vars={{ searchablePosts }} is:inline>
-  import { onRouteChange } from '@lib/router-events';
+<script type="module" define:vars={{ searchablePosts }} is:inline>
+  // Runtime-safe access to onRouteChange. Some inline scripts run as-is in
+  // the browser during Astro client-side transitions and cannot resolve
+  // bare import specifiers like "@lib/router-events". The router module
+  // exposes a bridge on window.__erland_router_events.
+  const onRouteChange = (window.__erland_router_events && window.__erland_router_events.onRouteChange) ||
+    ((listener) => {
+      console.warn('onRouteChange not available: inline router reinit will be a no-op');
+      return () => undefined;
+    });
 
   // Make searchable posts available to the search component
   function initSearchData() {
