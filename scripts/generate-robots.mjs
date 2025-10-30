@@ -2,11 +2,7 @@
 
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import {
-  loadEnv,
-  resolveMode,
-  isProd as isProdMode,
-} from './utils/env.mjs';
+import { loadEnv, resolveMode, isProd as isProdMode } from './utils/env.mjs';
 
 loadEnv();
 

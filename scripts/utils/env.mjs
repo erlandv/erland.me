@@ -73,4 +73,3 @@ export function isProd(mode = resolveMode()) {
     process.argv.includes('--force-production');
   return forceProd || mode === 'production';
 }
-

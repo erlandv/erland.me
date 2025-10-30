@@ -12,11 +12,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
-import {
-  loadEnv,
-  resolveMode,
-  isProd as isProdMode,
-} from './utils/env.mjs';
+import { loadEnv, resolveMode, isProd as isProdMode } from './utils/env.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -213,12 +209,10 @@ function parseDate(value) {
 }
 
 function pickLatestDate(...dates) {
-  return dates
-    .filter(Boolean)
-    .reduce((latest, current) => {
-      if (!latest) return current;
-      return current.valueOf() > latest.valueOf() ? current : latest;
-    }, null);
+  return dates.filter(Boolean).reduce((latest, current) => {
+    if (!latest) return current;
+    return current.valueOf() > latest.valueOf() ? current : latest;
+  }, null);
 }
 
 async function findContentEntryFile(baseDir, slug) {

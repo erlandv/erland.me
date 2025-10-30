@@ -92,8 +92,7 @@ self.addEventListener('activate', event => {
     (async () => {
       const cacheNames = await caches.keys();
       const cachesToDelete = cacheNames.filter(name => {
-        const isAppCache =
-          name.startsWith('erland-me-') && name !== CACHE_NAME;
+        const isAppCache = name.startsWith('erland-me-') && name !== CACHE_NAME;
         const isRuntimeCache =
           name.startsWith('runtime-') && name !== RUNTIME_CACHE;
         return isAppCache || isRuntimeCache;
