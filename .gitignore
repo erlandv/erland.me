@@ -1,12 +1,17 @@
 # build output
 dist/
-scripts/dist/
 
 # generated types
 .astro/
 
 # dependencies
 node_modules/
+
+# static files
+AGENTS.md
+public/*.txt
+public/*.json
+public/favicon.ico
 
 # logs
 npm-debug.log*
@@ -45,16 +50,3 @@ shrinkwrap.yaml
 .yarn/
 .yarnrc.yml
 .pnp.*
-
-# deploy platform outputs
-.vercel/
-.netlify/
-.output/
-
-# static files that get generated
-AGENTS.md
-public/*.txt
-public/*.json
-
-# Personal Docs
-TAILWIND_ROADMAP_MIGRATION.md
