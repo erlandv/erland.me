@@ -39,7 +39,7 @@
 
 :global(.sidebar) :global(.socials--sidebar) {
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 32px;
   border-top: 1px solid var(--border-color);
   justify-content: center;
 }

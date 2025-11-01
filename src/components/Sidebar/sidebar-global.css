@@ -40,8 +40,8 @@
 .nav-content {
   width: 100%;
   height: 100%;
-  grid-column-gap: var(--sidebar-section-gap);
-  grid-row-gap: var(--sidebar-section-gap);
+  grid-column-gap: var(--sidebar-section-gap-fixed);
+  grid-row-gap: var(--sidebar-section-gap-fixed);
   flex-direction: column;
   display: flex;
 }
@@ -121,10 +121,9 @@ body:has(.sidebar .nav-toggle:checked) {
   overflow: hidden;
   transition: var(
     --sidebar-init-transition,
-    opacity 200ms var(--ease-standard),
-    max-width var(--dur-medium) var(--ease-standard)
+    opacity 200ms var(--ease-standard)
   );
-  will-change: opacity, max-width;
+  will-change: opacity;
 }
 
 :is(
@@ -143,6 +142,8 @@ body:has(.sidebar .nav-toggle:checked) {
   .nav-text {
   opacity: 0;
   max-width: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .sidebar .socials--sidebar,
@@ -214,8 +215,8 @@ body:has(.sidebar .nav-toggle:checked) {
   pointer-events: none;
   margin-top: auto !important;
   border-top-color: transparent;
-  padding-top: 0;
-  min-height: 51px;
+  padding-top: 32px;
+  min-height: 71px;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
@@ -234,13 +235,11 @@ body:has(.sidebar .nav-toggle:checked) {
   .sidebar
   .w-nav-brand {
   justify-content: center !important;
-  margin-bottom: var(--space-3) !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
   .w-nav-brand {
   justify-content: center !important;
-  margin-bottom: var(--space-3) !important;
 }
 
 :is(
@@ -252,10 +251,10 @@ body:has(.sidebar .nav-toggle:checked) {
   .nav-content,
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
   .nav-content {
-  grid-row-gap: var(--sidebar-section-gap) !important;
-  row-gap: var(--sidebar-section-gap) !important;
-  grid-column-gap: var(--sidebar-section-gap) !important;
-  column-gap: var(--sidebar-section-gap) !important;
+  grid-row-gap: var(--sidebar-section-gap-fixed) !important;
+  row-gap: var(--sidebar-section-gap-fixed) !important;
+  grid-column-gap: var(--sidebar-section-gap-fixed) !important;
+  column-gap: var(--sidebar-section-gap-fixed) !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))

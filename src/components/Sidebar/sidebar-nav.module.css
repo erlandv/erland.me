@@ -1,5 +1,8 @@
 .nav-link-image {
   width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin: 0;
   opacity: 0.48;
   transition: opacity 0.2s ease;
 }
@@ -19,6 +22,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: clamp(10px, 2vw, 14px);
+  height: var(--sidebar-nav-item-height);
   min-height: 44px;
   text-decoration: none;
   display: flex;
