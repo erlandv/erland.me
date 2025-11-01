@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: ${{ vars.SITE_URL }}
+      url: https://erland.me
     # --- Environment variables used by build and remote deployment ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
