@@ -22,6 +22,15 @@
   --space-8: 32px;
 
   /* ========================================
+     SIDEBAR FIXED POSITIONING
+     ======================================== */
+  --sidebar-nav-item-height: 44px;
+  --sidebar-section-gap-fixed: 24px;
+  --sidebar-nav-gap: 8px;
+  --sidebar-socials-margin-top: 24px;
+  --sidebar-profile-margin-bottom: 24px;
+
+  /* ========================================
      BORDER RADIUS
      ======================================== */
   --radius-sm: 6px;
