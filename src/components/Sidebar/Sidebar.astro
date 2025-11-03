@@ -24,13 +24,19 @@ const { selectedItem } = Astro.props;
     <div class='w-nav-brand'>
       <div class='profile-header'>
         <div class='niv-data'>
-          <img
-            src='/assets/profile/avatar.webp'
-            loading='eager'
-            alt='Profile picture'
-            class='niv-image'
+          <button
+            type='button'
+            class='sidebar__avatar-button'
             data-stories
-          />
+            aria-label='View stories'
+          >
+            <img
+              src='/assets/profile/avatar.webp'
+              loading='eager'
+              alt='Profile picture'
+              class='niv-image'
+            />
+          </button>
           <div class='profile-text'>
             <div class='label-white'>Erland Ramdhani</div>
             <div class='label-gray'>Web Developer</div>
