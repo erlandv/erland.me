@@ -1,0 +1,309 @@
+/* Avatar Stories - Instagram-like Story Viewer */
+
+/* Fullscreen overlay */
+.stories {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.stories.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+/* Backdrop */
+.stories__backdrop {
+  position: absolute;
+  inset: 0;
+  background: #161616;
+  cursor: pointer;
+}
+
+/* Container for story content */
+.stories__container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  max-height: 98vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Header section with progress bars and avatar */
+.stories__header {
+  position: relative;
+  padding: var(--space-3) var(--space-4);
+
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Progress bars container */
+.stories__progress {
+  display: flex;
+  gap: 4px;
+}
+
+/* User info and controls row */
+.stories__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.stories__progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stories__progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.1s linear;
+}
+
+.stories__progress-bar.completed .stories__progress-fill {
+  width: 100%;
+}
+
+.stories__progress-bar.active .stories__progress-fill {
+  transition: none;
+  animation: progress-fill var(--story-duration, 5s) linear forwards;
+}
+
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* User info section */
+.stories__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stories__avatar {
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  object-fit: cover;
+}
+
+.stories__username {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Control buttons (pause and close) */
+.stories__buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stories__pause,
+.stories__close {
+  width: var(--space-8);
+  height: var(--space-8);
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.stories__pause:hover,
+.stories__close:hover {
+  opacity: 0.7;
+}
+
+.stories__pause svg,
+.stories__close svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Story image container */
+.stories__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  margin: 0 var(--space-4);
+}
+
+.stories__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Click zones for mobile navigation */
+.stories__click-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.stories__click-zone--prev {
+  left: 0;
+}
+
+.stories__click-zone--next {
+  right: 0;
+}
+
+/* Navigation zones */
+.stories__nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 1;
+  transition: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.stories__nav:hover .stories__nav-icon {
+  background: rgba(255, 255, 255, 1);
+}
+
+.stories__nav.hidden {
+  display: none;
+}
+
+.stories__nav--prev {
+  left: -50px;
+}
+
+.stories__nav--next {
+  right: -50px;
+}
+
+.stories__nav-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px var(--shadow-030);
+  transition: background var(--dur-base) var(--ease-out);
+}
+
+.stories__nav-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  color: #000;
+}
+
+/* Pause state */
+.stories.paused .stories__progress-fill {
+  animation-play-state: paused;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .stories__container {
+    max-width: 100%;
+    max-height: 100vh;
+    margin: 0;
+  }
+
+  .stories__header {
+    padding: var(--space-4);
+  }
+
+  .stories__content {
+    border-radius: 0;
+    margin: 0;
+  }
+
+  /* Hide desktop navigation buttons on mobile */
+  .stories__nav {
+    display: none !important;
+  }
+
+  /* Show click zones on mobile */
+  .stories__click-zone {
+    display: block;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  /* Show desktop navigation buttons */
+  .stories__nav {
+    display: flex;
+  }
+
+  /* Hide click zones on desktop */
+  .stories__click-zone {
+    display: none;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .stories,
+  .stories__nav-icon,
+  .stories__close,
+  .stories__pause {
+    transition: none;
+  }
+
+  .stories__progress-fill {
+    animation: none !important;
+  }
+}

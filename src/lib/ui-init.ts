@@ -14,6 +14,7 @@ type LoadedFlags = {
   table: boolean;
   themeToggle: boolean;
   themeControl: boolean;
+  stories: boolean;
 };
 
 const loaded: LoadedFlags = {
@@ -23,6 +24,7 @@ const loaded: LoadedFlags = {
   table: false,
   themeToggle: false,
   themeControl: false,
+  stories: false,
 };
 
 const SELECTORS = {
@@ -34,6 +36,7 @@ const SELECTORS = {
   ],
   table: ['.prose table'],
   themeToggle: ['.theme-toggle'],
+  stories: ['[data-stories]'],
 } as const;
 
 function hasTarget(selectors: readonly string[]): boolean {
@@ -142,11 +145,28 @@ async function maybeLoadThemeToggle(): Promise<void> {
   );
 }
 
+async function maybeLoadStories(): Promise<void> {
+  if (loaded.stories) return;
+  if (!hasTarget(SELECTORS.stories)) return;
+
+  await safeFeatureInit(
+    'stories',
+    async () => {
+      const m = await import('./stories');
+      loaded.stories = true;
+      m.autoInit?.();
+      return m;
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
+}
+
 function gateAll(): void {
   void maybeLoadShare();
   void maybeLoadCopy();
   void maybeLoadLightbox();
   void maybeLoadTable();
+  void maybeLoadStories();
 }
 
 function gateThemeToggle(): void {
