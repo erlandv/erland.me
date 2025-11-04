@@ -1,13 +1,11 @@
 ---
 title: Mengembangkan Bisnis dengan Pemasaran Online
 description: >-
-  Pesatnya perkembangan zaman—khususnya di bidang teknologi—nyaris tak terasa,
-  ya? Di sektor bisnis misalnya, lima tahun lalu rasanya belum begitu masif…
+  Solusi jitu mengembangkan bisnis dengan pemasaran online di internet, ikuti perkembangan zaman agar bisnis turut berkembang.
 excerpt: >-
-  Pesatnya perkembangan zaman—khususnya di bidang teknologi—nyaris tak terasa,
-  ya? Di sektor bisnis misalnya, lima tahun lalu rasanya belum begitu masif
-  transaksi belanja online, sekarang sebaliknya,…
+  Solusi jitu mengembangkan bisnis dengan pemasaran online di internet, ikuti perkembangan zaman agar bisnis turut berkembang.
 publishDate: 2022-05-22T00:00:00.000Z
+updatedDate: 2025-11-04
 hero: ./hero.png
 heroAlt: Mengembangkan Bisnis dengan Pemasaran Online
 tags: []
@@ -17,7 +15,7 @@ draft: false
 
 Pesatnya perkembangan zaman—khususnya di bidang teknologi—nyaris tak terasa, ya? Di sektor bisnis misalnya, lima tahun lalu rasanya belum begitu masif transaksi belanja _online_, sekarang sebaliknya, transaksi jual beli _online_ menjadi tren di sekitar kita.
 
-Lihatlah, orang-orang rela begadang menunggu jam 12 malam saat _harbolnas_, demi mendapatkan diskon belanja _online_ di _marketplace e-commerce_. Ya, kehadiran _marketplace e-commerce_ juga punya andil besar yang membuat tren belanja _online_ ini menjadi kian populer.
+Lihatlah, orang-orang rela begadang menunggu jam 12 malam saat _harbolnas_, demi mendapatkan diskon belanja _online_ di marketplace e-commerce. Ya, kehadiran _marketplace e-commerce_ juga punya andil besar yang membuat tren belanja _online_ ini menjadi kian populer.
 
 Anda yang sedang membaca ini, saya tebak, pasti pernah belanja _online_. Betul? Belanja _online_ memang menyenangkan, bertransaksi jual beli bisa sambil rebahan. Belanja hanya bermodal _smartphone_, kemudian tinggal menunggu kurir berteriak "pakeeeetttt" di depan rumah. Sungguh sangat menghemat waktu dan tenaga, bukan?
 
@@ -59,11 +57,11 @@ Namun, di mana sebaiknya memasarkan produk dari bisnis kita secara _online_? Seb
 
 Menjual produk secara _online_ di _marketplace e-commerce_ bisa menjadi salah satu pilihan bagus. Tingkat arus penjualan di _marketplace_ sangat tinggi. Seperti contoh kasus tadi, ratusan ribu orang memburu diskon saat _harbolnas_ di tengah malam.
 
-Salah satu faktor banyaknya orang belanja _online_ di _marketplace_ umumnya karena mereka merasa _e-commerce_ itu lebih terpercaya dengan nama besar _marketplace_ itu sendiri. Siapa yang meragukan kredibilitas perusahaan sekelas Tokopedia, Shopee, Bukalapak, dan lain-lain?
+Salah satu faktor banyaknya orang belanja _online_ di _marketplace_ umumnya karena mereka merasa _e-commerce_ itu lebih terpercaya dengan nama besar _marketplace_ itu sendiri. Siapa yang meragukan kredibilitas perusahaan sekelas Tokopedia, Shopee, Lazada, Blibli, dan lain-lain?
 
 Para perusahaan _marketplace_ tersebut selalu berlomba-lomba mengadakan program yang tidak hanya menarik minat pembeli saja, tapi juga menarik minat penjual untuk mempromosikan produk di _marketplace_ milik mereka. Contohnya seperti gratis ongkos kirim dan _event harbolnas_ yang dipenuhi beragam diskon menggiurkan. Program-program untuk penjual juga tidak kalah menarik. Ada fitur-fitur seperti _power merchant_ di Tokopedia, _star seller_ di Shopee, layanan _ads_ untuk mendapat rekomendasi di _search engine_, dan lain-lain.
 
-Jika Anda tertarik untuk memulai memasarkan bisnis _onlin_e di \_marketplace_, pastikan Anda menyusun strategi pemasaran terlebih dahulu karena tingkat kompetisi penjualan di _marketplace_ sangat tinggi dan kompetitif, ada banyak toko lain yang menjual produk serupa di sana.
+Jika Anda tertarik untuk memulai memasarkan bisnis _online_ di _marketplace_, pastikan Anda menyusun strategi pemasaran terlebih dahulu karena tingkat kompetisi penjualan di _marketplace_ sangat tinggi dan kompetitif, ada banyak toko lain yang menjual produk serupa di sana.
 
 Tantangan lain jika menjual produk secara _online_ di _marketplace_ adalah Anda akan kesulitan untuk menganalisis pasar karena data-data pembeli/pengunjung hanya dapat diakses oleh pihak _marketplace_. Dengan tidak adanya data-data tersebut, Anda tidak bisa melakukan analisis dari perilaku konsumen secara detail. Padahal melalukan analisis pasar sangatlah penting sebagai acuan dasar dalam mengatur strategi penjualan yang tepat untuk membuat bisnis Anda lebih berkembang lagi.
 
@@ -81,7 +79,7 @@ Salah satu cara mudah membuat website yang paling populer adalah dengan mengguna
 
 Sifat WordPress yang fungsional didukung oleh ketersedian _plugin_ yang bermanfaat. Di antaranya seperti _plugin_ **Elementor Page Builder** yang memungkinkan Anda mendesain tampilan antarmuka situs web hanya dengan _drop and drag_, tidak perlu keahlian _coding_. Ada juga _plugin_ **WooCommerce** yang memungkinkan Anda membuat toko _online_ di web dengan mudah. WordPress ini juga gratis, Anda hanya perlu modal untuk membeli domain dan _hosting_ saja. Domain digunakan sebagai nama _branding_ bisnis Anda di internet, sedangkan _hosting_ sebagai alat penyimpanan data-data _website_ Anda.
 
-_Provider hosting_ di Indonesia saat ini sangat mudah ditemukan dan tersedia di mana-mana, banyak yang menawarkan _hostin_g dengan harga murah. Pastikan Anda memilih \_provider hosting_ yang menawarkan layanan _customer service_ 24 jam setiap hari, memiliki sistem proteksi keamanan dengan **Imunify360**, dan juga fitur kecepatan dengan **LiteSpeed** serta **WordPress Accelerator**. Dan tentu saja yang tidak kalah penting, pilih yang berani memberikan garansi. Layanan dan fitur seperti itu sangat krusial perannya untuk kelancaran _website_ bisnis Anda. Kalau Anda bingung memilih penyedia layanan _hosting_, saya merekomendasikan **Niagahoster**. _Provider hosting_ tersebut memiliki seluruh kriteria fitur dan layanan penting yang saya sebutkan di atas.
+_Provider hosting_ di Indonesia saat ini sangat mudah ditemukan dan tersedia di mana-mana, banyak yang menawarkan _hosting_ dengan harga murah. Pastikan Anda memilih _provider hosting_ yang menawarkan layanan _customer service_ 24 jam setiap hari, memiliki sistem proteksi keamanan dengan **Imunify360**, dan juga fitur kecepatan dengan **LiteSpeed** serta **WordPress Accelerator**. Dan tentu saja yang tidak kalah penting, pilih yang berani memberikan garansi. Layanan dan fitur seperti itu sangat krusial perannya untuk kelancaran _website_ bisnis Anda. Kalau Anda bingung memilih penyedia layanan _hosting_, saya merekomendasikan **Niagahoster**. _Provider hosting_ tersebut memiliki seluruh kriteria fitur dan layanan penting yang saya sebutkan di atas.
 
 Sedangkan untuk domain, ada dua ekstensi domain yang menurut saya cocok untuk sebuah _website_ profesional, yaitu domain dengan ekstensi **.com** dan **.id**, keduanya sama-sama bagus. Domain .com memang yang paling dikenal banyak orang, tapi tidak ada salahnya juga Anda <a href="https://www.niagahoster.co.id/domain-id">memilih domain id</a> sebagai ekstensi domain bisnis, khususnya jika pasar bisnis Anda adalah Indonesia. Dengan domain id, itu akan lebih mencirikan perusahaan Anda asli berasal dari Indonesia.
 
@@ -89,7 +87,7 @@ Kalau anggaran Anda mencukupi, lebih diutamakan lagi jika Anda membeli kedua eks
 
 Sekali lagi, Anda bisa membuat web sendiri dengan WordPress secara mudah tanpa perlu keahlian _coding_ yang bikin pusing. Sebagian besar penyedia layanan _hosting_ juga memiliki fitur sekali klik untuk menginstal WordPress dengan **Softaculous Auto Installer**, sangat bermanfaat untuk pemula yang baru mengenal dunia _website_.
 
-Namun, jika Anda merasa tidak memiliki banyak waktu untuk membuat dan mengurus _website_ bisnis, Anda dapat menggunakan layanan [jasa pembuatan website](/jasa-pembuatan-website-bogor/) yang banyak tersedia di mana-mana. Atau bisa juga mempekerjakan seseorang sebagai karyawan untuk membuat dan mengurus _website_, sementara Anda dapat fokus sepenuhnya mengurus bisnis.
+Namun, jika Anda merasa tidak memiliki banyak waktu untuk membuat dan mengurus _website_ bisnis, Anda dapat menggunakan layanan <a href="https://www.anama.id/jasa-pembuatan-website/">jasa pembuatan website</a> yang banyak tersedia di mana-mana. Atau bisa juga mempekerjakan seseorang sebagai karyawan untuk membuat dan mengurus _website_, sementara Anda dapat fokus sepenuhnya mengurus bisnis.
 
 ## Optimalkan Bisnis Online Anda
 
@@ -121,4 +119,4 @@ Jika Anda merasa ketinggalan zaman atau merasa gagap teknologi, Anda harus seger
 
 Suka tidak suka, mau tidak mau, zaman semakin berkembang seiring dengan berjalannya waktu. Jika bisnis Anda ingin ikut berkembang, maka ikuti perkembangan zaman tersebut. Apalagi tahun 2020 ini, dunia kita dilanda pandemi yang memaksa orang-orang beraktivitas dari rumah, transaksi jual beli _online_ sangat meningkat tinggi di masa pandemi, sementara perdagangan _offline_ di pusat pembelanjaan seperti mall banyak yang mati suri.
 
-Ayo, mulai gunakan _digital marketing_ dan _online_\-kan segera bisnis Anda. Jangan tunda lebih lama lagi agar tidak kehilangan potensi meraih lebih banyak keuntungan dengan pemasaran _online_ di internet. Sukses selalu untuk bisnis Anda!
+Ayo, mulai gunakan _digital marketing_ dan online-kan segera bisnis Anda. Jangan tunda lebih lama lagi agar tidak kehilangan potensi meraih lebih banyak keuntungan dengan pemasaran _online_ di internet. Sukses selalu untuk bisnis Anda!
