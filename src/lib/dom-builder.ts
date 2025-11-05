@@ -159,3 +159,16 @@ export function onEvents<K extends keyof HTMLElementEventMap>(
     element.addEventListener(event, handler as EventListener);
   });
 }
+
+/**
+ * Escape HTML special characters to prevent XSS and DOM corruption
+ * Safely converts text content to HTML-safe string
+ * @example
+ * escapeHtml('1 < 2 && 3 > 1') // '1 &lt; 2 &amp;&amp; 3 &gt; 1'
+ * escapeHtml('AT&T') // 'AT&amp;T'
+ */
+export function escapeHtml(text: string): string {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}

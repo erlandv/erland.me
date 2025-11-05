@@ -1,7 +1,7 @@
 // Dynamic Table of Contents (TOC) for blog posts
 // Scans `.prose` for H2/H3, assigns stable IDs, and inserts a toggleable TOC
 
-import { qs } from './dom-builder';
+import { qs, escapeHtml } from './dom-builder';
 import { onRouteChange } from './router-events';
 import arrowUpRaw from '@/icons/arrowup.svg?raw';
 import arrowDownRaw from '@/icons/arrowdown.svg?raw';
@@ -87,11 +87,13 @@ function createTocHeaderTemplate(arrowDownIcon: string): string {
 
 /**
  * Create TOC list item HTML
+ * Note: heading.text is HTML-escaped to prevent XSS and DOM corruption
+ * from headings containing <, >, &, etc.
  */
 function createTocItemHtml(heading: HeadingInfo): string {
   return `
     <li class="toc__item toc__item--h${heading.level}">
-      <a class="toc__anchor" href="#${heading.id}">${heading.text}</a>
+      <a class="toc__anchor" href="#${heading.id}">${escapeHtml(heading.text)}</a>
     </li>
   `;
 }
