@@ -7,6 +7,7 @@ excerpt: >-
   Cara jitu untuk membuat press release lanching produk agar brand kamu
   viral di sosial media dan bisa diliput oleh banyak media nasional
 publishDate: 2025-10-31
+updatedDate: 2025-11-04
 hero: ./hero.png
 heroAlt: Press Release Launching Produk
 category: info
@@ -25,7 +26,7 @@ Press Release Launching Produk bekerja sebagai jembatan antara brand dan media. 
 
 ## Fondasi konten yang layak liput
 
-Berikut ini beberapa fondasi konten press release yang layak untuk diliput oleh media nasional.
+Jika Anda ingin membuat press release, berikut ini panduan beberapa fondasi konten press release yang layak untuk diliput oleh media nasional.
 
 ### Pilih sudut cerita yang manusiawi
 

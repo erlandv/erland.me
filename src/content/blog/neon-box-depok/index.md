@@ -1,14 +1,11 @@
 ---
 title: Rekomendasi Jasa Pembuatan Neon Box Depok
 description: >-
-  Setelah sebelumnya saya membuat artikel ulasan rekomendasi jasa pembuatan ,
-  kali ini saya akan memberikan rekomendasi jasa neon box di kota Depok. Neon
-  Box…
+  Tempat Pembuatan Neon Box Depok. Rekomendasi bengkel reklame pusat produksi neonbox bulat akrilik LED dengan harga murah.
 excerpt: >-
-  Setelah sebelumnya saya membuat artikel ulasan rekomendasi jasa pembuatan ,
-  kali ini saya akan memberikan rekomendasi jasa neon box di kota Depok. Neon
-  Box adalah salah satu jenis reklame yang dapat…
+  Tempat Pembuatan Neon Box Depok. Rekomendasi bengkel reklame pusat produksi neonbox bulat akrilik LED dengan harga murah.
 publishDate: 2020-04-18T00:00:00.000Z
+updatedDate: 2025-11-04
 hero: ./hero.png
 heroAlt: Rekomendasi Jasa Pembuatan Neon Box Depok
 tags: []
@@ -20,7 +17,7 @@ Setelah sebelumnya saya membuat artikel ulasan rekomendasi jasa pembuatan [neon 
 
 **Neon Box** adalah salah satu jenis reklame yang dapat menyala terang di saat gelap, penerangannya menggunakan lampu neon yang posisinya berada di dalam rangka box. Namun, akhir-akhir ini perkembangan industri reklame semakin pesat sehingga banyak para penyedia jasa pembuatan neonbox berkreasi membuatnya unik seperti mengganti neon dengan LED, membuat bentuk bulat, dan lain-lain.
 
-Jika Anda sedang mencari jasa pembuatan neon box depok, saya merekomendasikan **Cipta Mica Kreasi** yang merupakan ahli pembuatan berbagai bentuk dan jenis neonbox dengan harga yang relatif murah. Selain itu, mereka juga memberikan garansi, pengerjaannya juga cepat dan profesional karena mereka telah berpengalaman di dunia reklame lebih dari lima tahun.
+Jika Anda sedang mencari jasa pembuatan neon box depok, saya merekomendasikan **Cimika Solusi Kreatif** yang merupakan ahli pembuatan berbagai bentuk dan jenis neonbox dengan harga yang relatif murah. Selain itu, mereka juga memberikan garansi, pengerjaannya juga cepat dan profesional karena mereka telah berpengalaman di dunia reklame lebih dari lima tahun.
 
 ## Jenis Neon Box
 
@@ -38,7 +35,7 @@ Selain itu, masih banyak sekali jenis-jenisnya. Anda bisa memesan berbagai bentu
 
 ## Harga Neon Box
 
-Harga <a href="https://reklamesia.com/neon-box/depok">neon box Depok</a> yang saya lampirkan di sini hanya harga neonbox bulat saja demi artikel yang ringkas. Jika Anda ingin mengetahui daftar harga pembuatan neonbox yang lebih lengkap, saya sarankan Anda menghubungi langsung _customer service_ Cipta Mica Kreasi melalui chat WhatsApp **0812-8552-8669**
+Harga <a href="https://reklamesia.com/neon-box/depok">neon box Depok</a> yang saya lampirkan di sini hanya harga neonbox bulat saja demi artikel yang ringkas. Jika Anda ingin mengetahui daftar harga pembuatan neonbox yang lebih lengkap, saya sarankan Anda menghubungi langsung _customer service_ Cimika melalui chat WhatsApp **0812-8552-8669**
 
 | Diameter | Media Akrilik | Media Backlight | Tiang   |
 | -------- | ------------- | --------------- | ------- |
@@ -74,23 +71,16 @@ Terakhir adalah frame neonbox atau bagian samping. Bahan yang digunakan untuk ba
 
 Berikut ini adalah beberapa foto contoh-contoh neonbox hasil produksi yang saya ambil dari situs web Cipta Mica Kreasi sebagai referensi Anda yang akan membuat reklame untuk toko, ruko, kios, kantor, atau tempat usaha Anda. Ada banyak sekali sebenarnya seperti neon box barbershop, cafe, hotel, laundry, papan nama apotek, plang praktik dokter, dan lain-lain. Tapi saya hanya mencantumkan enam foto aja di sini. Jika Anda ingin melihat lebih banyak galeri hasil produksi reklame yang khususnya neon box depok, silakan mengunjungi Instagram **@ciptamica**
 
-[![](./images/neon-box-depok.jpg)](/wp-content/uploads/2020/04/neon-box-depok.jpg)
-
-[![neon box depok](./images/jasa-neon-box-depok.jpg)](/wp-content/uploads/2020/04/jasa-neon-box-depok.jpg)
-
-[![](./images/harga-neon-box-akrilik-depok.jpg)](/wp-content/uploads/2020/04/harga-neon-box-akrilik-depok.jpg)
-
-[![](./images/neon-box-bulat-depok.jpg)](/wp-content/uploads/2020/04/neon-box-bulat-depok.jpg)
-
-[![](./images/pemasangan-neon-box-depok.jpg)](/wp-content/uploads/2020/04/pemasangan-neon-box-depok.jpg)
-
-[![](./images/pembuatan-neon-box-depok.jpg)](/wp-content/uploads/2020/04/pembuatan-neon-box-depok.jpg)
-
----
+:::gallery
+![neon box depok](./images/neon-box-depok.jpg),
+![jasa neon box depok](./images/jasa-neon-box-depok.jpg),
+![harga neon box akrilik depok](./images/harga-neon-box-akrilik-depok.jpg),
+![neon box bulat depok](./images/neon-box-bulat-depok.jpg),
+![pemasangan neon box depok](./images/pemasangan-neon-box-depok.jpg),
+![pembuatan neon box depok](./images/pembuatan-neon-box-depok.jpg)
+:::
 
 ## Pertanyaan Terkait Neon Box
-
----
 
 ### Bagaimana cara membuat neonbox?
 
@@ -98,7 +88,7 @@ Membuat neonbox adalah pekerjaan yang tidak mudah. Oleh karena itu saya merekome
 
 ### Berapa harga jasa pembuatan neonbox?
 
-Harga neonbox itu fleksibel, tergantung pada jenis dan ukurannya. Saya rekomendasikan Anda menghubungi langsung _customer service_ Cipta Mica Kreasi untuk mendapatkan penawaran harga terbaik.
+Harga neonbox itu fleksibel, tergantung pada jenis dan ukurannya. Saya rekomendasikan Anda menghubungi langsung _customer service_ Cimika Solusi Kreatif untuk mendapatkan penawaran harga terbaik.
 
 ### Bagaimana cara memesan neon box?
 
@@ -110,8 +100,8 @@ Neonbox akrilik adalah yang paling populer akhir-akhir ini. Bentuknya tidak sela
 
 ### Apakah neonbox dapat dikenakan pajak reklame?
 
-Ya, neonbox yang Anda pasang dapat dikenakan pajak reklame jika memenuhi kriteria. Anda dapat mengunjungi tautan berikut ini untuk mempelajari tentang pajak reklame <a href="https://www.online-pajak.com/pajak-reklame">https://online-pajak.com/pajak-reklame</a>
+Ya, neonbox yang Anda pasang dapat dikenakan pajak reklame jika memenuhi kriteria. Anda dapat mengunjungi tautan berikut ini untuk mempelajari tentang pajak reklame <a href="https://www.online-pajak.com/pajak-reklame" rel="nofollow noopener">https://online-pajak.com/pajak-reklame</a>
 
 ### Tempat jasa pembuatan reklame neon box Depok terbaik?
 
-Sudah jelas, Cipta Mica Kreasi adalah jawabannya. Mereka adalah spesialis reklame di Depok, telah berpengalaman lebih dari lima tahun hingga saya meyakini mereka jasa neonbox yang terbaik.
+Sudah jelas, Cimika Solusi Kreatif adalah jawabannya. Mereka adalah spesialis reklame di Depok, telah berpengalaman lebih dari lima tahun hingga saya meyakini mereka jasa neonbox yang terbaik.

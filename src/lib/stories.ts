@@ -14,6 +14,7 @@ import leftArrowIcon from '@/icons/left-arrow.svg?raw';
 import rightArrowIcon from '@/icons/right-arrow.svg?raw';
 import pauseIcon from '@/icons/pause.svg?raw';
 import playIcon from '@/icons/play.svg?raw';
+import verifiedIcon from '@/icons/verified.svg?raw';
 import { onRouteChange } from './router-events';
 
 interface Story {
@@ -131,10 +132,21 @@ class StoriesViewer {
     avatar.alt = 'Erland Ramdhani';
     userInfo.appendChild(avatar);
 
+    const usernameContainer = document.createElement('div');
+    usernameContainer.className = 'stories__username-container';
+
     const username = document.createElement('div');
     username.className = 'stories__username';
     username.textContent = 'erlandramdhani';
-    userInfo.appendChild(username);
+    usernameContainer.appendChild(username);
+
+    const verifiedBadge = document.createElement('span');
+    verifiedBadge.className = 'stories__verified';
+    verifiedBadge.innerHTML = verifiedIcon;
+    verifiedBadge.setAttribute('aria-label', 'Verified');
+    usernameContainer.appendChild(verifiedBadge);
+
+    userInfo.appendChild(usernameContainer);
 
     controlsRow.appendChild(userInfo);
 
