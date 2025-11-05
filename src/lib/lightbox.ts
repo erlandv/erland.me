@@ -7,6 +7,7 @@
 import closeIcon from '@/icons/close.svg?raw';
 import fullscreenIcon from '@/icons/fullscreen.svg?raw';
 import { onRouteChange } from './router-events';
+import { qs } from './dom-builder';
 
 type InitOptions = {
   containerSelectors?: string[];
@@ -14,36 +15,48 @@ type InitOptions = {
 
 const DEFAULT_CONTAINERS = ['.prose', '.content-image-grid'];
 
-function createOverlay() {
+/**
+ * Create lightbox overlay template HTML
+ */
+function createOverlayTemplate(): string {
+  return `
+    <div class="image-lightbox__backdrop"></div>
+    <figure class="image-lightbox__figure">
+      <img class="image-lightbox__image" alt="" />
+      <figcaption class="image-lightbox__caption"></figcaption>
+      <button 
+        class="image-lightbox__close" 
+        type="button" 
+        aria-label="Close"
+      >
+        ${closeIcon}
+      </button>
+    </figure>
+  `;
+}
+
+interface LightboxElements {
+  overlay: HTMLDivElement;
+  backdrop: HTMLDivElement;
+  img: HTMLImageElement;
+  caption: HTMLElement;
+  closeBtn: HTMLButtonElement;
+}
+
+function createOverlay(): LightboxElements {
   const overlay = document.createElement('div');
   overlay.className = 'image-lightbox';
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
 
-  const backdrop = document.createElement('div');
-  backdrop.className = 'image-lightbox__backdrop';
-  overlay.appendChild(backdrop);
+  // Use template to create structure
+  overlay.innerHTML = createOverlayTemplate();
 
-  const figure = document.createElement('figure');
-  figure.className = 'image-lightbox__figure';
-
-  const img = document.createElement('img');
-  img.className = 'image-lightbox__image';
-  img.alt = '';
-
-  const caption = document.createElement('figcaption');
-  caption.className = 'image-lightbox__caption';
-
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'image-lightbox__close';
-  closeBtn.type = 'button';
-  closeBtn.setAttribute('aria-label', 'Close');
-  closeBtn.innerHTML = closeIcon;
-
-  figure.appendChild(img);
-  figure.appendChild(caption);
-  figure.appendChild(closeBtn);
-  overlay.appendChild(figure);
+  // Query and cache DOM references
+  const backdrop = qs<HTMLDivElement>(overlay, '.image-lightbox__backdrop')!;
+  const img = qs<HTMLImageElement>(overlay, '.image-lightbox__image')!;
+  const caption = qs<HTMLElement>(overlay, '.image-lightbox__caption')!;
+  const closeBtn = qs<HTMLButtonElement>(overlay, '.image-lightbox__close')!;
 
   return { overlay, backdrop, img, caption, closeBtn };
 }
