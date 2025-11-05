@@ -1,6 +1,11 @@
 // Dynamic Table of Contents (TOC) for blog posts
 // Scans `.prose` for H2/H3, assigns stable IDs, and inserts a toggleable TOC
 
+import { qs } from './dom-builder';
+import { onRouteChange } from './router-events';
+import arrowUpRaw from '@/icons/arrowup.svg?raw';
+import arrowDownRaw from '@/icons/arrowdown.svg?raw';
+
 type HeadingInfo = {
   el: HTMLElement;
   level: 2 | 3;
@@ -61,6 +66,36 @@ function isArticleRoute(): boolean {
   }
 }
 
+/**
+ * Create TOC header template HTML
+ */
+function createTocHeaderTemplate(arrowDownIcon: string): string {
+  return `
+    <div class="toc__header" role="button" tabindex="0">
+      <strong class="toc__title">Table of Contents</strong>
+      <button 
+        type="button" 
+        class="toc__toggle" 
+        aria-expanded="false" 
+        aria-label="Show table of contents"
+      >
+        ${arrowDownIcon}
+      </button>
+    </div>
+  `;
+}
+
+/**
+ * Create TOC list item HTML
+ */
+function createTocItemHtml(heading: HeadingInfo): string {
+  return `
+    <li class="toc__item toc__item--h${heading.level}">
+      <a class="toc__anchor" href="#${heading.id}">${heading.text}</a>
+    </li>
+  `;
+}
+
 function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   if (!headings.length) return null;
 
@@ -68,24 +103,15 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   container.className = 'toc';
   container.setAttribute('data-expanded', 'false');
 
-  const header = document.createElement('div');
-  header.className = 'toc__header';
-  header.setAttribute('role', 'button');
-  header.setAttribute('tabindex', '0');
-  const title = document.createElement('strong');
-  title.className = 'toc__title';
-  title.textContent = 'Table of Contents';
+  // Use template for header
+  const arrowDownIcon = normalizeSvg(arrowDownRaw, 'toc__toggle-icon');
+  container.innerHTML = createTocHeaderTemplate(arrowDownIcon);
 
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'toc__toggle';
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'Show table of contents');
-  toggle.innerHTML = normalizeSvg(arrowDownRaw, 'toc__toggle-icon');
+  // Get references to header elements
+  const header = qs<HTMLDivElement>(container, '.toc__header')!;
+  const toggle = qs<HTMLButtonElement>(container, '.toc__toggle')!;
 
-  header.appendChild(title);
-  header.appendChild(toggle);
-
+  // Build list dynamically (structure depends on heading nesting)
   const list = document.createElement('ul');
   list.className = 'toc__list';
 
@@ -94,13 +120,10 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
 
   for (const h of headings) {
     if (h.level === 2) {
-      const li = document.createElement('li');
-      li.className = 'toc__item toc__item--h2';
-      const a = document.createElement('a');
-      a.className = 'toc__anchor';
-      a.href = `#${h.id}`;
-      a.textContent = h.text;
-      li.appendChild(a);
+      // Create H2 item from template
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = createTocItemHtml(h);
+      const li = tempDiv.firstElementChild as HTMLLIElement;
       list.appendChild(li);
       currentH2Li = li;
       currentSubUl = null;
@@ -108,13 +131,9 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
       // H3
       if (!currentH2Li) {
         // No preceding H2, append as top-level fallback
-        const li = document.createElement('li');
-        li.className = 'toc__item toc__item--h3';
-        const a = document.createElement('a');
-        a.className = 'toc__anchor';
-        a.href = `#${h.id}`;
-        a.textContent = h.text;
-        li.appendChild(a);
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = createTocItemHtml(h);
+        const li = tempDiv.firstElementChild as HTMLLIElement;
         list.appendChild(li);
         continue;
       }
@@ -123,18 +142,15 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
         currentSubUl.className = 'toc__sublist';
         currentH2Li.appendChild(currentSubUl);
       }
-      const subLi = document.createElement('li');
-      subLi.className = 'toc__item toc__item--h3';
-      const subA = document.createElement('a');
-      subA.className = 'toc__anchor';
-      subA.href = `#${h.id}`;
-      subA.textContent = h.text;
-      subLi.appendChild(subA);
+      // Create H3 item from template
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = createTocItemHtml(h);
+      const subLi = tempDiv.firstElementChild as HTMLLIElement;
       currentSubUl.appendChild(subLi);
     }
   }
 
-  container.appendChild(header);
+  // Append list to container (header already in innerHTML)
   container.appendChild(list);
 
   // Toggle behavior
@@ -249,10 +265,6 @@ export function autoInit() {
 }
 
 export default initToc;
-// Inline SVG icons for toggle
-import { onRouteChange } from './router-events';
-import arrowUpRaw from '@/icons/arrowup.svg?raw';
-import arrowDownRaw from '@/icons/arrowdown.svg?raw';
 
 function normalizeSvg(svg: string, extraClass = ''): string {
   try {
