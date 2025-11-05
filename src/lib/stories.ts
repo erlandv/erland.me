@@ -16,6 +16,7 @@ import pauseIcon from '@/icons/pause.svg?raw';
 import playIcon from '@/icons/play.svg?raw';
 import verifiedIcon from '@/icons/verified.svg?raw';
 import { onRouteChange } from './router-events';
+import { qs, qsa } from './dom-builder';
 
 interface Story {
   src: string;
@@ -82,6 +83,107 @@ class StoriesViewer {
   }
 
   /**
+   * Create stories overlay template HTML
+   */
+  private createOverlayTemplate(): string {
+    const progressBarsHTML = this.stories
+      .map(
+        () => `
+        <div class="stories__progress-bar">
+          <div class="stories__progress-fill"></div>
+        </div>
+      `
+      )
+      .join('');
+
+    return `
+      <div class="stories__backdrop"></div>
+      <div class="stories__container">
+        <!-- Header section -->
+        <div class="stories__header">
+          <!-- Progress bars -->
+          <div class="stories__progress">
+            ${progressBarsHTML}
+          </div>
+
+          <!-- Controls row (user info + buttons) -->
+          <div class="stories__controls">
+            <!-- User info -->
+            <div class="stories__user">
+              <img 
+                class="stories__avatar" 
+                src="/assets/profile/avatar-stories.webp" 
+                alt="Erland Ramdhani"
+              />
+              <div class="stories__username-container">
+                <div class="stories__username">erlandramdhani</div>
+                <span class="stories__verified" aria-label="Verified">
+                  ${verifiedIcon}
+                </span>
+              </div>
+            </div>
+
+            <!-- Buttons container -->
+            <div class="stories__buttons">
+              <button 
+                class="stories__pause" 
+                type="button" 
+                aria-label="Pause"
+              >
+                ${pauseIcon}
+              </button>
+              <button 
+                class="stories__close" 
+                type="button" 
+                aria-label="Close stories"
+              >
+                ${closeIcon}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content area -->
+        <div class="stories__content">
+          <img 
+            class="stories__image" 
+            alt="" 
+            draggable="false"
+          />
+          
+          <!-- Click zones for mobile navigation -->
+          <div 
+            class="stories__click-zone stories__click-zone--prev" 
+            aria-label="Previous story"
+          ></div>
+          <div 
+            class="stories__click-zone stories__click-zone--next" 
+            aria-label="Next story"
+          ></div>
+        </div>
+
+        <!-- Navigation - Previous (desktop) -->
+        <button 
+          class="stories__nav stories__nav--prev" 
+          type="button" 
+          aria-label="Previous story"
+        >
+          <span class="stories__nav-icon">${leftArrowIcon}</span>
+        </button>
+
+        <!-- Navigation - Next (desktop) -->
+        <button 
+          class="stories__nav stories__nav--next" 
+          type="button" 
+          aria-label="Next story"
+        >
+          <span class="stories__nav-icon">${rightArrowIcon}</span>
+        </button>
+      </div>
+    `;
+  }
+
+  /**
    * Create the stories overlay DOM structure
    */
   private createOverlay(): HTMLDivElement {
@@ -91,152 +193,57 @@ class StoriesViewer {
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-label', 'Stories viewer');
 
-    // Backdrop
-    const backdrop = document.createElement('div');
-    backdrop.className = 'stories__backdrop';
-    overlay.appendChild(backdrop);
+    // Use template to create structure
+    overlay.innerHTML = this.createOverlayTemplate();
 
-    // Container
-    const container = document.createElement('div');
-    container.className = 'stories__container';
+    // Query and cache DOM references
+    const backdrop = qs<HTMLDivElement>(overlay, '.stories__backdrop');
+    const closeBtn = qs<HTMLButtonElement>(overlay, '.stories__close');
+    const pauseBtn = qs<HTMLButtonElement>(overlay, '.stories__pause');
+    const navPrev = qs<HTMLButtonElement>(overlay, '.stories__nav--prev');
+    const navNext = qs<HTMLButtonElement>(overlay, '.stories__nav--next');
+    const clickZonePrev = qs<HTMLDivElement>(
+      overlay,
+      '.stories__click-zone--prev'
+    );
+    const clickZoneNext = qs<HTMLDivElement>(
+      overlay,
+      '.stories__click-zone--next'
+    );
+    const imageElement = qs<HTMLImageElement>(overlay, '.stories__image');
+    const progressBars = qsa<HTMLDivElement>(overlay, '.stories__progress-bar');
 
-    // Header section
-    const header = document.createElement('div');
-    header.className = 'stories__header';
-
-    // Progress bars
-    const progressContainer = document.createElement('div');
-    progressContainer.className = 'stories__progress';
-    this.stories.forEach(() => {
-      const bar = document.createElement('div');
-      bar.className = 'stories__progress-bar';
-      const fill = document.createElement('div');
-      fill.className = 'stories__progress-fill';
-      bar.appendChild(fill);
-      progressContainer.appendChild(bar);
-      this.progressBars.push(bar);
-    });
-    header.appendChild(progressContainer);
-
-    // Controls row (user info + buttons)
-    const controlsRow = document.createElement('div');
-    controlsRow.className = 'stories__controls';
-
-    // User info
-    const userInfo = document.createElement('div');
-    userInfo.className = 'stories__user';
-
-    const avatar = document.createElement('img');
-    avatar.className = 'stories__avatar';
-    avatar.src = '/assets/profile/avatar-stories.webp';
-    avatar.alt = 'Erland Ramdhani';
-    userInfo.appendChild(avatar);
-
-    const usernameContainer = document.createElement('div');
-    usernameContainer.className = 'stories__username-container';
-
-    const username = document.createElement('div');
-    username.className = 'stories__username';
-    username.textContent = 'erlandramdhani';
-    usernameContainer.appendChild(username);
-
-    const verifiedBadge = document.createElement('span');
-    verifiedBadge.className = 'stories__verified';
-    verifiedBadge.innerHTML = verifiedIcon;
-    verifiedBadge.setAttribute('aria-label', 'Verified');
-    usernameContainer.appendChild(verifiedBadge);
-
-    userInfo.appendChild(usernameContainer);
-
-    controlsRow.appendChild(userInfo);
-
-    // Buttons container
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'stories__buttons';
-
-    // Pause/Play button
-    const pauseBtn = document.createElement('button');
-    pauseBtn.className = 'stories__pause';
-    pauseBtn.type = 'button';
-    pauseBtn.setAttribute('aria-label', 'Pause');
-    pauseBtn.innerHTML = pauseIcon;
-    buttonsContainer.appendChild(pauseBtn);
+    // Store references
+    this.imageElement = imageElement;
     this.pauseButton = pauseBtn;
-
-    // Close button (in header, both mobile and desktop)
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'stories__close';
-    closeBtn.type = 'button';
-    closeBtn.setAttribute('aria-label', 'Close stories');
-    closeBtn.innerHTML = closeIcon;
-    buttonsContainer.appendChild(closeBtn);
-
-    controlsRow.appendChild(buttonsContainer);
-    header.appendChild(controlsRow);
-
-    container.appendChild(header);
-
-    // Content area
-    const content = document.createElement('div');
-    content.className = 'stories__content';
-
-    // Image
-    const img = document.createElement('img');
-    img.className = 'stories__image';
-    img.alt = '';
-    img.draggable = false;
-    content.appendChild(img);
-    this.imageElement = img;
-
-    // Click zones for mobile navigation
-    const clickZonePrev = document.createElement('div');
-    clickZonePrev.className = 'stories__click-zone stories__click-zone--prev';
-    clickZonePrev.setAttribute('aria-label', 'Previous story');
-    content.appendChild(clickZonePrev);
-    this.clickZonePrev = clickZonePrev;
-
-    const clickZoneNext = document.createElement('div');
-    clickZoneNext.className = 'stories__click-zone stories__click-zone--next';
-    clickZoneNext.setAttribute('aria-label', 'Next story');
-    content.appendChild(clickZoneNext);
-    this.clickZoneNext = clickZoneNext;
-
-    container.appendChild(content);
-
-    // Navigation - Previous (desktop)
-    const navPrev = document.createElement('button');
-    navPrev.className = 'stories__nav stories__nav--prev';
-    navPrev.setAttribute('aria-label', 'Previous story');
-    navPrev.type = 'button';
-    const navPrevIcon = document.createElement('span');
-    navPrevIcon.className = 'stories__nav-icon';
-    navPrevIcon.innerHTML = leftArrowIcon;
-    navPrev.appendChild(navPrevIcon);
-    container.appendChild(navPrev);
     this.navPrev = navPrev;
-
-    // Navigation - Next (desktop)
-    const navNext = document.createElement('button');
-    navNext.className = 'stories__nav stories__nav--next';
-    navNext.setAttribute('aria-label', 'Next story');
-    navNext.type = 'button';
-    const navNextIcon = document.createElement('span');
-    navNextIcon.className = 'stories__nav-icon';
-    navNextIcon.innerHTML = rightArrowIcon;
-    navNext.appendChild(navNextIcon);
-    container.appendChild(navNext);
     this.navNext = navNext;
+    this.clickZonePrev = clickZonePrev;
+    this.clickZoneNext = clickZoneNext;
+    this.progressBars = progressBars;
 
-    overlay.appendChild(container);
-
-    // Event listeners
-    backdrop.addEventListener('click', () => this.close());
-    closeBtn.addEventListener('click', () => this.close());
-    pauseBtn.addEventListener('click', () => this.togglePause());
-    navPrev.addEventListener('click', () => this.prev());
-    navNext.addEventListener('click', () => this.next());
-    clickZonePrev.addEventListener('click', () => this.prev());
-    clickZoneNext.addEventListener('click', () => this.next());
+    // Setup event listeners
+    if (backdrop) {
+      backdrop.addEventListener('click', () => this.close());
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.close());
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => this.togglePause());
+    }
+    if (navPrev) {
+      navPrev.addEventListener('click', () => this.prev());
+    }
+    if (navNext) {
+      navNext.addEventListener('click', () => this.next());
+    }
+    if (clickZonePrev) {
+      clickZonePrev.addEventListener('click', () => this.prev());
+    }
+    if (clickZoneNext) {
+      clickZoneNext.addEventListener('click', () => this.next());
+    }
 
     // Keyboard navigation
     document.addEventListener('keydown', this.handleKeyDown);
@@ -365,9 +372,7 @@ class StoriesViewer {
     const currentBar = this.progressBars[this.currentIndex];
     if (!currentBar) return;
 
-    const fill = currentBar.querySelector(
-      '.stories__progress-fill'
-    ) as HTMLDivElement;
+    const fill = qs<HTMLDivElement>(currentBar, '.stories__progress-fill');
     if (!fill) return;
 
     const progress = Math.min((this.elapsed / STORY_DURATION) * 100, 100);
@@ -416,9 +421,7 @@ class StoriesViewer {
 
     // Update progress bars state
     this.progressBars.forEach((bar, i) => {
-      const fill = bar.querySelector(
-        '.stories__progress-fill'
-      ) as HTMLDivElement;
+      const fill = qs<HTMLDivElement>(bar, '.stories__progress-fill');
       if (!fill) return;
 
       if (i < index) {
