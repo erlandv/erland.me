@@ -9,12 +9,12 @@
  * - Auto-close after all stories viewed
  */
 
-import closeIcon from '@/icons/close.svg?raw';
-import leftArrowIcon from '@/icons/left-arrow.svg?raw';
-import rightArrowIcon from '@/icons/right-arrow.svg?raw';
-import pauseIcon from '@/icons/pause.svg?raw';
-import playIcon from '@/icons/play.svg?raw';
-import verifiedIcon from '@/icons/verified.svg?raw';
+import closeIcon from '@/icons/btn-close.svg?raw';
+import leftArrowIcon from '@/icons/arrow-left.svg?raw';
+import rightArrowIcon from '@/icons/arrow-right.svg?raw';
+import pauseIcon from '@/icons/stories-pause.svg?raw';
+import playIcon from '@/icons/stories-play.svg?raw';
+import verifiedIcon from '@/icons/stories-verified.svg?raw';
 import { onRouteChange } from './router-events';
 import { qs, qsa } from './dom-builder';
 

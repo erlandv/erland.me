@@ -38,8 +38,8 @@
 }
 
 .iconSvg {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
 }
 
 .disabled {
@@ -81,8 +81,8 @@
     height: 36px;
   }
   .iconSvg {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
   }
   .mobileHide {
     display: none;

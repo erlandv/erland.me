@@ -45,13 +45,13 @@ const { widths, sizes } = getCardImageConfig();
         <div class={styles["post-card__meta"]}>
           {category && (
             <div class={styles["post-card__meta-item"]}>
-              <Icon name="tags" class={styles["post-card__meta-icon"]} />
+              <Icon name="blogTags" class={styles["post-card__meta-icon"]} />
               <a href={categoryHref!} class={styles["post-card__category"]}>{category}</a>
             </div>
           )}
           {dateLabel && (
             <div class={styles["post-card__meta-item"]}>
-              <Icon name="date" class={styles["post-card__meta-icon"]} />
+              <Icon name="blogDate" class={styles["post-card__meta-icon"]} />
               <time class={styles["post-card__date"]}>{dateLabel}</time>
             </div>
           )}
@@ -60,7 +60,7 @@ const { widths, sizes } = getCardImageConfig();
       {excerpt && <p class={styles["post-card__excerpt"]}>{excerpt}</p>}
       <a href={href} class:list={[styles["post-card__readmore"], 'btn']}>
         <span>Read more</span>
-        <Icon name="readmore" class={styles["post-card__readmore-icon"]} />
+        <Icon name="blogReadmore" class={styles["post-card__readmore-icon"]} />
       </a>
     </div>
   </div>
