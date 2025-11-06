@@ -57,7 +57,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         type='button'
         aria-label='Share via native share'
       >
-        <Icon name='share' class={styles['share__icon']} ariaLabel='Share' />
+        <Icon name='blogShare' class={styles['share__icon']} ariaLabel='Share' />
       </button>
       <button
         class:list={[styles['share__btn'], 'share__btn--copy']}
@@ -65,7 +65,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         aria-label='Copy link'
         data-copy={shareUrlCopy}
       >
-        <Icon name='copy' class={styles['share__icon']} ariaLabel='Copy link' />
+        <Icon name='btnCopy' class={styles['share__icon']} ariaLabel='Copy link' />
       </button>
     </div>
 
@@ -78,7 +78,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         aria-label='Share on WhatsApp'
       >
         <Icon
-          name='whatsapp'
+          name='socialWhatsapp'
           class={styles['share__icon']}
           ariaLabel='WhatsApp'
         />
@@ -91,7 +91,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         aria-label='Share on Telegram'
       >
         <Icon
-          name='telegram'
+          name='socialTelegram'
           class={styles['share__icon']}
           ariaLabel='Telegram'
         />
@@ -103,7 +103,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         rel='noopener noreferrer'
         aria-label='Share on X/Twitter'
       >
-        <Icon name='x' class={styles['share__icon']} ariaLabel='X / Twitter' />
+        <Icon name='socialX' class={styles['share__icon']} ariaLabel='X / Twitter' />
       </a>
       <a
         class={styles['share__btn']}
@@ -113,7 +113,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         aria-label='Share on Facebook'
       >
         <Icon
-          name='facebook'
+          name='socialFacebook'
           class={styles['share__icon']}
           ariaLabel='Facebook'
         />
@@ -126,7 +126,7 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
         aria-label='Share on LinkedIn'
       >
         <Icon
-          name='linkedin'
+          name='socialLinkedin'
           class={styles['share__icon']}
           ariaLabel='LinkedIn'
         />

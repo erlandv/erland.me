@@ -73,13 +73,13 @@ const jsonLd = blogPostingJsonLd({
         <div class={blogStyles['blog-post__meta']}>
           {frontmatter.category && (
             <div class={blogStyles['blog-post__meta-item']}>
-              <Icon name="tags" class={blogStyles['blog-post__meta-icon']} />
+              <Icon name="blogTags" class={blogStyles['blog-post__meta-icon']} />
               <a href={`/blog/category/${(await import('../../lib/blog')).slugifyCategory(String(frontmatter.category))}/`} class={blogStyles['blog-post__meta-text']}>{frontmatter.category}</a>
             </div>
           )}
           {frontmatter.publishDate && (
             <div class={blogStyles['blog-post__meta-item']}>
-              <Icon name="date" class={blogStyles['blog-post__meta-icon']} />
+              <Icon name="blogDate" class={blogStyles['blog-post__meta-icon']} />
               <time datetime={new Date(frontmatter.publishDate).toISOString()} class={blogStyles['blog-post__meta-text']}>
                 {new Date(frontmatter.publishDate).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
               </time>

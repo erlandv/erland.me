@@ -17,7 +17,6 @@ const { selectedItem } = Astro.props;
   data-easing='ease'
   data-easing2='ease'
   data-astro-transition-persist='sidebar'
-  role='banner'
   class='sidebar w-nav'
 >
   <div class='nav-content'>
@@ -59,10 +58,10 @@ const { selectedItem } = Astro.props;
         tabindex='0'
       >
         <span class='icon-switch icon-switch--menu'
-          ><Icon name='menu' class='navbar-icon' /></span
+          ><Icon name='navMobile' class='navbar-icon' /></span
         >
         <span class='icon-switch icon-switch--close'
-          ><Icon name='close' class='navbar-icon' /></span
+          ><Icon name='btnClose' class='navbar-icon' /></span
         >
       </label>
     </div>
@@ -94,7 +93,7 @@ const { selectedItem } = Astro.props;
         ]}
       >
         <Icon
-          name='home'
+          name='navHome'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Home</div>
@@ -112,7 +111,7 @@ const { selectedItem } = Astro.props;
         aria-current={selectedItem === 'web-development' ? 'page' : undefined}
       >
         <Icon
-          name='code'
+          name='navWeb'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Web development</div>
@@ -129,7 +128,7 @@ const { selectedItem } = Astro.props;
         ]}
       >
         <Icon
-          name='dns'
+          name='navInfra'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Cloud Infra</div>
@@ -146,7 +145,7 @@ const { selectedItem } = Astro.props;
         ]}
       >
         <Icon
-          name='favorite'
+          name='navPersonal'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Personal projects</div>
@@ -164,7 +163,7 @@ const { selectedItem } = Astro.props;
         aria-current={selectedItem === 'download' ? 'page' : undefined}
       >
         <Icon
-          name='download'
+          name='navDownload'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Download</div>
@@ -181,7 +180,7 @@ const { selectedItem } = Astro.props;
         ]}
       >
         <Icon
-          name='blog'
+          name='navBlog'
           class:list={[navStyles['nav-link-image'], 'nav-link-image']}
         />
         <div class='nav-text'>Blog Posts</div>

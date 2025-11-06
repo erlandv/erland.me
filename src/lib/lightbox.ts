@@ -4,8 +4,8 @@
 // - Opens overlay with zoom animation
 // - Close button and a floating open button (SVG loaded via ?raw)
 
-import closeIcon from '@/icons/close.svg?raw';
-import fullscreenIcon from '@/icons/fullscreen.svg?raw';
+import closeIcon from '@/icons/btn-close.svg?raw';
+import fullscreenIcon from '@/icons/btn-fullscreen.svg?raw';
 import { onRouteChange } from './router-events';
 import { qs } from './dom-builder';
 

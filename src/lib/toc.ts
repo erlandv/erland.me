@@ -3,8 +3,8 @@
 
 import { qs, escapeHtml } from './dom-builder';
 import { onRouteChange } from './router-events';
-import arrowUpRaw from '@/icons/arrowup.svg?raw';
-import arrowDownRaw from '@/icons/arrowdown.svg?raw';
+import arrowUpRaw from '@/icons/arrow-up.svg?raw';
+import arrowDownRaw from '@/icons/arrow-down.svg?raw';
 
 type HeadingInfo = {
   el: HTMLElement;

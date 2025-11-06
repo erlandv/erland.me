@@ -17,7 +17,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
   aria-label='Cari artikel'
 >
   <div class={styles['search-input-wrapper']}>
-    <Icon name='search' class={styles['search-icon']} />
+    <Icon name='blogSearch' class={styles['search-icon']} />
     <input
       type='text'
       placeholder={placeholder}
@@ -36,7 +36,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       aria-label='Clear search'
       style='display: none;'
     >
-      <Icon name='close' class={styles['clear-icon']} />
+      <Icon name='btnClose' class={styles['clear-icon']} />
     </button>
   </div>
   <div
