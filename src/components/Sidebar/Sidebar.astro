@@ -28,6 +28,7 @@ const { selectedItem } = Astro.props;
             class='sidebar__avatar-button'
             data-stories
             aria-label='View stories'
+            title="View stories"
           >
             <img
               src='/assets/profile/avatar.webp'
@@ -85,6 +86,7 @@ const { selectedItem } = Astro.props;
         href='/'
         aria-label='Home'
         data-label='Home'
+        title='Home'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',
@@ -102,6 +104,7 @@ const { selectedItem } = Astro.props;
         href='/portfolio/web-development/'
         aria-label='Web Development'
         data-label='Web Development'
+        title='Web Development'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',
@@ -120,6 +123,7 @@ const { selectedItem } = Astro.props;
         href='/portfolio/cloud-infra/'
         aria-label='Cloud Infrastructure'
         data-label='Cloud Infra'
+        title='Cloud Infra'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',
@@ -137,6 +141,7 @@ const { selectedItem } = Astro.props;
         href='/portfolio/personal-projects/'
         aria-label='Personal Projects'
         data-label='Personal Projects'
+        title='Personal Projects'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',
@@ -154,6 +159,7 @@ const { selectedItem } = Astro.props;
         href='/download/'
         aria-label='Download'
         data-label='Download'
+        title='Download'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',
@@ -172,6 +178,7 @@ const { selectedItem } = Astro.props;
         href='/blog/'
         aria-label='Blog Posts'
         data-label='Blog Posts'
+        title='Blog Posts'
         class:list={[
           navStyles['nav-link-container'],
           'nav-link-container',

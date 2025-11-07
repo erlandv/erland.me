@@ -6,7 +6,9 @@ import styles from './SidebarToggleButton.module.css';
 <div class:list={[styles.wrapper, "sidebar-edge-toggle-wrapper"]}>
   <div class={styles.divider} aria-hidden="true" />
   <label
+    id="sidebar-toggle-label"
     for="sidebar-toggle"
+    title="sidebar"
     class:list={[styles.toggle, "sidebar-toggle-button", "sidebar-edge-toggle"]}
     aria-label="Toggle sidebar width"
     tabindex="0"
@@ -29,6 +31,7 @@ import styles from './SidebarToggleButton.module.css';
   const TOGGLE_SELECTOR = '.sidebar-edge-toggle';
   const HTML_ATTR = 'data-sidebar';
 
+  const LABEL_ID = 'sidebar-toggle-label';
   const updateState = () => {
     try {
       const wrapper = document.querySelector(WRAPPER_SELECTOR);
@@ -42,6 +45,11 @@ import styles from './SidebarToggleButton.module.css';
       }
       wrapper.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
       toggle.classList.toggle('is-active', collapsed);
+      // Update dynamic title
+      const label = document.getElementById(LABEL_ID);
+      if (label) {
+        label.title = collapsed ? 'expand sidebar' : 'collapse sidebar';
+      }
     } catch {}
   };
 
