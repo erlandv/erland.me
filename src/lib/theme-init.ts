@@ -28,9 +28,9 @@ export function initThemeControl(): void {
       const value = localStorage.getItem(storageKey);
       return value === 'light' || value === 'dark' || value === 'auto'
         ? value
-        : 'auto';
+        : 'dark';
     } catch {
-      return 'auto';
+      return 'dark';
     }
   };
 
