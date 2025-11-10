@@ -4,7 +4,7 @@ import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
 const SITE_CONFIG = {
   name: 'erland.me',
   description:
-    'Erland, a passionate Developer based in Jakarta, Indonesia. With over a decade of experience in web development and open-source technologies.',
+    'Hello world! I am Erland. I build things for the web. I help teams turn ideas into production-ready, scalable web products that customers genuinely value.',
   url: SITE_URL,
   author: {
     name: 'Erland Ramdhani',
@@ -299,7 +299,7 @@ export function generateMetaTags(opts: {
   const imageAlt = opts.description || `${opts.title} – ${SITE_CONFIG.name}`;
 
   return {
-    title: `${opts.title} | ${SITE_CONFIG.name}`,
+    title: `${opts.title} - ${SITE_CONFIG.name}`,
     description: opts.description || SITE_CONFIG.description,
     canonical: fullUrl,
     openGraph: {
