@@ -28,7 +28,7 @@ const icons = {
     title='Theme settings'
   >
     <span class:list={[styles.triggerIcon, 'theme-toggle__trigger-icon']}>
-      <Icon name='themeAuto' class={styles.svg} data-theme-trigger-icon />
+      <Icon name='themeDark' class={styles.svg} data-theme-trigger-icon />
     </span>
   </button>
 
@@ -44,8 +44,8 @@ const icons = {
       class:list={[styles.option, 'theme-toggle__option']}
       role='menuitemradio'
       data-theme-option='auto'
-      data-active='true'
-      aria-checked='true'
+      data-active='false'
+      aria-checked='false'
     >
       <span class={styles.optionIcon}>
         <Icon name='themeAuto' class={styles.optionSvg} />
@@ -71,7 +71,8 @@ const icons = {
       class:list={[styles.option, 'theme-toggle__option']}
       role='menuitemradio'
       data-theme-option='dark'
-      aria-checked='false'
+      data-active='true'
+      aria-checked='true'
     >
       <span class={styles.optionIcon}>
         <Icon name='themeDark' class={styles.optionSvg} />
@@ -90,4 +91,4 @@ const icons = {
   </div>
 </div>
 
-<script is:inline define:vars={{ icons }}>!function(){try{var e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"?e:"auto",r=document.currentScript;if(r){var n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){var i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>
+<script is:inline define:vars={{ icons }}>!function(){try{var e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"||e==="auto"?e:"dark",r=document.currentScript;if(r){var n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){var i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>

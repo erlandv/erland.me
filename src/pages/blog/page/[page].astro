@@ -38,9 +38,9 @@ const searchablePosts = posts.map(postToSearchable);
 ---
 
 <SiteLayout
-  title={`Blog Archives Page ${page}`}
+  title={`Page ${page}: Blog Archives by Erland Ramdhani`}
   canonical={pageHref(page)}
-  description={`Halaman ${page} dari arsip blog: Berbagai artikel yang ditulis untuk menyalurkan hobi walau tak tentu waktu publikasi.`}
+  description={`Page ${page}: Arsip blog yang berisi berbagai artikel oleh Erland Ramdhani. Baca artikel menarik di blog ini.`}
   prevHref={page > 1 ? pageHref(page - 1) : undefined}
   nextHref={page < totalPages ? pageHref(page + 1) : undefined}
   jsonLd={collectionPageJsonLd(
@@ -55,10 +55,10 @@ const searchablePosts = posts.map(postToSearchable);
   selectedItem="blog"
   preloadSearch
 >
-  <BackNav href="/" label="Back" />
+  <BackNav href="/blog/" label="Back" />
 
   <div class="content-container">
-    <h1>Blog Posts</h1>
+    <h1>Page {page} Blog Archives</h1>
     
     <SearchInput posts={searchablePosts} placeholder="Cari artikel..." />
     <section class={listing['items-container']}>

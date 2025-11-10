@@ -36,15 +36,19 @@ const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
 const paginated = slicePage(filtered, page, pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/category/${categoryParam}/` : `/blog/category/${categoryParam}/page/${n}/`);
 
+// Capitalize first letter of category for display
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+const displayCategory = capitalize(categoryParam);
+
 const getHero = (post: any) => post.data?.hero ?? null;
 const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
-  title={`Blog Posts in "${categoryParam}"`}
+  title={`${displayCategory} Blog Posts by Erland Ramdhani`}
   canonical={`/blog/category/${categoryParam}/`}
-  description={`Arsip blog berdasarkan kategori "${categoryParam}".`}
+  description={`Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog Erland Ramdhani.`}
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={[
     collectionPageJsonLd(
@@ -61,12 +65,12 @@ const getCategory = (post: any) => post.data?.category ?? null;
   selectedItem="blog"
   preloadSearch
 >
-  <BackNav href="/blog/category/" label="Back to Category" />
+  <BackNav href="/blog/category/" label="See All Categories" />
 
   <div class="content-container">
-    <h1 style="text-transform: capitalize;">Category: {categoryParam}</h1>
+    <h1 style="text-transform: capitalize;">Category {displayCategory}</h1>
 
-    <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${categoryParam}\"...`} />
+    <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${displayCategory}\"...`} />
 
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>

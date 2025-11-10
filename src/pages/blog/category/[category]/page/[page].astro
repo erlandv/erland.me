@@ -49,6 +49,10 @@ const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Mat
 const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/category/${categoryParam}/` : `/blog/category/${categoryParam}/page/${n}/`);
 
+// Capitalize first letter of category for display
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+const displayCategory = capitalize(categoryParam);
+
 /* normalizeHero removed: frontmatter hero is ImageMetadata via schema(image()) */
 
 const getHero = (post: any) => post.data?.hero ?? null;
@@ -60,13 +64,13 @@ const searchablePosts = filtered.map(postToSearchable);
 ---
 
 <SiteLayout
-  title={`Blog Archives in "${categoryParam}" - Page ${page}`}
+  title={`Page ${page}: ${displayCategory} Blog Posts by Erland Ramdhani`}
   canonical={pageHref(page)}
-  description={`Halaman ${page} dari arsip kategori \"${categoryParam}\".`}
+  description={`Page ${page}: Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog Erland Ramdhani.`}
   prevHref={page > 1 ? pageHref(page - 1) : undefined}
   nextHref={page < totalPages ? pageHref(page + 1) : undefined}
   jsonLd={collectionPageJsonLd(
-    `Blog Category: ${categoryParam} - Page ${page}`,
+    `Blog Category: ${displayCategory} - Page ${page}`,
     pageHref(page),
     paginated.map((p: any, i: number) => ({
       url: `/blog/${p.slug}/`,
@@ -77,12 +81,12 @@ const searchablePosts = filtered.map(postToSearchable);
   selectedItem="blog"
   preloadSearch
 >
-  <BackNav href="/" label="Back" />
+  <BackNav href={`/blog/category/${categoryParam}/`} label="Back" />
 
   <div class="content-container">
-    <h1>Blog Posts</h1>
+    <h1>Page {page} Category {displayCategory}</h1>
     
-    <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${categoryParam}\"...`} />
+    <SearchInput posts={searchablePosts} placeholder={`Cari artikel di kategori \"${displayCategory}\"...`} />
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
         {paginated.map((post: any) => {
