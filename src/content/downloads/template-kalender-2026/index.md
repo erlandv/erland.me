@@ -8,6 +8,11 @@ updatedDate: 2025-10-15
 hero: ./hero.png
 heroAlt: 'Template Kalender 2026'
 draft: false
+rating:
+  ratingValue: 5
+  reviewCount: 113
+  bestRating: 5
+  worstRating: 1
 downloadFiles:
   - label: 'kalender-2026.zip'
     href: 'https://asset.erland.me/template/kalender-2026.zip'
@@ -98,6 +103,6 @@ Silakan download file template kalender 2026 gratis melalui link download di baw
 
 ### Opsional
 
-Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">Saweria</a>.
+Jika Anda merasa apa yang saya bagikan di sini bermanfaat dan ingin memberikan tanda kasih, Anda dapat mengirimkan donasi seikhlasnya melalui: <a href="https://saweria.co/erlandev" rel="nofollow noopener" target="_blank">saweria.co/erlandev</a>.
 
 Donasi yang Anda berikan akan saya gunakan sebaik-baiknya untuk membayar tagihan server yang digunakan pada web ini. Terima kasih banyak atas apresiasinya!

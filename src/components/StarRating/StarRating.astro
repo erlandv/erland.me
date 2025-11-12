@@ -1,0 +1,46 @@
+---
+import styles from './star-rating.module.css';
+
+interface Props {
+  ratingValue: number;
+  reviewCount: number;
+  bestRating?: number;
+  class?: string;
+}
+
+const {
+  ratingValue,
+  reviewCount,
+  bestRating = 5,
+  class: className,
+} = Astro.props;
+
+// Calculate full stars and half star
+const fullStars = Math.floor(ratingValue);
+const hasHalfStar = ratingValue % 1 >= 0.5;
+
+// Import SVG content directly
+import fullStarSvg from '@/icons/rating-star.svg?raw';
+import halfStarSvg from '@/icons/rating-half-star.svg?raw';
+---
+
+<div
+  class:list={[styles.rating, className]}
+  aria-label={`Rating: ${ratingValue} out of ${bestRating} stars, based on ${reviewCount} reviews`}
+>
+  <div class={styles.stars} aria-hidden='true'>
+    {
+      Array.from({ length: fullStars }).map(() => (
+        <span class={styles.star} set:html={fullStarSvg} />
+      ))
+    }
+    {hasHalfStar && <span class={styles.star} set:html={halfStarSvg} />}
+  </div>
+  <div class={styles.text}>
+    <span class={styles.value}>{ratingValue.toFixed(1)}</span>
+    <span class={styles.separator}>·</span>
+    <span class={styles.count}
+      >{reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}</span
+    >
+  </div>
+</div>
