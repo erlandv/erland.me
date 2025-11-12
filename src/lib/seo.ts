@@ -216,6 +216,11 @@ export function creativeWorkJsonLd(opts: {
           reviewCount: opts.rating.reviewCount,
           bestRating: opts.rating.bestRating ?? 5,
           worstRating: opts.rating.worstRating ?? 1,
+          itemReviewed: {
+            '@type': 'CreativeWork',
+            name: opts.title,
+            url: fullUrl,
+          },
         }
       : undefined,
     inLanguage: 'id-ID',
