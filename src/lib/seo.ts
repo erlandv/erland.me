@@ -158,6 +158,12 @@ export function creativeWorkJsonLd(opts: {
   publishDate?: Date | string | null;
   fileSize?: string | null;
   fileFormat?: string | null;
+  rating?: {
+    ratingValue: number;
+    reviewCount: number;
+    bestRating?: number;
+    worstRating?: number;
+  } | null;
 }) {
   const datePublished = opts.publishDate
     ? new Date(opts.publishDate).toISOString()
@@ -201,6 +207,21 @@ export function creativeWorkJsonLd(opts: {
             : `${SITE_CONFIG.url}${opts.downloadUrl}`,
           fileFormat: opts.fileFormat || 'application/zip',
           contentSize: opts.fileSize,
+        }
+      : undefined,
+    aggregateRating: opts.rating
+      ? {
+          '@type': 'AggregateRating',
+          ratingValue: opts.rating.ratingValue,
+          reviewCount: opts.rating.reviewCount,
+          bestRating: opts.rating.bestRating ?? 5,
+          worstRating: opts.rating.worstRating ?? 1,
+          itemReviewed: {
+            '@type': 'MediaObject',
+            name: opts.title,
+            url: fullUrl,
+            description: opts.description ?? undefined,
+          },
         }
       : undefined,
     inLanguage: 'id-ID',

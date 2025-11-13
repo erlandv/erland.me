@@ -40,6 +40,14 @@ const downloads = defineCollection({
           })
         )
         .optional(),
+      rating: z
+        .object({
+          ratingValue: z.number().min(1).max(5),
+          reviewCount: z.number().int().positive(),
+          bestRating: z.number().default(5),
+          worstRating: z.number().default(1),
+        })
+        .optional(),
     }),
 });
 
