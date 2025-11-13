@@ -217,9 +217,10 @@ export function creativeWorkJsonLd(opts: {
           bestRating: opts.rating.bestRating ?? 5,
           worstRating: opts.rating.worstRating ?? 1,
           itemReviewed: {
-            '@type': 'CreativeWork',
+            '@type': 'MediaObject',
             name: opts.title,
             url: fullUrl,
+            description: opts.description ?? undefined,
           },
         }
       : undefined,
