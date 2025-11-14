@@ -46,3 +46,9 @@ export const ADSENSE_SLOT_DL_END: string =
   (import.meta as any).env?.PUBLIC_ADSENSE_SLOT_DL_END ||
   process.env.PUBLIC_ADSENSE_SLOT_DL_END ||
   '';
+
+// Ahrefs Web Analytics data-key (public)
+export const AHREFS_DATA_KEY: string =
+  (import.meta as any).env?.PUBLIC_AHREFS_DATA_KEY ||
+  process.env.PUBLIC_AHREFS_DATA_KEY ||
+  '';
