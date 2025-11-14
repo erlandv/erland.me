@@ -15,6 +15,7 @@ type LoadedFlags = {
   themeToggle: boolean;
   themeControl: boolean;
   stories: boolean;
+  downloadTracker: boolean;
 };
 
 const loaded: LoadedFlags = {
@@ -25,6 +26,7 @@ const loaded: LoadedFlags = {
   themeToggle: false,
   themeControl: false,
   stories: false,
+  downloadTracker: false,
 };
 
 const SELECTORS = {
@@ -37,6 +39,15 @@ const SELECTORS = {
   table: ['.prose table'],
   themeToggle: ['.theme-toggle'],
   stories: ['[data-stories]'],
+  downloadTracker: [
+    'a[href*=".zip"]',
+    'a[href*=".cdr"]',
+    'a[href*=".ai"]',
+    'a[href*=".pdf"]',
+    'a[href*=".png"]',
+    'a[download]',
+    '.download-files-link',
+  ],
 } as const;
 
 function hasTarget(selectors: readonly string[]): boolean {
@@ -161,12 +172,33 @@ async function maybeLoadStories(): Promise<void> {
   );
 }
 
+async function maybeLoadDownloadTracker(): Promise<void> {
+  if (!hasTarget(SELECTORS.downloadTracker)) return;
+
+  await safeFeatureInit(
+    'downloadTracker',
+    async () => {
+      // Import module once, but always re-run the initializer
+      if (!loaded.downloadTracker) {
+        const mod = await import('./download-tracker');
+        loaded.downloadTracker = true;
+        // Store reference to the initializer function for subsequent calls
+        (window as any).__downloadTrackerInit = mod.initDownloadTracking;
+      }
+      // Always execute the initializer to track new download links after navigation
+      (window as any).__downloadTrackerInit?.();
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
+}
+
 function gateAll(): void {
   void maybeLoadShare();
   void maybeLoadCopy();
   void maybeLoadLightbox();
   void maybeLoadTable();
   void maybeLoadStories();
+  void maybeLoadDownloadTracker();
 }
 
 function gateThemeToggle(): void {
