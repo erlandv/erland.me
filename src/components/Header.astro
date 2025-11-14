@@ -149,7 +149,7 @@ const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+n
     <Fragment set:html={`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`} />
   )}
   {enableAhrefs && (
-    <Fragment set:html={`<script src="https://analytics.ahrefs.com/analytics.js" data-key="${AHREFS_DATA_KEY}" async></script>`} />
+    <Fragment set:html={`<script async src="https://analytics.ahrefs.com/analytics.js" data-key="${AHREFS_DATA_KEY}"></script>`} />
   )}
   
   <ClientRouter fallback="swap" />
