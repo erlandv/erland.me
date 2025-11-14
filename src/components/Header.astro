@@ -1,6 +1,6 @@
 ---
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
-import { GTM_ID, ADSENSE_CLIENT } from '@lib/env';
+import { GTM_ID, ADSENSE_CLIENT, AHREFS_DATA_KEY } from '@lib/env';
 import { ClientRouter } from 'astro:transitions';
 import CriticalInit from './CriticalInit.astro';
 
@@ -53,6 +53,7 @@ const websiteSchema = websiteJsonLd();
 
 const enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
 const enableAdsense = import.meta.env.PROD && isProductionSite() && Boolean(ADSENSE_CLIENT);
+const enableAhrefs = import.meta.env.PROD && isProductionSite() && Boolean(AHREFS_DATA_KEY);
 
 // Minified GTM snippet with server-side GTM_ID interpolation
 const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+new Date,event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=!0,j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl,f.parentNode.insertBefore(j,f)}(window,document,'script','dataLayer','${GTM_ID}');`;
@@ -116,6 +117,12 @@ const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+n
       <link rel="dns-prefetch" href="https://adservice.google.com">
     </>
   )}
+  {enableAhrefs && (
+    <>
+      <link rel="preconnect" href="https://analytics.ahrefs.com">
+      <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+    </>
+  )}
   
   <link rel="preload" href="/fonts/agave-nerd/AgaveNerdFontMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
@@ -140,6 +147,9 @@ const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+n
   )}
   {enableAdsense && (
     <Fragment set:html={`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`} />
+  )}
+  {enableAhrefs && (
+    <Fragment set:html={`<script async src="https://analytics.ahrefs.com/analytics.js" data-key="${AHREFS_DATA_KEY}"></script>`} />
   )}
   
   <ClientRouter fallback="swap" />
