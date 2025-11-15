@@ -17,7 +17,7 @@ There aren't many advanced features here because it was intentionally designed t
 - **"Search"**: It can find things! Truly groundbreaking for 2025. Instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like absolutely nothing).
 - **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Nobel Prize committee, my DMs are open.
 - **Syntax Highlighting**: Makes code snippets readable instead of looking like a JSON file threw up. You're welcome.
-- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
+- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, `JSON-LD`, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
 - **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't standard everywhere yet. I'm as confused as you are.
 - **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful. It's called UX, look it up.
 - **Share Buttons**: Standard social media icons for my dozen readers who are _totally_ dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
@@ -144,12 +144,12 @@ npm run build:clean # Nuclear option: clean dist + full rebuild
 npm run preview     # Serve production build locally for QA
 
 # Quality checks (run these before committing unless you enjoy CI failures)
-npm run validate    # All checks: lint + lint:js + type-check + format:check
-npm run lint        # Astro check for errors/warnings
-npm run lint:js     # ESLint check for JavaScript/TypeScript
-npm run lint:js:fix # ESLint with auto-fix
-npm run type-check  # TypeScript validation only
-npm run format      # Auto-format with Prettier
+npm run validate     # All checks: lint + lint:js + type-check + format:check
+npm run lint         # Astro check for errors/warnings
+npm run lint:js      # ESLint check for JavaScript/TypeScript
+npm run lint:js:fix  # ESLint with auto-fix
+npm run type-check   # TypeScript validation only
+npm run format       # Auto-format with Prettier
 npm run format:check # Verify Prettier compliance (CI uses this)
 
 # Metadata generation (usually automatic via pre-hooks)
@@ -171,7 +171,7 @@ Why this paranoia? Because "it works on my machine" is not acceptable when produ
 
 ### Environment Variables
 
-Create `.env` if you want to override defaults (optional, everything has sane fallbacks). The site now has a **ridiculously over-engineered validation system** that uses Zod schemas because apparently I don't trust environment variables to be what they claim to be. It's like TypeScript for your `.env` file—paranoid, but helpful.
+Create `.env` if you want to override defaults (optional, everything has sane fallbacks). Includes a **completely unnecessary Zod validation layer** because I have trust issues with plain text files. Yes, I validate environment variables in a static site. No, I don't have better things to do.
 
 ```bash
 # Core site configuration (auto-detected if you're using localhost like a civilized developer)
@@ -180,7 +180,7 @@ SITE_DOMAIN=localhost               # Domain for localhost development
 PUBLIC_SITE_ENV=development         # Force environment mode (development/production/staging)
 
 # Analytics & tracking (optional for development, required for production because Google demands tribute)
-PUBLIC_GTM_ID=GTM-XXXXXXX          # Google Tag Manager ID (format: GTM-XXXXXXXX)
+PUBLIC_GTM_ID=GTM-XXXXXXX           # Google Tag Manager ID (format: GTM-XXXXXXXX)
 PUBLIC_ADSENSE_CLIENT=ca-pub-...    # AdSense publisher ID (format: ca-pub-XXXXXXXXXX)
 PUBLIC_ADSENSE_SLOT_BLOG_MID=12345  # AdSense slot IDs (numeric, because consistency is overrated)
 PUBLIC_ADSENSE_SLOT_BLOG_END=67890  # More slot IDs for maximum monetization potential

@@ -1,4 +1,5 @@
 import { createLogger } from './logger';
+import { isProdSite } from './env';
 
 const log = createLogger('AdSense');
 
@@ -7,16 +8,6 @@ interface WindowWithAds extends Window {
   adsbygoogle?: Array<Record<string, unknown>>;
   __ads_dl_end?: Set<string>;
   __ph_dl_end?: boolean;
-}
-
-interface ImportMetaEnvWithAds {
-  readonly PROD?: boolean;
-  readonly PUBLIC_PRODUCTION_HOSTS?: string;
-  readonly PUBLIC_SITE_ENV?: string;
-}
-
-interface ImportMetaWithAds {
-  readonly env?: ImportMetaEnvWithAds;
 }
 
 export function insertAdUnit(container: Element, client: string, slot: string) {
@@ -292,34 +283,6 @@ export function autoInitDownloadPlaceholders() {
 
 type AdsSlots = Array<string | null | undefined>;
 
-function getProductionHosts(): string[] {
-  const meta = import.meta as ImportMetaWithAds;
-  const envHosts =
-    (meta.env?.PUBLIC_PRODUCTION_HOSTS as string | undefined) || '';
-  const parsed = envHosts
-    .split(',')
-    .map(h => h.trim().toLowerCase())
-    .filter(Boolean);
-  if (parsed.length > 0) return parsed;
-  return ['erland.me', 'www.erland.me'];
-}
-
-function resolveRuntimeEnvironment(): 'production' | 'preview' {
-  const meta = import.meta as ImportMetaWithAds;
-  if (!meta.env?.PROD) return 'preview';
-
-  const siteEnv = (meta.env?.PUBLIC_SITE_ENV as string | undefined) || '';
-  if (siteEnv) {
-    return siteEnv.toLowerCase() === 'production' ? 'production' : 'preview';
-  }
-
-  if (typeof window === 'undefined') return 'preview';
-  const host = window.location.hostname?.toLowerCase() ?? '';
-  if (!host) return 'preview';
-  const allowed = getProductionHosts();
-  return allowed.includes(host) ? 'production' : 'preview';
-}
-
 const hasSlotConfigured = (slots?: AdsSlots): boolean =>
   Array.isArray(slots) &&
   slots.some(slot => typeof slot === 'string' && slot.trim().length > 0);
@@ -332,7 +295,8 @@ interface AdsRenderConfig {
 export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
   const client = (config.client ?? '').trim();
   if (!client) return false;
-  if (resolveRuntimeEnvironment() !== 'production') return false;
+  // Use same logic as Header.astro: PROD environment + production site
+  if (!import.meta.env.PROD || !isProdSite()) return false;
   if (config.slots && !hasSlotConfigured(config.slots)) {
     return false;
   }
