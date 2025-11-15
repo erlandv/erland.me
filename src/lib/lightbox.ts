@@ -57,11 +57,16 @@ function createOverlay(): LightboxElements {
   // Use template to create structure
   overlay.innerHTML = createOverlayTemplate();
 
-  // Query and cache DOM references
-  const backdrop = qs<HTMLDivElement>(overlay, '.image-lightbox__backdrop')!;
-  const img = qs<HTMLImageElement>(overlay, '.image-lightbox__image')!;
-  const caption = qs<HTMLElement>(overlay, '.image-lightbox__caption')!;
-  const closeBtn = qs<HTMLButtonElement>(overlay, '.image-lightbox__close')!;
+  // Query and cache DOM references with explicit error handling
+  const backdrop = qs<HTMLDivElement>(overlay, '.image-lightbox__backdrop');
+  const img = qs<HTMLImageElement>(overlay, '.image-lightbox__image');
+  const caption = qs<HTMLElement>(overlay, '.image-lightbox__caption');
+  const closeBtn = qs<HTMLButtonElement>(overlay, '.image-lightbox__close');
+
+  // Ensure all required elements exist (should never fail with our template)
+  if (!backdrop || !img || !caption || !closeBtn) {
+    throw new Error('Failed to create lightbox overlay: missing required elements');
+  }
 
   return { overlay, backdrop, img, caption, closeBtn };
 }

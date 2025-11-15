@@ -109,9 +109,14 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   const arrowDownIcon = normalizeSvg(arrowDownRaw, 'toc__toggle-icon');
   container.innerHTML = createTocHeaderTemplate(arrowDownIcon);
 
-  // Get references to header elements
-  const header = qs<HTMLDivElement>(container, '.toc__header')!;
-  const toggle = qs<HTMLButtonElement>(container, '.toc__toggle')!;
+  // Get references to header elements with explicit error handling
+  const header = qs<HTMLDivElement>(container, '.toc__header');
+  const toggle = qs<HTMLButtonElement>(container, '.toc__toggle');
+
+  // Ensure required elements exist (should never fail with our template)
+  if (!header || !toggle) {
+    throw new Error('Failed to create TOC: missing required header elements');
+  };
 
   // Build list dynamically (structure depends on heading nesting)
   const list = document.createElement('ul');
