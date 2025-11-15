@@ -32,6 +32,9 @@
  */
 ---
 
+<!-- Critical inline script for theme initialization (runs before page render) -->
+<!-- eslint-disable -->
 <script is:inline>
-!function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"dark";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));var a=window.matchMedia("(min-width: 1025px)");if(a.matches){var s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
+!function(){try{let e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"dark";const r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));const a=window.matchMedia("(min-width: 1025px)");if(a.matches){const s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
 </script>
+<!-- eslint-enable -->

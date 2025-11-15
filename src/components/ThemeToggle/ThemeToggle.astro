@@ -113,4 +113,6 @@ const icons = {
   </div>
 </div>
 
-<script is:inline define:vars={{ icons }}>!function(){try{var e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"||e==="auto"?e:"dark",r=document.currentScript;if(r){var n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){var i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>
+<!-- eslint-disable -->
+<script is:inline define:vars={{ icons }}>!function(){try{const e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"||e==="auto"?e:"dark",r=document.currentScript;if(r){const n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){const i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>
+<!-- eslint-enable -->

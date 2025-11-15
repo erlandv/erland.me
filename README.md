@@ -66,6 +66,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 ### Utilities & Configuration
 
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
+- **ESLint**: TypeScript/JavaScript linter with strict rules. Catches bugs before they happen and enforces consistent code patterns. See `.github/ESLINT.md` for configuration details.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.
 - **ESM Node Scripts (.mjs)**: Modern Node scripts because `.js` is so 2019 and I have a personal brand to maintain.
@@ -140,8 +141,10 @@ npm run build:clean # Nuclear option: clean dist + full rebuild
 npm run preview     # Serve production build locally for QA
 
 # Quality checks (run these before committing unless you enjoy CI failures)
-npm run validate    # All checks: lint + type-check + format:check
+npm run validate    # All checks: lint + lint:js + type-check + format:check
 npm run lint        # Astro check for errors/warnings
+npm run lint:js     # ESLint check for JavaScript/TypeScript
+npm run lint:js:fix # ESLint with auto-fix
 npm run type-check  # TypeScript validation only
 npm run format      # Auto-format with Prettier
 npm run format:check # Verify Prettier compliance (CI uses this)

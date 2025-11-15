@@ -23,7 +23,7 @@ function findCodeBlocks(): NodeListOf<HTMLElement> {
 
 function detectLanguage(pre: HTMLElement, code: HTMLElement): string {
   let language = 'text';
-  const classes = (pre.className + ' ' + code.className)
+  const classes = `${pre.className} ${code.className}`
     .split(' ')
     .map(c => c.trim())
     .filter(Boolean);

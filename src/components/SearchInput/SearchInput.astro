@@ -154,9 +154,9 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     const signatureOf = (list: any[]): string => {
       try {
         return (
-          list.length +
-          ':' +
-          list.map((it: any) => it.slug || it.id || '').join('|')
+          `${list.length 
+        }:${ 
+        list.map((it: any) => it.slug || it.id || '').join('|')}`
         );
       } catch {
         return `${Date.now()}:${list.length}`;
@@ -349,7 +349,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
         );
         let nextIndex = e.key === 'ArrowDown' ? active + 1 : active - 1;
         if (active === -1)
-          nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;
+          {nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;}
         if (nextIndex < 0) nextIndex = items.length - 1;
         if (nextIndex >= items.length) nextIndex = 0;
         items.forEach(el => el.classList.remove('is-active'));
@@ -485,7 +485,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
     const match = matches.find(m => m.key === key);
     if (!match || !match.indices || match.indices.length === 0)
-      return escapeHtml(text);
+      {return escapeHtml(text);}
 
     const isWordChar = (ch: string) => /\p{L}|\p{N}|_/u.test(ch);
     const expandToWordBoundaries = (

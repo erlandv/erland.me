@@ -35,5 +35,5 @@ export function summarize(text, maxChars = 280) {
     .filter(Boolean);
   const first = paragraphs[0] || normalized;
   if (first.length <= maxChars) return first;
-  return first.slice(0, maxChars).trimEnd() + '…';
+  return `${first.slice(0, maxChars).trimEnd()}…`;
 }

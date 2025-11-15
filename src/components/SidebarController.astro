@@ -167,8 +167,8 @@
       handler();
       // Prefer modern listener; fallback to onchange without deprecated addListener
       if (typeof (mq as any).addEventListener === 'function')
-        (mq as any).addEventListener('change', handler);
-      else if ('onchange' in mq) (mq as any).onchange = handler as any;
+        {(mq as any).addEventListener('change', handler);}
+      else if ('onchange' in mq) {(mq as any).onchange = handler as any;}
     } catch {}
   }
 
@@ -203,7 +203,7 @@
   function normalizePath(p: string): string {
     try {
       if (!p) return '/';
-      return p.endsWith('/') ? p : p + '/';
+      return p.endsWith('/') ? p : `${p  }/`;
     } catch {
       return '/';
     }

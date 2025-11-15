@@ -104,7 +104,7 @@ const flyoutId = 'sidebar-social-flyout';
       const trigger = wrapper.querySelector<HTMLElement>(TRIGGER_SELECTOR);
       const flyout = wrapper.querySelector<HTMLElement>(FLYOUT_SELECTOR);
       if (!(trigger instanceof HTMLElement) || !(flyout instanceof HTMLElement))
-        return false;
+        {return false;}
 
       const getItems = () =>
         Array.from(flyout.querySelectorAll<HTMLElement>(ITEM_SELECTOR)).filter(
@@ -140,11 +140,11 @@ const flyoutId = 'sidebar-social-flyout';
         if (isOpen === open) {
           if (open && opts.focusFirst) focusFirstItem();
           if (!open && opts.focusTrigger)
-            requestAnimationFrame(() => {
-              try {
-                trigger.focus();
-              } catch {}
-            });
+            {requestAnimationFrame(() => {
+            try {
+              trigger.focus();
+            } catch {}
+          });}
           return;
         }
         isOpen = open;
@@ -155,11 +155,11 @@ const flyoutId = 'sidebar-social-flyout';
         wrapper.setAttribute('data-open', open ? 'true' : 'false');
         if (open && opts.focusFirst) focusFirstItem();
         if (!open && opts.focusTrigger)
-          requestAnimationFrame(() => {
-            try {
-              trigger.focus();
-            } catch {}
-          });
+          {requestAnimationFrame(() => {
+          try {
+            trigger.focus();
+          } catch {}
+        });}
       };
 
       const handleDocumentPointer = (event: PointerEvent | MouseEvent) => {
@@ -249,12 +249,12 @@ const flyoutId = 'sidebar-social-flyout';
         try {
           const related = event.relatedTarget as HTMLElement | null;
           if (related && (flyout.contains(related) || related === trigger))
-            return;
+            {return;}
           requestAnimationFrame(() => {
             try {
               const active = document.activeElement as HTMLElement | null;
               if (active && (flyout.contains(active) || active === trigger))
-                return;
+                {return;}
               setOpen(false);
             } catch {}
           });
