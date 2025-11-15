@@ -1,4 +1,26 @@
 ---
+/**
+ * SearchInput Component
+ * 
+ * Client-side search input with fuzzy search powered by Fuse.js.
+ * Lazy-loads search index and Fuse.js on first focus for performance.
+ * Displays search results in a dropdown with keyboard navigation support.
+ * 
+ * Features:
+ * - Debounced search (300ms)
+ * - Keyboard navigation (Arrow Up/Down, Enter, Escape)
+ * - Click-outside to close
+ * - Highlighted search matches
+ * - Mobile-responsive results display
+ * 
+ * @component
+ * @example
+ * <SearchInput placeholder="Search articles..." />
+ * 
+ * @param {Object} props
+ * @param {any[]} [props.posts] - Initial posts data (optional, fetches from /search-index.json if not provided)
+ * @param {string} [props.placeholder="Search articles..."] - Input placeholder text
+ */
 import Icon from '@components/Icon.astro';
 import styles from './search-input.module.css';
 

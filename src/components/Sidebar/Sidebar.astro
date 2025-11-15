@@ -1,4 +1,31 @@
 ---
+/**
+ * Sidebar Component
+ * 
+ * Main navigation sidebar with profile header, navigation links, theme toggle, and social links.
+ * Supports collapsible state (desktop) and mobile menu drawer.
+ * 
+ * Features:
+ * - Profile avatar with stories button
+ * - Navigation links with active state highlighting
+ * - Mobile hamburger menu toggle
+ * - Theme toggle integration
+ * - Social media links (both sidebar and mobile menu variants)
+ * - Responsive design (drawer on mobile, collapsible on desktop)
+ * - View transitions persistence (data-astro-transition-persist)
+ * 
+ * Navigation state managed by:
+ * - SidebarController.astro (state management)
+ * - CSS classes and data attributes
+ * - Checkbox inputs for toggle state
+ * 
+ * @component
+ * @example
+ * <Sidebar selectedItem="blog" />
+ * 
+ * @param {Object} props
+ * @param {string} [props.selectedItem] - Currently active navigation item ("home" | "web-development" | "cloud-infra" | "personal-projects" | "download" | "blog")
+ */
 import Icon from '@components/Icon.astro';
 import ThemeToggle from '@components/ThemeToggle/ThemeToggle.astro';
 import './sidebar-global.css';

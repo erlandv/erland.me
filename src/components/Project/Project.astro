@@ -1,4 +1,30 @@
 ---
+/**
+ * Project Component
+ * 
+ * Displays portfolio project details with title, description, highlights, and tech stack.
+ * Used in portfolio pages to showcase individual projects.
+ * 
+ * Features:
+ * - Multi-paragraph description support (split by double newlines)
+ * - Optional highlights list
+ * - Technology chips/badges display
+ * 
+ * @component
+ * @example
+ * <Project 
+ *   title="My Project"
+ *   desc="Project description.\n\nSecond paragraph."
+ *   highlights={["Feature 1", "Feature 2"]}
+ *   tech={["React", "TypeScript", "Node.js"]}
+ * />
+ * 
+ * @param {Object} props
+ * @param {string} props.title - Project title
+ * @param {string} props.desc - Project description (supports multiple paragraphs separated by \n\n)
+ * @param {string[]} [props.highlights=[]] - Array of project highlights/features (optional)
+ * @param {string[]} props.tech - Array of technologies/tools used in the project
+ */
 import styles from './project.module.css';
 
 const { title, desc, highlights = [], tech } = Astro.props;

@@ -1,4 +1,33 @@
 ---
+/**
+ * HeroImage Component
+ * 
+ * Optimized hero image component with responsive sizing and multiple densities.
+ * Used for above-the-fold hero images with eager loading and high fetch priority.
+ * 
+ * Features:
+ * - Responsive image sizing (60vw mobile max 320px, 45vw desktop max 320px)
+ * - Multiple widths for different pixel densities (1x, 1.5x, 2x)
+ * - Eager loading for above-fold performance
+ * - High fetch priority for LCP optimization
+ * 
+ * @component
+ * @example
+ * <HeroImage 
+ *   image={heroImageMetadata}
+ *   alt="Hero image description"
+ *   loading="eager"
+ *   fetchpriority="high"
+ * />
+ * 
+ * @param {Object} props
+ * @param {ImageMetadata} props.image - Image metadata from Astro assets
+ * @param {string} props.alt - Alt text for accessibility (required)
+ * @param {"eager" | "lazy"} [props.loading="eager"] - Loading strategy (default: eager for heroes)
+ * @param {string} [props.sizes] - Responsive sizes attribute (default: optimized for hero layout)
+ * @param {number[]} [props.widths] - Array of image widths to generate (default: [180, 220, 270, 320, 480, 640])
+ * @param {"high" | "low" | "auto"} [props.fetchpriority="high"] - Fetch priority hint (default: high for heroes)
+ */
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import "@/styles/components/hero.css";

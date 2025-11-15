@@ -1,4 +1,49 @@
 ---
+/**
+ * Header Component
+ * 
+ * Comprehensive HTML <head> manager with SEO, analytics, and performance optimizations.
+ * Generates meta tags, JSON-LD structured data, and loads critical third-party scripts.
+ * 
+ * Features:
+ * - Complete Open Graph and Twitter Card meta tags
+ * - JSON-LD structured data (website + custom schemas)
+ * - Google Tag Manager integration (production only)
+ * - Google AdSense integration (production only)
+ * - Ahrefs Analytics integration (production only)
+ * - Font preloading and optimization
+ * - Favicon and web app manifest
+ * - Canonical URLs and pagination links
+ * - Astro View Transitions support
+ * - Critical theme/sidebar initialization
+ * 
+ * @component
+ * @example
+ * <Header 
+ *   title="Page Title | Site Name"
+ *   description="Page description for SEO"
+ *   canonical="https://example.com/page/"
+ *   image="https://example.com/og-image.jpg"
+ *   type="article"
+ *   publishedTime={new Date()}
+ *   preloadSearch={true}
+ * />
+ * 
+ * @param {Object} props
+ * @param {string} props.title - Page title (used for <title> and meta tags)
+ * @param {string} [props.canonical] - Canonical URL (auto-generated if not provided)
+ * @param {string} [props.prevHref] - Previous page URL for pagination (link rel="prev")
+ * @param {string} [props.nextHref] - Next page URL for pagination (link rel="next")
+ * @param {any} [props.jsonLd] - Custom JSON-LD structured data object (optional)
+ * @param {string} [props.description] - Meta description for SEO
+ * @param {string} [props.image] - OG image URL (absolute)
+ * @param {"website" | "article" | "profile"} [props.type="website"] - Open Graph type
+ * @param {Date | string} [props.publishedTime] - Article published time (ISO 8601 or Date)
+ * @param {Date | string} [props.modifiedTime] - Article modified time (ISO 8601 or Date)
+ * @param {string[]} [props.tags] - Article tags/keywords array
+ * @param {string} [props.author] - Article author name
+ * @param {boolean} [props.preloadSearch=false] - Preload search index JSON (for blog listing pages)
+ */
 import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
 import { GTM_ID, ADSENSE_CLIENT, AHREFS_DATA_KEY } from '@lib/env';
 import { ClientRouter } from 'astro:transitions';

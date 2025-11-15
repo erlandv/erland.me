@@ -1,4 +1,31 @@
 ---
+/**
+ * PostCard Component
+ * 
+ * Displays a blog post preview card with thumbnail, title, excerpt, category, and date.
+ * Used in blog listing pages to show post previews in a grid layout.
+ * 
+ * @component
+ * @example
+ * <PostCard 
+ *   href="/blog/my-post/"
+ *   title="Post Title"
+ *   hero={heroImage}
+ *   alt="Hero image description"
+ *   category="Technology"
+ *   dateLabel="Jan 1, 2024"
+ *   excerpt="Brief post description..."
+ * />
+ * 
+ * @param {Object} props
+ * @param {string} props.href - Post URL (absolute or relative path)
+ * @param {string} props.title - Post title displayed in card header
+ * @param {ImageMetadata | null} [props.hero] - Hero image from content collection (optional)
+ * @param {string} props.alt - Alt text for hero image (required for accessibility)
+ * @param {string | null} [props.category] - Post category (optional, generates link to category page)
+ * @param {string | null} [props.dateLabel] - Formatted date string (optional, e.g., "Jan 15, 2024")
+ * @param {string | null} [props.excerpt] - Post excerpt/description (optional)
+ */
 import Icon from '@components/Icon.astro';
 import { slugifyCategory } from '@lib/blog';
 import { Image } from 'astro:assets';

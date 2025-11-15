@@ -1,4 +1,38 @@
 ---
+/**
+ * SidebarController Component
+ * 
+ * Headless state management component for sidebar collapse/expand behavior.
+ * Manages mobile menu state, active navigation highlighting, and breakpoint transitions.
+ * 
+ * Features:
+ * - Persistent sidebar collapse state (localStorage)
+ * - Mobile vs desktop breakpoint handling (1024px)
+ * - Smooth collapse/expand animations
+ * - Active nav link detection and highlighting
+ * - Mobile menu drawer controls
+ * - Focus trap for mobile menu accessibility
+ * - Router event integration for view transitions
+ * - Syncs with SidebarToggleButton component
+ * 
+ * State persistence:
+ * - Sidebar collapsed state: localStorage key "sidebar-collapsed"
+ * - Desktop: persists user preference
+ * - Mobile: always expanded (breakpoint override)
+ * 
+ * Controlled elements:
+ * - .sidebar element and CSS classes
+ * - document.documentElement data-sidebar attribute
+ * - #sidebar-toggle checkbox (desktop collapse)
+ * - #nav-toggle checkbox (mobile menu)
+ * - .nav-link-container active states
+ * 
+ * @component
+ * @example
+ * <SidebarController />
+ * 
+ * @note This component has no visual output - it only manages sidebar state via JavaScript
+ */
 // No props; this island centralizes sidebar state, mobile menu, and active nav.
 ---
 

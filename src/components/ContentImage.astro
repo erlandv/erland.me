@@ -1,4 +1,27 @@
 ---
+/**
+ * ContentImage Component
+ * 
+ * Smart image component that resolves local images from content collections.
+ * Used as override for img tags in Markdown/MDX content.
+ * 
+ * Features:
+ * - Auto-resolves relative image paths to ImageMetadata
+ * - Lazy-loads images in blog and downloads collections
+ * - Falls back to regular img for external/public URLs
+ * - Responsive sizing via astro:assets integration
+ * - Maintains .prose img styles from global CSS
+ * 
+ * Resolution order:
+ * 1. Check blog collection images
+ * 2. Check downloads collection images
+ * 3. Fallback to regular img tag
+ * 
+ * @component
+ * @example
+ * In markdown: ![Alt text](./images/photo.jpg)
+ * Renders as: ContentImage with src="./images/photo.jpg" alt="Alt text"
+ */
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { getContentImageConfig } from "@lib/images";
@@ -12,12 +35,6 @@ interface Props {
   class?: string;
 }
 
-/**
- * ContentImage: Override for the <img> tag in Markdown/MDX.
- * - Tries to resolve local images in the blog/downloads collections to ImageMetadata so they can be rendered via astro:assets.Image.
- * - If resolution fails (e.g. external/public URLs), falls back to a regular <img> with the same attributes.
- * - Global CSS .prose img will still apply to <img> results from <Image> because of the <picture><img> output.
- */
 const {
   src,
   alt = "",

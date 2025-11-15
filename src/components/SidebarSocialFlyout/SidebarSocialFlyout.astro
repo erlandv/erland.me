@@ -1,4 +1,27 @@
 ---
+/**
+ * SidebarSocialFlyout Component
+ * 
+ * Collapsible social media links menu for collapsed sidebar state.
+ * Opens on click to reveal social media icons in a vertical flyout.
+ * 
+ * Features:
+ * - Toggle button with open/close icons
+ * - Animated flyout transition
+ * - Keyboard navigation support
+ * - Focus management and trap
+ * - Auto-closes when sidebar expands
+ * - Click-outside detection
+ * 
+ * Accessibility:
+ * - ARIA menu pattern (role="menu")
+ * - aria-expanded state tracking
+ * - focusout handling for focus trap
+ * 
+ * @component
+ * @example
+ * <SidebarSocialFlyout />
+ */
 import Icon from '@components/Icon.astro';
 import styles from './SidebarSocialFlyout.module.css';
 import socialsStyles from '@components/Sidebar/sidebar-socials.module.css';
