@@ -97,7 +97,9 @@ export function insertAdAfterMiddle(
       (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
       (ref.closest && (ref.closest('figure') as Element)) ||
       ref;
-    target.parentNode!.insertBefore(ins, target.nextSibling);
+    if (target.parentNode) {
+      target.parentNode.insertBefore(ins, target.nextSibling);
+    }
     const w = window as WindowWithAds;
     w.adsbygoogle = w.adsbygoogle || [];
     w.adsbygoogle.push({});
@@ -136,7 +138,9 @@ export function insertPlaceholderAfterMiddle(
         (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
         (ref.closest && (ref.closest('figure') as Element)) ||
         ref;
-      target.parentNode!.insertBefore(box, target.nextSibling);
+      if (target.parentNode) {
+        target.parentNode.insertBefore(box, target.nextSibling);
+      }
     }
   } catch (e) {
     log.warn('insertPlaceholderAfterMiddle failed', { error: e });

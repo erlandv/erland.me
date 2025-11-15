@@ -74,7 +74,11 @@ function getFileExtension(url: string): string {
     const pathname = new URL(url, window.location.href).pathname;
     const filename = pathname.split('/').pop() || '';
     const parts = filename.split('.');
-    return parts.length > 1 ? parts.pop()!.toLowerCase() : 'unknown';
+    if (parts.length > 1) {
+      const ext = parts.pop();
+      return ext ? ext.toLowerCase() : 'unknown';
+    }
+    return 'unknown';
   } catch {
     return 'unknown';
   }
