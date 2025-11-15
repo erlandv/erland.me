@@ -32,7 +32,6 @@ const envSchema = z.object({
       val => {
         // Allow localhost and IP addresses for development
         if (
-          val === 'localhost' ||
           /^127\.0\.0\.1(:\d+)?$/.test(val) ||
           /^localhost(:\d+)?$/.test(val)
         ) {
@@ -57,8 +56,8 @@ const envSchema = z.object({
   PUBLIC_GTM_ID: z
     .string()
     .regex(/^GTM-[A-Z0-9]+$/, 'PUBLIC_GTM_ID must match GTM-XXXXXXXX format')
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   // AdSense configuration (optional)
   PUBLIC_ADSENSE_CLIENT: z
@@ -67,35 +66,37 @@ const envSchema = z.object({
       /^ca-pub-\d+$/,
       'PUBLIC_ADSENSE_CLIENT must match ca-pub-XXXXXXXXXX format'
     )
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   PUBLIC_ADSENSE_SLOT_BLOG_MID: z
     .string()
     .regex(/^\d+$/, 'AdSense slot must be numeric')
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   PUBLIC_ADSENSE_SLOT_BLOG_END: z
     .string()
     .regex(/^\d+$/, 'AdSense slot must be numeric')
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   PUBLIC_ADSENSE_SLOT_DL_MID: z
     .string()
     .regex(/^\d+$/, 'AdSense slot must be numeric')
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   PUBLIC_ADSENSE_SLOT_DL_END: z
     .string()
     .regex(/^\d+$/, 'AdSense slot must be numeric')
-    .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .optional(),
 
   // Ahrefs analytics (optional)
-  PUBLIC_AHREFS_DATA_KEY: z.string().min(1).optional().or(z.literal('')),
+  PUBLIC_AHREFS_DATA_KEY: z
+    .union([z.string().min(1), z.literal('')])
+    .optional(),
 
   // Build configuration (optional)
   MINIFY_ENGINE: z.enum(['terser', 'esbuild']).default('esbuild'),
@@ -119,8 +120,11 @@ const envSchema = z.object({
 
 type ValidatedEnv = z.infer<typeof envSchema>;
 
+// Export type for external use
+export type { ValidatedEnv };
+
 // Cache for validated environment
-let validatedEnvCache: ValidatedEnv | null = null;
+const validatedEnvCache: { [key: string]: ValidatedEnv } = {};
 let validationError: Error | null = null;
 
 /**
@@ -131,8 +135,8 @@ let validationError: Error | null = null;
 function validateEnv(
   mode: 'development' | 'production' | 'staging' = 'development'
 ): ValidatedEnv {
-  // Return cached result if validation already succeeded
-  if (validatedEnvCache) return validatedEnvCache;
+  // Return cached result if validation already succeeded for this mode
+  if (validatedEnvCache[mode]) return validatedEnvCache[mode];
 
   // Re-throw cached validation error if validation failed
   if (validationError) throw validationError;
@@ -187,13 +191,13 @@ function validateEnv(
       });
 
       const result = productionSchema.parse(rawEnv);
-      validatedEnvCache = result;
+      validatedEnvCache[mode] = result;
       return result;
     }
 
     // Validate and cache result
     const result = envSchema.parse(rawEnv);
-    validatedEnvCache = result;
+    validatedEnvCache[mode] = result;
     return result;
   } catch (error) {
     const validationErr = new Error(
