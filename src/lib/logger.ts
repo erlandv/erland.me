@@ -77,7 +77,7 @@ function logContext(
 ): void {
   if (!context) return;
 
-  const { feature, timestamp, ...rest } = context;
+  const { feature: _feature, timestamp: _timestamp, ...rest } = context;
 
   if (Object.keys(rest).length > 0) {
     consoleFn(rest);

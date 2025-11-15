@@ -75,7 +75,10 @@ export function initThemeControl(): void {
   let preference = readStoredPreference();
 
   const resolvePreference = (pref: ThemePreference): ResolvedTheme => {
-    return pref === 'auto' ? (media.matches ? 'dark' : 'light') : pref;
+    if (pref === 'auto') {
+      return media.matches ? 'dark' : 'light';
+    }
+    return pref;
   };
 
   const syncDocument = (targetDoc: Document = document): ResolvedTheme => {
