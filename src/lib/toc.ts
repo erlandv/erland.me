@@ -116,7 +116,7 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   // Ensure required elements exist (should never fail with our template)
   if (!header || !toggle) {
     throw new Error('Failed to create TOC: missing required header elements');
-  };
+  }
 
   // Build list dynamically (structure depends on heading nesting)
   const list = document.createElement('ul');

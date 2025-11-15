@@ -65,7 +65,9 @@ function createOverlay(): LightboxElements {
 
   // Ensure all required elements exist (should never fail with our template)
   if (!backdrop || !img || !caption || !closeBtn) {
-    throw new Error('Failed to create lightbox overlay: missing required elements');
+    throw new Error(
+      'Failed to create lightbox overlay: missing required elements'
+    );
   }
 
   return { overlay, backdrop, img, caption, closeBtn };

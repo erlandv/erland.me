@@ -20,7 +20,7 @@ There aren't many advanced features here because it was intentionally designed t
 - **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
 - **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't standard everywhere yet. I'm as confused as you are.
 - **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful. It's called UX, look it up.
-- **Share Buttons**: Standard social media icons for my dozen readers who are *totally* dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
+- **Share Buttons**: Standard social media icons for my dozen readers who are _totally_ dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
 - **Instagram-like Story Viewer**: Fullscreen story modal with progress bars, auto-advance, and manual navigation. Because apparently my static site needed Instagram vibes. Complete with pause/resume and smooth transitions that'll make you forget this is just a personal web.
 - **Light/Dark Theme**: Toggle between themes because choosing colors is apparently too hard in 2025. Persists your preference in `localStorage` like it's rocket science. Auto-detects system settings because I'm considerate like that.
 - **Pagination**: Splits posts across pages instead of one endless scroll of regret. Apparently this counts as a feature now.
@@ -61,7 +61,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **Vanilla CSS + CSS Modules**: Plain CSS because this site is so minimal that Tailwind would be embarrassed to be here. Adding a framework would literally double my bundle size just to avoid writing `display: flex;`.
 - **PostCSS**: The automated janitor that cleans up my CSS, adds vendor prefixes I always forget, and minifies everything. Doing the Lord's work.
 - **SVG Icons**: Vector icons that scale infinitely and never look pixelated. Unlike my career trajectory.
-- **Flaticon**: Where I sourced—*totally legally*—all the hero images from the [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) pack. They're cute, they're blue, and they prevent my blog from looking like a 90s GeoCities page.
+- **Flaticon**: Where I sourced—_totally legally_—all the hero images from the [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) pack. They're cute, they're blue, and they prevent my blog from looking like a 90s GeoCities page.
 - **remark-directive**: Markdown plugins that add superpowers like gallery embeds (`remark-gallery`). Because regular Markdown is too mainstream.
 - **Agave Nerd Font**: That ridiculously fancy monospace font for code blocks. Because Comic Sans wasn't an option.
 
