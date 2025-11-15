@@ -284,12 +284,12 @@ export function isProdSite(): boolean {
   const actualSiteDomain =
     (import.meta as ImportMeta).env?.SITE_DOMAIN ||
     (typeof process !== 'undefined' ? process.env.SITE_DOMAIN : undefined);
-  
+
   // If no env vars set, check if current mode resolved to production
   if (!actualSiteUrl && !actualSiteDomain) {
     return currentMode === 'production';
   }
-  
+
   return (
     actualSiteUrl === 'https://erland.me' && actualSiteDomain === 'erland.me'
   );
