@@ -52,11 +52,48 @@ Static-first Astro personal website with type-safe content collections, minimal 
 - **Sitemap structure**: Custom sitemaps (`sitemap_index.xml`, `post-sitemap.xml`, `page-sitemap.xml`) for GSC backward compatibility; generated via `scripts/generate-sitemap.mjs` post-build; **only generated in production environment**
 - **Environment-aware**: Use `import.meta.env.SITE` (Astro components), `process.env.SITE_URL` (config files), or `SITE_URL` env var
 
+### Environment Validation System
+
+- **Runtime validation**: `src/lib/env.ts` provides comprehensive Zod-based validation of all environment variables at startup
+- **Mode detection**: Automatically detects environment mode based on explicit settings, localhost detection, or production URL patterns
+- **Type-safe access**: All environment variables are validated and cached for consistent access throughout the application
+- **Development-friendly**: Analytics IDs (GTM, AdSense) are optional in development mode but required for production builds
+- **Startup validation**: Environment validation occurs in `astro.config.ts` before any build processes, preventing invalid builds
+
+**Environment Modes**:
+
+- **Development**: Relaxed validation, analytics optional, localhost/127.0.0.1 domains supported
+- **Production**: Strict validation, GTM and AdSense IDs required, proper domain format enforced
+- **Staging**: Inherits development rules but can be explicitly set for preview deployments
+
+**Mode Detection Priority** (highest to lowest):
+
+1. `PUBLIC_SITE_ENV` explicit override (`development`/`production`/`staging`)
+2. Localhost detection (`localhost`, `127.0.0.1` in SITE_URL/SITE_DOMAIN → development)
+3. Production URL + NODE_ENV (`erland.me` + `NODE_ENV=production` → production)
+4. Default fallback (development mode for safety)
+
+**Build Commands**:
+
+- `npm run build:dev` - Forces development mode for local testing builds
+- `npm run build` - Auto-detects environment mode based on configuration
+- `npm run dev` - Always runs in development mode
+
+**Validation Features**:
+
+- URL format validation for `SITE_URL`
+- Domain format validation with localhost support for `SITE_DOMAIN`
+- GTM ID format validation (`GTM-XXXXXXXX` pattern)
+- AdSense client ID validation (`ca-pub-XXXXXXXXXX` pattern)
+- Numeric validation for AdSense slot IDs
+- Environment-specific requirement enforcement
+
 ## Critical Commands
 
 ```bash
 npm run dev          # Dev server (auto-generates metadata first via predev hook)
-npm run build        # Production build with fresh metadata
+npm run build        # Auto-detected environment build with fresh metadata
+npm run build:dev    # Development mode build (no analytics required)
 npm run build:clean  # Force clean dist/ cache before build
 npm run preview      # Serve built site locally for QA
 npm run validate     # Lint + type-check + format:check (must pass before PR)
@@ -344,7 +381,7 @@ This catches cases where:
 - **`ui-init.ts`**: Entry point for lazy-loading client features with gate pattern
 - **`router-events.ts`**: Centralized History API event management
 - **`toast.ts`**: Toast notification system for user feedback
-- **`env.ts`**: Environment variable access with `SITE_URL`, `SITE_DOMAIN` constants
+- **`env.ts`**: Environment validation with Zod schemas, mode detection, and type-safe variable access
 
 ## File Organization
 
@@ -362,12 +399,30 @@ This catches cases where:
 
 Update `src/env.d.ts` when adding new environment variables to maintain TypeScript inference.
 
-**Key variables**:
+**Core Configuration**:
 
-- `SITE_URL`: Site base URL (default: `https://erland.me`)
+- `SITE_URL`: Site base URL (default: `http://localhost:4321` for development)
+- `SITE_DOMAIN`: Site domain (default: `localhost` for development)
+- `PUBLIC_SITE_ENV`: Explicit environment override (`development`/`production`/`staging`)
+
+**Analytics & Tracking** (Required for production):
+
+- `PUBLIC_GTM_ID`: Google Tag Manager ID (format: `GTM-XXXXXXXX`)
+- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (format: `ca-pub-XXXXXXXXXX`)
+- `PUBLIC_ADSENSE_SLOT_*`: AdSense slot IDs (numeric)
+- `PUBLIC_AHREFS_DATA_KEY`: Ahrefs Web Analytics data key (optional)
+
+**Build Configuration**:
+
 - `MINIFY_ENGINE`: `terser` or `esbuild` (default: `esbuild`)
 - `ENABLE_STRIP_CONSOLE`: Remove console logs in production (requires terser)
-- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (public prefix makes it available in client code)
+- `ENABLE_MINIFY`: Enable/disable minification (boolean)
+
+**Validation Rules**:
+
+- Development mode: Analytics IDs optional, localhost domains supported
+- Production mode: GTM and AdSense IDs required, proper domain format enforced
+- All URLs validated for proper format, domains validated with regex patterns
 
 ### More Info
 

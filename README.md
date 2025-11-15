@@ -138,7 +138,8 @@ The dev server runs at `http://localhost:4321` (because Astro thinks it's funny)
 
 ```bash
 npm run dev         # Dev server with auto-reload (alias: npm start)
-npm run build       # Production build with metadata generation
+npm run build       # Auto-detected environment build with metadata generation
+npm run build:dev   # Development build (no analytics required, perfect for local testing)
 npm run build:clean # Nuclear option: clean dist + full rebuild
 npm run preview     # Serve production build locally for QA
 
@@ -170,22 +171,41 @@ Why this paranoia? Because "it works on my machine" is not acceptable when produ
 
 ### Environment Variables
 
-Create `.env` if you want to override defaults (optional, everything has sane fallbacks):
+Create `.env` if you want to override defaults (optional, everything has sane fallbacks). The site now has a **ridiculously over-engineered validation system** that uses Zod schemas because apparently I don't trust environment variables to be what they claim to be. It's like TypeScript for your `.env` file—paranoid, but helpful.
 
 ```bash
-# Site configuration
-SITE_URL=http://localhost:4321  # Base URL (or whatever universe you're in)
+# Core site configuration (auto-detected if you're using localhost like a civilized developer)
+SITE_URL=http://localhost:4321      # Base URL (or whatever dimension you're in)
+SITE_DOMAIN=localhost               # Domain for localhost development
+PUBLIC_SITE_ENV=development         # Force environment mode (development/production/staging)
 
-# Build optimization
-MINIFY_ENGINE=esbuild            # 'esbuild' or 'terser' (default: esbuild)
-ENABLE_STRIP_CONSOLE=false       # Remove console.log in prod (requires terser)
+# Analytics & tracking (optional for development, required for production because Google demands tribute)
+PUBLIC_GTM_ID=GTM-XXXXXXX          # Google Tag Manager ID (format: GTM-XXXXXXXX)
+PUBLIC_ADSENSE_CLIENT=ca-pub-...    # AdSense publisher ID (format: ca-pub-XXXXXXXXXX)
+PUBLIC_ADSENSE_SLOT_BLOG_MID=12345  # AdSense slot IDs (numeric, because consistency is overrated)
+PUBLIC_ADSENSE_SLOT_BLOG_END=67890  # More slot IDs for maximum monetization potential
+PUBLIC_AHREFS_DATA_KEY=abc123...    # Ahrefs Web Analytics key (optional, for when GTM isn't enough)
 
-# Third-party integrations (production only)
-PUBLIC_GTM_ID=GTM-XXXXXXX        # Google Tag Manager ID
-PUBLIC_ADSENSE_CLIENT=ca-pub-... # AdSense publisher ID
+# Build optimization (because I'm petty about milliseconds)
+MINIFY_ENGINE=esbuild               # 'esbuild' or 'terser' (default: esbuild, because speed)
+ENABLE_STRIP_CONSOLE=false          # Remove console.log in prod (requires terser, your choice)
+ENABLE_MINIFY=true                  # Enable/disable minification (boolean, obviously)
 ```
 
-All environment variables are optional. Defaults are production-ready. Check `src/env.d.ts` for the complete list with TypeScript types.
+**Environment Mode Detection** (because the system is smarter than you think):
+
+1. **Explicit override**: `PUBLIC_SITE_ENV` wins every argument
+2. **Localhost detection**: If you're using `localhost` or `127.0.0.1`, it assumes development (shocking insight)
+3. **Production URL + NODE_ENV**: `erland.me` domain + `NODE_ENV=production` = production mode
+4. **Safe fallback**: When in doubt, defaults to development (because breaking production is embarrassing)
+
+**Build Commands for Every Mood**:
+
+- `npm run build:dev` - Development build without analytics (for when you just want it to work)
+- `npm run build` - Auto-detects environment like it's reading your mind
+- `npm run dev` - Always development mode (the safe space)
+
+All environment variables are optional with intelligent defaults. The validation system will yell at you (politely) if something's wrong. Check `src/env.d.ts` for the complete list with TypeScript types, or `src/lib/env.ts` for the Zod schemas that judge your configuration choices.
 
 ## Production Deployment
 
