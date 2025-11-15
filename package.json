@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
+    "build:dev": "PUBLIC_SITE_ENV=development npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
     "build:clean": "rm -rf dist && npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
     "preview": "astro preview",
     "astro": "astro",

@@ -3,10 +3,72 @@ import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
 import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import remarkDownloadFiles from './src/lib/remark-download-files';
+
+// Environment validation at startup
+import {
+  validateEnv,
+  resolveEnvironmentMode,
+  type ValidatedEnv,
+} from './src/lib/env.js';
+
+// Validate and get environment configuration
+let validatedEnv: ValidatedEnv;
+let mode: 'development' | 'production' | 'staging' = 'development';
+
+try {
+  mode = resolveEnvironmentMode();
+  validatedEnv = validateEnv(mode);
+
+  // Only show validation success in non-CI environments
+  if (!process.env.CI && !process.env.GITHUB_ACTIONS) {
+    console.log(`Environment validation passed for mode: ${mode}`);
+    console.log(`Site: ${validatedEnv.SITE_URL}`);
+    console.log(`Domain: ${validatedEnv.SITE_DOMAIN}`);
+
+    if (mode === 'production') {
+      console.log(
+        `GTM ID: ${validatedEnv.PUBLIC_GTM_ID ? 'Configured' : 'Missing'}`
+      );
+      console.log(
+        `AdSense: ${validatedEnv.PUBLIC_ADSENSE_CLIENT ? 'Configured' : 'Missing'}`
+      );
+    }
+  }
+} catch (error) {
+  console.error('Environment validation failed at startup:');
+
+  // Safely handle error message extraction
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error(errorMessage);
+  console.error('Please fix your environment configuration before continuing.');
+  console.error('Check your .env file or environment variables.');
+
+  // Provide helpful suggestions based on error type
+  if (errorMessage.includes('SITE_DOMAIN')) {
+    console.error(
+      'Tip: SITE_DOMAIN should be a valid domain like "example.com" (without protocol)'
+    );
+  }
+  if (errorMessage.includes('GTM_ID') && mode === 'production') {
+    console.error(
+      'Tip: Set PUBLIC_GTM_ID to your Google Tag Manager ID (e.g., GTM-XXXXXXXX)'
+    );
+  }
+  if (errorMessage.includes('ADSENSE_CLIENT') && mode === 'production') {
+    console.error(
+      'Tip: Set PUBLIC_ADSENSE_CLIENT to your AdSense publisher ID (e.g., ca-pub-XXXXXXXXXX)'
+    );
+  }
+
+  // Exit with error to prevent build/dev from continuing
+  process.exit(1);
+}
+
 // https://astro.build/config
+
 export default defineConfig({
-  // Site configuration
-  site: process.env.SITE_URL || 'https://erland.me',
+  // Site configuration using validated values
+  site: validatedEnv.SITE_URL,
   trailingSlash: 'always',
 
   // Output configuration
@@ -39,11 +101,11 @@ export default defineConfig({
     build: {
       // Prefer esbuild for speed; allow switching to Terser via env
       // MINIFY_ENGINE=terser to enable Terser for advanced cases
-      minify: process.env.MINIFY_ENGINE === 'terser' ? 'terser' : 'esbuild',
+      minify: validatedEnv.MINIFY_ENGINE === 'terser' ? 'terser' : 'esbuild',
       terserOptions:
-        process.env.MINIFY_ENGINE === 'terser'
+        validatedEnv.MINIFY_ENGINE === 'terser'
           ? {
-              ...(process.env.ENABLE_STRIP_CONSOLE === 'true'
+              ...(validatedEnv.ENABLE_STRIP_CONSOLE === 'true'
                 ? {
                     compress: {
                       drop_console: true,
@@ -133,11 +195,11 @@ export default defineConfig({
     },
     // Esbuild options (apply drops only in production)
     esbuild:
-      process.env.NODE_ENV === 'production'
+      mode === 'production'
         ? {
             legalComments: 'none',
-            ...(process.env.ENABLE_STRIP_CONSOLE === 'true' &&
-            process.env.MINIFY_ENGINE !== 'terser'
+            ...(validatedEnv.ENABLE_STRIP_CONSOLE === 'true' &&
+            validatedEnv.MINIFY_ENGINE !== 'terser'
               ? {
                   drop: ['console', 'debugger'],
                   pure: ['console.log', 'console.info', 'console.debug'],
@@ -170,19 +232,17 @@ export default defineConfig({
         : process.env.IMAGE_SERVICE === 'passthrough'
           ? passthroughImageService()
           : undefined,
-    domains: [process.env.SITE_DOMAIN || 'erland.me'],
+    domains: [validatedEnv.SITE_DOMAIN],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.SITE_DOMAIN || 'erland.me',
+        hostname: validatedEnv.SITE_DOMAIN,
       },
     ],
   },
 
   // Compress configuration for Astro components - enabled in production or when ENABLE_MINIFY is true
-  compressHTML:
-    process.env.ENABLE_MINIFY === 'true' ||
-    process.env.NODE_ENV === 'production',
+  compressHTML: validatedEnv.ENABLE_MINIFY === 'true' || mode === 'production',
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
