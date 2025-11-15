@@ -5,11 +5,15 @@ import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
 import remarkDownloadFiles from './src/lib/remark-download-files';
 
 // Environment validation at startup
-import { validateEnv, resolveEnvironmentMode } from './src/lib/env.js';
+import {
+  validateEnv,
+  resolveEnvironmentMode,
+  type ValidatedEnv,
+} from './src/lib/env.js';
 
 // Validate and get environment configuration
-let validatedEnv;
-let mode;
+let validatedEnv: ValidatedEnv;
+let mode: 'development' | 'production' | 'staging' = 'development';
 
 try {
   mode = resolveEnvironmentMode();
