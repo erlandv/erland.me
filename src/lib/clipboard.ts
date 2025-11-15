@@ -33,9 +33,12 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     ta.focus();
     ta.select();
 
-    // Avoid TS deprecation hint by indexing via string key on any
-    const docAny = document as any;
-    const exec = docAny && docAny['execCommand'];
+    // Avoid TS deprecation hint by accessing execCommand safely
+    interface DocumentWithExecCommand {
+      execCommand?(command: string): boolean;
+    }
+    const docWithExec = document as unknown as DocumentWithExecCommand;
+    const exec = docWithExec.execCommand;
     const ok =
       typeof exec === 'function' ? !!exec.call(document, 'copy') : false;
     document.body.removeChild(ta);

@@ -165,10 +165,8 @@
       };
       // Apply once immediately
       handler();
-      // Prefer modern listener; fallback to onchange without deprecated addListener
-      if (typeof (mq as any).addEventListener === 'function')
-        {(mq as any).addEventListener('change', handler);}
-      else if ('onchange' in mq) {(mq as any).onchange = handler as any;}
+      // Modern listener with type safety
+      mq.addEventListener('change', handler);
     } catch {}
   }
 

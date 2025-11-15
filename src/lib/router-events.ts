@@ -48,7 +48,7 @@ function ensureSetup() {
   const originalPush = history.pushState?.bind(history);
   if (originalPush) {
     history.pushState = function (
-      data: any,
+      data: unknown,
       unused: string,
       url?: string | URL | null
     ) {
@@ -65,7 +65,7 @@ function ensureSetup() {
   const originalReplace = history.replaceState?.bind(history);
   if (originalReplace) {
     history.replaceState = function (
-      data: any,
+      data: unknown,
       unused: string,
       url?: string | URL | null
     ) {
@@ -138,8 +138,19 @@ export function getListenerCount(): number {
 // window so inline <script type="module"> can call them without needing
 // Vite/Server path resolution.
 if (typeof window !== 'undefined') {
+  interface EerlandRouterEvents {
+    onRouteChange: typeof onRouteChange;
+    triggerRouteChange: typeof triggerRouteChange;
+    clearAllListeners: typeof clearAllListeners;
+    getListenerCount: typeof getListenerCount;
+  }
+
   // Put behind a short, unique namespace to avoid collisions
-  (window as any).__erland_router_events = {
+  interface WindowWithRouterEvents extends Window {
+    __erland_router_events?: EerlandRouterEvents;
+  }
+
+  (window as WindowWithRouterEvents).__erland_router_events = {
     onRouteChange,
     triggerRouteChange,
     clearAllListeners,

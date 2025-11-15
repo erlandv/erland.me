@@ -570,9 +570,14 @@ class StoriesViewer {
 export function initAvatarStories(): void {
   const avatarImages = document.querySelectorAll('[data-stories]');
 
+  interface ElementWithStoriesBound extends Element {
+    _storiesBound?: boolean;
+  }
+
   avatarImages.forEach(avatar => {
-    if ((avatar as any)._storiesBound) return;
-    (avatar as any)._storiesBound = true;
+    const elem = avatar as ElementWithStoriesBound;
+    if (elem._storiesBound) return;
+    elem._storiesBound = true;
 
     avatar.addEventListener('click', (e: Event) => {
       e.preventDefault();

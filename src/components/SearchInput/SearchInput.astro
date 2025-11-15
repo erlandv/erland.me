@@ -18,14 +18,15 @@
  * <SearchInput placeholder="Search articles..." />
  * 
  * @param {Object} props
- * @param {any[]} [props.posts] - Initial posts data (optional, fetches from /search-index.json if not provided)
+ * @param {SearchablePost[]} [props.posts] - Initial posts data (optional, fetches from /search-index.json if not provided)
  * @param {string} [props.placeholder="Search articles..."] - Input placeholder text
  */
 import Icon from '@components/Icon.astro';
 import styles from './search-input.module.css';
+import type { SearchablePost } from '@lib/search';
 
 interface Props {
-  posts?: any[];
+  posts?: SearchablePost[];
   placeholder?: string;
 }
 
@@ -86,23 +87,27 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 </div>
 
 <script>
+  import type Fuse from 'fuse.js';
+  import type { FuseResultMatch } from 'fuse.js';
   import { onRouteChange } from '@lib/router-events';
+  import type { SearchablePost } from '@lib/search';
 
-  // SearchResult type is used in the script below
+  // Type definitions
   interface SearchResult {
-    item: any;
+    item: SearchablePost;
     score?: number;
-    matches?: Array<{
-      indices: [number, number][];
-      key: string;
-      value: string;
-    }>;
+    matches?: readonly FuseResultMatch[];
   }
 
   interface SearchState {
     isInitialized: boolean;
     currentQuery: string;
     isSearching: boolean;
+  }
+
+  interface WindowWithSearch extends Window {
+    __SEARCH_POSTS__?: SearchablePost[];
+    __FUSE_INSTANCE__?: Fuse<SearchablePost>;
   }
 
   const searchState: SearchState = {
@@ -128,12 +133,12 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     useExtendedSearch: false,
   };
 
-  let fuse: any = null;
+  let fuse: Fuse<SearchablePost> | null = null;
   let fuseReady = false;
   let fuseLoadPromise: Promise<void> | null = null;
   let cleanupSearch: (() => void) | null = null;
 
-  async function loadSearchIndex(): Promise<any[]> {
+  async function loadSearchIndex(): Promise<SearchablePost[]> {
     try {
       const res = await fetch('/search-index.json', {
         headers: { Accept: 'application/json' },
@@ -141,23 +146,23 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       if (!res || !res.ok) return [];
       const data = await res.json();
       if (Array.isArray(data)) {
-        (window as any).__SEARCH_POSTS__ = data;
-        return data;
+        const w = window as WindowWithSearch;
+        w.__SEARCH_POSTS__ = data as SearchablePost[];
+        return data as SearchablePost[];
       }
     } catch (e) {
       console.error('Failed to fetch search index:', e);
     }
     return [];
   }
-  async function ensureFuse(postsData: any[]): Promise<void> {
+  async function ensureFuse(postsData: SearchablePost[]): Promise<void> {
     const arr = Array.isArray(postsData) ? postsData : [];
-    const signatureOf = (list: any[]): string => {
+    const signatureOf = (list: SearchablePost[]): string => {
       try {
-        return (
-          `${list.length 
-        }:${ 
-        list.map((it: any) => it.slug || it.id || '').join('|')}`
-        );
+        return `${
+          list.length
+        }:${
+          list.map((it: SearchablePost) => it.slug || it.id || '').join('|')}`;
       } catch {
         return `${Date.now()}:${list.length}`;
       }
@@ -165,35 +170,44 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     const nextSig = signatureOf(arr);
 
     // Check global cache first (for view transitions)
-    if ((window as any).__FUSE_INSTANCE__) {
-      fuse = (window as any).__FUSE_INSTANCE__;
+    const w = window as WindowWithSearch;
+    if (w.__FUSE_INSTANCE__) {
+      fuse = w.__FUSE_INSTANCE__;
       fuseReady = true;
       return;
     }
 
-    const mod: any = await import('fuse.js');
-    const FuseCtor = mod.default || mod;
+    const mod = await import('fuse.js');
+    const FuseCtor = (mod.default || mod) as typeof Fuse<SearchablePost>;
 
     if (!fuse) {
-      fuse = new FuseCtor(arr, FUSE_OPTS);
-      (fuse as any).__signature = nextSig;
+      fuse = new FuseCtor(arr, FUSE_OPTS) as Fuse<SearchablePost> & {
+        __signature?: string;
+      };
+      (fuse as unknown as { __signature?: string }).__signature = nextSig;
       fuseReady = true;
       // Cache globally for view transitions
-      (window as any).__FUSE_INSTANCE__ = fuse;
+      w.__FUSE_INSTANCE__ = fuse;
       return;
     }
 
-    const prevSig = (fuse as any).__signature;
+    const prevSig = (fuse as unknown as { __signature?: string }).__signature;
     if (prevSig !== nextSig) {
-      if (typeof (fuse as any).setCollection === 'function') {
-        (fuse as any).setCollection(arr);
-        (fuse as any).__signature = nextSig;
+      const fuseWithSet = fuse as unknown as {
+        setCollection?: (data: SearchablePost[]) => void;
+        __signature?: string;
+      };
+      if (typeof fuseWithSet.setCollection === 'function') {
+        fuseWithSet.setCollection(arr);
+        fuseWithSet.__signature = nextSig;
       } else {
-        fuse = new FuseCtor(arr, FUSE_OPTS);
-        (fuse as any).__signature = nextSig;
+        fuse = new FuseCtor(arr, FUSE_OPTS) as Fuse<SearchablePost> & {
+          __signature?: string;
+        };
+        (fuse as unknown as { __signature?: string }).__signature = nextSig;
       }
       // Update cache
-      (window as any).__FUSE_INSTANCE__ = fuse;
+      w.__FUSE_INSTANCE__ = fuse;
     }
     fuseReady = true;
   }
@@ -252,7 +266,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     // Initialize search
     // Wait for data to be available
     const initOnce = async () => {
-      const postsData = (window as any).__SEARCH_POSTS__ || [];
+      const w = window as WindowWithSearch;
+      const postsData = w.__SEARCH_POSTS__ || [];
 
       if (!postsData || postsData.length === 0) {
         // Fire-and-forget fetch to prime the cache; performSearch will also fetch on demand
@@ -270,9 +285,14 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     const onFirstFocus = () => {
       if (!fuseLoadPromise) {
         fuseLoadPromise = (async () => {
-          let postsData = (window as any).__SEARCH_POSTS__ || [];
+          const w = window as WindowWithSearch;
+          let postsData = w.__SEARCH_POSTS__ || [];
           // If no data, or items don't include `content` (we inlined only metadata), fetch the canonical index
-          if (!postsData || postsData.length === 0 || typeof postsData[0]?.content === 'undefined') {
+          if (
+            !postsData ||
+            postsData.length === 0 ||
+            typeof postsData[0]?.content === 'undefined'
+          ) {
             postsData = await loadSearchIndex();
           }
           await ensureFuse(postsData);
@@ -403,7 +423,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       if (fuseReady && fuse) {
         const raw = fuse.search(query);
         // Fuse returns sorted results (lower score = more relevant)
-        results = raw.map((r: any) => ({
+        results = raw.map(r => ({
           item: r.item,
           score: r.score,
           matches: r.matches,
@@ -478,7 +498,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   function highlightMatches(
     text: string,
-    matches: any[] | undefined,
+    matches: readonly FuseResultMatch[] | undefined,
     key: string
   ): string {
     if (!matches) return escapeHtml(text);

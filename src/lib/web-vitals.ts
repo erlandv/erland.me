@@ -12,13 +12,26 @@ import { createLogger } from './logger';
 
 const log = createLogger('WebVitals');
 
+interface GTMDataLayer {
+  push(data: Record<string, unknown>): void;
+}
+
+interface WindowWithGTM extends Window {
+  dataLayer?: GTMDataLayer;
+  gtag?: (
+    type: string,
+    eventName: string,
+    params: Record<string, unknown>
+  ) => void;
+}
+
 /**
  * Check if GTM dataLayer is available
  */
 function isGTMAvailable(): boolean {
   return (
     typeof window !== 'undefined' &&
-    typeof (window as any).dataLayer !== 'undefined'
+    typeof (window as WindowWithGTM).dataLayer !== 'undefined'
   );
 }
 
@@ -34,7 +47,10 @@ function sendToGTM(metric: Metric): void {
     return;
   }
 
-  const dataLayer = (window as any).dataLayer;
+  const w = window as WindowWithGTM;
+  const dataLayer = w.dataLayer;
+
+  if (!dataLayer) return;
 
   // Send metric to GTM
   dataLayer.push({
@@ -58,9 +74,10 @@ function sendToGTM(metric: Metric): void {
  * Send metric to Google Analytics 4 (alternative to GTM)
  */
 function sendToGA4(metric: Metric): void {
-  if (typeof (window as any).gtag === 'undefined') return;
+  const w = window as WindowWithGTM;
+  if (!w.gtag) return;
 
-  const gtag = (window as any).gtag;
+  const gtag = w.gtag;
 
   gtag('event', metric.name, {
     value: Math.round(metric.value),
@@ -183,11 +200,14 @@ export async function reportWebVitals(): Promise<void> {
  */
 export function sendPerformanceEvent(
   eventName: string,
-  data: Record<string, any>
+  data: Record<string, unknown>
 ): void {
   if (!isGTMAvailable()) return;
 
-  const dataLayer = (window as any).dataLayer;
+  const w = window as WindowWithGTM;
+  const dataLayer = w.dataLayer;
+  if (!dataLayer) return;
+
   dataLayer.push({
     event: 'performance',
     performance_event: eventName,

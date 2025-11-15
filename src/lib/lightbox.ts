@@ -13,6 +13,11 @@ type InitOptions = {
   containerSelectors?: string[];
 };
 
+interface ImageWithLightbox extends HTMLImageElement {
+  _lightboxBound?: boolean;
+  _lightboxBtn?: HTMLButtonElement;
+}
+
 const DEFAULT_CONTAINERS = ['.prose', '.content-image-grid'];
 
 /**
@@ -164,21 +169,22 @@ export function initImageLightbox(opts?: InitOptions) {
 
   images.forEach(img => {
     // Mark as ready and add handler once
-    img.classList.add('lightbox-ready');
-    if ((img as any)._lightboxBound) return;
-    (img as any)._lightboxBound = true;
-    img.addEventListener('click', e => {
+    const imgWithLightbox = img as ImageWithLightbox;
+    imgWithLightbox.classList.add('lightbox-ready');
+    if (imgWithLightbox._lightboxBound) return;
+    imgWithLightbox._lightboxBound = true;
+    imgWithLightbox.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
-      openLightbox(img);
+      openLightbox(imgWithLightbox);
     });
 
     // Add open icon button top-right of image when lightbox is inactive
-    const container = (img.closest('figure') ||
-      img.parentElement) as HTMLElement | null;
+    const container = (imgWithLightbox.closest('figure') ||
+      imgWithLightbox.parentElement) as HTMLElement | null;
     if (container) {
       container.classList.add('lightbox-anchor');
-      if (!(img as any)._lightboxBtn) {
+      if (!imgWithLightbox._lightboxBtn) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'image-lightbox__open';
@@ -187,10 +193,10 @@ export function initImageLightbox(opts?: InitOptions) {
         btn.addEventListener('click', e => {
           e.preventDefault();
           e.stopPropagation();
-          openLightbox(img);
+          openLightbox(imgWithLightbox);
         });
         container.appendChild(btn);
-        (img as any)._lightboxBtn = btn;
+        imgWithLightbox._lightboxBtn = btn;
       }
     }
   });

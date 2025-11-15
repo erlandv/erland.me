@@ -16,8 +16,14 @@ interface LogContext {
  */
 function isProduction(): boolean {
   // Check build-time environment
-  if (typeof import.meta !== 'undefined' && (import.meta as any).env) {
-    return (import.meta as any).env.PROD === true;
+  if (typeof import.meta !== 'undefined') {
+    interface ImportMetaWithEnv {
+      env?: { PROD?: boolean };
+    }
+    const meta = import.meta as ImportMetaWithEnv;
+    if (meta.env) {
+      return meta.env.PROD === true;
+    }
   }
   // Fallback to runtime check
   if (typeof process !== 'undefined' && process.env) {

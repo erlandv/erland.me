@@ -30,13 +30,21 @@ interface DownloadEventData {
   download_page: string;
 }
 
+interface GTMDataLayer {
+  push(data: DownloadEventData | Record<string, unknown>): void;
+}
+
+interface WindowWithDataLayer extends Window {
+  dataLayer?: GTMDataLayer;
+}
+
 /**
  * Check if GTM dataLayer is available
  */
 function hasDataLayer(): boolean {
   return (
     typeof window !== 'undefined' &&
-    typeof (window as any).dataLayer !== 'undefined'
+    typeof (window as WindowWithDataLayer).dataLayer !== 'undefined'
   );
 }
 
@@ -50,7 +58,8 @@ function pushDownloadEvent(data: DownloadEventData): void {
   }
 
   try {
-    (window as any).dataLayer.push(data);
+    const w = window as WindowWithDataLayer;
+    w.dataLayer?.push(data);
     console.log('[Download Tracker] Event pushed:', data);
   } catch (error) {
     console.error('[Download Tracker] Failed to push event:', error);

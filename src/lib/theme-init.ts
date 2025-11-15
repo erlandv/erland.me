@@ -12,6 +12,36 @@
  * This module handles the full interactive theme control after page load.
  */
 
+// Type definitions
+type ThemePreference = 'light' | 'dark' | 'auto';
+type ResolvedTheme = 'light' | 'dark';
+
+interface ThemeState {
+  preference: ThemePreference;
+  resolved: ResolvedTheme;
+}
+
+interface ThemeControl {
+  getPreference: () => ThemePreference;
+  getResolved: () => ResolvedTheme;
+  setPreference: (pref: ThemePreference) => void;
+  cyclePreference: () => ThemePreference;
+  subscribe: (callback: (state: ThemeState) => void) => () => void;
+  syncDocument: (doc?: Document) => ResolvedTheme;
+}
+
+interface AstroBeforeSwapEvent extends Event {
+  readonly detail?: {
+    readonly newDocument?: Document;
+  };
+}
+
+declare global {
+  interface Window {
+    __themeControl?: ThemeControl;
+  }
+}
+
 export function initThemeControl(): void {
   // Skip if already initialized (view transitions)
   if (window.__themeControl) {
@@ -100,8 +130,9 @@ export function initThemeControl(): void {
   media.addEventListener('change', handleMediaChange);
 
   // View transitions support
-  const syncIncomingDocument = (event: any): void => {
-    const newDoc = event?.detail?.newDocument;
+  const syncIncomingDocument = (event: Event): void => {
+    const astroEvent = event as AstroBeforeSwapEvent;
+    const newDoc = astroEvent?.detail?.newDocument;
     if (newDoc) {
       syncDocument(newDoc);
     }
@@ -149,28 +180,4 @@ export function initThemeControl(): void {
     writable: false,
     configurable: false,
   });
-}
-
-// Type definitions
-type ThemePreference = 'light' | 'dark' | 'auto';
-type ResolvedTheme = 'light' | 'dark';
-
-interface ThemeState {
-  preference: ThemePreference;
-  resolved: ResolvedTheme;
-}
-
-interface ThemeControl {
-  getPreference: () => ThemePreference;
-  getResolved: () => ResolvedTheme;
-  setPreference: (pref: ThemePreference) => void;
-  cyclePreference: () => ThemePreference;
-  subscribe: (callback: (state: ThemeState) => void) => () => void;
-  syncDocument: (doc?: Document) => ResolvedTheme;
-}
-
-declare global {
-  interface Window {
-    __themeControl?: ThemeControl;
-  }
 }
