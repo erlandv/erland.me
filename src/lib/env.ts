@@ -277,7 +277,22 @@ export const SITE_URL: string = validatedEnv.SITE_URL;
 export const SITE_DOMAIN: string = validatedEnv.SITE_DOMAIN;
 
 export function isProdSite(): boolean {
-  return SITE_URL === 'https://erland.me' && SITE_DOMAIN === 'erland.me';
+  // Check actual environment variables, not cached values from validation
+  const actualSiteUrl =
+    (import.meta as ImportMeta).env?.SITE_URL ||
+    (typeof process !== 'undefined' ? process.env.SITE_URL : undefined);
+  const actualSiteDomain =
+    (import.meta as ImportMeta).env?.SITE_DOMAIN ||
+    (typeof process !== 'undefined' ? process.env.SITE_DOMAIN : undefined);
+
+  // If no env vars set, check if current mode resolved to production
+  if (!actualSiteUrl && !actualSiteDomain) {
+    return currentMode === 'production';
+  }
+
+  return (
+    actualSiteUrl === 'https://erland.me' && actualSiteDomain === 'erland.me'
+  );
 }
 
 // Google Tag Manager container ID (public, non-secret)
