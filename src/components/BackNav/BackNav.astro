@@ -1,4 +1,18 @@
 ---
+/**
+ * BackNav Component
+ * 
+ * Renders a "Back" navigation button with an arrow icon.
+ * Used at the top of detail pages to navigate back to listing pages.
+ * 
+ * @component
+ * @example
+ * <BackNav href="/blog/" label="Back to Blog" />
+ * 
+ * @param {Object} props
+ * @param {string} props.href - URL to navigate back to (absolute or relative path)
+ * @param {string} [props.label="Back"] - Button label text (default: "Back")
+ */
 import Icon from '@components/Icon.astro';
 import styles from './back-nav.module.css';
 

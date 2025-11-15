@@ -165,7 +165,9 @@ export async function safeFeatureInit<T>(
 /**
  * Create a wrapped version of a feature loader function with error boundary
  */
-export function withErrorBoundary<T extends (...args: any[]) => Promise<any>>(
+export function withErrorBoundary<
+  T extends (...args: unknown[]) => Promise<unknown>,
+>(
   fn: T,
   featureName: string,
   options: {
@@ -173,7 +175,7 @@ export function withErrorBoundary<T extends (...args: any[]) => Promise<any>>(
     recoverable?: boolean;
   } = {}
 ): T {
-  return (async (...args: any[]) => {
+  return (async (...args: unknown[]) => {
     return safeFeatureInit(featureName, () => fn(...args), options);
   }) as T;
 }

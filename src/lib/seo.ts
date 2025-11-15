@@ -106,11 +106,15 @@ export function blogPostingJsonLd(opts: {
   const dateModified = new Date(
     opts.updatedDate || opts.publishDate || Date.now()
   ).toISOString();
-  const image = Array.isArray(opts.image)
-    ? opts.image
-    : opts.image
-      ? [opts.image]
-      : undefined;
+
+  let image: string[] | undefined;
+  if (Array.isArray(opts.image)) {
+    image = opts.image;
+  } else if (opts.image) {
+    image = [opts.image];
+  } else {
+    image = undefined;
+  }
   const fullUrl = `${SITE_CONFIG.url}${opts.canonical}`;
 
   return {
@@ -168,11 +172,15 @@ export function creativeWorkJsonLd(opts: {
   const datePublished = opts.publishDate
     ? new Date(opts.publishDate).toISOString()
     : undefined;
-  const dateModified = opts.lastUpdated
-    ? new Date(opts.lastUpdated).toISOString()
-    : opts.publishDate
-      ? new Date(opts.publishDate).toISOString()
-      : undefined;
+
+  let dateModified: string | undefined;
+  if (opts.lastUpdated) {
+    dateModified = new Date(opts.lastUpdated).toISOString();
+  } else if (opts.publishDate) {
+    dateModified = new Date(opts.publishDate).toISOString();
+  } else {
+    dateModified = undefined;
+  }
   const fullUrl = opts.url.startsWith('http')
     ? opts.url
     : `${SITE_CONFIG.url}${opts.url}`;
@@ -312,11 +320,15 @@ export function generateMetaTags(opts: {
   const fullUrl = opts.canonical
     ? `${SITE_CONFIG.url}${opts.canonical}`
     : SITE_CONFIG.url;
-  const imageUrl = opts.image
-    ? opts.image.startsWith('http')
+
+  let imageUrl: string;
+  if (opts.image) {
+    imageUrl = opts.image.startsWith('http')
       ? opts.image
-      : `${SITE_CONFIG.url}${opts.image}`
-    : `${SITE_CONFIG.url}/assets/social/og-default-1200x630.png`;
+      : `${SITE_CONFIG.url}${opts.image}`;
+  } else {
+    imageUrl = `${SITE_CONFIG.url}/assets/social/og-default-1200x630.png`;
+  }
   const imageAlt = opts.description || `${opts.title} – ${SITE_CONFIG.name}`;
 
   return {

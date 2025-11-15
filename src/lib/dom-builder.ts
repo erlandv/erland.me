@@ -32,25 +32,16 @@ export function el<K extends keyof HTMLElementTagNameMap>(
   const element = document.createElement(tag);
 
   if (props) {
-    Object.entries(props).forEach(([key, value]) => {
-      if (value === undefined || value === null) return;
-
-      // Handle special cases
-      if (key === 'className') {
-        element.className = value as string;
-      } else if (key === 'innerHTML') {
-        element.innerHTML = value as string;
-      } else if (key === 'ariaLabel') {
-        element.setAttribute('aria-label', value as string);
-      } else if (key === 'ariaModal') {
-        element.setAttribute('aria-modal', value as string);
-      } else if (key === 'role') {
-        element.setAttribute('role', value as string);
+    for (const [key, value] of Object.entries(props)) {
+      if (key === 'textContent') {
+        element.textContent = String(value);
+      } else if (key.startsWith('on') && typeof value === 'function') {
+        const event = key.slice(2).toLowerCase();
+        element.addEventListener(event, value as EventListener);
       } else {
-        // Direct property assignment for standard properties
-        (element as any)[key] = value;
+        (element as Record<string, unknown>)[key] = value;
       }
-    });
+    }
   }
 
   if (children) {
@@ -81,11 +72,11 @@ export function el<K extends keyof HTMLElementTagNameMap>(
  */
 export function html(
   strings: TemplateStringsArray,
-  ...values: any[]
+  ...values: unknown[]
 ): DocumentFragment {
   // Combine template strings and values
   const htmlString = strings.reduce((result, str, i) => {
-    const value = values[i] !== undefined ? values[i] : '';
+    const value = values[i] !== undefined ? String(values[i]) : '';
     return result + str + value;
   }, '');
 
@@ -152,7 +143,7 @@ export function setAttrs(
 export function onEvents<K extends keyof HTMLElementEventMap>(
   element: HTMLElement,
   events: Partial<
-    Record<K, (this: HTMLElement, ev: HTMLElementEventMap[K]) => any>
+    Record<K, (this: HTMLElement, ev: HTMLElementEventMap[K]) => void>
   >
 ): void {
   Object.entries(events).forEach(([event, handler]) => {

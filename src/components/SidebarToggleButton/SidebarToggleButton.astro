@@ -1,4 +1,25 @@
 ---
+/**
+ * SidebarToggleButton Component
+ * 
+ * Edge-mounted button to toggle sidebar between collapsed and expanded states.
+ * Displays chevron icons that flip based on sidebar state.
+ * 
+ * Features:
+ * - Visual indicator of sidebar collapse state
+ * - Animated icon transitions
+ * - Syncs with sidebar state managed by SidebarController
+ * - Desktop-only (hidden on mobile breakpoints)
+ * 
+ * State synchronized via:
+ * - data-sidebar attribute on document root
+ * - MutationObserver for real-time state updates
+ * - Checkbox input #sidebar-toggle
+ * 
+ * @component
+ * @example
+ * <SidebarToggleButton />
+ */
 import Icon from '@components/Icon.astro';
 import styles from './SidebarToggleButton.module.css';
 ---

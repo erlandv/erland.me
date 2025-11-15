@@ -2,6 +2,23 @@ import { createLogger } from './logger';
 
 const log = createLogger('AdSense');
 
+// Type definitions for Google AdSense
+interface WindowWithAds extends Window {
+  adsbygoogle?: Array<Record<string, unknown>>;
+  __ads_dl_end?: Set<string>;
+  __ph_dl_end?: boolean;
+}
+
+interface ImportMetaEnvWithAds {
+  readonly PROD?: boolean;
+  readonly PUBLIC_PRODUCTION_HOSTS?: string;
+  readonly PUBLIC_SITE_ENV?: string;
+}
+
+interface ImportMetaWithAds {
+  readonly env?: ImportMetaEnvWithAds;
+}
+
 export function insertAdUnit(container: Element, client: string, slot: string) {
   if (!container || !client || !slot) return;
   try {
@@ -20,8 +37,9 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
 
     container.appendChild(ins);
     // Initialize this unit
-    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-    (window as any).adsbygoogle.push({});
+    const w = window as WindowWithAds;
+    w.adsbygoogle = w.adsbygoogle || [];
+    w.adsbygoogle.push({});
   } catch (e) {
     log.warn('insertAdUnit failed', { error: e, slot });
   }
@@ -79,9 +97,12 @@ export function insertAdAfterMiddle(
       (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
       (ref.closest && (ref.closest('figure') as Element)) ||
       ref;
-    target.parentNode!.insertBefore(ins, target.nextSibling);
-    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-    (window as any).adsbygoogle.push({});
+    if (target.parentNode) {
+      target.parentNode.insertBefore(ins, target.nextSibling);
+    }
+    const w = window as WindowWithAds;
+    w.adsbygoogle = w.adsbygoogle || [];
+    w.adsbygoogle.push({});
   } catch (e) {
     log.warn('insertAdAfterMiddle failed', { error: e, slot });
   }
@@ -117,7 +138,9 @@ export function insertPlaceholderAfterMiddle(
         (ref.closest && (ref.closest('.content-image-grid') as Element)) ||
         (ref.closest && (ref.closest('figure') as Element)) ||
         ref;
-      target.parentNode!.insertBefore(box, target.nextSibling);
+      if (target.parentNode) {
+        target.parentNode.insertBefore(box, target.nextSibling);
+      }
     }
   } catch (e) {
     log.warn('insertPlaceholderAfterMiddle failed', { error: e });
@@ -153,7 +176,7 @@ export function autoInitDownloadAds(
   if (!slotEnd) return;
 
   // Re-entrancy guard to avoid race duplicates across multiple events
-  const w = window as any;
+  const w = window as WindowWithAds;
   w.__ads_dl_end = w.__ads_dl_end || new Set<string>();
   const key = `${client}:${slotEnd}`;
   if (w.__ads_dl_end.has(key)) return;
@@ -178,7 +201,8 @@ export function autoInitDownloadAds(
       ins.setAttribute('data-ad-format', 'auto');
       ins.setAttribute('data-full-width-responsive', 'true');
       share.parentNode.insertBefore(ins, share);
-      (w.adsbygoogle = w.adsbygoogle || []).push({});
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
       w.__ads_dl_end.add(key);
       return;
     }
@@ -194,7 +218,8 @@ export function autoInitDownloadAds(
       ins.setAttribute('data-ad-format', 'auto');
       ins.setAttribute('data-full-width-responsive', 'true');
       filesSection.parentNode.insertBefore(ins, filesSection.nextSibling);
-      (w.adsbygoogle = w.adsbygoogle || []).push({});
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
       w.__ads_dl_end.add(key);
       return;
     }
@@ -212,7 +237,8 @@ export function autoInitDownloadAds(
     );
     if (!exists) {
       insertAdUnit(container, client, slotEnd);
-      (window as any).__ads_dl_end.add(key);
+      const w = window as WindowWithAds;
+      w.__ads_dl_end?.add(key);
     }
   }
 }
@@ -222,7 +248,7 @@ export function autoInitDownloadPlaceholders() {
   if (!container) return;
   insertPlaceholderAfterMiddle(container, 'Ad Placeholder (mid)');
   try {
-    const w = window as any;
+    const w = window as WindowWithAds;
     w.__ph_dl_end = w.__ph_dl_end || false;
     if (w.__ph_dl_end) return;
 
@@ -267,9 +293,9 @@ export function autoInitDownloadPlaceholders() {
 type AdsSlots = Array<string | null | undefined>;
 
 function getProductionHosts(): string[] {
+  const meta = import.meta as ImportMetaWithAds;
   const envHosts =
-    ((import.meta as any).env?.PUBLIC_PRODUCTION_HOSTS as string | undefined) ||
-    '';
+    (meta.env?.PUBLIC_PRODUCTION_HOSTS as string | undefined) || '';
   const parsed = envHosts
     .split(',')
     .map(h => h.trim().toLowerCase())
@@ -279,10 +305,10 @@ function getProductionHosts(): string[] {
 }
 
 function resolveRuntimeEnvironment(): 'production' | 'preview' {
-  if (!(import.meta as any).env?.PROD) return 'preview';
+  const meta = import.meta as ImportMetaWithAds;
+  if (!meta.env?.PROD) return 'preview';
 
-  const siteEnv =
-    ((import.meta as any).env?.PUBLIC_SITE_ENV as string | undefined) || '';
+  const siteEnv = (meta.env?.PUBLIC_SITE_ENV as string | undefined) || '';
   if (siteEnv) {
     return siteEnv.toLowerCase() === 'production' ? 'production' : 'preview';
   }

@@ -2,6 +2,14 @@ import type { Root } from 'mdast';
 import type { ContainerDirective } from 'mdast-util-directive';
 import { visit, CONTINUE, SKIP } from 'unist-util-visit';
 
+interface VFile {
+  data?: {
+    astro?: {
+      frontmatter?: Record<string, unknown>;
+    };
+  };
+}
+
 function escapeHtml(value: unknown): string {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -61,7 +69,7 @@ function buildTableHtml(items: DownloadLink[], note?: string) {
 }
 
 export default function remarkDownloadFiles() {
-  return (tree: Root, file: any) => {
+  return (tree: Root, file: VFile) => {
     const frontmatter = (file.data?.astro && file.data.astro.frontmatter) || {};
     const downloads: DownloadLink[] = Array.isArray(frontmatter.downloadFiles)
       ? frontmatter.downloadFiles

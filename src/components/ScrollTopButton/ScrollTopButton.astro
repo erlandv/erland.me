@@ -1,4 +1,19 @@
 ---
+/**
+ * ScrollTopButton Component
+ * 
+ * Floating "Back to Top" button that appears when user scrolls down.
+ * Auto-hides when near top of page. Smoothly scrolls to top when clicked.
+ * 
+ * Visibility controlled by:
+ * - Scroll position threshold (shows after scrolling down)
+ * - Client-side JavaScript in @lib/scroll-top.ts
+ * - CSS transitions for smooth fade in/out
+ * 
+ * @component
+ * @example
+ * <ScrollTopButton />
+ */
 import Icon from '@components/Icon.astro';
 import styles from './scroll-top-button.module.css';
 ---

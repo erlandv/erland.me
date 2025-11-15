@@ -11,32 +11,34 @@ This is my small corner on the interweb where I dump my notes, my achievements, 
 
 There aren't many advanced features here because it was intentionally designed to be minimal. I mean, come on, it's just a personal web. What were you expecting? User authentication? Payment processing? Push notifications for new blog posts nobody reads? Get real.
 
-- **Personal Blog**: Just a place to write stuff using Markdown. Yeah, it has tags, categories, and hero images, but let's not pretend-it's basically a glorified text file with extra compilation steps. The server is furious about this.
+- **Personal Blog**: Just a place to write stuff using Markdown. Yeah, it has tags, categories, and hero images, but let's not pretend—it's basically a glorified text file with fancy compilation steps. The server is judging me for this.
 - **Portfolio Showcase**: Where I flex my work. Some different layouts, nothing that'll win awards. But it works, and that's more than most portfolio sites can say.
-- **Offline Support (PWA)**: Has a service worker that caches everything so you can read my mediocre content even when your internet dies. It's technically a PWA now. I know, revolutionary for a blog that updates twice a month.
-- **"Search"**: It can find things! I know, truly revolutionary for 2025. It's instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like nothing).
-- **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Breakthrough innovation right here. Nobel Prize pending.
-- **Syntax Highlighting**: Makes code snippets actually readable instead of looking like a JSON file threw up. You're welcome.
-- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, and `robots.txt` so Google's crawlers don't get confused and cry.
-- **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't default everywhere yet. I'm as confused as you are.
-- **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful for feedback. It's called UX, look it up.
-- **Share Buttons**: Standard social media sharing icons. Because clearly my dozen readers are dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
-- **Pagination**: The blog splits posts across pages instead of creating one endless scroll of regret. Apparently this counts as a feature now.
-- **Adsense/Placeholder Integration**: Reserved space for ads (if I ever feel like monetizing my dozen visitors) or just placeholder slots for dev environments.
-- **Error Boundary**: Catches JS errors before they ruin everyone's day. Shows a friendly fallback UI instead of letting the entire page implode. It's called "not being a jerk to your users."
-- **Web Vitals Tracking**: Obsessively monitors every Core Web Vital metric and sends them to Google Tag Manager. Because apparently I need hard data to confirm that yes, the site is fast. Peak perfectionism.
+- **Offline Support (PWA)**: Has a service worker that caches everything so you can read my mediocre content even when your internet dies. Technically a PWA now. Revolutionary stuff for a blog that updates twice a month.
+- **"Search"**: It can find things! Truly groundbreaking for 2025. Instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like absolutely nothing).
+- **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Nobel Prize committee, my DMs are open.
+- **Syntax Highlighting**: Makes code snippets readable instead of looking like a JSON file threw up. You're welcome.
+- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
+- **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't standard everywhere yet. I'm as confused as you are.
+- **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful. It's called UX, look it up.
+- **Share Buttons**: Standard social media icons for my dozen readers who are _totally_ dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
+- **Instagram-like Story Viewer**: Fullscreen story modal with progress bars, auto-advance, and manual navigation. Because apparently my static site needed Instagram vibes. Complete with pause/resume and smooth transitions that'll make you forget this is just a personal web.
+- **Light/Dark Theme**: Toggle between themes because choosing colors is apparently too hard in 2025. Persists your preference in `localStorage` like it's rocket science. Auto-detects system settings because I'm considerate like that.
+- **Pagination**: Splits posts across pages instead of one endless scroll of regret. Apparently this counts as a feature now.
+- **Adsense/Placeholder Integration**: Reserved space for ads if I ever monetize my dozen visitors. Mostly just placeholder slots judging me from the sidebar.
+- **Error Boundary**: Catches JS errors before they ruin everyone's day. Shows a friendly fallback instead of letting the page implode. It's called "not being a jerk to your users."
+- **Web Vitals Tracking**: Obsessively monitors every Core Web Vital and reports to Google Tag Manager. Because apparently I need hard data to confirm that yes, the site is fast. Peak developer anxiety.
 
 ## What's Intentionally NOT Here
 
 Because apparently listing what you _didn't_ build is the new humble brag:
 
-- **✗** **No Database**: Not MySQL, not PostgreSQL, not even SQLite. Just markdown files like it's 2010. And you know what? It works better this way.
-- **✗** **No CMS**: No WordPress, no Contentful, no Strapi. I edit markdown in VS Code like our ancestors intended. I am the CMS.
-- **✗** **No User Authentication**: There's nothing to log into. No accounts, no passwords, no "forgot password" flow. Blissfully simple. You're not that important.
-- **✗** **No API Endpoints**: This is a static site. The only API calls happening here are from your browser to my CDN. That's it.
-- **✗** **No Comment System**: Want to leave feedback? Email exists. Social media exists. I'm not running a Disqus instance for my dozen readers.
-- **✗** **No Real-Time Features**: No WebSockets, no Server-Sent Events, no live updates. Content updates when I push to `main`. That's the "real-time" you get.
-- **✗** **No Server-Side Rendering**: Everything's pre-rendered at build time. No edge functions, no serverless lambdas, no "hybrid rendering modes." Just plain HTML, fast and dumb.
+- **No Database**: Not MySQL, not PostgreSQL, not even SQLite. Just markdown files like it's 2010. And you know what? It works better this way.
+- **No CMS**: No WordPress, no Contentful, no Strapi. I edit markdown in VS Code like our ancestors intended. I am the CMS.
+- **No User Authentication**: There's nothing to log into. No accounts, no passwords, no "forgot password" flow that emails you at 3 AM. You're not that important.
+- **No API Endpoints**: This is a static site. The only API calls happening here are from your browser to my CDN. That's the entire infrastructure diagram.
+- **No Comment System**: Want to leave feedback? Email exists. Social media exists. I'm not running a Disqus instance for the crickets in my analytics.
+- **No Real-Time Features**: No WebSockets, no Server-Sent Events, no live updates. Content updates when I push to `main`. That's the "real-time" you get. Deal with it.
+- **No Server-Side Rendering**: Everything's pre-rendered at build time. No edge functions, no serverless lambdas, no "hybrid rendering modes" that require a PhD to understand. Just plain HTML—fast, dumb, and honest.
 
 The best code is the code you don't write. This README is already 10x longer than necessary, so at least the codebase stayed minimal.
 
@@ -59,13 +61,14 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **Vanilla CSS + CSS Modules**: Plain CSS because this site is so minimal that Tailwind would be embarrassed to be here. Adding a framework would literally double my bundle size just to avoid writing `display: flex;`.
 - **PostCSS**: The automated janitor that cleans up my CSS, adds vendor prefixes I always forget, and minifies everything. Doing the Lord's work.
 - **SVG Icons**: Vector icons that scale infinitely and never look pixelated. Unlike my career trajectory.
-- **Flaticon**: Where I stole—sorry, _licensed_—all the hero images from the [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) pack. They're cute. Sue me. (Please don't.)
+- **Flaticon**: Where I sourced—_totally legally_—all the hero images from the [Basic Miscellany Blue](https://www.flaticon.com/authors/basic-miscellany/blue) pack. They're cute, they're blue, and they prevent my blog from looking like a 90s GeoCities page.
 - **remark-directive**: Markdown plugins that add superpowers like gallery embeds (`remark-gallery`). Because regular Markdown is too mainstream.
 - **Agave Nerd Font**: That ridiculously fancy monospace font for code blocks. Because Comic Sans wasn't an option.
 
 ### Utilities & Configuration
 
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
+- **ESLint**: The strict parent of my codebase. Tells me "no semicolons there" and "that variable name is embarrassing" until I learn to code like a proper adult.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.
 - **ESM Node Scripts (.mjs)**: Modern Node scripts because `.js` is so 2019 and I have a personal brand to maintain.
@@ -140,8 +143,10 @@ npm run build:clean # Nuclear option: clean dist + full rebuild
 npm run preview     # Serve production build locally for QA
 
 # Quality checks (run these before committing unless you enjoy CI failures)
-npm run validate    # All checks: lint + type-check + format:check
+npm run validate    # All checks: lint + lint:js + type-check + format:check
 npm run lint        # Astro check for errors/warnings
+npm run lint:js     # ESLint check for JavaScript/TypeScript
+npm run lint:js:fix # ESLint with auto-fix
 npm run type-check  # TypeScript validation only
 npm run format      # Auto-format with Prettier
 npm run format:check # Verify Prettier compliance (CI uses this)
@@ -263,8 +268,6 @@ Even unnecessarily complex personal websites need proper licensing. Lawyers insi
 
 ---
 
-> _Wait, you actually read this entire README for a personal static site? That's either impressive dedication or concerning lack of better things to do. Possibly both._
+> _Wait, you actually read this entire README for a personal static site? That's either impressive dedication or a concerning lack of better things to do. Possibly both._
 >
-> _Either way, you have my deepest admiration and mild concern. Maybe go outside? Touch some grass? No judgment._
->
-> _But seriously, thanks for reading. You're probably the only one who will._
+> _Either way, thanks for reading. You're probably the only person who will. Now go touch some grass or something._

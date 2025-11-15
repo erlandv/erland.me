@@ -8,6 +8,7 @@ export interface SearchablePost {
   category?: string | null;
   dateLabel?: string | null;
   content: string;
+  id?: string;
 }
 
 export interface SearchResult {

@@ -1,4 +1,24 @@
 ---
+/**
+ * Pagination Component
+ * 
+ * Renders pagination controls with prev/next buttons and page numbers.
+ * Implements responsive design: shows window of 4 page numbers on desktop/tablet,
+ * reduces to 2 page numbers on mobile. Uses ellipsis for truncated ranges.
+ * 
+ * @component
+ * @example
+ * <Pagination 
+ *   page={2}
+ *   totalPages={10}
+ *   pageHref={(n) => `/blog/page/${n}/`}
+ * />
+ * 
+ * @param {Object} props
+ * @param {number} props.page - Current page number (1-indexed)
+ * @param {number} props.totalPages - Total number of pages
+ * @param {Function} props.pageHref - Function that takes page number and returns URL string
+ */
 import styles from './pagination.module.css';
 import Icon from '@components/Icon.astro';
 

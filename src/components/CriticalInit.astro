@@ -1,13 +1,40 @@
 ---
 /**
- * Critical initialization scripts that must run before CSS to prevent FOUC.
- * This combines theme and sidebar state initialization in a single minified inline script.
+ * CriticalInit Component
  * 
- * IMPORTANT: This script MUST remain inline and execute before any CSS loads.
- * Do not move to external file or defer execution.
+ * Critical inline script that prevents FOUC (Flash of Unstyled Content) by initializing
+ * theme and sidebar state before CSS loads.
+ * 
+ * Initializes:
+ * 1. Theme preference from localStorage ("light" | "dark" | "auto")
+ * 2. Resolved theme based on system preference (when auto)
+ * 3. Sidebar collapsed state on desktop (min-width: 1025px)
+ * 4. CSS custom properties for transition prevention during initial load
+ * 
+ * IMPORTANT: 
+ * - Must execute inline before CSS loads
+ * - Do NOT move to external file or defer
+ * - Minified for performance
+ * 
+ * Sets on document.documentElement:
+ * - data-theme: "light" (or removed for dark)
+ * - data-theme-preference: user's preference ("light" | "dark" | "auto")
+ * - data-theme-resolved: actual applied theme ("light" | "dark")
+ * - data-sidebar: "collapsed" | "expanded" (desktop only)
+ * - --sidebar-init-transition: "none" (prevents animated FOUC, removed by SidebarController)
+ * - .sidebar-collapsed-global class (when sidebar collapsed)
+ * 
+ * @component
+ * @example
+ * <CriticalInit />
+ * 
+ * @note Should be placed in <head> via Header component before any CSS loads
  */
 ---
 
+<!-- Critical inline script for theme initialization (runs before page render) -->
+<!-- eslint-disable -->
 <script is:inline>
-!function(){try{var e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"dark";var r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));var a=window.matchMedia("(min-width: 1025px)");if(a.matches){var s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
+!function(){try{let e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"dark";const r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));const a=window.matchMedia("(min-width: 1025px)");if(a.matches){const s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
 </script>
+<!-- eslint-enable -->

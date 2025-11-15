@@ -1,4 +1,43 @@
 ---
+/**
+ * Icon Component
+ * 
+ * Centralized SVG icon loader with automatic normalization and accessibility.
+ * Dynamically imports SVG files and injects them inline with proper attributes.
+ * 
+ * Features:
+ * - Lazy dynamic imports for code splitting
+ * - Automatic color normalization to currentColor
+ * - ARIA label support for semantic icons
+ * - aria-hidden for decorative icons
+ * - Removes width/height attributes (CSS controls sizing)
+ * - Strips embedded styles and fill/stroke declarations
+ * 
+ * Available icon categories:
+ * - Sidebar: navHome, navWeb, navInfra, navPersonal, navDownload, navBlog, navMobile
+ * - Theme: themeAuto, themeLight, themeDark
+ * - Social: socialX, socialInstagram, socialFacebook, socialGithub, etc.
+ * - Blog: blogDate, blogTags, blogReadmore, blogSearch, blogShare
+ * - Buttons: btnCopy, btnClose, btnBack, btnFullscreen
+ * - Arrows: arrowUp, arrowDown, arrowRight, arrowLeft
+ * - Stories: storiesPause, storiesPlay, storiesVerified
+ * - Rating: ratingStar, ratingHalfStar
+ * 
+ * @component
+ * @example
+ * // Decorative icon (aria-hidden="true")
+ * <Icon name="blogDate" class="date-icon" />
+ * 
+ * // Semantic icon with label
+ * <Icon name="socialGithub" class="social-icon" ariaLabel="GitHub profile" />
+ * 
+ * @param {Object} props
+ * @param {string} props.name - Icon name from iconMap (required)
+ * @param {string} [props.class] - CSS class for styling
+ * @param {string} [props.ariaLabel] - ARIA label for semantic icons (if not provided, icon is decorative)
+ * 
+ * @throws {Error} Throws error if icon name is not found in iconMap
+ */
 interface Props {
   name: string;
   class?: string;

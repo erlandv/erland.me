@@ -7,6 +7,13 @@
 import { safeFeatureInit, setupGlobalErrorHandler } from './error-boundary';
 import { initThemeControl } from './theme-init';
 
+// Window interface extensions for cached initializers
+interface WindowWithInitializers extends Window {
+  __tableResponsiveInit?: () => void;
+  __themeToggleInit?: () => Promise<void>;
+  __downloadTrackerInit?: () => void;
+}
+
 type LoadedFlags = {
   share: boolean;
   copy: boolean;
@@ -120,14 +127,15 @@ async function maybeLoadTable(): Promise<void> {
     'table',
     async () => {
       // Import module once, but always re-run the initializer
+      const w = window as WindowWithInitializers;
       if (!loaded.table) {
         const mod = await import('./table-responsive');
         loaded.table = true;
         // Store reference to the initializer function for subsequent calls
-        (window as any).__tableResponsiveInit = mod.initResponsiveTables;
+        w.__tableResponsiveInit = mod.initResponsiveTables;
       }
       // Always execute the initializer to process new tables after navigation
-      (window as any).__tableResponsiveInit?.();
+      w.__tableResponsiveInit?.();
     },
     { operation: 'load-and-init', recoverable: true }
   );
@@ -141,16 +149,17 @@ async function maybeLoadThemeToggle(): Promise<void> {
     'themeToggle',
     async () => {
       // Import module once, but always re-run the initializer
+      const w = window as WindowWithInitializers;
       if (!loaded.themeToggle) {
         const mod = await import('./theme-toggle');
         loaded.themeToggle = true;
         // Store reference to the initializer function for subsequent calls
-        (window as any).__themeToggleInit = () => {
-          void mod.init();
+        w.__themeToggleInit = async () => {
+          await mod.init();
         };
       }
       // Always execute the initializer to handle view transitions
-      await (window as any).__themeToggleInit?.();
+      await w.__themeToggleInit?.();
     },
     { operation: 'load-and-init', recoverable: true }
   );
@@ -176,17 +185,18 @@ async function maybeLoadDownloadTracker(): Promise<void> {
   if (!hasTarget(SELECTORS.downloadTracker)) return;
 
   await safeFeatureInit(
-    'downloadTracker',
+    'downloadTracking',
     async () => {
       // Import module once, but always re-run the initializer
+      const w = window as WindowWithInitializers;
       if (!loaded.downloadTracker) {
         const mod = await import('./download-tracker');
         loaded.downloadTracker = true;
         // Store reference to the initializer function for subsequent calls
-        (window as any).__downloadTrackerInit = mod.initDownloadTracking;
+        w.__downloadTrackerInit = mod.initDownloadTracking;
       }
-      // Always execute the initializer to track new download links after navigation
-      (window as any).__downloadTrackerInit?.();
+      // Always execute the initializer to attach new listeners
+      w.__downloadTrackerInit?.();
     },
     { operation: 'load-and-init', recoverable: true }
   );

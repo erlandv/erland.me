@@ -8,8 +8,21 @@ import { onRouteChange } from './router-events';
 
 type Scope = Document | Element | ParentNode;
 
+interface ShareData {
+  title?: string;
+  text?: string;
+  url?: string;
+}
+
+interface NavigatorWithShare {
+  share?: (data: ShareData) => Promise<void>;
+}
+
 function canUseWebShare(): boolean {
-  return typeof navigator !== 'undefined' && !!(navigator as any).share;
+  return (
+    typeof navigator !== 'undefined' &&
+    !!(navigator as unknown as NavigatorWithShare).share
+  );
 }
 
 function updateNativeVisibility(scope: Scope = document) {
@@ -30,7 +43,10 @@ async function handleCopy(btn: Element) {
     location.href) as string;
   let ok = false;
   try {
-    const w = window as any;
+    interface WindowWithCopyFn extends Window {
+      copyToClipboard?: (text: string) => Promise<boolean>;
+    }
+    const w = window as WindowWithCopyFn;
     if (w && typeof w.copyToClipboard === 'function') {
       ok = !!(await w.copyToClipboard(url));
     } else {
@@ -52,7 +68,10 @@ async function handleNativeShare(btn: Element) {
   const text = root.getAttribute('data-text') || title || '';
   const url = root.getAttribute('data-url') || location.href;
   try {
-    await (navigator as any).share({ title, text, url });
+    const nav = navigator as unknown as NavigatorWithShare;
+    if (nav.share) {
+      await nav.share({ title, text, url });
+    }
   } catch {
     // ignore dismiss/denied
   }

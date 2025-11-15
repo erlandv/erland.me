@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
-import { getCollection, getEntryBySlug } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { creativeWorkJsonLd } from '@lib/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import StarRating from '@components/StarRating/StarRating.astro';
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const entry = await getEntryBySlug('downloads', slug ?? '');
+const entry = await getEntry('downloads', slug ?? '');
 
 if (!entry || entry.data.draft) {
   return Astro.redirect('/download/');

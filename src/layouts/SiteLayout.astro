@@ -103,11 +103,10 @@ const {
       </nav>
     </div>
     <script>
-      // @ts-nocheck
       // Global UI gate: import '../lib/ui-init' only when needed
       (() => {
         // Checks if a CSS selector matches any element in the document.
-        function has(sel) {
+        function has(sel: string): boolean {
           return !!document.querySelector(sel);
         }
         const check = () => ({
