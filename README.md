@@ -17,7 +17,7 @@ There aren't many advanced features here because it was intentionally designed t
 - **"Search"**: It can find things! Truly groundbreaking for 2025. Instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like absolutely nothing).
 - **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Nobel Prize committee, my DMs are open.
 - **Syntax Highlighting**: Makes code snippets readable instead of looking like a JSON file threw up. You're welcome.
-- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, `JSON-LD`, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
+- **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, `JSON-LD` schemas, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
 - **Image Click & Code Copy**: Click to zoom images. One-click code copying. Quality of life features that somehow aren't standard everywhere yet. I'm as confused as you are.
 - **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful. It's called UX, look it up.
 - **Share Buttons**: Standard social media icons for my dozen readers who are _totally_ dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
@@ -53,7 +53,6 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **Vite**: Blazing-fast build tool that's faster than my attention span. Rebuilds in milliseconds. Which is good, because I break things constantly.
 - **Shiki**: Makes code blocks actually readable instead of looking like regex had a baby with a JSON error. Syntax highlighting that doesn't make your eyes bleed.
 - **Sharp**: The image optimizer that does in milliseconds what Photoshop users spend 10 minutes doing manually. Automatic WebP conversion, responsive sizing, compression. It's a gift.
-- **Terser**: Optional JavaScript minifier that squeezes files smaller than necessary. Because I'm petty about kilobytes.
 
 ### Content & Styling
 
@@ -68,6 +67,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 ### Utilities & Configuration
 
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
+- **@playform/compress**: Squishes CSS, HTML, JS, and SVG into tiny little packages. Because uncompressed files are for people who hate their users and their Lighthouse scores.
 - **ESLint**: The strict parent of my codebase. Tells me "no semicolons there" and "that variable name is embarrassing" until I learn to code like a proper adult.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.
@@ -185,11 +185,6 @@ PUBLIC_ADSENSE_CLIENT=ca-pub-...    # AdSense publisher ID (format: ca-pub-XXXXX
 PUBLIC_ADSENSE_SLOT_BLOG_MID=12345  # AdSense slot IDs (numeric, because consistency is overrated)
 PUBLIC_ADSENSE_SLOT_BLOG_END=67890  # More slot IDs for maximum monetization potential
 PUBLIC_AHREFS_DATA_KEY=abc123...    # Ahrefs Web Analytics key (optional, for when GTM isn't enough)
-
-# Build optimization (because I'm petty about milliseconds)
-MINIFY_ENGINE=esbuild               # 'esbuild' or 'terser' (default: esbuild, because speed)
-ENABLE_STRIP_CONSOLE=false          # Remove console.log in prod (requires terser, your choice)
-ENABLE_MINIFY=true                  # Enable/disable minification (boolean, obviously)
 ```
 
 **Environment Mode Detection** (because the system is smarter than you think):
@@ -255,10 +250,10 @@ The big red panic button for when I push something catastrophically broken and n
 
 It's a static site, so it's already fast by default (cheat codes enabled), but I went completely overboard anyway because apparently having a fast site isn't enough—I need a _ridiculously_ fast site. Here's my checklist for making Google's crawlers feel special:
 
-- **Structured Data**: Comprehensive JSON-LD schemas for everything—BlogPosting, CreativeWork, CollectionPage, BreadcrumbList, WebSite with SearchAction. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
+- **Structured Data**: Comprehensive `JSON-LD` schemas for everything—`BlogPosting`, `CreativeWork`, `CollectionPage`, `BreadcrumbList`, `WebSite` with `SearchAction`. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
 - **Resource Hints**: Strategic `preconnect` for Google Fonts, GTM, and AdSense domains. `dns-prefetch` as fallback. Fonts get `preload` with `crossorigin`. Search index preloads conditionally only on pages that need it. No wasted prefetching—every hint has a purpose.
 - **Robot Files**: Auto-generates `robots.txt` with environment-aware rules. The boring configuration files that search engines actually read and humans pretend to understand.
-- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up). Agave Nerd Font loads in WOFF2 format because we're not savages.
+- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up). Agave Nerd Font loads in `WOFF2` format because we're not savages.
 - **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses. Sharp handles WebP conversion and compression automatically.
 - **Social Tags**: Comprehensive OG and Twitter meta tags with proper image dimensions (1200×630), alt text, and all the metadata social networks demand. When you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
 - **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know. Manual chunk splitting keeps vendor code separate for better caching.
@@ -281,10 +276,10 @@ It's literally just static HTML files. No database, no server-side code. The wor
 
 Even unnecessarily complex personal websites need proper licensing. Lawyers insist on it, apparently.
 
-- **License**: MIT License. Copy it, steal it, claim you built it from scratch—I don't care. The only thing I ask is you don't sue me when it breaks. Full legalese in [LICENSE](./LICENSE).
-- **Credit**: This wasn't entirely my original idea. I aggressively modified an existing theme, added a bunch of features, removed others, over-engineered the deployment, and somehow made it both simpler _and_ more complicated.
-  - Original theme: [Codefolio](https://github.com/danielunited/codefolio) by Daniel Alter. Solid foundation, big thanks!
-  - The Culprit: Modified, "simplified," and over-engineered by Erland (that's me, hi)
+- **License**: MIT License. Copy it, fork it, claim you built it from scratch in a weekend—I genuinely don't care. Just don't sue me when it inevitably breaks. Full legalese in [LICENSE](./LICENSE).
+- **Credit**: This wasn't entirely my original idea. I took an existing theme, added features nobody asked for, removed features people probably liked, and somehow made it both simpler _and_ more complicated at the same time.
+  - **Original theme**: [Codefolio](https://github.com/danielunited/codefolio) by Daniel Alter. Solid foundation, saved me weeks of work.
+  - **The Culprit**: Modified, "improved," and over-engineered by Erland (that's me, unfortunately).
 
 ---
 
