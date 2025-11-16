@@ -22,6 +22,7 @@ type LoadedFlags = {
   themeToggle: boolean;
   themeControl: boolean;
   stories: boolean;
+  categoryFilter: boolean;
   downloadTracker: boolean;
 };
 
@@ -33,6 +34,7 @@ const loaded: LoadedFlags = {
   themeToggle: false,
   themeControl: false,
   stories: false,
+  categoryFilter: false,
   downloadTracker: false,
 };
 
@@ -46,6 +48,7 @@ const SELECTORS = {
   table: ['.prose table'],
   themeToggle: ['.theme-toggle'],
   stories: ['[data-stories]'],
+  categoryFilter: ['#category-filter', '[data-cat-page]'],
   downloadTracker: [
     'a[href*=".zip"]',
     'a[href*=".cdr"]',
@@ -181,6 +184,22 @@ async function maybeLoadStories(): Promise<void> {
   );
 }
 
+async function maybeLoadCategoryFilter(): Promise<void> {
+  if (loaded.categoryFilter) return;
+  if (!hasTarget(SELECTORS.categoryFilter)) return;
+
+  await safeFeatureInit(
+    'categoryFilter',
+    async () => {
+      const m = await import('./category-filter');
+      loaded.categoryFilter = true;
+      m.init();
+      return m;
+    },
+    { operation: 'load-and-init', recoverable: true }
+  );
+}
+
 async function maybeLoadDownloadTracker(): Promise<void> {
   if (!hasTarget(SELECTORS.downloadTracker)) return;
 
@@ -208,6 +227,7 @@ function gateAll(): void {
   void maybeLoadLightbox();
   void maybeLoadTable();
   void maybeLoadStories();
+  void maybeLoadCategoryFilter();
   void maybeLoadDownloadTracker();
 }
 

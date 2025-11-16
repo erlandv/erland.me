@@ -24,19 +24,6 @@
 import Icon from '@components/Icon.astro';
 import styles from './ThemeToggle.module.css';
 
-// Import theme icon SVGs for pre-hydration injection
-import autoIconRaw from '@/icons/theme-auto.svg?raw';
-import lightIconRaw from '@/icons/theme-light.svg?raw';
-import darkIconRaw from '@/icons/theme-dark.svg?raw';
-
-// Prepare icons for inline script with exact same styles as .svg class
-const iconStyles =
-  'style="width:24px;height:24px;display:block;margin:0;padding:0"';
-const icons = {
-  auto: autoIconRaw.replace('<svg', `<svg ${iconStyles}`),
-  light: lightIconRaw.replace('<svg', `<svg ${iconStyles}`),
-  dark: darkIconRaw.replace('<svg', `<svg ${iconStyles}`),
-};
 ---
 
 <div class:list={[styles.wrapper, 'theme-toggle']}>
@@ -112,34 +99,3 @@ const icons = {
   >
   </div>
 </div>
-
-<script is:inline define:vars={{ icons }}>
-  (function () {
-    try {
-      // Get current theme preference
-      const storedTheme = localStorage.getItem('theme-preference');
-      const validTheme =
-        storedTheme === 'light' ||
-        storedTheme === 'dark' ||
-        storedTheme === 'auto'
-          ? storedTheme
-          : 'dark';
-
-      // Find theme toggle component and update icon
-      const script = document.currentScript;
-      if (script) {
-        const wrapper = script.previousElementSibling;
-        if (wrapper && wrapper.classList.contains('theme-toggle')) {
-          const iconContainer = wrapper.querySelector(
-            '.theme-toggle__trigger-icon'
-          );
-          if (iconContainer && icons[validTheme]) {
-            iconContainer.innerHTML = icons[validTheme];
-          }
-        }
-      }
-    } catch (_err) {
-      // Silently fail to prevent script errors
-    }
-  })();
-</script>
