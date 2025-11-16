@@ -11,6 +11,7 @@ import { initThemeControl } from './theme-init';
 interface WindowWithInitializers extends Window {
   __tableResponsiveInit?: () => void;
   __themeToggleInit?: () => Promise<void>;
+  __categoryFilterInit?: () => void;
   __downloadTrackerInit?: () => void;
 }
 
@@ -185,16 +186,21 @@ async function maybeLoadStories(): Promise<void> {
 }
 
 async function maybeLoadCategoryFilter(): Promise<void> {
-  if (loaded.categoryFilter) return;
   if (!hasTarget(SELECTORS.categoryFilter)) return;
 
   await safeFeatureInit(
     'categoryFilter',
     async () => {
-      const m = await import('./category-filter');
-      loaded.categoryFilter = true;
-      m.init();
-      return m;
+      // Import module once, but always re-run the initializer
+      const w = window as WindowWithInitializers;
+      if (!loaded.categoryFilter) {
+        const mod = await import('./category-filter');
+        loaded.categoryFilter = true;
+        // Store reference to the initializer function for subsequent calls
+        w.__categoryFilterInit = mod.initCategoryFilter;
+      }
+      // Always execute the initializer to handle view transitions
+      w.__categoryFilterInit?.();
     },
     { operation: 'load-and-init', recoverable: true }
   );

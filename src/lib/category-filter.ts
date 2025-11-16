@@ -8,6 +8,10 @@ interface ParsedHash {
   page: number;
 }
 
+// Global state to prevent duplicate listeners
+let hashChangeListenerSetup = false;
+let documentClickListenerSetup = false;
+
 /**
  * Parse hash to get category and page number
  */
@@ -56,9 +60,9 @@ function showCategoryPage(category: string, page: number): void {
 }
 
 /**
- * Initialize category filtering
+ * Initialize category filtering - can be called multiple times safely
  */
-function initCategoryFilter(): void {
+export function initCategoryFilter(): void {
   let parsed = parseHash();
 
   // If no hash, pick random category
@@ -83,10 +87,14 @@ function initCategoryFilter(): void {
     showCategoryPage(parsed.cat, parsed.page);
   }
 
-  // Attach click handlers to filter buttons
+  // Attach click handlers to filter buttons with duplicate prevention
   document
     .querySelectorAll('#category-filter .cat-filter-btn')
     .forEach(function (btn) {
+      const elem = btn as Element & { _categoryFilterBound?: boolean };
+      if (elem._categoryFilterBound) return;
+      elem._categoryFilterBound = true;
+
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         const cat = btn.getAttribute('data-cat');
@@ -102,9 +110,12 @@ function initCategoryFilter(): void {
 }
 
 /**
- * Handle pagination link clicks
+ * Handle pagination link clicks - sets up document-level listener only once
  */
-function handlePaginationClicks(): void {
+function setupDocumentClickListener(): void {
+  if (documentClickListenerSetup) return;
+  documentClickListenerSetup = true;
+
   document.addEventListener('click', function (e) {
     const target = e.target;
     if (target) {
@@ -138,9 +149,12 @@ function handlePaginationClicks(): void {
 }
 
 /**
- * Handle hash changes
+ * Handle hash changes - sets up window-level listener only once
  */
-function handleHashChanges(): void {
+function setupHashChangeListener(): void {
+  if (hashChangeListenerSetup) return;
+  hashChangeListenerSetup = true;
+
   window.addEventListener('hashchange', function () {
     const parsed = parseHash();
     if (parsed) {
@@ -150,16 +164,16 @@ function handleHashChanges(): void {
 }
 
 /**
- * Auto-init function for lazy loading
+ * Auto-init function for lazy loading - sets up one-time listeners
  */
 export const autoInit = (): void => {
   initCategoryFilter();
-  handlePaginationClicks();
-  handleHashChanges();
+  setupDocumentClickListener();
+  setupHashChangeListener();
 };
 
 /**
- * Initialize category filtering system
+ * Initialize category filtering system - entry point for external usage
  */
 export const init = (): void => {
   // Initialize when DOM is ready
@@ -169,7 +183,9 @@ export const init = (): void => {
     autoInit();
   }
 
-  // Re-initialize on Astro view transitions
-  document.addEventListener('astro:page-load', autoInit);
-  document.addEventListener('astro:after-swap', autoInit);
+  // Set up view transition listeners only once
+  if (!hashChangeListenerSetup || !documentClickListenerSetup) {
+    document.addEventListener('astro:page-load', autoInit);
+    document.addEventListener('astro:after-swap', autoInit);
+  }
 };
