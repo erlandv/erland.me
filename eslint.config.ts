@@ -19,11 +19,9 @@ export default [
     ],
   },
 
-  // Global language options and environment
+  // Global environment - only define globals here; ecmaVersion and sourceType are set in file-specific configs
   {
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
       globals: {
         // Node.js globals
         console: 'readonly',
@@ -152,4 +150,4 @@ export default [
       'no-console': 'off', // Scripts need console output
     },
   },
-] satisfies Linter.Config[];
+] satisfies Linter.Config[] as Linter.Config[];
