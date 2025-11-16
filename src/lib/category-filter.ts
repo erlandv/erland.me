@@ -16,7 +16,8 @@ let documentClickListenerSetup = false;
  * Parse hash to get category and page number
  */
 function parseHash(): ParsedHash | null {
-  const match = (location.hash || '').match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);
+  const hash = location.hash || '';
+  const match = hash.match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);
   return match
     ? {
         cat: match[1],
@@ -100,9 +101,8 @@ export function initCategoryFilter(): void {
         const cat = btn.getAttribute('data-cat');
         if (cat) {
           const hash = `#cat-${cat}-page-1`;
-          if (location.hash !== hash) {
-            location.hash = hash;
-          }
+          location.hash = hash;
+          // Always call showCategoryPage to ensure UI updates
           showCategoryPage(cat, 1);
         }
       });
@@ -137,9 +137,8 @@ function setupDocumentClickListener(): void {
             e.preventDefault();
             const cat = match[1];
             const page = Math.max(1, parseInt(match[2] || '1', 10) || 1);
-            if (location.hash !== href) {
-              location.hash = href;
-            }
+            location.hash = href;
+            // Always call showCategoryPage to ensure UI updates immediately
             showCategoryPage(cat, page);
           }
         }
@@ -160,6 +159,17 @@ function setupHashChangeListener(): void {
     if (parsed) {
       showCategoryPage(parsed.cat, parsed.page);
     }
+  });
+
+  // Also listen for popstate events (browser back/forward)
+  window.addEventListener('popstate', function () {
+    // Small delay to ensure hash is updated
+    setTimeout(() => {
+      const parsed = parseHash();
+      if (parsed) {
+        showCategoryPage(parsed.cat, parsed.page);
+      }
+    }, 10);
   });
 }
 

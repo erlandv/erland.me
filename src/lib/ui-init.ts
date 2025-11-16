@@ -196,8 +196,8 @@ async function maybeLoadCategoryFilter(): Promise<void> {
       if (!loaded.categoryFilter) {
         const mod = await import('./category-filter');
         loaded.categoryFilter = true;
-        // Store reference to the initializer function for subsequent calls
-        w.__categoryFilterInit = mod.initCategoryFilter;
+        // Store reference to the autoInit function for subsequent calls
+        w.__categoryFilterInit = mod.autoInit;
       }
       // Always execute the initializer to handle view transitions
       w.__categoryFilterInit?.();
