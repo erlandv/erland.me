@@ -1,3 +1,6 @@
+// @ts-check - Enable TypeScript checking for better IDE experience
+// Note: ESLint uses jiti to transpile this config, so module resolution differs from tsc
+import type { Linter } from 'eslint';
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
@@ -13,30 +16,21 @@ export default [
       'public/**',
       '*.config.{js,cjs,mjs,ts}',
       'scripts/**/*.mjs',
-      // Files with minified inline scripts
-      'src/components/CriticalInit.astro',
-      'src/components/ThemeToggle/ThemeToggle.astro',
-      'src/pages/blog/category/index.astro',
     ],
   },
 
-  // Base JavaScript/TypeScript config
+  // Global environment - only define globals here; ecmaVersion and sourceType are set in file-specific configs
   {
-    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
     languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: './tsconfig.json',
-      },
       globals: {
+        // Node.js globals
         console: 'readonly',
         process: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         module: 'readonly',
         require: 'readonly',
+        // Browser globals
         window: 'readonly',
         document: 'readonly',
         navigator: 'readonly',
@@ -50,8 +44,21 @@ export default [
         NodeListOf: 'readonly',
       },
     },
+  },
+
+  // Base JavaScript/TypeScript config
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: './tsconfig.json',
+      },
+    },
     plugins: {
-      '@typescript-eslint': tsPlugin,
+      '@typescript-eslint': tsPlugin as any,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -105,7 +112,7 @@ export default [
   {
     files: ['**/*.astro'],
     languageOptions: {
-      parser: astroPlugin.parser,
+      parser: (astroPlugin as any).parser,
       parserOptions: {
         parser: tsParser,
         extraFileExtensions: ['.astro'],
@@ -139,15 +146,8 @@ export default [
   // Build scripts
   {
     files: ['scripts/**/*.mjs'],
-    languageOptions: {
-      globals: {
-        process: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-      },
-    },
     rules: {
       'no-console': 'off', // Scripts need console output
     },
   },
-];
+] satisfies Linter.Config[] as Linter.Config[];

@@ -33,8 +33,56 @@
 ---
 
 <!-- Critical inline script for theme initialization (runs before page render) -->
-<!-- eslint-disable -->
 <script is:inline>
-!function(){try{let e=localStorage.getItem("theme-preference"),t=window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)"):null;e="light"===e||"dark"===e||"auto"===e?e:"dark";const r="auto"===e?t&&t.matches?"dark":"light":e,n=document.documentElement;n&&("light"===r?n.setAttribute("data-theme","light"):n.removeAttribute("data-theme"),n.setAttribute("data-theme-preference",e),n.setAttribute("data-theme-resolved",r));const a=window.matchMedia("(min-width: 1025px)");if(a.matches){const s=localStorage.getItem("sidebar-collapsed")==="true";s&&(n.classList.add("sidebar-collapsed-global"),n.setAttribute("data-sidebar","collapsed"),n.style.setProperty("--sidebar-init-transition","none"))}}catch(e){}}();
+  (function () {
+    try {
+      // Get user's theme preference from localStorage
+      let storedTheme = localStorage.getItem('theme-preference');
+      const mediaQuery = window.matchMedia
+        ? window.matchMedia('(prefers-color-scheme: dark)')
+        : null;
+
+      // Validate stored theme or default to "dark"
+      storedTheme =
+        storedTheme === 'light' ||
+        storedTheme === 'dark' ||
+        storedTheme === 'auto'
+          ? storedTheme
+          : 'dark';
+
+      // Resolve actual theme based on preference
+      let resolvedTheme;
+      if (storedTheme === 'auto') {
+        resolvedTheme = mediaQuery && mediaQuery.matches ? 'dark' : 'light';
+      } else {
+        resolvedTheme = storedTheme;
+      }
+
+      const root = document.documentElement;
+      if (root) {
+        // Set theme attributes
+        if (resolvedTheme === 'light') {
+          root.setAttribute('data-theme', 'light');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        root.setAttribute('data-theme-preference', storedTheme);
+        root.setAttribute('data-theme-resolved', resolvedTheme);
+      }
+
+      // Initialize sidebar state on desktop
+      const desktopMedia = window.matchMedia('(min-width: 1025px)');
+      if (desktopMedia.matches) {
+        const sidebarCollapsed =
+          localStorage.getItem('sidebar-collapsed') === 'true';
+        if (sidebarCollapsed) {
+          root.classList.add('sidebar-collapsed-global');
+          root.setAttribute('data-sidebar', 'collapsed');
+          root.style.setProperty('--sidebar-init-transition', 'none');
+        }
+      }
+    } catch (_err) {
+      // Silently fail to prevent script errors
+    }
+  })();
 </script>
-<!-- eslint-enable -->

@@ -392,6 +392,7 @@ This catches cases where:
 - **Global styles**: `src/styles/` (for example `variables.css`, and subfolders such as `prose/`, `layout/`, `components/`, `advertising/`, and `utilities/`)
 - **Component styles**: Co-located `src/components/{Component}/{component}.module.css`
 - **Build scripts**: `scripts/*.mjs` (ESM Node.js)
+- **Config files**: `*.config.ts` (TypeScript for type safety and IDE support)
 - **Type definitions**: `src/env.d.ts` for `import.meta.env` inference
 - **Static assets**: `public/` (served as-is)
 
