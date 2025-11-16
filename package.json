@@ -6,9 +6,9 @@
     "predev": "npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
+    "build": "npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && AVIF=false astro build && npm run generate:sitemap",
     "build:dev": "PUBLIC_SITE_ENV=development npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
-    "build:clean": "rm -rf dist && npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && astro build && npm run generate:sitemap",
+    "build:clean": "rm -rf dist && npm run copy:favicon && npm run generate:robots && npm run generate:ads && npm run generate:search && AVIF=false astro build && npm run generate:sitemap",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "astro check",
@@ -30,6 +30,7 @@
     "npm": ">=10.9.0"
   },
   "dependencies": {
+    "@playform/compress": "^0.2.0",
     "astro": "^5.15.1",
     "fuse.js": "^7.1.0",
     "gray-matter": "^4.0.3",
@@ -42,13 +43,11 @@
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-astro": "^1.5.0",
     "jiti": "^2.6.1",
     "prettier": "^3.6.2",
     "remark-directive": "^4.0.0",
-    "terser": "^5.44.0",
     "typescript": "^5.9.2",
     "unist-util-visit": "^5.0.0"
   }

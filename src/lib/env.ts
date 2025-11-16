@@ -97,25 +97,6 @@ const envSchema = z.object({
   PUBLIC_AHREFS_DATA_KEY: z
     .union([z.string().min(1), z.literal('')])
     .optional(),
-
-  // Build configuration (optional)
-  MINIFY_ENGINE: z.enum(['terser', 'esbuild']).default('esbuild'),
-
-  ENABLE_STRIP_CONSOLE: z
-    .string()
-    .refine(
-      val => val === 'true' || val === 'false' || val === '',
-      'ENABLE_STRIP_CONSOLE must be "true", "false", or empty'
-    )
-    .optional(),
-
-  ENABLE_MINIFY: z
-    .string()
-    .refine(
-      val => val === 'true' || val === 'false' || val === '',
-      'ENABLE_MINIFY must be "true", "false", or empty'
-    )
-    .optional(),
 });
 
 type ValidatedEnv = z.infer<typeof envSchema>;
@@ -172,9 +153,6 @@ function validateEnv(
       PUBLIC_AHREFS_DATA_KEY:
         (import.meta as ImportMeta).env?.PUBLIC_AHREFS_DATA_KEY ||
         process.env.PUBLIC_AHREFS_DATA_KEY,
-      MINIFY_ENGINE: process.env.MINIFY_ENGINE,
-      ENABLE_STRIP_CONSOLE: process.env.ENABLE_STRIP_CONSOLE,
-      ENABLE_MINIFY: process.env.ENABLE_MINIFY,
     };
 
     // Apply mode-specific validation rules

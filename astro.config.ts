@@ -11,6 +11,8 @@ import {
   type ValidatedEnv,
 } from './src/lib/env.js';
 
+import playformCompress from '@playform/compress';
+
 // Validate and get environment configuration
 let validatedEnv: ValidatedEnv;
 let mode: 'development' | 'production' | 'staging' = 'development';
@@ -99,30 +101,9 @@ export default defineConfig({
   // Vite configuration for optimizations
   vite: {
     build: {
-      // Prefer esbuild for speed; allow switching to Terser via env
-      // MINIFY_ENGINE=terser to enable Terser for advanced cases
-      minify: validatedEnv.MINIFY_ENGINE === 'terser' ? 'terser' : 'esbuild',
-      terserOptions:
-        validatedEnv.MINIFY_ENGINE === 'terser'
-          ? {
-              ...(validatedEnv.ENABLE_STRIP_CONSOLE === 'true'
-                ? {
-                    compress: {
-                      drop_console: true,
-                      drop_debugger: true,
-                      dead_code: true,
-                      pure_funcs: [
-                        'console.log',
-                        'console.info',
-                        'console.debug',
-                      ],
-                    },
-                  }
-                : {}),
-              mangle: { safari10: true },
-              format: { comments: false },
-            }
-          : undefined,
+      // Minification handled by @playform/compress in production
+      // Use esbuild for speed in development
+      minify: 'esbuild',
       // Optimize chunk splitting
       rollupOptions: {
         onwarn(warning, defaultHandler) {
@@ -193,18 +174,11 @@ export default defineConfig({
         '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
       },
     },
-    // Esbuild options (apply drops only in production)
+    // Esbuild options (compression handled by @playform/compress)
     esbuild:
       mode === 'production'
         ? {
             legalComments: 'none',
-            ...(validatedEnv.ENABLE_STRIP_CONSOLE === 'true' &&
-            validatedEnv.MINIFY_ENGINE !== 'terser'
-              ? {
-                  drop: ['console', 'debugger'],
-                  pure: ['console.log', 'console.info', 'console.debug'],
-                }
-              : {}),
           }
         : undefined,
     // Server configuration
@@ -220,6 +194,8 @@ export default defineConfig({
   },
 
   // Image optimization
+  // Note: AVIF generation disabled via AVIF=false in build scripts for speed
+  // AVIF encoding is ~6s per image; WebP provides 99% of benefits with 10x faster build
   image: {
     // Optional: switch image service via env to avoid native Sharp issues on some hosts
     // IMAGE_SERVICE options:
@@ -241,8 +217,8 @@ export default defineConfig({
     ],
   },
 
-  // Compress configuration for Astro components - enabled in production or when ENABLE_MINIFY is true
-  compressHTML: validatedEnv.ENABLE_MINIFY === 'true' || mode === 'production',
+  // HTML compression handled by @playform/compress integration
+  compressHTML: false,
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
@@ -253,5 +229,17 @@ export default defineConfig({
   },
 
   // Integrations for additional features
-  integrations: [],
+  integrations: [
+    playformCompress({
+      // CSS compression
+      CSS: true,
+      // HTML compression (redundant with compressHTML above, but playformCompress handles it)
+      HTML: true,
+      // JavaScript/SVG compression
+      JavaScript: true,
+      SVG: true,
+      // Image optimization (disable if using separate image service)
+      Image: false,
+    }),
+  ],
 });

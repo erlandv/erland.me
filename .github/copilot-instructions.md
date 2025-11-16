@@ -51,6 +51,7 @@ Static-first Astro personal website with type-safe content collections, minimal 
 - **Metadata generation**: `predev` hook auto-runs scripts before `npm run dev`; `build` commands regenerate robots.txt, ads.txt, search-index.json, sitemaps
 - **Sitemap structure**: Custom sitemaps (`sitemap_index.xml`, `post-sitemap.xml`, `page-sitemap.xml`) for GSC backward compatibility; generated via `scripts/generate-sitemap.mjs` post-build; **only generated in production environment**
 - **Environment-aware**: Use `import.meta.env.SITE` (Astro components), `process.env.SITE_URL` (config files), or `SITE_URL` env var
+- **Asset compression**: `@playform/compress` integration handles production minification (CSS, HTML, JS, SVG, JSON); AVIF disabled in production builds via `AVIF=false` for ~10s total build time (optimal for 126+ pages)
 
 ### Environment Validation System
 
@@ -75,9 +76,10 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 **Build Commands**:
 
-- `npm run build:dev` - Forces development mode for local testing builds
-- `npm run build` - Auto-detects environment mode based on configuration
-- `npm run dev` - Always runs in development mode
+- `npm run build:dev` - Development mode build with AVIF images + full asset processing
+- `npm run build` - Production mode with `AVIF=false` for optimized ~10s build time
+- `npm run build:clean` - Force clean `dist/` before build (production optimized)
+- `npm run dev` - Always runs in development mode with full image formats
 
 **Validation Features**:
 
@@ -87,6 +89,12 @@ Static-first Astro personal website with type-safe content collections, minimal 
 - AdSense client ID validation (`ca-pub-XXXXXXXXXX` pattern)
 - Numeric validation for AdSense slot IDs
 - Environment-specific requirement enforcement
+
+**Build Performance**:
+
+- **AVIF disabled in production** via `AVIF=false` environment variable (production builds: ~10s, dev builds: ~20s)
+- Sharp optimization: WebP format provides 99% of AVIF benefits with 10x faster encoding
+- @playform/compress reduces build output by ~40% (CSS ~400B, HTML ~610KB, JS ~140KB total)
 
 ## Critical Commands
 
@@ -415,9 +423,9 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 
 **Build Configuration**:
 
-- `MINIFY_ENGINE`: `terser` or `esbuild` (default: `esbuild`)
-- `ENABLE_STRIP_CONSOLE`: Remove console logs in production (requires terser)
-- `ENABLE_MINIFY`: Enable/disable minification (boolean)
+- `AVIF`: Set to `false` in production scripts for fast WebP-only builds (default behavior)
+- Minification: Handled by @playform/compress (CSS, HTML, JS, SVG, JSON automatic)
+- Image optimization: Sharp + WebP format (AVIF disabled for speed)
 
 **Validation Rules**:
 
