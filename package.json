@@ -45,6 +45,7 @@
     "cssnano": "^7.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-astro": "^1.5.0",
+    "jiti": "^2.6.1",
     "prettier": "^3.6.2",
     "remark-directive": "^4.0.0",
     "terser": "^5.44.0",

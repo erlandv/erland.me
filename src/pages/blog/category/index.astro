@@ -182,6 +182,146 @@ const byCategory = categories.map(cat => {
   </div>
 </SiteLayout>
 
-<!-- eslint-disable -->
-<script is:inline>!function(){function e(){const e=(location.hash||"").match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);return e?{cat:e[1],page:Math.max(1,parseInt(e[2]||"1",10)||1)}:null}function t(e,t){document.querySelectorAll("[data-cat-page]").forEach(function(e){e instanceof HTMLElement&&(e.style.display="none")});const n=document.querySelector(`[data-cat-page][data-cat="${e}"][data-page="${t}"]`);n instanceof HTMLElement&&(n.style.display=""),document.querySelectorAll("#category-filter .cat-filter-btn").forEach(function(t){if(t instanceof HTMLElement){const n=t.getAttribute("data-cat");n===e?t.classList.add("is-active"):t.classList.remove("is-active")}})}function n(){let n=e();if(!n){const a=Array.from(new Set(Array.from(document.querySelectorAll("[data-cat-page]")).map(function(e){return e.getAttribute("data-cat")}).filter(Boolean)));if(a.length>0){const c=a[Math.floor(Math.random()*a.length)];location.replace(`#cat-${c}-page-1`),n={cat:c,page:1}}}n&&t(n.cat,n.page),document.querySelectorAll("#category-filter .cat-filter-btn").forEach(function(e){e.addEventListener("click",function(n){n.preventDefault();const a=e.getAttribute("data-cat");if(a){const c=`#cat-${a}-page-1`;location.hash!==c&&(location.hash=c),t(a,1)}})})}window.addEventListener("hashchange",function(){const n=e();n&&t(n.cat,n.page)}),document.addEventListener("click",function(n){const a=n.target;if(a){let c=null;if(a instanceof HTMLAnchorElement){c=a}else if(a instanceof Element&&"function"===typeof a.closest){c=a.closest("a")}if(c){const r=c.getAttribute("href")||"";if(r.startsWith("#cat-")){const i=r.match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);if(i){n.preventDefault();const o=i[1],s=Math.max(1,parseInt(i[2]||"1",10)||1);location.hash!==r&&(location.hash=r),t(o,s)}}}}}),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",n):n(),document.addEventListener("astro:page-load",n),document.addEventListener("astro:after-swap",n)}();</script>
-<!-- eslint-enable -->
+<script is:inline>
+  (function () {
+    // Parse hash to get category and page number
+    function parseHash() {
+      const match = (location.hash || '').match(
+        /^#cat-([^#]+?)(?:-page-(\d+))?$/
+      );
+      return match
+        ? {
+            cat: match[1],
+            page: Math.max(1, parseInt(match[2] || '1', 10) || 1),
+          }
+        : null;
+    }
+
+    // Show specific category page and update active filter button
+    function showCategoryPage(category, page) {
+      // Hide all category pages
+      document.querySelectorAll('[data-cat-page]').forEach(function (el) {
+        if (el instanceof HTMLElement) {
+          el.style.display = 'none';
+        }
+      });
+
+      // Show target page
+      const target = document.querySelector(
+        `[data-cat-page][data-cat="${category}"][data-page="${page}"]`
+      );
+      if (target instanceof HTMLElement) {
+        target.style.display = '';
+      }
+
+      // Update active filter button
+      document
+        .querySelectorAll('#category-filter .cat-filter-btn')
+        .forEach(function (btn) {
+          if (btn instanceof HTMLElement) {
+            const btnCat = btn.getAttribute('data-cat');
+            if (btnCat === category) {
+              btn.classList.add('is-active');
+            } else {
+              btn.classList.remove('is-active');
+            }
+          }
+        });
+    }
+
+    // Initialize page on load
+    function init() {
+      let parsed = parseHash();
+
+      // If no hash, pick random category
+      if (!parsed) {
+        const allCats = Array.from(
+          new Set(
+            Array.from(document.querySelectorAll('[data-cat-page]'))
+              .map(function (el) {
+                return el.getAttribute('data-cat');
+              })
+              .filter(Boolean)
+          )
+        );
+        if (allCats.length > 0) {
+          const randomCat = allCats[Math.floor(Math.random() * allCats.length)];
+          location.replace(`#cat-${randomCat}-page-1`);
+          parsed = { cat: randomCat, page: 1 };
+        }
+      }
+
+      if (parsed) {
+        showCategoryPage(parsed.cat, parsed.page);
+      }
+
+      // Attach click handlers to filter buttons
+      document
+        .querySelectorAll('#category-filter .cat-filter-btn')
+        .forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const cat = btn.getAttribute('data-cat');
+            if (cat) {
+              const hash = `#cat-${cat}-page-1`;
+              if (location.hash !== hash) {
+                location.hash = hash;
+              }
+              showCategoryPage(cat, 1);
+            }
+          });
+        });
+    }
+
+    // Handle hash changes
+    window.addEventListener('hashchange', function () {
+      const parsed = parseHash();
+      if (parsed) {
+        showCategoryPage(parsed.cat, parsed.page);
+      }
+    });
+
+    // Handle pagination link clicks
+    document.addEventListener('click', function (e) {
+      const target = e.target;
+      if (target) {
+        let link = null;
+        if (target instanceof HTMLAnchorElement) {
+          link = target;
+        } else if (
+          target instanceof Element &&
+          typeof target.closest === 'function'
+        ) {
+          link = target.closest('a');
+        }
+
+        if (link) {
+          const href = link.getAttribute('href') || '';
+          if (href.startsWith('#cat-')) {
+            const match = href.match(/^#cat-([^#]+?)(?:-page-(\d+))?$/);
+            if (match) {
+              e.preventDefault();
+              const cat = match[1];
+              const page = Math.max(1, parseInt(match[2] || '1', 10) || 1);
+              if (location.hash !== href) {
+                location.hash = href;
+              }
+              showCategoryPage(cat, page);
+            }
+          }
+        }
+      }
+    });
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    // Re-initialize on Astro view transitions
+    document.addEventListener('astro:page-load', init);
+    document.addEventListener('astro:after-swap', init);
+  })();
+</script>

@@ -113,6 +113,33 @@ const icons = {
   </div>
 </div>
 
-<!-- eslint-disable -->
-<script is:inline define:vars={{ icons }}>!function(){try{const e=localStorage.getItem("theme-preference"),t=e==="light"||e==="dark"||e==="auto"?e:"dark",r=document.currentScript;if(r){const n=r.previousElementSibling;if(n&&n.classList.contains("theme-toggle")){const i=n.querySelector(".theme-toggle__trigger-icon");i&&icons[t]&&(i.innerHTML=icons[t])}}}catch(e){}}();</script>
-<!-- eslint-enable -->
+<script is:inline define:vars={{ icons }}>
+  (function () {
+    try {
+      // Get current theme preference
+      const storedTheme = localStorage.getItem('theme-preference');
+      const validTheme =
+        storedTheme === 'light' ||
+        storedTheme === 'dark' ||
+        storedTheme === 'auto'
+          ? storedTheme
+          : 'dark';
+
+      // Find theme toggle component and update icon
+      const script = document.currentScript;
+      if (script) {
+        const wrapper = script.previousElementSibling;
+        if (wrapper && wrapper.classList.contains('theme-toggle')) {
+          const iconContainer = wrapper.querySelector(
+            '.theme-toggle__trigger-icon'
+          );
+          if (iconContainer && icons[validTheme]) {
+            iconContainer.innerHTML = icons[validTheme];
+          }
+        }
+      }
+    } catch (_err) {
+      // Silently fail to prevent script errors
+    }
+  })();
+</script>
