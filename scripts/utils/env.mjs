@@ -1,8 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
-
 export function loadEnv(filePath = join(process.cwd(), '.env')) {
   try {
     if (!filePath || !existsSync(filePath)) return;
@@ -33,43 +31,55 @@ export function loadEnv(filePath = join(process.cwd(), '.env')) {
   }
 }
 
+/**
+ * Resolve environment mode from various sources
+ * Matches logic from src/lib/env.ts for consistency
+ * @returns {'development' | 'production' | 'staging'}
+ */
 export function resolveMode() {
-  const siteEnvRaw =
-    process.env.PUBLIC_SITE_ENV ||
-    process.env.SITE_ENV ||
-    process.env.DEPLOYMENT_ENV ||
-    '';
-  const siteEnv = siteEnvRaw.trim().toLowerCase();
+  const siteEnv = process.env.PUBLIC_SITE_ENV;
+
+  // Explicit environment override takes highest priority
   if (siteEnv) {
-    if (['production', 'prod', 'live'].includes(siteEnv)) return 'production';
-    return 'preview';
+    const normalized = siteEnv.trim().toLowerCase();
+    if (normalized === 'production') {
+      return 'production';
+    }
+    if (normalized === 'staging') {
+      return 'staging';
+    }
+    return 'development';
   }
 
-  const arg = process.argv.find(a => a.startsWith('--mode='));
-  if (arg) {
-    const value = arg.split('=')[1]?.trim().toLowerCase();
-    if (value) return value;
+  // Check for local development indicators
+  const siteUrl = process.env.SITE_URL || '';
+  const siteDomain = process.env.SITE_DOMAIN || '';
+
+  // If using localhost or development URLs, prefer development mode
+  if (
+    (siteUrl &&
+      (siteUrl.includes('localhost') || siteUrl.includes('127.0.0.1'))) ||
+    (siteDomain &&
+      (siteDomain === 'localhost' || siteDomain.includes('127.0.0.1')))
+  ) {
+    return 'development';
   }
 
-  const envMode =
-    process.env.ASTRO_MODE || process.env.MODE || process.env.NODE_ENV || '';
-  if (envMode) return envMode.toLowerCase();
-
-  const url = process.env.SITE_URL || '';
-  if (url && !LOCAL_PATTERNS.test(url)) {
+  // Fallback to NODE_ENV or production URL detection
+  const nodeEnv = process.env.NODE_ENV;
+  if (nodeEnv === 'production' && siteUrl && siteUrl.includes('erland.me')) {
     return 'production';
   }
-  const domain = process.env.SITE_DOMAIN || '';
-  if (domain && !LOCAL_PATTERNS.test(domain)) {
-    return 'production';
-  }
 
+  // Default to development for local builds
   return 'development';
 }
 
+/**
+ * Check if current mode is production
+ * @param {string} [mode] - Optional mode override
+ * @returns {boolean}
+ */
 export function isProd(mode = resolveMode()) {
-  const forceProd =
-    process.env.FORCE_PRODUCTION === 'true' ||
-    process.argv.includes('--force-production');
-  return forceProd || mode === 'production';
+  return mode === 'production';
 }

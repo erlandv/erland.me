@@ -69,7 +69,9 @@ const mobileHideIdx = (() => {
 })();
 ---
 
+<!-- Pagination Navigation - Responsive page number controls with prev/next buttons -->
 <nav aria-label='Pagination' class={styles.pagination}>
+  <!-- Previous Page Button - Disabled on first page -->
   <a
     href={pageHref(clamp(page - 1, 1, totalPages))}
     aria-label='Previous page'
@@ -84,6 +86,7 @@ const mobileHideIdx = (() => {
     <Icon name='arrowLeft' class={styles.iconSvg} />
   </a>
 
+  {/* First Page Link - Always shown if current window doesn't start at page 1 */}
   {
     windowPages[0] > 1 && (
       <a href={pageHref(1)} class={styles['page-link']}>
@@ -91,6 +94,8 @@ const mobileHideIdx = (() => {
       </a>
     )
   }
+  
+  {/* Leading Ellipsis - Indicates skipped pages between first page and window */}
   {
     showLeadingEllipsis && (
       <span class={styles.ellipsis} aria-hidden='true'>
@@ -99,6 +104,7 @@ const mobileHideIdx = (() => {
     )
   }
 
+  {/* Page Number Window - Shows 4 page numbers on desktop, 2 on mobile */}
   {
     windowPages.map((n, idx) => {
       const active = n === page;
@@ -118,6 +124,7 @@ const mobileHideIdx = (() => {
     })
   }
 
+  {/* Trailing Ellipsis - Indicates skipped pages between window and last page */}
   {
     showTrailingEllipsis && (
       <span class={styles.ellipsis} aria-hidden='true'>
@@ -125,6 +132,8 @@ const mobileHideIdx = (() => {
       </span>
     )
   }
+  
+  {/* Last Page Link - Always shown if current window doesn't reach last page */}
   {
     windowPages[windowPages.length - 1] < totalPages && (
       <a href={pageHref(totalPages)} class={styles['page-link']}>
@@ -133,6 +142,7 @@ const mobileHideIdx = (() => {
     )
   }
 
+  <!-- Next Page Button - Disabled on last page -->
   <a
     href={pageHref(clamp(page + 1, 1, totalPages))}
     aria-label='Next page'

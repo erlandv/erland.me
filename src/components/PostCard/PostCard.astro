@@ -44,12 +44,16 @@ interface Props {
 }
 
 const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
+// Generate category URL if category exists (slugified for URL compatibility)
 const categoryHref = category ? `/blog/category/${slugifyCategory(category)}/` : null;
+// Get responsive image configuration for card thumbnails
 const { widths, sizes } = getCardImageConfig();
 ---
 
+<!-- Blog Post Preview Card - Grid item for blog listing pages -->
 <article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>
   <div class={styles["post-card__inner"]}>
+    <!-- Thumbnail Section - Conditional: Optimized hero image if available, placeholder otherwise -->
     <div class={styles["post-card__thumb"]}>
       {hero ? (
         <Image
@@ -64,11 +68,17 @@ const { widths, sizes } = getCardImageConfig();
         <div class={styles["post-card__thumb--placeholder"]} aria-hidden="true"></div>
       )}
     </div>
+    
+    <!-- Card Content Section - Title, metadata, excerpt, CTA -->
     <div class={styles["post-card__body"]}>
+      <!-- Card Header - Title and metadata (category, date) -->
       <header class={styles["post-card__header"]}>
+        <!-- Post Title - Clickable link to full post -->
         <h2 class={styles["post-card__title"]}>
           <a href={href} class={styles["post-card__title-link"]}>{title}</a>
         </h2>
+        
+        <!-- Post Metadata - Conditional: Shows category and/or date if available -->
         <div class={styles["post-card__meta"]}>
           {category && (
             <div class={styles["post-card__meta-item"]}>
@@ -84,7 +94,11 @@ const { widths, sizes } = getCardImageConfig();
           )}
         </div>
       </header>
+      
+      {/* Conditional: Post excerpt paragraph (only if excerpt exists) */}
       {excerpt && <p class={styles["post-card__excerpt"]}>{excerpt}</p>}
+      
+      <!-- Call-to-Action Button - Link to full post -->
       <a href={href} class:list={[styles["post-card__readmore"], 'btn']}>
         <span>Read more</span>
         <Icon name="blogReadmore" class={styles["post-card__readmore-icon"]} />

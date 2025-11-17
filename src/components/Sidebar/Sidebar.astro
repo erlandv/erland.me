@@ -37,6 +37,7 @@ import { sidebarSocialLinks as socials } from './social-links';
 const { selectedItem } = Astro.props;
 ---
 
+<!-- Sidebar Container - Persists across view transitions via data-astro-transition-persist -->
 <aside
   data-animation='default'
   data-collapse='medium'
@@ -47,9 +48,11 @@ const { selectedItem } = Astro.props;
   class='sidebar w-nav'
 >
   <div class='nav-content'>
+    <!-- Profile Header Section - Desktop sidebar branding -->
     <div class='w-nav-brand'>
       <div class='profile-header'>
         <div class='niv-data'>
+          <!-- Avatar Button - Opens stories modal when clicked -->
           <button
             type='button'
             class='sidebar__avatar-button'
@@ -64,6 +67,7 @@ const { selectedItem } = Astro.props;
               class='niv-image'
             />
           </button>
+          <!-- Profile Info Text -->
           <div class='profile-text'>
             <div class='label-white'>Erland Ramdhani</div>
             <div class='label-gray'>Web Developer</div>
@@ -72,10 +76,13 @@ const { selectedItem } = Astro.props;
       </div>
     </div>
 
+    <!-- Mobile Header Controls - Theme toggle and hamburger menu (visible on mobile only) -->
     <div class='mobile-header-controls'>
+      <!-- Theme Toggle - Dark/Light mode switcher -->
       <div class='theme-toggle-container theme-toggle-container--sidebar'>
         <ThemeToggle />
       </div>
+      <!-- Hamburger Menu Button - Toggles mobile navigation drawer -->
       <label
         for='nav-toggle'
         class='navbar-icon-button w-nav-button'
@@ -94,6 +101,8 @@ const { selectedItem } = Astro.props;
       </label>
     </div>
 
+    <!-- Hidden Checkbox Inputs - Control navigation and sidebar toggle states via CSS -->
+    <!-- Mobile menu toggle (controls drawer visibility on mobile) -->
     <input
       type='checkbox'
       id='nav-toggle'
@@ -101,6 +110,7 @@ const { selectedItem } = Astro.props;
       aria-label='Toggle navigation'
     />
 
+    <!-- Desktop sidebar collapse toggle -->
     <input
       type='checkbox'
       id='sidebar-toggle'
@@ -108,7 +118,9 @@ const { selectedItem } = Astro.props;
       aria-label='Toggle sidebar'
     />
 
+    <!-- Main Navigation Menu - Contains all navigation links -->
     <nav id='site-nav' role='navigation' class='w-nav-menu'>
+      <!-- Navigation Link: Home -->
       <a
         href='/'
         aria-label='Home'
@@ -127,6 +139,8 @@ const { selectedItem } = Astro.props;
         />
         <div class='nav-text'>Home</div>
       </a>
+      
+      <!-- Navigation Link: Web Development Portfolio -->
       <a
         href='/portfolio/web-development/'
         aria-label='Web Development'
@@ -146,6 +160,8 @@ const { selectedItem } = Astro.props;
         />
         <div class='nav-text'>Web development</div>
       </a>
+      
+      <!-- Navigation Link: Cloud Infrastructure Portfolio -->
       <a
         href='/portfolio/cloud-infra/'
         aria-label='Cloud Infrastructure'
@@ -164,6 +180,8 @@ const { selectedItem } = Astro.props;
         />
         <div class='nav-text'>Cloud Infra</div>
       </a>
+      
+      <!-- Navigation Link: Personal Projects Portfolio -->
       <a
         href='/portfolio/personal-projects/'
         aria-label='Personal Projects'
@@ -182,6 +200,8 @@ const { selectedItem } = Astro.props;
         />
         <div class='nav-text'>Personal projects</div>
       </a>
+      
+      <!-- Navigation Link: Download Page -->
       <a
         href='/download/'
         aria-label='Download'
@@ -201,6 +221,8 @@ const { selectedItem } = Astro.props;
         />
         <div class='nav-text'>Download</div>
       </a>
+      
+      <!-- Navigation Link: Blog Posts -->
       <a
         href='/blog/'
         aria-label='Blog Posts'
@@ -220,6 +242,7 @@ const { selectedItem } = Astro.props;
         <div class='nav-text'>Blog Posts</div>
       </a>
 
+      <!-- Social Links - Mobile Menu Variant (visible inside mobile drawer) -->
       <div class:list={[socialsStyles.socials, 'socials--menu']}>
         {
           socials.map(s => (
@@ -241,6 +264,7 @@ const { selectedItem } = Astro.props;
       </div>
     </nav>
 
+    <!-- Social Links - Desktop Sidebar Variant (visible at bottom of sidebar on desktop) -->
     <div class:list={[socialsStyles.socials, 'socials--sidebar']}>
       {
         socials.map(s => (

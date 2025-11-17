@@ -36,11 +36,17 @@ const paragraphs: string[] =
     : [];
 ---
 
+<!-- Portfolio Project Card - Displays project details with description, highlights, and tech stack -->
 <div class={styles["single-item"]}>
+  <!-- Project Title -->
   <h2>{title}</h2>
+  
+  <!-- Project Description - Supports multi-paragraph text (split by double newlines) -->
   <div class:list={[styles["project-desc"]]}>
     {paragraphs.length > 0 ? paragraphs.map((p: string) => <p>{p}</p>) : <p>{desc}</p>}
   </div>
+  
+  {/* Conditional: Project Highlights Section (only if highlights array provided) */}
   {highlights.length > 0 && (
     <>
       <h3>Highlights</h3>
@@ -51,6 +57,8 @@ const paragraphs: string[] =
       </div>
     </>
   )}
+  
+  <!-- Technologies Section - Chips/badges display -->
   <div class={styles["mini-label-white"]}>Technologies &amp; tools</div>
   <div class={styles["chips-container"]}>
     {tech.map((techItem: string) => <div class={styles["single-chip"]}>{techItem}</div>)}

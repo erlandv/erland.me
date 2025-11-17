@@ -13,7 +13,9 @@ import btn from '@/styles/components/button.module.css';
   canonical='/'
   selectedItem='home'
   >
+  <!-- Hero/Fold Section - Above-the-fold introduction and CTA -->
   <main class={fold['fold-content-container']}>
+    <!-- Hero Content - Greeting, tagline, and introduction -->
     <div class={fold['fold-content']}>
       <span class={fold['intro']}>Hello world;</span>
       <h1>I'm Erland.<br />I build things for the web.</h1>
@@ -23,6 +25,8 @@ import btn from '@/styles/components/button.module.css';
         This is where I'll share my notes, goals, and other things.
       </p>
     </div>
+    
+    <!-- Contact Button - Email CTA with icon -->
     <a
       href={`mailto:hello@${SITE_DOMAIN}`}
       class:list={[btn.button, btn['contact-button']]}
@@ -32,15 +36,23 @@ import btn from '@/styles/components/button.module.css';
       <span>Contact Me</span>
     </a>
   </main>
+  
+  <!-- Portfolio Categories Section - Highlights main project categories -->
   <div class={pf['projects-section']}>
+    <!-- Portfolio Category: Web Development -->
     <div class={pf['projects-container']}>
+      <!-- Category Icon -->
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container']}>
           <Icon name='portfolioWeb' class={pf['projects-category-image']} />
         </div>
       </div>
+      
+      <!-- Category Content - Title and tech stack -->
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
+        
+        <!-- Technologies & Tools - Chips/badges display -->
         <div class={chips['tech-tools-container']}>
           <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
           <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
@@ -56,14 +68,21 @@ import btn from '@/styles/components/button.module.css';
         </div>
       </div>
     </div>
+    
+    <!-- Portfolio Category: Cloud Infrastructure -->
     <div class={pf['projects-container']}>
+      <!-- Category Icon -->
       <div class={pf['single-projects-category']}>
         <div class={pf['projects-category-image-container'] + ' devops-img'}>
           <Icon name='portfolioInfra' class={pf['projects-category-image']} />
         </div>
       </div>
+      
+      <!-- Category Content - Title and tech stack -->
       <div class={pf['single-projects-content']}>
         <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
+        
+        <!-- Technologies & Tools - Chips/badges display -->
         <div class={chips['tech-tools-container']}>
           <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
           <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>

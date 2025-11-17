@@ -33,14 +33,19 @@ interface Props {
 const { placeholder = 'Search articles...' } = Astro.props as Props;
 ---
 
+<!-- Search Container - Client-side fuzzy search with Fuse.js -->
 <div
   id='search-container'
   class={styles['search-container']}
   role='search'
   aria-label='Cari artikel'
 >
+  <!-- Search Input Wrapper - Contains search icon, input field, and clear button -->
   <div class={styles['search-input-wrapper']}>
+    <!-- Search Icon - Visual indicator for search functionality -->
     <Icon name='blogSearch' class={styles['search-icon']} />
+    
+    <!-- Search Input Field - Debounced search with autocomplete suggestions -->
     <input
       type='text'
       placeholder={placeholder}
@@ -52,6 +57,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       aria-expanded='false'
       aria-label='Cari di blog'
     />
+    
+    <!-- Clear Button - Clears search input and hides results (hidden by default) -->
     <button
       type='button'
       class={styles['search-clear']}
@@ -62,6 +69,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       <Icon name='btnClose' class={styles['clear-icon']} />
     </button>
   </div>
+  
+  <!-- Search Results Dropdown - Shows matching articles (hidden by default) -->
   <div
     class={styles['search-results']}
     id='search-results'
@@ -69,6 +78,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     role='listbox'
     aria-label='Hasil pencarian'
   >
+    <!-- Results Content Container - Dynamically populated with search results -->
     <div
       class={styles['search-results-content']}
       id='search-results-content'
@@ -76,6 +86,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     >
     </div>
   </div>
+  
+  <!-- Loading Indicator - Shows while search is in progress (hidden by default) -->
   <div
     class={styles['search-loading']}
     id='search-loading'

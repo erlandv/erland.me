@@ -229,17 +229,21 @@ export default defineConfig({
   },
 
   // Integrations for additional features
-  integrations: [
-    playformCompress({
-      // CSS compression
-      CSS: true,
-      // HTML compression (redundant with compressHTML above, but playformCompress handles it)
-      HTML: true,
-      // JavaScript/SVG compression
-      JavaScript: true,
-      SVG: true,
-      // Image optimization (disable if using separate image service)
-      Image: false,
-    }),
-  ],
+  // Only apply compression in production to speed up development builds
+  integrations:
+    mode === 'production' || mode === 'staging'
+      ? [
+          playformCompress({
+            // CSS compression
+            CSS: true,
+            // HTML compression (compressHTML disabled above, handled here)
+            HTML: true,
+            // JavaScript/SVG compression
+            JavaScript: true,
+            SVG: true,
+            // Image optimization (disable if using separate image service)
+            Image: false,
+          }),
+        ]
+      : [],
 });
