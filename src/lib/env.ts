@@ -203,10 +203,11 @@ function resolveEnvironmentMode(): 'development' | 'production' | 'staging' {
 
   // Explicit environment override takes highest priority
   if (siteEnv) {
-    if (siteEnv === 'production') {
+    const normalized = siteEnv.trim().toLowerCase();
+    if (normalized === 'production') {
       return 'production';
     }
-    if (siteEnv === 'staging') {
+    if (normalized === 'staging') {
       return 'staging';
     }
     return 'development';

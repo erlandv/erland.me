@@ -1,8 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const LOCAL_PATTERNS = /(localhost|127(?:\.\d+){3}|::1)/i;
-
 export function loadEnv(filePath = join(process.cwd(), '.env')) {
   try {
     if (!filePath || !existsSync(filePath)) return;
@@ -58,13 +56,18 @@ export function resolveMode() {
   const siteDomain = process.env.SITE_DOMAIN || '';
 
   // If using localhost or development URLs, prefer development mode
-  if (LOCAL_PATTERNS.test(siteUrl) || LOCAL_PATTERNS.test(siteDomain)) {
+  if (
+    (siteUrl &&
+      (siteUrl.includes('localhost') || siteUrl.includes('127.0.0.1'))) ||
+    (siteDomain &&
+      (siteDomain === 'localhost' || siteDomain.includes('127.0.0.1')))
+  ) {
     return 'development';
   }
 
   // Fallback to NODE_ENV or production URL detection
   const nodeEnv = process.env.NODE_ENV;
-  if (nodeEnv === 'production' && siteUrl.includes('erland.me')) {
+  if (nodeEnv === 'production' && siteUrl && siteUrl.includes('erland.me')) {
     return 'production';
   }
 
