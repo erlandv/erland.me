@@ -64,9 +64,14 @@ const jsonLd = creativeWorkJsonLd({
   publishedTime={data.publishDate}
   modifiedTime={data.updatedDate ?? data.publishDate}
 >
+  <!-- Back Navigation - Return to download listing page -->
   <BackNav href='/download/' label='Back' />
+  
+  <!-- Download Article - Template/file details with download information -->
   <article class:list={['content-container', 'article-detail']}>
+    <!-- Article Header - Hero image (or placeholder emoji), title, and optional rating -->
     <header class='article-header'>
+      {/* Conditional: Hero image or fallback placeholder with package emoji */}
       {
         hero ? (
           <HeroImage image={hero} alt={heroAlt} loading='eager' fetchpriority='high' />
@@ -76,7 +81,11 @@ const jsonLd = creativeWorkJsonLd({
           </div>
         )
       }
+      
+      <!-- Article Title -->
       <h1>{data.heading ?? data.title}</h1>
+      
+      {/* Conditional: Star rating display (if rating data provided) */}
       {data.rating && (
         <StarRating
           ratingValue={data.rating.ratingValue}
@@ -86,10 +95,12 @@ const jsonLd = creativeWorkJsonLd({
       )}
     </header>
 
+    <!-- Article Content - Markdown rendered with download files table and custom images -->
     <div class='prose' id='download-content'>
       <Content components={{ img: ContentImage }} />
     </div>
 
+    <!-- Social Share Buttons - Share template to social platforms -->
     <ShareButtons
       title={data.title}
       url={canonicalUrl}
@@ -97,6 +108,8 @@ const jsonLd = creativeWorkJsonLd({
       heading='Share this template:'
     />
   </article>
+  
+  <!-- Scroll to Top Button - Floating button for long content -->
   <ScrollTopButton />
 </SiteLayout>
 

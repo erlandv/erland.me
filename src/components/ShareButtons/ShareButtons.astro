@@ -71,6 +71,7 @@ const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${enc(shareUr
 const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrlLinkedIn)}`;
 ---
 
+<!-- Social Share Section - Native Web Share API + fallback platform-specific buttons -->
 <section
   class='share'
   data-title={title}
@@ -79,8 +80,11 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
 >
   <h3 class={styles['share__title']}>{heading}</h3>
 
+  <!-- Share Buttons Container - Progressive enhancement based on device capabilities -->
   <div class={styles['share__wrap']}>
+    <!-- Native Share Options - Shown only on devices with Web Share API support (hidden by default, revealed by JS) -->
     <div class:list={[styles['share__native'], 'share__native']} hidden>
+      <!-- Native Share Button - Opens system share sheet -->
       <button
         class:list={[styles['share__btn'], 'share__btn--native']}
         type='button'
@@ -88,6 +92,8 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
       >
         <Icon name='blogShare' class={styles['share__icon']} ariaLabel='Share' />
       </button>
+      
+      <!-- Copy Link Button - Copies URL to clipboard -->
       <button
         class:list={[styles['share__btn'], 'share__btn--copy']}
         type='button'
@@ -98,7 +104,9 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
       </button>
     </div>
 
+    <!-- Fallback Share Buttons - Platform-specific share links (always visible) -->
     <div class={styles['share__fallback']}>
+      <!-- WhatsApp Share Button -->
       <a
         class={styles['share__btn']}
         href={whatsappHref}
@@ -112,6 +120,8 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
           ariaLabel='WhatsApp'
         />
       </a>
+      
+      <!-- Telegram Share Button -->
       <a
         class={styles['share__btn']}
         href={telegramHref}
@@ -125,6 +135,8 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
           ariaLabel='Telegram'
         />
       </a>
+      
+      <!-- X/Twitter Share Button -->
       <a
         class={styles['share__btn']}
         href={twitterHref}
@@ -134,6 +146,8 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
       >
         <Icon name='socialX' class={styles['share__icon']} ariaLabel='X / Twitter' />
       </a>
+      
+      <!-- Facebook Share Button -->
       <a
         class={styles['share__btn']}
         href={facebookHref}
@@ -147,6 +161,8 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
           ariaLabel='Facebook'
         />
       </a>
+      
+      <!-- LinkedIn Share Button -->
       <a
         class={styles['share__btn']}
         href={linkedinHref}

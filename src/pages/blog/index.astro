@@ -34,13 +34,17 @@ const getCategory = (post: any) => post.data?.category ?? null;
   selectedItem="blog"
   preloadSearch
 >
+  <!-- Back Navigation - Return to homepage -->
   <BackNav href="/" label="Back to Home" />
 
   <div class="content-container">
+    <!-- Page Title -->
     <h1>Blog Posts</h1>
     
+    <!-- Client-Side Search - Fuzzy search with Fuse.js (preloads search-index.json) -->
     <SearchInput placeholder="Cari artikel..." />
     
+    <!-- Blog Posts Grid Section - Displays paginated post preview cards -->
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
         {paginated.map((post) => {
@@ -62,11 +66,14 @@ const getCategory = (post: any) => post.data?.category ?? null;
           );
         })}
 
+        {/* Empty State - Message when no posts available */}
         {posts.length === 0 && (
           <p style="opacity:.8;">There are no articles to read yet</p>
         )}
       </div>
     </section>
+    
+    {/* Conditional: Pagination controls (only if more than one page) */}
     {posts.length > pageSize && (
       <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
     )}

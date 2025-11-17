@@ -66,6 +66,7 @@ const {
 
 <!DOCTYPE html>
 <html lang="id">
+  <!-- HTML Head - Meta tags, SEO, analytics, fonts, and critical scripts -->
   <Header
     title={title}
     canonical={canonical}
@@ -82,23 +83,32 @@ const {
     preloadSearch={preloadSearch}
   />
   <body>
+    {/* Google Tag Manager NoScript Fallback - For users with JavaScript disabled (production only) */}
     {import.meta.env.PROD && isProductionSite() && GTM_ID && (
       <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     )}
     
+    <!-- Theme Toggle - Floating button (visible on body, separate from sidebar) -->
     <div class="theme-toggle-container theme-toggle-container--body">
       <ThemeToggle />
     </div>
     
+    <!-- Main Content Container - Houses sidebar and page content -->
     <div class="content">
+      {/* Conditional: Sidebar Components (hidden on pages with showSidebar=false) */}
       {showSidebar && <Sidebar selectedItem={selectedItem} />}
       {showSidebar && <SidebarController />}
       {showSidebar && <SidebarToggleButton />}
       {showSidebar && <SidebarSocialFlyout />}
+      
+      <!-- Main Navigation Container - Page content and footer -->
       <nav class="main">
+        <!-- Content Container - Page-specific content injected via slot -->
         <div class="container">
           <slot />
         </div>
+        
+        <!-- Site Footer - Copyright and branding -->
         <Footer />
       </nav>
     </div>

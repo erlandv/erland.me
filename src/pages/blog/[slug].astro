@@ -62,13 +62,22 @@ const jsonLd = blogPostingJsonLd({
   tags={frontmatter.tags}
   author="Erland Ramdhani"
 >
+  <!-- Back Navigation - Return to blog listing page -->
   <BackNav href="/blog/" label="Back to Blog" />
+  
+  <!-- Blog Post Article - Full post content with SEO markup -->
   <article class:list={["content-container", "article-detail"]}>
+    <!-- Article Header - Hero image, title, and metadata -->
     <header class="article-header">
+      {/* Conditional: Hero image (optimized for LCP, eager loaded) */}
       {hero && (
         <HeroImage image={hero} alt={heroAlt} loading="eager" fetchpriority="high" />
       )}
+      
+      <!-- Article Title -->
       <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
+      
+      {/* Conditional: Article metadata (category and/or publish date) */}
       {(frontmatter.category || frontmatter.publishDate) && (
         <div class={blogStyles['blog-post__meta']}>
           {frontmatter.category && (
@@ -88,11 +97,17 @@ const jsonLd = blogPostingJsonLd({
         </div>
       )}
     </header>
+    
+    <!-- Article Content - Markdown rendered with custom image component -->
     <div class="prose" id="blog-content">
       <Content components={{ img: ContentImage }} />
     </div>
+    
+    <!-- Social Share Buttons - Share post to social platforms -->
     <ShareButtons title={frontmatter.title} url={canonicalUrl} description={frontmatter.description || frontmatter.excerpt} />
   </article>
+  
+  <!-- Scroll to Top Button - Floating button for long articles -->
   <ScrollTopButton />
   
   

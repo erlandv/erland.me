@@ -15,9 +15,13 @@ import styles from './footer.module.css';
 const year = new Date().getFullYear();
 ---
 
+<!-- Site Footer - Copyright and branding information -->
 <footer class={styles["site-footer"]} aria-label="Site footer">
   <div class={styles["footer-inner"]}>
+    <!-- Copyright Notice - Auto-updates year dynamically -->
     <div class={styles["footer-copy"]}>© {year} Erland Ramdhani</div>
+    
+    <!-- Powered By Section - Astro framework branding -->
     <div class={styles["footer-powered"]}>
       <span>Powered by</span>
       <span class={styles["footer-astro"]} aria-hidden="true">
