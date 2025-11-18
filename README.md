@@ -7,6 +7,23 @@ This repository hosts just my personal website with a little blog and portfolio.
 
 This is my small corner on the interweb where I dump my notes, my achievements, and whatever else I feel like posting. Yes, I'm aware of the irony.
 
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+- [Features](#features)
+- [What's Intentionally NOT Here](#whats-intentionally-not-here)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Development Setup](#development-setup)
+- [Production Deployment](#production-deployment)
+- [Staging Deployment](#staging-deployment)
+- [Rollback Deployment](#rollback-deployment)
+- [Performance & SEO](#performance--seo)
+- [Security Notes](#security-notes)
+- [License & Credits](#license--credits)
+
+</details>
+
 ## Features
 
 There aren't many advanced features here because it was intentionally designed to be minimal. I mean, come on, it's just a personal web. What were you expecting? User authentication? Payment processing? Push notifications for new blog posts nobody reads? Get real.
@@ -253,7 +270,6 @@ It's a static site, so it's already fast by default (cheat codes enabled), but I
 - **Structured Data**: Comprehensive `JSON-LD` schemas for everything—`BlogPosting`, `CreativeWork`, `CollectionPage`, `BreadcrumbList`, `WebSite` with `SearchAction`. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
 - **Resource Hints**: Strategic `preconnect` for Google Fonts, GTM, and AdSense domains. `dns-prefetch` as fallback. Fonts get `preload` with `crossorigin`. Search index preloads conditionally only on pages that need it. No wasted prefetching—every hint has a purpose.
 - **Robot Files**: Auto-generates `robots.txt` with environment-aware rules. The boring configuration files that search engines actually read and humans pretend to understand.
-- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up). Agave Nerd Font loads in `WOFF2` format because we're not savages.
 - **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses. Sharp handles WebP conversion and compression automatically.
 - **Social Tags**: Comprehensive OG and Twitter meta tags with proper image dimensions (1200×630), alt text, and all the metadata social networks demand. When you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
 - **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know. Manual chunk splitting keeps vendor code separate for better caching.
