@@ -5,7 +5,7 @@
   src: url('/fonts/agave-nerd/AgaveNerdFontMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 /* Webflow icons font used in UI */

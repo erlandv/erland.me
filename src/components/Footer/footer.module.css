@@ -3,7 +3,9 @@
   border-top: none;
   color: var(--text-secondary);
   font-size: clamp(14px, 2vw, 16px);
-  font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  font-family:
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
   line-height: 1.6;
   width: 100%;
   margin-top: clamp(var(--space-6), 4vw, var(--space-8));

@@ -112,7 +112,9 @@ body:has(.sidebar .nav-toggle:checked) {
 
 .sidebar .profile-text,
 .sidebar .nav-text {
-  font-family: 'Agave Nerd Font', ui-monospace, monospace;
+  font-family:
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
   opacity: 1;
   max-width: 220px;
   inline-size: auto;
