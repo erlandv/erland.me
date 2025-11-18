@@ -1,8 +1,36 @@
+/**
+ * Lightweight Toast Notification Utility
+ *
+ * Creates ephemeral notification messages that auto-dismiss after a duration.
+ * Matches the site's theme automatically and provides different visual types.
+ *
+ * **Features:**
+ * - Auto-dismiss with configurable duration
+ * - Three visual types: info, success, error
+ * - Smooth fade + translate animations
+ * - Single container for all toasts (DOM-efficient)
+ * - Automatic cleanup when container is empty
+ * - ARIA live region for screen reader announcements
+ *
+ * **Usage:**
+ * ```typescript
+ * import { showToast } from './toast';
+ *
+ * // Simple success message
+ * showToast('Copied to clipboard!');
+ *
+ * // Error with custom duration
+ * showToast('Network error', { type: 'error', duration: 3000 });
+ * ```
+ */
+
 import '@/styles/features/toast.css';
 
-// Lightweight toast notification utility
-// Creates a container and shows ephemeral messages matching site theme.
-
+/**
+ * Configuration options for toast notifications
+ * @property duration - Display duration in milliseconds (default: 2000, clamped to 1500-2500ms)
+ * @property type - Visual style and semantic meaning (default: 'success')
+ */
 export type ToastOptions = {
   duration?: number; // ms
   type?: 'info' | 'success' | 'error';
@@ -10,6 +38,11 @@ export type ToastOptions = {
 
 let container: HTMLElement | null = null;
 
+/**
+ * Get or create the global toast container
+ * Container is a singleton attached to document.body with ARIA live region attributes
+ * @returns Toast container element (creates new one if missing from DOM)
+ */
 function ensureContainer(): HTMLElement {
   if (container && document.body.contains(container)) return container;
   const el = document.createElement('div');
@@ -21,6 +54,21 @@ function ensureContainer(): HTMLElement {
   return el;
 }
 
+/**
+ * Show a toast notification message
+ * Automatically creates container, animates in, waits for duration, then animates out and cleans up
+ * @param message - Text content to display
+ * @param options - Display configuration (duration, type)
+ * @example
+ * // Success notification (default)
+ * showToast('Settings saved!');
+ *
+ * // Error with longer duration
+ * showToast('Failed to load data', { type: 'error', duration: 3000 });
+ *
+ * // Info message
+ * showToast('Processing...', { type: 'info' });
+ */
 export function showToast(message: string, options: ToastOptions = {}): void {
   const { duration = 2000, type = 'success' } = options;
   const wrap = ensureContainer();
@@ -59,6 +107,11 @@ export function showToast(message: string, options: ToastOptions = {}): void {
   );
 }
 
+/**
+ * Initialize toast system (optional preload)
+ * Creates the container element early to avoid layout shift on first toast
+ * Generally not required - showToast() will create container on demand
+ */
 export function initToasts(): void {
   ensureContainer();
 }

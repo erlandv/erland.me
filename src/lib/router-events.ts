@@ -1,14 +1,53 @@
-// Centralized router event manager to coordinate History API overrides.
-// Modules can subscribe to navigation changes without patching history individually.
+/**
+ * Centralized Router Event Manager
+ *
+ * Coordinates History API overrides to prevent multiple modules from conflicting patches.
+ * Provides a pub/sub pattern for navigation events across the application.
+ *
+ * **Key Features:**
+ * - Single point of History API patching (pushState/replaceState/popstate)
+ * - Event notification system for navigation changes
+ * - Automatic cleanup on page unload to prevent memory leaks
+ * - Lazy setup - patches are applied only when first listener subscribes
+ *
+ * **Usage Pattern:**
+ * ```typescript
+ * import { onRouteChange } from './router-events';
+ *
+ * const unsubscribe = onRouteChange(event => {
+ *   console.log(`Navigation: ${event.type} -> ${event.url}`);
+ *   // Update UI, track analytics, etc.
+ * });
+ *
+ * // Clean up when done
+ * unsubscribe();
+ * ```
+ */
 
+/**
+ * Type of navigation event
+ * - `push`: history.pushState() was called
+ * - `replace`: history.replaceState() was called
+ * - `pop`: browser back/forward button (popstate event)
+ */
 type RouterEventType = 'push' | 'replace' | 'pop';
 
+/**
+ * Navigation event object passed to listeners
+ * @property type - Type of navigation (push/replace/pop)
+ * @property url - Target URL after navigation
+ * @property state - History state object (from pushState/replaceState data parameter)
+ */
 export type RouterEvent = {
   type: RouterEventType;
   url: string;
   state: unknown;
 };
 
+/**
+ * Callback function invoked when navigation occurs
+ * @param event - Navigation event details
+ */
 export type RouterEventListener = (event: RouterEvent) => void;
 
 const listeners = new Set<RouterEventListener>();
@@ -21,12 +60,24 @@ if (typeof window !== 'undefined') {
   });
 }
 
+/**
+ * Normalize URL input to string format
+ * Handles various input types from History API methods
+ * @param input - URL in string, URL object, or undefined
+ * @returns Normalized URL string (current location if input is empty)
+ */
 function normalizeUrl(input: string | URL | null | undefined): string {
   if (!input) return window.location.href;
   if (typeof input === 'string') return input;
   return input.toString();
 }
 
+/**
+ * Notify all registered listeners of a navigation event
+ * Uses setTimeout to defer execution, allowing DOM updates to settle
+ * Silently ignores individual listener failures to keep other listeners running
+ * @param event - Navigation event to broadcast
+ */
 function notify(event: RouterEvent) {
   if (!listeners.size) return;
   // Defer notification to allow DOM updates to settle after navigation changes.
@@ -41,6 +92,11 @@ function notify(event: RouterEvent) {
   }, 10);
 }
 
+/**
+ * Setup History API patches (runs once)
+ * Wraps native pushState/replaceState methods and adds popstate listener
+ * Safe to call multiple times - only patches on first invocation
+ */
 function ensureSetup() {
   if (setupDone) return;
   if (typeof window === 'undefined' || typeof history === 'undefined') return;
@@ -90,6 +146,20 @@ function ensureSetup() {
   setupDone = true;
 }
 
+/**
+ * Subscribe to navigation events
+ * Automatically patches History API on first subscription
+ * @param listener - Callback to invoke on navigation
+ * @returns Unsubscribe function to remove listener
+ * @example
+ * const unsubscribe = onRouteChange(event => {
+ *   if (event.type === 'push') {
+ *     console.log('New page:', event.url);
+ *   }
+ * });
+ * // Later...
+ * unsubscribe();
+ */
 export function onRouteChange(listener: RouterEventListener): () => void {
   if (typeof window === 'undefined') return () => undefined;
   listeners.add(listener);
@@ -102,6 +172,16 @@ export function onRouteChange(listener: RouterEventListener): () => void {
   return unsubscribe;
 }
 
+/**
+ * Manually trigger a route change event notification
+ * Useful for programmatic navigation tracking without actual History API calls
+ * @param type - Type of navigation event (default: 'replace')
+ * @param url - Target URL (default: current location)
+ * @param state - Optional state object
+ * @example
+ * // Notify listeners of a virtual navigation
+ * triggerRouteChange('push', '/new-page', { fromSearch: true });
+ */
 export function triggerRouteChange(
   type: RouterEventType = 'replace',
   url?: string | URL | null,

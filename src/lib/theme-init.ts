@@ -12,15 +12,31 @@
  * This module handles the full interactive theme control after page load.
  */
 
-// Type definitions
+/**
+ * User's theme preference setting
+ * - 'light': Force light theme
+ * - 'dark': Force dark theme
+ * - 'auto': Follow system preference
+ */
 type ThemePreference = 'light' | 'dark' | 'auto';
+
+/**
+ * Resolved theme value (always light or dark, never auto)
+ */
 type ResolvedTheme = 'light' | 'dark';
 
+/**
+ * Current theme state including preference and resolved value
+ */
 interface ThemeState {
   preference: ThemePreference;
   resolved: ResolvedTheme;
 }
 
+/**
+ * Public API for theme control
+ * Exposed globally as window.__themeControl
+ */
 interface ThemeControl {
   getPreference: () => ThemePreference;
   getResolved: () => ResolvedTheme;
@@ -30,6 +46,9 @@ interface ThemeControl {
   syncDocument: (doc?: Document) => ResolvedTheme;
 }
 
+/**
+ * Astro view transition event with new document reference
+ */
 interface AstroBeforeSwapEvent extends Event {
   readonly detail?: {
     readonly newDocument?: Document;
@@ -42,6 +61,28 @@ declare global {
   }
 }
 
+/**
+ * Initialize theme control API
+ *
+ * Sets up complete theme management system including:
+ * - Preference storage in localStorage
+ * - System theme change detection
+ * - View transitions support (Astro)
+ * - Subscriber pattern for theme changes
+ * - Public API on window.__themeControl
+ *
+ * Safe to call multiple times - will re-sync document if already initialized
+ *
+ * @example
+ * // Initialize in CriticalInit.astro or app entry point
+ * initThemeControl();
+ *
+ * // Access API anywhere
+ * window.__themeControl.setPreference('dark');
+ * window.__themeControl.subscribe(state => {
+ *   console.log('Theme changed:', state);
+ * });
+ */
 export function initThemeControl(): void {
   // Skip if already initialized (view transitions)
   if (window.__themeControl) {

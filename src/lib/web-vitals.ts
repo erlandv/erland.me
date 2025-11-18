@@ -26,7 +26,9 @@ interface WindowWithGTM extends Window {
 }
 
 /**
- * Check if GTM dataLayer is available
+ * Check if Google Tag Manager dataLayer is available
+ * Verifies window object and dataLayer presence for safe GTM integration
+ * @returns True if GTM dataLayer exists and is ready to receive events
  */
 function isGTMAvailable(): boolean {
   return (
@@ -36,7 +38,10 @@ function isGTMAvailable(): boolean {
 }
 
 /**
- * Send metric to Google Tag Manager
+ * Send web vitals metric to Google Tag Manager
+ * Pushes structured event data to GTM dataLayer with metric details
+ * Falls back to debug logging if GTM unavailable
+ * @param metric - Web vitals metric from web-vitals library
  */
 function sendToGTM(metric: Metric): void {
   if (!isGTMAvailable()) {
@@ -71,7 +76,9 @@ function sendToGTM(metric: Metric): void {
 }
 
 /**
- * Send metric to Google Analytics 4 (alternative to GTM)
+ * Send web vitals metric to Google Analytics 4
+ * Alternative to GTM for direct GA4 integration using gtag API
+ * @param metric - Web vitals metric from web-vitals library
  */
 function sendToGA4(metric: Metric): void {
   const w = window as WindowWithGTM;
@@ -91,7 +98,22 @@ function sendToGA4(metric: Metric): void {
 }
 
 /**
- * Initialize Web Vitals tracking
+ * Initialize Core Web Vitals monitoring
+ *
+ * Tracks 5 key performance metrics and sends to GTM:
+ * - **CLS** (Cumulative Layout Shift): Visual stability - good < 0.1
+ * - **LCP** (Largest Contentful Paint): Loading performance - good < 2.5s
+ * - **INP** (Interaction to Next Paint): Overall responsiveness - good < 200ms
+ * - **FCP** (First Contentful Paint): Perceived loading speed - good < 1.8s
+ * - **TTFB** (Time to First Byte): Server response time - good < 800ms
+ *
+ * Only runs in production builds to avoid polluting analytics with dev data.
+ * Uses dynamic import to avoid bundling web-vitals in development.
+ *
+ * @example
+ * // In CriticalInit.astro or app entry point
+ * import { initWebVitals } from './lib/web-vitals';
+ * initWebVitals();
  */
 export async function initWebVitals(): Promise<void> {
   // Only run in production
@@ -131,7 +153,11 @@ export async function initWebVitals(): Promise<void> {
 }
 
 /**
- * Initialize with alternative analytics (Google Analytics 4)
+ * Initialize web vitals monitoring with dual GTM + GA4 tracking
+ * Sends metrics to both Google Tag Manager and Google Analytics 4 simultaneously
+ * @example
+ * // For dual analytics setup
+ * initWebVitalsWithGA4();
  */
 export async function initWebVitalsWithGA4(): Promise<void> {
   if (!import.meta.env.PROD) return;
@@ -155,7 +181,13 @@ export async function initWebVitalsWithGA4(): Promise<void> {
 }
 
 /**
- * Get current web vitals snapshot (for debugging)
+ * Get current web vitals snapshot for debugging
+ * Captures all 5 core metrics with reportAllChanges enabled
+ * @returns Object with metric names as keys and current values
+ * @example
+ * const snapshot = await getWebVitalsSnapshot();
+ * console.log('CLS:', snapshot.CLS);
+ * console.log('LCP:', snapshot.LCP);
  */
 export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
   try {
@@ -178,10 +210,12 @@ export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
 }
 
 /**
- * Report web vitals for specific navigation
- *
- * Usage in browser console:
+ * Report current web vitals to browser console as formatted table
+ * Useful for debugging performance in production or development
+ * @example
+ * // In browser console
  * import('./lib/web-vitals').then(m => m.reportWebVitals())
+ * // Outputs formatted table with all metrics
  */
 export async function reportWebVitals(): Promise<void> {
   const snapshot = await getWebVitalsSnapshot();
@@ -189,8 +223,10 @@ export async function reportWebVitals(): Promise<void> {
 }
 
 /**
- * Helper to send custom performance events to GTM
- *
+ * Send custom performance event to Google Tag Manager
+ * Useful for tracking non-standard metrics or resource timings
+ * @param eventName - Custom event name for GTM event tracking
+ * @param data - Additional data to attach to the performance event
  * @example
  * sendPerformanceEvent('resource_timing', {
  *   resource_name: 'hero-image.jpg',

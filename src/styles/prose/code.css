@@ -10,8 +10,8 @@
   padding: 0;
   border-radius: 0;
   font-family:
-    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
   font-size: 1.1em;
 }
 

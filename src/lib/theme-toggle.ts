@@ -5,13 +5,23 @@
 
 import { showToast } from './toast';
 
+/**
+ * User's theme preference setting
+ */
 type ThemePreference = 'auto' | 'light' | 'dark';
 
+/**
+ * Current theme state including preference and resolved theme
+ */
 interface ThemeState {
   preference: ThemePreference;
   resolved: 'light' | 'dark';
 }
 
+/**
+ * Theme control API from theme-init.ts
+ * Provides methods for getting/setting theme and subscribing to changes
+ */
 interface ThemeControl {
   getPreference: () => ThemePreference;
   getResolved: () => 'light' | 'dark';
@@ -252,6 +262,8 @@ const announceThemeChange = (
 
 /**
  * Wait for theme control to be available
+ * Polls for window.__themeControl with timeout
+ * @returns Promise that resolves with ThemeControl or rejects after 1 second
  */
 const waitForThemeControl = (): Promise<ThemeControl> => {
   return new Promise((resolve, reject) => {
@@ -277,6 +289,7 @@ const waitForThemeControl = (): Promise<ThemeControl> => {
 
 /**
  * Cleanup function - called before re-initialization or navigation
+ * Aborts event listeners, clears timers, unsubscribes from theme changes
  */
 const cleanup = (): void => {
   // Abort all event listeners

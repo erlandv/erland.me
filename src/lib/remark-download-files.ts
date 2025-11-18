@@ -1,3 +1,61 @@
+/**
+ * Remark Plugin for Download Files Table Generation
+ *
+ * Transforms `:::downloadFiles` or `:::download-files` container directives
+ * into responsive HTML tables with download links from frontmatter data.
+ *
+ * **Features:**
+ * - Auto-generates table from frontmatter `downloadFiles` array
+ * - Responsive table with data-label attributes for mobile vertical layout
+ * - Optional size column (shown only if any file has size data)
+ * - Optional note text below table
+ * - Safe HTML escaping for all user content
+ *
+ * **Frontmatter Structure:**
+ * ```yaml
+ * downloadFiles:
+ *   - label: "Main Package"
+ *     href: "/downloads/package.zip"
+ *     size: "2.5 MB"
+ *   - label: "Source Code"
+ *     href: "/downloads/source.zip"
+ * ```
+ *
+ * **Markdown Usage:**
+ * ```markdown
+ * :::downloadFiles
+ * note: "All files are safe and virus-scanned"
+ * :::
+ * ```
+ *
+ * **HTML Output:**
+ * ```html
+ * <section class="download-files" id="download-files-section">
+ *   <table class="download-files-table">
+ *     <thead>
+ *       <tr>
+ *         <th scope="col">File Name</th>
+ *         <th scope="col">Size</th>
+ *         <th scope="col">Link</th>
+ *       </tr>
+ *     </thead>
+ *     <tbody>
+ *       <tr>
+ *         <td data-label="File Name">Main Package</td>
+ *         <td data-label="Size">2.5 MB</td>
+ *         <td data-label="Download">
+ *           <a class="download-files-link" href="/downloads/package.zip" rel="noopener" target="_blank" download>
+ *             Download
+ *           </a>
+ *         </td>
+ *       </tr>
+ *     </tbody>
+ *   </table>
+ *   <p class="download-files-note">All files are safe and virus-scanned</p>
+ * </section>
+ * ```
+ */
+
 import type { Root } from 'mdast';
 import type { ContainerDirective } from 'mdast-util-directive';
 import { visit, CONTINUE, SKIP } from 'unist-util-visit';
@@ -10,6 +68,12 @@ interface VFile {
   };
 }
 
+/**
+ * Escape HTML special characters for safe rendering
+ * Converts &, <, >, ", ' to HTML entities
+ * @param value - Value to escape (converts to string)
+ * @returns HTML-safe string
+ */
 function escapeHtml(value: unknown): string {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -19,12 +83,26 @@ function escapeHtml(value: unknown): string {
     .replace(/'/g, '&#39;');
 }
 
+/**
+ * Escape HTML attribute value with additional backtick escaping
+ * Safe for use in href and other HTML attributes
+ * @param value - Value to escape for attribute context
+ * @returns Attribute-safe string
+ */
 function escapeAttribute(value: unknown): string {
   return escapeHtml(value).replace(/`/g, '&#96;');
 }
 
 type DownloadLink = { label?: string; href?: string; size?: string };
 
+/**
+ * Build responsive HTML table from download items
+ * Conditionally shows size column only if any item has size data
+ * Includes data-label attributes for mobile vertical layout
+ * @param items - Array of download links with label, href, and optional size
+ * @param note - Optional note text to display below table
+ * @returns Complete HTML string for download section
+ */
 function buildTableHtml(items: DownloadLink[], note?: string) {
   const hasSize = items.some(item => Boolean(item.size));
   const rows = items
@@ -68,6 +146,17 @@ function buildTableHtml(items: DownloadLink[], note?: string) {
   `;
 }
 
+/**
+ * Remark plugin to generate download files tables from frontmatter
+ *
+ * Transforms container directives (:::downloadFiles or :::download-files) into
+ * responsive HTML tables with download links sourced from frontmatter data.
+ *
+ * Validates directive name, reads frontmatter, and generates structured table.
+ * Shows helpful message if frontmatter is missing downloadFiles array.
+ *
+ * @returns Remark transformer function
+ */
 export default function remarkDownloadFiles() {
   return (tree: Root, file: VFile) => {
     const frontmatter = (file.data?.astro && file.data.astro.frontmatter) || {};

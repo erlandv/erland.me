@@ -1,8 +1,22 @@
 /**
  * Copy arbitrary text to the clipboard with a robust fallback.
- * - Prefers `navigator.clipboard.writeText` when available.
- * - Falls back to a hidden textarea + `execCommand('copy')` when needed.
- * Returns `true` when copy appears to succeed, otherwise `false`.
+ *
+ * **Strategy:**
+ * 1. Prefers modern `navigator.clipboard.writeText` API when available
+ * 2. Falls back to legacy `document.execCommand('copy')` for older browsers
+ *
+ * **Fallback Implementation:**
+ * - Creates hidden textarea element
+ * - Copies text content via execCommand
+ * - Cleans up temporary element
+ *
+ * @param text - Text content to copy to clipboard
+ * @returns Promise resolving to true if copy succeeded, false otherwise
+ * @example
+ * const success = await copyToClipboard('Hello world!');
+ * if (success) {
+ *   showToast('Copied!');
+ * }
  */
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {

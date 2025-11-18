@@ -1,3 +1,36 @@
+/**
+ * Remark Plugins for Gallery and Figure Transformations
+ *
+ * Provides two remark plugins for enhanced markdown image handling:
+ *
+ * 1. **remarkGallery** (default export): Transforms `:::gallery` container directives
+ *    into `.content-image-grid` divs with automatic figure/figcaption wrapping
+ *
+ * 2. **remarkFigure**: Converts standalone images with titles into semantic
+ *    `<figure>` + `<figcaption>` elements
+ *
+ * **Usage in astro.config.ts:**
+ * ```typescript
+ * import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
+ *
+ * export default defineConfig({
+ *   markdown: {
+ *     remarkPlugins: [remarkGallery, remarkFigure]
+ *   }
+ * });
+ * ```
+ *
+ * **Markdown Example:**
+ * ```markdown
+ * :::gallery
+ * ![Alt text](image1.jpg "Caption 1")
+ * ![Alt text](image2.jpg "Caption 2")
+ * :::
+ *
+ * ![Standalone image](hero.jpg "This becomes figcaption")
+ * ```
+ */
+
 import { visit } from 'unist-util-visit';
 import type { Node, Parent } from 'unist';
 
@@ -32,7 +65,38 @@ interface ContainerDirectiveNode extends Parent {
   };
 }
 
-// Convert remark-gallery plugin to TypeScript with proper typing
+/**
+ * Remark plugin to transform `:::gallery` directives into image grids
+ *
+ * Processes container directives with name 'gallery' and transforms them into:
+ * - Wrapper div with class `content-image-grid`
+ * - Individual `<figure>` elements for each image with class `content-image-grid__item`
+ * - `<figcaption>` elements from image titles
+ *
+ * **Markdown Input:**
+ * ```markdown
+ * :::gallery
+ * ![Image 1](path/to/image1.jpg "Caption for image 1")
+ * ![Image 2](path/to/image2.jpg "Caption for image 2")
+ * :::
+ * ```
+ *
+ * **HTML Output:**
+ * ```html
+ * <div class="content-image-grid">
+ *   <figure class="content-image-grid__item">
+ *     <img src="path/to/image1.jpg" alt="Image 1" />
+ *     <figcaption>Caption for image 1</figcaption>
+ *   </figure>
+ *   <figure class="content-image-grid__item">
+ *     <img src="path/to/image2.jpg" alt="Image 2" />
+ *     <figcaption>Caption for image 2</figcaption>
+ *   </figure>
+ * </div>
+ * ```
+ *
+ * @returns Remark transformer function
+ */
 export default function remarkGallery(): (tree: Node) => void {
   return (tree: Node) => {
     visit(
@@ -112,7 +176,30 @@ export default function remarkGallery(): (tree: Node) => void {
   };
 }
 
-// Plugin untuk mengkonversi markdown image dengan title menjadi figure/figcaption
+/**
+ * Remark plugin to convert standalone images with titles into semantic figures
+ *
+ * Transforms paragraph nodes containing only a single image (with title) into
+ * `<figure>` + `<figcaption>` structure for better semantics and styling.
+ *
+ * **Markdown Input:**
+ * ```markdown
+ * ![Hero image](hero.jpg "This is the caption")
+ * ```
+ *
+ * **HTML Output:**
+ * ```html
+ * <figure class="prose-figure">
+ *   <img src="hero.jpg" alt="Hero image" />
+ *   <figcaption>This is the caption</figcaption>
+ * </figure>
+ * ```
+ *
+ * **Note:** Only processes paragraphs with exactly one image element (ignoring whitespace).
+ * Images without titles are left unchanged.
+ *
+ * @returns Remark transformer function
+ */
 export function remarkFigure(): (tree: Node) => void {
   return (tree: Node) => {
     visit(

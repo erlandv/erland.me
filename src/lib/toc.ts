@@ -1,11 +1,60 @@
-// Dynamic Table of Contents (TOC) for blog posts
-// Scans `.prose` for H2/H3, assigns stable IDs, and inserts a toggleable TOC
+/**
+ * Dynamic Table of Contents (TOC) Generator
+ *
+ * Automatically scans `.prose` content for H2/H3 headings and generates a
+ * collapsible, interactive table of contents with smooth scroll navigation.
+ *
+ * **Features:**
+ * - Auto-generates unique IDs for headings without existing IDs
+ * - Hierarchical structure (H2 with nested H3 sublists)
+ * - Toggleable expand/collapse with keyboard support
+ * - Smooth scroll to heading on click
+ * - URL hash updates for shareable links
+ * - Only shows on article routes (blog posts & downloads)
+ * - XSS-safe: HTML-escapes all heading text
+ * - Router-safe: Re-initializes on Astro view transitions
+ *
+ * **HTML Structure:**
+ * ```html
+ * <div class="toc" data-expanded="false">
+ *   <div class="toc__header" role="button" tabindex="0">
+ *     <strong class="toc__title">Table of Contents</strong>
+ *     <button class="toc__toggle" aria-expanded="false">▼</button>
+ *   </div>
+ *   <ul class="toc__list">
+ *     <li class="toc__item toc__item--h2">
+ *       <a class="toc__anchor" href="#heading-id">Heading Text</a>
+ *       <ul class="toc__sublist">
+ *         <li class="toc__item toc__item--h3">
+ *           <a class="toc__anchor" href="#subheading-id">Subheading</a>
+ *         </li>
+ *       </ul>
+ *     </li>
+ *   </ul>
+ * </div>
+ * ```
+ *
+ * **Usage:**
+ * Automatically initialized via `ui-init.ts` on article pages.
+ * Manual initialization:
+ * ```typescript
+ * import { initToc } from './toc';
+ * initToc(); // Runs only on article routes
+ * ```
+ */
 
 import { qs, escapeHtml } from './dom-builder';
 import { onRouteChange } from './router-events';
 import arrowUpRaw from '@/icons/arrow-up.svg?raw';
 import arrowDownRaw from '@/icons/arrow-down.svg?raw';
 
+/**
+ * Heading metadata for TOC generation
+ * @property el - The heading DOM element
+ * @property level - Heading level (2 for H2, 3 for H3)
+ * @property text - Heading text content (trimmed)
+ * @property id - Unique ID attribute for anchor linking
+ */
 type HeadingInfo = {
   el: HTMLElement;
   level: 2 | 3;
@@ -13,6 +62,15 @@ type HeadingInfo = {
   id: string;
 };
 
+/**
+ * Convert text to URL-safe slug
+ * Strips special characters, converts to lowercase, and replaces spaces with hyphens
+ * @param text - Raw heading text to slugify
+ * @returns URL-safe slug string
+ * @example
+ * slugify('Hello World!') // 'hello-world'
+ * slugify('API Reference 2.0') // 'api-reference-20'
+ */
 function slugify(text: string): string {
   try {
     return text
@@ -26,6 +84,16 @@ function slugify(text: string): string {
   }
 }
 
+/**
+ * Ensure ID is unique within container by appending numeric suffix if needed
+ * Prevents ID collisions when multiple headings have similar text
+ * @param base - Base ID string (pre-slugified)
+ * @param container - Container element to check for existing IDs
+ * @returns Unique ID string (may have numeric suffix)
+ * @example
+ * ensureUniqueId('intro', prose) // 'intro' if available
+ * ensureUniqueId('intro', prose) // 'intro-1' if 'intro' exists
+ */
 function ensureUniqueId(base: string, container: HTMLElement): string {
   let id = base || 'section';
   let i = 1;
@@ -35,6 +103,12 @@ function ensureUniqueId(base: string, container: HTMLElement): string {
   return id;
 }
 
+/**
+ * Collect all H2 and H3 headings from prose container
+ * Auto-generates unique IDs for headings without existing IDs
+ * @param prose - Prose container element to scan
+ * @returns Array of heading metadata with levels, text, and IDs
+ */
 function collectHeadings(prose: HTMLElement): HeadingInfo[] {
   const els = Array.from(prose.querySelectorAll('h2, h3')) as HTMLElement[];
   const out: HeadingInfo[] = [];
@@ -54,6 +128,11 @@ function collectHeadings(prose: HTMLElement): HeadingInfo[] {
   return out;
 }
 
+/**
+ * Check if current route is an article page (blog post or download)
+ * TOC only shows on individual article pages, not listing/archive pages
+ * @returns True if on blog/download article route
+ */
 function isArticleRoute(): boolean {
   try {
     const p = window.location?.pathname || '';
@@ -67,7 +146,9 @@ function isArticleRoute(): boolean {
 }
 
 /**
- * Create TOC header template HTML
+ * Create TOC header template with title and toggle button
+ * @param arrowDownIcon - SVG icon HTML for collapsed state
+ * @returns HTML string for TOC header structure
  */
 function createTocHeaderTemplate(arrowDownIcon: string): string {
   return `
@@ -86,9 +167,11 @@ function createTocHeaderTemplate(arrowDownIcon: string): string {
 }
 
 /**
- * Create TOC list item HTML
- * Note: heading.text is HTML-escaped to prevent XSS and DOM corruption
- * from headings containing <, >, &, etc.
+ * Create TOC list item HTML with proper escaping
+ * Heading text is HTML-escaped to prevent XSS and DOM corruption
+ * from headings containing special characters (<, >, &, etc.)
+ * @param heading - Heading metadata with level, text, and ID
+ * @returns HTML string for TOC list item
  */
 function createTocItemHtml(heading: HeadingInfo): string {
   return `
@@ -98,6 +181,21 @@ function createTocItemHtml(heading: HeadingInfo): string {
   `;
 }
 
+/**
+ * Build complete TOC DOM element with interactive behaviors
+ *
+ * Creates hierarchical list structure with:
+ * - H2 as top-level items
+ * - H3 nested under parent H2
+ * - Toggle expand/collapse functionality
+ * - Keyboard navigation support
+ * - Smooth scroll to headings
+ * - URL hash updates
+ *
+ * @param headings - Array of heading metadata
+ * @returns TOC container element or null if no headings
+ * @throws Error if template generation fails (should never happen)
+ */
 function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   if (!headings.length) return null;
 
@@ -220,11 +318,39 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
   return container;
 }
 
+/**
+ * Find ideal insertion point for TOC (before first paragraph)
+ * @param prose - Prose container element
+ * @returns First paragraph element or first child node
+ */
 function findInsertPoint(prose: HTMLElement): ChildNode | null {
   const firstPara = prose.querySelector('p');
   return firstPara || prose.firstChild;
 }
 
+/**
+ * Initialize table of contents for current page
+ *
+ * Guards:
+ * - Only runs on article routes (blog/download posts)
+ * - Requires `.prose` container element
+ * - Prevents duplicate initialization
+ *
+ * Process:
+ * 1. Collect H2/H3 headings from `.prose`
+ * 2. Build interactive TOC element
+ * 3. Insert before first paragraph
+ * 4. Mark as initialized
+ *
+ * Safe to call multiple times - idempotent via initialization flag.
+ *
+ * @example
+ * // Manual initialization
+ * initToc();
+ *
+ * // Auto-initialization on route change
+ * document.addEventListener('astro:page-load', initToc);
+ */
 export function initToc() {
   // Guard: only initialize on article routes (blog & download)
   if (!isArticleRoute()) return;
@@ -246,6 +372,11 @@ export function initToc() {
   } catch {}
 }
 
+/**
+ * Setup router event listeners for TOC re-initialization
+ * Ensures TOC regenerates on Astro view transitions and navigation
+ * Only sets up once via module-level flag
+ */
 let routerSetup = false;
 function setupRouterReinit() {
   if (routerSetup) return;
@@ -258,6 +389,11 @@ function setupRouterReinit() {
   onRouteChange(run);
 }
 
+/**
+ * Auto-initialization entry point
+ * Sets up TOC with router listeners for automatic regeneration
+ * Typically called by ui-init.ts on app startup
+ */
 export function autoInit() {
   const run = () => {
     if (!isArticleRoute()) return;
@@ -273,6 +409,21 @@ export function autoInit() {
 
 export default initToc;
 
+/**
+ * Normalize SVG icon for inline use with currentColor
+ *
+ * Transformations:
+ * - Removes XML declarations and comments
+ * - Strips style tags
+ * - Replaces fill/stroke colors with currentColor
+ * - Removes width/height attributes
+ * - Adds aria-hidden="true" for accessibility
+ * - Adds custom class name
+ *
+ * @param svg - Raw SVG string from import
+ * @param extraClass - Optional class name to add to SVG element
+ * @returns Normalized SVG HTML string
+ */
 function normalizeSvg(svg: string, extraClass = ''): string {
   try {
     let s = svg

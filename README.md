@@ -7,6 +7,23 @@ This repository hosts just my personal website with a little blog and portfolio.
 
 This is my small corner on the interweb where I dump my notes, my achievements, and whatever else I feel like posting. Yes, I'm aware of the irony.
 
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+- [Features](#features)
+- [What's Intentionally NOT Here](#whats-intentionally-not-here)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Development Setup](#development-setup)
+- [Production Deployment](#production-deployment)
+- [Staging Deployment](#staging-deployment)
+- [Rollback Deployment](#rollback-deployment)
+- [Performance & SEO](#performance--seo)
+- [Security Notes](#security-notes)
+- [License & Credits](#license--credits)
+
+</details>
+
 ## Features
 
 There aren't many advanced features here because it was intentionally designed to be minimal. I mean, come on, it's just a personal web. What were you expecting? User authentication? Payment processing? Push notifications for new blog posts nobody reads? Get real.
@@ -27,10 +44,11 @@ There aren't many advanced features here because it was intentionally designed t
 - **Adsense/Placeholder Integration**: Reserved space for ads if I ever monetize my dozen visitors. Mostly just placeholder slots judging me from the sidebar.
 - **Error Boundary**: Catches JS errors before they ruin everyone's day. Shows a friendly fallback instead of letting the page implode. It's called "not being a jerk to your users."
 - **Web Vitals Tracking**: Obsessively monitors every Core Web Vital and reports to Google Tag Manager. Because apparently I need hard data to confirm that yes, the site is fast. Peak developer anxiety.
+- **JSDoc**: Well-documented `.astro` and `.ts` files. This _feature_ is exclusively for me when I inevitably forget what this function does three weeks from now. Not for you. For me.
 
 ## What's Intentionally NOT Here
 
-Because apparently listing what you _didn't_ build is the new humble brag:
+Because apparently listing what you _didn't_ build is the new humble brag. Here's what got cut because even I have limits on unnecessary complexity:
 
 - **No Database**: Not MySQL, not PostgreSQL, not even SQLite. Just markdown files like it's 2010. And you know what? It works better this way.
 - **No CMS**: No WordPress, no Contentful, no Strapi. I edit markdown in VS Code like our ancestors intended. I am the CMS.
@@ -48,8 +66,8 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 
 ### Core Framework
 
-- **Astro**: The framework that finally answered the question "what if we just... didn't ship JavaScript unless absolutely necessary?" Revolutionary concept in 2025, apparently.
-- **TypeScript**: Because I don't trust JS. Or myself. Or you. Especially myself. Every variable is typed. Every function returns exactly what it promises. This is a dictatorship, not a democracy.
+- **Astro**: The framework that finally answered the question "_what if we just... didn't ship JavaScript unless absolutely necessary?_" Revolutionary concept in 2025, apparently.
+- **TypeScript**: Because I don't trust JavaScript. Or myself. Or you. Especially myself. Every variable is typed. Every function returns exactly what it promises. This is a dictatorship, not a democracy.
 - **Vite**: Blazing-fast build tool that's faster than my attention span. Rebuilds in milliseconds. Which is good, because I break things constantly.
 - **Shiki**: Makes code blocks actually readable instead of looking like regex had a baby with a JSON error. Syntax highlighting that doesn't make your eyes bleed.
 - **Sharp**: The image optimizer that does in milliseconds what Photoshop users spend 10 minutes doing manually. Automatic WebP conversion, responsive sizing, compression. It's a gift.
@@ -167,7 +185,7 @@ The project enforces strict Node.js version consistency across all environments:
 - **`package.json` engines**: Requires `node >= 22.18.0` and `npm >= 10.9.0`. Use `npm install --engine-strict` if you want npm to actually enforce this (it's opt-in because npm is too polite by default).
 - **GitHub Actions**: CI/CD workflows read from `.nvmrc` via `node-version-file` parameter. Single source of truth, zero version drift.
 
-Why this paranoia? Because "it works on my machine" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Also because I've been burned before. Multiple times. I don't want to talk about it..
+Why this paranoia? Because "_it works on my machine_" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Also because I've been burned before. Multiple times. I don't want to talk about it..
 
 ### Environment Variables
 
@@ -208,7 +226,7 @@ The serious, enterprise-grade deployment pipeline for what is fundamentally a gl
 
 ### Prod Flow
 
-- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday). Runs in the `Production` environment. Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit). Also enforces concurrency limits—only one production deploy at a time because chaos is not a deployment strategy.
+- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday... yet). Runs in the `Production` environment. Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit). Also enforces concurrency limits—only one production deploy at a time because chaos is not a deployment strategy.
 - **Build**: Checks out code with `actions/checkout@v4`, sets up Node from `.nvmrc`, runs `npm ci` for deterministic installs (trust no one, not even npm), and executes `npm run build:clean` like it's launching a rocket.
 - **Release Metadata**: Verifies `dist/` actually has files (because deploying an empty directory is embarrassing), then writes `.release` with the commit SHA and `.built_at` with UTC timestamp. Also publishes `version.json` so you can verify exactly how stale my content is. Transparency is key.
 - **SSH Setup**: Loads the SSH key with maximum paranoia using `webfactory/ssh-agent`, pre-populates `known_hosts` with extended 60-second timeout (because slow networks exist), then prepares remote `releases/` directory. Security theater with actual security.
@@ -253,7 +271,6 @@ It's a static site, so it's already fast by default (cheat codes enabled), but I
 - **Structured Data**: Comprehensive `JSON-LD` schemas for everything—`BlogPosting`, `CreativeWork`, `CollectionPage`, `BreadcrumbList`, `WebSite` with `SearchAction`. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
 - **Resource Hints**: Strategic `preconnect` for Google Fonts, GTM, and AdSense domains. `dns-prefetch` as fallback. Fonts get `preload` with `crossorigin`. Search index preloads conditionally only on pages that need it. No wasted prefetching—every hint has a purpose.
 - **Robot Files**: Auto-generates `robots.txt` with environment-aware rules. The boring configuration files that search engines actually read and humans pretend to understand.
-- **Font Loading**: Fonts preload with `font-display: swap` so there's no awkward invisible text phase. Your eyeballs deserve better than FOIT (Flash of Invisible Text, look it up). Agave Nerd Font loads in `WOFF2` format because we're not savages.
 - **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses. Sharp handles WebP conversion and compression automatically.
 - **Social Tags**: Comprehensive OG and Twitter meta tags with proper image dimensions (1200×630), alt text, and all the metadata social networks demand. When you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
 - **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know. Manual chunk splitting keeps vendor code separate for better caching.

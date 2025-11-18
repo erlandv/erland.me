@@ -18,12 +18,25 @@ import verifiedIcon from '@/icons/stories-verified.svg?raw';
 import { onRouteChange } from './router-events';
 import { qs, qsa } from './dom-builder';
 
+/**
+ * Story data structure
+ * @property src - Image source URL
+ * @property alt - Image alt text for accessibility
+ */
 interface Story {
   src: string;
   alt: string;
 }
 
+/**
+ * Duration for each story in milliseconds (5 seconds)
+ */
 const STORY_DURATION = 5000; // 5 seconds per story
+
+/**
+ * Default placeholder stories for demo/testing
+ * Uses pre-defined story images from /assets/stories/
+ */
 const PLACEHOLDER_STORIES: Story[] = [
   {
     src: '/assets/stories/story-1.webp',
@@ -59,6 +72,21 @@ const PLACEHOLDER_STORIES: Story[] = [
   },
 ];
 
+/**
+ * Instagram-like Stories Viewer
+ *
+ * Provides fullscreen story viewing experience with:
+ * - Auto-advancing progress bars
+ * - Manual navigation (prev/next)
+ * - Pause/resume functionality
+ * - Keyboard controls (arrows, space, escape)
+ * - Touch-friendly click zones
+ * - Automatic cleanup on close
+ *
+ * @example
+ * const viewer = new StoriesViewer();
+ * viewer.open(); // Opens with default stories
+ */
 class StoriesViewer {
   private stories: Story[];
   private currentIndex: number = 0;
@@ -78,12 +106,18 @@ class StoriesViewer {
   private clickZoneNext: HTMLDivElement | null = null;
   private pauseButton: HTMLButtonElement | null = null;
 
+  /**
+   * Create new stories viewer instance
+   * @param stories - Array of story objects (defaults to PLACEHOLDER_STORIES)
+   */
   constructor(stories: Story[] = PLACEHOLDER_STORIES) {
     this.stories = stories;
   }
 
   /**
    * Create stories overlay template HTML
+   * Generates complete modal structure with header, progress bars, content, and navigation
+   * @returns HTML string for overlay structure
    */
   private createOverlayTemplate(): string {
     const progressBarsHTML = this.stories
@@ -185,6 +219,8 @@ class StoriesViewer {
 
   /**
    * Create the stories overlay DOM structure
+   * Builds overlay element, caches DOM references, and sets up event listeners
+   * @returns Configured overlay div element ready to append to body
    */
   private createOverlay(): HTMLDivElement {
     const overlay = document.createElement('div');
@@ -253,6 +289,11 @@ class StoriesViewer {
 
   /**
    * Handle keyboard navigation
+   * - Escape: Close viewer
+   * - ArrowLeft: Previous story
+   * - ArrowRight: Next story
+   * - Space: Toggle pause/resume
+   * @param e - Keyboard event
    */
   private handleKeyDown = (e: KeyboardEvent): void => {
     if (!this.overlay) return;
@@ -279,6 +320,7 @@ class StoriesViewer {
 
   /**
    * Toggle pause state
+   * Switches between paused and playing states
    */
   private togglePause(): void {
     if (this.isPaused) {
@@ -290,6 +332,7 @@ class StoriesViewer {
 
   /**
    * Pause the current story
+   * Stops progress animation and updates button icon to play
    */
   private pause(): void {
     if (this.isPaused) return;
@@ -315,6 +358,7 @@ class StoriesViewer {
 
   /**
    * Resume the current story
+   * Restarts progress animation and updates button icon to pause
    */
   private resume(): void {
     if (!this.isPaused) return;
@@ -333,6 +377,7 @@ class StoriesViewer {
 
   /**
    * Update navigation buttons visibility
+   * Hides prev button on first story, next button on last story
    */
   private updateNavVisibility(): void {
     const isFirst = this.currentIndex === 0;
@@ -367,6 +412,7 @@ class StoriesViewer {
 
   /**
    * Update progress bar fill percentage
+   * Calculates percentage based on elapsed time vs STORY_DURATION
    */
   private updateProgress(): void {
     const currentBar = this.progressBars[this.currentIndex];
@@ -381,6 +427,8 @@ class StoriesViewer {
 
   /**
    * Animation loop for progress bar
+   * Uses requestAnimationFrame for smooth 60fps animation
+   * Auto-advances to next story when duration reached
    */
   private animate = (): void => {
     if (this.isPaused) return;
@@ -402,6 +450,8 @@ class StoriesViewer {
 
   /**
    * Load and display a specific story
+   * Updates image, resets progress, and starts animation
+   * @param index - Story index to load (0-based)
    */
   private loadStory(index: number): void {
     if (index < 0 || index >= this.stories.length) return;
@@ -458,6 +508,7 @@ class StoriesViewer {
 
   /**
    * Navigate to previous story
+   * No-op if already on first story
    */
   private prev(): void {
     if (this.currentIndex > 0) {
@@ -467,6 +518,7 @@ class StoriesViewer {
 
   /**
    * Navigate to next story
+   * Auto-closes viewer if on last story
    */
   private next(): void {
     if (this.currentIndex < this.stories.length - 1) {
@@ -479,6 +531,7 @@ class StoriesViewer {
 
   /**
    * Disable page scrolling
+   * Adds CSS class to prevent body scroll while viewer is open
    */
   private disableScroll(): void {
     document.documentElement.classList.add('image-lightbox--locked');
@@ -486,6 +539,7 @@ class StoriesViewer {
 
   /**
    * Enable page scrolling
+   * Removes CSS class to restore normal scrolling after viewer closes
    */
   private enableScroll(): void {
     document.documentElement.classList.remove('image-lightbox--locked');
@@ -493,6 +547,10 @@ class StoriesViewer {
 
   /**
    * Open the stories viewer
+   * Creates overlay, appends to body, animates in, and loads first story
+   * @example
+   * const viewer = new StoriesViewer();
+   * viewer.open();
    */
   public open(): void {
     if (this.overlay) return; // Already open
@@ -512,6 +570,8 @@ class StoriesViewer {
 
   /**
    * Close the stories viewer
+   * Stops animation, cleans up event listeners, animates out, and removes overlay
+   * Automatically called when all stories are viewed or user presses escape
    */
   public close(): void {
     if (!this.overlay) return;
@@ -566,6 +626,11 @@ class StoriesViewer {
 
 /**
  * Initialize avatar stories feature
+ * Finds all elements with [data-stories] attribute and attaches click handlers
+ * Safe to call multiple times - prevents duplicate event binding
+ * @example
+ * // In HTML: <img data-stories src="avatar.jpg" />
+ * initAvatarStories();
  */
 export function initAvatarStories(): void {
   const avatarImages = document.querySelectorAll('[data-stories]');

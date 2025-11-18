@@ -22,20 +22,18 @@ ins.adsbygoogle {
   overflow: hidden;
 }
 
-.ad-placeholder {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: clamp(0.5rem, 1.5vw, 1rem) auto;
-  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
-  border: 2px dashed var(--border);
-  border-radius: 8px;
-  color: var(--text-muted);
-  background: var(--bg-tertiary);
+.adsense-placeholder {
+  background: var(--overlay-005);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
   text-align: center;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  font-family: 'Agave Nerd Font', ui-monospace, monospace;
-  overflow: hidden;
+  color: var(--text-tertiary);
+  font-family:
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 /* Mobile optimization - ensure ads fit within viewport */

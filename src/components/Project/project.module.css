@@ -55,8 +55,8 @@
   text-transform: uppercase;
   margin-top: clamp(20px, 4vw, 28px);
   font-family:
-    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
   font-size: clamp(12px, 2vw, 14px);
   font-weight: 500;
   line-height: 1.5;
@@ -85,8 +85,8 @@
   border-radius: 8px;
   padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2vw, 14px);
   font-family:
-    'Agave Nerd Font', ui-monospace, SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
+    'Agave Nerd Font', ui-monospace, 'Cascadia Code', Menlo, Consolas,
+    'Courier New', monospace;
   font-size: clamp(12px, 2vw, 14px);
   font-weight: 500;
   line-height: 1.4;
