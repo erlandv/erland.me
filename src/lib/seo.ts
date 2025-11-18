@@ -1,3 +1,41 @@
+/**
+ * SEO & Structured Data Utilities
+ *
+ * Provides helpers for generating Schema.org JSON-LD structured data and Open Graph meta tags.
+ * All URLs are automatically prefixed with SITE_URL for absolute paths.
+ *
+ * **Structured Data Types:**
+ * - `blogPostingJsonLd()`: Article/blog post with author, publisher, dates
+ * - `creativeWorkJsonLd()`: Downloads/resources with ratings and file info
+ * - `collectionPageJsonLd()`: Collection pages (blog listing, category pages)
+ * - `categoriesIndexJsonLd()`: Category index pages
+ * - `websiteJsonLd()`: Site-level metadata with search action
+ * - `breadcrumbJsonLd()`: Navigation breadcrumbs
+ * - `personJsonLd()`: Author/person entity
+ * - `organizationJsonLd()`: Site as organization
+ *
+ * **Meta Tags:**
+ * - `generateMetaTags()`: Complete meta tag object for Astro SEO component
+ *   Includes Open Graph, Twitter Card, and canonical URL
+ *
+ * **Usage:**
+ * ```typescript
+ * import { blogPostingJsonLd, generateMetaTags } from '@/lib/seo';
+ *
+ * const jsonLd = blogPostingJsonLd({
+ *   title: 'My Post',
+ *   canonical: '/blog/my-post',
+ *   publishDate: new Date(),
+ * });
+ *
+ * const metaTags = generateMetaTags({
+ *   title: 'My Post',
+ *   description: 'Post description',
+ *   canonical: '/blog/my-post',
+ * });
+ * ```
+ */
+
 // Base site configuration
 import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
 
@@ -24,6 +62,19 @@ const SITE_CONFIG = {
 // Environment helpers
 export const isProductionSite = isProdSite;
 
+/**
+ * Generate CollectionPage JSON-LD for blog listing pages
+ * Used for main blog index and paginated pages
+ * @param name - Page title (e.g., 'Blog', 'Page 2')
+ * @param url - Page path (e.g., '/blog/', '/blog/page/2')
+ * @param items - Array of posts with url, name, and 1-indexed position
+ * @returns Schema.org CollectionPage structured data object
+ * @example
+ * collectionPageJsonLd('Blog', '/blog/', [
+ *   { url: '/blog/post-1', name: 'Post Title', position: 1 },
+ *   { url: '/blog/post-2', name: 'Another Post', position: 2 },
+ * ])
+ */
 export function collectionPageJsonLd(
   name: string,
   url: string,
@@ -55,7 +106,14 @@ export function collectionPageJsonLd(
   } as const;
 }
 
-// Category index CollectionPage JSON-LD where items are category pages
+/**
+ * Generate CollectionPage JSON-LD for category index pages
+ * Similar to collectionPageJsonLd but for listing category pages instead of posts
+ * @param name - Page title (e.g., 'Categories')
+ * @param url - Page path (e.g., '/blog/category/')
+ * @param items - Array of categories with url, name, and 1-indexed position
+ * @returns Schema.org CollectionPage structured data object
+ */
 export function categoriesIndexJsonLd(
   name: string,
   url: string,
@@ -87,6 +145,23 @@ export function categoriesIndexJsonLd(
   } as const;
 }
 
+/**
+ * Generate BlogPosting JSON-LD for blog post detail pages
+ * Includes full article metadata, authorship, dates, images, and reading time
+ * @param opts - Post metadata options
+ * @param opts.title - Article headline
+ * @param opts.canonical - Page path (e.g., '/blog/my-post')
+ * @param opts.publishDate - Original publication date
+ * @param opts.updatedDate - Last modified date (defaults to publishDate)
+ * @param opts.image - Hero image URL (string or array for multiple images)
+ * @param opts.description - Article summary (falls back to excerpt)
+ * @param opts.excerpt - Short excerpt if description not provided
+ * @param opts.tags - Article tags/keywords
+ * @param opts.category - Article category/section
+ * @param opts.wordCount - Total word count
+ * @param opts.readingTime - Estimated reading time in minutes
+ * @returns Schema.org BlogPosting structured data object
+ */
 export function blogPostingJsonLd(opts: {
   title: string;
   canonical: string;
@@ -150,6 +225,24 @@ export function blogPostingJsonLd(opts: {
   } as const;
 }
 
+/**
+ * Generate CreativeWork JSON-LD for downloadable resources
+ * Includes version info, download links, file metadata, and ratings
+ * @param opts - Resource metadata options
+ * @param opts.title - Resource name
+ * @param opts.description - Resource description
+ * @param opts.version - Version string (e.g., '1.0.0')
+ * @param opts.tags - Resource tags/keywords
+ * @param opts.downloadUrl - Direct download link
+ * @param opts.url - Resource detail page path
+ * @param opts.image - Preview image URL
+ * @param opts.lastUpdated - Last modification date
+ * @param opts.publishDate - Original release date
+ * @param opts.fileSize - Human-readable file size (e.g., '2.5 MB')
+ * @param opts.fileFormat - MIME type (e.g., 'application/zip')
+ * @param opts.rating - Aggregate rating object with value and count
+ * @returns Schema.org CreativeWork structured data object
+ */
 export function creativeWorkJsonLd(opts: {
   title: string;
   description?: string | null;
@@ -238,7 +331,11 @@ export function creativeWorkJsonLd(opts: {
   } as const;
 }
 
-// Helper functions for structured data
+/**
+ * Generate Person JSON-LD for site author
+ * Used in BlogPosting, CreativeWork, and Organization structured data
+ * @returns Schema.org Person entity for site author
+ */
 export function personJsonLd() {
   return {
     '@type': 'Person',
@@ -255,6 +352,11 @@ export function personJsonLd() {
   } as const;
 }
 
+/**
+ * Generate Organization JSON-LD for site publisher
+ * Used as publisher in BlogPosting and CreativeWork
+ * @returns Schema.org Organization entity for the site
+ */
 export function organizationJsonLd() {
   return {
     '@type': 'Organization',
@@ -271,6 +373,12 @@ export function organizationJsonLd() {
   } as const;
 }
 
+/**
+ * Generate WebSite JSON-LD for site-level metadata
+ * Includes search action for blog search functionality
+ * Typically used on homepage and main navigation pages
+ * @returns Schema.org WebSite structured data object
+ */
 export function websiteJsonLd() {
   return {
     '@context': 'https://schema.org',
@@ -292,6 +400,18 @@ export function websiteJsonLd() {
   } as const;
 }
 
+/**
+ * Generate BreadcrumbList JSON-LD for navigation trail
+ * Shows hierarchical page position in site structure
+ * @param items - Breadcrumb items in order (root to current page)
+ * @returns Schema.org BreadcrumbList structured data object
+ * @example
+ * breadcrumbJsonLd([
+ *   { name: 'Home', url: '/' },
+ *   { name: 'Blog', url: '/blog/' },
+ *   { name: 'Post Title', url: '/blog/post-slug' },
+ * ])
+ */
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
@@ -305,7 +425,30 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   } as const;
 }
 
-// Enhanced meta tags generator
+/**
+ * Generate complete meta tags object for Astro SEO component
+ * Includes Open Graph, Twitter Card, and canonical URL
+ * @param opts - Meta tag options
+ * @param opts.title - Page title (will be suffixed with site name)
+ * @param opts.description - Page description
+ * @param opts.canonical - Page path (converted to absolute URL)
+ * @param opts.image - Social share image URL
+ * @param opts.type - Open Graph type (default: 'website')
+ * @param opts.publishedTime - Article published date (for type: 'article')
+ * @param opts.modifiedTime - Article modified date (for type: 'article')
+ * @param opts.tags - Article tags (for type: 'article')
+ * @param opts.author - Article author name (for type: 'article')
+ * @returns Object with title, description, canonical, openGraph, and twitter properties
+ * @example
+ * generateMetaTags({
+ *   title: 'My Blog Post',
+ *   description: 'A great post about...',
+ *   canonical: '/blog/my-post',
+ *   image: '/images/hero.jpg',
+ *   type: 'article',
+ *   publishedTime: new Date(),
+ * })
+ */
 export function generateMetaTags(opts: {
   title: string;
   description?: string | null;

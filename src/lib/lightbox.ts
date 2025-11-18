@@ -1,18 +1,52 @@
-// Lightweight Image Lightbox for markdown-rendered images
-// Targets images inside blog and download detail content containers
-// - Adds zoom-in cursor to images
-// - Opens overlay with zoom animation
-// - Close button and a floating open button (SVG loaded via ?raw)
+/**
+ * Lightweight Image Lightbox
+ *
+ * Provides click-to-zoom functionality for content images in blog posts and downloads.
+ * Creates an overlay modal with smooth animations and keyboard controls.
+ *
+ * **Features:**
+ * - Click image or fullscreen button to open overlay
+ * - Zoom animation from source image position
+ * - Displays image caption from figcaption or alt text
+ * - Keyboard support (ESC to close)
+ * - Multiple close methods (backdrop, close button, image click)
+ * - Respects responsive images (uses currentSrc)
+ * - Prevents body scroll when active
+ * - Auto-reinitializes on navigation and DOM mutations
+ *
+ * **Target Selectors:**
+ * - `.prose img` (blog/download content)
+ * - `.content-image-grid img` (gallery images)
+ * - Excludes `.hero-image` class
+ *
+ * **Usage:**
+ * Typically auto-initialized via `ui-init.ts` gate system.
+ * ```typescript
+ * import { initImageLightbox } from './lightbox';
+ *
+ * // Manual initialization with custom containers
+ * initImageLightbox({ containerSelectors: ['.my-content'] });
+ * ```
+ */
 
 import closeIcon from '@/icons/btn-close.svg?raw';
 import fullscreenIcon from '@/icons/btn-fullscreen.svg?raw';
 import { onRouteChange } from './router-events';
 import { qs } from './dom-builder';
 
+/**
+ * Initialization options for lightbox
+ * @property containerSelectors - CSS selectors for containers that hold lightbox-enabled images
+ */
 type InitOptions = {
   containerSelectors?: string[];
 };
 
+/**
+ * Extended HTMLImageElement with lightbox state tracking
+ * @property _lightboxBound - Flag to prevent duplicate event binding
+ * @property _lightboxBtn - Reference to associated fullscreen button element
+ */
 interface ImageWithLightbox extends HTMLImageElement {
   _lightboxBound?: boolean;
   _lightboxBtn?: HTMLButtonElement;
@@ -40,6 +74,14 @@ function createOverlayTemplate(): string {
   `;
 }
 
+/**
+ * Cached DOM references for lightbox overlay elements
+ * @property overlay - Main lightbox container with dialog role
+ * @property backdrop - Semi-transparent background (closes on click)
+ * @property img - Image element displaying the zoomed content
+ * @property caption - Figcaption element for image description
+ * @property closeBtn - Close button in top-right corner
+ */
 interface LightboxElements {
   overlay: HTMLDivElement;
   backdrop: HTMLDivElement;
@@ -48,6 +90,12 @@ interface LightboxElements {
   closeBtn: HTMLButtonElement;
 }
 
+/**
+ * Create lightbox overlay DOM structure
+ * Builds the complete modal HTML and queries all interactive elements
+ * @returns Object containing references to all lightbox DOM elements
+ * @throws Error if template structure is malformed (missing required elements)
+ */
 function createOverlay(): LightboxElements {
   const overlay = document.createElement('div');
   overlay.className = 'image-lightbox';
@@ -73,6 +121,12 @@ function createOverlay(): LightboxElements {
   return { overlay, backdrop, img, caption, closeBtn };
 }
 
+/**
+ * Extract caption text for an image
+ * Prioritizes explicit figcaption, falls back to alt text
+ * @param el - Image element to get caption for
+ * @returns Caption text or null if no caption available
+ */
 function getCaptionForImage(el: HTMLImageElement): string | null {
   // Prefer explicit figcaption if available
   const figure = el.closest('figure');
@@ -87,14 +141,29 @@ function getCaptionForImage(el: HTMLImageElement): string | null {
   return null;
 }
 
+/**
+ * Prevent body scroll when lightbox is open
+ * Adds CSS class to document element (global lock)
+ */
 function disableScroll() {
   document.documentElement.classList.add('image-lightbox--locked');
 }
 
+/**
+ * Re-enable body scroll after lightbox closes
+ * Removes CSS class from document element
+ */
 function enableScroll() {
   document.documentElement.classList.remove('image-lightbox--locked');
 }
 
+/**
+ * Open lightbox overlay with specified image
+ * Creates modal, sets up event handlers, disables scroll, and animates in
+ * @param sourceImg - Source image element that was clicked
+ * @example
+ * img.addEventListener('click', () => openLightbox(img));
+ */
 function openLightbox(sourceImg: HTMLImageElement) {
   const { overlay, backdrop, img, caption, closeBtn } = createOverlay();
 
@@ -149,6 +218,12 @@ function openLightbox(sourceImg: HTMLImageElement) {
   document.addEventListener('keydown', onKeyDown);
 }
 
+/**
+ * Query all images within specified containers
+ * Filters out hero images and other excluded elements
+ * @param containers - CSS selectors for parent containers
+ * @returns Array of HTMLImageElement that should have lightbox enabled
+ */
 function selectTargetImages(containers: string[]): HTMLImageElement[] {
   const imgs: HTMLImageElement[] = [];
   for (const sel of containers) {
@@ -168,6 +243,18 @@ function selectTargetImages(containers: string[]): HTMLImageElement[] {
   return imgs;
 }
 
+/**
+ * Initialize lightbox on all qualifying images
+ * Adds click handlers, fullscreen buttons, and CSS classes
+ * Safe to call multiple times - tracks initialization state per image
+ * @param opts - Configuration options (container selectors)
+ * @example
+ * // Use default containers (.prose, .content-image-grid)
+ * initImageLightbox();
+ *
+ * // Custom containers
+ * initImageLightbox({ containerSelectors: ['.gallery', '.photos'] });
+ */
 export function initImageLightbox(opts?: InitOptions) {
   const containers = opts?.containerSelectors?.length
     ? opts.containerSelectors
@@ -239,6 +326,11 @@ function setupRouterReinit() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+/**
+ * Auto-initialization entry point
+ * Sets up lightbox with router and DOM mutation observers for automatic reinit
+ * Called by ui-init.ts gate system when lightbox-eligible images are detected
+ */
 export function autoInit() {
   const run = () => initImageLightbox();
   if (document.readyState === 'loading') {

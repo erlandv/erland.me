@@ -110,8 +110,10 @@ let validationError: Error | null = null;
 
 /**
  * Validate environment variables against schema
+ * Applies mode-specific validation rules (production requires analytics IDs)
  * @param mode - Environment mode for conditional validation
  * @returns Validated environment object
+ * @throws Error if validation fails with detailed error messages
  */
 function validateEnv(
   mode: 'development' | 'production' | 'staging' = 'development'
@@ -195,6 +197,8 @@ function validateEnv(
 
 /**
  * Get environment mode from various sources
+ * Priority: PUBLIC_SITE_ENV > localhost detection > production URL + NODE_ENV > default
+ * @returns Resolved environment mode
  */
 function resolveEnvironmentMode(): 'development' | 'production' | 'staging' {
   const siteEnv =
@@ -255,6 +259,11 @@ interface ImportMeta {
 export const SITE_URL: string = validatedEnv.SITE_URL;
 export const SITE_DOMAIN: string = validatedEnv.SITE_DOMAIN;
 
+/**
+ * Check if running on production site (erland.me)
+ * Checks actual environment variables, not cached validation values
+ * @returns True if SITE_URL is https://erland.me and SITE_DOMAIN is erland.me
+ */
 export function isProdSite(): boolean {
   // Check actual environment variables, not cached values from validation
   const actualSiteUrl =

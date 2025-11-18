@@ -10,12 +10,21 @@ import { createLogger } from './logger';
 
 const log = createLogger('ErrorBoundary');
 
+/**
+ * Context information for error reporting
+ * @property feature - Feature name that encountered the error
+ * @property operation - Specific operation that failed (optional)
+ * @property recoverable - Whether error recovery should be attempted
+ */
 export type ErrorContext = {
   feature: string;
   operation?: string;
   recoverable?: boolean;
 };
 
+/**
+ * Error handler callback function type
+ */
 export type ErrorHandler = (error: Error, context: ErrorContext) => void;
 
 /**
@@ -39,6 +48,9 @@ const ERROR_MESSAGES: Record<string, string> = {
 
 /**
  * Determine if an error is recoverable (e.g., network errors, temporary failures)
+ * Checks error message and name against known recoverable patterns
+ * @param error - Error object to check
+ * @returns True if error matches recoverable patterns
  */
 function isRecoverableError(error: Error): boolean {
   const recoverablePatterns = [
@@ -56,6 +68,9 @@ function isRecoverableError(error: Error): boolean {
 
 /**
  * Log error details for debugging in development
+ * Uses logger utility for consistent formatting
+ * @param error - Error object to log
+ * @param context - Error context with feature and operation info
  */
 function logError(error: Error, context: ErrorContext): void {
   log.error(`${context.feature} error`, error, {
@@ -66,6 +81,8 @@ function logError(error: Error, context: ErrorContext): void {
 
 /**
  * Show user-friendly error notification
+ * Displays toast in production only (dev errors go to console)
+ * @param context - Error context to determine message
  */
 function notifyUser(context: ErrorContext): void {
   const message = ERROR_MESSAGES[context.feature] || ERROR_MESSAGES.default;
@@ -78,6 +95,9 @@ function notifyUser(context: ErrorContext): void {
 
 /**
  * Mark feature as failed and check if retry should be attempted
+ * Tracks retry attempts and marks features as permanently failed after max retries
+ * @param featureName - Name of feature to check
+ * @returns True if retry should be attempted (under MAX_RETRIES)
  */
 function shouldRetry(featureName: string): boolean {
   const attempts = retryAttempts.get(featureName) || 0;
@@ -108,6 +128,15 @@ export function resetFeatureFailure(featureName: string): void {
 
 /**
  * Main error handler with recovery logic
+ * Logs error, determines if recoverable, attempts retry if appropriate
+ * @param error - Error that occurred
+ * @param context - Context about where error occurred
+ * @example
+ * handleFeatureError(new Error('Network failed'), {
+ *   feature: 'lightbox',
+ *   operation: 'load-module',
+ *   recoverable: true
+ * });
  */
 export function handleFeatureError(error: Error, context: ErrorContext): void {
   // Log error for debugging
@@ -164,6 +193,17 @@ export async function safeFeatureInit<T>(
 
 /**
  * Create a wrapped version of a feature loader function with error boundary
+ * Returns new function that automatically catches and handles errors
+ * @param fn - Function to wrap with error handling
+ * @param featureName - Name of feature for error reporting
+ * @param options - Error handling options (operation, recoverable)
+ * @returns Wrapped function with error boundary
+ * @example
+ * const safeLightbox = withErrorBoundary(
+ *   loadLightbox,
+ *   'lightbox',
+ *   { operation: 'init', recoverable: true }
+ * );
  */
 export function withErrorBoundary<
   T extends (...args: unknown[]) => Promise<unknown>,
@@ -182,6 +222,11 @@ export function withErrorBoundary<
 
 /**
  * Global unhandled error handler for runtime errors
+ * Sets up window listeners for unhandled promise rejections and global errors
+ * Should be called once during app initialization
+ * @example
+ * // In ui-init.ts
+ * setupGlobalErrorHandler();
  */
 export function setupGlobalErrorHandler(): void {
   // Handle unhandled promise rejections
@@ -218,6 +263,9 @@ export function setupGlobalErrorHandler(): void {
 
 /**
  * Export a convenient shorthand for showing errors
+ * Displays error toast notification to user
+ * @param message - Error message to display
+ * @param duration - Display duration in milliseconds (default: 3000)
  */
 export function showError(message: string, duration = 3000): void {
   showToast(message, { type: 'error', duration });

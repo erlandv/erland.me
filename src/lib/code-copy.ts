@@ -1,11 +1,42 @@
-// Router-safe initializer that injects copy buttons for code blocks
-// Works across Astro ClientRouter navigations and DOM swaps
+/**
+ * Code Copy Buttons
+ *
+ * Injects copy-to-clipboard buttons for code blocks in blog posts and documentation.
+ * Automatically detects programming language and provides visual feedback on copy.
+ *
+ * **Features:**
+ * - Auto-detects language from CSS classes and attributes
+ * - Injects copy button into wrapper with language badge
+ * - Copy feedback with toast notification and button state
+ * - Router-safe: reinitializes on Astro navigation and DOM mutations
+ * - Works with Shiki, Highlight.js, and plain <pre> blocks
+ *
+ * **Language Detection Priority:**
+ * 1. `language-*` CSS class on <pre> or <code>
+ * 2. `data-language` or `lang` attribute on <pre>
+ * 3. Direct class name on <pre> (e.g., `javascript`)
+ * 4. Fallback to 'text'
+ *
+ * **Usage:**
+ * Typically auto-initialized via `ui-init.ts` gate system.
+ * ```typescript
+ * import { initCodeCopy } from './code-copy';
+ *
+ * // Manual initialization
+ * initCodeCopy();
+ * ```
+ */
 
 import { copyToClipboard } from './clipboard';
 import { showToast } from './toast';
 import { onRouteChange } from './router-events';
 import '@/styles/features/code-copy.css';
 
+/**
+ * Find all code blocks in the document
+ * Tries multiple selectors to catch different rendering patterns
+ * @returns NodeList of code elements
+ */
 function findCodeBlocks(): NodeListOf<HTMLElement> {
   let list = document.querySelectorAll(
     '.prose pre code'
@@ -21,6 +52,13 @@ function findCodeBlocks(): NodeListOf<HTMLElement> {
   return list;
 }
 
+/**
+ * Detect programming language from <pre> and <code> elements
+ * Checks CSS classes, data attributes, and element attributes in priority order
+ * @param pre - Pre element wrapping the code
+ * @param code - Code element containing the text
+ * @returns Language identifier (e.g., 'javascript', 'python', 'text')
+ */
 function detectLanguage(pre: HTMLElement, code: HTMLElement): string {
   let language = 'text';
   const classes = `${pre.className} ${code.className}`
@@ -69,6 +107,10 @@ function createCopyButtonTemplate(): string {
   `;
 }
 
+/**
+ * Create copy button element with SVG icon
+ * @returns Configured button element ready to attach
+ */
 function createCopyButton(): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.className = 'code-copy-btn';
@@ -78,6 +120,12 @@ function createCopyButton(): HTMLButtonElement {
   return btn;
 }
 
+/**
+ * Ensure <pre> is wrapped in a container for positioning copy button
+ * Creates wrapper if needed, or returns existing wrapper
+ * @param pre - Pre element to wrap
+ * @returns Wrapper element or null if pre has no parent
+ */
 function ensureWrapper(pre: HTMLElement): HTMLElement | null {
   const parent = pre.parentElement;
   if (!parent) return null;
@@ -93,6 +141,14 @@ function ensureWrapper(pre: HTMLElement): HTMLElement | null {
   return wrapper;
 }
 
+/**
+ * Initialize copy buttons for all code blocks on the page
+ * Detects language, wraps blocks, injects buttons with click handlers
+ * Safe to call multiple times - skips blocks that already have buttons
+ * @example
+ * // Manual initialization after dynamic content load
+ * initCodeCopy();
+ */
 export function initCodeCopy() {
   const blocks = findCodeBlocks();
   blocks.forEach(codeEl => {
@@ -142,6 +198,11 @@ function setupRouterReinit() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+/**
+ * Auto-initialization entry point
+ * Sets up code copy with router and DOM mutation observers for automatic reinit
+ * Called by ui-init.ts gate system when code blocks are detected
+ */
 export function autoInit() {
   const run = () => initCodeCopy();
   if (document.readyState === 'loading') {

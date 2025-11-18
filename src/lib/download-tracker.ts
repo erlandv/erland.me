@@ -21,6 +21,10 @@
  * }
  */
 
+/**
+ * GTM dataLayer event structure for file downloads
+ * Pushed to window.dataLayer for Google Analytics 4 tracking
+ */
 interface DownloadEventData {
   event: 'file_download';
   file_name: string;
@@ -30,16 +34,23 @@ interface DownloadEventData {
   download_page: string;
 }
 
+/**
+ * GTM dataLayer API interface
+ */
 interface GTMDataLayer {
   push(data: DownloadEventData | Record<string, unknown>): void;
 }
 
+/**
+ * Window extended with GTM dataLayer
+ */
 interface WindowWithDataLayer extends Window {
   dataLayer?: GTMDataLayer;
 }
 
 /**
  * Check if GTM dataLayer is available
+ * @returns True if window.dataLayer exists
  */
 function hasDataLayer(): boolean {
   return (
@@ -50,6 +61,8 @@ function hasDataLayer(): boolean {
 
 /**
  * Push download event to GTM dataLayer
+ * Logs event data in console for debugging
+ * @param data - Download event data to push
  */
 function pushDownloadEvent(data: DownloadEventData): void {
   if (!hasDataLayer()) {
@@ -68,6 +81,10 @@ function pushDownloadEvent(data: DownloadEventData): void {
 
 /**
  * Extract file extension from URL
+ * @param url - File URL (absolute or relative)
+ * @returns Lowercase file extension or 'unknown'
+ * @example
+ * getFileExtension('https://example.com/file.PDF') // 'pdf'
  */
 function getFileExtension(url: string): string {
   try {
@@ -86,6 +103,10 @@ function getFileExtension(url: string): string {
 
 /**
  * Extract file name from URL
+ * @param url - File URL (absolute or relative)
+ * @returns File name from URL path or 'unknown'
+ * @example
+ * getFileName('https://example.com/assets/file.zip') // 'file.zip'
  */
 function getFileName(url: string): string {
   try {
@@ -98,6 +119,9 @@ function getFileName(url: string): string {
 
 /**
  * Extract file size from table cell (if available)
+ * Looks for table cell with data-label="Size" in same row as link
+ * @param link - Download link element
+ * @returns Human-readable file size (e.g., '1.08 MB') or undefined
  */
 function getFileSize(link: HTMLAnchorElement): string | undefined {
   // Try to find size in the same row (for download tables)
@@ -117,6 +141,7 @@ function getFileSize(link: HTMLAnchorElement): string | undefined {
 
 /**
  * Get current page path for tracking
+ * @returns Current pathname (e.g., '/blog/post-slug')
  */
 function getCurrentPage(): string {
   return window.location.pathname;
@@ -124,6 +149,9 @@ function getCurrentPage(): string {
 
 /**
  * Check if link is a download link (external file)
+ * Checks for download attribute or common file extensions
+ * @param link - Anchor element to check
+ * @returns True if link points to downloadable file
  */
 function isDownloadLink(link: HTMLAnchorElement): boolean {
   const href = link.getAttribute('href') || '';
@@ -172,6 +200,8 @@ function isDownloadLink(link: HTMLAnchorElement): boolean {
 
 /**
  * Handle download link click
+ * Extracts file metadata and pushes event to GTM dataLayer
+ * @param event - Mouse click event
  */
 function handleDownloadClick(event: MouseEvent): void {
   const link = event.currentTarget as HTMLAnchorElement;
@@ -193,6 +223,11 @@ function handleDownloadClick(event: MouseEvent): void {
 
 /**
  * Initialize download tracking on all download links
+ * Attaches click handlers to links with downloadable file extensions
+ * Safe to call multiple times - skips already-tracked links
+ * @example
+ * // Initialize after page load or navigation
+ * initDownloadTracking();
  */
 export function initDownloadTracking(): void {
   // Skip if GTM is not available
@@ -227,7 +262,8 @@ export function initDownloadTracking(): void {
 }
 
 /**
- * Auto-init when module is imported
+ * Auto-initialization entry point
+ * Called by ui-init.ts gate system when download links are detected
  */
 export function autoInit(): void {
   initDownloadTracking();

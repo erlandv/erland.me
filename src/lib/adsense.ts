@@ -1,3 +1,35 @@
+/**
+ * Google AdSense Ad Unit Management
+ *
+ * Handles dynamic insertion of AdSense ad units and dev placeholders.
+ * Supports different ad placements for blog and download pages with
+ * intelligent positioning based on content structure.
+ *
+ * **Features:**
+ * - Dynamic ad unit insertion with duplicate prevention
+ * - Strategic mid-content and end-content placement
+ * - Development placeholders for layout testing
+ * - Re-entrancy guards for Astro view transitions
+ * - Environment-aware rendering (prod only)
+ *
+ * **Usage:**
+ * ```typescript
+ * // Blog page
+ * if (shouldRenderAds({ client, slots: [slotMid, slotEnd] })) {
+ *   autoInitBlogAds(client, slotMid, slotEnd);
+ * } else {
+ *   autoInitBlogPlaceholders();
+ * }
+ *
+ * // Download page
+ * if (shouldRenderAds({ client, slots: [slotMid, slotEnd] })) {
+ *   autoInitDownloadAds(client, slotMid, slotEnd);
+ * } else {
+ *   autoInitDownloadPlaceholders();
+ * }
+ * ```
+ */
+
 import { createLogger } from './logger';
 import { isProdSite } from './env';
 
@@ -10,6 +42,13 @@ interface WindowWithAds extends Window {
   __ph_dl_end?: boolean;
 }
 
+/**
+ * Insert AdSense ad unit into container element
+ * Creates responsive ad with auto format and prevents duplicate insertions
+ * @param container - Parent element to append ad unit
+ * @param client - AdSense client ID (ca-pub-XXXXXXXXXX)
+ * @param slot - AdSense slot ID
+ */
 export function insertAdUnit(container: Element, client: string, slot: string) {
   if (!container || !client || !slot) return;
   try {
@@ -36,6 +75,12 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
   }
 }
 
+/**
+ * Insert placeholder element for development/testing
+ * Shows where ad would appear in production without AdSense code
+ * @param container - Parent element to append placeholder
+ * @param label - Optional custom label text (default: 'Ad Placeholder')
+ */
 export function insertPlaceholderUnit(container: Element, label?: string) {
   if (!container) return;
   // Prevent duplicate placeholder for end position
@@ -50,6 +95,14 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
   container.appendChild(box);
 }
 
+/**
+ * Insert ad unit after middle content element
+ * Analyzes content structure to find strategic mid-point placement
+ * Considers paragraphs, headings, lists, code blocks, figures, and galleries
+ * @param container - Container with content elements
+ * @param client - AdSense client ID
+ * @param slot - AdSense slot ID
+ */
 export function insertAdAfterMiddle(
   container: Element,
   client: string,
@@ -99,6 +152,12 @@ export function insertAdAfterMiddle(
   }
 }
 
+/**
+ * Insert placeholder after middle content element (dev mode)
+ * Mirrors insertAdAfterMiddle positioning logic for layout testing
+ * @param container - Container with content elements
+ * @param label - Optional custom label text
+ */
 export function insertPlaceholderAfterMiddle(
   container: Element,
   label?: string
@@ -138,6 +197,13 @@ export function insertPlaceholderAfterMiddle(
   }
 }
 
+/**
+ * Auto-initialize AdSense ads for blog post pages
+ * Inserts mid-content and end-content ads in #blog-content container
+ * @param client - AdSense client ID
+ * @param slotMid - Optional slot ID for mid-content ad
+ * @param slotEnd - Optional slot ID for end-content ad
+ */
 export function autoInitBlogAds(
   client: string,
   slotMid?: string,
@@ -149,6 +215,10 @@ export function autoInitBlogAds(
   if (slotEnd) insertAdUnit(prose, client, slotEnd);
 }
 
+/**
+ * Auto-initialize ad placeholders for blog post pages (dev mode)
+ * Shows where ads would appear without loading AdSense
+ */
 export function autoInitBlogPlaceholders() {
   const prose = document.getElementById('blog-content');
   if (!prose) return;
@@ -156,6 +226,15 @@ export function autoInitBlogPlaceholders() {
   insertPlaceholderUnit(prose, 'Ad Placeholder (end)');
 }
 
+/**
+ * Auto-initialize AdSense ads for download pages
+ * Complex placement logic with re-entrancy guards for view transitions:
+ * - Mid-content: After middle content element
+ * - End-content: Before share section or after files section
+ * @param client - AdSense client ID
+ * @param slotMid - Optional slot ID for mid-content ad
+ * @param slotEnd - Optional slot ID for end-content ad
+ */
 export function autoInitDownloadAds(
   client: string,
   slotMid?: string,
@@ -234,6 +313,10 @@ export function autoInitDownloadAds(
   }
 }
 
+/**
+ * Auto-initialize ad placeholders for download pages (dev mode)
+ * Mirrors autoInitDownloadAds placement logic with re-entrancy guards
+ */
 export function autoInitDownloadPlaceholders() {
   const container = document.getElementById('download-content');
   if (!container) return;
@@ -292,6 +375,16 @@ interface AdsRenderConfig {
   slots?: AdsSlots;
 }
 
+/**
+ * Check if ads should be rendered based on environment and configuration
+ * Validates client ID, production environment, and slot configuration
+ * @param config - Configuration with client ID and slot IDs
+ * @returns True if ads should render (production site with valid config)
+ * @example
+ * if (shouldRenderAds({ client, slots: [slotMid, slotEnd] })) {
+ *   autoInitBlogAds(client, slotMid, slotEnd);
+ * }
+ */
 export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
   const client = (config.client ?? '').trim();
   if (!client) return false;

@@ -1,13 +1,57 @@
 /**
- * ui-init.ts - global UI initializer gate
- * Consolidates share, code-copy, lightbox, table-responsive, and theme control init into a single conditional dynamic import.
- * Includes error boundary for graceful error handling and recovery.
+ * Global UI Initializer with Lazy Loading Gates
+ *
+ * Central orchestrator for client-side feature initialization with intelligent
+ * conditional loading based on DOM presence. Minimizes bundle size by only
+ * importing features when needed.
+ *
+ * **Architecture:**
+ * - **Gate Pattern**: Check for DOM selectors before importing modules
+ * - **Cache-but-Reinit**: Import modules once, re-execute initializers on navigation
+ * - **Error Boundaries**: Graceful degradation with automatic retry logic
+ * - **View Transition Safe**: Reinitializes features after Astro page swaps
+ * - **Mutation Observer**: Handles dynamically injected content (e.g., AdSense)
+ *
+ * **Managed Features:**
+ * - Share buttons (Web Share API + clipboard fallback)
+ * - Code copy buttons (clipboard API)
+ * - Lightbox (image zoom overlay)
+ * - Responsive tables (mobile data-label injection)
+ * - Theme toggle (preference flyout)
+ * - Theme control (API initialization)
+ * - Stories viewer (Instagram-like interface)
+ * - Category filter (hash-based routing)
+ * - Download tracker (GTM analytics)
+ *
+ * **Critical Pattern for View Transitions:**
+ * ```typescript
+ * // WRONG: Blocks re-execution after navigation
+ * if (loaded.feature) return;
+ * const mod = await import('./feature');
+ * loaded.feature = true;
+ *
+ * // CORRECT: Cache module, always run initializer
+ * if (!loaded.feature) {
+ *   const mod = await import('./feature');
+ *   window.__featureInit = mod.init;
+ *   loaded.feature = true;
+ * }
+ * window.__featureInit?.(); // Execute on every page load
+ * ```
+ *
+ * **Usage:**
+ * Automatically initialized via CriticalInit.astro in SiteLayout.
+ * No manual invocation required.
  */
 
 import { safeFeatureInit, setupGlobalErrorHandler } from './error-boundary';
 import { initThemeControl } from './theme-init';
 
-// Window interface extensions for cached initializers
+/**
+ * Extended Window interface with cached feature initializers
+ * Stores references to initialization functions for features that need
+ * re-execution on every page load (view transitions)
+ */
 interface WindowWithInitializers extends Window {
   __tableResponsiveInit?: () => void;
   __themeToggleInit?: () => Promise<void>;
@@ -15,6 +59,10 @@ interface WindowWithInitializers extends Window {
   __downloadTrackerInit?: () => void;
 }
 
+/**
+ * Tracks which feature modules have been imported
+ * Prevents duplicate imports while allowing re-execution of initializers
+ */
 type LoadedFlags = {
   share: boolean;
   copy: boolean;
@@ -39,6 +87,10 @@ const loaded: LoadedFlags = {
   downloadTracker: false,
 };
 
+/**
+ * DOM selectors for feature gate checks
+ * Each feature only loads if matching elements exist on the page
+ */
 const SELECTORS = {
   share: ['section.share', '.share__btn--copy', '.share__btn--native'],
   copy: ['pre code', 'pre[class*="language-"]'],
@@ -61,6 +113,12 @@ const SELECTORS = {
   ],
 } as const;
 
+/**
+ * Check if any selector matches an element in the DOM
+ * Used for gate pattern to conditionally load features
+ * @param selectors - Array of CSS selectors to test
+ * @returns True if at least one selector has a matching element
+ */
 function hasTarget(selectors: readonly string[]): boolean {
   try {
     for (const sel of selectors) {
@@ -227,6 +285,10 @@ async function maybeLoadDownloadTracker(): Promise<void> {
   );
 }
 
+/**
+ * Run all feature gate checks and initialize as needed
+ * Called on page load, navigation, and DOM mutations
+ */
 function gateAll(): void {
   void maybeLoadShare();
   void maybeLoadCopy();
@@ -237,10 +299,18 @@ function gateAll(): void {
   void maybeLoadDownloadTracker();
 }
 
+/**
+ * Initialize theme toggle feature (always present in layout)
+ * Separate from gateAll to prevent infinite mutation observer loops
+ */
 function gateThemeToggle(): void {
   void maybeLoadThemeToggle();
 }
 
+/**
+ * Initialize theme control API (runs once, always)
+ * Sets up global theme management system with localStorage sync
+ */
 function initTheme(): void {
   // Theme control initialization (runs once, always)
   if (loaded.themeControl) return;
@@ -248,6 +318,10 @@ function initTheme(): void {
   initThemeControl();
 }
 
+/**
+ * Setup event listeners for Astro view transitions and DOM mutations
+ * Re-runs gate checks after navigation and dynamic content insertion
+ */
 function setupGateListeners(): void {
   // Re-gate on Astro router events until all features loaded
   const run = () => gateAll();
@@ -275,6 +349,24 @@ function setupGateListeners(): void {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+/**
+ * Main entry point for UI initialization system
+ *
+ * Sets up:
+ * - Global error handlers
+ * - Theme control API
+ * - Feature gate checks
+ * - View transition listeners
+ * - DOM mutation observers
+ *
+ * Safe to call multiple times - internal guards prevent duplicate initialization.
+ * Typically called from CriticalInit.astro in SiteLayout.
+ *
+ * @example
+ * // In CriticalInit.astro or app entry point
+ * import { initUi } from './lib/ui-init';
+ * initUi();
+ */
 export function initUi(): void {
   // Setup global error handlers once
   setupGlobalErrorHandler();

@@ -1,6 +1,43 @@
 /**
- * category-filter.ts - Blog category filtering and pagination
- * Manages client-side category filtering with hash-based routing and pagination
+ * Blog Category Filtering & Pagination
+ *
+ * Client-side category filtering using hash-based routing for blog posts.
+ * Manages category visibility, pagination, and random initial category selection.
+ *
+ * **URL Pattern:**
+ * - `#cat-{category}-page-{pageNumber}` (e.g., `#cat-web-development-page-2`)
+ * - No hash: Randomly selects a category and redirects to page 1
+ *
+ * **Features:**
+ * - Hash-based routing (no page reload on category change)
+ * - Pagination within categories
+ * - Random initial category if no hash provided
+ * - Active filter button highlighting
+ * - Browser back/forward support (popstate)
+ * - Safe multi-call: prevents duplicate event listeners
+ *
+ * **HTML Structure:**
+ * ```html
+ * <div id="category-filter">
+ *   <button class="cat-filter-btn" data-cat="web-development">Web Dev</button>
+ * </div>
+ *
+ * <div data-cat-page data-cat="web-development" data-page="1">
+ *   <!-- Category posts page 1 -->
+ * </div>
+ * <div data-cat-page data-cat="web-development" data-page="2">
+ *   <!-- Category posts page 2 -->
+ * </div>
+ * ```
+ *
+ * **Usage:**
+ * Typically auto-initialized via `ui-init.ts` gate system.
+ * ```typescript
+ * import { init } from './category-filter';
+ *
+ * // Initialize category filtering
+ * init();
+ * ```
  */
 
 interface ParsedHash {
@@ -13,7 +50,11 @@ let hashChangeListenerSetup = false;
 let documentClickListenerSetup = false;
 
 /**
- * Parse hash to get category and page number
+ * Parse URL hash to extract category and page number
+ * @returns Object with category slug and 1-indexed page number, or null if invalid
+ * @example
+ * // URL: https://example.com/blog/category/#cat-web-development-page-2
+ * parseHash() // { cat: 'web-development', page: 2 }
  */
 function parseHash(): ParsedHash | null {
   const hash = location.hash || '';
@@ -28,6 +69,9 @@ function parseHash(): ParsedHash | null {
 
 /**
  * Show specific category page and update active filter button
+ * Hides all other category pages and highlights matching filter button
+ * @param category - Category slug to display
+ * @param page - Page number to show (1-indexed)
  */
 function showCategoryPage(category: string, page: number): void {
   // Hide all category pages
@@ -61,7 +105,12 @@ function showCategoryPage(category: string, page: number): void {
 }
 
 /**
- * Initialize category filtering - can be called multiple times safely
+ * Initialize category filtering system
+ * Parses hash or selects random category, shows appropriate page, sets up filter button handlers
+ * Safe to call multiple times - prevents duplicate event listeners
+ * @example
+ * // Initialize after page load
+ * initCategoryFilter();
  */
 export function initCategoryFilter(): void {
   let parsed = parseHash();
@@ -110,7 +159,9 @@ export function initCategoryFilter(): void {
 }
 
 /**
- * Handle pagination link clicks - sets up document-level listener only once
+ * Setup document-level click listener for pagination links
+ * Intercepts clicks on `#cat-*` hash links and updates UI immediately
+ * Only runs once - safe to call multiple times
  */
 function setupDocumentClickListener(): void {
   if (documentClickListenerSetup) return;
@@ -148,7 +199,9 @@ function setupDocumentClickListener(): void {
 }
 
 /**
- * Handle hash changes - sets up window-level listener only once
+ * Setup hash change and popstate listeners for browser navigation
+ * Handles hash changes from browser back/forward buttons
+ * Only runs once - safe to call multiple times
  */
 function setupHashChangeListener(): void {
   if (hashChangeListenerSetup) return;
@@ -174,7 +227,9 @@ function setupHashChangeListener(): void {
 }
 
 /**
- * Auto-init function for lazy loading - sets up one-time listeners
+ * Auto-initialization entry point
+ * Initializes filtering and sets up one-time event listeners
+ * Called by ui-init.ts gate system when category filter is detected
  */
 export const autoInit = (): void => {
   initCategoryFilter();
@@ -183,7 +238,13 @@ export const autoInit = (): void => {
 };
 
 /**
- * Initialize category filtering system - entry point for external usage
+ * Initialize category filtering system - main entry point
+ * Handles DOM ready state and sets up view transition listeners
+ * @example
+ * import { init } from './category-filter';
+ *
+ * // Initialize on page load
+ * init();
  */
 export const init = (): void => {
   // Initialize when DOM is ready
