@@ -200,8 +200,8 @@ PUBLIC_SITE_ENV=development         # Force environment mode (development/produc
 # Analytics & tracking (optional for development, required for production because Google demands tribute)
 PUBLIC_GTM_ID=GTM-XXXXXXX           # Google Tag Manager ID (format: GTM-XXXXXXXX)
 PUBLIC_ADSENSE_CLIENT=ca-pub-...    # AdSense publisher ID (format: ca-pub-XXXXXXXXXX)
-PUBLIC_ADSENSE_SLOT_BLOG_MID=12345  # AdSense slot IDs (numeric, because consistency is overrated)
-PUBLIC_ADSENSE_SLOT_BLOG_END=67890  # More slot IDs for maximum monetization potential
+PUBLIC_ADSENSE_SLOT_START=12345     # AdSense slot for start placement (after first paragraph)
+PUBLIC_ADSENSE_SLOT_END=67890       # AdSense slot for end placement (after last paragraph)
 PUBLIC_AHREFS_DATA_KEY=abc123...    # Ahrefs Web Analytics key (optional, for when GTM isn't enough)
 ```
 

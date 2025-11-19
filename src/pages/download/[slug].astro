@@ -118,6 +118,7 @@ const jsonLd = creativeWorkJsonLd({
     autoInitDownloadAds,
     autoInitDownloadPlaceholders,
     shouldRenderAds,
+    shouldRenderPlaceholders,
   } from '@lib/adsense';
   import { autoInit as autoInitToc } from '@lib/toc';
 
@@ -131,16 +132,17 @@ const jsonLd = creativeWorkJsonLd({
   const runAds = () => {
     try {
       const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
-      const slotMid = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_MID || '';
-      const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_DL_END || '';
+      const slotStart = import.meta.env.PUBLIC_ADSENSE_SLOT_START || '';
+      const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_END || '';
+      
       if (
         shouldRenderAds({
           client,
-          slots: [slotMid, slotEnd],
+          slots: [slotStart, slotEnd],
         })
       ) {
-        autoInitDownloadAds(client, slotMid, slotEnd);
-      } else {
+        autoInitDownloadAds(client, slotStart, slotEnd);
+      } else if (shouldRenderPlaceholders()) {
         autoInitDownloadPlaceholders();
       }
     } catch {}

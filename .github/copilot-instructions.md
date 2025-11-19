@@ -414,11 +414,12 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 - `SITE_DOMAIN`: Site domain (default: `localhost` for development)
 - `PUBLIC_SITE_ENV`: Explicit environment override (`development`/`production`/`staging`)
 
-**Analytics & Tracking** (Required for production):
+**Analytics & Tracking** (Optional in all environments):
 
-- `PUBLIC_GTM_ID`: Google Tag Manager ID (format: `GTM-XXXXXXXX`)
-- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (format: `ca-pub-XXXXXXXXXX`)
-- `PUBLIC_ADSENSE_SLOT_*`: AdSense slot IDs (numeric)
+- `PUBLIC_GTM_ID`: Google Tag Manager ID (format: `GTM-XXXXXXXX`, optional)
+- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (format: `ca-pub-XXXXXXXXXX`, optional)
+- `PUBLIC_ADSENSE_SLOT_START`: AdSense slot ID for start placement (after first paragraph, numeric, optional)
+- `PUBLIC_ADSENSE_SLOT_END`: AdSense slot ID for end placement (after last paragraph, numeric, optional)
 - `PUBLIC_AHREFS_DATA_KEY`: Ahrefs Web Analytics data key (optional)
 
 **Build Configuration**:
@@ -429,8 +430,9 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 
 **Validation Rules**:
 
-- Development mode: Analytics IDs optional, localhost domains supported
-- Production mode: GTM and AdSense IDs required, proper domain format enforced
+- All environments: Analytics IDs optional - ads only render when configured
+- Development mode: Localhost domains supported (localhost, 127.0.0.1)
+- Production mode: Proper domain format enforced for SITE_DOMAIN
 - All URLs validated for proper format, domains validated with regex patterns
 
 ### More Info
