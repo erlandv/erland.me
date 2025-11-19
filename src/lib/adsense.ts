@@ -132,7 +132,7 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
 
 /**
  * Insert ad unit after first content element (START placement)
- * Places ad after the first substantial content element (paragraph, heading, etc.)
+ * Places ad after the first substantial content element (paragraph, heading, list, code block, etc.)
  * Considers paragraphs, headings, lists, code blocks, figures, and galleries
  * @param container - Container with content elements
  * @param client - AdSense client ID
@@ -242,8 +242,8 @@ export function insertPlaceholderAfterFirst(
  * Uses unified START and END slot placement logic
  * @param containerId - Container element ID ('blog-content' or 'download-content')
  * @param client - AdSense client ID
- * @param slotStart - Optional slot ID for start placement (after first paragraph)
- * @param slotEnd - Optional slot ID for end placement (after last paragraph)
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
  */
 export function autoInitContentAds(
   containerId: string,
@@ -273,8 +273,8 @@ export function autoInitContentPlaceholders(containerId: string) {
  * Auto-initialize AdSense ads for blog post pages
  * Wrapper for backward compatibility - delegates to unified content ads function
  * @param client - AdSense client ID
- * @param slotStart - Optional slot ID for start placement
- * @param slotEnd - Optional slot ID for end placement
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
  */
 export function autoInitBlogAds(
   client: string,
@@ -297,8 +297,8 @@ export function autoInitBlogPlaceholders() {
  * Uses unified START and END slot placement logic
  * END placement: before last content element (same as blog)
  * @param client - AdSense client ID
- * @param slotStart - Optional slot ID for start placement (after first paragraph)
- * @param slotEnd - Optional slot ID for end placement (before last paragraph)
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
  */
 export function autoInitDownloadAds(
   client: string,
@@ -366,10 +366,10 @@ export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
 
 /**
  * Check if placeholders should be rendered (for development/staging)
- * Always returns true in non-production environments for testing layout
- * @returns True if placeholders should render (dev/staging environments)
+ * Returns true only in non-production builds to avoid showing placeholders on staging domains
+ * @returns True if placeholders should render (non-production builds only)
  */
 export function shouldRenderPlaceholders(): boolean {
-  // Show placeholders in non-production environments
-  return !import.meta.env.PROD || !isProdSite();
+  // Show placeholders in non-production builds only
+  return !import.meta.env.PROD;
 }

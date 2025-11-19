@@ -169,7 +169,8 @@ let validationError: Error | null = null;
  * ```typescript
  * const env = validateEnv('production');
  * console.log(env.SITE_URL); // https://erland.me
- * // AdSense optional: if PUBLIC_ADSENSE_CLIENT empty, no ads render
+ * // AdSense optional: validation allows empty string for PUBLIC_ADSENSE_CLIENT.
+ * // Note: If PUBLIC_ADSENSE_CLIENT is empty, validation passes but ad rendering logic will not render ads.
  * ```
  *
  * @internal
@@ -393,7 +394,7 @@ export function isProdSite(): boolean {
 /**
  * Google Tag Manager container ID
  * Format: GTM-XXXXXXXX (public, non-secret)
- * Required in production, optional in development
+ * Optional in all environments
  * @public
  * @example 'GTM-ABC1234'
  */
@@ -402,14 +403,14 @@ export const GTM_ID: string = validatedEnv.PUBLIC_GTM_ID || '';
 /**
  * Google AdSense publisher client ID
  * Format: ca-pub-XXXXXXXXXX (public identifier)
- * Required in production, optional in development
+ * Optional in all environments – ads render only when configured
  * @public
  * @example 'ca-pub-1234567890123456'
  */
 export const ADSENSE_CLIENT: string = validatedEnv.PUBLIC_ADSENSE_CLIENT || '';
 
 /**
- * AdSense slot ID for START placement (after first paragraph)
+ * AdSense slot ID for START placement (after first content element)
  * Shared by blog and download pages
  * Numeric string, optional in all environments
  * @public
@@ -419,7 +420,7 @@ export const ADSENSE_SLOT_START: string =
   validatedEnv.PUBLIC_ADSENSE_SLOT_START || '';
 
 /**
- * AdSense slot ID for END placement (after last paragraph)
+ * AdSense slot ID for END placement (before last content element)
  * Shared by blog and download pages
  * Numeric string, optional in all environments
  * @public
