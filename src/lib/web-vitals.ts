@@ -8,9 +8,6 @@
  */
 
 import type { Metric } from 'web-vitals';
-import { createLogger } from './logger';
-
-const log = createLogger('WebVitals');
 
 interface GTMDataLayer {
   push(data: Record<string, unknown>): void;
@@ -44,13 +41,7 @@ function isGTMAvailable(): boolean {
  * @param metric - Web vitals metric from web-vitals library
  */
 function sendToGTM(metric: Metric): void {
-  if (!isGTMAvailable()) {
-    log.debug(`${metric.name}: ${Math.round(metric.value)}`, {
-      rating: metric.rating,
-      delta: metric.delta,
-    });
-    return;
-  }
+  if (!isGTMAvailable()) return;
 
   const w = window as WindowWithGTM;
   const dataLayer = w.dataLayer;
@@ -66,12 +57,6 @@ function sendToGTM(metric: Metric): void {
     metric_rating: metric.rating, // 'good', 'needs-improvement', or 'poor'
     metric_delta: Math.round(metric.delta),
     metric_navigation_type: metric.navigationType,
-  });
-
-  log.debug(`Sent to GTM: ${metric.name}`, {
-    value: Math.round(metric.value),
-    rating: metric.rating,
-    id: metric.id,
   });
 }
 
@@ -117,10 +102,7 @@ function sendToGA4(metric: Metric): void {
  */
 export async function initWebVitals(): Promise<void> {
   // Only run in production
-  if (!import.meta.env.PROD) {
-    log.info('Skipping in development mode');
-    return;
-  }
+  if (!import.meta.env.PROD) return;
 
   try {
     // Dynamic import to avoid bundling in non-production builds
@@ -145,10 +127,8 @@ export async function initWebVitals(): Promise<void> {
     // Track Time to First Byte (TTFB)
     // Measures server response time - good < 800ms
     webVitals.onTTFB(sendToGTM);
-
-    log.info('Monitoring initialized');
-  } catch (error) {
-    log.error('Failed to initialize', error);
+  } catch {
+    // Silent fail - web vitals monitoring is non-critical
   }
 }
 
@@ -175,8 +155,8 @@ export async function initWebVitalsWithGA4(): Promise<void> {
     webVitals.onINP(sendToBoth);
     webVitals.onFCP(sendToBoth);
     webVitals.onTTFB(sendToBoth);
-  } catch (error) {
-    log.error('Failed to initialize', error);
+  } catch {
+    // Silent fail - web vitals monitoring is non-critical
   }
 }
 
@@ -203,8 +183,8 @@ export async function getWebVitalsSnapshot(): Promise<Record<string, number>> {
     });
 
     return snapshot;
-  } catch (error) {
-    log.error('Failed to get snapshot', error);
+  } catch {
+    // Silent fail - return empty snapshot
     return {};
   }
 }

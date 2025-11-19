@@ -8,7 +8,7 @@
  * - Automatic detection of download links (external files with extensions)
  * - GTM dataLayer integration for Google Analytics 4
  * - Extracts file metadata (name, extension, size, page)
- * - Graceful fallback if GTM is not available
+ * - Only active in production with GTM configured
  *
  * Events pushed to dataLayer:
  * {
@@ -20,6 +20,8 @@
  *   download_page: '/download/template-kalender-2026'
  * }
  */
+
+import { GTM_ID } from './env';
 
 /**
  * GTM dataLayer event structure for file downloads
@@ -65,17 +67,13 @@ function hasDataLayer(): boolean {
  * @param data - Download event data to push
  */
 function pushDownloadEvent(data: DownloadEventData): void {
-  if (!hasDataLayer()) {
-    console.warn('[Download Tracker] GTM dataLayer not available');
-    return;
-  }
+  if (!hasDataLayer()) return;
 
   try {
     const w = window as WindowWithDataLayer;
     w.dataLayer?.push(data);
-    console.log('[Download Tracker] Event pushed:', data);
-  } catch (error) {
-    console.error('[Download Tracker] Failed to push event:', error);
+  } catch {
+    // Silent fail
   }
 }
 
@@ -225,22 +223,27 @@ function handleDownloadClick(event: MouseEvent): void {
  * Initialize download tracking on all download links
  * Attaches click handlers to links with downloadable file extensions
  * Safe to call multiple times - skips already-tracked links
+ * Only active in production environment with GTM configured
  * @example
  * // Initialize after page load or navigation
  * initDownloadTracking();
  */
 export function initDownloadTracking(): void {
-  // Skip if GTM is not available
-  if (!hasDataLayer()) {
-    console.warn(
-      '[Download Tracker] GTM dataLayer not available, skipping initialization'
-    );
+  // Skip if not production environment
+  if (!import.meta.env.PROD) {
     return;
   }
 
+  // Skip if GTM is not configured
+  if (!GTM_ID || GTM_ID.trim() === '') {
+    return;
+  }
+
+  // Skip if GTM dataLayer is not available
+  if (!hasDataLayer()) return;
+
   // Find all download links
   const links = document.querySelectorAll('a');
-  let trackedCount = 0;
 
   links.forEach(link => {
     // Skip if already tracked
@@ -250,15 +253,8 @@ export function initDownloadTracking(): void {
     if (isDownloadLink(link)) {
       link.addEventListener('click', handleDownloadClick);
       link.setAttribute('data-download-tracked', 'true');
-      trackedCount++;
     }
   });
-
-  if (trackedCount > 0) {
-    console.log(
-      `[Download Tracker] Initialized tracking on ${trackedCount} download links`
-    );
-  }
 }
 
 /**

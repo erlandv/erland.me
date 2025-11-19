@@ -26,21 +26,21 @@ const logger = (() => {
   return {
     info: (message, ...args) => {
       if (isDevMode) {
-        console.log(`${PREFIX} ℹ️`, message, ...args);
+        console.log(`${PREFIX}`, message, ...args);
       }
     },
     warn: (message, ...args) => {
-      console.warn(`${PREFIX} ⚠️`, message, ...args);
+      console.warn(`${PREFIX}`, message, ...args);
     },
     error: (message, error, ...args) => {
-      console.error(`${PREFIX} ❌`, message, ...args);
+      console.error(`${PREFIX}`, message, ...args);
       if (error) {
         console.error('Error:', error);
       }
     },
     debug: (message, ...args) => {
       if (isDevMode) {
-        console.debug(`${PREFIX} 🔍`, message, ...args);
+        console.debug(`${PREFIX}`, message, ...args);
       }
     },
   };

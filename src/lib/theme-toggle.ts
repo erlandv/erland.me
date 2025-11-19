@@ -335,8 +335,8 @@ export const init = async (): Promise<void> => {
   let control: ThemeControl;
   try {
     control = await waitForThemeControl();
-  } catch (error) {
-    console.error('[ThemeToggle] Theme control not available:', error);
+  } catch {
+    // Theme control not available - exit silently
     return;
   }
 

@@ -12,6 +12,10 @@
  * This module handles the full interactive theme control after page load.
  */
 
+import { createLogger } from './logger';
+
+const log = createLogger('ThemeControl');
+
 /**
  * User's theme preference setting
  * - 'light': Force light theme
@@ -108,8 +112,8 @@ export function initThemeControl(): void {
   const writeStoredPreference = (value: ThemePreference): void => {
     try {
       localStorage.setItem(storageKey, value);
-    } catch (err) {
-      console.warn('Failed to save theme preference:', err);
+    } catch {
+      // Silent fail - theme still works without localStorage persistence
     }
   };
 
@@ -144,7 +148,7 @@ export function initThemeControl(): void {
       try {
         callback({ preference, resolved });
       } catch (error) {
-        console.error('Theme subscriber error:', error);
+        log.error('Theme subscriber error', { error });
       }
     });
   };

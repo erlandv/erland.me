@@ -35,10 +35,6 @@
  * ```
  */
 
-import { createLogger } from './logger';
-
-const log = createLogger('ServiceWorker');
-
 /**
  * Configuration for service worker registration callbacks
  * @property onSuccess - Called when SW is active and ready
@@ -77,29 +73,19 @@ function isSupported(): boolean {
 export async function registerServiceWorker(
   config: ServiceWorkerConfig = {}
 ): Promise<ServiceWorkerRegistration | null> {
-  if (!isSupported()) {
-    log.info('Service workers not supported');
-    return null;
-  }
+  if (!isSupported()) return null;
 
-  if (!import.meta.env.PROD) {
-    log.info('Skipping registration in development');
-    return null;
-  }
+  if (!import.meta.env.PROD) return null;
 
   try {
     const registration = await navigator.serviceWorker.register('/sw.js', {
       scope: '/',
     });
 
-    log.info('Service worker registered', { scope: registration.scope });
-
     // Check for updates
     registration.addEventListener('updatefound', () => {
       const newWorker = registration.installing;
       if (!newWorker) return;
-
-      log.info('Update found, installing new version...');
 
       newWorker.addEventListener('statechange', () => {
         if (
@@ -107,7 +93,6 @@ export async function registerServiceWorker(
           navigator.serviceWorker.controller
         ) {
           // New service worker available
-          log.info('New version available');
           config.onUpdate?.(registration);
         }
       });
@@ -121,7 +106,6 @@ export async function registerServiceWorker(
     return registration;
   } catch (error) {
     const err = error instanceof Error ? error : new Error(String(error));
-    log.error('Registration failed', err);
     config.onError?.(err);
     return null;
   }
@@ -142,12 +126,10 @@ export async function unregisterServiceWorker(): Promise<boolean> {
     const registration = await navigator.serviceWorker.getRegistration();
     if (registration) {
       const success = await registration.unregister();
-      log.info('Unregistered', { success });
       return success;
     }
     return false;
-  } catch (error) {
-    log.error('Unregister failed', error);
+  } catch {
     return false;
   }
 }
@@ -185,8 +167,7 @@ function showUpdateNotification(): void {
       });
     })
     .catch(() => {
-      // Fallback to logger if toast fails
-      log.info('New version available. Please refresh the page.');
+      // Silent fail if toast import fails
     });
 }
 
@@ -204,15 +185,8 @@ export function initServiceWorker(): void {
   // Register on load to avoid blocking initial render
   window.addEventListener('load', () => {
     registerServiceWorker({
-      onSuccess: () => {
-        log.info('Active and ready');
-      },
       onUpdate: () => {
-        log.info('Update available');
         showUpdateNotification();
-      },
-      onError: error => {
-        log.error('Registration error', error);
       },
     });
   });
