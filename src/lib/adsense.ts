@@ -366,10 +366,12 @@ export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
 
 /**
  * Check if placeholders should be rendered (for development/staging)
- * Returns true only in non-production builds to avoid showing placeholders on staging domains
- * @returns True if placeholders should render (non-production builds only)
+ * Shows placeholders in dev mode OR on non-production domains (staging/preview)
+ * This ensures staging builds show placeholders instead of broken ad slots
+ * @returns True if placeholders should render (dev mode or non-production domain)
  */
 export function shouldRenderPlaceholders(): boolean {
-  // Show placeholders in non-production builds only
-  return !import.meta.env.PROD;
+  // Show placeholders in non-production builds OR non-production domains
+  // Ensures staging/preview environments show placeholders instead of empty ad slots
+  return !import.meta.env.PROD || !isProdSite();
 }
