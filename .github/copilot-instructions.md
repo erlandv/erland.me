@@ -360,12 +360,12 @@ function shouldEnableStagingFeature(): boolean {
 
 **Truth Table:**
 
-| Environment | `PROD` | `isProdSite()` | Production Only | Staging/Dev Only |
-|-------------|--------|----------------|----------------|------------------|
-| `npm run dev` | `false` | `false` | ❌ | ✅ |
-| `npm run preview` | `true` | `false` | ❌ | ✅ |
-| Staging (Cloudflare) | `true` | `false` | ❌ | ✅ |
-| Production (erland.me) | `true` | `true` | ✅ | ❌ |
+| Environment            | `PROD`  | `isProdSite()` | Production Only | Staging/Dev Only |
+| ---------------------- | ------- | -------------- | --------------- | ---------------- |
+| `npm run dev`          | `false` | `false`        | ❌              | ✅               |
+| `npm run preview`      | `true`  | `false`        | ❌              | ✅               |
+| Staging (Cloudflare)   | `true`  | `false`        | ❌              | ✅               |
+| Production (erland.me) | `true`  | `true`         | ✅              | ❌               |
 
 **Real Example (AdSense):**
 
@@ -374,10 +374,10 @@ function shouldEnableStagingFeature(): boolean {
 export function shouldRenderAds(config: AdsRenderConfig): boolean {
   const client = (config.client ?? '').trim();
   if (!client) return false;
-  
+
   // Only render real ads in production build + production domain
   if (!import.meta.env.PROD || !isProdSite()) return false;
-  
+
   return config.slots ? hasSlotConfigured(config.slots) : true;
 }
 
@@ -407,6 +407,7 @@ if (import.meta.env.PUBLIC_SITE_ENV === 'staging') {
 ```
 
 **Mode Detection Priority** (from `src/lib/env.ts`):
+
 1. `PUBLIC_SITE_ENV` explicit override (highest)
 2. Localhost detection (`localhost`, `127.0.0.1` → development)
 3. Production URL + `NODE_ENV` (`erland.me` + `production` → production)
@@ -414,14 +415,14 @@ if (import.meta.env.PUBLIC_SITE_ENV === 'staging') {
 
 #### Use Case → Pattern Guide
 
-| Use Case | Pattern | Example |
-|----------|---------|---------|
-| Real ads/analytics | Hybrid | `PROD && isProdSite()` |
-| Dev placeholders | Hybrid | `!PROD \|\| !isProdSite()` |
-| Debug tools | Build-time | `!import.meta.env.PROD` |
-| Error reporting | Build-time | `import.meta.env.PROD` |
-| Feature flags | Env Var | `PUBLIC_SITE_ENV === 'staging'` |
-| API endpoints | Runtime | Domain-based routing |
+| Use Case           | Pattern    | Example                         |
+| ------------------ | ---------- | ------------------------------- |
+| Real ads/analytics | Hybrid     | `PROD && isProdSite()`          |
+| Dev placeholders   | Hybrid     | `!PROD \|\| !isProdSite()`      |
+| Debug tools        | Build-time | `!import.meta.env.PROD`         |
+| Error reporting    | Build-time | `import.meta.env.PROD`          |
+| Feature flags      | Env Var    | `PUBLIC_SITE_ENV === 'staging'` |
+| API endpoints      | Runtime    | Domain-based routing            |
 
 #### Best Practices
 
