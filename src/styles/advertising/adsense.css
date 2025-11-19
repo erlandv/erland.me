@@ -22,7 +22,7 @@ ins.adsbygoogle {
   overflow: hidden;
 }
 
-.adsense-placeholder {
+.ad-placeholder {
   background: var(--overlay-005);
   border: 2px dashed var(--border-color);
   border-radius: var(--radius-md);

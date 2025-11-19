@@ -45,6 +45,7 @@ interface WindowWithAds extends Window {
 /**
  * Insert AdSense ad unit into container element
  * Creates responsive ad with auto format and prevents duplicate insertions
+ * Inserts before last content element (paragraph, heading, etc.) for better integration
  * @param container - Parent element to append ad unit
  * @param client - AdSense client ID (ca-pub-XXXXXXXXXX)
  * @param slot - AdSense slot ID
@@ -65,7 +66,23 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
     ins.setAttribute('data-ad-format', 'auto');
     ins.setAttribute('data-full-width-responsive', 'true');
 
-    container.appendChild(ins);
+    // Find last substantial content element to insert before it
+    const candidates = Array.from(
+      container.querySelectorAll(
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
+      )
+    ).filter(el => !el.closest('.toc'));
+
+    const lastElement = candidates[candidates.length - 1];
+
+    if (lastElement && lastElement.parentNode) {
+      // Insert before last content element
+      lastElement.parentNode.insertBefore(ins, lastElement);
+    } else {
+      // Fallback: append to container if no suitable element found
+      container.appendChild(ins);
+    }
+
     // Initialize this unit
     const w = window as WindowWithAds;
     w.adsbygoogle = w.adsbygoogle || [];
@@ -78,6 +95,7 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
 /**
  * Insert placeholder element for development/testing
  * Shows where ad would appear in production without AdSense code
+ * Inserts before last content element for better integration
  * @param container - Parent element to append placeholder
  * @param label - Optional custom label text (default: 'Ad Placeholder')
  */
@@ -88,22 +106,39 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
     `.ad-placeholder[data-ad-pos="end"]`
   );
   if (existing) return;
+
   const box = document.createElement('div');
   box.className = 'ad-placeholder';
   box.setAttribute('data-ad-pos', 'end');
   box.textContent = label || 'Ad Placeholder';
-  container.appendChild(box);
+
+  // Find last substantial content element to insert before it
+  const candidates = Array.from(
+    container.querySelectorAll(
+      'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
+    )
+  ).filter(el => !el.closest('.toc'));
+
+  const lastElement = candidates[candidates.length - 1];
+
+  if (lastElement && lastElement.parentNode) {
+    // Insert before last content element
+    lastElement.parentNode.insertBefore(box, lastElement);
+  } else {
+    // Fallback: append to container if no suitable element found
+    container.appendChild(box);
+  }
 }
 
 /**
- * Insert ad unit after middle content element
- * Analyzes content structure to find strategic mid-point placement
+ * Insert ad unit after first content element (START placement)
+ * Places ad after the first substantial content element (paragraph, heading, list, code block, etc.)
  * Considers paragraphs, headings, lists, code blocks, figures, and galleries
  * @param container - Container with content elements
  * @param client - AdSense client ID
  * @param slot - AdSense slot ID
  */
-export function insertAdAfterMiddle(
+export function insertAdAfterFirst(
   container: Element,
   client: string,
   slot: string
@@ -114,10 +149,11 @@ export function insertAdAfterMiddle(
       container.querySelectorAll(
         'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
       )
-    );
-    const n = candidates.length;
-    const index = n > 4 ? Math.floor(n / 2) : Math.max(n - 1, 0);
-    const ref = candidates[index];
+    ).filter(el => {
+      // Skip TOC elements - look for elements that are not part of TOC
+      return !el.closest('.toc');
+    });
+    const ref = candidates[0]; // First content element (excluding TOC)
     if (!ref || !ref.parentNode) {
       insertAdUnit(container, client, slot);
       return;
@@ -148,39 +184,43 @@ export function insertAdAfterMiddle(
     w.adsbygoogle = w.adsbygoogle || [];
     w.adsbygoogle.push({});
   } catch (e) {
-    log.warn('insertAdAfterMiddle failed', { error: e, slot });
+    log.warn('insertAdAfterFirst failed', { error: e, slot });
   }
 }
 
 /**
- * Insert placeholder after middle content element (dev mode)
- * Mirrors insertAdAfterMiddle positioning logic for layout testing
+ * Insert placeholder after first content element (dev mode)
+ * Mirrors insertAdAfterFirst positioning logic for layout testing
  * @param container - Container with content elements
  * @param label - Optional custom label text
  */
-export function insertPlaceholderAfterMiddle(
+export function insertPlaceholderAfterFirst(
   container: Element,
   label?: string
 ) {
   if (!container) return;
   try {
-    // Prevent duplicate placeholder for mid position
+    // Prevent duplicate placeholder for start position
     const existing = container.querySelector(
-      `.ad-placeholder[data-ad-pos="mid"]`
+      `.ad-placeholder[data-ad-pos="start"]`
     );
     if (existing) return;
+
     const candidates = Array.from(
       container.querySelectorAll(
         'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
       )
-    );
-    const n = candidates.length;
-    const index = n > 4 ? Math.floor(n / 2) : Math.max(n - 1, 0);
-    const ref = candidates[index];
+    ).filter(el => {
+      // Skip TOC elements - look for elements that are not part of TOC
+      return !el.closest('.toc');
+    });
+
+    const ref = candidates[0]; // First content element (excluding TOC)
     const box = document.createElement('div');
     box.className = 'ad-placeholder';
-    box.setAttribute('data-ad-pos', 'mid');
+    box.setAttribute('data-ad-pos', 'start');
     box.textContent = label || 'Ad Placeholder';
+
     if (!ref || !ref.parentNode) {
       container.appendChild(box);
     } else {
@@ -192,176 +232,102 @@ export function insertPlaceholderAfterMiddle(
         target.parentNode.insertBefore(box, target.nextSibling);
       }
     }
-  } catch (e) {
-    log.warn('insertPlaceholderAfterMiddle failed', { error: e });
+  } catch {
+    // Silent fail - placeholder insertion is non-critical
   }
+}
+
+/**
+ * Auto-initialize AdSense ads for content pages (blog and download)
+ * Uses unified START and END slot placement logic
+ * @param containerId - Container element ID ('blog-content' or 'download-content')
+ * @param client - AdSense client ID
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
+ */
+export function autoInitContentAds(
+  containerId: string,
+  client: string,
+  slotStart?: string,
+  slotEnd?: string
+) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  if (slotStart) insertAdAfterFirst(container, client, slotStart);
+  if (slotEnd) insertAdUnit(container, client, slotEnd);
+}
+
+/**
+ * Auto-initialize ad placeholders for content pages (dev mode)
+ * Shows where ads would appear without loading AdSense
+ * @param containerId - Container element ID ('blog-content' or 'download-content')
+ */
+export function autoInitContentPlaceholders(containerId: string) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  insertPlaceholderAfterFirst(container, 'Ad-Placeholder (start)');
+  insertPlaceholderUnit(container, 'Ad-Placeholder (end)');
 }
 
 /**
  * Auto-initialize AdSense ads for blog post pages
- * Inserts mid-content and end-content ads in #blog-content container
+ * Wrapper for backward compatibility - delegates to unified content ads function
  * @param client - AdSense client ID
- * @param slotMid - Optional slot ID for mid-content ad
- * @param slotEnd - Optional slot ID for end-content ad
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
  */
 export function autoInitBlogAds(
   client: string,
-  slotMid?: string,
+  slotStart?: string,
   slotEnd?: string
 ) {
-  const prose = document.getElementById('blog-content');
-  if (!prose) return;
-  if (slotMid) insertAdAfterMiddle(prose, client, slotMid);
-  if (slotEnd) insertAdUnit(prose, client, slotEnd);
+  autoInitContentAds('blog-content', client, slotStart, slotEnd);
 }
 
 /**
  * Auto-initialize ad placeholders for blog post pages (dev mode)
- * Shows where ads would appear without loading AdSense
+ * Wrapper for backward compatibility - delegates to unified content placeholders function
  */
 export function autoInitBlogPlaceholders() {
-  const prose = document.getElementById('blog-content');
-  if (!prose) return;
-  insertPlaceholderAfterMiddle(prose, 'Ad Placeholder (mid)');
-  insertPlaceholderUnit(prose, 'Ad Placeholder (end)');
+  autoInitContentPlaceholders('blog-content');
 }
 
 /**
  * Auto-initialize AdSense ads for download pages
- * Complex placement logic with re-entrancy guards for view transitions:
- * - Mid-content: After middle content element
- * - End-content: Before share section or after files section
+ * Uses unified START and END slot placement logic
+ * END placement: before last content element (same as blog)
  * @param client - AdSense client ID
- * @param slotMid - Optional slot ID for mid-content ad
- * @param slotEnd - Optional slot ID for end-content ad
+ * @param slotStart - Optional slot ID for start placement (after first content element)
+ * @param slotEnd - Optional slot ID for end placement (before last content element)
  */
 export function autoInitDownloadAds(
   client: string,
-  slotMid?: string,
+  slotStart?: string,
   slotEnd?: string
 ) {
   const container = document.getElementById('download-content');
   if (!container) return;
-  if (slotMid) insertAdAfterMiddle(container, client, slotMid);
-  if (!slotEnd) return;
 
-  // Re-entrancy guard to avoid race duplicates across multiple events
-  const w = window as WindowWithAds;
-  w.__ads_dl_end = w.__ads_dl_end || new Set<string>();
-  const key = `${client}:${slotEnd}`;
-  if (w.__ads_dl_end.has(key)) return;
+  // Use unified START placement
+  if (slotStart) insertAdAfterFirst(container, client, slotStart);
 
-  try {
-    const existingGlobal = document.querySelector(
-      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
-    );
-    if (existingGlobal) {
-      w.__ads_dl_end.add(key);
-      return;
-    }
-
-    // Target: between files section and share -> insert before share if present
-    const share = document.querySelector('section.share');
-    if (share && share.parentNode) {
-      const ins = document.createElement('ins');
-      ins.className = 'adsbygoogle';
-      ins.style.display = 'block';
-      ins.setAttribute('data-ad-client', client);
-      ins.setAttribute('data-ad-slot', slotEnd);
-      ins.setAttribute('data-ad-format', 'auto');
-      ins.setAttribute('data-full-width-responsive', 'true');
-      share.parentNode.insertBefore(ins, share);
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({});
-      w.__ads_dl_end.add(key);
-      return;
-    }
-
-    // Fallback: after files section if present
-    const filesSection = document.getElementById('download-files-section');
-    if (filesSection && filesSection.parentNode) {
-      const ins = document.createElement('ins');
-      ins.className = 'adsbygoogle';
-      ins.style.display = 'block';
-      ins.setAttribute('data-ad-client', client);
-      ins.setAttribute('data-ad-slot', slotEnd);
-      ins.setAttribute('data-ad-format', 'auto');
-      ins.setAttribute('data-full-width-responsive', 'true');
-      filesSection.parentNode.insertBefore(ins, filesSection.nextSibling);
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({});
-      w.__ads_dl_end.add(key);
-      return;
-    }
-
-    // Final fallback: append inside content container
-    insertAdUnit(container, client, slotEnd);
-    w.__ads_dl_end.add(key);
-  } catch (e) {
-    log.warn('autoInitDownloadAds end placement failed', {
-      error: e,
-      slot: slotEnd,
-    });
-    const exists = document.querySelector(
-      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slotEnd}"]`
-    );
-    if (!exists) {
-      insertAdUnit(container, client, slotEnd);
-      const w = window as WindowWithAds;
-      w.__ads_dl_end?.add(key);
-    }
-  }
+  // Use unified END placement (same as blog)
+  if (slotEnd) insertAdUnit(container, client, slotEnd);
 }
 
 /**
  * Auto-initialize ad placeholders for download pages (dev mode)
- * Mirrors autoInitDownloadAds placement logic with re-entrancy guards
+ * Uses unified START and END placement (same as blog)
  */
 export function autoInitDownloadPlaceholders() {
   const container = document.getElementById('download-content');
   if (!container) return;
-  insertPlaceholderAfterMiddle(container, 'Ad Placeholder (mid)');
-  try {
-    const w = window as WindowWithAds;
-    w.__ph_dl_end = w.__ph_dl_end || false;
-    if (w.__ph_dl_end) return;
 
-    const phExists = document.querySelector(
-      '.ad-placeholder[data-ad-pos="end"]'
-    );
-    if (phExists) {
-      w.__ph_dl_end = true;
-      return;
-    }
+  // Use unified START placement
+  insertPlaceholderAfterFirst(container, 'Ad Placeholder (start)');
 
-    const share = document.querySelector('section.share');
-    if (share && share.parentNode) {
-      const box = document.createElement('div');
-      box.className = 'ad-placeholder';
-      box.setAttribute('data-ad-pos', 'end');
-      box.textContent = 'Ad Placeholder (end)';
-      share.parentNode.insertBefore(box, share);
-      w.__ph_dl_end = true;
-      return;
-    }
-
-    const filesSection = document.getElementById('download-files-section');
-    if (filesSection && filesSection.parentNode) {
-      const box = document.createElement('div');
-      box.className = 'ad-placeholder';
-      box.setAttribute('data-ad-pos', 'end');
-      box.textContent = 'Ad Placeholder (end)';
-      filesSection.parentNode.insertBefore(box, filesSection.nextSibling);
-      w.__ph_dl_end = true;
-      return;
-    }
-
-    insertPlaceholderUnit(container, 'Ad Placeholder (end)');
-    w.__ph_dl_end = true;
-  } catch (e) {
-    log.warn('autoInitDownloadPlaceholders end placement failed', { error: e });
-    insertPlaceholderUnit(container, 'Ad Placeholder (end)');
-  }
+  // Use unified END placement (same as blog)
+  insertPlaceholderUnit(container, 'Ad Placeholder (end)');
 }
 
 type AdsSlots = Array<string | null | undefined>;
@@ -381,8 +347,10 @@ interface AdsRenderConfig {
  * @param config - Configuration with client ID and slot IDs
  * @returns True if ads should render (production site with valid config)
  * @example
- * if (shouldRenderAds({ client, slots: [slotMid, slotEnd] })) {
- *   autoInitBlogAds(client, slotMid, slotEnd);
+ * if (shouldRenderAds({ client, slots: [slotStart, slotEnd] })) {
+ *   autoInitBlogAds(client, slotStart, slotEnd);
+ * } else {
+ *   autoInitBlogPlaceholders();
  * }
  */
 export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
@@ -394,4 +362,16 @@ export function shouldRenderAds(config: AdsRenderConfig = {}): boolean {
     return false;
   }
   return true;
+}
+
+/**
+ * Check if placeholders should be rendered (for development/staging)
+ * Shows placeholders in dev mode OR on non-production domains (staging/preview)
+ * This ensures staging builds show placeholders instead of broken ad slots
+ * @returns True if placeholders should render (dev mode or non-production domain)
+ */
+export function shouldRenderPlaceholders(): boolean {
+  // Show placeholders in non-production builds OR non-production domains
+  // Ensures staging/preview environments show placeholders instead of empty ad slots
+  return !import.meta.env.PROD || !isProdSite();
 }

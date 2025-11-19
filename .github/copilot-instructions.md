@@ -296,6 +296,143 @@ Watch for:
 
 ## Project-Specific Patterns
 
+### Environment-Aware Features
+
+The project uses multiple patterns for environment-aware feature detection to handle dev, staging, and production environments correctly.
+
+#### Pattern 1: Build-Time Detection (`import.meta.env.PROD`)
+
+Use for features that need compile-time separation (dev vs production builds). Code gets tree-shaken when unused.
+
+```typescript
+// Production-only feature (analytics, error tracking)
+if (import.meta.env.PROD) {
+  initProductionFeature();
+}
+
+// Development-only feature (debug panels, verbose logging)
+if (!import.meta.env.PROD) {
+  initDevFeature();
+}
+```
+
+**Pros:** Zero runtime overhead, unused code removed from bundle  
+**Cons:** Staging builds (`npm run build`) become production mode, can't differentiate staging from prod
+
+#### Pattern 2: Runtime Domain Detection (`isProdSite()`)
+
+Use for features that need to detect the actual production domain (erland.me vs staging/preview).
+
+```typescript
+import { isProdSite } from '@lib/env';
+
+// Only on production domain (erland.me)
+if (isProdSite()) {
+  initRealProductionFeature();
+}
+
+// On localhost/staging/preview (not erland.me)
+if (!isProdSite()) {
+  initNonProdDomainFeature();
+}
+```
+
+**Pros:** Runtime check, works across all environments, detects actual domain  
+**Cons:** Code stays in bundle (not tree-shaken), minimal runtime overhead
+
+#### Pattern 3: Hybrid (Build + Runtime)
+
+Use for complex features like ads, analytics, feature flags that need full control.
+
+```typescript
+import { isProdSite } from '@lib/env';
+
+// Feature for PRODUCTION BUILD + PRODUCTION DOMAIN only
+function shouldEnableProductionFeature(): boolean {
+  return import.meta.env.PROD && isProdSite();
+}
+
+// Feature for DEV or STAGING (not true production)
+function shouldEnableStagingFeature(): boolean {
+  return !import.meta.env.PROD || !isProdSite();
+}
+```
+
+**Truth Table:**
+
+| Environment            | `PROD`  | `isProdSite()` | Production Only | Staging/Dev Only |
+| ---------------------- | ------- | -------------- | --------------- | ---------------- |
+| `npm run dev`          | `false` | `false`        | ❌              | ✅               |
+| `npm run preview`      | `true`  | `false`        | ❌              | ✅               |
+| Staging (Cloudflare)   | `true`  | `false`        | ❌              | ✅               |
+| Production (erland.me) | `true`  | `true`         | ✅              | ❌               |
+
+**Real Example (AdSense):**
+
+```typescript
+// src/lib/adsense.ts
+export function shouldRenderAds(config: AdsRenderConfig): boolean {
+  const client = (config.client ?? '').trim();
+  if (!client) return false;
+
+  // Only render real ads in production build + production domain
+  if (!import.meta.env.PROD || !isProdSite()) return false;
+
+  return config.slots ? hasSlotConfigured(config.slots) : true;
+}
+
+export function shouldRenderPlaceholders(): boolean {
+  // Show placeholders in dev builds OR non-production domains
+  return !import.meta.env.PROD || !isProdSite();
+}
+```
+
+#### Pattern 4: Explicit Environment Variable
+
+Use for custom modes beyond dev/staging/prod (preview, testing, demo modes).
+
+```typescript
+import { resolveEnvironmentMode } from '@lib/env';
+
+const mode = resolveEnvironmentMode(); // 'development' | 'staging' | 'production'
+
+if (mode === 'production') {
+  // Production-specific logic
+}
+
+// Or check directly
+if (import.meta.env.PUBLIC_SITE_ENV === 'staging') {
+  // Staging-specific logic
+}
+```
+
+**Mode Detection Priority** (from `src/lib/env.ts`):
+
+1. `PUBLIC_SITE_ENV` explicit override (highest)
+2. Localhost detection (`localhost`, `127.0.0.1` → development)
+3. Production URL + `NODE_ENV` (`erland.me` + `production` → production)
+4. Default fallback (development)
+
+#### Use Case → Pattern Guide
+
+| Use Case           | Pattern    | Example                         |
+| ------------------ | ---------- | ------------------------------- |
+| Real ads/analytics | Hybrid     | `PROD && isProdSite()`          |
+| Dev placeholders   | Hybrid     | `!PROD \|\| !isProdSite()`      |
+| Debug tools        | Build-time | `!import.meta.env.PROD`         |
+| Error reporting    | Build-time | `import.meta.env.PROD`          |
+| Feature flags      | Env Var    | `PUBLIC_SITE_ENV === 'staging'` |
+| API endpoints      | Runtime    | Domain-based routing            |
+
+#### Best Practices
+
+1. **Centralize logic** in `src/lib/env.ts` or dedicated feature flags module
+2. **Document with truth tables** in JSDoc for complex conditions
+3. **Test all environments:** dev server, preview, staging, production
+4. **Use descriptive names:** `shouldEnableX()` not `checkX()` or `isX()`
+5. **Avoid magic strings:** Use constants/enums for environment values
+6. **Cache expensive checks** if called frequently
+
 ### Table Styling: `width: 1%` Trick
 
 First column uses `width: 1%` + `white-space: nowrap` to force minimum width based on content while allowing other columns to share remaining space proportionally. Works for 2-column (blog specs) and multi-column (download files) tables. **Never use `table-layout: fixed`** — breaks multi-column layouts.
@@ -414,11 +551,12 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 - `SITE_DOMAIN`: Site domain (default: `localhost` for development)
 - `PUBLIC_SITE_ENV`: Explicit environment override (`development`/`production`/`staging`)
 
-**Analytics & Tracking** (Required for production):
+**Analytics & Tracking** (Optional in all environments):
 
-- `PUBLIC_GTM_ID`: Google Tag Manager ID (format: `GTM-XXXXXXXX`)
-- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (format: `ca-pub-XXXXXXXXXX`)
-- `PUBLIC_ADSENSE_SLOT_*`: AdSense slot IDs (numeric)
+- `PUBLIC_GTM_ID`: Google Tag Manager ID (format: `GTM-XXXXXXXX`, optional)
+- `PUBLIC_ADSENSE_CLIENT`: AdSense publisher ID (format: `ca-pub-XXXXXXXXXX`, optional)
+- `PUBLIC_ADSENSE_SLOT_START`: AdSense slot ID for start placement (after first content element, numeric, optional)
+- `PUBLIC_ADSENSE_SLOT_END`: AdSense slot ID for end placement (before last content element, numeric, optional)
 - `PUBLIC_AHREFS_DATA_KEY`: Ahrefs Web Analytics data key (optional)
 
 **Build Configuration**:
@@ -429,8 +567,9 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 
 **Validation Rules**:
 
-- Development mode: Analytics IDs optional, localhost domains supported
-- Production mode: GTM and AdSense IDs required, proper domain format enforced
+- All environments: Analytics IDs optional - ads only render when configured
+- Development mode: Localhost domains supported (localhost, 127.0.0.1)
+- Production mode: Proper domain format enforced for SITE_DOMAIN
 - All URLs validated for proper format, domains validated with regex patterns
 
 ### More Info
