@@ -29,9 +29,9 @@
  * ```
  */
 
-import { copyToClipboard } from './clipboard';
-import { showToast } from './toast';
-import { onRouteChange } from './router-events';
+import { copyToClipboard } from '@lib/core/clipboard';
+import { showToast } from '@lib/features/toast';
+import { onRouteChange } from '@lib/infrastructure/router-events';
 
 /**
  * DOM scope for querying elements

@@ -43,8 +43,8 @@
  * ```
  */
 
-import { qs, escapeHtml } from './dom-builder';
-import { onRouteChange } from './router-events';
+import { qs, escapeHtml } from '@lib/core/dom-builder';
+import { onRouteChange } from '@lib/infrastructure/router-events';
 import arrowUpRaw from '@/icons/arrow-up.svg?raw';
 import arrowDownRaw from '@/icons/arrow-down.svg?raw';
 

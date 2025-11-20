@@ -15,8 +15,8 @@ import rightArrowIcon from '@/icons/arrow-right.svg?raw';
 import pauseIcon from '@/icons/stories-pause.svg?raw';
 import playIcon from '@/icons/stories-play.svg?raw';
 import verifiedIcon from '@/icons/stories-verified.svg?raw';
-import { onRouteChange } from './router-events';
-import { qs, qsa } from './dom-builder';
+import { onRouteChange } from '@lib/infrastructure/router-events';
+import { qs, qsa } from '@lib/core/dom-builder';
 
 /**
  * Story data structure

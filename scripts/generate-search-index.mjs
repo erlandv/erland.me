@@ -3,7 +3,10 @@
 import { readdir, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
-import { markdownToPlainText, summarize } from '../src/lib/search-utils.js';
+import {
+  markdownToPlainText,
+  summarize,
+} from '../src/lib/content/search-utils.js';
 
 const BLOG_DIR = path.resolve('src/content/blog');
 const OUTPUT_DIR = path.resolve('public');

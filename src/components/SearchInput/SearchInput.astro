@@ -23,7 +23,7 @@
  */
 import Icon from '@components/Icon.astro';
 import styles from './search-input.module.css';
-import type { SearchablePost } from '@lib/search';
+import type { SearchablePost } from '@lib/content/search';
 
 interface Props {
   posts?: SearchablePost[];
@@ -101,8 +101,8 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 <script>
   import type Fuse from 'fuse.js';
   import type { FuseResultMatch } from 'fuse.js';
-  import { onRouteChange } from '@lib/router-events';
-  import type { SearchablePost } from '@lib/search';
+  import { onRouteChange } from '@lib/infrastructure/router-events';
+  import type { SearchablePost } from '@lib/content/search';
 
   // Type definitions
   interface SearchResult {

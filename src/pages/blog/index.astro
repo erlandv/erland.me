@@ -4,8 +4,8 @@ import BackNav from '@components/BackNav/BackNav.astro';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
-import { loadAllPosts, slicePage } from '@lib/blog';
-import { collectionPageJsonLd } from '@lib/seo';
+import { loadAllPosts, slicePage } from '@lib/content/blog';
+import { collectionPageJsonLd } from '@lib/content/seo';
 import listing from '@/styles/pages/listing.module.css';
 
 const posts = await loadAllPosts();

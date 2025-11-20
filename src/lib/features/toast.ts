@@ -14,7 +14,7 @@
  *
  * **Usage:**
  * ```typescript
- * import { showToast } from './toast';
+ * import { showToast } from '@lib/features/toast';
  *
  * // Simple success message
  * showToast('Copied to clipboard!');

@@ -24,7 +24,7 @@
  *
  * **Usage:**
  * ```typescript
- * import { SITE_URL, ADSENSE_CLIENT, isProdSite } from '@lib/env';
+ * import { SITE_URL, ADSENSE_CLIENT, isProdSite } from '@lib/core/env';
  *
  * const siteUrl = SITE_URL; // Type-safe, validated
  * if (isProdSite()) {

@@ -24,7 +24,7 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 ### Client-Side JavaScript Pattern
 
-- **Lazy initialization via gates**: `src/lib/ui-init.ts` conditionally imports features only when DOM selectors match (check `hasTarget(SELECTORS.feature)` before loading)
+- **Lazy initialization via gates**: `src/lib/infrastructure/ui-init.ts` conditionally imports features only when DOM selectors match (check `hasTarget(SELECTORS.feature)` before loading)
 - **Critical cache-but-reinit pattern**: Cache imported module once but **always re-execute initializer** on Astro view transitions (`astro:page-load`, `astro:after-swap`)
 
   ```typescript
@@ -55,7 +55,7 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 ### Environment Validation System
 
-- **Runtime validation**: `src/lib/env.ts` provides comprehensive Zod-based validation of all environment variables at startup
+- **Runtime validation**: `src/lib/core/env.ts` provides comprehensive Zod-based validation of all environment variables at startup
 - **Mode detection**: Automatically detects environment mode based on explicit settings, localhost detection, or production URL patterns
 - **Type-safe access**: All environment variables are validated and cached for consistent access throughout the application
 - **Development-friendly**: Analytics IDs (GTM, AdSense) are optional in development mode but required for production builds
@@ -180,7 +180,7 @@ const { Content } = await entry.render();
 
 ### Image Handling Pattern
 
-Use `resolveHero()` from `src/lib/images.ts` to handle both frontmatter images and fallback hero images from glob imports:
+Use `resolveHero()` from `src/lib/content/images.ts` to handle both frontmatter images and fallback hero images from glob imports:
 
 ```typescript
 const hero = resolveHero(frontmatter.hero);
@@ -324,7 +324,7 @@ if (!import.meta.env.PROD) {
 Use for features that need to detect the actual production domain (erland.me vs staging/preview).
 
 ```typescript
-import { isProdSite } from '@lib/env';
+import { isProdSite } from '@lib/core/env';
 
 // Only on production domain (erland.me)
 if (isProdSite()) {
@@ -345,7 +345,7 @@ if (!isProdSite()) {
 Use for complex features like ads, analytics, feature flags that need full control.
 
 ```typescript
-import { isProdSite } from '@lib/env';
+import { isProdSite } from '@lib/core/env';
 
 // Feature for PRODUCTION BUILD + PRODUCTION DOMAIN only
 function shouldEnableProductionFeature(): boolean {
@@ -392,7 +392,7 @@ export function shouldRenderPlaceholders(): boolean {
 Use for custom modes beyond dev/staging/prod (preview, testing, demo modes).
 
 ```typescript
-import { resolveEnvironmentMode } from '@lib/env';
+import { resolveEnvironmentMode } from '@lib/core/env';
 
 const mode = resolveEnvironmentMode(); // 'development' | 'staging' | 'production'
 
@@ -455,7 +455,7 @@ First column uses `width: 1%` + `white-space: nowrap` to force minimum width bas
 
 ### Router Event Management
 
-The project uses a centralized router event system (`src/lib/router-events.ts`) that patches `history.pushState/replaceState`:
+The project uses a centralized router event system (`src/lib/infrastructure/router-events.ts`) that patches `history.pushState/replaceState`:
 
 ```typescript
 import { onRouteChange } from './router-events';
@@ -519,14 +519,14 @@ This catches cases where:
 
 ## Key Utility Modules
 
-- **`blog.ts`**: `loadAllPosts()`, `slugifyCategory()`, `slicePage()` - content loading and pagination helpers
-- **`images.ts`**: `resolveHero()`, `getOgImageUrl()` - image resolution and optimization
-- **`seo.ts`**: `blogPostingJsonLd()`, `collectionPageJsonLd()`, `breadcrumbJsonLd()` - structured data generators
-- **`search.ts`**: `postToSearchable()` - converts posts to Fuse.js searchable format
-- **`ui-init.ts`**: Entry point for lazy-loading client features with gate pattern
-- **`router-events.ts`**: Centralized History API event management
-- **`toast.ts`**: Toast notification system for user feedback
-- **`env.ts`**: Environment validation with Zod schemas, mode detection, and type-safe variable access
+- **`blog.ts`**: `src/lib/content/blog.ts` - content loading and pagination helpers
+- **`images.ts`**: `src/lib/content/images.ts` - image resolution and optimization
+- **`seo.ts`**: `src/lib/content/seo.ts` - structured data generators
+- **`search.ts`**: `src/lib/content/search.ts` - converts posts to Fuse.js searchable format
+- **`ui-init.ts`**: `src/lib/infrastructure/ui-init.ts` - Entry point for lazy-loading client features with gate pattern
+- **`router-events.ts`**: `src/lib/infrastructure/router-events.ts` - Centralized History API event management
+- **`toast.ts`**: `src/lib/infrastructure/toast.ts` - Toast notification system for user feedback
+- **`env.ts`**: `src/lib/core/env.ts` - Environment validation with Zod schemas, mode detection, and type-safe variable access
 
 ## File Organization
 

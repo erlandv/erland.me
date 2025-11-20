@@ -44,8 +44,8 @@
  * @param {string} [props.author] - Article author name
  * @param {boolean} [props.preloadSearch=false] - Preload search index JSON (for blog listing pages)
  */
-import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/seo';
-import { GTM_ID, ADSENSE_CLIENT, AHREFS_DATA_KEY } from '@lib/env';
+import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/content/seo';
+import { GTM_ID, ADSENSE_CLIENT, AHREFS_DATA_KEY } from '@lib/core/env';
 import { ClientRouter } from 'astro:transitions';
 import CriticalInit from './CriticalInit.astro';
 

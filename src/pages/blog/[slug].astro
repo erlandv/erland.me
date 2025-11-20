@@ -3,18 +3,18 @@ import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import { getCollection } from 'astro:content';
-import { blogPostingJsonLd } from '@lib/seo';
+import { blogPostingJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
-import { SITE_URL } from '@lib/env';
+import { SITE_URL } from '@lib/core/env';
 import blogStyles from './styles/_blog.module.css';
 import '@/styles/components/article-detail.css';
 import '@/styles/components/toc.css';
 import '@/styles/prose/tables.css';
-import '@/styles/advertising/adsense.css';
+import '@/styles/prose/ads.css';
 import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
-import { getOgImageUrl, resolveHero } from '@lib/images';
+import { getOgImageUrl, resolveHero } from '@lib/content/images';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -83,7 +83,7 @@ const jsonLd = blogPostingJsonLd({
           {frontmatter.category && (
             <div class={blogStyles['blog-post__meta-item']}>
               <Icon name="blogTags" class={blogStyles['blog-post__meta-icon']} />
-              <a href={`/blog/category/${(await import('../../lib/blog')).slugifyCategory(String(frontmatter.category))}/`} class={blogStyles['blog-post__meta-text']}>{frontmatter.category}</a>
+              <a href={`/blog/category/${(await import('@lib/content/blog')).slugifyCategory(String(frontmatter.category))}/`} class={blogStyles['blog-post__meta-text']}>{frontmatter.category}</a>
             </div>
           )}
           {frontmatter.publishDate && (
@@ -114,8 +114,8 @@ const jsonLd = blogPostingJsonLd({
 </SiteLayout>
 
 <script>
-  import { autoInitBlogAds, autoInitBlogPlaceholders, shouldRenderAds, shouldRenderPlaceholders } from '@lib/adsense';
-  import { autoInit as autoInitToc } from '@lib/toc';
+  import { autoInitBlogAds, autoInitBlogPlaceholders, shouldRenderAds, shouldRenderPlaceholders } from '@lib/tracking/ads';
+  import { autoInit as autoInitToc } from '@lib/features/toc';
   // Initialize dynamic TOC after content renders
   const runToc = () => {
     try {

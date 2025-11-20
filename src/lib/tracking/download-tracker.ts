@@ -21,7 +21,7 @@
  * }
  */
 
-import { GTM_ID } from './env';
+import { GTM_ID } from '@lib/core/env';
 
 /**
  * GTM dataLayer event structure for file downloads
