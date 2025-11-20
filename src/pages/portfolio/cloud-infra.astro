@@ -3,14 +3,9 @@ import SiteLayout from "@layouts/SiteLayout.astro";
 import Project from "@components/Project/Project.astro";
 import BackNav from "@components/BackNav/BackNav.astro";
 import listing from "@/styles/pages/listing.module.css";
-import { getCollection, type CollectionEntry } from 'astro:content';
-type ProjectEntry = CollectionEntry<'portfolio'>;
-type ProjectData = ProjectEntry['data'];
-const allProjects: ProjectEntry[] = await getCollection('portfolio');
-const projects: ProjectData[] = allProjects
-  .filter((p: ProjectEntry) => p.data.category === 'cloud-infra')
-  .sort((a: ProjectEntry, b: ProjectEntry) => (a.data.order ?? 0) - (b.data.order ?? 0))
-  .map((p: ProjectEntry) => p.data);
+import { getProjectsByCategory, type ProjectData } from '@lib/content/portfolio';
+
+const projects = await getProjectsByCategory('cloud-infra');
 ---
 
 <SiteLayout
