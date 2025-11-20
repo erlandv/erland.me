@@ -159,7 +159,7 @@ export function skipWaiting(): void {
  */
 function showUpdateNotification(): void {
   // Import toast dynamically to avoid bundling if not needed
-          import('@lib/features/toast')
+  import('@lib/features/toast')
     .then(({ showToast }) => {
       showToast('New version available! Refresh to update.', {
         duration: 5000,
