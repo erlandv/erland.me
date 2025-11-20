@@ -5,6 +5,7 @@ import BackNav from '@components/BackNav/BackNav.astro';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
 import chips from '@/styles/pages/chips.module.css';
+import { projectCategories } from '@lib/content/portfolio';
 ---
 
 <SiteLayout
@@ -13,7 +14,10 @@ import chips from '@/styles/pages/chips.module.css';
   selectedItem='portfolio'
   description='Explore projects across web, cloud, and side gigs, a snapshot of what I have built and learned. I deliver end-to-end builds with uptime-first architectures and lean cloud costs.'
 >
+  <!-- Back Navigation -->
   <BackNav href='/' label='Back' />
+
+  <!-- Hero/Fold Section -->
   <main class={fold['fold-content-container']}>
     <div class={fold['fold-content']}>
       <h1>Portfolio</h1>
@@ -24,82 +28,54 @@ import chips from '@/styles/pages/chips.module.css';
       </p>
     </div>
   </main>
+
+  <!-- Portfolio Categories Section -->
   <div class={pf['projects-section']}>
-    <div class={pf['projects-container']}>
-      <div class={pf['single-projects-category']}>
-        <div class={pf['projects-category-image-container']}>
-          <Icon name='portfolioWeb' class={pf['projects-category-image']} />
-        </div>
-      </div>
-      <div class={pf['single-projects-content']}>
-        <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
-        <div class={chips['tech-tools-container']}>
-          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
-            Technologies &amp; tools
+    {
+      projectCategories.map((project) => (
+        <div class={pf['projects-container']}>
+          {/* Category Icon */}
+          <div class={pf['single-projects-category']}>
+            <div
+              class={
+                pf['projects-category-image-container'] +
+                (project.extraImageClass ? ' ' + project.extraImageClass : '')
+              }
+            >
+              <Icon name={project.icon} class={pf['projects-category-image']} />
+            </div>
           </div>
-          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Node.js</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>TypeScript</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Next.js</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>React</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Tailwind CSS</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>PostgreSQL</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Vite</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Git</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class={pf['projects-container']}>
-      <div class={pf['single-projects-category']}>
-        <div class={pf['projects-category-image-container'] + ' devops-img'}>
-          <Icon name='portfolioInfra' class={pf['projects-category-image']} />
-        </div>
-      </div>
-      <div class={pf['single-projects-content']}>
-        <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
-        <div class={chips['tech-tools-container']}>
-          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
-            Technologies &amp; tools
-          </div>
-          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Terraform</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Docker</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Kubernetes</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Bash</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Github Actions</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>AWS</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Azure</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>GCP</div>
+
+          {/* Category Content - Title and tech stack */}
+          <div class={pf['single-projects-content']}>
+            <h3>
+              <a href={project.href}>{project.title}</a>
+            </h3>
+
+            {/* Technologies & Tools - Chips/badges display */}
+            <div class={chips['tech-tools-container']}>
+              <div
+                class:list={[chips['mini-label-white'], chips['gray-color']]}
+              >
+                Technologies &amp; tools
+              </div>
+              <div
+                class:list={[
+                  chips['chips-container'],
+                  chips['chips-container-small-width'],
+                ]}
+              >
+                {project.tags.map((tag) => (
+                  <div class:list={[chips['single-chip'], chips['small-chip']]}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class={pf['projects-container']}>
-      <div class={pf['single-projects-category']}>
-        <div class={pf['projects-category-image-container']}>
-          <Icon name='portfolioPersonal' class={pf['projects-category-image']} />
-        </div>
-      </div>
-      <div class={pf['single-projects-content']}>
-        <h3><a href='/portfolio/personal-projects/'>Personal Projects</a></h3>
-        <div class={chips['tech-tools-container']}>
-          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>
-            Technologies &amp; tools
-          </div>
-          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Nginx</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Apache</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Redis</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>PHP</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>CSS</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>JavaScript</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>MySQL</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>MariaDB</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Certbot</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      ))
+    }
   </div>
+  <!-- End of Portfolio Categories Section -->
 </SiteLayout>
