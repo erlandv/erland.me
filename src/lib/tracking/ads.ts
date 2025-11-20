@@ -33,7 +33,7 @@
 import { createLogger } from '@lib/core/logger';
 import { isProdSite } from '@lib/core/env';
 
-const log = createLogger('AdSense');
+const log = createLogger('Ads');
 
 // Type definitions for Google AdSense
 interface WindowWithAds extends Window {

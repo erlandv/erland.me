@@ -5,7 +5,7 @@
  * Integrates with toast notifications for non-intrusive error reporting.
  */
 
-import { showToast } from './toast';
+import { showToast } from '@lib/features/toast';
 import { createLogger } from '@lib/core/logger';
 
 const log = createLogger('ErrorBoundary');
