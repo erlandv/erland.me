@@ -522,10 +522,10 @@ This catches cases where:
 - **`blog.ts`**: `src/lib/content/blog.ts` - content loading and pagination helpers
 - **`images.ts`**: `src/lib/content/images.ts` - image resolution and optimization
 - **`seo.ts`**: `src/lib/content/seo.ts` - structured data generators
-- **`search.ts`**: `src/lib/features/search.ts` - converts posts to Fuse.js searchable format
+- **`search.ts`**: `src/lib/content/search.ts` - converts posts to Fuse.js searchable format
 - **`ui-init.ts`**: `src/lib/infrastructure/ui-init.ts` - Entry point for lazy-loading client features with gate pattern
 - **`router-events.ts`**: `src/lib/infrastructure/router-events.ts` - Centralized History API event management
-- **`toast.ts`**: `src/lib/features/toast.ts` - Toast notification system for user feedback
+- **`toast.ts`**: `src/lib/infrastructure/toast.ts` - Toast notification system for user feedback
 - **`env.ts`**: `src/lib/core/env.ts` - Environment validation with Zod schemas, mode detection, and type-safe variable access
 
 ## File Organization
