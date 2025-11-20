@@ -3,6 +3,7 @@ import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
 import chips from '@/styles/pages/chips.module.css';
@@ -10,10 +11,10 @@ import { projectCategories } from '@lib/content/portfolio';
 ---
 
 <SiteLayout
-  title={`All Portfolio by ${SITE_CONFIG.author.name}`}
+  title={`${PAGE_METADATA.portfolio.index.title} by ${SITE_CONFIG.author.name}`}
   canonical='/portfolio/'
   selectedItem='portfolio'
-  description='Explore projects across web, cloud, and side gigs, a snapshot of what I have built and learned. I deliver end-to-end builds with uptime-first architectures and lean cloud costs.'
+  description={PAGE_METADATA.portfolio.index.description}
 >
   <!-- Back Navigation -->
   <BackNav href='/' label='Back' />

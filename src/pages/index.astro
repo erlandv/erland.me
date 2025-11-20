@@ -3,6 +3,7 @@ import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
 import { SITE_DOMAIN } from '@lib/core/env';
 import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
 import chips from '@/styles/pages/chips.module.css';
@@ -13,9 +14,10 @@ const featuredProjects = projectCategories.slice(0, 2);
 ---
 
 <SiteLayout 
-  title={`Personal Web by ${SITE_CONFIG.author.name}`}
+  title={`${PAGE_METADATA.home.title} by ${SITE_CONFIG.author.name}`}
   canonical='/'
   selectedItem='home'
+  description={PAGE_METADATA.home.description}
   >
   <!-- Hero/Fold Section - Above-the-fold introduction and CTA -->
   <main class={fold['fold-content-container']}>
