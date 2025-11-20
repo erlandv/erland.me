@@ -12,6 +12,7 @@
  * - Copy to clipboard functionality
  * - Graceful fallback to platform share URLs
  * - Client-side progressive enhancement
+ * - Centralized platform configuration
  * 
  * @component
  * @example
@@ -30,6 +31,8 @@
  */
 import Icon from '@components/Icon.astro';
 import styles from './share-buttons.module.css';
+import { sharePlatforms } from '@lib/content/share-platforms';
+import { addUTMParams, UTM_PRESETS } from '@lib/tracking/utm';
 
 interface Props {
   title: string;
@@ -45,30 +48,31 @@ const {
   heading = 'Share this article:',
 }: Props = Astro.props as Props;
 
-function withUtm(baseUrl: string, source: string) {
-  const u = new URL(baseUrl);
-  u.searchParams.set('utm_source', source);
-  u.searchParams.set('utm_medium', 'social');
-  u.searchParams.set('utm_campaign', 'share-button');
-  return u.toString();
-}
+// Generate tracked URLs for each platform
+const trackedUrls = sharePlatforms.reduce(
+  (acc, platform) => {
+    acc[platform.id] = addUTMParams(url, {
+      source: platform.id,
+      ...UTM_PRESETS.shareButton,
+    });
+    return acc;
+  },
+  {} as Record<string, string>
+);
 
-const shareUrlCopy = withUtm(url, 'copy');
-const shareUrlWebShare = withUtm(url, 'webshare');
-const shareUrlWhatsapp = withUtm(url, 'whatsapp');
-const shareUrlTelegram = withUtm(url, 'telegram');
-const shareUrlTwitter = withUtm(url, 'twitter');
-const shareUrlFacebook = withUtm(url, 'facebook');
-const shareUrlLinkedIn = withUtm(url, 'linkedin');
+// Special URLs for copy and webshare
+const shareUrlCopy = addUTMParams(url, { source: 'copy', ...UTM_PRESETS.shareButton });
+const shareUrlWebShare = addUTMParams(url, { source: 'webshare', ...UTM_PRESETS.shareButton });
 
-const enc = encodeURIComponent;
-
-// Intent URLs (fallback)
-const whatsappHref = `https://wa.me/?text=${enc(`${title} — ${shareUrlWhatsapp}`)}`;
-const telegramHref = `https://t.me/share/url?url=${enc(shareUrlTelegram)}&text=${enc(title)}`;
-const twitterHref = `https://x.com/intent/post?url=${enc(shareUrlTwitter)}&text=${enc(title)}`;
-const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrlFacebook)}`;
-const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrlLinkedIn)}`;
+// Build platform share URLs with UTM tracking
+const platformShareUrls = sharePlatforms.map(platform => ({
+  platform,
+  href: platform.buildUrl({
+    url: trackedUrls[platform.id],
+    title,
+    text: description || title,
+  }),
+}));
 ---
 
 <!-- Social Share Section - Native Web Share API + fallback platform-specific buttons -->
@@ -106,76 +110,21 @@ const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(
 
     <!-- Fallback Share Buttons - Platform-specific share links (always visible) -->
     <div class={styles['share__fallback']}>
-      <!-- WhatsApp Share Button -->
-      <a
-        class={styles['share__btn']}
-        href={whatsappHref}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label='Share on WhatsApp'
-      >
-        <Icon
-          name='socialWhatsapp'
-          class={styles['share__icon']}
-          ariaLabel='WhatsApp'
-        />
-      </a>
-      
-      <!-- Telegram Share Button -->
-      <a
-        class={styles['share__btn']}
-        href={telegramHref}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label='Share on Telegram'
-      >
-        <Icon
-          name='socialTelegram'
-          class={styles['share__icon']}
-          ariaLabel='Telegram'
-        />
-      </a>
-      
-      <!-- X/Twitter Share Button -->
-      <a
-        class={styles['share__btn']}
-        href={twitterHref}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label='Share on X/Twitter'
-      >
-        <Icon name='socialX' class={styles['share__icon']} ariaLabel='X / Twitter' />
-      </a>
-      
-      <!-- Facebook Share Button -->
-      <a
-        class={styles['share__btn']}
-        href={facebookHref}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label='Share on Facebook'
-      >
-        <Icon
-          name='socialFacebook'
-          class={styles['share__icon']}
-          ariaLabel='Facebook'
-        />
-      </a>
-      
-      <!-- LinkedIn Share Button -->
-      <a
-        class={styles['share__btn']}
-        href={linkedinHref}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label='Share on LinkedIn'
-      >
-        <Icon
-          name='socialLinkedin'
-          class={styles['share__icon']}
-          ariaLabel='LinkedIn'
-        />
-      </a>
+      {platformShareUrls.map(({ platform, href }) => (
+        <a
+          class={styles['share__btn']}
+          href={href}
+          target='_blank'
+          rel='nofollow noopener noreferrer'
+          aria-label={platform.ariaLabel}
+        >
+          <Icon
+            name={platform.icon}
+            class={styles['share__icon']}
+            ariaLabel={platform.name}
+          />
+        </a>
+      ))}
     </div>
   </div>
 </section>
