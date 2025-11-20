@@ -15,6 +15,7 @@ import rightArrowIcon from '@/icons/arrow-right.svg?raw';
 import pauseIcon from '@/icons/stories-pause.svg?raw';
 import playIcon from '@/icons/stories-play.svg?raw';
 import verifiedIcon from '@/icons/stories-verified.svg?raw';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import { onRouteChange } from '@lib/infrastructure/router-events';
 import { qs, qsa } from '@lib/core/dom-builder';
 
@@ -147,7 +148,7 @@ class StoriesViewer {
               <img 
                 class="stories__avatar" 
                 src="/assets/profile/avatar-stories.webp" 
-                alt="Erland Ramdhani"
+                alt="${SITE_CONFIG.author.name}"
               />
               <div class="stories__username-container">
                 <div class="stories__username">erlandramdhani</div>

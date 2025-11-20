@@ -7,6 +7,7 @@ import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { postToSearchable } from '@lib/content/search';
 import { loadAllPosts, slugifyCategory } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import listing from '@styles/pages/listing.module.css';
 
 // Generate static paths for pages in each category
@@ -64,9 +65,9 @@ const searchablePosts = filtered.map(postToSearchable);
 ---
 
 <SiteLayout
-  title={`Page ${page}: ${displayCategory} Blog Posts by Erland Ramdhani`}
+  title={`Page ${page}: ${displayCategory} Blog Posts by ${SITE_CONFIG.author.name}`}
   canonical={pageHref(page)}
-  description={`Page ${page}: Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog Erland Ramdhani.`}
+  description={`Page ${page}: Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog ${SITE_CONFIG.author.name}.`}
   prevHref={page > 1 ? pageHref(page - 1) : undefined}
   nextHref={page < totalPages ? pageHref(page + 1) : undefined}
   jsonLd={collectionPageJsonLd(

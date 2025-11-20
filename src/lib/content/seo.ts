@@ -36,28 +36,8 @@
  * ```
  */
 
-// Base site configuration
-import { SITE_URL, SITE_DOMAIN, isProdSite } from '@lib/core/env';
-
-const SITE_CONFIG = {
-  name: 'erland.me',
-  description:
-    'Hello world! I am Erland. I build things for the web. I help teams turn ideas into production-ready, scalable web products that customers genuinely value.',
-  url: SITE_URL,
-  author: {
-    name: 'Erland Ramdhani',
-    email: `hello@${SITE_DOMAIN}`,
-    jobTitle: 'Web Developer',
-    url: SITE_URL,
-    sameAs: [
-      'https://github.com/erlandv',
-      'https://twitter.com/erlandzz',
-      'https://www.instagram.com/erlandramdhani',
-      'https://www.facebook.com/erlandramdhani',
-      'https://bsky.app/profile/erland.me',
-    ],
-  },
-} as const;
+import { isProdSite } from '@lib/core/env';
+import { SITE_CONFIG } from '@lib/core/site-config';
 
 // Environment helpers
 export const isProductionSite = isProdSite;

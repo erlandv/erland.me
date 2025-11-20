@@ -5,6 +5,7 @@ import { getCollection, getEntry } from 'astro:content';
 import { creativeWorkJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import StarRating from '@components/StarRating/StarRating.astro';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import '@/styles/components/hero.css';
 import '@/styles/components/article-detail.css';
 import '@/styles/components/toc.css';
@@ -59,7 +60,7 @@ const jsonLd = creativeWorkJsonLd({
   jsonLd={jsonLd}
   selectedItem='download'
   image={optimizedHero}
-  author="Erland Ramdhani"
+  author={SITE_CONFIG.author.name}
   type="article"
   publishedTime={data.publishDate}
   modifiedTime={data.updatedDate ?? data.publishDate}

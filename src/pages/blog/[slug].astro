@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import { SITE_URL } from '@lib/core/env';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import blogStyles from './styles/_blog.module.css';
 import '@/styles/components/article-detail.css';
 import '@/styles/components/toc.css';
@@ -60,7 +61,7 @@ const jsonLd = blogPostingJsonLd({
   publishedTime={frontmatter.publishDate}
   modifiedTime={frontmatter.updatedDate}
   tags={frontmatter.tags}
-  author="Erland Ramdhani"
+  author={SITE_CONFIG.author.name}
 >
   <!-- Back Navigation - Return to blog listing page -->
   <BackNav href="/blog/" label="Back to Blog" />

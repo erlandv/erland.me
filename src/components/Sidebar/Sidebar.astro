@@ -34,6 +34,7 @@ import socialsStyles from './sidebar-socials.module.css';
 import navStyles from './sidebar-nav.module.css';
 import { sidebarSocialLinks as socials } from './social-links';
 import { navigationLinks } from '@lib/content/navigation';
+import { SITE_CONFIG } from '@lib/core/site-config';
 
 const { selectedItem } = Astro.props;
 ---
@@ -70,8 +71,8 @@ const { selectedItem } = Astro.props;
           </button>
           <!-- Profile Info Text -->
           <div class='profile-text'>
-            <div class='label-white'>Erland Ramdhani</div>
-            <div class='label-gray'>Web Developer</div>
+            <div class='label-white'>{SITE_CONFIG.author.name}</div>
+            <div class='label-gray'>{SITE_CONFIG.author.jobTitle}</div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import listing from '@/styles/pages/listing.module.css';
 import catStyles from '@/pages/blog/styles/_category.module.css';
 import { loadAllPosts, slugifyCategory, slicePage } from '@lib/content/blog';
@@ -85,9 +86,9 @@ const byCategory = categories.map(cat => {
 ---
 
 <SiteLayout
-  title='All Blog Categories by Erland Ramdhani'
+  title={`All Blog Categories by ${SITE_CONFIG.author.name}`}
   canonical='/blog/category/'
-  description='Daftar kategori blog posts by Erland Ramdhani. Cek berbagai topik menarik yang telah dibahas di blog ini.'
+  description={`Daftar kategori blog posts by ${SITE_CONFIG.author.name}. Cek berbagai topik menarik yang telah dibahas di blog ini.`}
   selectedItem='blog'
   jsonLd={[
     categoriesIndexJsonLd(

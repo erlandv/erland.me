@@ -7,6 +7,7 @@ import SearchInput from "@components/SearchInput/SearchInput.astro";
 import { loadAllPosts, slicePage, slugifyCategory } from '@lib/content/blog';
 import { postToSearchable } from '@lib/content/search';
 import { collectionPageJsonLd, breadcrumbJsonLd } from '@lib/content/seo';
+import { SITE_CONFIG } from '@lib/core/site-config';
 import listing from "@/styles/pages/listing.module.css";
 
 // Build-time static paths for each category found in content
@@ -46,9 +47,9 @@ const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
-  title={`${displayCategory} Blog Posts by Erland Ramdhani`}
+  title={`${displayCategory} Blog Posts by ${SITE_CONFIG.author.name}`}
   canonical={`/blog/category/${categoryParam}/`}
-  description={`Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog Erland Ramdhani.`}
+  description={`Arsip blog berdasarkan kategori ${displayCategory}. Baca artikel terkait ${displayCategory} di blog ${SITE_CONFIG.author.name}.`}
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={[
     collectionPageJsonLd(

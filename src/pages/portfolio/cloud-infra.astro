@@ -2,6 +2,7 @@
 import SiteLayout from "@layouts/SiteLayout.astro";
 import Project from "@components/Project/Project.astro";
 import BackNav from "@components/BackNav/BackNav.astro";
+import { SITE_CONFIG } from '@lib/core/site-config';
 import listing from "@/styles/pages/listing.module.css";
 import { getProjectsByCategory, type ProjectData } from '@lib/content/portfolio';
 
@@ -9,7 +10,7 @@ const projects = await getProjectsByCategory('cloud-infra');
 ---
 
 <SiteLayout
-  title="Cloud Infra Portfolio by Erland Ramdhani"
+  title={`Cloud Infra Portfolio by ${SITE_CONFIG.author.name}`}
   canonical="/portfolio/cloud-infra/"
   selectedItem="cloud-infra"
   description="Uptime-first infrastructure work across VMs, containers, load balancers, backups, and CDNs. IaC, monitoring, and cost controls to keep things reliable and lean."
