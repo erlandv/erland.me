@@ -27,9 +27,9 @@
  * ```
  */
 
-import { copyToClipboard } from './clipboard';
-import { showToast } from './toast';
-import { onRouteChange } from './router-events';
+import { copyToClipboard } from '@lib/core/clipboard';
+import { showToast } from '@lib/infrastructure/toast';
+import { onRouteChange } from '@lib/infrastructure/router-events';
 import '@/styles/features/code-copy.css';
 
 /**

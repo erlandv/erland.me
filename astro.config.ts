@@ -1,15 +1,17 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
-import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
-import remarkDownloadFiles from './src/lib/remark-download-files';
+import remarkGallery, {
+  remarkFigure,
+} from './src/lib/content/remark/remark-gallery';
+import remarkDownloadFiles from './src/lib/content/remark/remark-download-files';
 
 // Environment validation at startup
 import {
   validateEnv,
   resolveEnvironmentMode,
   type ValidatedEnv,
-} from './src/lib/env.js';
+} from './src/lib/core/env.js';
 
 import playformCompress from '@playform/compress';
 

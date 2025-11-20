@@ -6,7 +6,7 @@
  */
 
 import { showToast } from './toast';
-import { createLogger } from './logger';
+import { createLogger } from '@lib/core/logger';
 
 const log = createLogger('ErrorBoundary');
 

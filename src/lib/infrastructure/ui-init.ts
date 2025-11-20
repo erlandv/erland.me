@@ -45,7 +45,7 @@
  */
 
 import { safeFeatureInit, setupGlobalErrorHandler } from './error-boundary';
-import { initThemeControl } from './theme-init';
+import { initThemeControl } from '@lib/features/theme/theme-init';
 
 /**
  * Extended Window interface with cached feature initializers
@@ -138,7 +138,7 @@ async function maybeLoadShare(): Promise<void> {
   await safeFeatureInit(
     'share',
     async () => {
-      const m = await import('./share-buttons');
+      const m = await import('@lib/features/share-buttons');
       loaded.share = true;
       m.autoInit?.();
       return m;
@@ -157,7 +157,7 @@ async function maybeLoadCopy(): Promise<void> {
   await safeFeatureInit(
     'copy',
     async () => {
-      const m = await import('./code-copy');
+      const m = await import('@lib/features/code-copy');
       loaded.copy = true;
       m.autoInit?.();
       return m;
@@ -173,7 +173,7 @@ async function maybeLoadLightbox(): Promise<void> {
   await safeFeatureInit(
     'lightbox',
     async () => {
-      const m = await import('./lightbox');
+      const m = await import('@lib/features/lightbox');
       loaded.lightbox = true;
       m.autoInit?.();
       return m;
@@ -191,7 +191,7 @@ async function maybeLoadTable(): Promise<void> {
       // Import module once, but always re-run the initializer
       const w = window as WindowWithInitializers;
       if (!loaded.table) {
-        const mod = await import('./table-responsive');
+        const mod = await import('@lib/features/table-responsive');
         loaded.table = true;
         // Store reference to the initializer function for subsequent calls
         w.__tableResponsiveInit = mod.initResponsiveTables;
@@ -213,7 +213,7 @@ async function maybeLoadThemeToggle(): Promise<void> {
       // Import module once, but always re-run the initializer
       const w = window as WindowWithInitializers;
       if (!loaded.themeToggle) {
-        const mod = await import('./theme-toggle');
+        const mod = await import('@lib/features/theme/theme-toggle');
         loaded.themeToggle = true;
         // Store reference to the initializer function for subsequent calls
         w.__themeToggleInit = async () => {
@@ -234,7 +234,7 @@ async function maybeLoadStories(): Promise<void> {
   await safeFeatureInit(
     'stories',
     async () => {
-      const m = await import('./stories');
+      const m = await import('@lib/features/stories');
       loaded.stories = true;
       m.autoInit?.();
       return m;
@@ -252,7 +252,7 @@ async function maybeLoadCategoryFilter(): Promise<void> {
       // Import module once, but always re-run the initializer
       const w = window as WindowWithInitializers;
       if (!loaded.categoryFilter) {
-        const mod = await import('./category-filter');
+        const mod = await import('@lib/features/category-filter');
         loaded.categoryFilter = true;
         // Store reference to the autoInit function for subsequent calls
         w.__categoryFilterInit = mod.autoInit;
@@ -273,7 +273,7 @@ async function maybeLoadDownloadTracker(): Promise<void> {
       // Import module once, but always re-run the initializer
       const w = window as WindowWithInitializers;
       if (!loaded.downloadTracker) {
-        const mod = await import('./download-tracker');
+        const mod = await import('@lib/tracking/download-tracker');
         loaded.downloadTracker = true;
         // Store reference to the initializer function for subsequent calls
         w.__downloadTrackerInit = mod.initDownloadTracking;

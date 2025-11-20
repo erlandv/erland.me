@@ -3,7 +3,7 @@
  * Manages theme selection flyout menu with proper cleanup and view transition support
  */
 
-import { showToast } from './toast';
+import { showToast } from '@lib/infrastructure/toast';
 
 /**
  * User's theme preference setting

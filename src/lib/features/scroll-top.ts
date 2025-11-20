@@ -23,7 +23,7 @@
  * ```
  */
 
-import { onRouteChange } from './router-events';
+import { onRouteChange } from '@lib/infrastructure/router-events';
 
 /**
  * Scroll threshold in pixels - button shows when scrolled past this point

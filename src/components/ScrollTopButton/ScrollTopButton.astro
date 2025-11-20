@@ -7,7 +7,7 @@
  * 
  * Visibility controlled by:
  * - Scroll position threshold (shows after scrolling down)
- * - Client-side JavaScript in @lib/scroll-top.ts
+ * - Client-side JavaScript in @lib/features/scroll-top.ts
  * - CSS transitions for smooth fade in/out
  * 
  * @component
@@ -31,7 +31,7 @@ import styles from './scroll-top-button.module.css';
 <script>
   (async () => {
     try {
-      const mod = await import('@lib/scroll-top');
+      const mod = await import('@lib/features/scroll-top');
       mod.autoInit();
     } catch (e) {
       console.error('ScrollTop init error:', e);

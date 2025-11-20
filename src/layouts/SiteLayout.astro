@@ -19,8 +19,8 @@ import Footer from "@components/Footer/Footer.astro";
 import SidebarToggleButton from "@components/SidebarToggleButton/SidebarToggleButton.astro";
 import SidebarSocialFlyout from "@components/SidebarSocialFlyout/SidebarSocialFlyout.astro";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
-import { GTM_ID } from "@lib/env";
-import { isProductionSite } from "@lib/seo";
+import { GTM_ID } from "@lib/core/env";
+import { isProductionSite } from "@lib/content/seo";
 
 interface Props {
   title: string;
@@ -131,7 +131,7 @@ const {
         });
 
         const runImport = () => {
-          import('../lib/ui-init')
+          import('@lib/infrastructure/ui-init')
             .then(m => m.initUi && m.initUi())
             .catch(e => console.error('ui-init import error:', e));
         };
@@ -147,7 +147,7 @@ const {
             if (q.share || q.copy || q.lightbox || q.table || q.themeToggle) {
               document.removeEventListener('astro:page-load', reGate);
               document.removeEventListener('astro:after-swap', reGate);
-              import('../lib/ui-init')
+              import('@lib/infrastructure/ui-init')
                 .then(m => m.initUi && m.initUi())
                 .catch(e => console.error('ui-init import error:', e));
             }
@@ -165,14 +165,14 @@ const {
     <script>
       // Web Vitals Performance Monitoring
       // Runs unconditionally - module handles prod check internally
-      import('../lib/web-vitals')
+      import('@lib/tracking/web-vitals')
         .then(m => m.initWebVitals && m.initWebVitals())
         .catch(e => console.error('web-vitals init error:', e));
     </script>
     <script>
       // Service Worker Registration for offline support
       // Runs unconditionally - module handles prod check internally
-      import('../lib/sw-register')
+      import('@lib/infrastructure/sw-register')
         .then(m => m.initServiceWorker && m.initServiceWorker())
         .catch(e => console.error('sw-register init error:', e));
     </script>

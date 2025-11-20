@@ -31,8 +31,7 @@
 
 import closeIcon from '@/icons/btn-close.svg?raw';
 import fullscreenIcon from '@/icons/btn-fullscreen.svg?raw';
-import { onRouteChange } from './router-events';
-import { qs } from './dom-builder';
+import { onRouteChange } from '@lib/infrastructure/router-events';
 
 /**
  * Initialization options for lightbox
@@ -106,10 +105,16 @@ function createOverlay(): LightboxElements {
   overlay.innerHTML = createOverlayTemplate();
 
   // Query and cache DOM references with explicit error handling
-  const backdrop = qs<HTMLDivElement>(overlay, '.image-lightbox__backdrop');
-  const img = qs<HTMLImageElement>(overlay, '.image-lightbox__image');
-  const caption = qs<HTMLElement>(overlay, '.image-lightbox__caption');
-  const closeBtn = qs<HTMLButtonElement>(overlay, '.image-lightbox__close');
+  const backdrop = overlay.querySelector<HTMLDivElement>(
+    '.image-lightbox__backdrop'
+  );
+  const img = overlay.querySelector<HTMLImageElement>('.image-lightbox__image');
+  const caption = overlay.querySelector<HTMLElement>(
+    '.image-lightbox__caption'
+  );
+  const closeBtn = overlay.querySelector<HTMLButtonElement>(
+    '.image-lightbox__close'
+  );
 
   // Ensure all required elements exist (should never fail with our template)
   if (!backdrop || !img || !caption || !closeBtn) {

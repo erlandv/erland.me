@@ -37,7 +37,7 @@
  */
 
 // Base site configuration
-import { SITE_URL, SITE_DOMAIN, isProdSite } from './env';
+import { SITE_URL, SITE_DOMAIN, isProdSite } from '@lib/core/env';
 
 const SITE_CONFIG = {
   name: 'erland.me',

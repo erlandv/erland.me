@@ -2,7 +2,7 @@
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { creativeWorkJsonLd } from '@lib/seo';
+import { creativeWorkJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import StarRating from '@components/StarRating/StarRating.astro';
 import '@/styles/components/hero.css';
@@ -13,8 +13,8 @@ import '@/styles/prose/ads.css';
 import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
-import { getOgImageUrl, resolveHero } from '@lib/images';
-import { SITE_URL } from '@lib/env';
+import { getOgImageUrl, resolveHero } from '@lib/content/images';
+import { SITE_URL } from '@lib/core/env';
 
 export async function getStaticPaths() {
   const downloads = await getCollection('downloads');
@@ -119,8 +119,8 @@ const jsonLd = creativeWorkJsonLd({
     autoInitDownloadPlaceholders,
     shouldRenderAds,
     shouldRenderPlaceholders,
-  } from '@lib/adsense';
-  import { autoInit as autoInitToc } from '@lib/toc';
+  } from '@lib/tracking/adsense';
+  import { autoInit as autoInitToc } from '@lib/features/toc';
 
   // Initialize dynamic TOC after content renders
   const runToc = () => {

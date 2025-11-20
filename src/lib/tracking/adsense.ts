@@ -30,8 +30,8 @@
  * ```
  */
 
-import { createLogger } from './logger';
-import { isProdSite } from './env';
+import { createLogger } from '@lib/core/logger';
+import { isProdSite } from '@lib/core/env';
 
 const log = createLogger('AdSense');
 

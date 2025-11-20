@@ -24,6 +24,11 @@
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@lib/*": ["./src/lib/*"],
+      "@lib/core/*": ["./src/lib/core/*"],
+      "@lib/content/*": ["./src/lib/content/*"],
+      "@lib/features/*": ["./src/lib/features/*"],
+      "@lib/tracking/*": ["./src/lib/tracking/*"],
+      "@lib/infrastructure/*": ["./src/lib/infrastructure/*"],
       "@content/*": ["./src/content/*"],
       "@styles/*": ["./src/styles/*"]
     }

@@ -12,7 +12,7 @@
  * This module handles the full interactive theme control after page load.
  */
 
-import { createLogger } from './logger';
+import { createLogger } from '@lib/core/logger';
 
 const log = createLogger('ThemeControl');
 
