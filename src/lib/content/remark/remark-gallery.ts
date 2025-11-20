@@ -1,21 +1,16 @@
 /**
- * Remark Plugins for Gallery and Figure Transformations
+ * Remark Plugin for Gallery Transformation
  *
- * Provides two remark plugins for enhanced markdown image handling:
- *
- * 1. **remarkGallery** (default export): Transforms `:::gallery` container directives
- *    into `.content-image-grid` divs with automatic figure/figcaption wrapping
- *
- * 2. **remarkFigure**: Converts standalone images with titles into semantic
- *    `<figure>` + `<figcaption>` elements
+ * Transforms `:::gallery` container directives into `.content-image-grid` divs
+ * with automatic figure/figcaption wrapping.
  *
  * **Usage in astro.config.ts:**
  * ```typescript
- * import remarkGallery, { remarkFigure } from './src/lib/remark-gallery';
+ * import remarkGallery from './src/lib/content/remark/remark-gallery';
  *
  * export default defineConfig({
  *   markdown: {
- *     remarkPlugins: [remarkGallery, remarkFigure]
+ *     remarkPlugins: [remarkGallery]
  *   }
  * });
  * ```
@@ -26,8 +21,6 @@
  * ![Alt text](image1.jpg "Caption 1")
  * ![Alt text](image2.jpg "Caption 2")
  * :::
- *
- * ![Standalone image](hero.jpg "This becomes figcaption")
  * ```
  */
 
@@ -171,75 +164,6 @@ export default function remarkGallery(): (tree: Node) => void {
         }
 
         node.children = nextChildren;
-      }
-    );
-  };
-}
-
-/**
- * Remark plugin to convert standalone images with titles into semantic figures
- *
- * Transforms paragraph nodes containing only a single image (with title) into
- * `<figure>` + `<figcaption>` structure for better semantics and styling.
- *
- * **Markdown Input:**
- * ```markdown
- * ![Hero image](hero.jpg "This is the caption")
- * ```
- *
- * **HTML Output:**
- * ```html
- * <figure class="prose-figure">
- *   <img src="hero.jpg" alt="Hero image" />
- *   <figcaption>This is the caption</figcaption>
- * </figure>
- * ```
- *
- * **Note:** Only processes paragraphs with exactly one image element (ignoring whitespace).
- * Images without titles are left unchanged.
- *
- * @returns Remark transformer function
- */
-export function remarkFigure(): (tree: Node) => void {
-  return (tree: Node) => {
-    visit(
-      tree,
-      (node: Node): node is ParagraphNode => node.type === 'paragraph',
-      (node: ParagraphNode) => {
-        // Cek apakah paragraph hanya berisi satu image (abaikan whitespace)
-        const children = (node.children || []).filter((c: Node) => {
-          if (c.type === 'text') {
-            const textNode = c as TextNode;
-            return textNode.value && textNode.value.trim();
-          }
-          return true;
-        });
-
-        if (children.length === 1 && children[0].type === 'image') {
-          const image = children[0] as ImageNode;
-          const caption: string | null = image.title || null;
-
-          // Jika ada title (caption), konversi menjadi figure
-          if (caption) {
-            image.title = null; // Hapus title dari image
-
-            node.data = {
-              hName: 'figure',
-              hProperties: {
-                className: ['prose-figure'],
-              },
-            };
-
-            node.children = [
-              image,
-              {
-                type: 'paragraph',
-                data: { hName: 'figcaption' },
-                children: [{ type: 'text', value: caption } as TextNode],
-              } as ParagraphNode,
-            ];
-          }
-        }
       }
     );
   };

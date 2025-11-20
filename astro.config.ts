@@ -1,9 +1,8 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
-import remarkGallery, {
-  remarkFigure,
-} from './src/lib/content/remark/remark-gallery';
+import remarkGallery from './src/lib/content/remark/remark-gallery';
+import remarkFigure from './src/lib/content/remark/remark-figure';
 import remarkDownloadFiles from './src/lib/content/remark/remark-download-files';
 
 // Environment validation at startup
