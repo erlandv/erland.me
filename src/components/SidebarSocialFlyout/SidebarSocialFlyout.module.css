@@ -128,6 +128,13 @@
   transform: translate3d(0, -50%, 0) scale(1);
 }
 
+.socialsList {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
 .flyoutItem {
   padding: var(--space-2);
   border-radius: var(--radius-sm);

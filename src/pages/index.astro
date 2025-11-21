@@ -6,19 +6,19 @@ import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
-import chips from '@/styles/pages/chips.module.css';
 import btn from '@/styles/components/button.module.css';
 import { projectCategories } from '@lib/content/portfolio';
+import PortfolioCategoryCard from '@components/PortfolioCategoryCard.astro';
 
 const featuredProjects = projectCategories.slice(0, 2);
 ---
 
-<SiteLayout 
+<SiteLayout
   title={`${PAGE_METADATA.home.title} by ${SITE_CONFIG.author.name}`}
   canonical='/'
   selectedItem='home'
   description={PAGE_METADATA.home.description}
-  >
+>
   <!-- Hero/Fold Section - Above-the-fold introduction and CTA -->
   <main class={fold['fold-content-container']}>
     <!-- Hero Content - Greeting, tagline, and introduction -->
@@ -26,68 +26,35 @@ const featuredProjects = projectCategories.slice(0, 2);
       <span class={fold['intro']}>Hello world;</span>
       <h1>I'm Erland.<br />I build things for the web.</h1>
       <p class={fold['lead']}>
-        I help teams turn ideas into production-ready, scalable web products that customers genuinely value. Over the past decade, I have led projects end-to-end spanning websites and web apps, balancing usability, performance, and ROI from discovery through launch and continuous iteration.<br /><br />
-        On the infrastructure side, I design and manage resilient IaaS platforms using virtual machines, load balancers, and CI/CD pipelines. I implement autoscaling and observability on GNU/Linux. The result is a stable, secure, and cost-aware platform that keeps your product growing.<br /><br />
+        I help teams turn ideas into production-ready, scalable web products
+        that customers genuinely value. Over the past decade, I have led
+        projects end-to-end spanning websites and web apps, balancing usability,
+        performance, and ROI from discovery through launch and continuous
+        iteration.<br /><br />
+        On the infrastructure side, I design and manage resilient IaaS platforms
+        using virtual machines, load balancers, and CI/CD pipelines. I implement
+        autoscaling and observability on GNU/Linux. The result is a stable, secure,
+        and cost-aware platform that keeps your product growing.<br /><br />
         This is where I'll share my notes, goals, and other things.
       </p>
     </div>
-    
+
     <!-- Contact Button - Email CTA with icon -->
     <a
       href={`mailto:hello@${SITE_DOMAIN}`}
       class:list={[btn.button, btn['contact-button']]}
-      title="Contact Me"
+      title='Contact Me'
     >
       <Icon name='socialEmail' class={btn['button-icon']} />
       <span>Contact Me</span>
     </a>
   </main>
-  
+
   <!-- Portfolio Categories Section - Highlights main project categories -->
   <div class={pf['projects-section']}>
     {
-      featuredProjects.map((project) => (
-        <div class={pf['projects-container']}>
-          {/* Category Icon */}
-          <div class={pf['single-projects-category']}>
-            <div
-              class={
-                pf['projects-category-image-container'] +
-                (project.extraImageClass ? ' ' + project.extraImageClass : '')
-              }
-            >
-              <Icon name={project.icon} class={pf['projects-category-image']} />
-            </div>
-          </div>
-
-          {/* Category Content - Title and tech stack */}
-          <div class={pf['single-projects-content']}>
-            <h3>
-              <a href={project.href}>{project.title}</a>
-            </h3>
-            
-            {/* Technologies & Tools - Chips/badges display */}
-            <div class={chips['tech-tools-container']}>
-              <div
-                class:list={[chips['mini-label-white'], chips['gray-color']]}
-              >
-                Technologies &amp; tools
-              </div>
-              <div
-                class:list={[
-                  chips['chips-container'],
-                  chips['chips-container-small-width'],
-                ]}
-              >
-                {project.tags.map((tag) => (
-                  <div class:list={[chips['single-chip'], chips['small-chip']]}>
-                    {tag}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+      featuredProjects.map(project => (
+        <PortfolioCategoryCard project={project} />
       ))
     }
   </div>

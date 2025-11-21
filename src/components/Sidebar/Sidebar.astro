@@ -1,10 +1,10 @@
 ---
 /**
  * Sidebar Component
- * 
+ *
  * Main navigation sidebar with profile header, navigation links, theme toggle, and social links.
  * Supports collapsible state (desktop) and mobile menu drawer.
- * 
+ *
  * Features:
  * - Profile avatar with stories button
  * - Navigation links with active state highlighting
@@ -13,27 +13,28 @@
  * - Social media links (both sidebar and mobile menu variants)
  * - Responsive design (drawer on mobile, collapsible on desktop)
  * - View transitions persistence (data-astro-transition-persist)
- * 
+ *
  * Navigation state managed by:
  * - SidebarController.astro (state management)
  * - CSS classes and data attributes
  * - Checkbox inputs for toggle state
- * 
+ *
  * @component
  * @example
  * <Sidebar selectedItem="blog" />
- * 
+ *
  * @param {Object} props
  * @param {string} [props.selectedItem] - Currently active navigation item ("home" | "web-development" | "cloud-infra" | "personal-projects" | "download" | "blog")
  */
 import Icon from '@components/Icon.astro';
 import ThemeToggle from '@components/ThemeToggle/ThemeToggle.astro';
+import SocialLinks from '@components/SocialLinks.astro';
 import './sidebar-global.css';
 import './sidebar-local.module.css';
 import socialsStyles from './sidebar-socials.module.css';
 import navStyles from './sidebar-nav.module.css';
 import { navigationLinks } from '@lib/content/navigation';
-import { SITE_CONFIG, SOCIAL_LINKS } from '@lib/core/site-config';
+import { SITE_CONFIG } from '@lib/core/site-config';
 
 const { selectedItem } = Astro.props;
 ---
@@ -59,7 +60,7 @@ const { selectedItem } = Astro.props;
             class='sidebar__avatar-button'
             data-stories
             aria-label='View stories'
-            title="View stories"
+            title='View stories'
           >
             <img
               src='/assets/profile/avatar.webp'
@@ -121,69 +122,35 @@ const { selectedItem } = Astro.props;
 
     <!-- Main Navigation Menu - Contains all navigation links -->
     <nav id='site-nav' role='navigation' class='w-nav-menu'>
-      {navigationLinks.map((link) => (
-        <a
-          href={link.href}
-          aria-label={link.ariaLabel || link.label}
-          data-label={link.dataLabel || link.label}
-          title={link.label}
-          class:list={[
-            navStyles['nav-link-container'],
-            'nav-link-container',
-            'w-inline-block',
-            selectedItem === link.id && 'w--current',
-          ]}
-          aria-current={selectedItem === link.id ? 'page' : undefined}
-        >
-          <Icon
-            name={link.icon}
-            class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-          />
-          <div class='nav-text'>{link.label}</div>
-        </a>
-      ))}
-
-      <!-- Social Links - Mobile Menu Variant (visible inside mobile drawer) -->
-      <div class:list={[socialsStyles.socials, 'socials--menu']}>
-        {
-          SOCIAL_LINKS.map(link => (
-            <a
-              href={link.url}
-              aria-label={link.label}
-              class={socialsStyles['social-link']}
-              target='_blank'
-              rel='nofollow noopener noreferrer'
-            >
-              <Icon
-                name={link.icon}
-                class={socialsStyles['social-icon']}
-                ariaLabel={link.label}
-              />
-            </a>
-          ))
-        }
-      </div>
-    </nav>
-
-    <!-- Social Links - Desktop Sidebar Variant (visible at bottom of sidebar on desktop) -->
-    <div class:list={[socialsStyles.socials, 'socials--sidebar']}>
       {
-        SOCIAL_LINKS.map(link => (
+        navigationLinks.map(link => (
           <a
-            href={link.url}
-            aria-label={link.label}
-            class={socialsStyles['social-link']}
-            target='_blank'
-            rel='nofollow noopener noreferrer'
+            href={link.href}
+            aria-label={link.ariaLabel || link.label}
+            data-label={link.dataLabel || link.label}
+            title={link.label}
+            class:list={[
+              navStyles['nav-link-container'],
+              'nav-link-container',
+              'w-inline-block',
+              selectedItem === link.id && 'w--current',
+            ]}
+            aria-current={selectedItem === link.id ? 'page' : undefined}
           >
             <Icon
               name={link.icon}
-              class={socialsStyles['social-icon']}
-              ariaLabel={link.label}
+              class:list={[navStyles['nav-link-image'], 'nav-link-image']}
             />
+            <div class='nav-text'>{link.label}</div>
           </a>
         ))
       }
-    </div>
+
+      <!-- Social Links - Mobile Menu Variant (visible inside mobile drawer) -->
+      <SocialLinks class:list={[socialsStyles.socials, 'socials--menu']} />
+    </nav>
+
+    <!-- Social Links - Desktop Sidebar Variant (visible at bottom of sidebar on desktop) -->
+    <SocialLinks class:list={[socialsStyles.socials, 'socials--sidebar']} />
   </div>
 </aside>
