@@ -122,15 +122,6 @@
   color: var(--text-muted);
 }
 
-.post-card__tags {
-  display: inline-flex;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
 .post-card__category,
 .post-card__date {
   font-size: clamp(0.8rem, 2vw, 0.9rem) !important;
@@ -201,12 +192,6 @@
   .post-card__thumb {
     max-width: 260px;
     margin: 0 auto;
-  }
-
-  .post-card__footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 
   .post-card__readmore {

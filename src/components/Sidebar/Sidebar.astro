@@ -132,7 +132,6 @@ const { selectedItem } = Astro.props;
             class:list={[
               navStyles['nav-link-container'],
               'nav-link-container',
-              'w-inline-block',
               selectedItem === link.id && 'w--current',
             ]}
             aria-current={selectedItem === link.id ? 'page' : undefined}
