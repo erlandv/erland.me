@@ -59,7 +59,7 @@
 import type { Root } from 'mdast';
 import type { ContainerDirective } from 'mdast-util-directive';
 import { visit, CONTINUE, SKIP } from 'unist-util-visit';
-import { escapeHtml } from '../../core/dom-builder.js';
+import { escapeHtml } from '../../core/html-utils.js';
 
 interface VFile {
   data?: {

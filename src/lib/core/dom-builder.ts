@@ -154,6 +154,10 @@ export function onEvents<K extends keyof HTMLElementEventMap>(
 /**
  * Escape HTML special characters to prevent XSS and DOM corruption
  * Safely converts text content to HTML-safe string
+ *
+ * BROWSER ONLY: Uses DOM APIs (document.createElement)
+ * For Node.js/build-time usage, use escapeHtml from html-utils.ts instead
+ *
  * @example
  * escapeHtml('1 < 2 && 3 > 1') // '1 &lt; 2 &amp;&amp; 3 &gt; 1'
  * escapeHtml('AT&T') // 'AT&amp;T'
