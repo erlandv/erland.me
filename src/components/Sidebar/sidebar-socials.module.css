@@ -72,7 +72,7 @@
   }
 
   :global(.w-nav[data-collapse='medium'])
-    :global(.w-nav-menu.is-visible)
+    :global(.sidebar-nav.is-visible)
     :global(.socials--menu) {
     display: flex !important;
     position: static;

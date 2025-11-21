@@ -29,12 +29,12 @@
   position: relative;
 }
 
-.w-nav-menu {
+.sidebar-nav {
   float: right;
   position: relative;
 }
 
-.sidebar .w-nav-menu {
+.sidebar .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: var(--sidebar-nav-gap);

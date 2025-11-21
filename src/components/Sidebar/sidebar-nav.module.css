@@ -140,7 +140,7 @@
   }
 
   :global(.nav-toggle:checked)
-    ~ :global(.w-nav-menu)
+    ~ :global(.sidebar-nav)
     :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
