@@ -72,7 +72,7 @@
   color: inherit;
 }
 
-.nav-link-container:global(.w--current) {
+.nav-link-container:global(.is-current-page) {
   color: var(--text-primary);
   background-color: var(--sidebar-nav-active-bg, var(--surface-active));
   border-color: var(--sidebar-nav-active-border, var(--border-color));

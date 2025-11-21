@@ -172,7 +172,7 @@
    Global CSS already handles .profile-text and .nav-text opacity/max-width */
 
 @media (max-width: 1024px) {
-  :global(.w-nav-brand) {
+  :global(.sidebar-profile-header) {
     padding-left: 10px;
   }
 
@@ -265,7 +265,7 @@
     display: none !important;
   }
 
-  :global(.w-nav-brand) {
+  :global(.sidebar-profile-header) {
     position: relative;
     z-index: 1301;
   }

@@ -234,12 +234,12 @@ body:has(.sidebar .nav-toggle:checked) {
     body.sidebar-collapsed
   )
   .sidebar
-  .w-nav-brand {
+  .sidebar-profile-header {
   justify-content: center !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .w-nav-brand {
+  .sidebar-profile-header {
   justify-content: center !important;
 }
 

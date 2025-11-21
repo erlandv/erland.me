@@ -236,12 +236,12 @@
         } catch {}
       });
       links.forEach(link => {
-        link.classList.remove('w--current');
+        link.classList.remove('is-current-page');
         link.removeAttribute('aria-current');
       });
       const b = best as HTMLAnchorElement | null;
       if (b) {
-        b.classList.add('w--current');
+        b.classList.add('is-current-page');
         b.setAttribute('aria-current', 'page');
       }
     } catch {}
@@ -270,10 +270,10 @@
                 '.sidebar .nav-link-container[href]'
               );
               all.forEach(a => {
-                a.classList.remove('w--current');
+                a.classList.remove('is-current-page');
                 a.removeAttribute('aria-current');
               });
-              link.classList.add('w--current');
+              link.classList.add('is-current-page');
               link.setAttribute('aria-current', 'page');
               setTimeout(updateActiveNav, 0);
             } catch {}
