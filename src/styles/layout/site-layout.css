@@ -5,7 +5,7 @@
   position: relative;
 }
 
-.main {
+.site-main {
   flex: 1;
   min-height: 100vh;
   background: var(--bg-gradient);
@@ -40,7 +40,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .main {
+  .site-main {
     background-position: center center;
     padding-left: 28px;
     padding-right: 28px;
