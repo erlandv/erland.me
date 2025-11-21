@@ -102,6 +102,12 @@ export const PAGE_METADATA = {
       "Page Not Found! That path doesn't exist, but your journey still does. Let's find your way back.",
   },
 
+  forbidden: {
+    title: 'Access Forbidden',
+    description:
+      "You don't have permission to access this resource. If you believe this is an error, please contact the administrator.",
+  },
+
   offline: {
     title: 'Offline',
     description:

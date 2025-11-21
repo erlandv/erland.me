@@ -349,10 +349,14 @@ async function generateSitemaps() {
       })
     );
 
-    // Filter out 404 and offline pages from sitemap
+    // Filter out 404, 403, and offline pages from sitemap
     const validPages = allPages.filter(page => {
       const pathname = new URL(page.loc).pathname;
-      return !pathname.includes('/404') && pathname !== '/offline/';
+      return (
+        !pathname.includes('/404') &&
+        !pathname.includes('/403') &&
+        pathname !== '/offline/'
+      );
     });
 
     // Split into posts and pages
