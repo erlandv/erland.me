@@ -7,27 +7,25 @@
  * 
  * @component
  * @example
- * <BackNav href="/blog/" label="Back to Blog" />
+ * <BackNav href="/blog/" />
  * 
  * @param {Object} props
  * @param {string} props.href - URL to navigate back to (absolute or relative path)
- * @param {string} [props.label="Back"] - Button label text (default: "Back")
  */
 import Icon from '@components/Icon.astro';
 import styles from './back-nav.module.css';
 
 interface Props {
   href: string;
-  label?: string;
 }
 
-const { href, label = 'Back' } = Astro.props as Props;
+const { href } = Astro.props as Props;
 ---
 
 <div class={styles["back-nav-container"]}>
   <a href={href} class:list={[styles["back-nav-button"], 'w-inline-block']}>
     <Icon name="btnBack" class={styles["back-nav-img"]} />
-    <div>{label}</div>
+    <div>Back</div>
   </a>
   
 </div>
