@@ -1,73 +1,15 @@
 ---
-import Header from '@components/Header.astro';
+import ErrorPage from '@components/ErrorPage.astro';
 import Icon from '@components/Icon.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
-import btn from '@/styles/components/button.module.css';
-import fold from '@/styles/components/fold.module.css';
-import err from '@/styles/components/error.module.css';
-import '@/styles/layout/base.css';
-import '@/styles/prose/typography.css';
-import '@/styles/variables.css';
-import '@/styles/layout/site-layout.css';
 ---
 
-<!doctype html>
-<html lang='id'>
-  <Header
-    title={PAGE_METADATA.notFound.title}
-    description={PAGE_METADATA.notFound.description}
-  />
-  <body>
-    <div class='content'>
-      <nav class='main'>
-        <div class='container'>
-          <main class={fold['fold-content-container']}>
-            <div class={fold['fold-content']}>
-              <div class={err['error-content']}>
-                <div class={err['error-icon']}>
-                  <div class={err['error-icon-svg']}>!</div>
-                </div>
-                <h1 class={err['error-title']}>404</h1>
-                <h2 class={err['error-subtitle']}>Page Not Found</h2>
-                <p class={err['error-description']}>
-                  That path doesn't exist, but your journey still does. Let's
-                  find your way back.
-                </p>
-                <div class={err['error-actions']}>
-                  <a
-                    href='/'
-                    class:list={[
-                      btn.button,
-                      err['homepage-button'],
-                      'homepage-button',
-                    ]}
-                  >
-                    <Icon
-                      name='navHome'
-                      class:list={[btn['button-icon'], err['button-icon']]}
-                    />
-                    <span>Go Home</span>
-                  </a>
-                  <a
-                    href='javascript:history.back()'
-                    class:list={[
-                      btn.button,
-                      err['secondary-button'],
-                      'secondary-button',
-                    ]}
-                  >
-                    <Icon
-                      name='btnBack'
-                      class:list={[btn['button-icon'], err['button-icon']]}
-                    />
-                    <span>Go Back</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </main>
-        </div>
-      </nav>
-    </div>
-  </body>
-</html>
+<ErrorPage
+  errorCode='404'
+  errorTitle='Page Not Found'
+  errorMessage="That path doesn't exist, but your journey still does. Let's find your way back."
+  title={PAGE_METADATA.notFound.title}
+  description={PAGE_METADATA.notFound.description}
+>
+  <Icon slot='icon' name='error404' />
+</ErrorPage>

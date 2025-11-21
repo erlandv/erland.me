@@ -97,9 +97,15 @@ export const PAGE_METADATA = {
 
   /** Utility pages */
   notFound: {
-    title: 'Page Not Found',
+    title: '404 Page Not Found',
     description:
       "Page Not Found! That path doesn't exist, but your journey still does. Let's find your way back.",
+  },
+
+  forbidden: {
+    title: '403 Access Forbidden',
+    description:
+      "You don't have permission to access this resource. If you believe this is an error, please contact the administrator.",
   },
 
   offline: {

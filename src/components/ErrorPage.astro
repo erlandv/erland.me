@@ -1,0 +1,78 @@
+---
+/**
+ * ErrorPage Component
+ *
+ * Reusable layout for error pages (403, 404, etc).
+ * Provides consistent styling for error messages and action buttons.
+ *
+ * @component
+ * @example
+ * <ErrorPage
+ *   errorCode="404"
+ *   errorTitle="Page Not Found"
+ *   errorMessage="The page you are looking for does not exist."
+ *   title={PAGE_METADATA.notFound.title}
+ *   description={PAGE_METADATA.notFound.description}
+ * >
+ *   <Icon slot="icon" name="error404" />
+ * </ErrorPage>
+ */
+import Header from '@components/Header.astro';
+import Icon from '@components/Icon.astro';
+import fold from '@/styles/components/fold.module.css';
+import err from '@/styles/components/error.module.css';
+import btn from '@/styles/components/button.module.css';
+import '@/styles/layout/base.css';
+import '@/styles/prose/typography.css';
+import '@/styles/variables.css';
+import '@/styles/layout/site-layout.css';
+
+interface Props {
+  errorCode: string;
+  errorTitle: string;
+  errorMessage: string;
+  title: string;
+  description: string;
+}
+
+const { errorCode, errorTitle, errorMessage, title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang='id'>
+  <Header title={title} description={description} />
+  <body>
+    <div class='content'>
+      <nav class={`main ${err['error-page-layout']}`}>
+        <div class={`container ${err['error-container']}`}>
+          <main class={fold['fold-content-container']}>
+            <div class={fold['fold-content']}>
+              <div class={err['error-content']}>
+                <div class={err['error-icon']}>
+                  <slot name='icon' />
+                </div>
+                <h1 class={err['error-title']}>{errorCode}</h1>
+                <h2 class={err['error-subtitle']}>{errorTitle}</h2>
+                <p class={err['error-description']}>
+                  {errorMessage}
+                </p>
+                <div class={err['error-actions']}>
+                  <slot name='actions'>
+                    <!-- Default Go Home button -->
+                    <a
+                      href='/'
+                      class:list={[btn.button, btn['contact-button']]}
+                    >
+                      <Icon name='navHome' class={btn['button-icon']} />
+                      <span>Go Home</span>
+                    </a>
+                  </slot>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

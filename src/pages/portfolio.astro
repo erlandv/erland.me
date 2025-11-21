@@ -1,13 +1,12 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import Icon from '@components/Icon.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
-import chips from '@/styles/pages/chips.module.css';
 import { projectCategories } from '@lib/content/portfolio';
+import PortfolioCategoryCard from '@components/PortfolioCategoryCard.astro';
 ---
 
 <SiteLayout
@@ -17,7 +16,7 @@ import { projectCategories } from '@lib/content/portfolio';
   description={PAGE_METADATA.portfolio.index.description}
 >
   <!-- Back Navigation -->
-  <BackNav href='/' label='Back' />
+  <BackNav href='/' />
 
   <!-- Hero/Fold Section -->
   <main class={fold['fold-content-container']}>
@@ -34,48 +33,8 @@ import { projectCategories } from '@lib/content/portfolio';
   <!-- Portfolio Categories Section -->
   <div class={pf['projects-section']}>
     {
-      projectCategories.map((project) => (
-        <div class={pf['projects-container']}>
-          {/* Category Icon */}
-          <div class={pf['single-projects-category']}>
-            <div
-              class={
-                pf['projects-category-image-container'] +
-                (project.extraImageClass ? ' ' + project.extraImageClass : '')
-              }
-            >
-              <Icon name={project.icon} class={pf['projects-category-image']} />
-            </div>
-          </div>
-
-          {/* Category Content - Title and tech stack */}
-          <div class={pf['single-projects-content']}>
-            <h3>
-              <a href={project.href}>{project.title}</a>
-            </h3>
-
-            {/* Technologies & Tools - Chips/badges display */}
-            <div class={chips['tech-tools-container']}>
-              <div
-                class:list={[chips['mini-label-white'], chips['gray-color']]}
-              >
-                Technologies &amp; tools
-              </div>
-              <div
-                class:list={[
-                  chips['chips-container'],
-                  chips['chips-container-small-width'],
-                ]}
-              >
-                {project.tags.map((tag) => (
-                  <div class:list={[chips['single-chip'], chips['small-chip']]}>
-                    {tag}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+      projectCategories.map(project => (
+        <PortfolioCategoryCard project={project} />
       ))
     }
   </div>

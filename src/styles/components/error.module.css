@@ -1,3 +1,14 @@
+.error-page-layout {
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.error-container {
+  justify-content: center;
+  align-items: center;
+}
+
 .error-content {
   text-align: center;
   max-width: 600px;
@@ -7,22 +18,15 @@
 
 .error-icon {
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
-.error-icon-svg {
+.error-icon svg {
   width: 80px;
   height: 80px;
   color: var(--color-primary);
-  opacity: 0.8;
-  font-size: 3rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid var(--color-primary);
-  border-radius: 50%;
-  margin: 0 auto;
-  background: rgba(var(--color-primary-rgb), 0.1);
+  opacity: 0.9;
 }
 
 .error-title {
@@ -59,51 +63,12 @@
   flex-wrap: wrap;
 }
 
-.error-actions .homepage-button {
-  background: var(--color-primary);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.error-actions .homepage-button:hover {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-}
-
-.error-actions .secondary-button {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.secondary-button:hover {
-  background: var(--color-primary);
-  color: var(--text-primary);
-}
-
-.button-icon {
-  width: 18px;
-  height: 18px;
-}
-
 @media (max-width: 768px) {
+  .error-icon svg {
+    width: 60px;
+    height: 60px;
+  }
+
   .error-title {
     font-size: 4rem;
   }
@@ -112,16 +77,6 @@
   }
   .error-description {
     font-size: 1rem;
-  }
-  .error-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-  .homepage-button,
-  .secondary-button {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
   }
 }
 

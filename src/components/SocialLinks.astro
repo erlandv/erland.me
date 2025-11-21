@@ -1,0 +1,41 @@
+---
+/**
+ * SocialLinks Component
+ *
+ * Renders a list of social media links with icons.
+ * Used in Sidebar and SidebarSocialFlyout.
+ */
+import Icon from '@components/Icon.astro';
+import socialsStyles from './Sidebar/sidebar-socials.module.css';
+import { SOCIAL_LINKS } from '@lib/core/site-config';
+
+interface Props {
+  class?: string;
+  itemClass?: string;
+  iconClass?: string;
+  extraProps?: Record<string, any>;
+}
+
+const { class: className, itemClass, iconClass, extraProps = {} } = Astro.props;
+---
+
+<div class={className}>
+  {
+    SOCIAL_LINKS.map(link => (
+      <a
+        href={link.url}
+        aria-label={link.label}
+        class:list={[socialsStyles['social-link'], itemClass]}
+        target='_blank'
+        rel='nofollow noopener noreferrer'
+        {...extraProps}
+      >
+        <Icon
+          name={link.icon}
+          class:list={[socialsStyles['social-icon'], iconClass]}
+          ariaLabel={link.label}
+        />
+      </a>
+    ))
+  }
+</div>
