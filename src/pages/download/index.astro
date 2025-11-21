@@ -2,6 +2,8 @@
 import SiteLayout from "@layouts/SiteLayout.astro";
 import BackNav from "@components/BackNav/BackNav.astro";
 import { getCollection } from "astro:content";
+import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import dl from "./styles/_download.module.css";
 import { Image } from "astro:assets";
 
@@ -16,10 +18,10 @@ const downloads = (await getCollection("downloads"))
 ---
 
 <SiteLayout
-  title="Download Templates and Files by Erland Ramdhani"
+  title={`${PAGE_METADATA.download.index.title} by ${SITE_CONFIG.author.name}`}
   canonical="/download/"
   selectedItem="download"
-  description="Download berbagai macam file yang saya bagikan secara gratis. Download dengan mudah hanya dengan sekali klik, file akan otomatis terunduh ke perangkat kalian tanpa perlu melewati halaman safelink."
+  description={PAGE_METADATA.download.index.description}
 >
   <!-- Back Navigation - Return to homepage -->
   <BackNav href="/" label="Back" />

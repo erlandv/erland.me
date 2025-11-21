@@ -32,7 +32,8 @@ import './sidebar-global.css';
 import './sidebar-local.module.css';
 import socialsStyles from './sidebar-socials.module.css';
 import navStyles from './sidebar-nav.module.css';
-import { sidebarSocialLinks as socials } from './social-links';
+import { navigationLinks } from '@lib/content/navigation';
+import { SITE_CONFIG, SOCIAL_LINKS } from '@lib/core/site-config';
 
 const { selectedItem } = Astro.props;
 ---
@@ -69,8 +70,8 @@ const { selectedItem } = Astro.props;
           </button>
           <!-- Profile Info Text -->
           <div class='profile-text'>
-            <div class='label-white'>Erland Ramdhani</div>
-            <div class='label-gray'>Web Developer</div>
+            <div class='label-white'>{SITE_CONFIG.author.name}</div>
+            <div class='label-gray'>{SITE_CONFIG.author.jobTitle}</div>
           </div>
         </div>
       </div>
@@ -120,143 +121,43 @@ const { selectedItem } = Astro.props;
 
     <!-- Main Navigation Menu - Contains all navigation links -->
     <nav id='site-nav' role='navigation' class='w-nav-menu'>
-      <!-- Navigation Link: Home -->
-      <a
-        href='/'
-        aria-label='Home'
-        data-label='Home'
-        title='Home'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'home' && 'w--current',
-        ]}
-      >
-        <Icon
-          name='navHome'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Home</div>
-      </a>
-      
-      <!-- Navigation Link: Web Development Portfolio -->
-      <a
-        href='/portfolio/web-development/'
-        aria-label='Web Development'
-        data-label='Web Development'
-        title='Web Development'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'web-development' && 'w--current',
-        ]}
-        aria-current={selectedItem === 'web-development' ? 'page' : undefined}
-      >
-        <Icon
-          name='navWeb'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Web development</div>
-      </a>
-      
-      <!-- Navigation Link: Cloud Infrastructure Portfolio -->
-      <a
-        href='/portfolio/cloud-infra/'
-        aria-label='Cloud Infrastructure'
-        data-label='Cloud Infra'
-        title='Cloud Infra'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'cloud-infra' && 'w--current',
-        ]}
-      >
-        <Icon
-          name='navInfra'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Cloud Infra</div>
-      </a>
-      
-      <!-- Navigation Link: Personal Projects Portfolio -->
-      <a
-        href='/portfolio/personal-projects/'
-        aria-label='Personal Projects'
-        data-label='Personal Projects'
-        title='Personal Projects'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'personal-projects' && 'w--current',
-        ]}
-      >
-        <Icon
-          name='navPersonal'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Personal projects</div>
-      </a>
-      
-      <!-- Navigation Link: Download Page -->
-      <a
-        href='/download/'
-        aria-label='Download'
-        data-label='Download'
-        title='Download'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'download' && 'w--current',
-        ]}
-        aria-current={selectedItem === 'download' ? 'page' : undefined}
-      >
-        <Icon
-          name='navDownload'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Download</div>
-      </a>
-      
-      <!-- Navigation Link: Blog Posts -->
-      <a
-        href='/blog/'
-        aria-label='Blog Posts'
-        data-label='Blog Posts'
-        title='Blog Posts'
-        class:list={[
-          navStyles['nav-link-container'],
-          'nav-link-container',
-          'w-inline-block',
-          selectedItem === 'blog' && 'w--current',
-        ]}
-      >
-        <Icon
-          name='navBlog'
-          class:list={[navStyles['nav-link-image'], 'nav-link-image']}
-        />
-        <div class='nav-text'>Blog Posts</div>
-      </a>
+      {navigationLinks.map((link) => (
+        <a
+          href={link.href}
+          aria-label={link.ariaLabel || link.label}
+          data-label={link.dataLabel || link.label}
+          title={link.label}
+          class:list={[
+            navStyles['nav-link-container'],
+            'nav-link-container',
+            'w-inline-block',
+            selectedItem === link.id && 'w--current',
+          ]}
+          aria-current={selectedItem === link.id ? 'page' : undefined}
+        >
+          <Icon
+            name={link.icon}
+            class:list={[navStyles['nav-link-image'], 'nav-link-image']}
+          />
+          <div class='nav-text'>{link.label}</div>
+        </a>
+      ))}
 
       <!-- Social Links - Mobile Menu Variant (visible inside mobile drawer) -->
       <div class:list={[socialsStyles.socials, 'socials--menu']}>
         {
-          socials.map(s => (
+          SOCIAL_LINKS.map(link => (
             <a
-              href={s.href}
-              aria-label={s.label}
+              href={link.url}
+              aria-label={link.label}
               class={socialsStyles['social-link']}
               target='_blank'
-              rel='noopener noreferrer'
+              rel='nofollow noopener noreferrer'
             >
               <Icon
-                name={s.name}
+                name={link.icon}
                 class={socialsStyles['social-icon']}
-                ariaLabel={s.label}
+                ariaLabel={link.label}
               />
             </a>
           ))
@@ -267,18 +168,18 @@ const { selectedItem } = Astro.props;
     <!-- Social Links - Desktop Sidebar Variant (visible at bottom of sidebar on desktop) -->
     <div class:list={[socialsStyles.socials, 'socials--sidebar']}>
       {
-        socials.map(s => (
+        SOCIAL_LINKS.map(link => (
           <a
-            href={s.href}
-            aria-label={s.label}
+            href={link.url}
+            aria-label={link.label}
             class={socialsStyles['social-link']}
             target='_blank'
-            rel='noopener noreferrer'
+            rel='nofollow noopener noreferrer'
           >
             <Icon
-              name={s.name}
+              name={link.icon}
               class={socialsStyles['social-icon']}
-              ariaLabel={s.label}
+              ariaLabel={link.label}
             />
           </a>
         ))

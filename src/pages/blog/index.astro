@@ -6,6 +6,8 @@ import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { loadAllPosts, slicePage } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
+import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import listing from '@/styles/pages/listing.module.css';
 
 const posts = await loadAllPosts();
@@ -22,9 +24,9 @@ const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
-  title="Personal Blog Posts by Erland Ramdhani"
+  title={`${PAGE_METADATA.blog.index.title} by ${SITE_CONFIG.author.name}`}
   canonical="/blog/"
-  description="Halaman blog pribadi milik Erland Ramdhani. Berisi berbagai artikel yang ditulis untuk menyalurkan hobi walau tak tentu waktu publikasi."
+  description={PAGE_METADATA.blog.index.description}
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={collectionPageJsonLd(
     'Blog',

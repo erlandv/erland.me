@@ -1,23 +1,20 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro";
-import Project from '@components/Project/Project.astro';
+import Project from "@components/Project/Project.astro";
 import BackNav from "@components/BackNav/BackNav.astro";
+import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import listing from "@/styles/pages/listing.module.css";
-import { getCollection, type CollectionEntry } from 'astro:content';
-type ProjectEntry = CollectionEntry<'portfolio'>;
-type ProjectData = ProjectEntry['data'];
-const allProjects: ProjectEntry[] = await getCollection('portfolio');
-const projects: ProjectData[] = allProjects
-  .filter((p: ProjectEntry) => p.data.category === 'personal-projects')
-  .sort((a: ProjectEntry, b: ProjectEntry) => (a.data.order ?? 0) - (b.data.order ?? 0))
-  .map((p: ProjectEntry) => p.data);
+import { getProjectsByCategory, type ProjectData } from '@lib/content/portfolio';
+
+const projects = await getProjectsByCategory('personal-projects');
 ---
 
 <SiteLayout
-  title="Personal Projects Portfolio by Erland Ramdhani"
+  title={`${PAGE_METADATA.portfolio.personalProjects.title} by ${SITE_CONFIG.author.name}`}
   canonical="/portfolio/personal-projects/"
   selectedItem="personal-projects"
-  description="Weekend experiments and open-source toys—small tools, prototypes, and notes where I test ideas, learn new stacks, and ship for fun."
+  description={PAGE_METADATA.portfolio.personalProjects.description}
 >
   <BackNav href="/portfolio/" label="See Other Portfolios" />
   <div class="content-container">

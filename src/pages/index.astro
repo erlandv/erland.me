@@ -2,16 +2,22 @@
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
 import { SITE_DOMAIN } from '@lib/core/env';
+import { SITE_CONFIG } from '@lib/core/site-config';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
 import fold from '@/styles/components/fold.module.css';
 import chips from '@/styles/pages/chips.module.css';
 import btn from '@/styles/components/button.module.css';
+import { projectCategories } from '@lib/content/portfolio';
+
+const featuredProjects = projectCategories.slice(0, 2);
 ---
 
 <SiteLayout 
-  title='Personal Web by Erland Ramdhani'
+  title={`${PAGE_METADATA.home.title} by ${SITE_CONFIG.author.name}`}
   canonical='/'
   selectedItem='home'
+  description={PAGE_METADATA.home.description}
   >
   <!-- Hero/Fold Section - Above-the-fold introduction and CTA -->
   <main class={fold['fold-content-container']}>
@@ -39,64 +45,51 @@ import btn from '@/styles/components/button.module.css';
   
   <!-- Portfolio Categories Section - Highlights main project categories -->
   <div class={pf['projects-section']}>
-    <!-- Portfolio Category: Web Development -->
-    <div class={pf['projects-container']}>
-      <!-- Category Icon -->
-      <div class={pf['single-projects-category']}>
-        <div class={pf['projects-category-image-container']}>
-          <Icon name='portfolioWeb' class={pf['projects-category-image']} />
-        </div>
-      </div>
-      
-      <!-- Category Content - Title and tech stack -->
-      <div class={pf['single-projects-content']}>
-        <h3><a href='/portfolio/web-development/'>Web Development</a></h3>
-        
-        <!-- Technologies & Tools - Chips/badges display -->
-        <div class={chips['tech-tools-container']}>
-          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
-          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Node.js</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>TypeScript</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Next.js</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>React</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Tailwind CSS</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Vite</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>PostgreSQL</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Git</div>
+    {
+      featuredProjects.map((project) => (
+        <div class={pf['projects-container']}>
+          {/* Category Icon */}
+          <div class={pf['single-projects-category']}>
+            <div
+              class={
+                pf['projects-category-image-container'] +
+                (project.extraImageClass ? ' ' + project.extraImageClass : '')
+              }
+            >
+              <Icon name={project.icon} class={pf['projects-category-image']} />
+            </div>
+          </div>
+
+          {/* Category Content - Title and tech stack */}
+          <div class={pf['single-projects-content']}>
+            <h3>
+              <a href={project.href}>{project.title}</a>
+            </h3>
+            
+            {/* Technologies & Tools - Chips/badges display */}
+            <div class={chips['tech-tools-container']}>
+              <div
+                class:list={[chips['mini-label-white'], chips['gray-color']]}
+              >
+                Technologies &amp; tools
+              </div>
+              <div
+                class:list={[
+                  chips['chips-container'],
+                  chips['chips-container-small-width'],
+                ]}
+              >
+                {project.tags.map((tag) => (
+                  <div class:list={[chips['single-chip'], chips['small-chip']]}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Portfolio Category: Cloud Infrastructure -->
-    <div class={pf['projects-container']}>
-      <!-- Category Icon -->
-      <div class={pf['single-projects-category']}>
-        <div class={pf['projects-category-image-container'] + ' devops-img'}>
-          <Icon name='portfolioInfra' class={pf['projects-category-image']} />
-        </div>
-      </div>
-      
-      <!-- Category Content - Title and tech stack -->
-      <div class={pf['single-projects-content']}>
-        <h3><a href='/portfolio/cloud-infra/'>Cloud Infra</a></h3>
-        
-        <!-- Technologies & Tools - Chips/badges display -->
-        <div class={chips['tech-tools-container']}>
-          <div class:list={[chips['mini-label-white'], chips['gray-color']]}>Technologies &amp; tools</div>
-          <div class:list={[chips['chips-container'], chips['chips-container-small-width']]}>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Terraform</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Docker</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Kubernetes</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Bash</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Github Actions</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>AWS</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>Azure</div>
-            <div class:list={[chips['single-chip'], chips['small-chip']]}>GCP</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      ))
+    }
   </div>
+  <!-- End of Portfolio Categories Section -->
 </SiteLayout>

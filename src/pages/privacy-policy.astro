@@ -2,13 +2,14 @@
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import { SITE_DOMAIN } from '@lib/core/env';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import fold from '@/styles/components/fold.module.css';
 ---
 
 <SiteLayout
-  title='Privacy Policy'
+  title={PAGE_METADATA.privacyPolicy.title}
   canonical='/privacy-policy/'
-  description='Dengan mengakses dan/atau menggunakan layanan di situs ini, Anda dianggap telah membaca, memahami, menyetujui, dan terikat oleh kebijakan privasi ini.'
+  description={PAGE_METADATA.privacyPolicy.description}
 >
   <BackNav href='/' label='Back' />
   <main class={fold['fold-content-container']}>

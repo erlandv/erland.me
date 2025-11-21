@@ -25,7 +25,7 @@
 import Icon from '@components/Icon.astro';
 import styles from './SidebarSocialFlyout.module.css';
 import socialsStyles from '@components/Sidebar/sidebar-socials.module.css';
-import { sidebarSocialLinks } from '@components/Sidebar/social-links';
+import { SOCIAL_LINKS } from '@lib/core/site-config';
 
 const flyoutId = 'sidebar-social-flyout';
 ---
@@ -57,20 +57,20 @@ const flyoutId = 'sidebar-social-flyout';
     data-open='false'
   >
     {
-      sidebarSocialLinks.map(s => (
+      SOCIAL_LINKS.map(link => (
         <a
-          href={s.href}
-          aria-label={s.label}
+          href={link.url}
+          aria-label={link.label}
           class:list={[socialsStyles['social-link'], styles.flyoutItem]}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='nofollow noopener noreferrer'
           role='menuitem'
           data-socials-flyout-item
         >
           <Icon
-            name={s.name}
+            name={link.icon}
             class:list={[socialsStyles['social-icon'], styles.flyoutItemIcon]}
-            ariaLabel={s.label}
+            ariaLabel={link.label}
           />
         </a>
       ))

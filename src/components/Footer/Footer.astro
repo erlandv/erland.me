@@ -11,6 +11,7 @@
  */
 import astroLogoRaw from '@/icons/astro.svg?raw';
 import styles from './footer.module.css';
+import { SITE_CONFIG } from '@lib/core/site-config';
 
 const year = new Date().getFullYear();
 ---
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
 <footer class={styles["site-footer"]} aria-label="Site footer">
   <div class={styles["footer-inner"]}>
     <!-- Copyright Notice - Auto-updates year dynamically -->
-    <div class={styles["footer-copy"]}>© {year} Erland Ramdhani</div>
+    <div class={styles["footer-copy"]}>© {year} {SITE_CONFIG.author.name}</div>
     
     <!-- Powered By Section - Astro framework branding -->
     <div class={styles["footer-powered"]}>

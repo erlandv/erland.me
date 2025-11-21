@@ -2,14 +2,15 @@
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
 import Icon from '@components/Icon.astro';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import fold from '@/styles/components/fold.module.css';
 import btn from '@/styles/components/button.module.css';
 ---
 
 <SiteLayout
-  title='You are offline'
+  title={PAGE_METADATA.offline.title}
   canonical='/offline/'
-  description='This page is shown when you are offline. Please check your internet connection and try again.'
+  description={PAGE_METADATA.offline.description}
   showSidebar={true}
 >
   <BackNav href='/' label='Back to Home' />

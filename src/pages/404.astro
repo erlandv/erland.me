@@ -1,6 +1,7 @@
 ---
 import Header from '@components/Header.astro';
 import Icon from '@components/Icon.astro';
+import { PAGE_METADATA } from '@lib/content/page-metadata';
 import btn from '@/styles/components/button.module.css';
 import fold from '@/styles/components/fold.module.css';
 import err from '@/styles/components/error.module.css';
@@ -13,8 +14,8 @@ import '@/styles/layout/site-layout.css';
 <!doctype html>
 <html lang='id'>
   <Header
-    title='404 Page Not Found'
-    description="Page Not Found! That path doesn't exist, but your journey still does. Let's find your way back."
+    title={PAGE_METADATA.notFound.title}
+    description={PAGE_METADATA.notFound.description}
   />
   <body>
     <div class='content'>
