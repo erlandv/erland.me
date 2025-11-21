@@ -10,7 +10,7 @@ node_modules/
 # static files
 AGENTS.md
 public/*.txt
-public/*.json
+public/search-index.json
 public/favicon.ico
 
 # logs

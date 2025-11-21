@@ -1,0 +1,37 @@
+{
+  "_comment": "Story images located at public/assets/stories/",
+  "stories": [
+    {
+      "src": "/assets/stories/story-1.webp",
+      "alt": "Story 1"
+    },
+    {
+      "src": "/assets/stories/story-2.webp",
+      "alt": "Story 2"
+    },
+    {
+      "src": "/assets/stories/story-3.webp",
+      "alt": "Story 3"
+    },
+    {
+      "src": "/assets/stories/story-4.webp",
+      "alt": "Story 4"
+    },
+    {
+      "src": "/assets/stories/story-5.webp",
+      "alt": "Story 5"
+    },
+    {
+      "src": "/assets/stories/story-6.webp",
+      "alt": "Story 6"
+    },
+    {
+      "src": "/assets/stories/story-7.webp",
+      "alt": "Story 7"
+    },
+    {
+      "src": "/assets/stories/story-8.webp",
+      "alt": "Story 8"
+    }
+  ]
+}

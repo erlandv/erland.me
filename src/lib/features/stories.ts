@@ -30,48 +30,63 @@ interface Story {
 }
 
 /**
+ * Stories data container
+ * @property stories - Array of story objects
+ */
+interface StoriesData {
+  stories: Story[];
+}
+
+/**
  * Duration for each story in milliseconds (5 seconds)
  */
 const STORY_DURATION = 5000; // 5 seconds per story
 
 /**
- * Default placeholder stories for demo/testing
- * Uses pre-defined story images from /assets/stories/
+ * Stories JSON data URL
  */
-const PLACEHOLDER_STORIES: Story[] = [
-  {
-    src: '/assets/stories/story-1.webp',
-    alt: 'Story 1',
-  },
-  {
-    src: '/assets/stories/story-2.webp',
-    alt: 'Story 2',
-  },
-  {
-    src: '/assets/stories/story-3.webp',
-    alt: 'Story 3',
-  },
-  {
-    src: '/assets/stories/story-4.webp',
-    alt: 'Story 4',
-  },
-  {
-    src: '/assets/stories/story-5.webp',
-    alt: 'Story 5',
-  },
-  {
-    src: '/assets/stories/story-6.webp',
-    alt: 'Story 6',
-  },
-  {
-    src: '/assets/stories/story-7.webp',
-    alt: 'Story 7',
-  },
-  {
-    src: '/assets/stories/story-8.webp',
-    alt: 'Story 8',
-  },
-];
+const STORIES_DATA_URL = '/data/stories.json';
+
+/**
+ * In-memory cache for loaded stories
+ * Prevents multiple fetches for same data
+ */
+let storiesCache: Story[] | null = null;
+
+/**
+ * Load stories from JSON file
+ * Uses cache to prevent redundant fetches
+ * @returns Promise resolving to array of stories
+ * @throws Error if fetch fails or JSON is invalid
+ */
+async function loadStories(): Promise<Story[]> {
+  // Return cached data if available
+  if (storiesCache !== null) {
+    return storiesCache;
+  }
+
+  try {
+    const response = await fetch(STORIES_DATA_URL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch stories: ${response.statusText}`);
+    }
+
+    const data: StoriesData = await response.json();
+
+    // Validate data structure
+    if (!data.stories || !Array.isArray(data.stories)) {
+      throw new Error('Invalid stories data format');
+    }
+
+    // Cache the loaded stories
+    storiesCache = data.stories;
+    return storiesCache;
+  } catch (error) {
+    console.error('[Stories] Failed to load stories:', error);
+    // Return empty array as fallback
+    return [];
+  }
+}
 
 /**
  * Instagram-like Stories Viewer
@@ -84,9 +99,19 @@ const PLACEHOLDER_STORIES: Story[] = [
  * - Touch-friendly click zones
  * - Automatic cleanup on close
  *
+ * Stories are loaded from /data/stories.json by default,
+ * or can be provided directly via constructor parameter.
+ *
  * @example
+ * // Load from JSON (default)
  * const viewer = new StoriesViewer();
- * viewer.open(); // Opens with default stories
+ * await viewer.open();
+ *
+ * @example
+ * // Use custom stories
+ * const customStories = [{ src: '/img.jpg', alt: 'Custom' }];
+ * const viewer = new StoriesViewer(customStories);
+ * await viewer.open();
  */
 class StoriesViewer {
   private stories: Story[];
@@ -109,10 +134,10 @@ class StoriesViewer {
 
   /**
    * Create new stories viewer instance
-   * @param stories - Array of story objects (defaults to PLACEHOLDER_STORIES)
+   * @param stories - Optional array of story objects (defaults to loading from JSON)
    */
-  constructor(stories: Story[] = PLACEHOLDER_STORIES) {
-    this.stories = stories;
+  constructor(stories?: Story[]) {
+    this.stories = stories || [];
   }
 
   /**
@@ -548,13 +573,25 @@ class StoriesViewer {
 
   /**
    * Open the stories viewer
-   * Creates overlay, appends to body, animates in, and loads first story
+   * Loads stories from JSON if not provided, creates overlay, appends to body,
+   * animates in, and loads first story
    * @example
    * const viewer = new StoriesViewer();
-   * viewer.open();
+   * await viewer.open();
    */
-  public open(): void {
+  public async open(): Promise<void> {
     if (this.overlay) return; // Already open
+
+    // Load stories from JSON if not provided
+    if (this.stories.length === 0) {
+      this.stories = await loadStories();
+
+      // Check if stories were loaded successfully
+      if (this.stories.length === 0) {
+        console.error('[Stories] No stories available to display');
+        return;
+      }
+    }
 
     this.overlay = this.createOverlay();
     document.body.appendChild(this.overlay);
@@ -645,12 +682,12 @@ export function initAvatarStories(): void {
     if (elem._storiesBound) return;
     elem._storiesBound = true;
 
-    avatar.addEventListener('click', (e: Event) => {
+    avatar.addEventListener('click', async (e: Event) => {
       e.preventDefault();
       e.stopPropagation();
 
       const viewer = new StoriesViewer();
-      viewer.open();
+      await viewer.open();
     });
 
     // Add visual indicator (cursor pointer)
