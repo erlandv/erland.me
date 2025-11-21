@@ -72,7 +72,7 @@
   color: inherit;
 }
 
-.nav-link-container:global(.w--current) {
+.nav-link-container:global(.is-current-page) {
   color: var(--text-primary);
   background-color: var(--sidebar-nav-active-bg, var(--surface-active));
   border-color: var(--sidebar-nav-active-border, var(--border-color));
@@ -140,7 +140,7 @@
   }
 
   :global(.nav-toggle:checked)
-    ~ :global(.w-nav-menu)
+    ~ :global(.sidebar-nav)
     :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;

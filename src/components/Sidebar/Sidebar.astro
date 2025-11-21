@@ -47,13 +47,13 @@ const { selectedItem } = Astro.props;
   data-easing='ease'
   data-easing2='ease'
   data-astro-transition-persist='sidebar'
-  class='sidebar w-nav'
+  class='sidebar nav-scaffold'
 >
   <div class='nav-content'>
     <!-- Profile Header Section - Desktop sidebar branding -->
-    <div class='w-nav-brand'>
+    <div class='sidebar-profile-header'>
       <div class='profile-header'>
-        <div class='niv-data'>
+        <div class='profile-container'>
           <!-- Avatar Button - Opens stories modal when clicked -->
           <button
             type='button'
@@ -66,7 +66,7 @@ const { selectedItem } = Astro.props;
               src='/assets/profile/avatar.webp'
               loading='eager'
               alt='Profile picture'
-              class='niv-image'
+              class='profile-avatar'
             />
           </button>
           <!-- Profile Info Text -->
@@ -87,7 +87,7 @@ const { selectedItem } = Astro.props;
       <!-- Hamburger Menu Button - Toggles mobile navigation drawer -->
       <label
         for='nav-toggle'
-        class='navbar-icon-button w-nav-button'
+        class='navbar-icon-button mobile-menu-toggle'
         style='-webkit-user-select: text;'
         aria-label='Toggle menu'
         aria-controls='site-nav'
@@ -121,7 +121,7 @@ const { selectedItem } = Astro.props;
     />
 
     <!-- Main Navigation Menu - Contains all navigation links -->
-    <nav id='site-nav' role='navigation' class='w-nav-menu'>
+    <nav id='site-nav' class='sidebar-nav'>
       {
         navigationLinks.map(link => (
           <a
@@ -132,8 +132,7 @@ const { selectedItem } = Astro.props;
             class:list={[
               navStyles['nav-link-container'],
               'nav-link-container',
-              'w-inline-block',
-              selectedItem === link.id && 'w--current',
+              selectedItem === link.id && 'is-current-page',
             ]}
             aria-current={selectedItem === link.id ? 'page' : undefined}
           >

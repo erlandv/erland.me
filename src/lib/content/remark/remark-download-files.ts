@@ -59,6 +59,7 @@
 import type { Root } from 'mdast';
 import type { ContainerDirective } from 'mdast-util-directive';
 import { visit, CONTINUE, SKIP } from 'unist-util-visit';
+import { escapeHtml } from '../../core/html-utils.js';
 
 interface VFile {
   data?: {
@@ -69,28 +70,13 @@ interface VFile {
 }
 
 /**
- * Escape HTML special characters for safe rendering
- * Converts &, <, >, ", ' to HTML entities
- * @param value - Value to escape (converts to string)
- * @returns HTML-safe string
- */
-function escapeHtml(value: unknown): string {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-/**
  * Escape HTML attribute value with additional backtick escaping
  * Safe for use in href and other HTML attributes
  * @param value - Value to escape for attribute context
  * @returns Attribute-safe string
  */
 function escapeAttribute(value: unknown): string {
-  return escapeHtml(value).replace(/`/g, '&#96;');
+  return escapeHtml(String(value ?? '')).replace(/`/g, '&#96;');
 }
 
 type DownloadLink = { label?: string; href?: string; size?: string };

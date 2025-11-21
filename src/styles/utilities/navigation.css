@@ -1,46 +1,40 @@
 /**
  * Navigation Scaffold Utilities
- * Base styles for .w-nav-* classes used by Sidebar component
- * Legacy Webflow-style navigation structure
+ * Base styles for navigation classes used by Sidebar component
+ * Refactored from legacy Webflow-style navigation structure
  */
 
-/* Webflow-legacy inline-block utility used by navigation components */
-.w-inline-block {
-  max-width: 100%;
-  display: inline-block;
-}
-
 /* Navigation scaffold */
-.w-nav {
+.nav-scaffold {
   z-index: 1000;
   background: var(--bg-secondary);
   position: relative;
 }
 
-.w-nav:before,
-.w-nav:after {
+.nav-scaffold:before,
+.nav-scaffold:after {
   content: ' ';
   grid-area: 1 / 1 / 2 / 2;
   display: table;
 }
 
-.w-nav:after {
+.nav-scaffold:after {
   clear: both;
 }
 
-.w-nav-brand {
+.sidebar-profile-header {
   float: left;
   color: var(--text-primary);
   text-decoration: none;
   position: relative;
 }
 
-.w-nav-menu {
+.sidebar-nav {
   float: right;
   position: relative;
 }
 
-.sidebar .w-nav-menu {
+.sidebar .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: var(--sidebar-nav-gap);
@@ -48,7 +42,7 @@
   margin: 0;
 }
 
-.w-nav-button {
+.mobile-menu-toggle {
   float: right;
   cursor: pointer;
   -webkit-tap-highlight-color: var(--overlay-black-000);
@@ -62,12 +56,12 @@
   position: relative;
 }
 
-.w-nav-button:focus {
+.mobile-menu-toggle:focus {
   outline: 0;
 }
 
 @media screen and (max-width: 767px) {
-  .w-nav-brand {
+  .sidebar-profile-header {
     padding-left: 10px;
   }
 }

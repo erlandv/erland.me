@@ -101,8 +101,8 @@ const {
       {showSidebar && <SidebarToggleButton />}
       {showSidebar && <SidebarSocialFlyout />}
       
-      <!-- Main Navigation Container - Page content and footer -->
-      <nav class="main">
+      <!-- Main Content Area - Page content and footer -->
+      <main class="site-main">
         <!-- Content Container - Page-specific content injected via slot -->
         <div class="container">
           <slot />
@@ -110,7 +110,7 @@ const {
         
         <!-- Site Footer - Copyright and branding -->
         <Footer />
-      </nav>
+      </main>
     </div>
     <script>
       // Global UI gate: import '../lib/ui-init' only when needed

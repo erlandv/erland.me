@@ -15,7 +15,7 @@
 }
 
 /* Profile Header Layout - Desktop: Simple avatar + text */
-:global(.niv-data) {
+:global(.profile-container) {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -172,7 +172,7 @@
    Global CSS already handles .profile-text and .nav-text opacity/max-width */
 
 @media (max-width: 1024px) {
-  :global(.w-nav-brand) {
+  :global(.sidebar-profile-header) {
     padding-left: 10px;
   }
 
@@ -265,7 +265,7 @@
     display: none !important;
   }
 
-  :global(.w-nav-brand) {
+  :global(.sidebar-profile-header) {
     position: relative;
     z-index: 1301;
   }
@@ -277,7 +277,7 @@
     display: inline-flex;
   }
 
-  :global(.sidebar) :global(.w-nav-menu) {
+  :global(.sidebar) :global(.sidebar-nav) {
     display: flex !important;
     flex-direction: column;
     align-items: stretch !important;
@@ -305,7 +305,7 @@
     will-change: transform, opacity;
   }
 
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) {
+  :global(.nav-toggle:checked) ~ :global(.sidebar-nav) {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
@@ -316,15 +316,15 @@
     align-items: stretch !important;
   }
 
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.nav-text),
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.profile-text) {
+  :global(.nav-toggle:checked) ~ :global(.sidebar-nav) :global(.nav-text),
+  :global(.nav-toggle:checked) ~ :global(.sidebar-nav) :global(.profile-text) {
     opacity: 1 !important;
     max-width: 100% !important;
     pointer-events: auto !important;
   }
 
   :global(.nav-toggle:checked)
-    ~ :global(.w-nav-menu)
+    ~ :global(.sidebar-nav)
     :global(.nav-link-container) {
     width: auto !important;
     justify-content: flex-start !important;
@@ -335,7 +335,7 @@
     margin-right: 0 !important;
   }
 
-  :global(.nav-toggle:checked) ~ :global(.w-nav-menu) :global(.socials--menu) {
+  :global(.nav-toggle:checked) ~ :global(.sidebar-nav) :global(.socials--menu) {
     display: flex !important;
     position: static;
     justify-content: flex-start;

@@ -61,12 +61,12 @@
   font-weight: 400;
 }
 
-.niv-data {
+.profile-container {
   align-items: center;
   display: flex;
 }
 
-.niv-image {
+.profile-avatar {
   width: 48px;
   height: 48px;
   border: 1px solid var(--border-color);
@@ -234,12 +234,12 @@ body:has(.sidebar .nav-toggle:checked) {
     body.sidebar-collapsed
   )
   .sidebar
-  .w-nav-brand {
+  .sidebar-profile-header {
   justify-content: center !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .w-nav-brand {
+  .sidebar-profile-header {
   justify-content: center !important;
 }
 
@@ -259,13 +259,13 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .niv-data {
+  .profile-container {
   justify-content: center !important;
   align-items: center !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .niv-image {
+  .profile-avatar {
   margin-right: 0 !important;
   margin: 0 auto !important;
 }
@@ -297,12 +297,12 @@ body:has(.sidebar .nav-toggle:checked) {
   pointer-events: none;
 }
 
-.sidebar.sidebar-collapsed .w-nav-menu {
+.sidebar.sidebar-collapsed .sidebar-nav {
   align-items: flex-start !important;
 }
 
 /* Ensure the nav menu inside sidebar uses a vertical flex layout by default */
-:global(.sidebar) :global(.w-nav-menu) {
+:global(.sidebar) :global(.sidebar-nav) {
   display: flex;
   flex-direction: column;
   gap: 8px;

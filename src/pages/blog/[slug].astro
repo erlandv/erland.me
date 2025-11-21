@@ -76,7 +76,7 @@ const jsonLd = blogPostingJsonLd({
       )}
       
       <!-- Article Title -->
-      <h1 style="margin:0 0 .25rem 0;">{frontmatter.title}</h1>
+      <h1>{frontmatter.title}</h1>
       
       {/* Conditional: Article metadata (category and/or publish date) */}
       {(frontmatter.category || frontmatter.publishDate) && (

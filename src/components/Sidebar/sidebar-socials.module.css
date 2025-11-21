@@ -62,7 +62,7 @@
   gap: var(--space-2);
 }
 
-:global(.w-nav) :global(.socials--menu) {
+:global(.nav-scaffold) :global(.socials--menu) {
   display: none;
 }
 
@@ -71,8 +71,8 @@
     display: none !important;
   }
 
-  :global(.w-nav[data-collapse='medium'])
-    :global(.w-nav-menu.is-visible)
+  :global(.nav-scaffold[data-collapse='medium'])
+    :global(.sidebar-nav.is-visible)
     :global(.socials--menu) {
     display: flex !important;
     position: static;
