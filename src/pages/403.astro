@@ -2,29 +2,16 @@
 import ErrorPage from '@components/ErrorPage.astro';
 import Icon from '@components/Icon.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
-import btn from '@/styles/components/button.module.css';
 
 Astro.response.status = 403;
 ---
 
 <ErrorPage
-  title='403'
-  subtitle='Access Forbidden'
-  description="Bro, enough internet for today. Go home, you're drunk. Let's find your way back."
-  metaTitle={PAGE_METADATA.forbidden.title}
-  metaDescription={PAGE_METADATA.forbidden.description}
+  errorCode='403'
+  errorTitle='Access Forbidden'
+  errorMessage="Bro, enough internet for today. Go home, you're drunk. Let's find your way back."
+  title={PAGE_METADATA.forbidden.title}
+  description={PAGE_METADATA.forbidden.description}
 >
   <Icon slot='icon' name='error403' />
-
-  <a
-    slot='actions'
-    href='/'
-    class:list={[btn.button, btn['contact-button']]}
-  >
-    <Icon
-      name='navHome'
-      class={btn['button-icon']}
-    />
-    <span>Go Home</span>
-  </a>
 </ErrorPage>

@@ -2,27 +2,14 @@
 import ErrorPage from '@components/ErrorPage.astro';
 import Icon from '@components/Icon.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
-import btn from '@/styles/components/button.module.css';
 ---
 
 <ErrorPage
-  title='404'
-  subtitle='Page Not Found'
-  description="That path doesn't exist, but your journey still does. Let's find your way back."
-  metaTitle={PAGE_METADATA.notFound.title}
-  metaDescription={PAGE_METADATA.notFound.description}
+  errorCode='404'
+  errorTitle='Page Not Found'
+  errorMessage="That path doesn't exist, but your journey still does. Let's find your way back."
+  title={PAGE_METADATA.notFound.title}
+  description={PAGE_METADATA.notFound.description}
 >
   <Icon slot='icon' name='error404' />
-
-  <a
-    slot='actions'
-    href='/'
-    class:list={[btn.button, btn['contact-button']]}
-  >
-    <Icon
-      name='navHome'
-      class={btn['button-icon']}
-    />
-    <span>Go Home</span>
-  </a>
 </ErrorPage>

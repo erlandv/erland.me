@@ -8,37 +8,39 @@
  * @component
  * @example
  * <ErrorPage
- *   title="404"
- *   subtitle="Page Not Found"
- *   description="The page you are looking for does not exist."
+ *   errorCode="404"
+ *   errorTitle="Page Not Found"
+ *   errorMessage="The page you are looking for does not exist."
+ *   title={PAGE_METADATA.notFound.title}
+ *   description={PAGE_METADATA.notFound.description}
  * >
- *   <div slot="icon">...</div>
- *   <div slot="actions">...</div>
+ *   <Icon slot="icon" name="error404" />
  * </ErrorPage>
  */
 import Header from '@components/Header.astro';
+import Icon from '@components/Icon.astro';
 import fold from '@/styles/components/fold.module.css';
 import err from '@/styles/components/error.module.css';
+import btn from '@/styles/components/button.module.css';
 import '@/styles/layout/base.css';
 import '@/styles/prose/typography.css';
 import '@/styles/variables.css';
 import '@/styles/layout/site-layout.css';
 
 interface Props {
+  errorCode: string;
+  errorTitle: string;
+  errorMessage: string;
   title: string;
-  subtitle: string;
   description: string;
-  metaTitle: string;
-  metaDescription: string;
 }
 
-const { title, subtitle, description, metaTitle, metaDescription } =
-  Astro.props;
+const { errorCode, errorTitle, errorMessage, title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang='id'>
-  <Header title={metaTitle} description={metaDescription} />
+  <Header title={title} description={description} />
   <body>
     <div class='content'>
       <nav class={`main ${err['error-page-layout']}`}>
@@ -49,13 +51,22 @@ const { title, subtitle, description, metaTitle, metaDescription } =
                 <div class={err['error-icon']}>
                   <slot name='icon' />
                 </div>
-                <h1 class={err['error-title']}>{title}</h1>
-                <h2 class={err['error-subtitle']}>{subtitle}</h2>
+                <h1 class={err['error-title']}>{errorCode}</h1>
+                <h2 class={err['error-subtitle']}>{errorTitle}</h2>
                 <p class={err['error-description']}>
-                  {description}
+                  {errorMessage}
                 </p>
                 <div class={err['error-actions']}>
-                  <slot name='actions' />
+                  <slot name='actions'>
+                    <!-- Default Go Home button -->
+                    <a
+                      href='/'
+                      class:list={[btn.button, btn['contact-button']]}
+                    >
+                      <Icon name='navHome' class={btn['button-icon']} />
+                      <span>Go Home</span>
+                    </a>
+                  </slot>
                 </div>
               </div>
             </div>
