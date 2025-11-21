@@ -1,73 +1,30 @@
 ---
-import Header from '@components/Header.astro';
+import ErrorPage from '@components/ErrorPage.astro';
 import Icon from '@components/Icon.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import btn from '@/styles/components/button.module.css';
-import fold from '@/styles/components/fold.module.css';
-import err from '@/styles/components/error.module.css';
-import '@/styles/layout/base.css';
-import '@/styles/prose/typography.css';
-import '@/styles/variables.css';
-import '@/styles/layout/site-layout.css';
 
 Astro.response.status = 403;
 ---
 
-<!doctype html>
-<html lang='id'>
-  <Header
-    title={PAGE_METADATA.forbidden.title}
-    description={PAGE_METADATA.forbidden.description}
-  />
-  <body>
-    <div class='content'>
-      <nav class='main'>
-        <div class='container'>
-          <main class={fold['fold-content-container']}>
-            <div class={fold['fold-content']}>
-              <div class={err['error-content']}>
-                <div class={err['error-icon']}>
-                  <div class={err['error-icon-svg']}>
-                    <svg
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                      stroke-width='1.5'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                      style='width: 100%; height: 100%;'
-                    >
-                      <path d='M18.5 5.5L5.50002 18.4998' stroke-linecap='round'
-                      ></path>
-                      <circle cx='12' cy='12' r='10'></circle>
-                    </svg>
-                  </div>
-                </div>
-                <h1 class={err['error-title']}>403</h1>
-                <h2 class={err['error-subtitle']}>Access Forbidden</h2>
-                <p class={err['error-description']}>
-                  Bro, enough internet for today. Go home, you're drunk.
-                </p>
-                <div class={err['error-actions']}>
-                  <a
-                    href='/'
-                    class:list={[
-                      btn.button,
-                      err['homepage-button'],
-                      'homepage-button',
-                    ]}
-                  >
-                    <Icon
-                      name='navHome'
-                      class:list={[btn['button-icon'], err['button-icon']]}
-                    />
-                    <span>Go Home</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </main>
-        </div>
-      </nav>
-    </div>
-  </body>
-</html>
+<ErrorPage
+  title='403'
+  subtitle='Access Forbidden'
+  description="Bro, enough internet for today. Go home, you're drunk. Let's find your way back."
+  metaTitle={PAGE_METADATA.forbidden.title}
+  metaDescription={PAGE_METADATA.forbidden.description}
+>
+  <Icon slot='icon' name='error403' />
+
+  <a
+    slot='actions'
+    href='/'
+    class:list={[btn.button, btn['contact-button']]}
+  >
+    <Icon
+      name='navHome'
+      class={btn['button-icon']}
+    />
+    <span>Go Home</span>
+  </a>
+</ErrorPage>
