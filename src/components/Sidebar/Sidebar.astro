@@ -32,9 +32,8 @@ import './sidebar-global.css';
 import './sidebar-local.module.css';
 import socialsStyles from './sidebar-socials.module.css';
 import navStyles from './sidebar-nav.module.css';
-import { sidebarSocialLinks as socials } from './social-links';
 import { navigationLinks } from '@lib/content/navigation';
-import { SITE_CONFIG } from '@lib/core/site-config';
+import { SITE_CONFIG, SOCIAL_LINKS } from '@lib/core/site-config';
 
 const { selectedItem } = Astro.props;
 ---
@@ -147,18 +146,18 @@ const { selectedItem } = Astro.props;
       <!-- Social Links - Mobile Menu Variant (visible inside mobile drawer) -->
       <div class:list={[socialsStyles.socials, 'socials--menu']}>
         {
-          socials.map(s => (
+          SOCIAL_LINKS.map(link => (
             <a
-              href={s.href}
-              aria-label={s.label}
+              href={link.url}
+              aria-label={link.label}
               class={socialsStyles['social-link']}
               target='_blank'
-              rel='noopener noreferrer'
+              rel='nofollow noopener noreferrer'
             >
               <Icon
-                name={s.name}
+                name={link.icon}
                 class={socialsStyles['social-icon']}
-                ariaLabel={s.label}
+                ariaLabel={link.label}
               />
             </a>
           ))
@@ -169,18 +168,18 @@ const { selectedItem } = Astro.props;
     <!-- Social Links - Desktop Sidebar Variant (visible at bottom of sidebar on desktop) -->
     <div class:list={[socialsStyles.socials, 'socials--sidebar']}>
       {
-        socials.map(s => (
+        SOCIAL_LINKS.map(link => (
           <a
-            href={s.href}
-            aria-label={s.label}
+            href={link.url}
+            aria-label={link.label}
             class={socialsStyles['social-link']}
             target='_blank'
-            rel='noopener noreferrer'
+            rel='nofollow noopener noreferrer'
           >
             <Icon
-              name={s.name}
+              name={link.icon}
               class={socialsStyles['social-icon']}
-              ariaLabel={s.label}
+              ariaLabel={link.label}
             />
           </a>
         ))
