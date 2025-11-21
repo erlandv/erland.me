@@ -15,7 +15,7 @@
 }
 
 /* Profile Header Layout - Desktop: Simple avatar + text */
-:global(.niv-data) {
+:global(.profile-container) {
   display: flex;
   align-items: center;
   gap: 6px;

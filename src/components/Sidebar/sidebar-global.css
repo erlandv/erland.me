@@ -61,12 +61,12 @@
   font-weight: 400;
 }
 
-.niv-data {
+.profile-container {
   align-items: center;
   display: flex;
 }
 
-.niv-image {
+.profile-avatar {
   width: 48px;
   height: 48px;
   border: 1px solid var(--border-color);
@@ -259,13 +259,13 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .niv-data {
+  .profile-container {
   justify-content: center !important;
   align-items: center !important;
 }
 
 :is(.sidebar.sidebar-collapsed, .sidebar:has(#sidebar-toggle:checked))
-  .niv-image {
+  .profile-avatar {
   margin-right: 0 !important;
   margin: 0 auto !important;
 }
