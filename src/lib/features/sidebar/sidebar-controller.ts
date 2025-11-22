@@ -651,14 +651,10 @@ function bootOnce(
         }
       };
 
+      // Attach trap listener permanently
+      // The guard check (line 628: if (!navToggle.checked) return) ensures
+      // the trap is only active when menu is open, so no cleanup needed
       document.addEventListener('keydown', trap);
-
-      // Clean up when menu closes
-      navToggle.addEventListener('change', () => {
-        if (!navToggle.checked) {
-          document.removeEventListener('keydown', trap);
-        }
-      });
     }
   }
 
