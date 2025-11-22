@@ -113,54 +113,10 @@ const {
       </main>
     </div>
     <script>
-      // Global UI gate: import '../lib/ui-init' only when needed
-      (() => {
-        // Checks if a CSS selector matches any element in the document.
-        function has(sel: string): boolean {
-          return !!document.querySelector(sel);
-        }
-        const check = () => ({
-          share: has('section.share') || has('.share__btn--copy') || has('.share__btn--native'),
-          copy: has('pre code') || has('pre[class*="language-"]'),
-          lightbox:
-            has('.prose img:not(.hero-image)') ||
-            has('.content-image-grid img:not(.hero-image)'),
-          table: has('.prose table'),
-          // Theme toggle is always present, so always true
-          themeToggle: true,
-        });
-
-        const runImport = () => {
-          import('@lib/infrastructure/ui-init')
-            .then(m => m.initUi && m.initUi())
-            .catch(e => console.error('ui-init import error:', e));
-        };
-
-        const s = check();
-        // Always import because theme toggle is always present
-        if (s.share || s.copy || s.lightbox || s.table || s.themeToggle) {
-          runImport();
-        } else {
-          // This branch should never be reached now
-          const reGate = () => {
-            const q = check();
-            if (q.share || q.copy || q.lightbox || q.table || q.themeToggle) {
-              document.removeEventListener('astro:page-load', reGate);
-              document.removeEventListener('astro:after-swap', reGate);
-              import('@lib/infrastructure/ui-init')
-                .then(m => m.initUi && m.initUi())
-                .catch(e => console.error('ui-init import error:', e));
-            }
-          };
-          document.addEventListener('astro:page-load', reGate);
-          document.addEventListener('astro:after-swap', reGate);
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', reGate, { once: true });
-          } else {
-            setTimeout(reGate, 50);
-          }
-        }
-      })();
+      // Global UI initialization
+      // Smart gating handled internally by ui-init module
+      import { initUi } from '@lib/infrastructure/ui-init';
+      initUi();
     </script>
     <script>
       // Web Vitals Performance Monitoring

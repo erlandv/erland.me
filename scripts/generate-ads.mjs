@@ -40,10 +40,16 @@ if (!isProd) {
 }
 
 if (!pubId) {
-  console.error(
-    'PUBLIC_ADSENSE_CLIENT not set or invalid; cannot generate ads.txt'
+  // PUBLIC_ADSENSE_CLIENT is optional - skip generation if not configured
+  try {
+    if (existsSync(adsPath)) unlinkSync(adsPath);
+  } catch {
+    // ignore
+  }
+  console.log(
+    'Skipping ads.txt generation (PUBLIC_ADSENSE_CLIENT not configured)'
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 // Google AdSense authorized sellers entry

@@ -489,6 +489,42 @@ This catches cases where:
 
 **Debounce delay**: 50ms to batch multiple mutations and avoid excessive re-runs.
 
+### Error Boundary & Retry System
+
+The project includes a comprehensive error boundary system (`src/lib/infrastructure/error-boundary.ts`) that provides graceful degradation for client-side features:
+
+- **Automatic retry**: Retries failed feature loads up to 2 times for recoverable errors (network issues, chunk loading failures)
+- **User feedback**: Shows toast notifications for permanent failures (development mode logs to console only)
+- **Failure tracking**: Prevents infinite retry loops by marking permanently failed features
+- **Recovery patterns**: Detects network errors, timeouts, and dynamic import failures as recoverable
+
+```typescript
+import { safeFeatureInit } from '@lib/infrastructure/error-boundary';
+
+// Wrap feature initialization with error boundary
+await safeFeatureInit(
+  'lightbox',
+  async () => {
+    const mod = await import('./lightbox');
+    mod.init();
+  },
+  { operation: 'load-and-init', recoverable: true }
+);
+```
+
+All features in `ui-init.ts` are wrapped with `safeFeatureInit` for consistent error handling.
+
+### PWA & Service Worker
+
+The site implements progressive web app functionality via `public/sw.js`:
+
+- **Cache strategy**: Cache-first for static assets (CSS, JS, fonts, images), network-first for HTML
+- **Offline support**: Cached pages accessible without internet connection
+- **Version control**: Manual cache versioning (`CACHE_VERSION`) for deployment updates
+- **Logging**: Environment-aware logging (verbose in dev, minimal in production)
+
+Service worker registration happens in `SiteLayout.astro`. Cache version must be manually incremented when deploying breaking changes to force client cache refresh.
+
 ## Naming Conventions
 
 - **Components**: PascalCase (`HeroBanner.astro`)
@@ -525,7 +561,9 @@ This catches cases where:
 - **`search.ts`**: `src/lib/content/search.ts` - converts posts to Fuse.js searchable format
 - **`ui-init.ts`**: `src/lib/infrastructure/ui-init.ts` - Entry point for lazy-loading client features with gate pattern
 - **`router-events.ts`**: `src/lib/infrastructure/router-events.ts` - Centralized History API event management
-- **`toast.ts`**: `src/lib/infrastructure/toast.ts` - Toast notification system for user feedback
+- **`error-boundary.ts`**: `src/lib/infrastructure/error-boundary.ts` - Graceful error handling with retry logic and user feedback
+- **`toast.ts`**: `src/lib/features/toast.ts` - Toast notification system for user feedback
+- **`logger.ts`**: `src/lib/core/logger.ts` - Centralized logging utility with environment-aware output
 - **`env.ts`**: `src/lib/core/env.ts` - Environment validation with Zod schemas, mode detection, and type-safe variable access
 
 ## File Organization
