@@ -1,21 +1,21 @@
 ---
 /**
  * CriticalInit Component
- * 
+ *
  * Critical inline script that prevents FOUC (Flash of Unstyled Content) by initializing
  * theme and sidebar state before CSS loads.
- * 
+ *
  * Initializes:
  * 1. Theme preference from localStorage ("light" | "dark" | "auto")
  * 2. Resolved theme based on system preference (when auto)
  * 3. Sidebar collapsed state on desktop (min-width: 1025px)
  * 4. CSS custom properties for transition prevention during initial load
- * 
- * IMPORTANT: 
+ *
+ * IMPORTANT:
  * - Must execute inline before CSS loads
  * - Do NOT move to external file or defer
  * - Minified for performance
- * 
+ *
  * Sets on document.documentElement:
  * - data-theme: "light" (or removed for dark)
  * - data-theme-preference: user's preference ("light" | "dark" | "auto")
@@ -23,11 +23,11 @@
  * - data-sidebar: "collapsed" | "expanded" (desktop only)
  * - --sidebar-init-transition: "none" (prevents animated FOUC, removed by SidebarController)
  * - .sidebar-collapsed-global class (when sidebar collapsed)
- * 
+ *
  * @component
  * @example
  * <CriticalInit />
- * 
+ *
  * @note Should be placed in <head> via Header component before any CSS loads
  */
 ---

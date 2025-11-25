@@ -154,7 +154,7 @@ export function getSocialLinkById(id: string): SocialLink {
 
   if (!link) {
     throw new Error(
-      `Social link "${id}" not found. Available links: ${SOCIAL_LINKS.map(l => l.id).join(', ')}`
+      `Social link "${id}" not found. Available links: ${SOCIAL_LINKS.map(l => l.id).join(', ')}`,
     );
   }
 

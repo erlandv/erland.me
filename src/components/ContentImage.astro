@@ -1,59 +1,60 @@
 ---
 /**
  * ContentImage Component
- * 
+ *
  * Smart image component that resolves local images from content collections.
  * Used as override for img tags in Markdown/MDX content.
- * 
+ *
  * Features:
  * - Auto-resolves relative image paths to ImageMetadata
  * - Lazy-loads images in blog and downloads collections
  * - Falls back to regular img for external/public URLs
  * - Responsive sizing via astro:assets integration
  * - Maintains .prose img styles from global CSS
- * 
+ *
  * Resolution order:
  * 1. Check blog collection images
  * 2. Check downloads collection images
  * 3. Fallback to regular img tag
- * 
+ *
  * @component
  * @example
  * In markdown: ![Alt text](./images/photo.jpg)
  * Renders as: ContentImage with src="./images/photo.jpg" alt="Alt text"
  */
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
-import { getContentImageConfig } from "@lib/content/images";
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getContentImageConfig } from '@lib/content/images';
 
 interface Props {
   src: string;
   alt?: string;
   width?: number | string;
   height?: number | string;
-  loading?: "eager" | "lazy";
+  loading?: 'eager' | 'lazy';
   class?: string;
 }
 
-const {
-  src,
-  alt = "",
-  loading = "lazy",
-  class: cls,
-} = Astro.props as Props;
+const { src, alt = '', loading = 'lazy', class: cls } = Astro.props as Props;
 
 // Normalize relative path like "./images/foo.jpg" -> "images/foo.jpg"
-const normalized = src.replace(/^\.\/+/, "").replace(/^\//, "");
+const normalized = src.replace(/^\.\/+/, '').replace(/^\//, '');
 
 // Eager import metadata for all local images in the content collections
-const blogMap = import.meta.glob("../../content/blog/**/*.{jpg,jpeg,png,webp,gif,svg}", {
-  eager: true,
-  import: "default",
-});
-const dlMap = import.meta.glob("../../content/downloads/**/*.{jpg,jpeg,png,webp,gif,svg}", {
-  eager: true,
-  import: "default",
-});
+const blogMap = import.meta.glob(
+  '../../content/blog/**/*.{jpg,jpeg,png,webp,gif,svg}',
+  {
+    eager: true,
+    import: 'default',
+  },
+);
+const dlMap = import.meta.glob(
+  '../../content/downloads/**/*.{jpg,jpeg,png,webp,gif,svg}',
+  {
+    eager: true,
+    import: 'default',
+  },
+);
 
 function resolveLocalImage(path: string): ImageMetadata | null {
   for (const [p, meta] of Object.entries(blogMap)) {
@@ -69,16 +70,18 @@ const meta = resolveLocalImage(normalized);
 const { widths, sizes } = getContentImageConfig();
 ---
 
-{meta ? (
-  <Image
-    src={meta}
-    alt={alt}
-    loading={loading}
-    decoding="async"
-    widths={widths}
-    sizes={sizes}
-    class={cls}
-  />
-) : (
-  <img src={src} alt={alt} loading={loading} decoding="async" class={cls} />
-)}
+{
+  meta ? (
+    <Image
+      src={meta}
+      alt={alt}
+      loading={loading}
+      decoding='async'
+      widths={widths}
+      sizes={sizes}
+      class={cls}
+    />
+  ) : (
+    <img src={src} alt={alt} loading={loading} decoding='async' class={cls} />
+  )
+}

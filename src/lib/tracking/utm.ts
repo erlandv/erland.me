@@ -65,7 +65,7 @@ export function addUTMParams(baseUrl: string, params: UTMParams): string {
     return url.toString();
   } catch (error) {
     throw new Error(
-      `Invalid URL provided to addUTMParams: ${baseUrl}. Error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Invalid URL provided to addUTMParams: ${baseUrl}. Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
     );
   }
 }

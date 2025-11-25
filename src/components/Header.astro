@@ -44,7 +44,11 @@
  * @param {string} [props.author] - Article author name
  * @param {boolean} [props.preloadSearch=false] - Preload search index JSON (for blog listing pages)
  */
-import { generateMetaTags, websiteJsonLd, isProductionSite } from '@lib/content/seo';
+import {
+  generateMetaTags,
+  websiteJsonLd,
+  isProductionSite,
+} from '@lib/content/seo';
 import { GTM_ID, ADSENSE_CLIENT, AHREFS_DATA_KEY } from '@lib/core/env';
 import { ClientRouter } from 'astro:transitions';
 import CriticalInit from './CriticalInit.astro';
@@ -97,8 +101,7 @@ const metaTags = generateMetaTags({
 // Add website schema to all pages
 const websiteSchema = websiteJsonLd();
 
-const 
-  enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
+const enableGTM = import.meta.env.PROD && isProductionSite() && Boolean(GTM_ID);
 
 // Only show AdSense on blog and download pages (list and detail)
 const isAdSensePath = /^\/(blog|download)(\/|$)/.test(Astro.url.pathname);
@@ -128,7 +131,10 @@ const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+n
   <meta name='color-scheme' content='dark light' />
   <meta name='mobile-web-app-capable' content='yes' />
   <meta name='apple-mobile-web-app-title' content={metaTags.title} />
-  <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+  <meta
+    name='apple-mobile-web-app-status-bar-style'
+    content='black-translucent'
+  />
 
   <!-- SEO Meta Tags -->
   <meta name='description' content={metaTags.description} />
@@ -260,8 +266,18 @@ const gtmSnippet = `!function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+n
 
   <!-- Favicons & Web App Manifest -->
   <link rel='apple-touch-icon' href='/assets/favicon/apple-touch-icon.png' />
-  <link rel='icon' type='image/png' sizes='32x32' href='/assets/favicon/favicon-32x32.png' />
-  <link rel='icon' type='image/png' sizes='16x16' href='/assets/favicon/favicon-16x16.png' />
+  <link
+    rel='icon'
+    type='image/png'
+    sizes='32x32'
+    href='/assets/favicon/favicon-32x32.png'
+  />
+  <link
+    rel='icon'
+    type='image/png'
+    sizes='16x16'
+    href='/assets/favicon/favicon-16x16.png'
+  />
   <link rel='shortcut icon' href='/assets/favicon/favicon.ico' />
   <link rel='manifest' href='/assets/favicon/site.webmanifest' />
 

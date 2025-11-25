@@ -1,15 +1,15 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from "@components/BackNav/BackNav.astro";
-import PostCard from "@components/PostCard/PostCard.astro";
-import Pagination from "@components/Pagination/Pagination.astro";
-import SearchInput from "@components/SearchInput/SearchInput.astro";
+import BackNav from '@components/BackNav/BackNav.astro';
+import PostCard from '@components/PostCard/PostCard.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
+import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { postToSearchable } from '@lib/content/search';
 import { loadAllPosts } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { generateBlogPageMeta } from '@lib/content/page-metadata';
-import listing from "@/styles/pages/listing.module.css";
+import listing from '@/styles/pages/listing.module.css';
 
 // Generate static paths for pages 2..N (page 1 handled by /blog)
 export async function getStaticPaths() {
@@ -27,12 +27,16 @@ const posts = await loadAllPosts();
 const pageSize = 10;
 const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
 const param = Number(Astro.params.page ?? '1');
-const page = !Number.isFinite(param) || param < 1 ? 1 : Math.min(totalPages, Math.floor(param));
+const page =
+  !Number.isFinite(param) || param < 1
+    ? 1
+    : Math.min(totalPages, Math.floor(param));
 const paginated = posts.slice((page - 1) * pageSize, page * pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
 
 const getHero = (post: any) => post.data?.hero ?? null;
-const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+const getExcerpt = (post: any) =>
+  post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 
 // Convert posts to searchable format (used by SearchInput via window.__SEARCH_POSTS__)
@@ -54,45 +58,58 @@ const { title, description } = generateBlogPageMeta(page);
       url: `/blog/${p.slug}/`,
       name: p.data.title,
       position: (page - 1) * pageSize + i + 1,
-    }))
+    })),
   )}
-  selectedItem="blog"
+  selectedItem='blog'
   preloadSearch
 >
-  <BackNav href="/blog/" />
+  <BackNav href='/blog/' />
 
-  <div class="content-container">
+  <div class='content-container'>
     <h1>Page {page} Blog Archives</h1>
-    
-    <SearchInput posts={searchablePosts} placeholder="Cari artikel..." />
+
+    <SearchInput posts={searchablePosts} placeholder='Cari artikel...' />
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
-        {paginated.map((post) => {
-          const hero = getHero(post);
-          const excerpt = getExcerpt(post);
-          const dateLabel = post.date
-            ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
-            : null;
-          return (
-            <PostCard
-              href={`/blog/${post.slug}/`}
-              title={post.data.title}
-              hero={hero}
-              alt={post.data.heroAlt ?? post.data.title}
-              category={getCategory(post)}
-              dateLabel={dateLabel}
-              excerpt={excerpt}
+        {
+          paginated.map(post => {
+            const hero = getHero(post);
+            const excerpt = getExcerpt(post);
+            const dateLabel = post.date
+              ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+              : null;
+            return (
+              <PostCard
+                href={`/blog/${post.slug}/`}
+                title={post.data.title}
+                hero={hero}
+                alt={post.data.heroAlt ?? post.data.title}
+                category={getCategory(post)}
+                dateLabel={dateLabel}
+                excerpt={excerpt}
+              />
+            );
+          })
+        }
+
+        {
+          posts.length === 0 && (
+            <p style='opacity:.8;'>
+              Belum ada tulisan. Tambahkan file di{' '}
+              <code>src/content/blog/[slug]/index.md</code> ya ✍️
+            </p>
+          )
+        }
+
+        {
+          posts.length > pageSize && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              pageHref={pageHref}
             />
-          );
-        })}
-
-        {posts.length === 0 && (
-          <p style="opacity:.8;">Belum ada tulisan. Tambahkan file di <code>src/content/blog/[slug]/index.md</code> ya ✍️</p>
-        )}
-
-        {posts.length > pageSize && (
-          <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
-        )}
+          )
+        }
       </div>
     </section>
   </div>

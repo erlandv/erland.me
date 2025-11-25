@@ -71,7 +71,7 @@ function isSupported(): boolean {
  * });
  */
 export async function registerServiceWorker(
-  config: ServiceWorkerConfig = {}
+  config: ServiceWorkerConfig = {},
 ): Promise<ServiceWorkerRegistration | null> {
   if (!isSupported()) return null;
 

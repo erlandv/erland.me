@@ -58,7 +58,7 @@ export const isProductionSite = isProdSite;
 export function collectionPageJsonLd(
   name: string,
   url: string,
-  items: { url: string; name: string; position: number }[]
+  items: { url: string; name: string; position: number }[],
 ) {
   return {
     '@context': 'https://schema.org',
@@ -97,7 +97,7 @@ export function collectionPageJsonLd(
 export function categoriesIndexJsonLd(
   name: string,
   url: string,
-  items: { url: string; name: string; position: number }[]
+  items: { url: string; name: string; position: number }[],
 ) {
   return {
     '@context': 'https://schema.org',
@@ -159,7 +159,7 @@ export function blogPostingJsonLd(opts: {
     ? new Date(opts.publishDate).toISOString()
     : undefined;
   const dateModified = new Date(
-    opts.updatedDate || opts.publishDate || Date.now()
+    opts.updatedDate || opts.publishDate || Date.now(),
   ).toISOString();
 
   let image: string[] | undefined;

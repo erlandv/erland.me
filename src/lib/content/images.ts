@@ -78,7 +78,7 @@ export function resolveHero(hero?: ImageMetadata | null): ImageMetadata | null {
 export async function getOgImageUrl(
   hero: ImageMetadata,
   targetWidth = 1200,
-  preferFormat: 'avif' | 'webp' = 'avif'
+  preferFormat: 'avif' | 'webp' = 'avif',
 ): Promise<string> {
   const optimized = await getImage({
     src: hero,
@@ -102,7 +102,7 @@ export async function getOgImageUrl(
  */
 export async function getOgImageUrls(
   hero: ImageMetadata,
-  targetWidth = 1200
+  targetWidth = 1200,
 ): Promise<{ avif: string; webp: string }> {
   const [avif, webp] = await Promise.all([
     getImage({ src: hero, width: targetWidth, format: 'avif' }),

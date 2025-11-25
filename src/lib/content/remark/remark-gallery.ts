@@ -123,7 +123,7 @@ export default function remarkGallery(): (tree: Node) => void {
 
           const paragraphNode = child as ParagraphNode;
           const images = (paragraphNode.children || []).filter(
-            (n: Node): n is ImageNode => n.type === 'image'
+            (n: Node): n is ImageNode => n.type === 'image',
           );
           if (images.length === 0) {
             nextChildren.push(child);
@@ -164,7 +164,7 @@ export default function remarkGallery(): (tree: Node) => void {
         }
 
         node.children = nextChildren;
-      }
+      },
     );
   };
 }

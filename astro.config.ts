@@ -30,10 +30,10 @@ try {
 
     if (mode === 'production') {
       console.log(
-        `GTM ID: ${validatedEnv.PUBLIC_GTM_ID ? 'Configured' : 'Missing'}`
+        `GTM ID: ${validatedEnv.PUBLIC_GTM_ID ? 'Configured' : 'Missing'}`,
       );
       console.log(
-        `AdSense: ${validatedEnv.PUBLIC_ADSENSE_CLIENT ? 'Configured' : 'Missing'}`
+        `AdSense: ${validatedEnv.PUBLIC_ADSENSE_CLIENT ? 'Configured' : 'Missing'}`,
       );
     }
   }
@@ -49,17 +49,17 @@ try {
   // Provide helpful suggestions based on error type
   if (errorMessage.includes('SITE_DOMAIN')) {
     console.error(
-      'Tip: SITE_DOMAIN should be a valid domain like "example.com" (without protocol)'
+      'Tip: SITE_DOMAIN should be a valid domain like "example.com" (without protocol)',
     );
   }
   if (errorMessage.includes('GTM_ID') && mode === 'production') {
     console.error(
-      'Tip: Set PUBLIC_GTM_ID to your Google Tag Manager ID (e.g., GTM-XXXXXXXX)'
+      'Tip: Set PUBLIC_GTM_ID to your Google Tag Manager ID (e.g., GTM-XXXXXXXX)',
     );
   }
   if (errorMessage.includes('ADSENSE_CLIENT') && mode === 'production') {
     console.error(
-      'Tip: Set PUBLIC_ADSENSE_CLIENT to your AdSense publisher ID (e.g., ca-pub-XXXXXXXXXX)'
+      'Tip: Set PUBLIC_ADSENSE_CLIENT to your AdSense publisher ID (e.g., ca-pub-XXXXXXXXXX)',
     );
   }
 

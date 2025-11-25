@@ -1,19 +1,19 @@
 ---
 /**
  * Pagination Component
- * 
+ *
  * Renders pagination controls with prev/next buttons and page numbers.
  * Implements responsive design: shows window of 4 page numbers on desktop/tablet,
  * reduces to 2 page numbers on mobile. Uses ellipsis for truncated ranges.
- * 
+ *
  * @component
  * @example
- * <Pagination 
+ * <Pagination
  *   page={2}
  *   totalPages={10}
  *   pageHref={(n) => `/blog/page/${n}/`}
  * />
- * 
+ *
  * @param {Object} props
  * @param {number} props.page - Current page number (1-indexed)
  * @param {number} props.totalPages - Total number of pages
@@ -86,7 +86,9 @@ const mobileHideIdx = (() => {
     <Icon name='arrowLeft' class={styles.iconSvg} />
   </a>
 
-  {/* First Page Link - Always shown if current window doesn't start at page 1 */}
+  {
+    /* First Page Link - Always shown if current window doesn't start at page 1 */
+  }
   {
     windowPages[0] > 1 && (
       <a href={pageHref(1)} class={styles['page-link']}>
@@ -94,8 +96,10 @@ const mobileHideIdx = (() => {
       </a>
     )
   }
-  
-  {/* Leading Ellipsis - Indicates skipped pages between first page and window */}
+
+  {
+    /* Leading Ellipsis - Indicates skipped pages between first page and window */
+  }
   {
     showLeadingEllipsis && (
       <span class={styles.ellipsis} aria-hidden='true'>
@@ -124,7 +128,9 @@ const mobileHideIdx = (() => {
     })
   }
 
-  {/* Trailing Ellipsis - Indicates skipped pages between window and last page */}
+  {
+    /* Trailing Ellipsis - Indicates skipped pages between window and last page */
+  }
   {
     showTrailingEllipsis && (
       <span class={styles.ellipsis} aria-hidden='true'>
@@ -132,8 +138,10 @@ const mobileHideIdx = (() => {
       </span>
     )
   }
-  
-  {/* Last Page Link - Always shown if current window doesn't reach last page */}
+
+  {
+    /* Last Page Link - Always shown if current window doesn't reach last page */
+  }
   {
     windowPages[windowPages.length - 1] < totalPages && (
       <a href={pageHref(totalPages)} class={styles['page-link']}>

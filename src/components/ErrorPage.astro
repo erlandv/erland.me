@@ -42,7 +42,7 @@ const { errorCode, errorTitle, errorMessage, title, description } = Astro.props;
 <html lang='id'>
   <!-- HTML Head - Meta tags, SEO, and critical resources -->
   <Header title={title} description={description} />
-  
+
   <body>
     <!-- Main Content Wrapper -->
     <div class='content'>
@@ -60,18 +60,18 @@ const { errorCode, errorTitle, errorMessage, title, description } = Astro.props;
                 <div class={err['error-icon']}>
                   <slot name='icon' />
                 </div>
-                
+
                 <!-- Error Code (e.g., 404, 403) -->
                 <h1 class={err['error-title']}>{errorCode}</h1>
-                
+
                 <!-- Error Title (e.g., Page Not Found) -->
                 <h2 class={err['error-subtitle']}>{errorTitle}</h2>
-                
+
                 <!-- Error Description Message -->
                 <p class={err['error-description']}>
                   {errorMessage}
                 </p>
-                
+
                 <!-- Error Actions - Buttons and links -->
                 <div class={err['error-actions']}>
                   <slot name='actions'>

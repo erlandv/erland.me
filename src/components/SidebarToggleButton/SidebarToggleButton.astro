@@ -1,21 +1,21 @@
 ---
 /**
  * SidebarToggleButton Component
- * 
+ *
  * Edge-mounted button to toggle sidebar between collapsed and expanded states.
  * Displays chevron icons that flip based on sidebar state.
- * 
+ *
  * Features:
  * - Visual indicator of sidebar collapse state
  * - Animated icon transitions
  * - Syncs with sidebar state managed by SidebarController
  * - Desktop-only (hidden on mobile breakpoints)
- * 
+ *
  * State synchronized via:
  * - data-sidebar attribute on document root
  * - MutationObserver for real-time state updates
  * - Checkbox input #sidebar-toggle
- * 
+ *
  * @component
  * @example
  * <SidebarToggleButton />
@@ -24,23 +24,23 @@ import Icon from '@components/Icon.astro';
 import styles from './SidebarToggleButton.module.css';
 ---
 
-<div class:list={[styles.wrapper, "sidebar-edge-toggle-wrapper"]}>
-  <div class={styles.divider} aria-hidden="true" />
+<div class:list={[styles.wrapper, 'sidebar-edge-toggle-wrapper']}>
+  <div class={styles.divider} aria-hidden='true'></div>
   <label
-    id="sidebar-toggle-label"
-    for="sidebar-toggle"
-    title="sidebar"
-    class:list={[styles.toggle, "sidebar-toggle-button", "sidebar-edge-toggle"]}
-    aria-label="Toggle sidebar width"
-    tabindex="0"
+    id='sidebar-toggle-label'
+    for='sidebar-toggle'
+    title='sidebar'
+    class:list={[styles.toggle, 'sidebar-toggle-button', 'sidebar-edge-toggle']}
+    aria-label='Toggle sidebar width'
+    tabindex='0'
   >
     <div class={styles.iconWrapper}>
       <Icon
-        name="sidebarToggleLeft"
+        name='sidebarToggleLeft'
         class:list={[styles.icon, styles.iconLeft]}
       />
       <Icon
-        name="sidebarToggleRight"
+        name='sidebarToggleRight'
         class:list={[styles.icon, styles.iconRight]}
       />
     </div>
@@ -78,7 +78,10 @@ import styles from './SidebarToggleButton.module.css';
     try {
       updateState();
       const observer = new MutationObserver(updateState);
-      observer.observe(document.documentElement, { attributes: true, attributeFilter: [HTML_ATTR] });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: [HTML_ATTR],
+      });
       const sidebarToggle = document.getElementById('sidebar-toggle');
       if (sidebarToggle instanceof HTMLInputElement) {
         sidebarToggle.addEventListener('change', updateState);
@@ -89,7 +92,10 @@ import styles from './SidebarToggleButton.module.css';
   };
 
   if (typeof window !== 'undefined') {
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    if (
+      document.readyState === 'complete' ||
+      document.readyState === 'interactive'
+    ) {
       init();
     } else {
       document.addEventListener('DOMContentLoaded', init, { once: true });

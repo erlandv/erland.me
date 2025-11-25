@@ -69,18 +69,18 @@ for (const p of posts) {
 }
 
 const categories = Array.from(categoriesMap.values()).sort((a, b) =>
-  a.name.localeCompare(b.name, 'id')
+  a.name.localeCompare(b.name, 'id'),
 );
 
 // Build paginated posts for each category to mirror /blog/
 const pageSize = 10;
 const byCategory = categories.map(cat => {
   const catPosts = posts.filter(
-    p => slugifyCategory(String(p.data?.category || '')) === cat.slug
+    p => slugifyCategory(String(p.data?.category || '')) === cat.slug,
   );
   const totalPages = Math.max(1, Math.ceil(catPosts.length / pageSize));
   const pages = Array.from({ length: totalPages }, (_, i) =>
-    slicePage(catPosts, i + 1, pageSize)
+    slicePage(catPosts, i + 1, pageSize),
   );
   return { cat, pages, totalPages };
 });
@@ -99,7 +99,7 @@ const byCategory = categories.map(cat => {
         url: `/blog/category/${c.slug}/`,
         name: c.name,
         position: i + 1,
-      }))
+      })),
     ),
     breadcrumbJsonLd([
       { name: 'Blog', url: '/blog/' },
@@ -172,7 +172,7 @@ const byCategory = categories.map(cat => {
                 )}
               </div>
             );
-          })
+          }),
         )
       }
       {

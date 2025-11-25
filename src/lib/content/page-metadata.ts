@@ -150,7 +150,7 @@ export function generateBlogPageMeta(page: number): PageMetadata {
  */
 export function generateCategoryPageMeta(
   category: string,
-  page?: number
+  page?: number,
 ): PageMetadata {
   const titlePrefix = page ? `Page ${page}: ` : '';
   const descPrefix = page ? `Page ${page}: ` : '';

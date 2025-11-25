@@ -1,10 +1,10 @@
 ---
 /**
  * Footer Component
- * 
+ *
  * Site footer with copyright and "Powered by Astro" branding.
  * Displays current year dynamically.
- * 
+ *
  * @component
  * @example
  * <Footer />
@@ -17,15 +17,15 @@ const year = new Date().getFullYear();
 ---
 
 <!-- Site Footer - Copyright and branding information -->
-<footer class={styles["site-footer"]} aria-label="Site footer">
-  <div class={styles["footer-inner"]}>
+<footer class={styles['site-footer']} aria-label='Site footer'>
+  <div class={styles['footer-inner']}>
     <!-- Copyright Notice - Auto-updates year dynamically -->
-    <div class={styles["footer-copy"]}>© {year} {SITE_CONFIG.author.name}</div>
-    
+    <div class={styles['footer-copy']}>© {year} {SITE_CONFIG.author.name}</div>
+
     <!-- Powered By Section - Astro framework branding -->
-    <div class={styles["footer-powered"]}>
+    <div class={styles['footer-powered']}>
       <span>Powered by</span>
-      <span class={styles["footer-astro"]} aria-hidden="true">
+      <span class={styles['footer-astro']} aria-hidden='true'>
         <Fragment set:html={astroLogoRaw} />
       </span>
     </div>

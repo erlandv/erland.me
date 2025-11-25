@@ -62,7 +62,7 @@ function isRecoverableError(error: Error): boolean {
   ];
 
   return recoverablePatterns.some(
-    pattern => pattern.test(error.message) || pattern.test(error.name)
+    pattern => pattern.test(error.message) || pattern.test(error.name),
   );
 }
 
@@ -167,7 +167,7 @@ export async function safeFeatureInit<T>(
     operation?: string;
     recoverable?: boolean;
     silent?: boolean;
-  } = {}
+  } = {},
 ): Promise<T | null> {
   // Don't attempt if feature has permanently failed
   if (hasFeatureFailed(featureName)) {
@@ -213,7 +213,7 @@ export function withErrorBoundary<
   options: {
     operation?: string;
     recoverable?: boolean;
-  } = {}
+  } = {},
 ): T {
   return (async (...args: unknown[]) => {
     return safeFeatureInit(featureName, () => fn(...args), options);

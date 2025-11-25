@@ -74,11 +74,11 @@ self.addEventListener('install', event => {
       .then(cache => {
         logger.info('Precaching assets');
         return cache.addAll(
-          PRECACHE_ASSETS.map(url => new Request(url, { cache: 'reload' }))
+          PRECACHE_ASSETS.map(url => new Request(url, { cache: 'reload' })),
         );
       })
       .then(() => self.skipWaiting())
-      .catch(err => logger.error('Precache failed', err))
+      .catch(err => logger.error('Precache failed', err)),
   );
 });
 
@@ -102,11 +102,11 @@ self.addEventListener('activate', event => {
         cachesToDelete.map(name => {
           logger.info('Deleting old cache:', name);
           return caches.delete(name);
-        })
+        }),
       );
 
       await self.clients.claim();
-    })()
+    })(),
   );
 });
 
@@ -298,7 +298,7 @@ self.addEventListener('message', event => {
   }
   if (data && data.type === 'CACHE_URLS' && Array.isArray(data.urls)) {
     event.waitUntil(
-      caches.open(RUNTIME_CACHE).then(cache => cache.addAll(data.urls))
+      caches.open(RUNTIME_CACHE).then(cache => cache.addAll(data.urls)),
     );
   }
 });

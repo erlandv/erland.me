@@ -79,7 +79,7 @@ export async function loadAllPosts(): Promise<Post[]> {
       query: '?url',
       import: 'default',
       eager: true,
-    }
+    },
   );
 
   const posts: Post[] = [];
@@ -87,7 +87,7 @@ export async function loadAllPosts(): Promise<Post[]> {
     const { Content } = await entry.render();
     const body = entry.body;
     const heroEntry = Object.entries(heroMap).find(([p]) =>
-      p.startsWith(`../content/blog/${entry.slug}/hero.`)
+      p.startsWith(`../content/blog/${entry.slug}/hero.`),
     );
     const fallbackHero = heroEntry?.[1] as string | undefined;
     const hero = entry.data.hero ?? fallbackHero;

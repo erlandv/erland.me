@@ -87,7 +87,7 @@ const envSchema = z.object({
       {
         message:
           'SITE_DOMAIN must be a valid domain (or localhost for development)',
-      }
+      },
     )
     .default('localhost'),
 
@@ -108,7 +108,7 @@ const envSchema = z.object({
     .string()
     .regex(
       /^ca-pub-\d+$/,
-      'PUBLIC_ADSENSE_CLIENT must match ca-pub-XXXXXXXXXX format'
+      'PUBLIC_ADSENSE_CLIENT must match ca-pub-XXXXXXXXXX format',
     )
     .or(z.literal(''))
     .optional(),
@@ -176,7 +176,7 @@ let validationError: Error | null = null;
  * @internal
  */
 function validateEnv(
-  mode: 'development' | 'production' | 'staging' = 'development'
+  mode: 'development' | 'production' | 'staging' = 'development',
 ): ValidatedEnv {
   // Return cached result if validation already succeeded for this mode
   if (validatedEnvCache[mode]) return validatedEnvCache[mode];
@@ -230,7 +230,7 @@ function validateEnv(
               .map(e => `${e.path.join('.')}: ${e.message}`)
               .join(', ')
           : String(error)
-      }`
+      }`,
     );
 
     validationError = validationErr;

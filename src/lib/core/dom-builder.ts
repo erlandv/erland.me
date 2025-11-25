@@ -27,7 +27,7 @@ export function el<K extends keyof HTMLElementTagNameMap>(
       role?: string;
     }
   >,
-  children?: (Node | string)[]
+  children?: (Node | string)[],
 ): HTMLElementTagNameMap[K] {
   const element = document.createElement(tag);
 
@@ -95,7 +95,7 @@ export function html(
  */
 export function qs<T extends Element = Element>(
   parent: Element | Document,
-  selector: string
+  selector: string,
 ): T | null {
   return parent.querySelector<T>(selector);
 }
@@ -108,7 +108,7 @@ export function qs<T extends Element = Element>(
  */
 export function qsa<T extends Element = Element>(
   parent: Element | Document,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from(parent.querySelectorAll<T>(selector));
 }
@@ -124,7 +124,7 @@ export function qsa<T extends Element = Element>(
  */
 export function setAttrs(
   element: Element,
-  attrs: Record<string, string | number | boolean>
+  attrs: Record<string, string | number | boolean>,
 ): void {
   Object.entries(attrs).forEach(([key, value]) => {
     element.setAttribute(key, String(value));
@@ -144,7 +144,7 @@ export function onEvents<K extends keyof HTMLElementEventMap>(
   element: HTMLElement,
   events: Partial<
     Record<K, (this: HTMLElement, ev: HTMLElementEventMap[K]) => void>
-  >
+  >,
 ): void {
   Object.entries(events).forEach(([event, handler]) => {
     element.addEventListener(event, handler as EventListener);

@@ -37,7 +37,7 @@ const downloads = defineCollection({
             label: z.string(),
             href: z.string(),
             size: z.string().optional(),
-          })
+          }),
         )
         .optional(),
       rating: z

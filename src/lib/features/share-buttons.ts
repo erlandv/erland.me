@@ -213,7 +213,7 @@ export function autoInit() {
         run();
         setupRouterReinit();
       },
-      { once: true }
+      { once: true },
     );
   } else {
     setTimeout(() => {

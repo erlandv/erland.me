@@ -43,5 +43,5 @@ const robotsPath = join(process.cwd(), 'public', 'robots.txt');
 writeFileSync(robotsPath, robotsContent);
 
 console.log(
-  `Generated robots.txt for ${isProd ? 'production' : 'staging/testing'} (site URL: ${siteUrl})`
+  `Generated robots.txt for ${isProd ? 'production' : 'staging/testing'} (site URL: ${siteUrl})`,
 );

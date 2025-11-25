@@ -1,22 +1,22 @@
 ---
 /**
  * SearchInput Component
- * 
+ *
  * Client-side search input with fuzzy search powered by Fuse.js.
  * Lazy-loads search index and Fuse.js on first focus for performance.
  * Displays search results in a dropdown with keyboard navigation support.
- * 
+ *
  * Features:
  * - Debounced search (300ms)
  * - Keyboard navigation (Arrow Up/Down, Enter, Escape)
  * - Click-outside to close
  * - Highlighted search matches
  * - Mobile-responsive results display
- * 
+ *
  * @component
  * @example
  * <SearchInput placeholder="Search articles..." />
- * 
+ *
  * @param {Object} props
  * @param {SearchablePost[]} [props.posts] - Initial posts data (optional, fetches from /search-index.json if not provided)
  * @param {string} [props.placeholder="Search articles..."] - Input placeholder text
@@ -44,7 +44,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
   <div class={styles['search-input-wrapper']}>
     <!-- Search Icon - Visual indicator for search functionality -->
     <Icon name='blogSearch' class={styles['search-icon']} />
-    
+
     <!-- Search Input Field - Debounced search with autocomplete suggestions -->
     <input
       type='text'
@@ -57,7 +57,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       aria-expanded='false'
       aria-label='Cari di blog'
     />
-    
+
     <!-- Clear Button - Clears search input and hides results (hidden by default) -->
     <button
       type='button'
@@ -69,7 +69,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       <Icon name='btnClose' class={styles['clear-icon']} />
     </button>
   </div>
-  
+
   <!-- Search Results Dropdown - Shows matching articles (hidden by default) -->
   <div
     class={styles['search-results']}
@@ -86,7 +86,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     >
     </div>
   </div>
-  
+
   <!-- Loading Indicator - Shows while search is in progress (hidden by default) -->
   <div
     class={styles['search-loading']}
@@ -171,10 +171,9 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     const arr = Array.isArray(postsData) ? postsData : [];
     const signatureOf = (list: SearchablePost[]): string => {
       try {
-        return `${
-          list.length
-        }:${
-          list.map((it: SearchablePost) => it.slug || it.id || '').join('|')}`;
+        return `${list.length}:${list
+          .map((it: SearchablePost) => it.slug || it.id || '')
+          .join('|')}`;
       } catch {
         return `${Date.now()}:${list.length}`;
       }
@@ -250,19 +249,19 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     }
 
     const searchInput = document.getElementById(
-      'search-input'
+      'search-input',
     ) as HTMLInputElement;
     const searchClear = document.getElementById(
-      'search-clear'
+      'search-clear',
     ) as HTMLButtonElement;
     const searchResults = document.getElementById(
-      'search-results'
+      'search-results',
     ) as HTMLDivElement;
     const searchResultsContent = document.getElementById(
-      'search-results-content'
+      'search-results-content',
     ) as HTMLDivElement;
     const searchLoading = document.getElementById(
-      'search-loading'
+      'search-loading',
     ) as HTMLDivElement;
 
     if (
@@ -373,15 +372,16 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       // Keyboard navigation
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         const items = Array.from(
-          document.querySelectorAll('.search-result-item')
+          document.querySelectorAll('.search-result-item'),
         ) as HTMLElement[];
         if (items.length === 0) return;
         const active = items.findIndex(el =>
-          el.classList.contains('is-active')
+          el.classList.contains('is-active'),
         );
         let nextIndex = e.key === 'ArrowDown' ? active + 1 : active - 1;
-        if (active === -1)
-          {nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;}
+        if (active === -1) {
+          nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;
+        }
         if (nextIndex < 0) nextIndex = items.length - 1;
         if (nextIndex >= items.length) nextIndex = 0;
         items.forEach(el => el.classList.remove('is-active'));
@@ -393,7 +393,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
       if (e.key === 'Enter') {
         const active = document.querySelector(
-          '.search-result-item.is-active'
+          '.search-result-item.is-active',
         ) as HTMLElement | null;
         if (active) {
           const slug = active.getAttribute('data-slug');
@@ -450,10 +450,10 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     hideLoading();
 
     const searchResults = document.getElementById(
-      'search-results'
+      'search-results',
     ) as HTMLDivElement;
     const searchResultsContent = document.getElementById(
-      'search-results-content'
+      'search-results-content',
     ) as HTMLDivElement;
 
     if (!searchResults || !searchResultsContent) return;
@@ -503,7 +503,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     showResults();
     // Update ARIA expanded
     const searchInput = document.getElementById(
-      'search-input'
+      'search-input',
     ) as HTMLInputElement | null;
     if (searchInput) searchInput.setAttribute('aria-expanded', 'true');
   }
@@ -511,19 +511,20 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
   function highlightMatches(
     text: string,
     matches: readonly FuseResultMatch[] | undefined,
-    key: string
+    key: string,
   ): string {
     if (!matches) return escapeHtml(text);
 
     const match = matches.find(m => m.key === key);
-    if (!match || !match.indices || match.indices.length === 0)
-      {return escapeHtml(text);}
+    if (!match || !match.indices || match.indices.length === 0) {
+      return escapeHtml(text);
+    }
 
     const isWordChar = (ch: string) => /\p{L}|\p{N}|_/u.test(ch);
     const expandToWordBoundaries = (
       t: string,
       s: number,
-      e: number
+      e: number,
     ): [number, number] => {
       let start = s;
       let end = e;
@@ -566,7 +567,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   function showResults() {
     const searchResults = document.getElementById(
-      'search-results'
+      'search-results',
     ) as HTMLDivElement;
     if (searchResults) {
       searchResults.style.display = 'block';
@@ -575,20 +576,20 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   function hideResults() {
     const searchResults = document.getElementById(
-      'search-results'
+      'search-results',
     ) as HTMLDivElement;
     if (searchResults) {
       searchResults.style.display = 'none';
     }
     const searchInput = document.getElementById(
-      'search-input'
+      'search-input',
     ) as HTMLInputElement | null;
     if (searchInput) searchInput.setAttribute('aria-expanded', 'false');
   }
 
   function showLoading() {
     const searchLoading = document.getElementById(
-      'search-loading'
+      'search-loading',
     ) as HTMLDivElement;
     if (searchLoading) {
       searchLoading.style.display = 'flex';
@@ -597,7 +598,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
   function hideLoading() {
     const searchLoading = document.getElementById(
-      'search-loading'
+      'search-loading',
     ) as HTMLDivElement;
     if (searchLoading) {
       searchLoading.style.display = 'none';

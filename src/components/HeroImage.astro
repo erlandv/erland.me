@@ -1,25 +1,25 @@
 ---
 /**
  * HeroImage Component
- * 
+ *
  * Optimized hero image component with responsive sizing and multiple densities.
  * Used for above-the-fold hero images with eager loading and high fetch priority.
- * 
+ *
  * Features:
  * - Responsive image sizing (60vw mobile max 320px, 45vw desktop max 320px)
  * - Multiple widths for different pixel densities (1x, 1.5x, 2x)
  * - Eager loading for above-fold performance
  * - High fetch priority for LCP optimization
- * 
+ *
  * @component
  * @example
- * <HeroImage 
+ * <HeroImage
  *   image={heroImageMetadata}
  *   alt="Hero image description"
  *   loading="eager"
  *   fetchpriority="high"
  * />
- * 
+ *
  * @param {Object} props
  * @param {ImageMetadata} props.image - Image metadata from Astro assets
  * @param {string} props.alt - Alt text for accessibility (required)
@@ -28,29 +28,29 @@
  * @param {number[]} [props.widths] - Array of image widths to generate (default: [180, 220, 270, 320, 480, 640])
  * @param {"high" | "low" | "auto"} [props.fetchpriority="high"] - Fetch priority hint (default: high for heroes)
  */
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
-import "@/styles/components/hero.css";
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import '@/styles/components/hero.css';
 
 interface Props {
   image: ImageMetadata;
   alt: string;
-  loading?: "eager" | "lazy";
+  loading?: 'eager' | 'lazy';
   sizes?: string;
   widths?: number[];
-  fetchpriority?: "high" | "low" | "auto";
+  fetchpriority?: 'high' | 'low' | 'auto';
 }
 
 const {
   image,
   alt,
-  loading = "eager",
+  loading = 'eager',
   // Match CSS: mobile (60vw max 320px), desktop (45vw max 320px)
   // Breakpoint at 640px where we switch from 60vw to 45vw
-  sizes = "(max-width: 640px) min(60vw, 320px), min(45vw, 320px)",
+  sizes = '(max-width: 640px) min(60vw, 320px), min(45vw, 320px)',
   // Cover common densities: 1x (180-320px), 1.5x (270-480px), 2x (360-640px)
   widths = [180, 220, 270, 320, 480, 640],
-  fetchpriority = "high", // Above-fold hero images should have high priority
+  fetchpriority = 'high', // Above-fold hero images should have high priority
 } = Astro.props as Props;
 ---
 
@@ -61,5 +61,5 @@ const {
   widths={widths}
   sizes={sizes}
   fetchpriority={fetchpriority}
-  class="hero-image"
+  class='hero-image'
 />

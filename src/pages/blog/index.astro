@@ -19,66 +19,76 @@ const paginated = slicePage(posts, page, pageSize);
 const pageHref = (n: number) => (n === 1 ? `/blog/` : `/blog/page/${n}/`);
 
 const getHero = (post: any) => post.data?.hero ?? null;
-const getExcerpt = (post: any) => post.data?.excerpt ?? post.data?.description ?? '';
+const getExcerpt = (post: any) =>
+  post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 ---
 
 <SiteLayout
   title={`${PAGE_METADATA.blog.index.title} by ${SITE_CONFIG.author.name}`}
-  canonical="/blog/"
+  canonical='/blog/'
   description={PAGE_METADATA.blog.index.description}
   nextHref={totalPages > 1 ? pageHref(2) : undefined}
   jsonLd={collectionPageJsonLd(
     'Blog',
     '/blog/',
-    paginated.map((p, i) => ({ url: `/blog/${p.slug}/`, name: p.data.title, position: i + 1 }))
+    paginated.map((p, i) => ({
+      url: `/blog/${p.slug}/`,
+      name: p.data.title,
+      position: i + 1,
+    })),
   )}
-  selectedItem="blog"
+  selectedItem='blog'
   preloadSearch
 >
   <!-- Back Navigation - Return to homepage -->
-  <BackNav href="/" />
+  <BackNav href='/' />
 
-  <div class="content-container">
+  <div class='content-container'>
     <!-- Page Title -->
     <h1>Blog Posts</h1>
-    
+
     <!-- Client-Side Search - Fuzzy search with Fuse.js (preloads search-index.json) -->
-    <SearchInput placeholder="Cari artikel..." />
-    
+    <SearchInput placeholder='Cari artikel...' />
+
     <!-- Blog Posts Grid Section - Displays paginated post preview cards -->
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
-        {paginated.map((post) => {
-          const hero = getHero(post);
-          const excerpt = getExcerpt(post);
-          const dateLabel = post.date
-            ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
-            : null;
-          return (
-            <PostCard
-              href={`/blog/${post.slug}/`}
-              title={post.data.title}
-              hero={hero}
-              alt={post.data.heroAlt ?? post.data.title}
-              category={getCategory(post)}
-              dateLabel={dateLabel}
-              excerpt={excerpt}
-            />
-          );
-        })}
+        {
+          paginated.map(post => {
+            const hero = getHero(post);
+            const excerpt = getExcerpt(post);
+            const dateLabel = post.date
+              ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+              : null;
+            return (
+              <PostCard
+                href={`/blog/${post.slug}/`}
+                title={post.data.title}
+                hero={hero}
+                alt={post.data.heroAlt ?? post.data.title}
+                category={getCategory(post)}
+                dateLabel={dateLabel}
+                excerpt={excerpt}
+              />
+            );
+          })
+        }
 
         {/* Empty State - Message when no posts available */}
-        {posts.length === 0 && (
-          <p style="opacity:.8;">There are no articles to read yet</p>
-        )}
+        {
+          posts.length === 0 && (
+            <p style='opacity:.8;'>There are no articles to read yet</p>
+          )
+        }
       </div>
     </section>
-    
+
     {/* Conditional: Pagination controls (only if more than one page) */}
-    {posts.length > pageSize && (
-      <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
-    )}
+    {
+      posts.length > pageSize && (
+        <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
+      )
+    }
   </div>
 </SiteLayout>
-

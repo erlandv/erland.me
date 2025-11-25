@@ -39,14 +39,14 @@ import '@/styles/features/code-copy.css';
  */
 function findCodeBlocks(): NodeListOf<HTMLElement> {
   let list = document.querySelectorAll(
-    '.prose pre code'
+    '.prose pre code',
   ) as NodeListOf<HTMLElement>;
   if (list.length === 0) {
     list = document.querySelectorAll('pre code') as NodeListOf<HTMLElement>;
   }
   if (list.length === 0) {
     list = document.querySelectorAll(
-      'pre[class*="language-"] code'
+      'pre[class*="language-"] code',
     ) as NodeListOf<HTMLElement>;
   }
   return list;
@@ -212,7 +212,7 @@ export function autoInit() {
         run();
         setupRouterReinit();
       },
-      { once: true }
+      { once: true },
     );
   } else {
     setTimeout(() => {

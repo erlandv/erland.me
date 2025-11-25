@@ -1,24 +1,24 @@
 ---
 /**
  * Project Component
- * 
+ *
  * Displays portfolio project details with title, description, highlights, and tech stack.
  * Used in portfolio pages to showcase individual projects.
- * 
+ *
  * Features:
  * - Multi-paragraph description support (split by double newlines)
  * - Optional highlights list
  * - Technology chips/badges display
- * 
+ *
  * @component
  * @example
- * <Project 
+ * <Project
  *   title="My Project"
  *   desc="Project description.\n\nSecond paragraph."
  *   highlights={["Feature 1", "Feature 2"]}
  *   tech={["React", "TypeScript", "Node.js"]}
  * />
- * 
+ *
  * @param {Object} props
  * @param {string} props.title - Project title
  * @param {string} props.desc - Project description (supports multiple paragraphs separated by \n\n)
@@ -30,37 +30,54 @@ import styles from './project.module.css';
 const { title, desc, highlights = [], tech } = Astro.props;
 const paragraphs: string[] =
   typeof desc === 'string'
-    ? desc.split(/\n\s*\n/)
+    ? desc
+        .split(/\n\s*\n/)
         .map(p => p.trim())
         .filter(Boolean)
     : [];
 ---
 
 <!-- Portfolio Project Card - Displays project details with description, highlights, and tech stack -->
-<div class={styles["single-item"]}>
+<div class={styles['single-item']}>
   <!-- Project Title -->
   <h2>{title}</h2>
-  
+
   <!-- Project Description - Supports multi-paragraph text (split by double newlines) -->
-  <div class:list={[styles["project-desc"]]}>
-    {paragraphs.length > 0 ? paragraphs.map((p: string) => <p>{p}</p>) : <p>{desc}</p>}
+  <div class:list={[styles['project-desc']]}>
+    {
+      paragraphs.length > 0 ? (
+        paragraphs.map((p: string) => <p>{p}</p>)
+      ) : (
+        <p>{desc}</p>
+      )
+    }
   </div>
-  
-  {/* Conditional: Project Highlights Section (only if highlights array provided) */}
-  {highlights.length > 0 && (
-    <>
-      <h3>Highlights</h3>
-      <div class:list={[styles["project-desc"], styles["project-desc-list"]]}>
-        <ul role="list">
-          {highlights.map((item: string) => <li>{item}</li>)}
-        </ul>
-      </div>
-    </>
-  )}
-  
+
+  {
+    /* Conditional: Project Highlights Section (only if highlights array provided) */
+  }
+  {
+    highlights.length > 0 && (
+      <>
+        <h3>Highlights</h3>
+        <div class:list={[styles['project-desc'], styles['project-desc-list']]}>
+          <ul role='list'>
+            {highlights.map((item: string) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </>
+    )
+  }
+
   <!-- Technologies Section - Chips/badges display -->
-  <div class={styles["mini-label-white"]}>Technologies &amp; tools</div>
-  <div class={styles["chips-container"]}>
-    {tech.map((techItem: string) => <div class={styles["single-chip"]}>{techItem}</div>)}
+  <div class={styles['mini-label-white']}>Technologies &amp; tools</div>
+  <div class={styles['chips-container']}>
+    {
+      tech.map((techItem: string) => (
+        <div class={styles['single-chip']}>{techItem}</div>
+      ))
+    }
   </div>
 </div>

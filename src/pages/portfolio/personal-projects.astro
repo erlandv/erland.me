@@ -1,34 +1,39 @@
 ---
-import SiteLayout from "@layouts/SiteLayout.astro";
-import Project from "@components/Project/Project.astro";
-import BackNav from "@components/BackNav/BackNav.astro";
+import SiteLayout from '@layouts/SiteLayout.astro';
+import Project from '@components/Project/Project.astro';
+import BackNav from '@components/BackNav/BackNav.astro';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
-import listing from "@/styles/pages/listing.module.css";
-import { getProjectsByCategory, type ProjectData } from '@lib/content/portfolio';
+import listing from '@/styles/pages/listing.module.css';
+import {
+  getProjectsByCategory,
+  type ProjectData,
+} from '@lib/content/portfolio';
 
 const projects = await getProjectsByCategory('personal-projects');
 ---
 
 <SiteLayout
   title={`${PAGE_METADATA.portfolio.personalProjects.title} by ${SITE_CONFIG.author.name}`}
-  canonical="/portfolio/personal-projects/"
-  selectedItem="personal-projects"
+  canonical='/portfolio/personal-projects/'
+  selectedItem='personal-projects'
   description={PAGE_METADATA.portfolio.personalProjects.description}
 >
-  <BackNav href="/portfolio/" />
-  <div class="content-container">
+  <BackNav href='/portfolio/' />
+  <div class='content-container'>
     <h1>Personal Projects</h1>
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
-        {projects.map((project: ProjectData) => (
-          <Project 
-            title={project.title} 
-            desc={project.desc}
-            highlights={project.highlights}
-            tech={project.tech}
-          />
-        ))}
+        {
+          projects.map((project: ProjectData) => (
+            <Project
+              title={project.title}
+              desc={project.desc}
+              highlights={project.highlights}
+              tech={project.tech}
+            />
+          ))
+        }
       </div>
     </section>
   </div>

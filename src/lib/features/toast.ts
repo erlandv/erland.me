@@ -103,7 +103,7 @@ export function showToast(message: string, options: ToastOptions = {}): void {
         }
       }, removeDelay);
     },
-    Math.max(1500, Math.min(2500, duration))
+    Math.max(1500, Math.min(2500, duration)),
   );
 }
 
