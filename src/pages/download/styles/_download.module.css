@@ -148,57 +148,6 @@
   width: 100%;
 }
 
-:global(.download-files-table) {
-  width: 100%;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  border-collapse: collapse;
-  overflow: hidden;
-  background-color: var(--bg-secondary);
-}
-
-:global(.download-files-table th),
-:global(.download-files-table td) {
-  border-top: 1px solid var(--divider-weak);
-  border-right: 1px solid var(--divider-weak);
-  padding: 16px 18px;
-  text-align: left;
-  color: var(--text-secondary);
-}
-
-:global(.download-files-table th) {
-  color: var(--text-primary);
-  background-color: var(--bg-tertiary);
-  font-weight: 600;
-}
-
-:global(.download-files-table tr:first-child th) {
-  border-top: none;
-}
-
-:global(.download-files-table tr:first-child td) {
-  border-top: none;
-}
-
-:global(.download-files-table tr td:last-child),
-:global(.download-files-table tr th:last-child) {
-  border-right: none;
-}
-
-:global(.download-files-table tr:nth-child(even) td) {
-  background-color: var(--bg-primary);
-}
-
-:global(.download-files-link) {
-  color: var(--text-primary);
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-:global(.download-files-link:hover) {
-  color: var(--color-secondary);
-}
-
 :global(.download-files-note) {
   margin: 0;
   color: var(--text-subtle);
@@ -207,9 +156,6 @@
 
 /* Tablet adjustments */
 @media screen and (max-width: 767px) {
-  .download-files-table {
-    font-size: 0.95rem;
-  }
   .download-grid {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -221,48 +167,9 @@
   .download-card-thumb {
     padding: 24px;
   }
+
   .download-card-body {
     padding: 20px;
-  }
-
-  .download-files-table,
-  .download-files-table thead,
-  .download-files-table tbody,
-  .download-files-table th,
-  .download-files-table td,
-  .download-files-table tr {
-    display: block;
-  }
-
-  .download-files-table thead {
-    display: none;
-  }
-
-  .download-files-table tr {
-    border: 1px solid var(--divider-weak);
-    border-radius: 12px;
-    margin-bottom: 16px;
-    overflow: hidden;
-  }
-
-  .download-files-table td {
-    border: none;
-    border-bottom: 1px solid var(--divider-weak);
-    padding: 12px 16px;
-  }
-
-  .download-files-table td:last-child {
-    border-bottom: none;
-  }
-
-  .download-files-table td[data-label]:before {
-    content: attr(data-label);
-    display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 4px;
-    color: var(--text-muted);
   }
 }
 
