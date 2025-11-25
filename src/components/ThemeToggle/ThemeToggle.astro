@@ -1,29 +1,28 @@
 ---
 /**
  * ThemeToggle Component
- * 
+ *
  * Theme switcher dropdown with three options: Auto (system default), Light Mode, and Dark Mode.
  * Persists user preference to localStorage and syncs across page navigations.
- * 
+ *
  * Features:
  * - System default theme detection (prefers-color-scheme)
  * - Manual theme override (light/dark)
  * - Pre-hydration icon injection to prevent FOUC
  * - Keyboard navigation support
  * - ARIA menu pattern for accessibility
- * 
+ *
  * Theme state managed by:
  * - Client-side JavaScript in @lib/features/theme-toggle.ts
  * - Critical init script in CriticalInit.astro
  * - CSS custom properties on document root
- * 
+ *
  * @component
  * @example
  * <ThemeToggle />
  */
 import Icon from '@components/Icon.astro';
 import styles from './ThemeToggle.module.css';
-
 ---
 
 <div class:list={[styles.wrapper, 'theme-toggle']}>

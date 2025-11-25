@@ -152,7 +152,7 @@ class StoriesViewer {
         <div class="stories__progress-bar">
           <div class="stories__progress-fill"></div>
         </div>
-      `
+      `,
       )
       .join('');
 
@@ -266,11 +266,11 @@ class StoriesViewer {
     const navNext = qs<HTMLButtonElement>(overlay, '.stories__nav--next');
     const clickZonePrev = qs<HTMLDivElement>(
       overlay,
-      '.stories__click-zone--prev'
+      '.stories__click-zone--prev',
     );
     const clickZoneNext = qs<HTMLDivElement>(
       overlay,
-      '.stories__click-zone--next'
+      '.stories__click-zone--next',
     );
     const imageElement = qs<HTMLImageElement>(overlay, '.stories__image');
     const progressBars = qsa<HTMLDivElement>(overlay, '.stories__progress-bar');
@@ -641,7 +641,7 @@ class StoriesViewer {
       () => {
         currentOverlay.remove();
       },
-      { once: true }
+      { once: true },
     );
 
     // Fallback: remove overlay after max transition duration
@@ -724,7 +724,7 @@ export function autoInit(): void {
         run();
         setupRouterReinit();
       },
-      { once: true }
+      { once: true },
     );
   } else {
     setTimeout(() => {

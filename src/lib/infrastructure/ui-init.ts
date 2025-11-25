@@ -143,7 +143,7 @@ async function maybeLoadShare(): Promise<void> {
       m.autoInit?.();
       return m;
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 
   // If loading failed and feature is not marked as permanently failed,
@@ -162,7 +162,7 @@ async function maybeLoadCopy(): Promise<void> {
       m.autoInit?.();
       return m;
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -178,7 +178,7 @@ async function maybeLoadLightbox(): Promise<void> {
       m.autoInit?.();
       return m;
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -199,7 +199,7 @@ async function maybeLoadTable(): Promise<void> {
       // Always execute the initializer to process new tables after navigation
       w.__tableResponsiveInit?.();
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -223,7 +223,7 @@ async function maybeLoadThemeToggle(): Promise<void> {
       // Always execute the initializer to handle view transitions
       await w.__themeToggleInit?.();
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -239,7 +239,7 @@ async function maybeLoadStories(): Promise<void> {
       m.autoInit?.();
       return m;
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -260,7 +260,7 @@ async function maybeLoadCategoryFilter(): Promise<void> {
       // Always execute the initializer to handle view transitions
       w.__categoryFilterInit?.();
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -281,7 +281,7 @@ async function maybeLoadDownloadTracker(): Promise<void> {
       // Always execute the initializer to attach new listeners
       w.__downloadTrackerInit?.();
     },
-    { operation: 'load-and-init', recoverable: true }
+    { operation: 'load-and-init', recoverable: true },
   );
 }
 
@@ -383,7 +383,7 @@ export function initUi(): void {
         gateThemeToggle(); // Theme toggle initial load
         setupGateListeners();
       },
-      { once: true }
+      { once: true },
     );
   } else {
     // Small delay to allow Astro content to hydrate

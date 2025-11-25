@@ -160,7 +160,7 @@ declare global {
  */
 function applyStateImmediate(
   collapsed: boolean,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
   if (!sidebar) return;
@@ -170,11 +170,11 @@ function applyStateImmediate(
 
   document.documentElement.classList.toggle(
     'sidebar-collapsed-global',
-    isCollapsed
+    isCollapsed,
   );
   document.documentElement.setAttribute(
     'data-sidebar',
-    isCollapsed ? 'collapsed' : 'expanded'
+    isCollapsed ? 'collapsed' : 'expanded',
   );
   document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   sidebar.classList.toggle('sidebar-collapsed', isCollapsed);
@@ -192,7 +192,7 @@ function applyStateImmediate(
  */
 function animateToState(
   collapsed: boolean,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
   if (!sidebar) return applyStateImmediate(collapsed, breakpoint);
@@ -237,7 +237,7 @@ function animateToState(
 function syncToggleActive(): void {
   try {
     const toggleButtons = document.querySelectorAll<HTMLElement>(
-      '.sidebar-toggle-button'
+      '.sidebar-toggle-button',
     );
     const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
     if (!toggleButtons.length || !sidebar) return;
@@ -247,7 +247,7 @@ function syncToggleActive(): void {
       sidebar.classList.contains('sidebar-collapsed');
 
     toggleButtons.forEach(btn =>
-      btn.classList.toggle('is-active', isCollapsedNow)
+      btn.classList.toggle('is-active', isCollapsedNow),
     );
   } catch {
     // Silently fail if elements not found
@@ -263,17 +263,17 @@ function syncToggleActive(): void {
  */
 function applyInitialRootFlags(
   storage: SidebarStorage,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   try {
     const shouldCollapse = storage.getCollapsed() && !breakpoint.isMobile();
     document.documentElement.classList.toggle(
       'sidebar-collapsed-global',
-      shouldCollapse
+      shouldCollapse,
     );
     document.documentElement.setAttribute(
       'data-sidebar',
-      shouldCollapse ? 'collapsed' : 'expanded'
+      shouldCollapse ? 'collapsed' : 'expanded',
     );
   } catch {
     // Silently fail if document not ready
@@ -289,12 +289,12 @@ function applyInitialRootFlags(
  */
 function handleBreakpointChanges(
   storage: SidebarStorage,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   try {
     const handler = () => {
       const sidebarToggle = document.getElementById(
-        'sidebar-toggle'
+        'sidebar-toggle',
       ) as HTMLInputElement | null;
       if (!sidebarToggle) return;
 
@@ -326,10 +326,10 @@ function handleBreakpointChanges(
 function updateMobileAriaExpanded(): void {
   try {
     const btn = document.querySelector(
-      '.navbar-icon-button'
+      '.navbar-icon-button',
     ) as HTMLElement | null;
     const toggle = document.getElementById(
-      'nav-toggle'
+      'nav-toggle',
     ) as HTMLInputElement | null;
     if (!btn || !toggle) return;
 
@@ -346,7 +346,7 @@ function updateMobileAriaExpanded(): void {
 function closeMobileMenu(): void {
   try {
     const toggle = document.getElementById(
-      'nav-toggle'
+      'nav-toggle',
     ) as HTMLInputElement | null;
     if (!toggle) return;
 
@@ -385,7 +385,7 @@ function normalizePath(p: string): string {
 function updateActiveNav(): void {
   try {
     const links = document.querySelectorAll<HTMLAnchorElement>(
-      '.sidebar .nav-link-container[href]'
+      '.sidebar .nav-link-container[href]',
     );
     if (!links || !links.length) return;
 
@@ -397,7 +397,7 @@ function updateActiveNav(): void {
       try {
         const hrefAttr = link.getAttribute('href') || '';
         const hrefPath = normalizePath(
-          new URL(hrefAttr, window.location.origin).pathname
+          new URL(hrefAttr, window.location.origin).pathname,
         );
 
         // Exact match for homepage
@@ -443,7 +443,7 @@ function updateActiveNav(): void {
 function attachNavClickHandlers(): void {
   try {
     const links = document.querySelectorAll<HTMLAnchorElement>(
-      '.sidebar .nav-link-container[href]'
+      '.sidebar .nav-link-container[href]',
     );
     if (!links || !links.length) return;
 
@@ -470,7 +470,7 @@ function attachNavClickHandlers(): void {
 
             // Update active state immediately for better UX
             const all = document.querySelectorAll<HTMLAnchorElement>(
-              '.sidebar .nav-link-container[href]'
+              '.sidebar .nav-link-container[href]',
             );
             all.forEach(a => {
               a.classList.remove('is-current-page');
@@ -485,7 +485,7 @@ function attachNavClickHandlers(): void {
             // Silently fail on click handler errors
           }
         },
-        { passive: true }
+        { passive: true },
       );
     });
   } catch {
@@ -502,11 +502,11 @@ function attachNavClickHandlers(): void {
  */
 function refreshCollapsedState(
   storage: SidebarStorage,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   try {
     const sidebarToggle = document.getElementById(
-      'sidebar-toggle'
+      'sidebar-toggle',
     ) as HTMLInputElement | null;
 
     let collapsed = storage.getCollapsed();
@@ -529,7 +529,7 @@ function refreshCollapsedState(
  */
 function bindRouterEvents(
   storage: SidebarStorage,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   try {
     if (window.__sidebarControllerRouterBound) return;
@@ -556,7 +556,7 @@ function bindRouterEvents(
  */
 function bootOnce(
   storage: SidebarStorage,
-  breakpoint: BreakpointDetector
+  breakpoint: BreakpointDetector,
 ): void {
   const sidebar = document.querySelector('.sidebar') as HTMLElement | null;
   if (!sidebar) return;
@@ -573,7 +573,7 @@ function bootOnce(
   requestAnimationFrame(() => {
     try {
       document.documentElement.style.removeProperty(
-        '--sidebar-init-transition'
+        '--sidebar-init-transition',
       );
     } catch {
       // Silently fail if style manipulation fails
@@ -582,7 +582,7 @@ function bootOnce(
 
   // Initialize state and breakpoint handling
   const sidebarToggle = document.getElementById(
-    'sidebar-toggle'
+    'sidebar-toggle',
   ) as HTMLInputElement | null;
 
   if (sidebarToggle) {
@@ -613,7 +613,7 @@ function bootOnce(
 
   // Sync ARIA for mobile nav toggle + listen for changes
   const navToggle = document.getElementById(
-    'nav-toggle'
+    'nav-toggle',
   ) as HTMLInputElement | null;
 
   if (navToggle) {
@@ -628,7 +628,7 @@ function bootOnce(
         if (!navToggle.checked) return;
 
         const focusables = siteNav.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         );
         if (!focusables.length) return;
 
@@ -715,7 +715,7 @@ function bootOnce(
  */
 export function initSidebarController(
   storage: SidebarStorage = defaultStorage,
-  breakpoint: BreakpointDetector = defaultBreakpoint
+  breakpoint: BreakpointDetector = defaultBreakpoint,
 ): void {
   bootOnce(storage, breakpoint);
   bindRouterEvents(storage, breakpoint);

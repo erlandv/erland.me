@@ -76,7 +76,7 @@ function shouldLog(level: LogLevel): boolean {
 function formatMessage(
   prefix: string,
   message: string,
-  context?: LogContext
+  context?: LogContext,
 ): string {
   const parts: string[] = [prefix];
 
@@ -97,7 +97,7 @@ function formatMessage(
  */
 function logContext(
   consoleFn: (...args: unknown[]) => void,
-  context?: LogContext
+  context?: LogContext,
 ): void {
   if (!context) return;
 

@@ -106,7 +106,7 @@ function ensureSetup() {
     history.pushState = function (
       data: unknown,
       unused: string,
-      url?: string | URL | null
+      url?: string | URL | null,
     ) {
       const result = originalPush(data, unused, url);
       notify({
@@ -123,7 +123,7 @@ function ensureSetup() {
     history.replaceState = function (
       data: unknown,
       unused: string,
-      url?: string | URL | null
+      url?: string | URL | null,
     ) {
       const result = originalReplace(data, unused, url);
       notify({
@@ -185,7 +185,7 @@ export function onRouteChange(listener: RouterEventListener): () => void {
 export function triggerRouteChange(
   type: RouterEventType = 'replace',
   url?: string | URL | null,
-  state?: unknown
+  state?: unknown,
 ) {
   if (typeof window === 'undefined') return;
   ensureSetup();

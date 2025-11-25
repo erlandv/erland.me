@@ -93,7 +93,7 @@ export default function remarkFigure(): (tree: Node) => void {
             ];
           }
         }
-      }
+      },
     );
   };
 }

@@ -1,10 +1,10 @@
 ---
 /**
  * Icon Component
- * 
+ *
  * Centralized SVG icon loader with automatic normalization and accessibility.
  * Dynamically imports SVG files and injects them inline with proper attributes.
- * 
+ *
  * Features:
  * - Lazy dynamic imports for code splitting
  * - Automatic color normalization to currentColor
@@ -12,7 +12,7 @@
  * - aria-hidden for decorative icons
  * - Removes width/height attributes (CSS controls sizing)
  * - Strips embedded styles and fill/stroke declarations
- * 
+ *
  * Available icon categories:
  * - Sidebar: navHome, navWeb, navInfra, navPersonal, navDownload, navBlog, navMobile
  * - Theme: themeAuto, themeLight, themeDark
@@ -22,20 +22,20 @@
  * - Arrows: arrowUp, arrowDown, arrowRight, arrowLeft
  * - Stories: storiesPause, storiesPlay, storiesVerified
  * - Rating: ratingStar, ratingHalfStar
- * 
+ *
  * @component
  * @example
  * // Decorative icon (aria-hidden="true")
  * <Icon name="blogDate" class="date-icon" />
- * 
+ *
  * // Semantic icon with label
  * <Icon name="socialGithub" class="social-icon" ariaLabel="GitHub profile" />
- * 
+ *
  * @param {Object} props
  * @param {string} props.name - Icon name from iconMap (required)
  * @param {string} [props.class] - CSS class for styling
  * @param {string} [props.ariaLabel] - ARIA label for semantic icons (if not provided, icon is decorative)
- * 
+ *
  * @throws {Error} Throws error if icon name is not found in iconMap
  */
 interface Props {
@@ -49,63 +49,63 @@ const { name, class: className, ariaLabel }: Props = Astro.props as Props;
 // Lazy load icons using dynamic imports
 const iconMap = {
   // Sidebar Icons
-  navHome: () => import("@/icons/nav-home.svg?raw"),
-  navWeb: () => import("@/icons/nav-web.svg?raw"),
-  navInfra: () => import("@/icons/nav-infra.svg?raw"),
-  navPersonal: () => import("@/icons/nav-personal.svg?raw"),
-  navDownload: () => import("@/icons/nav-download.svg?raw"),
-  navBlog: () => import("@/icons/nav-blog.svg?raw"),
-  navMobile: () => import("@/icons/nav-mobile.svg?raw"),
-  sidebarToggleLeft: () => import("@/icons/sidebar-toggle-left.svg?raw"),
-  sidebarToggleRight: () => import("@/icons/sidebar-toggle-right.svg?raw"),
+  navHome: () => import('@/icons/nav-home.svg?raw'),
+  navWeb: () => import('@/icons/nav-web.svg?raw'),
+  navInfra: () => import('@/icons/nav-infra.svg?raw'),
+  navPersonal: () => import('@/icons/nav-personal.svg?raw'),
+  navDownload: () => import('@/icons/nav-download.svg?raw'),
+  navBlog: () => import('@/icons/nav-blog.svg?raw'),
+  navMobile: () => import('@/icons/nav-mobile.svg?raw'),
+  sidebarToggleLeft: () => import('@/icons/sidebar-toggle-left.svg?raw'),
+  sidebarToggleRight: () => import('@/icons/sidebar-toggle-right.svg?raw'),
   // Theme Toggle Icons
-  themeAuto: () => import("@/icons/theme-auto.svg?raw"),
-  themeLight: () => import("@/icons/theme-light.svg?raw"),
-  themeDark: () => import("@/icons/theme-dark.svg?raw"),
+  themeAuto: () => import('@/icons/theme-auto.svg?raw'),
+  themeLight: () => import('@/icons/theme-light.svg?raw'),
+  themeDark: () => import('@/icons/theme-dark.svg?raw'),
   // Project Icons
-  portfolioWeb: () => import("@/icons/portfolio-web.svg?raw"),
-  portfolioInfra: () => import("@/icons/portfolio-infra.svg?raw"),
-  portfolioPersonal: () => import("@/icons/portfolio-personal.svg?raw"),
+  portfolioWeb: () => import('@/icons/portfolio-web.svg?raw'),
+  portfolioInfra: () => import('@/icons/portfolio-infra.svg?raw'),
+  portfolioPersonal: () => import('@/icons/portfolio-personal.svg?raw'),
   // Social Icons
-  socialX: () => import("@/icons/social-x.svg?raw"),
-  socialInstagram: () => import("@/icons/social-instagram.svg?raw"),
-  socialFacebook: () => import("@/icons/social-facebook.svg?raw"),
-  socialGithub: () => import("@/icons/social-github.svg?raw"),
-  socialBluesky: () => import("@/icons/social-bluesky.svg?raw"),
-  socialLinkedin: () => import("@/icons/social-linkedin.svg?raw"),
-  socialWhatsapp: () => import("@/icons/social-whatsapp.svg?raw"),
-  socialTelegram: () => import("@/icons/social-telegram.svg?raw"),
-  socialPinterest: () => import("@/icons/social-pinterest.svg?raw"),
-  socialReddit: () => import("@/icons/social-reddit.svg?raw"),
-  socialEmail: () => import("@/icons/social-email.svg?raw"),
-  socialOpen: () => import("@/icons/social-open.svg?raw"),
-  socialClose: () => import("@/icons/social-close.svg?raw"),
+  socialX: () => import('@/icons/social-x.svg?raw'),
+  socialInstagram: () => import('@/icons/social-instagram.svg?raw'),
+  socialFacebook: () => import('@/icons/social-facebook.svg?raw'),
+  socialGithub: () => import('@/icons/social-github.svg?raw'),
+  socialBluesky: () => import('@/icons/social-bluesky.svg?raw'),
+  socialLinkedin: () => import('@/icons/social-linkedin.svg?raw'),
+  socialWhatsapp: () => import('@/icons/social-whatsapp.svg?raw'),
+  socialTelegram: () => import('@/icons/social-telegram.svg?raw'),
+  socialPinterest: () => import('@/icons/social-pinterest.svg?raw'),
+  socialReddit: () => import('@/icons/social-reddit.svg?raw'),
+  socialEmail: () => import('@/icons/social-email.svg?raw'),
+  socialOpen: () => import('@/icons/social-open.svg?raw'),
+  socialClose: () => import('@/icons/social-close.svg?raw'),
   // Blogs Icons
-  blogDate: () => import("@/icons/blog-date.svg?raw"),
-  blogTags: () => import("@/icons/blog-tags.svg?raw"),
-  blogReadmore: () => import("@/icons/blog-readmore.svg?raw"),
-  blogSearch: () => import("@/icons/blog-search.svg?raw"),
-  blogShare: () => import("@/icons/blog-share.svg?raw"),
+  blogDate: () => import('@/icons/blog-date.svg?raw'),
+  blogTags: () => import('@/icons/blog-tags.svg?raw'),
+  blogReadmore: () => import('@/icons/blog-readmore.svg?raw'),
+  blogSearch: () => import('@/icons/blog-search.svg?raw'),
+  blogShare: () => import('@/icons/blog-share.svg?raw'),
   // General Icons
-  btnCopy: () => import("@/icons/btn-copy.svg?raw"),
-  btnClose: () => import("@/icons/btn-close.svg?raw"),
-  btnBack: () => import("@/icons/btn-back.svg?raw"),
-  btnFullscreen: () => import("@/icons/btn-fullscreen.svg?raw"),
+  btnCopy: () => import('@/icons/btn-copy.svg?raw'),
+  btnClose: () => import('@/icons/btn-close.svg?raw'),
+  btnBack: () => import('@/icons/btn-back.svg?raw'),
+  btnFullscreen: () => import('@/icons/btn-fullscreen.svg?raw'),
   // Arrows Icons
-  arrowUp: () => import("@/icons/arrow-up.svg?raw"),
-  arrowDown: () => import("@/icons/arrow-down.svg?raw"),
-  arrowRight: () => import("@/icons/arrow-right.svg?raw"),
-  arrowLeft: () => import("@/icons/arrow-left.svg?raw"),
+  arrowUp: () => import('@/icons/arrow-up.svg?raw'),
+  arrowDown: () => import('@/icons/arrow-down.svg?raw'),
+  arrowRight: () => import('@/icons/arrow-right.svg?raw'),
+  arrowLeft: () => import('@/icons/arrow-left.svg?raw'),
   // Stories Icons
-  storiesPause: () => import("@/icons/stories-pause.svg?raw"),
-  storiesPlay: () => import("@/icons/stories-play.svg?raw"),
-  storiesVerified: () => import("@/icons/stories-verified.svg?raw"),
+  storiesPause: () => import('@/icons/stories-pause.svg?raw'),
+  storiesPlay: () => import('@/icons/stories-play.svg?raw'),
+  storiesVerified: () => import('@/icons/stories-verified.svg?raw'),
   // Rating Icons
-  ratingStar: () => import("@/icons/rating-star.svg?raw"),
-  ratingHalfStar: () => import("@/icons/rating-half-star.svg?raw"),
+  ratingStar: () => import('@/icons/rating-star.svg?raw'),
+  ratingHalfStar: () => import('@/icons/rating-half-star.svg?raw'),
   // Error Page Icons
-  error404: () => import("@/icons/error-404.svg?raw"),
-  error403: () => import("@/icons/error-403.svg?raw"),
+  error404: () => import('@/icons/error-404.svg?raw'),
+  error403: () => import('@/icons/error-403.svg?raw'),
 };
 
 // Get the icon loader function
@@ -121,76 +121,77 @@ const raw = iconModule.default;
 function normalizeSvg(svg: string): string {
   let s = svg
     // remove XML declarations and comments
-    .replace(/<\?xml[\s\S]*?\?>/g, "")
-    .replace(/<!--([\s\S]*?)-->/g, "")
+    .replace(/<\?xml[\s\S]*?\?>/g, '')
+    .replace(/<!--([\s\S]*?)-->/g, '')
     // remove style blocks (e.g., .st0 { fill:#FFFFFF })
-    .replace(/<style[\s\S]*?<\/style>/g, "")
+    .replace(/<style[\s\S]*?<\/style>/g, '')
     // normalize inline fill/stroke declarations to currentColor (skip none/url/currentColor)
     .replace(
       /fill\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
-      "fill:currentColor"
+      'fill:currentColor',
     )
     .replace(
       /stroke\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
-      "stroke:currentColor"
+      'stroke:currentColor',
     )
     .replace(
       /fill\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
-      'fill="currentColor"'
+      'fill="currentColor"',
     )
     .replace(
       /stroke\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
-      'stroke="currentColor"'
+      'stroke="currentColor"',
     );
 
   // inject class + accessibility + default color attributes on root <svg>
-  s = s.replace(
-    /<svg(\s[^>]*)?>/i,
-    (match) => {
-      let tag = match;
-      // strip width/height from root svg so CSS controls sizing
-      tag = tag.replace(/\s(width|height)\s*=\s*"[^"]*"/gi, "");
-      // drop any existing root fill attribute before injecting our default
-      tag = tag.replace(/\sfill\s*=\s*"[^"]*"/i, "");
-      // ensure class
-      if (className) {
-        if (/class\s*=\s*"[^"]*"/i.test(tag)) {
-          tag = tag.replace(
-            /class\s*=\s*"([^"]*)"/i,
-            (_m, cls) => `class="${cls} ${className}"`
-          );
-        } else {
-          tag = tag.replace(/<svg/i, `<svg class="${className}"`);
-        }
-      }
-      // ensure aria-hidden or aria-label
-      if (ariaLabel && ariaLabel.trim().length > 0) {
-        if (/aria-label\s*=\s*"[^"]*"/i.test(tag)) {
-          tag = tag.replace(/aria-label\s*=\s*"([^"]*)"/i, `aria-label="${ariaLabel}"`);
-        } else {
-          tag = tag.replace(/<svg/i, `<svg aria-label="${ariaLabel}"`);
-        }
-        // role img for labeled icon
-        if (!/role\s*=\s*"img"/i.test(tag)) {
-          tag = tag.replace(/<svg/i, `<svg role="img"`);
-        }
+  s = s.replace(/<svg(\s[^>]*)?>/i, match => {
+    let tag = match;
+    // strip width/height from root svg so CSS controls sizing
+    tag = tag.replace(/\s(width|height)\s*=\s*"[^"]*"/gi, '');
+    // drop any existing root fill attribute before injecting our default
+    tag = tag.replace(/\sfill\s*=\s*"[^"]*"/i, '');
+    // ensure class
+    if (className) {
+      if (/class\s*=\s*"[^"]*"/i.test(tag)) {
+        tag = tag.replace(
+          /class\s*=\s*"([^"]*)"/i,
+          (_m, cls) => `class="${cls} ${className}"`,
+        );
       } else {
-        // decorative
-        if (!/aria-hidden\s*=\s*"true"/i.test(tag)) {
-          tag = tag.replace(/<svg/i, `<svg aria-hidden="true"`);
-        }
+        tag = tag.replace(/<svg/i, `<svg class="${className}"`);
       }
-      // default color behavior
-      if (!/fill\s*=\s*"currentColor"/i.test(tag)) {
-        tag = tag.replace(/<svg/i, `<svg fill="currentColor"`);
-      }
-      return tag;
     }
-  );
+    // ensure aria-hidden or aria-label
+    if (ariaLabel && ariaLabel.trim().length > 0) {
+      if (/aria-label\s*=\s*"[^"]*"/i.test(tag)) {
+        tag = tag.replace(
+          /aria-label\s*=\s*"([^"]*)"/i,
+          `aria-label="${ariaLabel}"`,
+        );
+      } else {
+        tag = tag.replace(/<svg/i, `<svg aria-label="${ariaLabel}"`);
+      }
+      // role img for labeled icon
+      if (!/role\s*=\s*"img"/i.test(tag)) {
+        tag = tag.replace(/<svg/i, `<svg role="img"`);
+      }
+    } else {
+      // decorative
+      if (!/aria-hidden\s*=\s*"true"/i.test(tag)) {
+        tag = tag.replace(/<svg/i, `<svg aria-hidden="true"`);
+      }
+    }
+    // default color behavior
+    if (!/fill\s*=\s*"currentColor"/i.test(tag)) {
+      tag = tag.replace(/<svg/i, `<svg fill="currentColor"`);
+    }
+    return tag;
+  });
 
   return s;
 }
 
 const svg = normalizeSvg(raw);
 ---
+
 <Fragment set:html={svg} />

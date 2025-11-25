@@ -83,7 +83,7 @@ function showCategoryPage(category: string, page: number): void {
 
   // Show target page
   const target = document.querySelector(
-    `[data-cat-page][data-cat="${category}"][data-page="${page}"]`
+    `[data-cat-page][data-cat="${category}"][data-page="${page}"]`,
   );
   if (target instanceof HTMLElement) {
     target.style.display = '';
@@ -123,8 +123,8 @@ export function initCategoryFilter(): void {
           .map(function (el) {
             return el.getAttribute('data-cat');
           })
-          .filter(Boolean) as string[]
-      )
+          .filter(Boolean) as string[],
+      ),
     );
     if (allCats.length > 0) {
       const randomCat = allCats[Math.floor(Math.random() * allCats.length)];

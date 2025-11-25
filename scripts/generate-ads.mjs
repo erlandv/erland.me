@@ -47,7 +47,7 @@ if (!pubId) {
     // ignore
   }
   console.log(
-    'Skipping ads.txt generation (PUBLIC_ADSENSE_CLIENT not configured)'
+    'Skipping ads.txt generation (PUBLIC_ADSENSE_CLIENT not configured)',
   );
   process.exit(0);
 }
@@ -59,5 +59,5 @@ const adsContent = `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
 writeFileSync(adsPath, adsContent);
 
 console.log(
-  `Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`
+  `Generated ads.txt for production (publisher: ${pubId}) at ${adsPath}`,
 );

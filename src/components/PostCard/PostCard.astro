@@ -1,13 +1,13 @@
 ---
 /**
  * PostCard Component
- * 
+ *
  * Displays a blog post preview card with thumbnail, title, excerpt, category, and date.
  * Used in blog listing pages to show post previews in a grid layout.
- * 
+ *
  * @component
  * @example
- * <PostCard 
+ * <PostCard
  *   href="/blog/my-post/"
  *   title="Post Title"
  *   hero={heroImage}
@@ -16,7 +16,7 @@
  *   dateLabel="Jan 1, 2024"
  *   excerpt="Brief post description..."
  * />
- * 
+ *
  * @param {Object} props
  * @param {string} props.href - Post URL (absolute or relative path)
  * @param {string} props.title - Post title displayed in card header
@@ -43,65 +43,79 @@ interface Props {
   excerpt?: string | null;
 }
 
-const { href, title, hero, alt, category, dateLabel, excerpt } = Astro.props as Props;
+const { href, title, hero, alt, category, dateLabel, excerpt } =
+  Astro.props as Props;
 // Generate category URL if category exists (slugified for URL compatibility)
-const categoryHref = category ? `/blog/category/${slugifyCategory(category)}/` : null;
+const categoryHref = category
+  ? `/blog/category/${slugifyCategory(category)}/`
+  : null;
 // Get responsive image configuration for card thumbnails
 const { widths, sizes } = getCardImageConfig();
 ---
 
 <!-- Blog Post Preview Card - Grid item for blog listing pages -->
 <article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>
-  <div class={styles["post-card__inner"]}>
+  <div class={styles['post-card__inner']}>
     <!-- Thumbnail Section - Conditional: Optimized hero image if available, placeholder otherwise -->
-    <div class={styles["post-card__thumb"]}>
-      {hero ? (
-        <Image
-          src={hero}
-          alt={alt}
-          loading="lazy"
-          widths={widths}
-          sizes={sizes}
-          class={styles["post-card__img"]}
-        />
-      ) : (
-        <div class={styles["post-card__thumb--placeholder"]} aria-hidden="true"></div>
-      )}
+    <div class={styles['post-card__thumb']}>
+      {
+        hero ? (
+          <Image
+            src={hero}
+            alt={alt}
+            loading='lazy'
+            widths={widths}
+            sizes={sizes}
+            class={styles['post-card__img']}
+          />
+        ) : (
+          <div
+            class={styles['post-card__thumb--placeholder']}
+            aria-hidden='true'
+          />
+        )
+      }
     </div>
-    
+
     <!-- Card Content Section - Title, metadata, excerpt, CTA -->
-    <div class={styles["post-card__body"]}>
+    <div class={styles['post-card__body']}>
       <!-- Card Header - Title and metadata (category, date) -->
-      <header class={styles["post-card__header"]}>
+      <header class={styles['post-card__header']}>
         <!-- Post Title - Clickable link to full post -->
-        <h2 class={styles["post-card__title"]}>
-          <a href={href} class={styles["post-card__title-link"]}>{title}</a>
+        <h2 class={styles['post-card__title']}>
+          <a href={href} class={styles['post-card__title-link']}>{title}</a>
         </h2>
-        
+
         <!-- Post Metadata - Conditional: Shows category and/or date if available -->
-        <div class={styles["post-card__meta"]}>
-          {category && (
-            <div class={styles["post-card__meta-item"]}>
-              <Icon name="blogTags" class={styles["post-card__meta-icon"]} />
-              <a href={categoryHref!} class={styles["post-card__category"]}>{category}</a>
-            </div>
-          )}
-          {dateLabel && (
-            <div class={styles["post-card__meta-item"]}>
-              <Icon name="blogDate" class={styles["post-card__meta-icon"]} />
-              <time class={styles["post-card__date"]}>{dateLabel}</time>
-            </div>
-          )}
+        <div class={styles['post-card__meta']}>
+          {
+            category && (
+              <div class={styles['post-card__meta-item']}>
+                <Icon name='blogTags' class={styles['post-card__meta-icon']} />
+                <a href={categoryHref!} class={styles['post-card__category']}>
+                  {category}
+                </a>
+              </div>
+            )
+          }
+          {
+            dateLabel && (
+              <div class={styles['post-card__meta-item']}>
+                <Icon name='blogDate' class={styles['post-card__meta-icon']} />
+                <time class={styles['post-card__date']}>{dateLabel}</time>
+              </div>
+            )
+          }
         </div>
       </header>
-      
+
       {/* Conditional: Post excerpt paragraph (only if excerpt exists) */}
-      {excerpt && <p class={styles["post-card__excerpt"]}>{excerpt}</p>}
-      
+      {excerpt && <p class={styles['post-card__excerpt']}>{excerpt}</p>}
+
       <!-- Call-to-Action Button - Link to full post -->
-      <a href={href} class:list={[styles["post-card__readmore"], 'btn']}>
+      <a href={href} class:list={[styles['post-card__readmore'], 'btn']}>
         <span>Read more</span>
-        <Icon name="blogReadmore" class={styles["post-card__readmore-icon"]} />
+        <Icon name='blogReadmore' class={styles['post-card__readmore-icon']} />
       </a>
     </div>
   </div>

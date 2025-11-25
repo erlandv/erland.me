@@ -1,14 +1,14 @@
 ---
 /**
  * BackNav Component
- * 
+ *
  * Renders a "Back" navigation button with an arrow icon.
  * Used at the top of detail pages to navigate back to listing pages.
- * 
+ *
  * @component
  * @example
  * <BackNav href="/blog/" />
- * 
+ *
  * @param {Object} props
  * @param {string} props.href - URL to navigate back to (absolute or relative path)
  */
@@ -22,10 +22,9 @@ interface Props {
 const { href } = Astro.props as Props;
 ---
 
-<div class={styles["back-nav-container"]}>
-  <a href={href} class:list={[styles["back-nav-button"]]}>
-    <Icon name="btnBack" class={styles["back-nav-img"]} />
+<div class={styles['back-nav-container']}>
+  <a href={href} class:list={[styles['back-nav-button']]}>
+    <Icon name='btnBack' class={styles['back-nav-img']} />
     <div>Back</div>
   </a>
-  
 </div>

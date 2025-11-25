@@ -111,12 +111,12 @@ export const projectCategories: ProjectCategory[] = [
  */
 export function getCategoryConfig(categoryId: string): ProjectCategory {
   const category = projectCategories.find(c =>
-    c.href.includes(`/${categoryId}/`)
+    c.href.includes(`/${categoryId}/`),
   );
 
   if (!category) {
     throw new Error(
-      `Category "${categoryId}" not found. Available categories: ${projectCategories.map(c => c.href).join(', ')}`
+      `Category "${categoryId}" not found. Available categories: ${projectCategories.map(c => c.href).join(', ')}`,
     );
   }
 
@@ -133,7 +133,7 @@ export function getCategoryConfig(categoryId: string): ProjectCategory {
  * webProjects.forEach(p => console.log(p.title));
  */
 export async function getProjectsByCategory(
-  categoryId: string
+  categoryId: string,
 ): Promise<ProjectData[]> {
   const allProjects: ProjectEntry[] = await getCollection('portfolio');
 
@@ -141,7 +141,7 @@ export async function getProjectsByCategory(
     .filter((p: ProjectEntry) => p.data.category === categoryId)
     .sort(
       (a: ProjectEntry, b: ProjectEntry) =>
-        (a.data.order ?? 0) - (b.data.order ?? 0)
+        (a.data.order ?? 0) - (b.data.order ?? 0),
     )
     .map((p: ProjectEntry) => p.data);
 }

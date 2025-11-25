@@ -1,26 +1,26 @@
 ---
-import Header from "@components/Header.astro";
+import Header from '@components/Header.astro';
 /* Consolidated global styles at layout level: load variables first for clarity and cascade */
-import "@/styles/variables.css";
-import "@/styles/layout/base.css";
-import "@/styles/prose/typography.css";
-import "@/styles/prose/media.css";
-import "@/styles/prose/links.css";
-import "@/styles/prose/code.css";
-import "@/styles/utilities/accessibility.css";
-import "@/styles/layout/site-layout.css";
-import "@/styles/features/gallery.css";
-import "@/styles/features/lightbox.css";
-import "@/styles/features/stories.css";
-import "@/styles/components/button.module.css";
-import Sidebar from "@components/Sidebar/Sidebar.astro";
-import SidebarController from "@components/SidebarController.astro";
-import Footer from "@components/Footer/Footer.astro";
-import SidebarToggleButton from "@components/SidebarToggleButton/SidebarToggleButton.astro";
-import SidebarSocialFlyout from "@components/SidebarSocialFlyout/SidebarSocialFlyout.astro";
-import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
-import { GTM_ID } from "@lib/core/env";
-import { isProductionSite } from "@lib/content/seo";
+import '@/styles/variables.css';
+import '@/styles/layout/base.css';
+import '@/styles/prose/typography.css';
+import '@/styles/prose/media.css';
+import '@/styles/prose/links.css';
+import '@/styles/prose/code.css';
+import '@/styles/utilities/accessibility.css';
+import '@/styles/layout/site-layout.css';
+import '@/styles/features/gallery.css';
+import '@/styles/features/lightbox.css';
+import '@/styles/features/stories.css';
+import '@/styles/components/button.module.css';
+import Sidebar from '@components/Sidebar/Sidebar.astro';
+import SidebarController from '@components/SidebarController.astro';
+import Footer from '@components/Footer/Footer.astro';
+import SidebarToggleButton from '@components/SidebarToggleButton/SidebarToggleButton.astro';
+import SidebarSocialFlyout from '@components/SidebarSocialFlyout/SidebarSocialFlyout.astro';
+import ThemeToggle from '@components/ThemeToggle/ThemeToggle.astro';
+import { GTM_ID } from '@lib/core/env';
+import { isProductionSite } from '@lib/content/seo';
 
 interface Props {
   title: string;
@@ -60,12 +60,12 @@ const {
   tags,
   author,
   showSidebar = true,
-  preloadSearch = false
+  preloadSearch = false,
 } = Astro.props as Props;
 ---
 
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang='id'>
   <!-- HTML Head - Meta tags, SEO, analytics, fonts, and critical scripts -->
   <Header
     title={title}
@@ -83,31 +83,44 @@ const {
     preloadSearch={preloadSearch}
   />
   <body>
-    {/* Google Tag Manager NoScript Fallback - For users with JavaScript disabled (production only) */}
-    {import.meta.env.PROD && isProductionSite() && GTM_ID && (
-      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    )}
-    
+    {
+      /* Google Tag Manager NoScript Fallback - For users with JavaScript disabled (production only) */
+    }
+    {
+      import.meta.env.PROD && isProductionSite() && GTM_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height='0'
+            width='0'
+            style='display:none;visibility:hidden'
+          />
+        </noscript>
+      )
+    }
+
     <!-- Theme Toggle - Floating button (visible on body, separate from sidebar) -->
-    <div class="theme-toggle-container theme-toggle-container--body">
+    <div class='theme-toggle-container theme-toggle-container--body'>
       <ThemeToggle />
     </div>
-    
+
     <!-- Main Content Container - Houses sidebar and page content -->
-    <div class="content">
-      {/* Conditional: Sidebar Components (hidden on pages with showSidebar=false) */}
+    <div class='content'>
+      {
+        /* Conditional: Sidebar Components (hidden on pages with showSidebar=false) */
+      }
       {showSidebar && <Sidebar selectedItem={selectedItem} />}
       {showSidebar && <SidebarController />}
       {showSidebar && <SidebarToggleButton />}
       {showSidebar && <SidebarSocialFlyout />}
-      
+
       <!-- Main Content Area - Page content and footer -->
-      <main class="site-main">
+      <main class='site-main'>
         <!-- Content Container - Page-specific content injected via slot -->
-        <div class="container">
+        <div class='container'>
           <slot />
         </div>
-        
+
         <!-- Site Footer - Copyright and branding -->
         <Footer />
       </main>
@@ -133,5 +146,4 @@ const {
         .catch(e => console.error('sw-register init error:', e));
     </script>
   </body>
-  
 </html>

@@ -106,20 +106,20 @@ function createOverlay(): LightboxElements {
 
   // Query and cache DOM references with explicit error handling
   const backdrop = overlay.querySelector<HTMLDivElement>(
-    '.image-lightbox__backdrop'
+    '.image-lightbox__backdrop',
   );
   const img = overlay.querySelector<HTMLImageElement>('.image-lightbox__image');
   const caption = overlay.querySelector<HTMLElement>(
-    '.image-lightbox__caption'
+    '.image-lightbox__caption',
   );
   const closeBtn = overlay.querySelector<HTMLButtonElement>(
-    '.image-lightbox__close'
+    '.image-lightbox__close',
   );
 
   // Ensure all required elements exist (should never fail with our template)
   if (!backdrop || !img || !caption || !closeBtn) {
     throw new Error(
-      'Failed to create lightbox overlay: missing required elements'
+      'Failed to create lightbox overlay: missing required elements',
     );
   }
 
@@ -194,7 +194,7 @@ function openLightbox(sourceImg: HTMLImageElement) {
         enableScroll();
         document.removeEventListener('keydown', onKeyDown);
       },
-      { once: true }
+      { once: true },
     );
   }
 
@@ -233,7 +233,7 @@ function selectTargetImages(containers: string[]): HTMLImageElement[] {
   const imgs: HTMLImageElement[] = [];
   for (const sel of containers) {
     const found = Array.from(
-      document.querySelectorAll(`${sel} img`)
+      document.querySelectorAll(`${sel} img`),
     ) as HTMLImageElement[];
     for (const img of found) {
       // Skip non-content images like hero
@@ -345,7 +345,7 @@ export function autoInit() {
         run();
         setupRouterReinit();
       },
-      { once: true }
+      { once: true },
     );
   } else {
     // Delay slightly to allow Astro content to hydrate

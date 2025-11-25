@@ -1,11 +1,11 @@
 ---
 /**
  * ShareButtons Component
- * 
+ *
  * Social sharing buttons with native Web Share API support (falls back to platform-specific share URLs).
  * Displays share buttons for WhatsApp, Telegram, Twitter/X, Facebook, and LinkedIn.
  * On supported devices, shows native share and copy link buttons.
- * 
+ *
  * Features:
  * - Native Web Share API integration
  * - UTM parameters for tracking share sources
@@ -13,16 +13,16 @@
  * - Graceful fallback to platform share URLs
  * - Client-side progressive enhancement
  * - Centralized platform configuration
- * 
+ *
  * @component
  * @example
- * <ShareButtons 
+ * <ShareButtons
  *   title="My Blog Post"
  *   url="https://example.com/blog/post/"
  *   description="Post description for social sharing"
  *   heading="Share this article:"
  * />
- * 
+ *
  * @param {Object} props
  * @param {string} props.title - Title to share (used in share text and meta)
  * @param {string} props.url - Absolute URL to share (must be fully qualified)
@@ -57,12 +57,18 @@ const trackedUrls = sharePlatforms.reduce(
     });
     return acc;
   },
-  {} as Record<string, string>
+  {} as Record<string, string>,
 );
 
 // Special URLs for copy and webshare
-const shareUrlCopy = addUTMParams(url, { source: 'copy', ...UTM_PRESETS.shareButton });
-const shareUrlWebShare = addUTMParams(url, { source: 'webshare', ...UTM_PRESETS.shareButton });
+const shareUrlCopy = addUTMParams(url, {
+  source: 'copy',
+  ...UTM_PRESETS.shareButton,
+});
+const shareUrlWebShare = addUTMParams(url, {
+  source: 'webshare',
+  ...UTM_PRESETS.shareButton,
+});
 
 // Build platform share URLs with UTM tracking
 const platformShareUrls = sharePlatforms.map(platform => ({
@@ -94,9 +100,13 @@ const platformShareUrls = sharePlatforms.map(platform => ({
         type='button'
         aria-label='Share via native share'
       >
-        <Icon name='blogShare' class={styles['share__icon']} ariaLabel='Share' />
+        <Icon
+          name='blogShare'
+          class={styles['share__icon']}
+          ariaLabel='Share'
+        />
       </button>
-      
+
       <!-- Copy Link Button - Copies URL to clipboard -->
       <button
         class:list={[styles['share__btn'], 'share__btn--copy']}
@@ -104,27 +114,33 @@ const platformShareUrls = sharePlatforms.map(platform => ({
         aria-label='Copy link'
         data-copy={shareUrlCopy}
       >
-        <Icon name='btnCopy' class={styles['share__icon']} ariaLabel='Copy link' />
+        <Icon
+          name='btnCopy'
+          class={styles['share__icon']}
+          ariaLabel='Copy link'
+        />
       </button>
     </div>
 
     <!-- Fallback Share Buttons - Platform-specific share links (always visible) -->
     <div class={styles['share__fallback']}>
-      {platformShareUrls.map(({ platform, href }) => (
-        <a
-          class={styles['share__btn']}
-          href={href}
-          target='_blank'
-          rel='nofollow noopener noreferrer'
-          aria-label={platform.ariaLabel}
-        >
-          <Icon
-            name={platform.icon}
-            class={styles['share__icon']}
-            ariaLabel={platform.name}
-          />
-        </a>
-      ))}
+      {
+        platformShareUrls.map(({ platform, href }) => (
+          <a
+            class={styles['share__btn']}
+            href={href}
+            target='_blank'
+            rel='nofollow noopener noreferrer'
+            aria-label={platform.ariaLabel}
+          >
+            <Icon
+              name={platform.icon}
+              class={styles['share__icon']}
+              ariaLabel={platform.name}
+            />
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

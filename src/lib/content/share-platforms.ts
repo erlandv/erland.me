@@ -133,7 +133,7 @@ export function getPlatformById(platformId: string): SharePlatform {
 
   if (!platform) {
     throw new Error(
-      `Share platform "${platformId}" not found. Available platforms: ${sharePlatforms.map(p => p.id).join(', ')}`
+      `Share platform "${platformId}" not found. Available platforms: ${sharePlatforms.map(p => p.id).join(', ')}`,
     );
   }
 

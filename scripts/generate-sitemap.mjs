@@ -346,7 +346,7 @@ async function generateSitemaps() {
           priority: config.priority,
           type: config.type,
         };
-      })
+      }),
     );
 
     // Filter out 404, 403, and offline pages from sitemap
@@ -373,7 +373,7 @@ async function generateSitemaps() {
     await fs.writeFile(
       path.join(DIST_DIR, 'post-sitemap.xml'),
       postSitemapContent,
-      'utf8'
+      'utf8',
     );
     console.log('Generated post-sitemap.xml');
 
@@ -382,7 +382,7 @@ async function generateSitemaps() {
     await fs.writeFile(
       path.join(DIST_DIR, 'page-sitemap.xml'),
       pageSitemapContent,
-      'utf8'
+      'utf8',
     );
     console.log('Generated page-sitemap.xml');
 
@@ -400,7 +400,7 @@ async function generateSitemaps() {
     await fs.writeFile(
       path.join(DIST_DIR, 'sitemap_index.xml'),
       sitemapIndex,
-      'utf8'
+      'utf8',
     );
     console.log('Generated sitemap_index.xml');
 

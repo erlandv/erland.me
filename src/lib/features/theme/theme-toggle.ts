@@ -76,10 +76,10 @@ const cacheIcons = (): void => {
  */
 const updateTriggerIcon = (
   preference: ThemePreference,
-  trigger: HTMLElement
+  trigger: HTMLElement,
 ): void => {
   const triggerIconContainer = trigger.querySelector(
-    '.theme-toggle__trigger-icon'
+    '.theme-toggle__trigger-icon',
   );
   if (!triggerIconContainer) {
     return;
@@ -89,7 +89,7 @@ const updateTriggerIcon = (
   if (cachedIcon) {
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
+      '(prefers-reduced-motion: reduce)',
     ).matches;
 
     if (prefersReducedMotion) {
@@ -125,7 +125,7 @@ const updateTriggerIcon = (
  */
 const updateOptionsState = (
   preference: ThemePreference,
-  options: NodeListOf<HTMLElement>
+  options: NodeListOf<HTMLElement>,
 ): void => {
   options.forEach(option => {
     const optionTheme = option.getAttribute('data-theme-option');
@@ -182,7 +182,7 @@ const closeFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
 
   // Check if user prefers reduced motion
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
+    '(prefers-reduced-motion: reduce)',
   ).matches;
 
   if (prefersReducedMotion) {
@@ -232,7 +232,7 @@ const toggleFlyout = (trigger: HTMLElement, flyout: HTMLElement): void => {
  */
 const announceThemeChange = (
   theme: ThemePreference,
-  resolved: 'light' | 'dark'
+  resolved: 'light' | 'dark',
 ): void => {
   // Generate consistent message for both screen reader and toast
   let message: string;
@@ -350,11 +350,11 @@ export const init = async (): Promise<void> => {
   // Initialize each theme toggle instance
   allToggles.forEach(wrapperElement => {
     const trigger = wrapperElement.querySelector<HTMLElement>(
-      '[data-theme-trigger]'
+      '[data-theme-trigger]',
     );
     const flyout = wrapperElement.querySelector<HTMLElement>('#theme-flyout');
     const options = wrapperElement.querySelectorAll<HTMLElement>(
-      '[data-theme-option]'
+      '[data-theme-option]',
     );
 
     if (!trigger || !flyout || !options.length) {
@@ -385,7 +385,7 @@ export const init = async (): Promise<void> => {
         event.stopPropagation();
         toggleFlyout(trigger, flyout);
       },
-      { signal }
+      { signal },
     );
 
     // Option click handlers
@@ -395,7 +395,7 @@ export const init = async (): Promise<void> => {
         event => {
           event.preventDefault();
           const theme = option.getAttribute(
-            'data-theme-option'
+            'data-theme-option',
           ) as ThemePreference | null;
 
           if (
@@ -411,7 +411,7 @@ export const init = async (): Promise<void> => {
             closeFlyout(trigger, flyout);
           }
         },
-        { signal }
+        { signal },
       );
     });
 
@@ -469,7 +469,7 @@ export const init = async (): Promise<void> => {
             break;
         }
       },
-      { signal }
+      { signal },
     );
   });
 };

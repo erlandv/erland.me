@@ -18,7 +18,7 @@ interface WindowWithGTM extends Window {
   gtag?: (
     type: string,
     eventName: string,
-    params: Record<string, unknown>
+    params: Record<string, unknown>,
   ) => void;
 }
 
@@ -216,7 +216,7 @@ export async function reportWebVitals(): Promise<void> {
  */
 export function sendPerformanceEvent(
   eventName: string,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): void {
   if (!isGTMAvailable()) return;
 

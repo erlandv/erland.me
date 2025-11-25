@@ -40,39 +40,60 @@ const { errorCode, errorTitle, errorMessage, title, description } = Astro.props;
 
 <!doctype html>
 <html lang='id'>
+  <!-- HTML Head - Meta tags, SEO, and critical resources -->
   <Header title={title} description={description} />
+
   <body>
+    <!-- Main Content Wrapper -->
     <div class='content'>
-      <nav class={`main ${err['error-page-layout']}`}>
+      <!-- Error Page Main Content Area -->
+      <main class={`site-main ${err['error-page-layout']}`}>
+        <!-- Content Container - Max-width and centering -->
         <div class={`container ${err['error-container']}`}>
-          <main class={fold['fold-content-container']}>
+          <!-- Fold Content Container - Layout wrapper -->
+          <div class={fold['fold-content-container']}>
+            <!-- Fold Content - Inner content wrapper -->
             <div class={fold['fold-content']}>
+              <!-- Error Content - Error message and actions -->
               <div class={err['error-content']}>
+                <!-- Error Icon - Custom icon slot -->
                 <div class={err['error-icon']}>
                   <slot name='icon' />
                 </div>
+
+                <!-- Error Code (e.g., 404, 403) -->
                 <h1 class={err['error-title']}>{errorCode}</h1>
+
+                <!-- Error Title (e.g., Page Not Found) -->
                 <h2 class={err['error-subtitle']}>{errorTitle}</h2>
+
+                <!-- Error Description Message -->
                 <p class={err['error-description']}>
                   {errorMessage}
                 </p>
+
+                <!-- Error Actions - Buttons and links -->
                 <div class={err['error-actions']}>
                   <slot name='actions'>
                     <!-- Default Go Home button -->
-                    <a
-                      href='/'
-                      class:list={[btn.button, btn['contact-button']]}
-                    >
+                    <a href='/' class={btn.button}>
                       <Icon name='navHome' class={btn['button-icon']} />
                       <span>Go Home</span>
                     </a>
                   </slot>
                 </div>
+                <!-- /Error Actions -->
               </div>
+              <!-- /Error Content -->
             </div>
-          </main>
+            <!-- /Fold Content -->
+          </div>
+          <!-- /Fold Content Container -->
         </div>
-      </nav>
+        <!-- /Content Container -->
+      </main>
+      <!-- /Error Page Main Content Area -->
     </div>
+    <!-- /Main Content Wrapper -->
   </body>
 </html>

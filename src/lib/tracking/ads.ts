@@ -54,7 +54,7 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
   if (!container || !client || !slot) return;
   try {
     const existing = container.querySelector(
-      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slot}"]`
+      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slot}"]`,
     );
     if (existing) return;
 
@@ -69,8 +69,8 @@ export function insertAdUnit(container: Element, client: string, slot: string) {
     // Find last substantial content element to insert before it
     const candidates = Array.from(
       container.querySelectorAll(
-        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
-      )
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid',
+      ),
     ).filter(el => !el.closest('.toc'));
 
     const lastElement = candidates[candidates.length - 1];
@@ -103,7 +103,7 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
   if (!container) return;
   // Prevent duplicate placeholder for end position
   const existing = container.querySelector(
-    `.ad-placeholder[data-ad-pos="end"]`
+    `.ad-placeholder[data-ad-pos="end"]`,
   );
   if (existing) return;
 
@@ -115,8 +115,8 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
   // Find last substantial content element to insert before it
   const candidates = Array.from(
     container.querySelectorAll(
-      'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
-    )
+      'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid',
+    ),
   ).filter(el => !el.closest('.toc'));
 
   const lastElement = candidates[candidates.length - 1];
@@ -141,14 +141,14 @@ export function insertPlaceholderUnit(container: Element, label?: string) {
 export function insertAdAfterFirst(
   container: Element,
   client: string,
-  slot: string
+  slot: string,
 ) {
   if (!container || !client || !slot) return;
   try {
     const candidates = Array.from(
       container.querySelectorAll(
-        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
-      )
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid',
+      ),
     ).filter(el => {
       // Skip TOC elements - look for elements that are not part of TOC
       return !el.closest('.toc');
@@ -161,7 +161,7 @@ export function insertAdAfterFirst(
 
     // Prevent duplicate for same slot
     const dup = container.querySelector(
-      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slot}"]`
+      `ins.adsbygoogle[data-ad-client="${client}"][data-ad-slot="${slot}"]`,
     );
     if (dup) return;
 
@@ -196,20 +196,20 @@ export function insertAdAfterFirst(
  */
 export function insertPlaceholderAfterFirst(
   container: Element,
-  label?: string
+  label?: string,
 ) {
   if (!container) return;
   try {
     // Prevent duplicate placeholder for start position
     const existing = container.querySelector(
-      `.ad-placeholder[data-ad-pos="start"]`
+      `.ad-placeholder[data-ad-pos="start"]`,
     );
     if (existing) return;
 
     const candidates = Array.from(
       container.querySelectorAll(
-        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid'
-      )
+        'p, h2, h3, ul, ol, pre, blockquote, figure, div.content-image-grid',
+      ),
     ).filter(el => {
       // Skip TOC elements - look for elements that are not part of TOC
       return !el.closest('.toc');
@@ -249,7 +249,7 @@ export function autoInitContentAds(
   containerId: string,
   client: string,
   slotStart?: string,
-  slotEnd?: string
+  slotEnd?: string,
 ) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -279,7 +279,7 @@ export function autoInitContentPlaceholders(containerId: string) {
 export function autoInitBlogAds(
   client: string,
   slotStart?: string,
-  slotEnd?: string
+  slotEnd?: string,
 ) {
   autoInitContentAds('blog-content', client, slotStart, slotEnd);
 }
@@ -303,7 +303,7 @@ export function autoInitBlogPlaceholders() {
 export function autoInitDownloadAds(
   client: string,
   slotStart?: string,
-  slotEnd?: string
+  slotEnd?: string,
 ) {
   const container = document.getElementById('download-content');
   if (!container) return;

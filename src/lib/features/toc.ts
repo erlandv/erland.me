@@ -264,7 +264,7 @@ function buildTocElement(headings: HeadingInfo[]): HTMLElement | null {
     toggle.setAttribute('aria-expanded', String(next));
     toggle.setAttribute(
       'aria-label',
-      next ? 'Hide table of contents' : 'Show table of contents'
+      next ? 'Hide table of contents' : 'Show table of contents',
     );
     toggle.innerHTML = next
       ? normalizeSvg(arrowUpRaw, 'toc__toggle-icon')
@@ -359,7 +359,7 @@ export function initToc() {
   if (prose.dataset.tocInitialized === 'true') return;
 
   const headings = collectHeadings(prose).filter(
-    h => h.level === 2 || h.level === 3
+    h => h.level === 2 || h.level === 3,
   );
   const tocEl = buildTocElement(headings);
   if (!tocEl) return;
@@ -432,19 +432,19 @@ function normalizeSvg(svg: string, extraClass = ''): string {
       .replace(/<style[\s\S]*?<\/style>/g, '')
       .replace(
         /fill\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
-        'fill:currentColor'
+        'fill:currentColor',
       )
       .replace(
         /stroke\s*:\s*(?!none\b)(?!currentColor\b)(?!url\()[^;"']+/gi,
-        'stroke:currentColor'
+        'stroke:currentColor',
       )
       .replace(
         /fill\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
-        'fill="currentColor"'
+        'fill="currentColor"',
       )
       .replace(
         /stroke\s*=\s*"(?!none\b)(?!currentColor\b)(?!url\()[^"]*"/gi,
-        'stroke="currentColor"'
+        'stroke="currentColor"',
       );
 
     s = s.replace(/<svg(\s[^>]*)?>/i, match => {
@@ -455,7 +455,7 @@ function normalizeSvg(svg: string, extraClass = ''): string {
       if (/class\s*=\s*"[^"]*"/i.test(tag)) {
         tag = tag.replace(
           /class\s*=\s*"([^"]*)"/i,
-          (_m, c) => `class="${c}${cls}"`
+          (_m, c) => `class="${c}${cls}"`,
         );
       } else {
         tag = tag.replace(/<svg/i, `<svg class="${extraClass}"`);

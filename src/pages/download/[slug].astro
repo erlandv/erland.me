@@ -61,13 +61,13 @@ const jsonLd = creativeWorkJsonLd({
   selectedItem='download'
   image={optimizedHero}
   author={SITE_CONFIG.author.name}
-  type="article"
+  type='article'
   publishedTime={data.publishDate}
   modifiedTime={data.updatedDate ?? data.publishDate}
 >
   <!-- Back Navigation - Return to download listing page -->
   <BackNav href='/download/' />
-  
+
   <!-- Download Article - Template/file details with download information -->
   <article class:list={['content-container', 'article-detail']}>
     <!-- Article Header - Hero image (or placeholder emoji), title, and optional rating -->
@@ -75,25 +75,32 @@ const jsonLd = creativeWorkJsonLd({
       {/* Conditional: Hero image or fallback placeholder with package emoji */}
       {
         hero ? (
-          <HeroImage image={hero} alt={heroAlt} loading='eager' fetchpriority='high' />
+          <HeroImage
+            image={hero}
+            alt={heroAlt}
+            loading='eager'
+            fetchpriority='high'
+          />
         ) : (
           <div class='hero-image hero-placeholder' aria-hidden='true'>
             📦
           </div>
         )
       }
-      
+
       <!-- Article Title -->
       <h1>{data.heading ?? data.title}</h1>
-      
+
       {/* Conditional: Star rating display (if rating data provided) */}
-      {data.rating && (
-        <StarRating
-          ratingValue={data.rating.ratingValue}
-          reviewCount={data.rating.reviewCount}
-          bestRating={data.rating.bestRating}
-        />
-      )}
+      {
+        data.rating && (
+          <StarRating
+            ratingValue={data.rating.ratingValue}
+            reviewCount={data.rating.reviewCount}
+            bestRating={data.rating.bestRating}
+          />
+        )
+      }
     </header>
 
     <!-- Article Content - Markdown rendered with download files table and custom images -->
@@ -109,7 +116,7 @@ const jsonLd = creativeWorkJsonLd({
       heading='Share this template:'
     />
   </article>
-  
+
   <!-- Scroll to Top Button - Floating button for long content -->
   <ScrollTopButton />
 </SiteLayout>
@@ -135,7 +142,7 @@ const jsonLd = creativeWorkJsonLd({
       const client = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
       const slotStart = import.meta.env.PUBLIC_ADSENSE_SLOT_START || '';
       const slotEnd = import.meta.env.PUBLIC_ADSENSE_SLOT_END || '';
-      
+
       if (
         shouldRenderAds({
           client,
