@@ -4,18 +4,20 @@
  * Used in blog posts (specs tables) and download pages (file lists)
  * 
  * Key features:
- * - Desktop: Standard table layout with auto column sizing
- * - Mobile (≤767px): Vertical stack with data-label attributes
+ * - Desktop: Clean, minimal layout with uppercase headers
+ * - Mobile (≤767px): Stacked layout with inline labels (Label ... Value)
  * - First column uses width: 1% trick for auto-sizing to content
  */
 
 /* Table container */
-.prose > table {
+.prose > table,
+.prose .download-files table {
   width: 100%;
   margin: clamp(0.75rem, 2.5vw, 1.25rem) 0;
-  border-radius: 12px;
+  border-collapse: collapse;
   border: 1px solid var(--border-color);
   background-color: var(--bg-secondary);
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -26,103 +28,107 @@
   background-color: var(--bg-secondary);
 }
 
-.prose table th,
-.prose table td {
-  border-top: 1px solid var(--divider-weak);
-  border-right: 1px solid var(--divider-weak);
-  padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 18px);
-  text-align: left;
-  color: var(--text-secondary);
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  vertical-align: top;
-  line-height: 1.6;
-}
-
+/* Header Styling */
 .prose table th {
-  color: var(--text-primary);
   background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   font-weight: 600;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--divider-weak);
+  border-right: 1px solid var(--divider-weak);
   white-space: nowrap;
 }
 
-.prose table tr:first-child th,
-.prose table tr:first-child td {
-  border-top: none;
+/* Cell Styling */
+.prose table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--divider-weak);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.5;
+  border-right: 1px solid var(--divider-weak);
 }
 
-.prose table tr td:last-child,
-.prose table tr th:last-child {
-  border-right: none;
+/* Zebra Striping - Desktop Only */
+@media screen and (min-width: 768px) {
+  .prose table tr:nth-child(even) td {
+    background-color: var(--bg-primary);
+  }
+
+  .prose table th:last-child,
+  .prose table td:last-child {
+    border-right: none;
+  }
 }
 
-.prose table tr:nth-child(even) td {
-  background-color: var(--bg-primary);
+.prose table tr:last-child td {
+  border-bottom: none;
 }
 
-/* First column - auto-sized to content width
- * The width: 1% is a CSS trick that forces the column to shrink to the minimum
- * width needed to fit the content (respecting white-space: nowrap).
- * This allows other columns to share the remaining table width proportionally.
- * Works for both 2-column tables (blog specs) and multi-column tables (downloads).
- */
+/* First column - auto-sized to content width */
 .prose table th:first-child,
 .prose table td:first-child {
-  font-weight: 600;
   color: var(--text-primary);
-  padding-left: clamp(14px, 3vw, 20px);
-  white-space: nowrap;
+  font-weight: 600;
   width: 1%;
+  white-space: nowrap;
 }
 
-/* Last column right padding */
-.prose table th:last-child,
-.prose table td:last-child {
-  padding-right: clamp(14px, 3vw, 20px);
-}
-
-/* Disable default link underline animation for table links */
+/* Link Styling */
 .prose table a {
   color: var(--color-primary);
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.2s ease;
-  display: inline;
-  word-break: break-word;
+}
+
+.prose table a:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
 }
 
 .prose table a::after {
   display: none;
 }
 
-.prose table a:hover {
-  color: var(--color-secondary);
-}
-
-/* Mobile: Stack table vertically */
+/* Mobile: Stacked Layout (Reference Style) */
 @media screen and (max-width: 767px) {
-  .prose > table {
-    border-radius: 8px;
+  .prose > table,
+  .prose .download-files table {
+    border: none;
+    background: transparent;
   }
 
   .prose table,
-  .prose table thead,
   .prose table tbody,
-  .prose table tr {
+  .prose table tr,
+  .prose table td {
     display: block;
     width: 100%;
   }
 
+  /* Hide header visually but keep accessible */
   .prose table thead {
-    display: none;
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
 
   .prose table tr {
-    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
     border: 1px solid var(--divider-weak);
     border-radius: 8px;
+    margin-bottom: 1rem;
     overflow: hidden;
-    background-color: var(--bg-secondary);
   }
 
   .prose table tr:last-child {
@@ -130,14 +136,13 @@
   }
 
   .prose table td {
+    border-bottom: 1px solid var(--divider-weak);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 14px;
-    border: none;
-    border-bottom: 1px solid var(--divider-weak);
-    white-space: normal;
     text-align: right;
+    font-size: 0.9em;
+    padding: 12px 14px;
     min-height: 44px;
   }
 
@@ -145,30 +150,30 @@
     border-bottom: none;
   }
 
-  .prose table td:before {
+  /* Label styling */
+  .prose table td::before {
     content: attr(data-label);
-    font-weight: 600;
+    float: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85em;
     color: var(--text-primary);
+    margin-right: 1rem;
     text-align: left;
-    padding-right: 1rem;
-    flex-shrink: 0;
   }
 
-  .prose table td:first-child,
-  .prose table td:last-child {
-    padding-left: 14px;
-    padding-right: 14px;
+  /* Reset first column specific styles for mobile */
+  .prose table td:first-child {
+    width: 100%;
+    white-space: normal;
+    background-color: transparent;
+    border-bottom: 1px solid var(--divider-weak);
+    font-weight: normal;
+    color: var(--text-secondary);
   }
 
-  .prose table tr:nth-child(even) td {
-    background-color: var(--bg-secondary);
-  }
-}
-
-/* Tablet adjustments */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .prose table th,
-  .prose table td {
-    padding: 12px 14px;
+  /* Ensure links wrap properly on mobile */
+  .prose table a {
+    word-break: break-word;
   }
 }

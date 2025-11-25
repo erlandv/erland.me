@@ -157,14 +157,14 @@ export async function getStaticPaths() {
 export async function getStaticPaths() {
   const posts = await loadAllPosts();
   const categories = Array.from(
-    new Set(posts.map(p => p.data?.category?.trim()).filter(Boolean))
+    new Set(posts.map(p => p.data?.category?.trim()).filter(Boolean)),
   );
   return categories.map(c => ({ params: { category: slugifyCategory(c) } }));
 }
 
 // Filter at render time
 const filtered = allPosts.filter(
-  p => slugifyCategory(p.data?.category) === categoryParam
+  p => slugifyCategory(p.data?.category) === categoryParam,
 );
 ```
 
@@ -173,8 +173,7 @@ const filtered = allPosts.filter(
 Always call `entry.render()` to get the `Content` component and use it for markdown rendering:
 
 ```astro
-const { Content } = await entry.render();
-// In template:
+const {Content} = await entry.render(); // In template:
 <Content />
 ```
 
@@ -221,13 +220,13 @@ echo "---\ntitle: First Entry\n---\n# Content" > src/content/newCollection/first
 
 ### 3. Create Route Pages
 
-```astro
+```
 // src/pages/newCollection/[slug].astro
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('newCollection');
-  return entries.map((e) => ({ params: { slug: e.slug } }));
+  return entries.map(e => ({ params: { slug: e.slug } }));
 }
 ```
 
@@ -508,7 +507,7 @@ await safeFeatureInit(
     const mod = await import('./lightbox');
     mod.init();
   },
-  { operation: 'load-and-init', recoverable: true }
+  { operation: 'load-and-init', recoverable: true },
 );
 ```
 
