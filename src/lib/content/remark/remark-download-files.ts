@@ -105,7 +105,7 @@ function buildTableHtml(items: DownloadLink[], note?: string) {
               : ''
           }
           <td data-label="Download">
-            <a class="download-files-link" href="${href}" rel="noopener" target="_blank" download>
+            <a href="${href}" rel="noopener" target="_blank" download>
               Download
             </a>
           </td>
@@ -115,7 +115,7 @@ function buildTableHtml(items: DownloadLink[], note?: string) {
 
   return `
     <section class="download-files" id="download-files-section">
-      <table class="download-files-table">
+      <table>
         <thead>
           <tr>
             <th scope="col">File Name</th>
