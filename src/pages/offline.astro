@@ -1,10 +1,8 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
-import Icon from '@components/Icon.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import fold from '@/styles/components/fold.module.css';
-import btn from '@/styles/components/button.module.css';
 ---
 
 <SiteLayout
@@ -19,46 +17,21 @@ import btn from '@/styles/components/button.module.css';
       <h1>You're Offline</h1>
 
       <p>
-        It looks like you've lost your internet connection. Don't worry, some
-        pages you've visited before are still available to read.
+        Looks like your internet took a quick break.
+        No worries, some pages you opened before are still here for you.
       </p>
 
-      <h2>What you can do:</h2>
+      <h2>Try this:</h2>
       <ul>
-        <li>Check your internet connection</li>
-        <li>Try refreshing the page when you're back online</li>
-        <li>Browse previously visited pages from cache</li>
+        <li>Check your Wi-Fi or data</li>
+        <li>Refresh the page once you're back online</li>
+        <li>Open pages you've visited earlier (they're saved in cache)</li>
       </ul>
 
       <p>
-        This site works offline for pages you've already visited. Once you're
-        back online, you'll have access to all content again.
+        This site keeps previously opened pages available offline.
+        When your connection returns, everything will be back to normal.
       </p>
-
-      <a href='/' class:list={[btn.button, 'offline-button']}>
-        <Icon name='navHome' class={btn['button-icon']} />
-        <span>Go to Homepage</span>
-      </a>
     </div>
   </main>
 </SiteLayout>
-
-<style>
-  ul {
-    margin: 1.5rem 0;
-    padding-left: 1.5rem;
-  }
-
-  li {
-    margin: 0.5rem 0;
-  }
-
-  .offline-button :global(svg) {
-    width: 16px;
-    height: 16px;
-  }
-
-  .offline-button {
-    gap: 8px;
-  }
-</style>
