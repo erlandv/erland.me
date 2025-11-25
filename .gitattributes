@@ -1,2 +1,46 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Source code
+*.astro text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Config files
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+.env* text eol=lf
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.svg text eol=lf
+
+# Fonts
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+
+# Generated files (exclude from git archive)
+public/robots.txt export-ignore
+public/ads.txt export-ignore
+public/search-index.json export-ignore
+public/favicon.ico export-ignore
+AGENTS.md export-ignore
+
+# Lock files (normalize to LF to prevent diff noise)
+package-lock.json text eol=lf linguist-generated=true
