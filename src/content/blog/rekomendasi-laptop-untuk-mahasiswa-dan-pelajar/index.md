@@ -66,17 +66,17 @@ Laptop ini memang memiliki desain yang konvertibel dengan tujuan dapat digunakan
 
 Laptop Acer TravelMate Spin B3 ini tersedia dengan harga mulai Rp5.499.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 
-| Spesifikasi      | Detail                                               |
-| ---------------- | ---------------------------------------------------- |
-| Operating System | Windows 10 Home                                      |
+| Spesifikasi      | Detail                                             |
+| ---------------- | -------------------------------------------------- |
+| Operating System | Windows 10 Home                                    |
 | CPU              | Intel® Celeron® N4020 Processor Dual-core 1.10 GHz |
-| Graphics         | Intel® UHD Graphics 600                             |
-| Display          | 11.6″ HD (1366 x 768) 16:9 IPS Touchscreen           |
-| Memory           | 4 GB                                                 |
-| Storage          | DDR4 SDRAM                                           |
-| Webcam           | HD HDR Webcam with Camera Shutter                    |
-| Networking       | Wi-Fi 5 (Intel® Wireless-AC 9560) MU-MIMO           |
-| Battery          | Battery life up to 12 hours                          |
+| Graphics         | Intel® UHD Graphics 600                            |
+| Display          | 11.6″ HD (1366 x 768) 16:9 IPS Touchscreen         |
+| Memory           | 4 GB                                               |
+| Storage          | DDR4 SDRAM                                         |
+| Webcam           | HD HDR Webcam with Camera Shutter                  |
+| Networking       | Wi-Fi 5 (Intel® Wireless-AC 9560) MU-MIMO          |
+| Battery          | Battery life up to 12 hours                        |
 
 ### Acer Swift 1 Fresh (SF114-34)
 
@@ -88,22 +88,22 @@ Fitur lain yang tidak kalah menarik dari Acer Swift 1 Fresh (SF114-34) ini adala
 
 Laptop Acer Swift 1 Fresh (SF114-34) ini tersedia dengan harga mulai Rp6.699.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 
-| Spesifikasi      | Detail                                                                                                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Operating System | Windows 10 Home Pre-installed Office Home and Student 2019                                                                                                                     |
-| CPU              | Intel® Pentium® Silver N6000 Processor (1.10 GHz, up to 3.30 GHz with Intel® Burst Technology)                                                                              |
+| Spesifikasi      | Detail                                                                                                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating System | Windows 10 Home Pre-installed Office Home and Student 2019                                                                                                                    |
+| CPU              | Intel® Pentium® Silver N6000 Processor (1.10 GHz, up to 3.30 GHz with Intel® Burst Technology)                                                                                |
 | Graphics         | Intel® UHD Graphics                                                                                                                                                           |
 | Display          | 14.0″ display with IPS (In-Plane Switching) technology FHD (1920 x 1080) High-brightness (300nits) Acer ComfyView™ LED-backlit TFT LCD 16:9 aspect ratio 72% NTSC color gamut |
-| Memory           | 4GB of LPDDR4X                                                                                                                                                                 |
-| Storage          | 512 GB SSD PCIe Gen3, 8 Gb/s, NVMe                                                                                                                                             |
-| Camera           | HD webcam with: 1280 x 720 resolution; 720p HD audio/video recording; Super high dynamic range imaging (SHDR)                                                                  |
+| Memory           | 4GB of LPDDR4X                                                                                                                                                                |
+| Storage          | 512 GB SSD PCIe Gen3, 8 Gb/s, NVMe                                                                                                                                            |
+| Camera           | HD webcam with: 1280 x 720 resolution; 720p HD audio/video recording; Super high dynamic range imaging (SHDR)                                                                 |
 | Audio            | DTS® Audio featuring optimized bass response Micro-speaker distortion prevention                                                                                              |
-| Battery          | Battery life up to 15 hours                                                                                                                                                    |
-| I/O Port         | HDMI® port 1x USB Type-C™ port: USB 3.2 Gen 1 (up to 5 Gbps) 2x USB 3.2 Gen 1                                                                                                |
-| Security         | Fingerprint (Windows Hello Certified)                                                                                                                                          |
+| Battery          | Battery life up to 15 hours                                                                                                                                                   |
+| I/O Port         | HDMI® port 1x USB Type-C™ port: USB 3.2 Gen 1 (up to 5 Gbps) 2x USB 3.2 Gen 1                                                                                                 |
+| Security         | Fingerprint (Windows Hello Certified)                                                                                                                                         |
 | Networking       | Intel® Wireless Wi-Fi 6 AX201 with MU-MIMO                                                                                                                                    |
-| Bluetooth        | Bluetooth 5.1                                                                                                                                                                  |
-| Weight & Height  | 1,3 kg & 14,95 mm                                                                                                                                                              |
+| Bluetooth        | Bluetooth 5.1                                                                                                                                                                 |
+| Weight & Height  | 1,3 kg & 14,95 mm                                                                                                                                                             |
 
 ### Aspire 5 Slim (A514-54/54G)
 
@@ -115,14 +115,14 @@ Laptop Aspire 5 Slim (A514-54/54G) ini juga dilengkapi dengan tampilan layar rea
 
 Laptop Aspire 5 Slim (A514-54/54G) ini tersedia dengan harga mulai Rp8.999.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 
-| Spesifikasi      | Detail                                                                                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Operating System | Windows 10 Home                                                                                                                                                                                                          |
+| Spesifikasi      | Detail                                                                                                                                                                                                                 |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating System | Windows 10 Home                                                                                                                                                                                                        |
 | CPU              | Intel® Core™ i7-1165G7 / i5-1135G7 11th Gen                                                                                                                                                                            |
 | Graphics         | Intel® Iris® Xe Graphics (54) / Nvidia Geforce MX350 (54G)                                                                                                                                                             |
-| Display          | 11.6″ HD (1366 x 768) 16:9 IPS Touchscreen                                                                                                                                                                               |
-| Memory           | 8 GB DDR4                                                                                                                                                                                                                |
-| Storage          | 512GB SSD upgradable                                                                                                                                                                                                     |
+| Display          | 11.6″ HD (1366 x 768) 16:9 IPS Touchscreen                                                                                                                                                                             |
+| Memory           | 8 GB DDR4                                                                                                                                                                                                              |
+| Storage          | 512GB SSD upgradable                                                                                                                                                                                                   |
 | Monitor          | 14″ display with IPS (In-Plane Switching) technology Full HD 1920 x 1080, high-brightness Acer ComfyView™ LED-backlit TFT LCD (i7 Varian) 14″ HD 1366 x 768 resolution Acer ComfyView™ LED-backlit TFT LCD (i5 Varian) |
 
 Jadi itulah beberapa tips memilih laptop yang cocok untuk mahasiswa dan pelajar beserta pilihan rekomendasi laptop murah untuk pelajar dan mahasiswa dan harganya. Sekali lagi saran dari saya, pastikan kalian membeli laptop yang dijamin oleh garansi resmi, ya! Jika ada hal-hal lain yang ingin ditanyakan, jangan sungkan untuk bertanya di kolom komentar. Terima kasih.

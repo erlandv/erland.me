@@ -15,7 +15,7 @@ category: essay
 draft: false
 ---
 
-**_Nocturnal human being_** adalah sebutan bagi orang yang cenderung terjaga hingga larut malam dan aktif pada malam hari. Sebutan lainnya yaitu *evening person*, *night owl,* atau _lychnobite_. Sebutan-sebutan tersebut disematkan pada orang yang aktif di malam hari untuk bekerja.
+***Nocturnal human being*** adalah sebutan bagi orang yang cenderung terjaga hingga larut malam dan aktif pada malam hari. Sebutan lainnya yaitu *evening person*, *night owl,* atau _lychnobite_. Sebutan-sebutan tersebut disematkan pada orang yang aktif di malam hari untuk bekerja.
 
 Untuk kali ini aku menambahkan satu sebutan lagi, sebut saja "manusia pemuja malam". Ini hanyalah berupa diksi yang aku sematkan bagi orang yang produktif di malam hari. Aku, kamu, dan banyak lagi orang di muka bumi ini yang mengalami.
 
