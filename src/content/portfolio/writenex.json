@@ -1,0 +1,23 @@
+{
+  "title": "Writenex",
+  "category": "personal-projects",
+  "desc": "Writenex is a side project where I design and build a Markdown-based writing experience from the ground up. The app focuses on fast local performance, data safety, and a minimal interface that stays out of the way. It supports real-time preview, auto-save with version history, and local-first storage to ensure users never lose their work. The UX and copy are carefully crafted to feel calm, predictable, and consistent across light and dark modes.\n\n From the engineering side, the project emphasizes maintainable frontend architecture, predictable state handling, and clear separation between UI concerns and storage logic. It also serves as a playground to explore modern web platform capabilities around offline usage and client-side data persistence.",
+  "highlights": [
+    "Clean Markdown editor with live preview and keyboard-friendly workflows",
+    "Local-first architecture with auto-save and version history",
+    "Offline-capable usage with persistent client-side storage",
+    "Minimal, distraction-free UI with consistent light and dark themes",
+    "Thoughtful copywriting and UX micro-interactions",
+    "Designed for extensibility as a long-term product"
+  ],
+  "tech": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Dexie",
+    "IndexedDB",
+    "Zustand"
+  ],
+  "order": 1
+}
