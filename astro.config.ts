@@ -4,6 +4,7 @@ import remarkDirective from 'remark-directive';
 import remarkGallery from './src/lib/content/remark/remark-gallery';
 import remarkFigure from './src/lib/content/remark/remark-figure';
 import remarkDownloadFiles from './src/lib/content/remark/remark-download-files';
+import writenex from '@writenex/astro';
 
 // Environment validation at startup
 import {
@@ -231,8 +232,9 @@ export default defineConfig({
 
   // Integrations for additional features
   // Only apply compression in production to speed up development builds
-  integrations:
-    mode === 'production' || mode === 'staging'
+  integrations: [
+    writenex(),
+    ...(mode === 'production' || mode === 'staging'
       ? [
           playformCompress({
             // CSS compression
@@ -246,5 +248,6 @@ export default defineConfig({
             Image: false,
           }),
         ]
-      : [],
+      : []),
+  ],
 });
