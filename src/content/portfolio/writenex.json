@@ -1,14 +1,13 @@
 {
   "title": "Writenex",
   "category": "personal-projects",
-  "desc": "Writenex is a side project where I design and build a Markdown-based writing experience from the ground up. The app focuses on fast local performance, data safety, and a minimal interface that stays out of the way. It supports real-time preview, auto-save with version history, and local-first storage to ensure users never lose their work. The UX and copy are carefully crafted to feel calm, predictable, and consistent across light and dark modes.\n\n From the engineering side, the project emphasizes maintainable frontend architecture, predictable state handling, and clear separation between UI concerns and storage logic. It also serves as a playground to explore modern web platform capabilities around offline usage and client-side data persistence.",
+  "desc": "Writenex is a collection of tools for modern Markdown editing and content management. I designed and developed both the standalone Markdown editor application and an Astro integration package that allows content creators and developers to manage and edit Markdown/MDX content directly within an Astro project workflow.\n\n The editor is offline-first and progressive, with a smooth writing experience that works in the browser. The Astro package integrates with Astro content collections so users can visually edit content that feeds directly into static sites, blogs, or documentation sites. I also managed documentation, packaging, and publishing processes to make sure the tools are easy to adopt and extend.",
   "highlights": [
-    "Clean Markdown editor with live preview and keyboard-friendly workflows",
-    "Local-first architecture with auto-save and version history",
-    "Offline-capable usage with persistent client-side storage",
-    "Minimal, distraction-free UI with consistent light and dark themes",
-    "Thoughtful copywriting and UX micro-interactions",
-    "Designed for extensibility as a long-term product"
+    "Created a PWA Markdown editor with offline support and rich editing features",
+    "Built @writenex/astro package to integrate visual Markdown editing into Astro content collections",
+    "Designed UX for non-technical writers and developers alike",
+    "Managed monorepo with shared configs, types, and consistent tooling across packages",
+    "Published and maintained packages with clear documentation and examples"
   ],
   "tech": [
     "Next.js",
@@ -17,7 +16,7 @@
     "Tailwind CSS",
     "Dexie",
     "IndexedDB",
-    "Zustand"
+    "Turborepo"
   ],
   "order": 1
 }
