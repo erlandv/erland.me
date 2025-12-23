@@ -10,5 +10,5 @@
     "Developer-friendly docs: local setup, deployment, and extension guides"
   ],
   "tech": ["PHP", "JavaScript", "MySQL", "Bootstrap", "AOS", "Confetti"],
-  "order": 3
+  "order": 4
 }

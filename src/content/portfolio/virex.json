@@ -1,0 +1,21 @@
+{
+  "title": "Virex Astro Theme",
+  "category": "personal-projects",
+  "desc": "I built Virex as a customizable Astro theme that helps developers launch professional SaaS landing pages with rich content support out of the box. The project includes blog, docs, changelog, and testimonial content collections that integrate with Astro’s routing and content APIs.\n\n I designed and implemented accessible components, SEO-friendly metadata (Open Graph, JSON-LD, Twitter cards), dark mode support, Tailwind CSS utility styling, and feature flags to let users toggle site sections easily. Virex aims to be both a ready template for quick deployment and a flexible foundation for further customization.",
+  "highlights": [
+    "Built a SaaS landing page theme using Astro 5, TypeScript, and Tailwind CSS v4",
+    "Content collections for blog, docs, changelog, and testimonials",
+    "SEO readiness with meta tags, Open Graph, Twitter Cards, JSON-LD, sitemap, and RSS",
+    "Feature flags for optional sections and easy theming",
+    "Contact form support with validation and multiple backend options",
+    "Accessibility enhancements like focus states and reduced motion support",
+    "Live demo, docs, and reusable configuration pattern"
+  ],
+  "tech": [
+    "Astro",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js"
+  ],
+  "order": 2
+}
