@@ -11,11 +11,6 @@
     "Accessibility enhancements like focus states and reduced motion support",
     "Live demo, docs, and reusable configuration pattern"
   ],
-  "tech": [
-    "Astro",
-    "TypeScript",
-    "Tailwind CSS",
-    "Node.js"
-  ],
+  "tech": ["Astro", "TypeScript", "Tailwind CSS", "Node.js"],
   "order": 2
 }
