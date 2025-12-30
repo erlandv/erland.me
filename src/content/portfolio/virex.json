@@ -1,15 +1,15 @@
 {
   "title": "Virex Astro Theme",
   "category": "personal-projects",
-  "desc": "I built Virex as a customizable Astro theme that helps developers launch professional SaaS landing pages with rich content support out of the box. The project includes blog, docs, changelog, and testimonial content collections that integrate with Astro’s routing and content APIs.\n\n I designed and implemented accessible components, SEO-friendly metadata (Open Graph, JSON-LD, Twitter cards), dark mode support, Tailwind CSS utility styling, and feature flags to let users toggle site sections easily. Virex aims to be both a ready template for quick deployment and a flexible foundation for further customization.",
+  "desc": "Virex is a production-ready SaaS UI theme I built to help developers launch modern SaaS products faster—from marketing pages to dashboard interfaces. The project is designed as a solid starting point for SaaS builders who want a consistent UI foundation without starting from scratch.\n\n It includes fully structured marketing pages, a reusable dashboard layout with example pages, and rich content support using Astro Content Collections for blogs, documentation, changelogs, and testimonials. All parts are built to integrate cleanly with Astro’s routing, content APIs, and TypeScript-first workflow.\n\n I designed and implemented accessible UI components, SEO-ready metadata (Open Graph, JSON-LD, Twitter Cards), dark mode with system preference support, and a feature-flag system that allows sections to be enabled or disabled easily. Virex balances speed of setup with long-term flexibility, making it suitable both as a ready-to-use template and as a customizable foundation for real-world SaaS projects.",
   "highlights": [
-    "Built a SaaS landing page theme using Astro 5, TypeScript, and Tailwind CSS v4",
-    "Content collections for blog, docs, changelog, and testimonials",
-    "SEO readiness with meta tags, Open Graph, Twitter Cards, JSON-LD, sitemap, and RSS",
-    "Feature flags for optional sections and easy theming",
-    "Contact form support with validation and multiple backend options",
-    "Accessibility enhancements like focus states and reduced motion support",
-    "Live demo, docs, and reusable configuration pattern"
+    "Built a complete SaaS UI theme using Astro 5, TypeScript, and Tailwind CSS v4",
+    "Marketing pages and reusable dashboard UI with example SaaS workflows",
+    "Content Collections for blog, documentation, changelog, and testimonials",
+    "SEO-ready setup with Open Graph, Twitter Cards, JSON-LD, sitemap, and RSS",
+    "Feature flags for optional sections and flexible site configuration",
+    "Accessible components with focus states and reduced motion support",
+    "Structured configuration and documentation for easy customization"
   ],
   "tech": ["Astro", "TypeScript", "Tailwind CSS", "Node.js"],
   "order": 2

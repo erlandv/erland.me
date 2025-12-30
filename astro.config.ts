@@ -233,10 +233,7 @@ export default defineConfig({
   // Integrations for additional features
   // Only apply compression in production to speed up development builds
   integrations: [
-    writenex({
-      // Custom Editor Path
-      basePath: `/editor`,
-    }),
+    writenex(),
     ...(mode === 'production' || mode === 'staging'
       ? [
           playformCompress({
