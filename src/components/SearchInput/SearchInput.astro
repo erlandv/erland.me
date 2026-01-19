@@ -356,6 +356,8 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
       return;
     }
 
+    // Store query in state
+    searchState.currentQuery = query;
     emitSearchResults(query, [], true); // Signal searching state
 
     setTimeout(async () => {
@@ -372,7 +374,8 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
           matches: r.matches,
         }));
       }
-      emitSearchResults(searchState.currentQuery, results, false);
+      // Use the query parameter, not searchState.currentQuery
+      emitSearchResults(query, results, false);
     }, 100);
   }
 
