@@ -92,7 +92,11 @@ const getCategory = (post: any) => post.data?.category ?? null;
       </div>
 
       <!-- All posts for search (hidden, used for filtering) -->
-      <div id='all-posts-container' class={listing['resouce-items']} style='display: none;'>
+      <div
+        id='all-posts-container'
+        class={listing['resouce-items']}
+        style='display: none;'
+      >
         {
           posts.map(post => {
             const hero = getHero(post);
@@ -118,7 +122,11 @@ const getCategory = (post: any) => post.data?.category ?? null;
       </div>
 
       <!-- Search results container (cloned posts will be placed here) -->
-      <div id='search-results-grid' class={listing['resouce-items']} style='display: none;'>
+      <div
+        id='search-results-grid'
+        class={listing['resouce-items']}
+        style='display: none;'
+      >
       </div>
 
       <!-- No results message -->
@@ -164,14 +172,30 @@ const getCategory = (post: any) => post.data?.category ?? null;
       return;
     }
 
-    const defaultPosts = document.getElementById('default-posts') as HTMLDivElement | null;
-    const allPostsContainer = document.getElementById('all-posts-container') as HTMLDivElement | null;
-    const searchResultsGrid = document.getElementById('search-results-grid') as HTMLDivElement | null;
-    const paginationContainer = document.getElementById('pagination-container') as HTMLDivElement | null;
-    const searchStatus = document.getElementById('search-status') as HTMLDivElement | null;
-    const searchResultCount = document.getElementById('search-result-count') as HTMLSpanElement | null;
-    const clearSearchBtn = document.getElementById('clear-search-btn') as HTMLButtonElement | null;
-    const noResultsMessage = document.getElementById('no-results-message') as HTMLDivElement | null;
+    const defaultPosts = document.getElementById(
+      'default-posts',
+    ) as HTMLDivElement | null;
+    const allPostsContainer = document.getElementById(
+      'all-posts-container',
+    ) as HTMLDivElement | null;
+    const searchResultsGrid = document.getElementById(
+      'search-results-grid',
+    ) as HTMLDivElement | null;
+    const paginationContainer = document.getElementById(
+      'pagination-container',
+    ) as HTMLDivElement | null;
+    const searchStatus = document.getElementById(
+      'search-status',
+    ) as HTMLDivElement | null;
+    const searchResultCount = document.getElementById(
+      'search-result-count',
+    ) as HTMLSpanElement | null;
+    const clearSearchBtn = document.getElementById(
+      'clear-search-btn',
+    ) as HTMLButtonElement | null;
+    const noResultsMessage = document.getElementById(
+      'no-results-message',
+    ) as HTMLDivElement | null;
 
     if (
       !defaultPosts ||
@@ -206,12 +230,15 @@ const getCategory = (post: any) => post.data?.category ?? null;
 
       // Only update if results actually changed
       const currentSlugs = Array.from($searchResultsGrid.children).map(
-        el => el.getAttribute('data-cloned-slug') || ''
+        el => el.getAttribute('data-cloned-slug') || '',
       );
       const newSlugsStr = matchingSlugs.join(',');
       const currentSlugsStr = currentSlugs.join(',');
 
-      if (newSlugsStr === currentSlugsStr && $searchResultsGrid.style.display !== 'none') {
+      if (
+        newSlugsStr === currentSlugsStr &&
+        $searchResultsGrid.style.display !== 'none'
+      ) {
         // Results haven't changed, skip re-render
         return;
       }
@@ -221,7 +248,9 @@ const getCategory = (post: any) => post.data?.category ?? null;
 
       // Clone matching posts from all-posts-container
       matchingSlugs.forEach(slug => {
-        const sourcePost = $allPostsContainer.querySelector(`[data-slug="${slug}"]`);
+        const sourcePost = $allPostsContainer.querySelector(
+          `[data-slug="${slug}"]`,
+        );
         if (sourcePost) {
           const postCard = sourcePost.querySelector('.post-card');
           if (postCard) {
@@ -269,7 +298,9 @@ const getCategory = (post: any) => post.data?.category ?? null;
       url.searchParams.delete('search');
       history.replaceState({}, '', url.toString());
 
-      const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+      const searchInput = document.getElementById(
+        'search-input',
+      ) as HTMLInputElement | null;
       if (searchInput) {
         searchInput.value = '';
         const clearBtn = document.getElementById('search-clear');

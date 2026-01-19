@@ -3,7 +3,7 @@
  * SearchInput Component
  *
  * Client-side search input with fuzzy search powered by Fuse.js.
- * 
+ *
  * Supports two modes:
  * - Inline mode: Search results displayed on same page, URL synced with ?search=
  * - Redirect mode (default): Redirects to /blog/?search=keyword
@@ -36,7 +36,12 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
   aria-label='Cari artikel'
   data-mode={mode}
 >
-  <form id='search-form' class={styles['search-form']} action='/blog/' method='get'>
+  <form
+    id='search-form'
+    class={styles['search-form']}
+    action='/blog/'
+    method='get'
+  >
     <div class={styles['search-input-wrapper']}>
       <input
         type='text'
@@ -157,7 +162,7 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
   async function ensureFuse(postsData: SearchablePost[]): Promise<void> {
     const arr = Array.isArray(postsData) ? postsData : [];
     const w = window as WindowWithSearch;
-    
+
     if (w.__FUSE_INSTANCE__) {
       fuse = w.__FUSE_INSTANCE__;
       fuseReady = true;
@@ -196,7 +201,7 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
       bubbles: true,
     });
     document.dispatchEvent(event);
-    
+
     // For initial page load with query param, retry emission after a short delay
     // to ensure blog search listener is ready
     if (!isSearching && query && results.length >= 0) {
@@ -235,10 +240,18 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
     searchState.mode =
       (container.dataset.mode as 'inline' | 'redirect') || 'redirect';
 
-    const searchForm = document.getElementById('search-form') as HTMLFormElement;
-    const searchInput = document.getElementById('search-input') as HTMLInputElement;
-    const searchClear = document.getElementById('search-clear') as HTMLButtonElement;
-    const searchLoading = document.getElementById('search-loading') as HTMLDivElement;
+    const searchForm = document.getElementById(
+      'search-form',
+    ) as HTMLFormElement;
+    const searchInput = document.getElementById(
+      'search-input',
+    ) as HTMLInputElement;
+    const searchClear = document.getElementById(
+      'search-clear',
+    ) as HTMLButtonElement;
+    const searchLoading = document.getElementById(
+      'search-loading',
+    ) as HTMLDivElement;
 
     if (!searchForm || !searchInput || !searchClear || !searchLoading) {
       return;
@@ -287,7 +300,7 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
     // Handle form submit
     const onFormSubmit = (e: Event) => {
       const query = searchInput.value.trim();
-      
+
       if (searchState.mode === 'redirect') {
         // Let form submit naturally to /blog/?search=query
         if (!query) {
@@ -300,7 +313,7 @@ const { placeholder = 'Search articles...', mode = 'redirect' } =
       e.preventDefault();
       searchState.currentQuery = query;
       updateUrlWithQuery(query);
-      
+
       if (query.length >= 2) {
         performSearch(query);
       } else if (query.length === 0) {
