@@ -31,7 +31,7 @@ There aren't many advanced features here because it was intentionally designed t
 - **Personal Blog**: Just a place to write stuff using Markdown. Yeah, it has tags, categories, and hero images, but let's not pretend—it's basically a glorified text file with fancy compilation steps. The server is judging me for this.
 - **Portfolio Showcase**: Where I flex my work. Some different layouts, nothing that'll win awards. But it works, and that's more than most portfolio sites can say.
 - **Offline Support (PWA)**: Has a service worker that caches everything so you can read my mediocre content even when your internet dies. Technically a PWA now. Revolutionary stuff for a blog that updates twice a month.
-- **"Search"**: It can find things! Truly groundbreaking for 2025. Instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like absolutely nothing).
+- **"Search"**: It can find things! Truly groundbreaking for 2026. Instant, client-side fuzzy search that doesn't bother the server because the server has better things to do (like absolutely nothing).
 - **Gallery in Posts**: Lets me cram multiple images into blog posts without the layout having an existential crisis. Nobel Prize committee, my DMs are open.
 - **Syntax Highlighting**: Makes code snippets readable instead of looking like a JSON file threw up. You're welcome.
 - **SEO Ready (Theoretically)**: Auto-generates all the boring `<meta>` tags, `sitemap_index.xml`, `JSON-LD` schemas, and `robots.txt` so Google's crawlers don't get confused and file a complaint.
@@ -39,7 +39,7 @@ There aren't many advanced features here because it was intentionally designed t
 - **Toast Notifications**: Little pop-up messages that briefly interrupt your life but are actually useful. It's called UX, look it up.
 - **Share Buttons**: Standard social media icons for my dozen readers who are _totally_ dying to broadcast my blog posts to their followers. The feature nobody asked for but everyone expects.
 - **Instagram-like Story Viewer**: Fullscreen story modal with progress bars, auto-advance, and manual navigation. Because apparently my static site needed Instagram vibes. Complete with pause/resume and smooth transitions that'll make you forget this is just a personal web.
-- **Light/Dark Theme**: Toggle between themes because choosing colors is apparently too hard in 2025. Persists your preference in `localStorage` like it's rocket science. Auto-detects system settings because I'm considerate like that.
+- **Light/Dark Theme**: Toggle between themes because choosing colors is apparently too hard in 2026. Persists your preference in `localStorage` like it's rocket science. Auto-detects system settings because I'm considerate like that.
 - **Pagination**: Splits posts across pages instead of one endless scroll of regret. Apparently this counts as a feature now.
 - **Adsense/Placeholder Integration**: Reserved space for ads if I ever monetize my dozen visitors. Mostly just placeholder slots judging me from the sidebar.
 - **Error Boundary**: Catches JS errors before they ruin everyone's day. Shows a friendly fallback instead of letting the page implode. It's called "not being a jerk to your users."
@@ -66,7 +66,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 
 ### Core Framework
 
-- **Astro**: The framework that finally answered the question "_what if we just... didn't ship JavaScript unless absolutely necessary?_" Revolutionary concept in 2025, apparently.
+- **Astro**: The framework that finally answered the question "_what if we just... didn't ship JavaScript unless absolutely necessary?_" Revolutionary concept in 2026, apparently.
 - **TypeScript**: Because I don't trust JavaScript. Or myself. Or you. Especially myself. Every variable is typed. Every function returns exactly what it promises. This is a dictatorship, not a democracy.
 - **Vite**: Blazing-fast build tool that's faster than my attention span. Rebuilds in milliseconds. Which is good, because I break things constantly.
 - **Shiki**: Makes code blocks actually readable instead of looking like regex had a baby with a JSON error. Syntax highlighting that doesn't make your eyes bleed.
