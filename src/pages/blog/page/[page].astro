@@ -4,7 +4,6 @@ import BackNav from '@components/BackNav/BackNav.astro';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
-import { postToSearchable } from '@lib/content/search';
 import { loadAllPosts } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
 import { SITE_CONFIG } from '@lib/core/site-config';
@@ -39,9 +38,6 @@ const getExcerpt = (post: any) =>
   post.data?.excerpt ?? post.data?.description ?? '';
 const getCategory = (post: any) => post.data?.category ?? null;
 
-// Convert posts to searchable format (used by SearchInput via window.__SEARCH_POSTS__)
-const searchablePosts = posts.map(postToSearchable);
-
 const { title, description } = generateBlogPageMeta(page);
 ---
 
@@ -68,7 +64,7 @@ const { title, description } = generateBlogPageMeta(page);
   <div class='content-container'>
     <h1>Page {page} Blog Archives</h1>
 
-    <SearchInput posts={searchablePosts} placeholder='Cari artikel...' />
+    <SearchInput placeholder='Cari artikel...' />
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
         {

@@ -5,7 +5,6 @@ import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { loadAllPosts, slicePage, slugifyCategory } from '@lib/content/blog';
-import { postToSearchable } from '@lib/content/search';
 import { collectionPageJsonLd, breadcrumbJsonLd } from '@lib/content/seo';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { generateCategoryPageMeta } from '@lib/content/page-metadata';
@@ -32,9 +31,6 @@ const filtered = allPosts.filter(p => {
   const cat = slugifyCategory((p.data?.category ?? '').toString());
   return cat === categoryParam;
 });
-
-// Convert posts to searchable format
-const searchablePosts = filtered.map(postToSearchable);
 
 const pageSize = 10;
 const page = 1;
@@ -87,10 +83,7 @@ const { title, description } = generateCategoryPageMeta(displayCategory);
   <div class='content-container'>
     <h1 style='text-transform: capitalize;'>Category {displayCategory}</h1>
 
-    <SearchInput
-      posts={searchablePosts}
-      placeholder={`Cari artikel di kategori \"${displayCategory}\"...`}
-    />
+    <SearchInput placeholder={`Cari artikel...`} />
 
     <section class={listing['items-container']}>
       <div class={listing['resouce-items']}>
