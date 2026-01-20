@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createDownloadBreadcrumb } from '@lib/content/breadcrumb';
 import { getCollection, getEntry } from 'astro:content';
 import { creativeWorkJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
@@ -65,8 +66,8 @@ const jsonLd = creativeWorkJsonLd({
   publishedTime={data.publishDate}
   modifiedTime={data.updatedDate ?? data.publishDate}
 >
-  <!-- Back Navigation - Return to download listing page -->
-  <BackNav href='/download/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Download > Template Heading -->
+  <Breadcrumb items={createDownloadBreadcrumb(data.heading ?? data.title)} />
 
   <!-- Download Article - Template/file details with download information -->
   <article class:list={['content-container', 'article-detail']}>

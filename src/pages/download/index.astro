@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createDownloadIndexBreadcrumb } from '@lib/content/breadcrumb';
 import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
@@ -23,8 +24,8 @@ const downloads = (await getCollection('downloads'))
   selectedItem='download'
   description={PAGE_METADATA.download.index.description}
 >
-  <!-- Back Navigation - Return to homepage -->
-  <BackNav href='/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Download -->
+  <Breadcrumb items={createDownloadIndexBreadcrumb()} />
 
   <div class='content-container'>
     <!-- Page Title -->
