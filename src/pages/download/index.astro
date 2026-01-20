@@ -7,6 +7,7 @@ import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import dl from './styles/_download.module.css';
 import { Image } from 'astro:assets';
+import { DEFAULT_HERO_PATH } from '@lib/content/images';
 
 const toTimestamp = (entry: any) =>
   entry.data.publishDate instanceof Date
@@ -73,7 +74,7 @@ const downloads = (await getCollection('downloads'))
                   />
                 ) : (
                   <img
-                    src='/assets/social/og-default-1200x630.png'
+                    src={DEFAULT_HERO_PATH}
                     width={240}
                     height={180}
                     alt={alt}

@@ -15,7 +15,11 @@ import '@/styles/prose/ads.css';
 import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
-import { getOgImageUrl, resolveHero } from '@lib/content/images';
+import {
+  getOgImageUrl,
+  resolveHero,
+  DEFAULT_HERO_PATH,
+} from '@lib/content/images';
 import { SITE_URL } from '@lib/core/env';
 
 export async function getStaticPaths() {
@@ -39,7 +43,7 @@ const hero = resolveHero(data.hero);
 const heroAlt = data.heroAlt ?? data.title;
 const optimizedHero = hero
   ? await getOgImageUrl(hero, 1200, 'avif')
-  : undefined;
+  : DEFAULT_HERO_PATH;
 const canonicalPath = `/download/${entry.slug}/`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
@@ -73,7 +77,7 @@ const jsonLd = creativeWorkJsonLd({
   <article class:list={['content-container', 'article-detail']}>
     <!-- Article Header - Hero image (or placeholder emoji), title, and optional rating -->
     <header class='article-header'>
-      {/* Conditional: Hero image or fallback placeholder with package emoji */}
+      {/* Hero image with fallback to default hero */}
       {
         hero ? (
           <HeroImage
@@ -83,9 +87,13 @@ const jsonLd = creativeWorkJsonLd({
             fetchpriority='high'
           />
         ) : (
-          <div class='hero-image hero-placeholder' aria-hidden='true'>
-            📦
-          </div>
+          <img
+            src={DEFAULT_HERO_PATH}
+            alt={heroAlt}
+            class='hero-image'
+            loading='eager'
+            fetchpriority='high'
+          />
         )
       }
 

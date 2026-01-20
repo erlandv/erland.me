@@ -16,7 +16,11 @@ import '@/styles/prose/ads.css';
 import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
-import { getOgImageUrl, resolveHero } from '@lib/content/images';
+import {
+  getOgImageUrl,
+  resolveHero,
+  DEFAULT_HERO_PATH,
+} from '@lib/content/images';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -36,7 +40,7 @@ const hero = resolveHero(frontmatter.hero);
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 const optimizedHero = hero
   ? await getOgImageUrl(hero, 1200, 'avif')
-  : undefined;
+  : DEFAULT_HERO_PATH;
 const canonical = `/blog/${slug}/`;
 const canonicalUrl = `${SITE_URL}${canonical}`;
 
@@ -73,12 +77,20 @@ const jsonLd = blogPostingJsonLd({
   <article class:list={['content-container', 'article-detail']}>
     <!-- Article Header - Hero image, title, and metadata -->
     <header class='article-header'>
-      {/* Conditional: Hero image (optimized for LCP, eager loaded) */}
+      {/* Hero image with fallback to default hero */}
       {
-        hero && (
+        hero ? (
           <HeroImage
             image={hero}
             alt={heroAlt}
+            loading='eager'
+            fetchpriority='high'
+          />
+        ) : (
+          <img
+            src={DEFAULT_HERO_PATH}
+            alt={heroAlt}
+            class='hero-image'
             loading='eager'
             fetchpriority='high'
           />
