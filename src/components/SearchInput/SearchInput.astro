@@ -3,91 +3,78 @@
  * SearchInput Component
  *
  * Client-side search input with fuzzy search powered by Fuse.js.
- * Lazy-loads search index and Fuse.js on first focus for performance.
- * Displays search results in a dropdown with keyboard navigation support.
  *
- * Features:
- * - Debounced search (300ms)
- * - Keyboard navigation (Arrow Up/Down, Enter, Escape)
- * - Click-outside to close
- * - Highlighted search matches
- * - Mobile-responsive results display
+ * Supports two modes:
+ * - Inline mode: Search results displayed on same page, URL synced with ?search=
+ * - Redirect mode (default): Redirects to /blog/?search=keyword
  *
  * @component
  * @example
+ * // Redirect mode (default) - redirects to /blog/?search=keyword
  * <SearchInput placeholder="Search articles..." />
  *
- * @param {Object} props
- * @param {SearchablePost[]} [props.posts] - Initial posts data (optional, fetches from /search-index.json if not provided)
- * @param {string} [props.placeholder="Search articles..."] - Input placeholder text
+ * // Inline mode - results on same page with URL sync
+ * <SearchInput placeholder="Search articles..." mode="inline" />
  */
 import Icon from '@components/Icon.astro';
 import styles from './search-input.module.css';
-import type { SearchablePost } from '@lib/content/search';
 
 interface Props {
-  posts?: SearchablePost[];
   placeholder?: string;
+  mode?: 'inline' | 'redirect';
 }
 
-const { placeholder = 'Search articles...' } = Astro.props as Props;
+const { placeholder = 'Search articles...', mode = 'redirect' } =
+  Astro.props as Props;
 ---
 
-<!-- Search Container - Client-side fuzzy search with Fuse.js -->
+<!-- Search Container -->
 <div
   id='search-container'
   class={styles['search-container']}
   role='search'
   aria-label='Cari artikel'
+  data-mode={mode}
 >
-  <!-- Search Input Wrapper - Contains search icon, input field, and clear button -->
-  <div class={styles['search-input-wrapper']}>
-    <!-- Search Icon - Visual indicator for search functionality -->
-    <Icon name='blogSearch' class={styles['search-icon']} />
-
-    <!-- Search Input Field - Debounced search with autocomplete suggestions -->
-    <input
-      type='text'
-      placeholder={placeholder}
-      class={styles['search-input']}
-      id='search-input'
-      autocomplete='off'
-      aria-autocomplete='list'
-      aria-controls='search-results'
-      aria-expanded='false'
-      aria-label='Cari di blog'
-    />
-
-    <!-- Clear Button - Clears search input and hides results (hidden by default) -->
-    <button
-      type='button'
-      class={styles['search-clear']}
-      id='search-clear'
-      aria-label='Clear search'
-      style='display: none;'
-    >
-      <Icon name='btnClose' class={styles['clear-icon']} />
-    </button>
-  </div>
-
-  <!-- Search Results Dropdown - Shows matching articles (hidden by default) -->
-  <div
-    class={styles['search-results']}
-    id='search-results'
-    style='display: none;'
-    role='listbox'
-    aria-label='Hasil pencarian'
+  <form
+    id='search-form'
+    class={styles['search-form']}
+    action='/blog/'
+    method='get'
   >
-    <!-- Results Content Container - Dynamically populated with search results -->
-    <div
-      class={styles['search-results-content']}
-      id='search-results-content'
-      aria-live='polite'
-    >
-    </div>
-  </div>
+    <div class={styles['search-input-wrapper']}>
+      <input
+        type='text'
+        name='search'
+        placeholder={placeholder}
+        class={styles['search-input']}
+        id='search-input'
+        autocomplete='off'
+        aria-label='Cari di blog'
+      />
 
-  <!-- Loading Indicator - Shows while search is in progress (hidden by default) -->
+      <button
+        type='button'
+        class={styles['search-clear']}
+        id='search-clear'
+        aria-label='Clear search'
+        style='display: none;'
+      >
+        <Icon name='btnClose' class={styles['clear-icon']} />
+      </button>
+
+      <button
+        type='submit'
+        class={styles['search-submit']}
+        id='search-submit'
+        aria-label='Cari'
+      >
+        <Icon name='blogSearch' class={styles['search-submit-icon']} />
+      </button>
+    </div>
+  </form>
+
+  <!-- Loading Indicator -->
   <div
     class={styles['search-loading']}
     id='search-loading'
@@ -104,7 +91,6 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
   import { onRouteChange } from '@lib/infrastructure/router-events';
   import type { SearchablePost } from '@lib/content/search';
 
-  // Type definitions
   interface SearchResult {
     item: SearchablePost;
     score?: number;
@@ -114,7 +100,7 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
   interface SearchState {
     isInitialized: boolean;
     currentQuery: string;
-    isSearching: boolean;
+    mode: 'inline' | 'redirect';
   }
 
   interface WindowWithSearch extends Window {
@@ -122,13 +108,18 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     __FUSE_INSTANCE__?: Fuse<SearchablePost>;
   }
 
+  interface SearchResultsEventDetail {
+    query: string;
+    results: SearchResult[];
+    isSearching: boolean;
+  }
+
   const searchState: SearchState = {
     isInitialized: false,
     currentQuery: '',
-    isSearching: false,
+    mode: 'redirect',
   };
 
-  // Fuse.js options (lazy-imported)
   const FUSE_OPTS = {
     keys: [
       { name: 'title', weight: 0.5 },
@@ -167,21 +158,11 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     }
     return [];
   }
+
   async function ensureFuse(postsData: SearchablePost[]): Promise<void> {
     const arr = Array.isArray(postsData) ? postsData : [];
-    const signatureOf = (list: SearchablePost[]): string => {
-      try {
-        return `${list.length}:${list
-          .map((it: SearchablePost) => it.slug || it.id || '')
-          .join('|')}`;
-      } catch {
-        return `${Date.now()}:${list.length}`;
-      }
-    };
-    const nextSig = signatureOf(arr);
-
-    // Check global cache first (for view transitions)
     const w = window as WindowWithSearch;
+
     if (w.__FUSE_INSTANCE__) {
       fuse = w.__FUSE_INSTANCE__;
       fuseReady = true;
@@ -190,120 +171,122 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
 
     const mod = await import('fuse.js');
     const FuseCtor = (mod.default || mod) as typeof Fuse<SearchablePost>;
-
-    if (!fuse) {
-      fuse = new FuseCtor(arr, FUSE_OPTS) as Fuse<SearchablePost> & {
-        __signature?: string;
-      };
-      (fuse as unknown as { __signature?: string }).__signature = nextSig;
-      fuseReady = true;
-      // Cache globally for view transitions
-      w.__FUSE_INSTANCE__ = fuse;
-      return;
-    }
-
-    const prevSig = (fuse as unknown as { __signature?: string }).__signature;
-    if (prevSig !== nextSig) {
-      const fuseWithSet = fuse as unknown as {
-        setCollection?: (data: SearchablePost[]) => void;
-        __signature?: string;
-      };
-      if (typeof fuseWithSet.setCollection === 'function') {
-        fuseWithSet.setCollection(arr);
-        fuseWithSet.__signature = nextSig;
-      } else {
-        fuse = new FuseCtor(arr, FUSE_OPTS) as Fuse<SearchablePost> & {
-          __signature?: string;
-        };
-        (fuse as unknown as { __signature?: string }).__signature = nextSig;
-      }
-      // Update cache
-      w.__FUSE_INSTANCE__ = fuse;
-    }
+    fuse = new FuseCtor(arr, FUSE_OPTS);
     fuseReady = true;
+    w.__FUSE_INSTANCE__ = fuse;
   }
 
-  function escapeHtml(s: string): string {
-    const map: Record<string, string> = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
-    };
-    return String(s).replace(/[&<>"']/g, c => map[c] || c);
+  function getSearchQueryFromUrl(): string {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('search') || '';
   }
 
-  // Initialize search functionality
+  function updateUrlWithQuery(query: string): void {
+    const url = new URL(window.location.href);
+    if (query.trim()) {
+      url.searchParams.set('search', query.trim());
+    } else {
+      url.searchParams.delete('search');
+    }
+    history.replaceState({}, '', url.toString());
+  }
+
+  function emitSearchResults(
+    query: string,
+    results: SearchResult[],
+    isSearching: boolean,
+  ): void {
+    const event = new CustomEvent<SearchResultsEventDetail>('search:results', {
+      detail: { query, results, isSearching },
+      bubbles: true,
+    });
+    document.dispatchEvent(event);
+
+    // For initial page load with query param, retry emission after a short delay
+    // to ensure blog search listener is ready
+    if (!isSearching && query && results.length >= 0) {
+      setTimeout(() => {
+        document.dispatchEvent(event);
+      }, 50);
+    }
+  }
+
+  async function loadFuseAndSearch(query: string): Promise<void> {
+    if (!fuseLoadPromise) {
+      fuseLoadPromise = (async () => {
+        const w = window as WindowWithSearch;
+        let postsData = w.__SEARCH_POSTS__ || [];
+        if (!postsData || postsData.length === 0) {
+          postsData = await loadSearchIndex();
+        }
+        await ensureFuse(postsData);
+      })().catch(err => {
+        console.error('Failed to load Fuse.js:', err);
+      });
+    }
+    await fuseLoadPromise;
+    performSearch(query);
+  }
+
   function initSearch() {
-    // Remove any existing listeners before re-initializing
     if (cleanupSearch) {
       cleanupSearch();
       cleanupSearch = null;
     }
 
-    // Only initialize if the SearchInput component exists on the page
     const container = document.getElementById('search-container');
-    if (!container) {
-      return;
-    }
+    if (!container) return;
 
+    searchState.mode =
+      (container.dataset.mode as 'inline' | 'redirect') || 'redirect';
+
+    const searchForm = document.getElementById(
+      'search-form',
+    ) as HTMLFormElement;
     const searchInput = document.getElementById(
       'search-input',
     ) as HTMLInputElement;
     const searchClear = document.getElementById(
       'search-clear',
     ) as HTMLButtonElement;
-    const searchResults = document.getElementById(
-      'search-results',
-    ) as HTMLDivElement;
-    const searchResultsContent = document.getElementById(
-      'search-results-content',
-    ) as HTMLDivElement;
     const searchLoading = document.getElementById(
       'search-loading',
     ) as HTMLDivElement;
 
-    if (
-      !searchInput ||
-      !searchClear ||
-      !searchResults ||
-      !searchResultsContent ||
-      !searchLoading
-    ) {
+    if (!searchForm || !searchInput || !searchClear || !searchLoading) {
       return;
     }
 
-    // Initialize search
-    // Wait for data to be available
     const initOnce = async () => {
       const w = window as WindowWithSearch;
       const postsData = w.__SEARCH_POSTS__ || [];
 
       if (!postsData || postsData.length === 0) {
-        // Fire-and-forget fetch to prime the cache; performSearch will also fetch on demand
         loadSearchIndex().catch(() => {});
       }
 
-      // Always enable search immediately to avoid dev polling loop
       searchState.isInitialized = true;
+
+      // Inline mode: check URL for initial search query
+      if (searchState.mode === 'inline') {
+        const initialQuery = getSearchQueryFromUrl();
+        if (initialQuery) {
+          searchInput.value = initialQuery;
+          searchClear.style.display = 'flex';
+          await loadFuseAndSearch(initialQuery);
+        }
+      }
     };
 
-    // Start initialization
     initOnce();
 
-    // Lazy load Fuse.js on first focus (don't block initial page load)
+    // Lazy load Fuse.js on first focus
     const onFirstFocus = () => {
       if (!fuseLoadPromise) {
         fuseLoadPromise = (async () => {
           const w = window as WindowWithSearch;
           let postsData = w.__SEARCH_POSTS__ || [];
-          // If no data, or items don't include `content` (we inlined only metadata), fetch the canonical index
-          if (
-            !postsData ||
-            postsData.length === 0 ||
-            typeof postsData[0]?.content === 'undefined'
-          ) {
+          if (!postsData || postsData.length === 0) {
             postsData = await loadSearchIndex();
           }
           await ensureFuse(postsData);
@@ -314,31 +297,35 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
     };
     searchInput.addEventListener('focus', onFirstFocus, { once: true });
 
-    // Search input event handlers
-    let searchTimeout: number | null = null;
-    const onInput = (e: Event) => {
-      const query = (e.target as HTMLInputElement).value.trim();
-      searchState.currentQuery = query;
+    // Handle form submit
+    const onFormSubmit = (e: Event) => {
+      const query = searchInput.value.trim();
 
-      // Clear previous timeout
-      if (searchTimeout !== null) {
-        clearTimeout(searchTimeout);
-        searchTimeout = null;
-      }
-
-      // Show/hide clear button
-      if (query.length > 0) {
-        searchClear.style.display = 'flex';
-      } else {
-        searchClear.style.display = 'none';
-        hideResults();
+      if (searchState.mode === 'redirect') {
+        // Let form submit naturally to /blog/?search=query
+        if (!query) {
+          e.preventDefault();
+        }
         return;
       }
 
-      // Debounce search
-      searchTimeout = window.setTimeout(() => {
+      // Inline mode: prevent default and handle search
+      e.preventDefault();
+      searchState.currentQuery = query;
+      updateUrlWithQuery(query);
+
+      if (query.length >= 2) {
         performSearch(query);
-      }, 300);
+      } else if (query.length === 0) {
+        emitSearchResults('', [], false);
+      }
+    };
+    searchForm.addEventListener('submit', onFormSubmit);
+
+    // Input change handler - show/hide clear button
+    const onInput = () => {
+      const query = searchInput.value.trim();
+      searchClear.style.display = query.length > 0 ? 'flex' : 'none';
     };
     searchInput.addEventListener('input', onInput);
 
@@ -347,86 +334,46 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       searchInput.value = '';
       searchState.currentQuery = '';
       searchClear.style.display = 'none';
-      hideResults();
+
+      if (searchState.mode === 'inline') {
+        updateUrlWithQuery('');
+        emitSearchResults('', [], false);
+      }
+
+      searchInput.focus();
     };
     searchClear.addEventListener('click', onClearClick);
 
-    // Hide results when clicking outside
-    const onDocumentClick = (e: MouseEvent) => {
-      const target = e.target as Element;
-      // Use stable container id for click-outside detection
-      const container = document.getElementById('search-container');
-      if (container && !container.contains(target)) {
-        hideResults();
-      }
-    };
-    document.addEventListener('click', onDocumentClick);
-
-    // Handle escape key
-    const onDocumentKeyDown = (e: KeyboardEvent) => {
+    // Escape key to clear
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        hideResults();
         searchInput.blur();
       }
-
-      // Keyboard navigation
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        const items = Array.from(
-          document.querySelectorAll('.search-result-item'),
-        ) as HTMLElement[];
-        if (items.length === 0) return;
-        const active = items.findIndex(el =>
-          el.classList.contains('is-active'),
-        );
-        let nextIndex = e.key === 'ArrowDown' ? active + 1 : active - 1;
-        if (active === -1) {
-          nextIndex = e.key === 'ArrowDown' ? 0 : items.length - 1;
-        }
-        if (nextIndex < 0) nextIndex = items.length - 1;
-        if (nextIndex >= items.length) nextIndex = 0;
-        items.forEach(el => el.classList.remove('is-active'));
-        const next = items[nextIndex];
-        next.classList.add('is-active');
-        next.scrollIntoView({ block: 'nearest' });
-        e.preventDefault();
-      }
-
-      if (e.key === 'Enter') {
-        const active = document.querySelector(
-          '.search-result-item.is-active',
-        ) as HTMLElement | null;
-        if (active) {
-          const slug = active.getAttribute('data-slug');
-          if (slug) window.location.href = `/blog/${slug}/`;
-        }
-      }
     };
-    document.addEventListener('keydown', onDocumentKeyDown);
+    document.addEventListener('keydown', onKeyDown);
 
     cleanupSearch = () => {
-      if (searchTimeout !== null) {
-        clearTimeout(searchTimeout);
-        searchTimeout = null;
-      }
+      searchForm.removeEventListener('submit', onFormSubmit);
       searchInput.removeEventListener('input', onInput);
       searchClear.removeEventListener('click', onClearClick);
-      document.removeEventListener('click', onDocumentClick);
-      document.removeEventListener('keydown', onDocumentKeyDown);
+      document.removeEventListener('keydown', onKeyDown);
       cleanupSearch = null;
     };
   }
 
   function performSearch(query: string) {
     if (!searchState.isInitialized || query.length < 2) {
+      if (searchState.mode === 'inline' && query.length > 0) {
+        emitSearchResults(query, [], false);
+      }
       return;
     }
 
-    searchState.isSearching = true;
-    showLoading();
+    // Store query in state
+    searchState.currentQuery = query;
+    emitSearchResults(query, [], true); // Signal searching state
 
-    // Fuse-based client-side search with lazy import
     setTimeout(async () => {
-      // Wait for Fuse to be ready if still loading
       if (fuseLoadPromise) {
         await fuseLoadPromise;
       }
@@ -434,216 +381,43 @@ const { placeholder = 'Search articles...' } = Astro.props as Props;
       let results: SearchResult[] = [];
       if (fuseReady && fuse) {
         const raw = fuse.search(query);
-        // Fuse returns sorted results (lower score = more relevant)
         results = raw.map(r => ({
           item: r.item,
           score: r.score,
           matches: r.matches,
         }));
       }
-      handleSearchResults(results);
+      // Use the query parameter, not searchState.currentQuery
+      emitSearchResults(query, results, false);
     }, 100);
   }
 
-  function handleSearchResults(results: SearchResult[]) {
-    searchState.isSearching = false;
-    hideLoading();
-
-    const searchResults = document.getElementById(
-      'search-results',
-    ) as HTMLDivElement;
-    const searchResultsContent = document.getElementById(
-      'search-results-content',
-    ) as HTMLDivElement;
-
-    if (!searchResults || !searchResultsContent) return;
-
-    if (results.length === 0) {
-      searchResultsContent.innerHTML = `
-        <div class="search-no-results">
-          <p>Tidak ada artikel untuk "${searchState.currentQuery}"</p>
-        </div>
-      `;
-    } else {
-      searchResultsContent.innerHTML = results
-        .map(result => {
-          return `
-        <div class="search-result-item" role="option" tabindex="0" data-slug="${result.item.slug}">
-          <div class="search-result-body">
-            <h3 class="search-result-title">${highlightMatches(result.item.title, result.matches, 'title')}</h3>
-            ${result.item.excerpt ? `<p class="search-result-excerpt">${highlightMatches(result.item.excerpt, result.matches, 'excerpt')}</p>` : ''}
-            <div class="search-result-meta">
-              ${result.item.category ? `<span class="search-result-category">${result.item.category}</span>` : ''}
-              ${result.item.dateLabel ? `<span class="search-result-date">${result.item.dateLabel}</span>` : ''}
-            </div>
-          </div>
-        </div>`;
-        })
-        .join('');
-
-      // Add click handlers to result items
-      searchResultsContent
-        .querySelectorAll('.search-result-item')
-        .forEach(item => {
-          item.addEventListener('click', () => {
-            const slug = item.getAttribute('data-slug');
-            if (slug) {
-              window.location.href = `/blog/${slug}/`;
-            }
-          });
-          item.addEventListener('mouseover', () => {
-            document
-              .querySelectorAll('.search-result-item')
-              .forEach(el => el.classList.remove('is-active'));
-            item.classList.add('is-active');
-          });
-        });
-    }
-
-    showResults();
-    // Update ARIA expanded
-    const searchInput = document.getElementById(
-      'search-input',
-    ) as HTMLInputElement | null;
-    if (searchInput) searchInput.setAttribute('aria-expanded', 'true');
-  }
-
-  function highlightMatches(
-    text: string,
-    matches: readonly FuseResultMatch[] | undefined,
-    key: string,
-  ): string {
-    if (!matches) return escapeHtml(text);
-
-    const match = matches.find(m => m.key === key);
-    if (!match || !match.indices || match.indices.length === 0) {
-      return escapeHtml(text);
-    }
-
-    const isWordChar = (ch: string) => /\p{L}|\p{N}|_/u.test(ch);
-    const expandToWordBoundaries = (
-      t: string,
-      s: number,
-      e: number,
-    ): [number, number] => {
-      let start = s;
-      let end = e;
-      while (start > 0 && isWordChar(t[start - 1])) start--;
-      while (end + 1 < t.length && isWordChar(t[end + 1])) end++;
-      return [start, end];
-    };
-
-    // Extend to word boundaries and merge intersecting ranges
-    const ranges: [number, number][] = match.indices
-      .map(([s, e]: [number, number]) => expandToWordBoundaries(text, s, e))
-      .sort((a: [number, number], b: [number, number]) => a[0] - b[0]);
-
-    const merged: [number, number][] = [];
-    for (const [s, e] of ranges) {
-      if (merged.length === 0) {
-        merged.push([s, e]);
-      } else {
-        const last = merged[merged.length - 1];
-        if (s <= last[1] + 1) {
-          last[1] = Math.max(last[1], e);
-        } else {
-          merged.push([s, e]);
-        }
-      }
-    }
-
-    let highlighted = '';
-    let lastIndex = 0;
-
-    for (const [start, end] of merged) {
-      highlighted += escapeHtml(text.slice(lastIndex, start));
-      highlighted += `<mark class="search-highlight">${escapeHtml(text.slice(start, end + 1))}</mark>`;
-      lastIndex = end + 1;
-    }
-
-    highlighted += escapeHtml(text.slice(lastIndex));
-    return highlighted;
-  }
-
-  function showResults() {
-    const searchResults = document.getElementById(
-      'search-results',
-    ) as HTMLDivElement;
-    if (searchResults) {
-      searchResults.style.display = 'block';
-    }
-  }
-
-  function hideResults() {
-    const searchResults = document.getElementById(
-      'search-results',
-    ) as HTMLDivElement;
-    if (searchResults) {
-      searchResults.style.display = 'none';
-    }
-    const searchInput = document.getElementById(
-      'search-input',
-    ) as HTMLInputElement | null;
-    if (searchInput) searchInput.setAttribute('aria-expanded', 'false');
-  }
-
-  function showLoading() {
-    const searchLoading = document.getElementById(
-      'search-loading',
-    ) as HTMLDivElement;
-    if (searchLoading) {
-      searchLoading.style.display = 'flex';
-    }
-  }
-
-  function hideLoading() {
-    const searchLoading = document.getElementById(
-      'search-loading',
-    ) as HTMLDivElement;
-    if (searchLoading) {
-      searchLoading.style.display = 'none';
-    }
-  }
-
-  // Initialize search function
   function initSearchFunction() {
-    // Only run when the component's container is present
     const container = document.getElementById('search-container');
     if (!container) return;
+    if (container.hasAttribute('data-initialized')) return;
+    container.setAttribute('data-initialized', 'true');
     initSearch();
   }
 
-  // Setup router reinit for ClientRouter compatibility
   let routerSetup = false;
   function setupRouterReinit() {
     if (routerSetup) return;
     routerSetup = true;
 
-    const run = () => initSearchFunction();
+    const run = () => {
+      const container = document.getElementById('search-container');
+      if (container) {
+        container.removeAttribute('data-initialized');
+      }
+      initSearchFunction();
+    };
 
-    // Astro transitions events (if ClientRouter is used)
     document.addEventListener('astro:page-load', run);
     document.addEventListener('astro:after-swap', run);
-
     onRouteChange(run);
-
-    // Observe DOM changes to catch newly injected content
-    const debounced = (() => {
-      let t: number | null = null;
-      return () => {
-        if (t) window.clearTimeout(t);
-        t = window.setTimeout(() => {
-          run();
-          t = null;
-        }, 25);
-      };
-    })();
-
-    const observer = new MutationObserver(debounced);
-    observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       initSearchFunction();

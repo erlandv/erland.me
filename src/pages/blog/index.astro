@@ -4,11 +4,13 @@ import BackNav from '@components/BackNav/BackNav.astro';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
+import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import { loadAllPosts, slicePage } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import listing from '@/styles/pages/listing.module.css';
+import blogIndex from '@/pages/blog/styles/_blog-index.module.css';
 
 const posts = await loadAllPosts();
 
@@ -48,12 +50,29 @@ const getCategory = (post: any) => post.data?.category ?? null;
     <!-- Page Title -->
     <h1>Blog Posts</h1>
 
-    <!-- Client-Side Search - Fuzzy search with Fuse.js (preloads search-index.json) -->
-    <SearchInput placeholder='Cari artikel...' />
+    <!-- Client-Side Search - Fuzzy search with Fuse.js (inline mode for URL-based search) -->
+    <SearchInput placeholder='Cari artikel...' mode='inline' />
 
-    <!-- Blog Posts Grid Section - Displays paginated post preview cards -->
+    <!-- Search Status - Shows result count when searching -->
+    <div
+      id='search-status'
+      class={blogIndex['search-status']}
+      style='display: none;'
+    >
+      <span id='search-result-count'></span>
+      <button
+        type='button'
+        id='clear-search-btn'
+        class={blogIndex['clear-search-btn']}
+      >
+        Tampilkan semua artikel
+      </button>
+    </div>
+
+    <!-- Blog Posts Grid Section -->
     <section class={listing['items-container']}>
-      <div class={listing['resouce-items']}>
+      <!-- Default paginated posts (shown when not searching) -->
+      <div id='default-posts' class={listing['resouce-items']}>
         {
           paginated.map(post => {
             const hero = getHero(post);
@@ -75,20 +94,284 @@ const getCategory = (post: any) => post.data?.category ?? null;
           })
         }
 
-        {/* Empty State - Message when no posts available */}
         {
           posts.length === 0 && (
             <p style='opacity:.8;'>There are no articles to read yet</p>
           )
         }
       </div>
+
+      <!-- All posts for search (hidden, used for filtering) -->
+      <div
+        id='all-posts-container'
+        class={listing['resouce-items']}
+        style='display: none;'
+      >
+        {
+          posts.map(post => {
+            const hero = getHero(post);
+            const excerpt = getExcerpt(post);
+            const dateLabel = post.date
+              ? post.date.toLocaleDateString('id-ID', { dateStyle: 'medium' })
+              : null;
+            return (
+              <div class='searchable-post' data-slug={post.slug}>
+                <PostCard
+                  href={`/blog/${post.slug}/`}
+                  title={post.data.title}
+                  hero={hero}
+                  alt={post.data.heroAlt ?? post.data.title}
+                  category={getCategory(post)}
+                  dateLabel={dateLabel}
+                  excerpt={excerpt}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <!-- Search results container (cloned posts will be placed here) -->
+      <div
+        id='search-results-grid'
+        class={listing['resouce-items']}
+        style='display: none;'
+      >
+      </div>
+
+      <!-- No results message -->
+      <div
+        id='no-results-message'
+        class={blogIndex['no-results']}
+        style='display: none;'
+      >
+        <p>Tidak ada artikel yang cocok dengan pencarian Anda.</p>
+      </div>
     </section>
 
-    {/* Conditional: Pagination controls (only if more than one page) */}
-    {
-      posts.length > pageSize && (
-        <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
-      )
-    }
+    <!-- Pagination controls (hidden during search) -->
+    <div id='pagination-container'>
+      {
+        posts.length > pageSize && (
+          <Pagination page={page} totalPages={totalPages} pageHref={pageHref} />
+        )
+      }
+    </div>
   </div>
+
+  <ScrollTopButton />
 </SiteLayout>
+
+<script>
+  interface SearchResultsEventDetail {
+    query: string;
+    results: Array<{
+      item: { slug: string };
+      score?: number;
+    }>;
+    isSearching: boolean;
+  }
+
+  // Track initialization to prevent duplicate event listeners
+  let blogSearchInitialized = false;
+  let cleanupBlogSearch: (() => void) | null = null;
+
+  function initBlogSearch() {
+    // Cleanup previous listeners if any
+    if (cleanupBlogSearch) {
+      cleanupBlogSearch();
+      cleanupBlogSearch = null;
+    }
+
+    // Prevent duplicate initialization
+    if (blogSearchInitialized) {
+      return;
+    }
+
+    const defaultPosts = document.getElementById(
+      'default-posts',
+    ) as HTMLDivElement | null;
+    const allPostsContainer = document.getElementById(
+      'all-posts-container',
+    ) as HTMLDivElement | null;
+    const searchResultsGrid = document.getElementById(
+      'search-results-grid',
+    ) as HTMLDivElement | null;
+    const paginationContainer = document.getElementById(
+      'pagination-container',
+    ) as HTMLDivElement | null;
+    const searchStatus = document.getElementById(
+      'search-status',
+    ) as HTMLDivElement | null;
+    const searchResultCount = document.getElementById(
+      'search-result-count',
+    ) as HTMLSpanElement | null;
+    const clearSearchBtn = document.getElementById(
+      'clear-search-btn',
+    ) as HTMLButtonElement | null;
+    const noResultsMessage = document.getElementById(
+      'no-results-message',
+    ) as HTMLDivElement | null;
+
+    if (
+      !defaultPosts ||
+      !allPostsContainer ||
+      !searchResultsGrid ||
+      !paginationContainer ||
+      !searchStatus ||
+      !searchResultCount ||
+      !clearSearchBtn ||
+      !noResultsMessage
+    ) {
+      return;
+    }
+
+    blogSearchInitialized = true;
+
+    const $defaultPosts = defaultPosts;
+    const $allPostsContainer = allPostsContainer;
+    const $searchResultsGrid = searchResultsGrid;
+    const $paginationContainer = paginationContainer;
+    const $searchStatus = searchStatus;
+    const $searchResultCount = searchResultCount;
+    const $clearSearchBtn = clearSearchBtn;
+    const $noResultsMessage = noResultsMessage;
+
+    function showSearchResults(
+      results: SearchResultsEventDetail['results'],
+      query: string,
+    ) {
+      // Get matching slugs in order
+      const matchingSlugs = results.map(r => r.item.slug);
+
+      // Only update if results actually changed
+      const currentSlugs = Array.from($searchResultsGrid.children).map(
+        el => el.getAttribute('data-cloned-slug') || '',
+      );
+      const newSlugsStr = matchingSlugs.join(',');
+      const currentSlugsStr = currentSlugs.join(',');
+
+      if (
+        newSlugsStr === currentSlugsStr &&
+        $searchResultsGrid.style.display !== 'none'
+      ) {
+        // Results haven't changed, skip re-render
+        return;
+      }
+
+      // Clear previous results
+      $searchResultsGrid.innerHTML = '';
+
+      // Clone matching posts from all-posts-container
+      matchingSlugs.forEach(slug => {
+        const sourcePost = $allPostsContainer.querySelector(
+          `[data-slug="${slug}"]`,
+        );
+        if (sourcePost) {
+          const postCard = sourcePost.querySelector('.post-card');
+          if (postCard) {
+            const clone = postCard.cloneNode(true) as HTMLElement;
+            // Mark clone with slug for change detection
+            clone.setAttribute('data-cloned-slug', slug);
+            $searchResultsGrid.appendChild(clone);
+          }
+        }
+      });
+
+      // Update UI visibility
+      $defaultPosts.style.display = 'none';
+      $paginationContainer.style.display = 'none';
+      $searchStatus.style.display = 'flex';
+
+      // Update result count
+      const countText =
+        matchingSlugs.length === 0
+          ? `Tidak ada hasil untuk "${query}"`
+          : `${matchingSlugs.length} hasil untuk "${query}"`;
+      $searchResultCount.textContent = countText;
+
+      // Show results or no-results message
+      if (matchingSlugs.length === 0) {
+        $searchResultsGrid.style.display = 'none';
+        $noResultsMessage.style.display = 'block';
+      } else {
+        $searchResultsGrid.style.display = 'flex';
+        $noResultsMessage.style.display = 'none';
+      }
+    }
+
+    function showDefaultPosts() {
+      $defaultPosts.style.display = 'flex';
+      $paginationContainer.style.display = 'block';
+      $searchResultsGrid.style.display = 'none';
+      $searchStatus.style.display = 'none';
+      $noResultsMessage.style.display = 'none';
+      $searchResultsGrid.innerHTML = '';
+    }
+
+    function clearSearch() {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('search');
+      history.replaceState({}, '', url.toString());
+
+      const searchInput = document.getElementById(
+        'search-input',
+      ) as HTMLInputElement | null;
+      if (searchInput) {
+        searchInput.value = '';
+        const clearBtn = document.getElementById('search-clear');
+        if (clearBtn) clearBtn.style.display = 'none';
+      }
+
+      showDefaultPosts();
+    }
+
+    const handleSearchResults = (e: Event) => {
+      const customEvent = e as CustomEvent<SearchResultsEventDetail>;
+      const { query, results, isSearching } = customEvent.detail;
+
+      if (isSearching) {
+        return;
+      }
+
+      if (!query || query.length < 2) {
+        showDefaultPosts();
+        return;
+      }
+
+      showSearchResults(results, query);
+    };
+
+    const handleClearClick = () => clearSearch();
+
+    document.addEventListener('search:results', handleSearchResults);
+    $clearSearchBtn.addEventListener('click', handleClearClick);
+
+    // Store cleanup function
+    cleanupBlogSearch = () => {
+      document.removeEventListener('search:results', handleSearchResults);
+      $clearSearchBtn.removeEventListener('click', handleClearClick);
+      blogSearchInitialized = false;
+    };
+  }
+
+  function init() {
+    initBlogSearch();
+  }
+
+  // Reset state on page navigation
+  function resetOnNavigation() {
+    blogSearchInitialized = false;
+    if (cleanupBlogSearch) {
+      cleanupBlogSearch();
+      cleanupBlogSearch = null;
+    }
+    init();
+  }
+
+  // Initialize immediately (before SearchInput)
+  init();
+
+  document.addEventListener('astro:page-load', resetOnNavigation);
+  document.addEventListener('astro:after-swap', resetOnNavigation);
+</script>

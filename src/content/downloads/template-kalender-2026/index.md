@@ -9,8 +9,8 @@ hero: ./hero.png
 heroAlt: 'Template Kalender 2026'
 draft: false
 rating:
-  ratingValue: 5
-  reviewCount: 513
+  ratingValue: 4.9
+  reviewCount: 1920
   bestRating: 5
   worstRating: 1
 downloadFiles:

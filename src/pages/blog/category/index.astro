@@ -1,13 +1,13 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import BackNav from '@components/BackNav/BackNav.astro';
-import PostCard from '@components/PostCard/PostCard.astro';
-import Pagination from '@components/Pagination/Pagination.astro';
+import Icon from '@components/Icon.astro';
+import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import listing from '@/styles/pages/listing.module.css';
-import catStyles from '@/pages/blog/styles/_category.module.css';
-import { loadAllPosts, slugifyCategory, slicePage } from '@lib/content/blog';
+import categoryIndex from '@/pages/blog/styles/_category-index.module.css';
+import { loadAllPosts, slugifyCategory } from '@lib/content/blog';
 import { categoriesIndexJsonLd, breadcrumbJsonLd } from '@lib/content/seo';
 import type { ImageMetadata } from 'astro';
 
@@ -68,22 +68,9 @@ for (const p of posts) {
   }
 }
 
-const categories = Array.from(categoriesMap.values()).sort((a, b) =>
-  a.name.localeCompare(b.name, 'id'),
+const categories = Array.from(categoriesMap.values()).sort(
+  (a, b) => b.count - a.count, // Sort by post count (most popular first)
 );
-
-// Build paginated posts for each category to mirror /blog/
-const pageSize = 10;
-const byCategory = categories.map(cat => {
-  const catPosts = posts.filter(
-    p => slugifyCategory(String(p.data?.category || '')) === cat.slug,
-  );
-  const totalPages = Math.max(1, Math.ceil(catPosts.length / pageSize));
-  const pages = Array.from({ length: totalPages }, (_, i) =>
-    slicePage(catPosts, i + 1, pageSize),
-  );
-  return { cat, pages, totalPages };
-});
 ---
 
 <SiteLayout
@@ -91,6 +78,7 @@ const byCategory = categories.map(cat => {
   canonical='/blog/category/'
   description={PAGE_METADATA.blog.categoryIndex.description}
   selectedItem='blog'
+  preloadSearch
   jsonLd={[
     categoriesIndexJsonLd(
       'Blog Categories',
@@ -110,71 +98,82 @@ const byCategory = categories.map(cat => {
   <BackNav href='/blog/' />
 
   <div class='content-container'>
-    <h1>Blog Categories</h1>
+    <h1>Browse by Category</h1>
 
-    <div id='category-filter' class={catStyles.filterContainer}>
-      {
-        categories.map(c => (
-          <a
-            href={`#cat-${c.slug}-page-1`}
-            class:list={['cat-filter-btn', 'btn']}
-            data-cat={c.slug}
-          >
-            {c.name}
-          </a>
-        ))
-      }
-    </div>
+    <SearchInput placeholder='Cari artikel...' />
 
     <section class={listing['items-container']}>
-      {
-        byCategory.map(({ cat, pages, totalPages }) =>
-          pages.map((pagePosts, idx) => {
-            const page = idx + 1;
-            const pageHref = (n: number) => `#cat-${cat.slug}-page-${n}`;
-            return (
-              <div
-                class={listing['resouce-items']}
-                data-cat-page
-                data-cat={cat.slug}
-                data-page={String(page)}
-                style='display:none;'
-              >
-                {pagePosts.map(post => {
-                  const hero = post.data?.hero ?? null;
-                  const excerpt = getExcerpt(post);
-                  const dateLabel = post.date
-                    ? post.date.toLocaleDateString('id-ID', {
-                        dateStyle: 'medium',
-                      })
-                    : null;
-                  return (
-                    <PostCard
-                      href={`/blog/${post.slug}/`}
-                      title={post.data.title}
-                      hero={hero}
-                      alt={post.data.heroAlt ?? post.data.title}
-                      category={post.data?.category ?? null}
-                      dateLabel={dateLabel}
-                      excerpt={excerpt}
+      <div class={categoryIndex['category-grid']}>
+        {
+          categories.map(c => (
+            <a
+              href={`/blog/category/${c.slug}/`}
+              class={categoryIndex['category-card']}
+            >
+              <div class={categoryIndex['category-card__inner']}>
+                {c.hero ? (
+                  <div class={categoryIndex['category-card__thumb']}>
+                    <img
+                      src={c.hero.src}
+                      alt={c.name}
+                      class={categoryIndex['category-card__img']}
+                      loading='lazy'
                     />
-                  );
-                })}
-                {pagePosts.length === 0 && (
-                  <p style='opacity:.8;'>Tidak ada artikel.</p>
+                  </div>
+                ) : (
+                  <div class={categoryIndex['category-card__thumb']}>
+                    <div
+                      class={categoryIndex['category-card__thumb--placeholder']}
+                    />
+                  </div>
                 )}
-                {totalPages > 1 && (
-                  <Pagination
-                    page={page}
-                    totalPages={totalPages}
-                    pageHref={pageHref}
-                  />
-                )}
+
+                <div class={categoryIndex['category-card__body']}>
+                  <div class={categoryIndex['category-card__header']}>
+                    <h2 class={categoryIndex['category-card__title']}>
+                      {c.name}
+                    </h2>
+                    <p class={categoryIndex['category-card__count']}>
+                      {c.count} {c.count === 1 ? 'artikel' : 'artikel'}
+                    </p>
+                  </div>
+
+                  {c.latest && (
+                    <div class={categoryIndex['category-card__latest']}>
+                      <span
+                        class={categoryIndex['category-card__latest-label']}
+                      >
+                        Latest Post:
+                      </span>
+                      <p class={categoryIndex['category-card__latest-title']}>
+                        {c.latest.title}
+                      </p>
+                      {c.latest.date && (
+                        <p class={categoryIndex['category-card__latest-date']}>
+                          {c.latest.date.toLocaleDateString('id-ID', {
+                            dateStyle: 'medium',
+                          })}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  <div class={categoryIndex['category-card__footer']}>
+                    <span class={categoryIndex['category-card__link']}>
+                      View all posts
+                      <Icon
+                        name='blogReadmore'
+                        class={categoryIndex['category-card__link-icon']}
+                      />
+                    </span>
+                  </div>
+                </div>
               </div>
-            );
-          }),
-        )
-      }
+            </a>
+          ))
+        }
+      </div>
+
       {
         categories.length === 0 && (
           <p style='opacity:.8;'>Tidak ada kategori yang tersedia.</p>

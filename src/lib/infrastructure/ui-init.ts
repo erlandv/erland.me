@@ -20,7 +20,6 @@
  * - Theme toggle (preference flyout)
  * - Theme control (API initialization)
  * - Stories viewer (Instagram-like interface)
- * - Category filter (hash-based routing)
  * - Download tracker (GTM analytics)
  *
  * **Critical Pattern for View Transitions:**
@@ -55,7 +54,6 @@ import { initThemeControl } from '@lib/features/theme/theme-init';
 interface WindowWithInitializers extends Window {
   __tableResponsiveInit?: () => void;
   __themeToggleInit?: () => Promise<void>;
-  __categoryFilterInit?: () => void;
   __downloadTrackerInit?: () => void;
 }
 
@@ -71,7 +69,6 @@ type LoadedFlags = {
   themeToggle: boolean;
   themeControl: boolean;
   stories: boolean;
-  categoryFilter: boolean;
   downloadTracker: boolean;
 };
 
@@ -83,7 +80,6 @@ const loaded: LoadedFlags = {
   themeToggle: false,
   themeControl: false,
   stories: false,
-  categoryFilter: false,
   downloadTracker: false,
 };
 
@@ -101,7 +97,6 @@ const SELECTORS = {
   table: ['.prose table'],
   themeToggle: ['.theme-toggle'],
   stories: ['[data-stories]'],
-  categoryFilter: ['#category-filter', '[data-cat-page]'],
   downloadTracker: [
     'a[href*=".zip"]',
     'a[href*=".cdr"]',
@@ -242,28 +237,6 @@ async function maybeLoadStories(): Promise<void> {
     { operation: 'load-and-init', recoverable: true },
   );
 }
-
-async function maybeLoadCategoryFilter(): Promise<void> {
-  if (!hasTarget(SELECTORS.categoryFilter)) return;
-
-  await safeFeatureInit(
-    'categoryFilter',
-    async () => {
-      // Import module once, but always re-run the initializer
-      const w = window as WindowWithInitializers;
-      if (!loaded.categoryFilter) {
-        const mod = await import('@lib/features/category-filter');
-        loaded.categoryFilter = true;
-        // Store reference to the autoInit function for subsequent calls
-        w.__categoryFilterInit = mod.autoInit;
-      }
-      // Always execute the initializer to handle view transitions
-      w.__categoryFilterInit?.();
-    },
-    { operation: 'load-and-init', recoverable: true },
-  );
-}
-
 async function maybeLoadDownloadTracker(): Promise<void> {
   if (!hasTarget(SELECTORS.downloadTracker)) return;
 
@@ -295,7 +268,6 @@ function gateAll(): void {
   void maybeLoadLightbox();
   void maybeLoadTable();
   void maybeLoadStories();
-  void maybeLoadCategoryFilter();
   void maybeLoadDownloadTracker();
 }
 

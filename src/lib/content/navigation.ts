@@ -73,12 +73,12 @@ export const navigationLinks: NavLink[] = [
     icon: 'navPersonal',
     ariaLabel: 'Personal Projects',
   },
-  {
+  /** {
     id: 'download',
     href: '/download/',
     label: 'Download',
     icon: 'navDownload',
-  },
+  }, */
   {
     id: 'blog',
     href: '/blog/',
