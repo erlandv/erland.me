@@ -30,7 +30,7 @@ import Icon from '@components/Icon.astro';
 import { slugifyCategory } from '@lib/content/blog';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { getCardImageConfig } from '@lib/content/images';
+import { getCardImageConfig, DEFAULT_HERO_PATH } from '@lib/content/images';
 import styles from './post-card.module.css';
 
 interface Props {
@@ -56,7 +56,7 @@ const { widths, sizes } = getCardImageConfig();
 <!-- Blog Post Preview Card - Grid item for blog listing pages -->
 <article class:list={[styles['resource-card'], 'resource-card', 'post-card']}>
   <div class={styles['post-card__inner']}>
-    <!-- Thumbnail Section - Conditional: Optimized hero image if available, placeholder otherwise -->
+    <!-- Thumbnail Section - Hero image with fallback to default hero -->
     <div class={styles['post-card__thumb']}>
       {
         hero ? (
@@ -69,9 +69,11 @@ const { widths, sizes } = getCardImageConfig();
             class={styles['post-card__img']}
           />
         ) : (
-          <div
-            class={styles['post-card__thumb--placeholder']}
-            aria-hidden='true'
+          <img
+            src={DEFAULT_HERO_PATH}
+            alt={alt}
+            loading='lazy'
+            class={styles['post-card__img']}
           />
         )
       }
