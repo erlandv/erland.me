@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createBlogPostBreadcrumb } from '@lib/content/breadcrumb';
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
@@ -65,8 +66,8 @@ const jsonLd = blogPostingJsonLd({
   tags={frontmatter.tags}
   author={SITE_CONFIG.author.name}
 >
-  <!-- Back Navigation - Return to blog listing page -->
-  <BackNav href='/blog/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Blog > Post Title -->
+  <Breadcrumb items={createBlogPostBreadcrumb(frontmatter.title)} />
 
   <!-- Blog Post Article - Full post content with SEO markup -->
   <article class:list={['content-container', 'article-detail']}>

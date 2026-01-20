@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createBlogCategoryIndexBreadcrumb } from '@lib/content/breadcrumb';
 import Icon from '@components/Icon.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
 import { SITE_CONFIG } from '@lib/core/site-config';
@@ -95,7 +96,8 @@ const categories = Array.from(categoriesMap.values()).sort(
     ]),
   ]}
 >
-  <BackNav href='/blog/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Blog > Categories -->
+  <Breadcrumb items={createBlogCategoryIndexBreadcrumb()} />
 
   <div class='content-container'>
     <h1>Browse by Category</h1>
