@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import fold from '@/styles/components/fold.module.css';
 ---
@@ -11,7 +11,9 @@ import fold from '@/styles/components/fold.module.css';
   description={PAGE_METADATA.offline.description}
   showSidebar={true}
 >
-  <BackNav href='/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Offline -->
+  <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Offline' }]} />
+
   <main class={fold['fold-content-container']}>
     <div class={fold['fold-content']}>
       <h1>You're Offline</h1>
