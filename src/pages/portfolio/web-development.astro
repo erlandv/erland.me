@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Project from '@components/Project/Project.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createPortfolioBreadcrumb } from '@lib/content/breadcrumb';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import listing from '@/styles/pages/listing.module.css';
@@ -19,7 +20,9 @@ const projects = await getProjectsByCategory('web-development');
   selectedItem='web-development'
   description={PAGE_METADATA.portfolio.webDevelopment.description}
 >
-  <BackNav href='/portfolio/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Portfolio > Web Development -->
+  <Breadcrumb items={createPortfolioBreadcrumb('Web Development')} />
+
   <div class='content-container'>
     <h1>Web Development</h1>
     <section class={listing['items-container']}>
