@@ -4,6 +4,7 @@ import BackNav from '@components/BackNav/BackNav.astro';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
+import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import { loadAllPosts } from '@lib/content/blog';
 import { collectionPageJsonLd } from '@lib/content/seo';
 import { SITE_CONFIG } from '@lib/core/site-config';
@@ -109,4 +110,6 @@ const { title, description } = generateBlogPageMeta(page);
       </div>
     </section>
   </div>
+
+  <ScrollTopButton />
 </SiteLayout>
