@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createBlogPageBreadcrumb } from '@lib/content/breadcrumb';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
@@ -60,7 +61,8 @@ const { title, description } = generateBlogPageMeta(page);
   selectedItem='blog'
   preloadSearch
 >
-  <BackNav href='/blog/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Blog > Page N -->
+  <Breadcrumb items={createBlogPageBreadcrumb(page)} />
 
   <div class='content-container'>
     <h1>Page {page} Blog Archives</h1>

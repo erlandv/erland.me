@@ -38,6 +38,12 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 
 /**
+ * Default hero image path for fallback
+ * Used when content doesn't have a custom hero image
+ */
+export const DEFAULT_HERO_PATH = '/assets/content/hero-default.png';
+
+/**
  * Normalize optional hero image metadata to stable type
  *
  * Frontmatter schema validates with `image()` helper, ensuring type safety.
@@ -53,6 +59,22 @@ import { getImage } from 'astro:assets';
  */
 export function resolveHero(hero?: ImageMetadata | null): ImageMetadata | null {
   return hero ?? null;
+}
+
+/**
+ * Check if hero image exists
+ * Helper to determine if fallback should be used
+ *
+ * @param hero - Optional ImageMetadata from frontmatter
+ * @returns true if hero exists, false otherwise
+ * @example
+ * const hasHero = hasHeroImage(frontmatter.hero);
+ * if (!hasHero) {
+ *   // Use fallback
+ * }
+ */
+export function hasHeroImage(hero?: ImageMetadata | null): boolean {
+  return hero != null;
 }
 
 /**

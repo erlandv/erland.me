@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createBlogIndexBreadcrumb } from '@lib/content/breadcrumb';
 import PostCard from '@components/PostCard/PostCard.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
 import SearchInput from '@components/SearchInput/SearchInput.astro';
@@ -43,8 +44,8 @@ const getCategory = (post: any) => post.data?.category ?? null;
   selectedItem='blog'
   preloadSearch
 >
-  <!-- Back Navigation - Return to homepage -->
-  <BackNav href='/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path -->
+  <Breadcrumb items={createBlogIndexBreadcrumb()} />
 
   <div class='content-container'>
     <!-- Page Title -->

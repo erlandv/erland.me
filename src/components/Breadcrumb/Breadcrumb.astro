@@ -1,0 +1,96 @@
+---
+/**
+ * Breadcrumb Component
+ *
+ * Renders hierarchical breadcrumb navigation for multi-level pages.
+ * Provides visual navigation path and improves UX by showing page context.
+ *
+ * @component
+ * @example
+ * // Blog post detail
+ * <Breadcrumb items={[
+ *   { label: 'Home', href: '/' },
+ *   { label: 'Blog', href: '/blog/' },
+ *   { label: 'Post Title' }
+ * ]} />
+ *
+ * // Using helper utilities
+ * import { createBlogPostBreadcrumb } from '@lib/content/breadcrumb';
+ * <Breadcrumb items={createBlogPostBreadcrumb('My Post')} />
+ *
+ * @param {Object} props
+ * @param {BreadcrumbItem[]} props.items - Array of breadcrumb items (last item = current page)
+ * @param {string} [props.ariaLabel='Breadcrumb navigation'] - Accessible label for nav element
+ *
+ * **Accessibility:**
+ * - Uses semantic <nav> with aria-label
+ * - Ordered list (<ol>) for proper structure
+ * - aria-current="page" on last item
+ * - aria-hidden="true" on visual separators
+ * - Keyboard navigable via native <a> elements
+ */
+import type { BreadcrumbItem } from '@lib/content/breadcrumb';
+import { breadcrumbItemsToJsonLd } from '@lib/content/breadcrumb';
+import Icon from '@components/Icon.astro';
+import styles from './breadcrumb.module.css';
+
+interface Props {
+  items: BreadcrumbItem[];
+  ariaLabel?: string;
+  /**
+   * Enable JSON-LD structured data output for SEO.
+   * When true, generates Schema.org BreadcrumbList in <script type="application/ld+json">
+   * @default true
+   */
+  enableJsonLd?: boolean;
+}
+
+const {
+  items,
+  ariaLabel = 'Breadcrumb navigation',
+  enableJsonLd = true,
+} = Astro.props as Props;
+
+// Generate JSON-LD structured data for SEO
+const jsonLd = enableJsonLd ? breadcrumbItemsToJsonLd(items) : null;
+---
+
+<div class={styles['breadcrumb-container']}>
+  <nav aria-label={ariaLabel} class={styles.breadcrumb}>
+    <ol class={styles['breadcrumb-list']}>
+      {
+        items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (
+            <li class={styles['breadcrumb-item']}>
+              {isLast ? (
+                <span aria-current='page'>{item.label}</span>
+              ) : (
+                <>
+                  <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
+                    {item.label}
+                  </a>
+                  <Icon
+                    name='arrowRight'
+                    class={styles['breadcrumb-separator']}
+                  />
+                </>
+              )}
+            </li>
+          );
+        })
+      }
+    </ol>
+  </nav>
+</div>
+
+<!-- SEO: Structured Data (JSON-LD) for Breadcrumb Navigation -->
+{
+  jsonLd && (
+    <script
+      type='application/ld+json'
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
+  )
+}

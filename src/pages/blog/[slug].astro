@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createBlogPostBreadcrumb } from '@lib/content/breadcrumb';
 import { getCollection } from 'astro:content';
 import { blogPostingJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
@@ -15,7 +16,11 @@ import '@/styles/prose/ads.css';
 import ScrollTopButton from '@components/ScrollTopButton/ScrollTopButton.astro';
 import ContentImage from '@components/ContentImage.astro';
 import HeroImage from '@components/HeroImage.astro';
-import { getOgImageUrl, resolveHero } from '@lib/content/images';
+import {
+  getOgImageUrl,
+  resolveHero,
+  DEFAULT_HERO_PATH,
+} from '@lib/content/images';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -35,7 +40,7 @@ const hero = resolveHero(frontmatter.hero);
 const heroAlt = frontmatter.heroAlt ?? frontmatter.title;
 const optimizedHero = hero
   ? await getOgImageUrl(hero, 1200, 'avif')
-  : undefined;
+  : DEFAULT_HERO_PATH;
 const canonical = `/blog/${slug}/`;
 const canonicalUrl = `${SITE_URL}${canonical}`;
 
@@ -65,19 +70,27 @@ const jsonLd = blogPostingJsonLd({
   tags={frontmatter.tags}
   author={SITE_CONFIG.author.name}
 >
-  <!-- Back Navigation - Return to blog listing page -->
-  <BackNav href='/blog/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Blog > Post Title -->
+  <Breadcrumb items={createBlogPostBreadcrumb(frontmatter.title)} />
 
   <!-- Blog Post Article - Full post content with SEO markup -->
   <article class:list={['content-container', 'article-detail']}>
     <!-- Article Header - Hero image, title, and metadata -->
     <header class='article-header'>
-      {/* Conditional: Hero image (optimized for LCP, eager loaded) */}
+      {/* Hero image with fallback to default hero */}
       {
-        hero && (
+        hero ? (
           <HeroImage
             image={hero}
             alt={heroAlt}
+            loading='eager'
+            fetchpriority='high'
+          />
+        ) : (
+          <img
+            src={DEFAULT_HERO_PATH}
+            alt={heroAlt}
+            class='hero-image'
             loading='eager'
             fetchpriority='high'
           />
@@ -85,7 +98,9 @@ const jsonLd = blogPostingJsonLd({
       }
 
       <!-- Article Title -->
-      <h1>{frontmatter.title}</h1>
+      <h1 style='font-size: clamp(2rem, 5.5vw + 0.25rem, 3rem);'>
+        {frontmatter.title}
+      </h1>
 
       {/* Conditional: Article metadata (category and/or publish date) */}
       {

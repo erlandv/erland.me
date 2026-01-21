@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '@layouts/SiteLayout.astro';
-import BackNav from '@components/BackNav/BackNav.astro';
+import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
+import { createPortfolioIndexBreadcrumb } from '@lib/content/breadcrumb';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { PAGE_METADATA } from '@lib/content/page-metadata';
 import pf from './portfolio/styles/_portfolio.module.css';
@@ -15,8 +16,8 @@ import PortfolioCategoryCard from '@components/PortfolioCategoryCard.astro';
   selectedItem='portfolio'
   description={PAGE_METADATA.portfolio.index.description}
 >
-  <!-- Back Navigation -->
-  <BackNav href='/' />
+  <!-- Breadcrumb Navigation - Shows hierarchical path: Home > Portfolio -->
+  <Breadcrumb items={createPortfolioIndexBreadcrumb()} />
 
   <!-- Hero/Fold Section -->
   <main class={fold['fold-content-container']}>
