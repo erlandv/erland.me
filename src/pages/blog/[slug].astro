@@ -98,7 +98,9 @@ const jsonLd = blogPostingJsonLd({
       }
 
       <!-- Article Title -->
-      <h1>{frontmatter.title}</h1>
+      <h1 style='font-size: clamp(2rem, 5.5vw + 0.25rem, 3rem);'>
+        {frontmatter.title}
+      </h1>
 
       {/* Conditional: Article metadata (category and/or publish date) */}
       {

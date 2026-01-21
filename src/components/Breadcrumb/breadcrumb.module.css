@@ -26,7 +26,7 @@
 
 .breadcrumb-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 4px;
   list-style: none;
@@ -40,6 +40,12 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
+}
+
+.breadcrumb-item:last-child {
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .breadcrumb-item a {
@@ -55,6 +61,10 @@
 .breadcrumb-item [aria-current='page'] {
   color: var(--text-primary);
   font-weight: 500;
+  max-width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .breadcrumb-separator {
@@ -78,14 +88,15 @@
     width: 16px;
     height: 16px;
   }
+
+  .breadcrumb-item [aria-current='page'] {
+    max-width: 300px;
+  }
 }
 
 /* Truncate long breadcrumb items on very small screens */
 @media (max-width: 400px) {
   .breadcrumb-item [aria-current='page'] {
     max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 }
