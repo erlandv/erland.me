@@ -2,7 +2,7 @@
 import SiteLayout from '@layouts/SiteLayout.astro';
 import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
 import { createDownloadBreadcrumb } from '@lib/content/breadcrumb';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import { creativeWorkJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import StarRating from '@components/StarRating/StarRating.astro';
@@ -25,8 +25,8 @@ import { SITE_URL } from '@lib/core/env';
 export async function getStaticPaths() {
   const downloads = await getCollection('downloads');
   return downloads
-    .filter((item: any) => !item.data.draft)
-    .map((item: any) => ({ params: { slug: item.slug } }));
+    .filter((item: any) => item.id && !item.data.draft)
+    .map((item: any) => ({ params: { slug: item.id } }));
 }
 
 const { slug } = Astro.params;
@@ -36,7 +36,7 @@ if (!entry || entry.data.draft) {
   return Astro.redirect('/download/');
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const data = entry.data;
 
 const hero = resolveHero(data.hero);
