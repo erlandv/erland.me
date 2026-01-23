@@ -1,0 +1,30 @@
+---
+/**
+ * Skip to Content Component
+ *
+ * Accessibility feature that allows keyboard users to bypass navigation
+ * and jump directly to main content. Link is visually hidden until focused.
+ *
+ * Features:
+ * - Visually hidden by default (off-screen positioning)
+ * - Becomes visible on keyboard focus (:focus, :focus-visible)
+ * - High z-index to ensure visibility above all content
+ * - Smooth scroll behavior (respects prefers-reduced-motion)
+ * - Semantic HTML with descriptive text
+ *
+ * WCAG 2.1 Compliance:
+ * - Success Criterion 2.4.1 (Bypass Blocks) - Level A
+ * - Provides mechanism to skip repeated navigation blocks
+ *
+ * @component
+ * @example
+ * <SkipToContent />
+ *
+ * Usage:
+ * Place at the very top of <body>, before any other content.
+ * Requires corresponding id="main-content" on target element.
+ */
+import styles from './skip-to-content.module.css';
+---
+
+<a href='#main-content' class={styles.skip}> Skip to main content </a>

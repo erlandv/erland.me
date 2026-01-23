@@ -1,0 +1,42 @@
+/**
+ * Skip to Content Styles
+ *
+ * Implements visually-hidden-until-focused pattern for skip link.
+ * Uses design tokens from variables.css for consistency.
+ */
+
+.skip {
+  /* Positioning: Off-screen by default */
+  position: fixed;
+  top: -100px;
+  left: 0;
+  z-index: calc(var(--z-toast) + 100);
+
+  /* Visual styling */
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-primary);
+  color: var(--icon-on-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-md) 0;
+  box-shadow: 0 4px 6px var(--shadow-015);
+
+  /* Smooth transition */
+  transition: top var(--dur-medium) var(--ease-out);
+}
+
+/* Visible state on keyboard focus */
+.skip:focus,
+.skip:focus-visible {
+  top: 0;
+  outline: 3px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .skip {
+    transition: none;
+  }
+}
