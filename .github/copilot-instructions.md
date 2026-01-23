@@ -6,11 +6,38 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 ## Architecture Essentials
 
+### Astro v6 Content Layer API
+
+**IMPORTANT:** This project uses Astro v6 Content Layer API. Key differences from legacy API:
+
+- **Loader Required**: All collections must define a `loader` (e.g., `glob()` loader)
+- **No Type Property**: `type: 'content'` and `type: 'data'` are removed
+- **Entry ID**: Use `entry.id` instead of `entry.slug` for routing
+- **Render Function**: Use `render(entry)` function instead of `entry.render()` method
+- **Zod Import**: Import `z` from `astro/zod` instead of `astro:content`
+
+**Example:**
+
+```typescript
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  schema: ({ image }) =>
+    z.object({
+      /* ... */
+    }),
+});
+```
+
 ### Content Collections System
 
 - **Collections**: Three collections in `src/content/` — `blog/`, `downloads/`, `portfolio/` — each with frontmatter validated by schemas in `content.config.ts`
-- **Blog & Downloads**: Type `'content'` with markdown files; supports hero images via `image()` schema helper (paths relative to markdown)
-- **Portfolio**: Type `'data'` using JSON/YAML for structured project metadata (no markdown rendering)
+- **Blog & Downloads**: Markdown files loaded via `glob()` loader; supports hero images via `image()` schema helper (paths relative to markdown)
+- **Portfolio**: JSON/YAML files loaded via `glob()` loader for structured project metadata (no markdown rendering)
+- **Entry Routing**: Use `entry.id` for dynamic routes (e.g., `/blog/${entry.id}/`)
 - **Search index**: Client-side fuzzy search powered by Fuse.js; **always regenerate** via `npm run generate:search` after content changes
 - **Markdown extensions**: Custom remark plugins add `:::gallery` directives (`remark-gallery.ts`) and download file tables (`remark-download-files.ts`)
 
@@ -128,14 +155,18 @@ npm run generate:sitemap # Rebuild sitemaps (post-build only)
 ```typescript
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(p => ({ params: { slug: p.slug } }));
+  return posts
+    .filter(p => p.id && !p.data.draft)
+    .map(p => ({ params: { slug: p.id } }));
 }
 
 const { slug } = Astro.params;
-const entry = (await getCollection('blog')).find(e => e.slug === slug);
+const entry = (await getCollection('blog')).find(e => e.id === slug);
 if (!entry) return Astro.redirect('/blog/');
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ```
+
+**Note:** In Astro v6 Content Layer API, use `entry.id` instead of `entry.slug`. The `id` property contains the file path relative to the collection base.
 
 **Pagination pattern** (generate pages 2..N):
 
@@ -170,12 +201,15 @@ const filtered = allPosts.filter(
 
 ### Content Collection Rendering
 
-Always call `entry.render()` to get the `Content` component and use it for markdown rendering:
+Use the `render()` function from `astro:content` to get the `Content` component for markdown rendering:
 
 ```astro
-const {Content} = await entry.render(); // In template:
+import {render} from 'astro:content'; const {Content} = await render(entry); // In
+template:
 <Content />
 ```
+
+**Note:** In Astro v6, `entry.render()` is no longer available. Import and use the `render()` function instead.
 
 ### Image Handling Pattern
 
@@ -193,14 +227,17 @@ const optimizedHero = hero
 ### 1. Define Schema in `content.config.ts`
 
 ```typescript
+import { defineCollection, glob } from 'astro:content';
+import { z } from 'astro/zod';
+
 const newCollection = defineCollection({
-  type: 'content', // or 'data' for JSON/YAML only
+  loader: glob({ pattern: '**/*.md', base: './src/content/newCollection' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string().max(160).optional(),
       publishDate: z.coerce.date(),
-      hero: image().optional(), // For type: 'content' only
+      hero: image().optional(),
       draft: z.boolean().default(false),
       // Add custom fields
     }),
@@ -208,6 +245,8 @@ const newCollection = defineCollection({
 
 export const collections = { blog, downloads, portfolio, newCollection };
 ```
+
+**Note:** In Astro v6, collections require a `loader` definition. The `type: 'content'` or `type: 'data'` properties are no longer used.
 
 ### 2. Create Content Directory
 
@@ -220,15 +259,25 @@ echo "---\ntitle: First Entry\n---\n# Content" > src/content/newCollection/first
 
 ### 3. Create Route Pages
 
-```
+```typescript
 // src/pages/newCollection/[slug].astro
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('newCollection');
-  return entries.map(e => ({ params: { slug: e.slug } }));
+  return entries
+    .filter(e => e.id && !e.data.draft)
+    .map(e => ({ params: { slug: e.id } }));
 }
+
+const { slug } = Astro.params;
+const entry = (await getCollection('newCollection')).find(e => e.id === slug);
+if (!entry) return Astro.redirect('/newCollection/');
+
+const { Content } = await render(entry);
 ```
+
+**Note:** Use `entry.id` instead of `entry.slug` in Astro v6 Content Layer API.
 
 ### 4. Update Search Index (if needed)
 
