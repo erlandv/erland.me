@@ -24,11 +24,10 @@
  * ```
  */
 
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 
 type BlogEntry = CollectionEntry<'blog'>;
-type BlogRender = Awaited<ReturnType<BlogEntry['render']>>;
 type HeroType = string | ImageMetadata | undefined;
 
 /**
@@ -47,7 +46,8 @@ export type Post = {
   date: Date | null;
   hero?: HeroType;
   body: BlogEntry['body'];
-  Content: BlogRender['Content'];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Content: any; // Astro component from render()
 };
 
 /**
@@ -84,15 +84,17 @@ export async function loadAllPosts(): Promise<Post[]> {
 
   const posts: Post[] = [];
   for (const entry of entries) {
-    const { Content } = await entry.render();
+    const { Content } = await render(entry);
     const body = entry.body;
+    // In Content Layer API, use entry.id as the slug (it's the file path without extension)
+    const slug = entry.id;
     const heroEntry = Object.entries(heroMap).find(([p]) =>
-      p.startsWith(`../content/blog/${entry.slug}/hero.`),
+      p.startsWith(`../content/blog/${slug}/hero.`),
     );
     const fallbackHero = heroEntry?.[1] as string | undefined;
     const hero = entry.data.hero ?? fallbackHero;
     posts.push({
-      slug: entry.slug,
+      slug,
       data: entry.data,
       date: safeDate(entry.data.publishDate),
       hero,
