@@ -55,7 +55,7 @@ const downloads = (await getCollection('downloads'))
         downloads.map((item: any) => {
           const data = item.data;
           const alt = data.heroAlt ?? data.title;
-          const detailHref = `/download/${item.slug}/`;
+          const detailHref = `/download/${item.id}/`;
           return (
             <article class={dl['download-card']}>
               {/* Card Thumbnail - Clickable image linking to detail page */}

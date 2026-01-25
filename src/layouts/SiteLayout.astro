@@ -13,6 +13,7 @@ import '@/styles/features/gallery.css';
 import '@/styles/features/lightbox.css';
 import '@/styles/features/stories.css';
 import '@/styles/components/button.module.css';
+import SkipToContent from '@components/SkipToContent/SkipToContent.astro';
 import Sidebar from '@components/Sidebar/Sidebar.astro';
 import SidebarController from '@components/SidebarController.astro';
 import Footer from '@components/Footer/Footer.astro';
@@ -83,6 +84,9 @@ const {
     preloadSearch={preloadSearch}
   />
   <body>
+    <!-- Skip to Content Link - Accessibility feature for keyboard navigation -->
+    <SkipToContent />
+
     {
       /* Google Tag Manager NoScript Fallback - For users with JavaScript disabled (production only) */
     }
@@ -115,7 +119,7 @@ const {
       {showSidebar && <SidebarSocialFlyout />}
 
       <!-- Main Content Area - Page content and footer -->
-      <main class='site-main'>
+      <main id='main-content' class='site-main' tabindex='-1'>
         <!-- Content Container - Page-specific content injected via slot -->
         <div class='container'>
           <slot />

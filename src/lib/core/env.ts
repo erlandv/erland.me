@@ -40,7 +40,7 @@
  * @module env
  */
 
-import { z } from 'zod';
+import { z } from 'astro/zod';
 
 /**
  * Import.meta.env interface for Astro environment variables

@@ -13,6 +13,11 @@ button:focus-visible,
   border-radius: 4px;
 }
 
+/* Remove outline from main content when focused programmatically (skip link target) */
+#main-content:focus {
+  outline: none;
+}
+
 /* Text selection styling */
 ::selection {
   background-color: var(--overlay-020);

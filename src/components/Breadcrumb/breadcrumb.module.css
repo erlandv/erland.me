@@ -78,6 +78,13 @@
   justify-content: center;
 }
 
+/* Tablet */
+@media (max-width: 768px) {
+  .breadcrumb-item [aria-current='page'] {
+    max-width: 400px;
+  }
+}
+
 /* Mobile responsive */
 @media (max-width: 540px) {
   .breadcrumb-list {
@@ -90,13 +97,27 @@
   }
 
   .breadcrumb-item [aria-current='page'] {
-    max-width: 300px;
+    max-width: 280px;
   }
 }
 
-/* Truncate long breadcrumb items on very small screens */
-@media (max-width: 400px) {
+/* Large mobile */
+@media (max-width: 480px) {
   .breadcrumb-item [aria-current='page'] {
-    max-width: 180px;
+    max-width: 240px;
+  }
+}
+
+/* Medium mobile */
+@media (max-width: 390px) {
+  .breadcrumb-item [aria-current='page'] {
+    max-width: 200px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .breadcrumb-item [aria-current='page'] {
+    max-width: 160px;
   }
 }

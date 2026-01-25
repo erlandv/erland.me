@@ -3,7 +3,7 @@ import SiteLayout from '@layouts/SiteLayout.astro';
 import Icon from '@components/Icon.astro';
 import Breadcrumb from '@components/Breadcrumb/Breadcrumb.astro';
 import { createBlogPostBreadcrumb } from '@lib/content/breadcrumb';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { blogPostingJsonLd } from '@lib/content/seo';
 import ShareButtons from '@components/ShareButtons/ShareButtons.astro';
 import { SITE_URL } from '@lib/core/env';
@@ -24,16 +24,18 @@ import {
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((p: any) => ({ params: { slug: p.slug } }));
+  return posts
+    .filter((p: any) => p.id && !p.data.draft)
+    .map((p: any) => ({ params: { slug: p.id } }));
 }
 
 const { slug } = Astro.params;
-const entry = (await getCollection('blog')).find((e: any) => e.slug === slug);
+const entry = (await getCollection('blog')).find((e: any) => e.id === slug);
 if (!entry) {
   return Astro.redirect('/blog/');
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const frontmatter = entry.data;
 
 const hero = resolveHero(frontmatter.hero);

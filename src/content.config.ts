@@ -1,8 +1,9 @@
-// src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -19,7 +20,7 @@ const blog = defineCollection({
 });
 
 const downloads = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/downloads' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -51,9 +52,11 @@ const downloads = defineCollection({
     }),
 });
 
-// Portfolio collection: structured project data for portfolio pages
 const portfolio = defineCollection({
-  type: 'data',
+  loader: glob({
+    pattern: '**/*.{json,yaml}',
+    base: './src/content/portfolio',
+  }),
   schema: z.object({
     title: z.string(),
     category: z.enum(['web-development', 'cloud-infra', 'personal-projects']),
