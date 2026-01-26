@@ -120,6 +120,13 @@
   border-radius: 50%;
   border: 2px solid #ffffff;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.stories__user-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .stories__username-container {
@@ -130,7 +137,7 @@
 
 .stories__username {
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
@@ -138,8 +145,8 @@
 .stories__verified {
   display: inline-flex;
   align-items: center;
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
 }
 
@@ -150,13 +157,94 @@
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
 
-/* Control buttons (pause and close) */
+/* Music info section */
+.stories__music-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.stories__music-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.stories__music-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Waveform animation */
+.stories__music-icon .waveform-bar {
+  transform-origin: center;
+}
+
+/* Side bars (left and right) - same animation */
+.stories__music-icon .waveform-bar-side {
+  animation: waveform-pulse-side 1.2s ease-in-out infinite;
+}
+
+/* Center bar - different animation */
+.stories__music-icon .waveform-bar-center {
+  animation: waveform-pulse-center 1.2s ease-in-out infinite;
+}
+
+@keyframes waveform-pulse-side {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.4);
+  }
+}
+
+@keyframes waveform-pulse-center {
+  0%,
+  100% {
+    transform: scaleY(0.6);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Pause animation when story is paused */
+.stories.paused .stories__music-icon .waveform-bar {
+  animation-play-state: paused;
+}
+
+.stories__music-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.stories__music-artist {
+  font-weight: 600;
+}
+
+.stories__music-title {
+  font-weight: 400;
+}
+
+/* Control buttons (mute, pause and close) */
 .stories__buttons {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
 }
 
+.stories__mute,
 .stories__pause,
 .stories__close {
   width: var(--space-8);
@@ -169,13 +257,16 @@
   align-items: center;
   justify-content: center;
   transition: opacity var(--dur-base) var(--ease-out);
+  flex-shrink: 0;
 }
 
+.stories__mute:hover,
 .stories__pause:hover,
 .stories__close:hover {
   opacity: 0.7;
 }
 
+.stories__mute svg,
 .stories__pause svg,
 .stories__close svg {
   width: 20px;
@@ -308,6 +399,11 @@
     border-radius: 0;
   }
 
+  /* Truncate music text on mobile */
+  .stories__music-text {
+    max-width: 150px;
+  }
+
   /* Hide desktop navigation buttons on mobile */
   .stories__nav {
     display: none !important;
@@ -336,12 +432,18 @@
 @media (prefers-reduced-motion: reduce) {
   .stories,
   .stories__nav-icon,
+  .stories__mute,
   .stories__close,
   .stories__pause {
     transition: none;
   }
 
   .stories__progress-fill {
+    animation: none !important;
+  }
+
+  /* Disable waveform animation for reduced motion */
+  .stories__music-icon .waveform-bar {
     animation: none !important;
   }
 }

@@ -1,5 +1,10 @@
 {
-  "_comment": "Story images located at public/assets/stories/",
+  "_comment": "Story images and music located at public/assets/stories/",
+  "music": {
+    "src": "/assets/stories/wonderwall.mp3",
+    "title": "Wonderwall",
+    "artist": "Oasis"
+  },
   "stories": [
     {
       "src": "/assets/stories/story-1.webp",
