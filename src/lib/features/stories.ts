@@ -15,6 +15,9 @@ import rightArrowIcon from '@/icons/arrow-right.svg?raw';
 import pauseIcon from '@/icons/stories-pause.svg?raw';
 import playIcon from '@/icons/stories-play.svg?raw';
 import verifiedIcon from '@/icons/stories-verified.svg?raw';
+import volumeOnIcon from '@/icons/stories-volume-on.svg?raw';
+import volumeOffIcon from '@/icons/stories-volume-off.svg?raw';
+import musicIcon from '@/icons/stories-music.svg?raw';
 import { SITE_CONFIG } from '@lib/core/site-config';
 import { onRouteChange } from '@lib/infrastructure/router-events';
 import { qs, qsa } from '@lib/core/dom-builder';
@@ -30,11 +33,25 @@ interface Story {
 }
 
 /**
+ * Music data structure
+ * @property src - Audio file source URL
+ * @property title - Song title
+ * @property artist - Artist name (optional)
+ */
+interface Music {
+  src: string;
+  title: string;
+  artist?: string;
+}
+
+/**
  * Stories data container
  * @property stories - Array of story objects
+ * @property music - Optional background music configuration
  */
 interface StoriesData {
   stories: Story[];
+  music?: Music;
 }
 
 /**
@@ -48,21 +65,21 @@ const STORY_DURATION = 5000; // 5 seconds per story
 const STORIES_DATA_URL = '/data/stories.json';
 
 /**
- * In-memory cache for loaded stories
+ * In-memory cache for loaded stories data
  * Prevents multiple fetches for same data
  */
-let storiesCache: Story[] | null = null;
+let storiesDataCache: StoriesData | null = null;
 
 /**
- * Load stories from JSON file
+ * Load stories data from JSON file
  * Uses cache to prevent redundant fetches
- * @returns Promise resolving to array of stories
+ * @returns Promise resolving to stories data object
  * @throws Error if fetch fails or JSON is invalid
  */
-async function loadStories(): Promise<Story[]> {
+async function loadStoriesData(): Promise<StoriesData> {
   // Return cached data if available
-  if (storiesCache !== null) {
-    return storiesCache;
+  if (storiesDataCache !== null) {
+    return storiesDataCache;
   }
 
   try {
@@ -78,13 +95,13 @@ async function loadStories(): Promise<Story[]> {
       throw new Error('Invalid stories data format');
     }
 
-    // Cache the loaded stories
-    storiesCache = data.stories;
-    return storiesCache;
+    // Cache the loaded stories data
+    storiesDataCache = data;
+    return storiesDataCache;
   } catch (error) {
     console.error('[Stories] Failed to load stories:', error);
-    // Return empty array as fallback
-    return [];
+    // Return empty data as fallback
+    return { stories: [] };
   }
 }
 
@@ -115,8 +132,10 @@ async function loadStories(): Promise<Story[]> {
  */
 class StoriesViewer {
   private stories: Story[];
+  private music: Music | undefined;
   private currentIndex: number = 0;
   private isPaused: boolean = false;
+  private isMuted: boolean = false;
   private startTime: number = 0;
   private elapsed: number = 0;
   private animationId: number | null = null;
@@ -131,13 +150,18 @@ class StoriesViewer {
   private clickZonePrev: HTMLDivElement | null = null;
   private clickZoneNext: HTMLDivElement | null = null;
   private pauseButton: HTMLButtonElement | null = null;
+  private muteButton: HTMLButtonElement | null = null;
+  private audioElement: HTMLAudioElement | null = null;
+  private musicInfoElement: HTMLDivElement | null = null;
 
   /**
    * Create new stories viewer instance
    * @param stories - Optional array of story objects (defaults to loading from JSON)
+   * @param music - Optional music configuration
    */
-  constructor(stories?: Story[]) {
+  constructor(stories?: Story[], music?: Music) {
     this.stories = stories || [];
+    this.music = music;
   }
 
   /**
@@ -155,6 +179,20 @@ class StoriesViewer {
       `,
       )
       .join('');
+
+    // Music info HTML (only if music is configured)
+    const musicInfoHTML = this.music
+      ? `
+      <div class="stories__music-info">
+        <span class="stories__music-icon" aria-hidden="true">
+          ${musicIcon}
+        </span>
+        <span class="stories__music-text">
+          ${this.music.artist ? `<span class="stories__music-artist">${this.music.artist}</span> • ` : ''}<span class="stories__music-title">${this.music.title}</span>
+        </span>
+      </div>
+    `
+      : '';
 
     return `
       <div class="stories__backdrop"></div>
@@ -175,16 +213,32 @@ class StoriesViewer {
                 src="/assets/profile/avatar-stories.webp" 
                 alt="${SITE_CONFIG.author.name}"
               />
-              <div class="stories__username-container">
-                <div class="stories__username">erlandramdhani</div>
-                <span class="stories__verified" aria-label="Verified">
-                  ${verifiedIcon}
-                </span>
+              <div class="stories__user-details">
+                <div class="stories__username-container">
+                  <div class="stories__username">erlandramdhani</div>
+                  <span class="stories__verified" aria-label="Verified">
+                    ${verifiedIcon}
+                  </span>
+                </div>
+                ${musicInfoHTML}
               </div>
             </div>
 
             <!-- Buttons container -->
             <div class="stories__buttons">
+              ${
+                this.music
+                  ? `
+              <button 
+                class="stories__mute" 
+                type="button" 
+                aria-label="Mute"
+              >
+                ${volumeOnIcon}
+              </button>
+              `
+                  : ''
+              }
               <button 
                 class="stories__pause" 
                 type="button" 
@@ -262,6 +316,7 @@ class StoriesViewer {
     const backdrop = qs<HTMLDivElement>(overlay, '.stories__backdrop');
     const closeBtn = qs<HTMLButtonElement>(overlay, '.stories__close');
     const pauseBtn = qs<HTMLButtonElement>(overlay, '.stories__pause');
+    const muteBtn = qs<HTMLButtonElement>(overlay, '.stories__mute');
     const navPrev = qs<HTMLButtonElement>(overlay, '.stories__nav--prev');
     const navNext = qs<HTMLButtonElement>(overlay, '.stories__nav--next');
     const clickZonePrev = qs<HTMLDivElement>(
@@ -274,15 +329,21 @@ class StoriesViewer {
     );
     const imageElement = qs<HTMLImageElement>(overlay, '.stories__image');
     const progressBars = qsa<HTMLDivElement>(overlay, '.stories__progress-bar');
+    const musicInfoElement = qs<HTMLDivElement>(
+      overlay,
+      '.stories__music-info',
+    );
 
     // Store references
     this.imageElement = imageElement;
     this.pauseButton = pauseBtn;
+    this.muteButton = muteBtn;
     this.navPrev = navPrev;
     this.navNext = navNext;
     this.clickZonePrev = clickZonePrev;
     this.clickZoneNext = clickZoneNext;
     this.progressBars = progressBars;
+    this.musicInfoElement = musicInfoElement;
 
     // Setup event listeners
     if (backdrop) {
@@ -293,6 +354,9 @@ class StoriesViewer {
     }
     if (pauseBtn) {
       pauseBtn.addEventListener('click', () => this.togglePause());
+    }
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => this.toggleMute());
     }
     if (navPrev) {
       navPrev.addEventListener('click', () => this.prev());
@@ -319,6 +383,7 @@ class StoriesViewer {
    * - ArrowLeft: Previous story
    * - ArrowRight: Next story
    * - Space: Toggle pause/resume
+   * - M: Toggle mute/unmute
    * @param e - Keyboard event
    */
   private handleKeyDown = (e: KeyboardEvent): void => {
@@ -341,6 +406,11 @@ class StoriesViewer {
         e.preventDefault();
         this.togglePause();
         break;
+      case 'm':
+      case 'M':
+        e.preventDefault();
+        this.toggleMute();
+        break;
     }
   };
 
@@ -359,6 +429,7 @@ class StoriesViewer {
   /**
    * Pause the current story
    * Stops progress animation and updates button icon to play
+   * Also pauses background music if playing
    */
   private pause(): void {
     if (this.isPaused) return;
@@ -369,6 +440,16 @@ class StoriesViewer {
     if (this.pauseButton) {
       this.pauseButton.innerHTML = playIcon;
       this.pauseButton.setAttribute('aria-label', 'Play');
+    }
+
+    // Pause audio and update mute button icon to volume off
+    if (this.audioElement && !this.audioElement.paused) {
+      this.audioElement.pause();
+
+      // Update mute button icon to show audio is not playing
+      if (this.muteButton && !this.isMuted) {
+        this.muteButton.innerHTML = volumeOffIcon;
+      }
     }
 
     // Calculate elapsed time
@@ -385,6 +466,7 @@ class StoriesViewer {
   /**
    * Resume the current story
    * Restarts progress animation and updates button icon to pause
+   * Also resumes background music if not muted
    */
   private resume(): void {
     if (!this.isPaused) return;
@@ -397,8 +479,129 @@ class StoriesViewer {
       this.pauseButton.setAttribute('aria-label', 'Pause');
     }
 
+    // Resume audio and update mute button icon to volume on
+    if (this.audioElement && this.audioElement.paused && !this.isMuted) {
+      this.audioElement.play().catch(err => {
+        console.error('[Stories] Failed to resume audio:', err);
+      });
+
+      // Update mute button icon to show audio is playing
+      if (this.muteButton) {
+        this.muteButton.innerHTML = volumeOnIcon;
+      }
+    }
+
     this.startTime = Date.now();
     this.animate();
+  }
+
+  /**
+   * Toggle mute state
+   * Switches between muted and unmuted states
+   */
+  private toggleMute(): void {
+    if (this.isMuted) {
+      this.unmute();
+    } else {
+      this.mute();
+    }
+  }
+
+  /**
+   * Mute background music
+   * Updates button icon and pauses audio playback
+   */
+  private mute(): void {
+    if (this.isMuted || !this.audioElement) return;
+    this.isMuted = true;
+
+    // Update mute button icon to volume off
+    if (this.muteButton) {
+      this.muteButton.innerHTML = volumeOffIcon;
+      this.muteButton.setAttribute('aria-label', 'Unmute');
+    }
+
+    // Pause audio
+    if (!this.audioElement.paused) {
+      this.audioElement.pause();
+    }
+  }
+
+  /**
+   * Unmute background music
+   * Updates button icon and resumes audio playback if story is playing
+   */
+  private unmute(): void {
+    if (!this.isMuted || !this.audioElement) return;
+    this.isMuted = false;
+
+    // Update mute button icon to volume on
+    if (this.muteButton) {
+      this.muteButton.innerHTML = volumeOnIcon;
+      this.muteButton.setAttribute('aria-label', 'Mute');
+    }
+
+    // Resume audio if story is not paused
+    if (!this.isPaused && this.audioElement.paused) {
+      this.audioElement.play().catch(err => {
+        console.error('[Stories] Failed to unmute audio:', err);
+      });
+    }
+  }
+
+  /**
+   * Initialize background music
+   * Creates audio element, sets up looping, and starts playback
+   * Hides music info if audio fails to load
+   */
+  private async initAudio(): Promise<void> {
+    if (!this.music) return;
+
+    try {
+      this.audioElement = new Audio(this.music.src);
+      this.audioElement.loop = true;
+      this.audioElement.preload = 'auto';
+
+      // Handle audio load errors
+      this.audioElement.addEventListener('error', () => {
+        console.error('[Stories] Failed to load audio:', this.music?.src);
+        // Hide music info on error
+        if (this.musicInfoElement) {
+          this.musicInfoElement.style.display = 'none';
+        }
+        // Hide mute button on error
+        if (this.muteButton) {
+          this.muteButton.style.display = 'none';
+        }
+      });
+
+      // Start playing audio (unmuted by default)
+      await this.audioElement.play();
+    } catch (error) {
+      console.error('[Stories] Failed to initialize audio:', error);
+      // Hide music info on error
+      if (this.musicInfoElement) {
+        this.musicInfoElement.style.display = 'none';
+      }
+      // Hide mute button on error
+      if (this.muteButton) {
+        this.muteButton.style.display = 'none';
+      }
+    }
+  }
+
+  /**
+   * Cleanup audio resources
+   * Stops playback, removes event listeners, and nullifies audio element
+   */
+  private cleanupAudio(): void {
+    if (!this.audioElement) return;
+
+    this.audioElement.pause();
+    this.audioElement.currentTime = 0;
+    this.audioElement.src = '';
+    this.audioElement.load();
+    this.audioElement = null;
   }
 
   /**
@@ -574,7 +777,7 @@ class StoriesViewer {
   /**
    * Open the stories viewer
    * Loads stories from JSON if not provided, creates overlay, appends to body,
-   * animates in, and loads first story
+   * animates in, initializes audio, and loads first story
    * @example
    * const viewer = new StoriesViewer();
    * await viewer.open();
@@ -582,9 +785,11 @@ class StoriesViewer {
   public async open(): Promise<void> {
     if (this.overlay) return; // Already open
 
-    // Load stories from JSON if not provided
+    // Load stories data from JSON if not provided
     if (this.stories.length === 0) {
-      this.stories = await loadStories();
+      const data = await loadStoriesData();
+      this.stories = data.stories;
+      this.music = data.music;
 
       // Check if stories were loaded successfully
       if (this.stories.length === 0) {
@@ -602,13 +807,18 @@ class StoriesViewer {
 
     this.disableScroll();
 
+    // Initialize audio if music is configured
+    if (this.music) {
+      await this.initAudio();
+    }
+
     // Load first story
     this.loadStory(0);
   }
 
   /**
    * Close the stories viewer
-   * Stops animation, cleans up event listeners, animates out, and removes overlay
+   * Stops animation, audio, cleans up event listeners, animates out, and removes overlay
    * Automatically called when all stories are viewed or user presses escape
    */
   public close(): void {
@@ -627,6 +837,9 @@ class StoriesViewer {
       window.clearTimeout(this.holdTimer);
       this.holdTimer = null;
     }
+
+    // Cleanup audio
+    this.cleanupAudio();
 
     // Clean up event listeners
     document.removeEventListener('keydown', this.handleKeyDown);
@@ -659,6 +872,9 @@ class StoriesViewer {
     this.navNext = null;
     this.clickZonePrev = null;
     this.clickZoneNext = null;
+    this.pauseButton = null;
+    this.muteButton = null;
+    this.musicInfoElement = null;
   }
 }
 
