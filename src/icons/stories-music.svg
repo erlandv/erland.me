@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect class="waveform-bar waveform-bar-side" x="3" y="8" width="4" height="8" rx="2"/>
+  <rect class="waveform-bar waveform-bar-center" x="10" y="4" width="4" height="16" rx="2"/>
+  <rect class="waveform-bar waveform-bar-side" x="17" y="8" width="4" height="8" rx="2"/>
+</svg>
