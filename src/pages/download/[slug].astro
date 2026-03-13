@@ -44,7 +44,7 @@ const heroAlt = data.heroAlt ?? data.title;
 const optimizedHero = hero
   ? await getOgImageUrl(hero, 1200, 'avif')
   : DEFAULT_HERO_PATH;
-const canonicalPath = `/download/${entry.slug}/`;
+const canonicalPath = `/download/${entry.id}/`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
 const jsonLd = creativeWorkJsonLd({
