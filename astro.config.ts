@@ -1,4 +1,5 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
 import remarkGallery from './src/lib/content/remark/remark-gallery';
@@ -85,18 +86,20 @@ export default defineConfig({
 
   // Markdown configuration
   markdown: {
-    remarkPlugins: [
-      remarkDirective,
-      remarkGallery,
-      remarkFigure,
-      remarkDownloadFiles,
-    ],
+    processor: unified({
+      remarkPlugins: [
+        remarkDirective,
+        remarkGallery,
+        remarkFigure,
+        remarkDownloadFiles,
+      ],
+      gfm: true,
+      smartypants: true,
+    }),
     shikiConfig: {
       theme: 'material-theme-darker',
       wrap: false,
     },
-    gfm: true,
-    smartypants: true,
   },
 
   // Vite configuration for optimizations
@@ -201,7 +204,7 @@ export default defineConfig({
     // Optional: switch image service via env to avoid native Sharp issues on some hosts
     // IMAGE_SERVICE options:
     // - "squoosh" (WASM) via deep entrypoint (supported)
-    // - "passthrough" via passthroughImageService() (no transforms, safe in Astro v5)
+    // - "passthrough" via passthroughImageService() (no transforms, Astro-compatible fallback)
     // - unset => default Sharp (if available)
     service:
       process.env.IMAGE_SERVICE === 'squoosh'
