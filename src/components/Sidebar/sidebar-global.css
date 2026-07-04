@@ -3,6 +3,23 @@
 
 /* Global Sidebar states and transitions migrated from <style is:global> */
 
+/* Hide checkbox inputs used for CSS-only toggle state (visually-hidden pattern).
+   IMPORTANT: Must be in plain CSS (not CSS Module) so it is never dropped by
+   the production CSS bundler/optimizer. */
+.nav-toggle,
+.sidebar-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
 :root {
   --sidebar-expanded-width: 300px;
   --sidebar-collapsed-width: 100px;
