@@ -26,7 +26,7 @@ describe('slugifyCategory', () => {
 
   it('should return empty string for falsy input', () => {
     expect(slugifyCategory('')).toBe('');
-    expect(slugifyCategory(undefined as any)).toBe('');
-    expect(slugifyCategory(null as any)).toBe('');
+    expect(slugifyCategory(undefined as unknown as string)).toBe('');
+    expect(slugifyCategory(null as unknown as string)).toBe('');
   });
 });

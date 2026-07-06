@@ -7,7 +7,13 @@ describe('Content Collections', () => {
     // or astro:content to be stubbed if it fails.
     try {
       const posts = await getCollection('blog');
-      posts.forEach((post: any) => {
+      interface TestPost {
+        data: {
+          title: string;
+          publishDate: string | Date;
+        };
+      }
+      posts.forEach((post: TestPost) => {
         expect(post.data.title).toBeDefined();
         expect(post.data.title.length).toBeGreaterThan(0);
 
@@ -15,7 +21,7 @@ describe('Content Collections', () => {
         expect(post.data.publishDate).toBeDefined();
         expect(
           post.data.publishDate instanceof Date ||
-            !isNaN(Date.parse(post.data.publishDate)),
+            !isNaN(Date.parse(String(post.data.publishDate))),
         ).toBe(true);
       });
     } catch (e) {

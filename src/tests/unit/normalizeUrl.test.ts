@@ -4,7 +4,9 @@ import { normalizeUrl } from '../../lib/infrastructure/router-events';
 describe('normalizeUrl', () => {
   it('should return window.location.href if input is falsy', () => {
     // We mock window object here
-    globalThis.window = { location: { href: 'http://localhost/test' } } as any;
+    globalThis.window = {
+      location: { href: 'http://localhost/test' },
+    } as unknown as Window & typeof globalThis;
     expect(normalizeUrl(null)).toBe('http://localhost/test');
     expect(normalizeUrl(undefined)).toBe('http://localhost/test');
   });
