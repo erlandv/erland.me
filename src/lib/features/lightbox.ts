@@ -13,6 +13,7 @@
  * - Respects responsive images (uses currentSrc)
  * - Prevents body scroll when active
  * - Auto-reinitializes on navigation and DOM mutations
+ * - Trap focus within the lightbox
  *
  * **Target Selectors:**
  * - `.prose img` (blog/download content)
@@ -155,6 +156,34 @@ function disableScroll() {
 }
 
 /**
+ * Trap focus within a container element
+ * @param element - The container element to trap focus inside
+ * @param e - The keyboard event
+ */
+function handleFocusTrap(element: HTMLElement, e: KeyboardEvent) {
+  const focusableEls = element.querySelectorAll<HTMLElement>(
+    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  );
+
+  if (focusableEls.length === 0) return;
+
+  const firstFocusableEl = focusableEls[0];
+  const lastFocusableEl = focusableEls[focusableEls.length - 1];
+
+  if (e.shiftKey) {
+    if (document.activeElement === firstFocusableEl) {
+      lastFocusableEl.focus();
+      e.preventDefault();
+    }
+  } else {
+    if (document.activeElement === lastFocusableEl) {
+      firstFocusableEl.focus();
+      e.preventDefault();
+    }
+  }
+}
+
+/**
  * Re-enable body scroll after lightbox closes
  * Removes CSS class from document element
  */
@@ -185,6 +214,12 @@ function openLightbox(sourceImg: HTMLImageElement) {
     caption.style.display = 'none';
   }
 
+  // Save the currently focused element to restore it later
+  let previouslyFocusedElement: HTMLElement | null = null;
+  if (document.activeElement instanceof HTMLElement) {
+    previouslyFocusedElement = document.activeElement;
+  }
+
   function close() {
     overlay.classList.remove('open');
     overlay.addEventListener(
@@ -193,6 +228,10 @@ function openLightbox(sourceImg: HTMLImageElement) {
         overlay.remove();
         enableScroll();
         document.removeEventListener('keydown', onKeyDown);
+        // Restore focus
+        if (previouslyFocusedElement) {
+          previouslyFocusedElement.focus();
+        }
       },
       { once: true },
     );
@@ -202,6 +241,8 @@ function openLightbox(sourceImg: HTMLImageElement) {
     if (e.key === 'Escape') {
       e.preventDefault();
       close();
+    } else if (e.key === 'Tab') {
+      handleFocusTrap(overlay, e);
     }
   }
 
@@ -221,6 +262,9 @@ function openLightbox(sourceImg: HTMLImageElement) {
   overlay.classList.add('open');
   disableScroll();
   document.addEventListener('keydown', onKeyDown);
+
+  // Set initial focus to the close button for accessibility
+  closeBtn.focus();
 }
 
 /**
