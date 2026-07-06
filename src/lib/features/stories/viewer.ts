@@ -389,7 +389,10 @@ export class StoriesViewer {
     // Resume audio and update mute button icon to volume on
     if (this.audioElement && this.audioElement.paused && !this.isMuted) {
       this.audioElement.play().catch(err => {
-        log.error('Failed to resume audio', err instanceof Error ? err : new Error(String(err)));
+        log.error(
+          'Failed to resume audio',
+          err instanceof Error ? err : new Error(String(err)),
+        );
       });
 
       // Update mute button icon to show audio is playing
@@ -453,7 +456,10 @@ export class StoriesViewer {
     // Resume audio if story is not paused
     if (!this.isPaused && this.audioElement.paused) {
       this.audioElement.play().catch(err => {
-        log.error('Failed to unmute audio', err instanceof Error ? err : new Error(String(err)));
+        log.error(
+          'Failed to unmute audio',
+          err instanceof Error ? err : new Error(String(err)),
+        );
       });
     }
   }
@@ -489,7 +495,10 @@ export class StoriesViewer {
       // Start playing audio (unmuted by default)
       await this.audioElement.play();
     } catch (error) {
-      log.error('Failed to initialize audio', error instanceof Error ? error : new Error(String(error)));
+      log.error(
+        'Failed to initialize audio',
+        error instanceof Error ? error : new Error(String(error)),
+      );
       // Hide music info on error
       if (this.musicInfoElement) {
         this.musicInfoElement.style.display = 'none';

@@ -117,13 +117,13 @@ Sekarang aku jualan dengan modal sendiri, berasa ganteng jadi pengusaha sejak us
 
 “_Itu uang hasil jualan, bu. hehe_” aku jawab sambil tersipu malu. 
 
-Senangnya berlipat-lipat ganda punya penghasilan sendiri, tabungan banyak. Walau capek pagi-siang sekolah, siang-malam jualan. Tapi itu semua dibayar oleh hasil yang memuaskan. Sampai waktu itu sekolah aku ngadain *Study Tour*, kalau nggak salah (berarti benar)... ke Gedung Sate Bandung dan Air Panas Ciater. Bayarnya sekitar Rp. 200.000 dan itu aku bayar sendiri dengan uang tabunganku. Pikir aja anak kelas 5 SD punya uang segitu bukan hasil minta dari orang tua, gimana rasanya? Dibilang megang uang Lima Puluh Ribu aja tangan merinding.
+Senangnya berlipat-lipat ganda punya penghasilan sendiri, tabungan banyak. Walau capek pagi-siang sekolah, siang-malam jualan. Tapi itu semua dibayar oleh hasil yang memuaskan. Sampai waktu itu sekolah aku ngadain _Study Tour_, kalau nggak salah (berarti benar)... ke Gedung Sate Bandung dan Air Panas Ciater. Bayarnya sekitar Rp. 200.000 dan itu aku bayar sendiri dengan uang tabunganku. Pikir aja anak kelas 5 SD punya uang segitu bukan hasil minta dari orang tua, gimana rasanya? Dibilang megang uang Lima Puluh Ribu aja tangan merinding.
 
 Waktu berlalu sampai aku kelas 6 SD, awal-awal aku masih jualan juga. Tapi mendekati akhir sekolah aku benar-benar berhenti dulu jualan karena aku harus fokus EBTANAS.
 
 Eh, kamu tau EBTANAS? Kalau tau, berarti kita seumuran. Ehe.
 
-Sampai akhirnya, *Alhamdulillah*.. lulus SD, aku melanjutkan ke SMP.
+Sampai akhirnya, _Alhamdulillah_.. lulus SD, aku melanjutkan ke SMP.
 
 Lokasi sekolah? Tetap jauh dari rumah yang mengharuskan aku naik kereta untuk pulang perginya. Saat sudah SMP dan ketika pulang naik kereta, aku lihat pedagang asongan, sedikit rindu aku untuk kembali berjualan. Akhirnya aku berniat untuk jualan lagi, mengejar cita-cita jadi pengusaha lagi, aku pikir aku harus lelah dulu memang berjualan. Ada saatnya nanti aku berbisnis tanpa lelah lagi, mempekerjakan pegawai aku, jadi Bandar, tinggal nunggu para pegawai setoran uang ke aku. Ah, itu cita-cita ku!
 
