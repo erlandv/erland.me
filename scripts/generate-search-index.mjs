@@ -51,7 +51,7 @@ function toDateLabel(input) {
   }
 }
 
-function pickExcerpt(data, bodyPlain) {
+export function pickExcerpt(data, bodyPlain) {
   const fallback = summarize(bodyPlain, 280);
   const excerpt =
     typeof data['excerpt'] === 'string' ? data['excerpt'].trim() : '';
@@ -111,7 +111,13 @@ async function main() {
   console.log(`Search index written: ${OUTPUT_PATH} (${items.length} items)`);
 }
 
-main().catch(err => {
-  console.error('Failed to generate search index:', err);
-  process.exitCode = 1;
-});
+// Only run if executed directly, not if imported for testing
+import { fileURLToPath } from 'node:url';
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+
+if (isMain) {
+  main().catch(err => {
+    console.error('Failed to generate search index:', err);
+    process.exitCode = 1;
+  });
+}
