@@ -71,7 +71,7 @@ type HeadingInfo = {
  * slugify('Hello World!') // 'hello-world'
  * slugify('API Reference 2.0') // 'api-reference-20'
  */
-function slugify(text: string): string {
+export function slugify(text: string): string {
   try {
     return text
       .toLowerCase()
