@@ -20,7 +20,7 @@ const featuredProjects = projectCategories.slice(0, 2);
   description={PAGE_METADATA.home.description}
 >
   <!-- Hero/Fold Section - Above-the-fold introduction and CTA -->
-  <main class={fold['fold-content-container']}>
+  <section aria-label='Introduction' class={fold['fold-content-container']}>
     <!-- Hero Content - Greeting, tagline, and introduction -->
     <div class={fold['fold-content']}>
       <span class={fold['intro']}>Hello world;</span>
@@ -48,7 +48,7 @@ const featuredProjects = projectCategories.slice(0, 2);
       <Icon name='socialEmail' class={btn['button-icon']} />
       <span>Contact Me</span>
     </a>
-  </main>
+  </section>
 
   <!-- Portfolio Categories Section - Highlights main project categories -->
   <div class={pf['projects-section']}>

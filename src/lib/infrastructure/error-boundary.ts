@@ -220,6 +220,8 @@ export function withErrorBoundary<
   }) as T;
 }
 
+let globalHandlerSetup = false;
+
 /**
  * Global unhandled error handler for runtime errors
  * Sets up window listeners for unhandled promise rejections and global errors
@@ -229,6 +231,9 @@ export function withErrorBoundary<
  * setupGlobalErrorHandler();
  */
 export function setupGlobalErrorHandler(): void {
+  if (globalHandlerSetup) return;
+  globalHandlerSetup = true;
+
   // Handle unhandled promise rejections
   window.addEventListener('unhandledrejection', event => {
     const error =

@@ -1,12 +1,14 @@
 /**
- * Avatar Stories - Instagram-like Story Viewer
- * Features:
- * - Fullscreen modal with backdrop
- * - Progress bars with countdown timer
- * - Auto-advance to next story
- * - Manual navigation (prev/next)
- * - Pause/Resume Story
- * - Auto-close after all stories viewed
+ * StoriesViewer — Instagram-like fullscreen story viewer
+ *
+ * Provides a complete fullscreen story-viewing experience:
+ * - Auto-advancing progress bars (rAF-based, accurate timing)
+ * - Manual prev/next navigation (buttons + click zones + keyboard)
+ * - Pause / resume (button + spacebar)
+ * - Background music with mute toggle
+ * - Keyboard shortcuts: Escape, ←, →, Space, M
+ * - Scroll lock while open
+ * - Automatic cleanup on close (removes DOM, listeners, audio)
  */
 
 import closeIcon from '@/icons/btn-close.svg?raw';
@@ -19,118 +21,15 @@ import volumeOnIcon from '@/icons/stories-volume-on.svg?raw';
 import volumeOffIcon from '@/icons/stories-volume-off.svg?raw';
 import musicIcon from '@/icons/stories-music.svg?raw';
 import { SITE_CONFIG } from '@lib/core/site-config';
-import { onRouteChange } from '@lib/infrastructure/router-events';
 import { qs, qsa } from '@lib/core/dom-builder';
+import { createLogger } from '@lib/core/logger';
+import { loadStoriesData } from './loader';
+import type { Story, Music } from './types';
+import { STORY_DURATION } from './types';
 
-/**
- * Story data structure
- * @property src - Image source URL
- * @property alt - Image alt text for accessibility
- */
-interface Story {
-  src: string;
-  alt: string;
-}
+const log = createLogger('Stories:Viewer');
 
-/**
- * Music data structure
- * @property src - Audio file source URL
- * @property title - Song title
- * @property artist - Artist name (optional)
- */
-interface Music {
-  src: string;
-  title: string;
-  artist?: string;
-}
-
-/**
- * Stories data container
- * @property stories - Array of story objects
- * @property music - Optional background music configuration
- */
-interface StoriesData {
-  stories: Story[];
-  music?: Music;
-}
-
-/**
- * Duration for each story in milliseconds (5 seconds)
- */
-const STORY_DURATION = 5000; // 5 seconds per story
-
-/**
- * Stories JSON data URL
- */
-const STORIES_DATA_URL = '/data/stories.json';
-
-/**
- * In-memory cache for loaded stories data
- * Prevents multiple fetches for same data
- */
-let storiesDataCache: StoriesData | null = null;
-
-/**
- * Load stories data from JSON file
- * Uses cache to prevent redundant fetches
- * @returns Promise resolving to stories data object
- * @throws Error if fetch fails or JSON is invalid
- */
-async function loadStoriesData(): Promise<StoriesData> {
-  // Return cached data if available
-  if (storiesDataCache !== null) {
-    return storiesDataCache;
-  }
-
-  try {
-    const response = await fetch(STORIES_DATA_URL);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch stories: ${response.statusText}`);
-    }
-
-    const data: StoriesData = await response.json();
-
-    // Validate data structure
-    if (!data.stories || !Array.isArray(data.stories)) {
-      throw new Error('Invalid stories data format');
-    }
-
-    // Cache the loaded stories data
-    storiesDataCache = data;
-    return storiesDataCache;
-  } catch (error) {
-    console.error('[Stories] Failed to load stories:', error);
-    // Return empty data as fallback
-    return { stories: [] };
-  }
-}
-
-/**
- * Instagram-like Stories Viewer
- *
- * Provides fullscreen story viewing experience with:
- * - Auto-advancing progress bars
- * - Manual navigation (prev/next)
- * - Pause/resume functionality
- * - Keyboard controls (arrows, space, escape)
- * - Touch-friendly click zones
- * - Automatic cleanup on close
- *
- * Stories are loaded from /data/stories.json by default,
- * or can be provided directly via constructor parameter.
- *
- * @example
- * // Load from JSON (default)
- * const viewer = new StoriesViewer();
- * await viewer.open();
- *
- * @example
- * // Use custom stories
- * const customStories = [{ src: '/img.jpg', alt: 'Custom' }];
- * const viewer = new StoriesViewer(customStories);
- * await viewer.open();
- */
-class StoriesViewer {
+export class StoriesViewer {
   private stories: Story[];
   private music: Music | undefined;
   private currentIndex: number = 0;
@@ -163,6 +62,8 @@ class StoriesViewer {
     this.stories = stories || [];
     this.music = music;
   }
+
+  // ─── Template ─────────────────────────────────────────────────────────────
 
   /**
    * Create stories overlay template HTML
@@ -297,6 +198,8 @@ class StoriesViewer {
     `;
   }
 
+  // ─── DOM setup ────────────────────────────────────────────────────────────
+
   /**
    * Create the stories overlay DOM structure
    * Builds overlay element, caches DOM references, and sets up event listeners
@@ -377,6 +280,8 @@ class StoriesViewer {
     return overlay;
   }
 
+  // ─── Keyboard ─────────────────────────────────────────────────────────────
+
   /**
    * Handle keyboard navigation
    * - Escape: Close viewer
@@ -413,6 +318,8 @@ class StoriesViewer {
         break;
     }
   };
+
+  // ─── Pause / Resume ───────────────────────────────────────────────────────
 
   /**
    * Toggle pause state
@@ -482,7 +389,7 @@ class StoriesViewer {
     // Resume audio and update mute button icon to volume on
     if (this.audioElement && this.audioElement.paused && !this.isMuted) {
       this.audioElement.play().catch(err => {
-        console.error('[Stories] Failed to resume audio:', err);
+        log.error('Failed to resume audio', err instanceof Error ? err : new Error(String(err)));
       });
 
       // Update mute button icon to show audio is playing
@@ -494,6 +401,8 @@ class StoriesViewer {
     this.startTime = Date.now();
     this.animate();
   }
+
+  // ─── Mute / Unmute ────────────────────────────────────────────────────────
 
   /**
    * Toggle mute state
@@ -544,10 +453,12 @@ class StoriesViewer {
     // Resume audio if story is not paused
     if (!this.isPaused && this.audioElement.paused) {
       this.audioElement.play().catch(err => {
-        console.error('[Stories] Failed to unmute audio:', err);
+        log.error('Failed to unmute audio', err instanceof Error ? err : new Error(String(err)));
       });
     }
   }
+
+  // ─── Audio ────────────────────────────────────────────────────────────────
 
   /**
    * Initialize background music
@@ -564,7 +475,7 @@ class StoriesViewer {
 
       // Handle audio load errors
       this.audioElement.addEventListener('error', () => {
-        console.error('[Stories] Failed to load audio:', this.music?.src);
+        log.error('Failed to load audio', new Error(this.music?.src ?? ''));
         // Hide music info on error
         if (this.musicInfoElement) {
           this.musicInfoElement.style.display = 'none';
@@ -578,7 +489,7 @@ class StoriesViewer {
       // Start playing audio (unmuted by default)
       await this.audioElement.play();
     } catch (error) {
-      console.error('[Stories] Failed to initialize audio:', error);
+      log.error('Failed to initialize audio', error instanceof Error ? error : new Error(String(error)));
       // Hide music info on error
       if (this.musicInfoElement) {
         this.musicInfoElement.style.display = 'none';
@@ -603,6 +514,8 @@ class StoriesViewer {
     this.audioElement.load();
     this.audioElement = null;
   }
+
+  // ─── Navigation ───────────────────────────────────────────────────────────
 
   /**
    * Update navigation buttons visibility
@@ -638,6 +551,8 @@ class StoriesViewer {
       this.clickZoneNext.style.display = isLast ? 'none' : 'block';
     }
   }
+
+  // ─── Progress / Animation ─────────────────────────────────────────────────
 
   /**
    * Update progress bar fill percentage
@@ -758,6 +673,8 @@ class StoriesViewer {
     }
   }
 
+  // ─── Scroll lock ──────────────────────────────────────────────────────────
+
   /**
    * Disable page scrolling
    * Adds CSS class to prevent body scroll while viewer is open
@@ -773,6 +690,8 @@ class StoriesViewer {
   private enableScroll(): void {
     document.documentElement.classList.remove('image-lightbox--locked');
   }
+
+  // ─── Public API ───────────────────────────────────────────────────────────
 
   /**
    * Open the stories viewer
@@ -793,7 +712,7 @@ class StoriesViewer {
 
       // Check if stories were loaded successfully
       if (this.stories.length === 0) {
-        console.error('[Stories] No stories available to display');
+        log.warn('No stories available to display');
         return;
       }
     }
@@ -877,77 +796,3 @@ class StoriesViewer {
     this.musicInfoElement = null;
   }
 }
-
-/**
- * Initialize avatar stories feature
- * Finds all elements with [data-stories] attribute and attaches click handlers
- * Safe to call multiple times - prevents duplicate event binding
- * @example
- * // In HTML: <img data-stories src="avatar.jpg" />
- * initAvatarStories();
- */
-export function initAvatarStories(): void {
-  const avatarImages = document.querySelectorAll('[data-stories]');
-
-  interface ElementWithStoriesBound extends Element {
-    _storiesBound?: boolean;
-  }
-
-  avatarImages.forEach(avatar => {
-    const elem = avatar as ElementWithStoriesBound;
-    if (elem._storiesBound) return;
-    elem._storiesBound = true;
-
-    avatar.addEventListener('click', async (e: Event) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const viewer = new StoriesViewer();
-      await viewer.open();
-    });
-
-    // Add visual indicator (cursor pointer)
-    (avatar as HTMLElement).style.cursor = 'pointer';
-  });
-}
-
-/**
- * Auto-init for router transitions
- */
-let routerSetup = false;
-function setupRouterReinit() {
-  if (routerSetup) return;
-  routerSetup = true;
-
-  const run = () => initAvatarStories();
-
-  document.addEventListener('astro:page-load', run);
-  document.addEventListener('astro:after-swap', run);
-
-  onRouteChange(run);
-}
-
-/**
- * Auto-init when module is loaded
- */
-export function autoInit(): void {
-  const run = () => initAvatarStories();
-
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      () => {
-        run();
-        setupRouterReinit();
-      },
-      { once: true },
-    );
-  } else {
-    setTimeout(() => {
-      run();
-      setupRouterReinit();
-    }, 50);
-  }
-}
-
-export default initAvatarStories;

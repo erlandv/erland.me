@@ -66,7 +66,6 @@ interface ImportMetaEnv {
 const envSchema = z.object({
   // Core site configuration (required)
   SITE_URL: z
-    .string()
     .url('SITE_URL must be a valid URL')
     .default('http://localhost:4321'),
   SITE_DOMAIN: z
@@ -226,8 +225,8 @@ function validateEnv(
     const validationErr = new Error(
       `Environment validation failed: ${
         error instanceof z.ZodError
-          ? error.errors
-              .map(e => `${e.path.join('.')}: ${e.message}`)
+          ? error.issues
+              .map(issue => `${issue.path.join('.')}: ${issue.message}`)
               .join(', ')
           : String(error)
       }`,

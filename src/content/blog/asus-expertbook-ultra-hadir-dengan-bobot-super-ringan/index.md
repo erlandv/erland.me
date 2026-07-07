@@ -4,7 +4,7 @@ description: Review ASUS ExpertBook Ultra B9406CAA, laptop bisnis ultra-portabel
 excerpt: Review ASUS ExpertBook Ultra, laptop bisnis ultra-portabel dengan Intel Core Ultra & AI on-device, performa tinggi.
 publishDate: 2026-05-07
 hero: ./hero.png
-heroAlt: ASUS ExpertBook Ultra 
+heroAlt: ASUS ExpertBook Ultra
 category: review
 draft: false
 ---
