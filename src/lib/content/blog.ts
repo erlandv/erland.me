@@ -56,7 +56,7 @@ export type Post = {
  * @param value - Date-like value (string, number, Date, or undefined)
  * @returns Parsed Date object or null if invalid
  */
-const safeDate = (value: unknown): Date | null => {
+export const safeDate = (value: unknown): Date | null => {
   if (!value) return null;
   const d = new Date(value as string | number | Date);
   return isNaN(d.valueOf()) ? null : d;

@@ -52,7 +52,7 @@ const ERROR_MESSAGES: Record<string, string> = {
  * @param error - Error object to check
  * @returns True if error matches recoverable patterns
  */
-function isRecoverableError(error: Error): boolean {
+export function isRecoverableError(error: Error): boolean {
   const recoverablePatterns = [
     /network/i,
     /timeout/i,
