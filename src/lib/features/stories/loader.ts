@@ -166,7 +166,10 @@ export async function loadStoriesData(): Promise<StoriesData> {
     storiesDataCache = data;
     return storiesDataCache;
   } catch (error) {
-    log.error('Failed to load stories', error instanceof Error ? error : new Error(String(error)));
+    log.error(
+      'Failed to load stories',
+      error instanceof Error ? error : new Error(String(error)),
+    );
     return { stories: [] };
   }
 }

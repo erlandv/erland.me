@@ -40,11 +40,11 @@ Terlepas dari jenis kelamin yang mengalami _sexual harassment_, entah perempuan 
 
 > Lalu apa yang harus dilakukan ketika mendapatkan sexual harassment?
 
-Sedikit tips yang bisa saya berikan, apa yang harus dilakukan ketika mendapatkan *sexual harassment*.
+Sedikit tips yang bisa saya berikan, apa yang harus dilakukan ketika mendapatkan _sexual harassment_.
 
 1. Apabila di tempat umum, berteriaklah. Agar orang di sekitarmu mengalihkan pandangan padamu dan menggagalkan niat si pelaku.
 
-2. Apabila melalui media sosial berupa pesan singkat, maka *screen shoot-\_lah isi percakapan dan akun pelaku, kemudian \_share* di media sosial Anda.
+2. Apabila melalui media sosial berupa pesan singkat, maka _screen shoot-\_lah isi percakapan dan akun pelaku, kemudian \_share_ di media sosial Anda.
 
 3. Apabila di tempat tertutup yang tidak banyak diketahui orang lain, cobalah mencatat tentang kejadian (identitas pelaku, tempat kejadian, waktu, saksi dan apa saja yang diperbuat  oleh pelaku). Karena data ini bisa digunakan sebagai bentuk laporan kamu kepada pihak berwajib.
 
@@ -54,4 +54,4 @@ Sedikit tips yang bisa saya berikan, apa yang harus dilakukan ketika mendapatkan
 
 6. Laporkan perbuatan pelecehan seksual tersebut kepada yang berwajib, karena pelecehan seksual jelas telah melanggar hukum.
 
-Selain hal di atas, untuk perempuan jaga diri dan jaga perilaku, kemudian untuk laki-laki jaga pandangan dan jaga pikiran. Hal tersebut dilakukan untuk menghindari perbuatan dilecehkan maupun melecehkan. Karena *sexual harassment* ini bisa terjadi di mana saja dan kapan saja. Entah sejak kapan *sexual harassment* ini muncul di muka bumi dan belum bisa hilang hingga sekarang. Semoga Tuhan melindungi kita dari hal yang berbau *sexual harassment*.
+Selain hal di atas, untuk perempuan jaga diri dan jaga perilaku, kemudian untuk laki-laki jaga pandangan dan jaga pikiran. Hal tersebut dilakukan untuk menghindari perbuatan dilecehkan maupun melecehkan. Karena _sexual harassment_ ini bisa terjadi di mana saja dan kapan saja. Entah sejak kapan _sexual harassment_ ini muncul di muka bumi dan belum bisa hilang hingga sekarang. Semoga Tuhan melindungi kita dari hal yang berbau _sexual harassment_.

@@ -66,7 +66,7 @@ if (typeof window !== 'undefined') {
  * @param input - URL in string, URL object, or undefined
  * @returns Normalized URL string (current location if input is empty)
  */
-function normalizeUrl(input: string | URL | null | undefined): string {
+export function normalizeUrl(input: string | URL | null | undefined): string {
   if (!input) return window.location.href;
   if (typeof input === 'string') return input;
   return input.toString();

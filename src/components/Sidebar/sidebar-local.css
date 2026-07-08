@@ -337,7 +337,9 @@
     --icon-xform: rotate(90deg) scale(0.9);
   }
 
-  .nav-content:has(#nav-toggle:checked) .navbar-icon-button .icon-switch--close {
+  .nav-content:has(#nav-toggle:checked)
+    .navbar-icon-button
+    .icon-switch--close {
     opacity: 1;
     --icon-xform: rotate(0deg) scale(1);
   }

@@ -23,7 +23,10 @@
     "generate:ads": "node scripts/generate-ads.mjs",
     "generate:search": "node scripts/generate-search-index.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "copy:favicon": "cp public/assets/favicon/favicon.ico public/favicon.ico"
+    "copy:favicon": "cp public/assets/favicon/favicon.ico public/favicon.ico",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:smoke": "node scripts/smoke-test.mjs"
   },
   "engines": {
     "node": ">=22.18.0",
@@ -51,6 +54,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "remark-directive": "^4.0.0",
     "typescript": "^5.9.2",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "vitest": "^3.0.0"
   }
 }

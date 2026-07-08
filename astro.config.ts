@@ -239,7 +239,7 @@ export default defineConfig({
       ? [
           playformCompress({
             // CSS compression
-            CSS: true,
+            CSS: false,
             // HTML compression (compressHTML disabled above, handled here)
             HTML: true,
             // JavaScript/SVG compression

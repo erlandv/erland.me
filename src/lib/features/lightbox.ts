@@ -162,7 +162,7 @@ function disableScroll() {
  */
 function handleFocusTrap(element: HTMLElement, e: KeyboardEvent) {
   const focusableEls = element.querySelectorAll<HTMLElement>(
-    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
   );
 
   if (focusableEls.length === 0) return;
