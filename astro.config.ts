@@ -1,5 +1,4 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
-import { unified } from '@astrojs/markdown-remark';
 import { fileURLToPath } from 'node:url';
 import remarkDirective from 'remark-directive';
 import remarkGallery from './src/lib/content/remark/remark-gallery';
@@ -86,16 +85,14 @@ export default defineConfig({
 
   // Markdown configuration
   markdown: {
-    processor: unified({
-      remarkPlugins: [
-        remarkDirective,
-        remarkGallery,
-        remarkFigure,
-        remarkDownloadFiles,
-      ],
-      gfm: true,
-      smartypants: true,
-    }),
+    remarkPlugins: [
+      remarkDirective,
+      remarkGallery,
+      remarkFigure,
+      remarkDownloadFiles,
+    ],
+    gfm: true,
+    smartypants: true,
     shikiConfig: {
       theme: 'material-theme-darker',
       wrap: false,
@@ -160,9 +157,6 @@ export default defineConfig({
             // Other assets: readable names + hash
             return `assets/${cleanBase}.[hash][extname]`;
           },
-          // JS output location: hashed-only to avoid route placeholders
-          chunkFileNames: 'assets/js/[hash].js',
-          entryFileNames: 'assets/js/[hash].js',
         },
       },
       // Enable source maps for production debugging
@@ -172,7 +166,6 @@ export default defineConfig({
       // Split CSS into separate files
       cssCodeSplit: true,
     },
-    plugins: [],
     resolve: {
       alias: {
         '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
@@ -220,9 +213,6 @@ export default defineConfig({
       },
     ],
   },
-
-  // HTML compression handled by @playform/compress integration
-  compressHTML: false,
 
   // Scoped style strategy
   scopedStyleStrategy: 'where',
