@@ -218,7 +218,7 @@ PUBLIC_AHREFS_DATA_KEY=abc123...    # Ahrefs Web Analytics key (optional, for wh
 - `npm run build` - Auto-detects environment like it's reading your mind
 - `npm run dev` - Always development mode (the safe space)
 
-All environment variables are optional with intelligent defaults. The validation system will yell at you (politely) if something's wrong. Check `src/env.d.ts` for the complete list with TypeScript types, or `src/lib/env.ts` for the Zod schemas that judge your configuration choices.
+All environment variables are optional with intelligent defaults. The validation system will yell at you (politely) if something's wrong. Check `src/env.d.ts` for the complete list with TypeScript types, or `src/lib/core/env.ts` for the Zod schemas that judge your configuration choices.
 
 ## Production Deployment
 
@@ -226,8 +226,8 @@ The serious, enterprise-grade deployment pipeline for what is fundamentally a gl
 
 ### Prod Flow
 
-- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday... yet). Runs in the `Production` environment. Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit). Also enforces concurrency limits—only one production deploy at a time because chaos is not a deployment strategy.
-- **Build**: Checks out code with `actions/checkout@v4`, sets up Node from `.nvmrc`, runs `npm ci` for deterministic installs (trust no one, not even npm), and executes `npm run build:clean` like it's launching a rocket.
+- **Trigger & Context**: Activates on push to `main` or manual trigger (at least I didn't push on Friday... yet). Runs in the `Production` environment. Uses path filters so it doesn't waste compute cycles when I only fix typos in this README (which happens more than I'd like to admit). Also enforces concurrency limits—if a new push arrives while a deploy is running, the old one gets cancelled immediately. Last push wins. Because waiting is for people with patience.
+- **Build**: Checks out code with `actions/checkout@v5`, sets up Node from `.nvmrc`, runs `npm ci` for deterministic installs (trust no one, not even npm), and executes `npm run build:clean` like it's launching a rocket.
 - **Release Metadata**: Verifies `dist/` actually has files (because deploying an empty directory is embarrassing), then writes `.release` with the commit SHA and `.built_at` with UTC timestamp. Also publishes `version.json` so you can verify exactly how stale my content is. Transparency is key.
 - **SSH Setup**: Loads the SSH key with maximum paranoia using `webfactory/ssh-agent`, pre-populates `known_hosts` with extended 60-second timeout (because slow networks exist), then prepares remote `releases/` directory. Security theater with actual security.
 - **Upload**: Creates release directory at `releases/<sha>` on remote, then `rsync` pushes `dist/` with enough flags (`-az --delete-delay --partial --mkpath`) to make it look like I'm deploying nuclear launch codes. Excludes `.DS_Store` and source maps because bandwidth is precious.
@@ -247,7 +247,7 @@ The sandbox where I break things safely before they embarrass me in production. 
 - **Preflight Check**: Validates that all required Cloudflare secrets and vars exist before wasting time building. Fail fast philosophy in action—if `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, or `CLOUDFLARE_PROJECT_NAME` are missing, yell immediately.
 - **Build**: Standard choreography: checkout code, setup Node from `.nvmrc` with npm cache enabled (because CI speed matters), `npm ci` for reproducibility, then `npm run build:clean` for a fresh build. No stale artifacts allowed.
 - **Verify Output**: Sanity check that `dist/` exists and actually contains files. Fail fast if the build exploded. No point uploading an empty directory to Cloudflare and calling it a day.
-- **Publish to Cloudflare**: `cloudflare/pages-action@v1` takes `./dist` and uploads it to Cloudflare's edge network. Auto-generates preview URLs per branch. Uses secrets for `apiToken` and `accountId` because security theater is still theater, and I'm putting on a show.
+- **Publish to Cloudflare**: `cloudflare/wrangler-action@v3` runs `wrangler pages deploy ./dist` to push the build to Cloudflare's edge network. Branch-based preview URLs come along for free. Secrets flow in as env vars because hardcoding credentials is a great way to have a very bad day.
 - **Summary**: Always runs (even if previous steps fail) to append deployment info to `GITHUB_STEP_SUMMARY`. Includes project name, branch, and commit SHA so Future Me remembers what Past Me just deployed. Communication with yourself is important.
 
 Go ahead, try to break it: **[https://staging.erland.pages.dev](https://staging.erland.pages.dev)**
