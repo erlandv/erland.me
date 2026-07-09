@@ -44,7 +44,7 @@ jobs:
     steps:
       # --- Repository checkout ---
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # --- Validate required staging environment secrets/vars are available ---
       - name: Preflight env availability
@@ -53,16 +53,16 @@ jobs:
           # Validate Environment 'Staging' secrets/vars are mapped into job env
           for v in CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_PROJECT_NAME; do
             if [ -z "${!v:-}" ]; then
-              echo "❌ Missing $v (ensure Environment 'Staging' secrets/vars exist and names match)"
+              echo "Missing $v (ensure Environment 'Staging' secrets/vars exist and names match)"
               echo "Required: secrets.CLOUDFLARE_ACCOUNT_ID, secrets.CLOUDFLARE_API_TOKEN, vars.CLOUDFLARE_PROJECT_NAME"
               exit 1
             fi
           done
-          echo "✅ Required envs are present for Staging deploy"
+          echo "Required envs are present for Staging deploy"
 
       # --- Node.js setup ---
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -78,17 +78,15 @@ jobs:
       - name: Verify build output
         run: |
           set -euo pipefail
-          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
+          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "dist is empty"; exit 1; }
 
-      # --- Publish to Cloudflare Pages ---
+      # --- Publish to Cloudflare Pages (via Wrangler) ---
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.CLOUDFLARE_PROJECT_NAME }}
-          directory: ./dist
-          branch: ${{ github.ref_name }}
+          command: pages deploy ./dist --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.ref_name }}
 
       # --- Summary ---
       - name: Summary

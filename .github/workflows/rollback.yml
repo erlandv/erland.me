@@ -23,7 +23,9 @@ jobs:
     steps:
       # --- SSH setup ---
       - name: Start ssh-agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.1
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -68,5 +70,5 @@ jobs:
           sleep 5
           # Verify site is accessible after rollback
           STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=$(date +%s)")"
-          test "$STATUS" -eq 200 || { echo "❌ Site not accessible after rollback (HTTP $STATUS)"; exit 1; }
-          echo "✅ Rollback successful - site is accessible"
+          test "$STATUS" -eq 200 || { echo "Site not accessible after rollback (HTTP $STATUS)"; exit 1; }
+          echo "Rollback successful - site is accessible"

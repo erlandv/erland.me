@@ -48,11 +48,11 @@ jobs:
     steps:
       # --- Repository checkout ---
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # --- Node.js setup ---
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -68,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           # Ensure `dist` directory exists and contains files
-          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
+          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "dist is empty"; exit 1; }
           # Record commit SHA for traceability
           echo "${GITHUB_SHA}" > dist/.release
           # Record UTC build timestamp
@@ -79,7 +79,9 @@ jobs:
 
       # --- SSH setup ---
       - name: Start ssh-agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.1
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -146,10 +148,10 @@ jobs:
           ROOT_URL="${{ env.SITE_URL }}"
           # Verify site is accessible and serving content
           STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
-          test "$STATUS" -eq 200 || { echo "❌ Site not accessible (HTTP $STATUS)"; exit 1; }
+          test "$STATUS" -eq 200 || { echo "Site not accessible (HTTP $STATUS)"; exit 1; }
           # Verify version.json matches deployed SHA (validates atomic symlink swap)
           VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
-          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
+          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
 
       # --- Clean up old releases: keep last 5 ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
