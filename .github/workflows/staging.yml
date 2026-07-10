@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Staging
-      url: ${{ env.SITE_URL }}
+      url: ${{ vars.SITE_URL }}
     # --- Minimal permissions required for this job ---
     permissions:
       contents: read

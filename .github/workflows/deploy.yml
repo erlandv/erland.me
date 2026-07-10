@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: https://erland.me
+      url: ${{ vars.SITE_URL }}
     # --- Environment variables used by build and remote deployment ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
@@ -132,6 +132,44 @@ jobs:
             # Atomically update 'current' symlink to point to the new release
             ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
           "
+
+      # ---------------------------------------------------------------------------
+      # DUAL DEPLOY (server migration only)
+      # Uncomment all lines in this block to dual deploy
+      # Re-comment them after the migration is complete
+      # Requires temporary GitHub Secrets: NEW_SSH_HOST, NEW_SSH_PORT, NEW_SSH_USER
+      # ---------------------------------------------------------------------------
+      # - name: Add NEW server to known_hosts
+      #   run: |
+      #     set -euo pipefail
+      #     ssh-keyscan -T 60 -p "${{ secrets.NEW_SSH_PORT }}" -H "${{ secrets.NEW_SSH_HOST }}" >> ~/.ssh/known_hosts
+      #     chmod 644 ~/.ssh/known_hosts
+      #
+      # - name: Rsync dist to NEW server
+      #   env:
+      #     REL_PATH: ${{ github.sha }}
+      #   run: |
+      #     set -euo pipefail
+      #     ssh -p "${{ secrets.NEW_SSH_PORT }}" $SSH_OPTS \
+      #       "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}" \
+      #       "mkdir -p '${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}'"
+      #     RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
+      #     RSYNC_OPTS="$RSYNC_OPTS --exclude='.DS_Store' --exclude='*.map' --exclude='Thumbs.db'"
+      #     rsync $RSYNC_OPTS \
+      #       -e "ssh -p ${{ secrets.NEW_SSH_PORT }} $SSH_OPTS" \
+      #       ./dist/ "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}:${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}/"
+      #
+      # - name: Activate new release on NEW server (symlink swap)
+      #   env:
+      #     REL_PATH: ${{ github.sha }}
+      #   run: |
+      #     set -euo pipefail
+      #     ssh -p "${{ secrets.NEW_SSH_PORT }}" $SSH_OPTS \
+      #       "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}" "
+      #         set -euo pipefail
+      #         ln -sfn '${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}' '${{ vars.DEPLOY_BASE_DIR }}/current'
+      #       "
+      # ---------------------------------------------------------------------------
 
       # --- Reload Nginx ---
       - name: Reload Nginx
