@@ -6,9 +6,9 @@ Static-first Astro personal website with type-safe content collections, minimal 
 
 ## Architecture Essentials
 
-### Astro v6 Content Layer API
+### Astro v7 Content Layer API
 
-**IMPORTANT:** This project uses Astro v6 Content Layer API. Key differences from legacy API:
+**IMPORTANT:** This project uses Astro v7 Content Layer API. Key differences from legacy API:
 
 - **Loader Required**: All collections must define a `loader` (e.g., `glob()` loader)
 - **No Type Property**: `type: 'content'` and `type: 'data'` are removed
@@ -40,8 +40,8 @@ const blog = defineCollection({
 
 ### Styling Architecture
 
-- **Global styles**: Styles are organized under `src/styles/` rather than a single `styles.css` file. Global typography, table layouts, and ad container patterns live in subfolders such as `src/styles/prose/`, `src/styles/layout/`, and `src/styles/advertising/` while `src/styles/variables.css` holds design tokens.
-- **CSS Modules**: Component-scoped styles are co-located with components using CSS Modules (e.g., `src/components/Sidebar/sidebar-local.module.css`).
+- **Global styles**: Styles are organized under `src/styles/` rather than a single `styles.css` file. Global typography, table layouts, and feature-specific patterns live in subfolders such as `src/styles/prose/`, `src/styles/layout/`, `src/styles/features/`, and `src/styles/utilities/` while `src/styles/variables.css` holds design tokens.
+- **CSS Modules**: Component-scoped styles are co-located with components using CSS Modules (e.g., `src/components/Sidebar/sidebar-local.css`).
 - **Shared patterns**: Reusable page-level patterns live in `src/styles/components/` (for example an `article-detail` stylesheet or related modules used by blog and download pages).
 - **Design tokens**: `src/styles/variables.css` centralizes CSS custom properties; never hardcode colors/spacing
 - **Page-scoped styles**: Individual pages often include their own scoped styles under `src/pages/<route>/styles/` (examples: `src/pages/blog/styles/_blog.module.css`, `src/pages/download/styles/_download.module.css`, `src/pages/portfolio/styles/_portfolio.module.css`). Pages also import shared page patterns from `src/styles/pages/` (e.g., `listing.module.css`, `chips.module.css`). Pages may import `src/styles/variables.css` and layout CSS directly when needed.
@@ -128,7 +128,7 @@ npm run build        # Auto-detected environment build with fresh metadata
 npm run build:dev    # Development mode build (no analytics required)
 npm run build:clean  # Force clean dist/ cache before build
 npm run preview      # Serve built site locally for QA
-npm run validate     # Lint + type-check + format:check (must pass before PR)
+npm run validate     # Lint + lint:js + type-check + format:check (must pass before PR)
 
 # Individual checks
 npm run lint         # Astro check for errors/warnings
@@ -163,7 +163,7 @@ if (!entry) return Astro.redirect('/blog/');
 const { Content } = await render(entry);
 ```
 
-**Note:** In Astro v6 Content Layer API, use `entry.id` instead of `entry.slug`. The `id` property contains the file path relative to the collection base.
+**Note:** In Astro v7 Content Layer API, use `entry.id` instead of `entry.slug`. The `id` property contains the file path relative to the collection base.
 
 **Pagination pattern** (generate pages 2..N):
 
@@ -206,7 +206,7 @@ template:
 <Content />
 ```
 
-**Note:** In Astro v6, `entry.render()` is no longer available. Import and use the `render()` function instead.
+**Note:** In Astro v7, `entry.render()` is no longer available. Import and use the `render()` function instead.
 
 ### Image Handling Pattern
 
@@ -243,7 +243,7 @@ const newCollection = defineCollection({
 export const collections = { blog, downloads, portfolio, newCollection };
 ```
 
-**Note:** In Astro v6, collections require a `loader` definition. The `type: 'content'` or `type: 'data'` properties are no longer used.
+**Note:** In Astro v7, collections require a `loader` definition. The `type: 'content'` or `type: 'data'` properties are no longer used.
 
 ### 2. Create Content Directory
 
@@ -274,7 +274,7 @@ if (!entry) return Astro.redirect('/newCollection/');
 const { Content } = await render(entry);
 ```
 
-**Note:** Use `entry.id` instead of `entry.slug` in Astro v6 Content Layer API.
+**Note:** Use `entry.id` instead of `entry.slug` in Astro v7 Content Layer API.
 
 ### 4. Update Search Index (if needed)
 
@@ -318,7 +318,7 @@ document.addEventListener('astro:after-swap', () => {
 
 ### Debugging View Transitions
 
-Add temporary logging to `src/lib/ui-init.ts`:
+Add temporary logging to `src/lib/infrastructure/ui-init.ts`:
 
 ```typescript
 async function maybeLoadFeature(): Promise<void> {
@@ -415,7 +415,7 @@ function shouldEnableStagingFeature(): boolean {
 **Real Example (AdSense):**
 
 ```typescript
-// src/lib/adsense.ts
+// src/lib/tracking/ads.ts
 export function shouldRenderAds(config: AdsRenderConfig): boolean {
   const client = (config.client ?? '').trim();
   if (!client) return false;
@@ -451,7 +451,7 @@ if (import.meta.env.PUBLIC_SITE_ENV === 'staging') {
 }
 ```
 
-**Mode Detection Priority** (from `src/lib/env.ts`):
+**Mode Detection Priority** (from `src/lib/core/env.ts`):
 
 1. `PUBLIC_SITE_ENV` explicit override (highest)
 2. Localhost detection (`localhost`, `127.0.0.1` → development)
@@ -471,7 +471,7 @@ if (import.meta.env.PUBLIC_SITE_ENV === 'staging') {
 
 #### Best Practices
 
-1. **Centralize logic** in `src/lib/env.ts` or dedicated feature flags module
+1. **Centralize logic** in `src/lib/core/env.ts` or dedicated feature flags module
 2. **Document with truth tables** in JSDoc for complex conditions
 3. **Test all environments:** dev server, preview, staging, production
 4. **Use descriptive names:** `shouldEnableX()` not `checkX()` or `isX()`
@@ -568,7 +568,7 @@ The site implements progressive web app functionality via `public/sw.js`:
 - **Version control**: Manual cache versioning (`CACHE_VERSION`) for deployment updates
 - **Logging**: Environment-aware logging (verbose in dev, minimal in production)
 
-Service worker registration happens in `SiteLayout.astro`. Cache version must be manually incremented when deploying breaking changes to force client cache refresh.
+Service worker registration is triggered from `SiteLayout.astro` via `@lib/infrastructure/sw-register.ts`. Cache version must be manually incremented when deploying breaking changes to force client cache refresh.
 
 ## Naming Conventions
 

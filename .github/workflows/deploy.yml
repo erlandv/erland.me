@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: https://erland.me
+      url: ${{ vars.SITE_URL }}
     # --- Environment variables used by build and remote deployment ---
     env:
       SITE_URL: ${{ vars.SITE_URL }}
@@ -48,11 +48,11 @@ jobs:
     steps:
       # --- Repository checkout ---
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # --- Node.js setup ---
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -68,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           # Ensure `dist` directory exists and contains files
-          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "❌ dist is empty"; exit 1; }
+          test -d dist && test "$(find dist -type f | wc -l)" -gt 0 || { echo "dist is empty"; exit 1; }
           # Record commit SHA for traceability
           echo "${GITHUB_SHA}" > dist/.release
           # Record UTC build timestamp
@@ -79,7 +79,9 @@ jobs:
 
       # --- SSH setup ---
       - name: Start ssh-agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.1
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -131,6 +133,44 @@ jobs:
             ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
           "
 
+      # ---------------------------------------------------------------------------
+      # DUAL DEPLOY (server migration only)
+      # Uncomment all lines in this block to dual deploy
+      # Re-comment them after the migration is complete
+      # Requires temporary GitHub Secrets: NEW_SSH_HOST, NEW_SSH_PORT, NEW_SSH_USER
+      # ---------------------------------------------------------------------------
+      - name: Add NEW server to known_hosts
+        run: |
+          set -euo pipefail
+          ssh-keyscan -T 60 -p "${{ secrets.NEW_SSH_PORT }}" -H "${{ secrets.NEW_SSH_HOST }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+      
+      - name: Rsync dist to NEW server
+        env:
+          REL_PATH: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          ssh -p "${{ secrets.NEW_SSH_PORT }}" $SSH_OPTS \
+             "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}" \
+             "mkdir -p '${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}'"
+           RSYNC_OPTS="-az --delete-delay --partial --mkpath --info=stats2,progress2"
+           RSYNC_OPTS="$RSYNC_OPTS --exclude='.DS_Store' --exclude='*.map' --exclude='Thumbs.db'"
+           rsync $RSYNC_OPTS \
+             -e "ssh -p ${{ secrets.NEW_SSH_PORT }} $SSH_OPTS" \
+             ./dist/ "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}:${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}/"
+      
+      - name: Activate new release on NEW server (symlink swap)
+        env:
+          REL_PATH: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          ssh -p "${{ secrets.NEW_SSH_PORT }}" $SSH_OPTS \
+             "${{ secrets.NEW_SSH_USER }}@${{ secrets.NEW_SSH_HOST }}" "
+               set -euo pipefail
+               ln -sfn '${{ vars.DEPLOY_BASE_DIR }}/releases/${REL_PATH}' '${{ vars.DEPLOY_BASE_DIR }}/current'
+             "
+      # ---------------------------------------------------------------------------
+
       # --- Reload Nginx ---
       - name: Reload Nginx
         if: ${{ vars.RELOAD_NGINX == 'true' }}
@@ -146,10 +186,10 @@ jobs:
           ROOT_URL="${{ env.SITE_URL }}"
           # Verify site is accessible and serving content
           STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=${GITHUB_SHA}")"
-          test "$STATUS" -eq 200 || { echo "❌ Site not accessible (HTTP $STATUS)"; exit 1; }
+          test "$STATUS" -eq 200 || { echo "Site not accessible (HTTP $STATUS)"; exit 1; }
           # Verify version.json matches deployed SHA (validates atomic symlink swap)
           VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
-          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "❌ version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
+          echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
 
       # --- Clean up old releases: keep last 5 ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
