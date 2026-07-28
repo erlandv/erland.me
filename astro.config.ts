@@ -1,5 +1,6 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { fileURLToPath } from 'node:url';
+import { unified } from '@astrojs/markdown-remark';
 import remarkDirective from 'remark-directive';
 import remarkGallery from './src/lib/content/remark/remark-gallery';
 import remarkFigure from './src/lib/content/remark/remark-figure';
@@ -85,18 +86,24 @@ export default defineConfig({
 
   // Markdown configuration
   markdown: {
-    remarkPlugins: [
-      remarkDirective,
-      remarkGallery,
-      remarkFigure,
-      remarkDownloadFiles,
-    ],
-    gfm: true,
-    smartypants: true,
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: [],
+    },
     shikiConfig: {
       theme: 'material-theme-darker',
       wrap: false,
     },
+    processor: unified({
+      remarkPlugins: [
+        remarkDirective,
+        remarkGallery,
+        remarkFigure,
+        remarkDownloadFiles,
+      ],
+      gfm: true,
+      smartypants: true,
+    }),
   },
 
   // Vite configuration for optimizations
