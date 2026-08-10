@@ -193,7 +193,7 @@ jobs:
           VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
           echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
 
-      # --- Clean up old releases: keep last 5 ---
+      # --- Clean up old releases: keep last N ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
         run: |
           set -euo pipefail
@@ -204,6 +204,13 @@ jobs:
             # Determine how many releases to keep; default to 5 if not provided
             KEEP='${{ vars.KEEP_RELEASES }}'
             KEEP=\"\${KEEP:-5}\"
-            # Keep only the latest KEEP releases; remove older ones
-            ls -1dt */ 2>/dev/null | tail -n +\$(( KEEP + 1 )) | xargs -r rm -rf --
+            # Resolve the currently active release to protect it from deletion.
+            # ls -t sorts by mtime which can be unreliable after rollbacks or manual
+            # touches; always excluding the active release is the critical safety net.
+            ACTIVE=\"\$(basename \"\$(readlink '${{ env.CURRENT_LINK }}')\" 2>/dev/null || true)\"
+            # Keep only the latest KEEP releases; always skip the active one
+            ls -1dt */ 2>/dev/null \
+              | grep -vF \"\${ACTIVE}/\" \
+              | tail -n +\$(( KEEP + 1 )) \
+              | xargs -r rm -rf --
           "
