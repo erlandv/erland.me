@@ -129,8 +129,10 @@ jobs:
           set -euo pipefail
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
-            # Atomically update 'current' symlink to point to the new release
-            ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
+            # Use ln+mv -T for a truly atomic swap that is safe even if 'current' is a
+            # real directory (ln -sfn alone silently creates the link *inside* the dir).
+            ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}_new'
+            mv -Tf '${{ env.CURRENT_LINK }}_new' '${{ env.CURRENT_LINK }}'
           "
 
       # ---------------------------------------------------------------------------
