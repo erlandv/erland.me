@@ -112,10 +112,6 @@ Selanjutnya restart PHP dengan menjalankan perintah berikut.
 sudo systemctl restart php8.4-fpm
 ```
 
-```bash
-sudo systemctl restart php8.4-fpm
-```
-
 ## Install MySQL di Ubuntu
 
 Setelah selesai menginstal Nginx sebagai webserver dan PHP sebagai bahasa pemrograman, sekarang saatnya install <a href="https://www.mysql.com">MySQL</a> sebagai SQL database management system yang akan digunakan di website WordPress. MySQL merupakan salah satu software pengelola database SQL yang populer. Selain itu, ada juga MariaDB yang tidak kalah populernya dengan MySQL.
