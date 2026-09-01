@@ -319,7 +319,7 @@ body:has(.sidebar .nav-toggle:checked) {
 }
 
 /* Ensure the nav menu inside sidebar uses a vertical flex layout by default */
-:global(.sidebar) :global(.sidebar-nav) {
+.sidebar .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
