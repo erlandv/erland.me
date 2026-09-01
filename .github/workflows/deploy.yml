@@ -129,10 +129,23 @@ jobs:
           set -euo pipefail
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
-            # Use ln+mv -T for a truly atomic swap that is safe even if 'current' is a
-            # real directory (ln -sfn alone silently creates the link *inside* the dir).
-            ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}_new'
-            mv -Tf '${{ env.CURRENT_LINK }}_new' '${{ env.CURRENT_LINK }}'
+            CURRENT_LINK='${{ env.CURRENT_LINK }}'
+            NEXT_LINK="\${CURRENT_LINK}_new"
+            # A directory cannot be atomically replaced by a symlink. Migrate the
+            # legacy layout once; all later symlink-to-symlink swaps are atomic.
+            if [ -d "\${CURRENT_LINK}" ] && [ ! -L "\${CURRENT_LINK}" ]; then
+              LEGACY_LINK="\${CURRENT_LINK}.legacy.\$(date +%s)"
+              mv "\${CURRENT_LINK}" "\${LEGACY_LINK}"
+              echo "Migrated legacy current directory to \${LEGACY_LINK}"
+            fi
+            # Never create the staging link inside an unexpected directory.
+            if [ -e "\${NEXT_LINK}" ] && [ ! -L "\${NEXT_LINK}" ]; then
+              echo "Refusing to replace non-symlink staging path: \${NEXT_LINK}" >&2
+              exit 1
+            fi
+            rm -f "\${NEXT_LINK}"
+            ln -s '${{ env.RELEASES_DIR }}/${REL_PATH}' "\${NEXT_LINK}"
+            mv -Tf "\${NEXT_LINK}" "\${CURRENT_LINK}"
           "
 
       # ---------------------------------------------------------------------------
@@ -210,7 +223,7 @@ jobs:
             ACTIVE=\"\$(basename \"\$(readlink '${{ env.CURRENT_LINK }}')\" 2>/dev/null || true)\"
             # Keep only the latest KEEP releases; always skip the active one
             ls -1dt */ 2>/dev/null \
-              | grep -vF \"\${ACTIVE}/\" \
+              | awk -v active=\"\${ACTIVE}/\" '\$0 != active' \
               | tail -n +\$(( KEEP + 1 )) \
               | xargs -r rm -rf --
           "
