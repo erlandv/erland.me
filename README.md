@@ -85,7 +85,6 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 ### Utilities & Configuration
 
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
-- **@playform/compress**: Squishes CSS, HTML, JS, and SVG into tiny little packages. Because uncompressed files are for people who hate their users and their Lighthouse scores.
 - **ESLint**: The strict parent of my codebase. Tells me "no semicolons there" and "that variable name is embarrassing" until I learn to code like a proper adult.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.

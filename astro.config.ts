@@ -13,8 +13,6 @@ import {
   type ValidatedEnv,
 } from './src/lib/core/env.js';
 
-import playformCompress from '@playform/compress';
-
 // Validate and get environment configuration
 let validatedEnv: ValidatedEnv;
 let mode: 'development' | 'production' | 'staging' = 'development';
@@ -109,9 +107,6 @@ export default defineConfig({
   // Vite configuration for optimizations
   vite: {
     build: {
-      // Minification handled by @playform/compress in production
-      // Use esbuild for speed in development
-      minify: 'esbuild',
       // Optimize chunk splitting
       rollupOptions: {
         onwarn(warning, defaultHandler) {
@@ -178,7 +173,7 @@ export default defineConfig({
         '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
       },
     },
-    // Esbuild options (compression handled by @playform/compress)
+    // Esbuild options
     esbuild:
       mode === 'production'
         ? {
@@ -228,24 +223,4 @@ export default defineConfig({
   devToolbar: {
     enabled: true,
   },
-
-  // Integrations for additional features
-  // Only apply compression in production to speed up development builds
-  integrations: [
-    ...(mode === 'production' || mode === 'staging'
-      ? [
-          playformCompress({
-            // CSS compression
-            CSS: false,
-            // HTML compression (compressHTML disabled above, handled here)
-            HTML: true,
-            // JavaScript/SVG compression
-            JavaScript: true,
-            SVG: true,
-            // Image optimization (disable if using separate image service)
-            Image: false,
-          }),
-        ]
-      : []),
-  ],
 });
