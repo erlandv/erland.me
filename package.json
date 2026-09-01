@@ -54,6 +54,7 @@
     "remark-directive": "^4.0.0",
     "typescript": "^5.9.2",
     "unist-util-visit": "^5.0.0",
-    "vitest": "^3.0.0"
+    "vitest": "^3.0.0",
+    "wrangler": "^4.127.1"
   }
 }
