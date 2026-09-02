@@ -129,8 +129,23 @@ jobs:
           set -euo pipefail
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
             set -euo pipefail
-            # Atomically update 'current' symlink to point to the new release
-            ln -sfn '${{ env.RELEASES_DIR }}/${REL_PATH}' '${{ env.CURRENT_LINK }}'
+            CURRENT_LINK='${{ env.CURRENT_LINK }}'
+            NEXT_LINK="\${CURRENT_LINK}_new"
+            # A directory cannot be atomically replaced by a symlink. Migrate the
+            # legacy layout once; all later symlink-to-symlink swaps are atomic.
+            if [ -d "\${CURRENT_LINK}" ] && [ ! -L "\${CURRENT_LINK}" ]; then
+              LEGACY_LINK="\${CURRENT_LINK}.legacy.\$(date +%s)"
+              mv "\${CURRENT_LINK}" "\${LEGACY_LINK}"
+              echo "Migrated legacy current directory to \${LEGACY_LINK}"
+            fi
+            # Never create the staging link inside an unexpected directory.
+            if [ -e "\${NEXT_LINK}" ] && [ ! -L "\${NEXT_LINK}" ]; then
+              echo "Refusing to replace non-symlink staging path: \${NEXT_LINK}" >&2
+              exit 1
+            fi
+            rm -f "\${NEXT_LINK}"
+            ln -s '${{ env.RELEASES_DIR }}/${REL_PATH}' "\${NEXT_LINK}"
+            mv -Tf "\${NEXT_LINK}" "\${CURRENT_LINK}"
           "
 
       # ---------------------------------------------------------------------------
@@ -191,7 +206,7 @@ jobs:
           VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=${GITHUB_SHA}")"
           echo "$VERSION_JSON" | grep -q "\"sha\"[[:space:]]*:[[:space:]]*\"${GITHUB_SHA}\"" || { echo "version.json SHA mismatch"; echo "$VERSION_JSON"; exit 1; }
 
-      # --- Clean up old releases: keep last 5 ---
+      # --- Clean up old releases: keep last N ---
       - name: Cleanup old releases (keep last ${{ vars.KEEP_RELEASES }})
         run: |
           set -euo pipefail
@@ -202,6 +217,13 @@ jobs:
             # Determine how many releases to keep; default to 5 if not provided
             KEEP='${{ vars.KEEP_RELEASES }}'
             KEEP=\"\${KEEP:-5}\"
-            # Keep only the latest KEEP releases; remove older ones
-            ls -1dt */ 2>/dev/null | tail -n +\$(( KEEP + 1 )) | xargs -r rm -rf --
+            # Resolve the currently active release to protect it from deletion.
+            # ls -t sorts by mtime which can be unreliable after rollbacks or manual
+            # touches; always excluding the active release is the critical safety net.
+            ACTIVE=\"\$(basename \"\$(readlink '${{ env.CURRENT_LINK }}')\" 2>/dev/null || true)\"
+            # Keep only the latest KEEP releases; always skip the active one
+            ls -1dt */ 2>/dev/null \
+              | awk -v active=\"\${ACTIVE}/\" '\$0 != active' \
+              | tail -n +\$(( KEEP + 1 )) \
+              | xargs -r rm -rf --
           "

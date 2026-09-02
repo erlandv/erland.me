@@ -44,6 +44,16 @@ jobs:
           ssh -p "${{ secrets.SSH_PORT }}" $SSH_OPTS "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
             "ls -1dt ${{ vars.DEPLOY_BASE_DIR }}/releases/*/ 2>/dev/null | head -n ${{ vars.KEEP_RELEASES }} || true"
 
+      # --- Capture current SHA before rollback (needed for --previous verification) ---
+      - name: Capture pre-rollback SHA
+        run: |
+          set -euo pipefail
+          ROOT_URL="${{ env.SITE_URL }}"
+          PRE_SHA="$(curl -fsSL --max-time 15 -H "Cache-Control: no-cache" \
+            "${ROOT_URL}/version.json?t=$(date +%s)" | jq -r '.sha // empty' || true)"
+          echo "Pre-rollback SHA: ${PRE_SHA:-unknown}"
+          echo "PRE_ROLLBACK_SHA=${PRE_SHA}" >> "$GITHUB_ENV"
+
       # --- Execute rollback ---
       - name: Rollback
         env:
@@ -63,6 +73,8 @@ jobs:
 
       # --- HTTP Health checks after rollback ---
       - name: Verify rollback success
+        env:
+          TARGET_SHA: ${{ github.event.inputs.target_sha }}
         run: |
           set -euo pipefail
           ROOT_URL="${{ env.SITE_URL }}"
@@ -71,4 +83,22 @@ jobs:
           # Verify site is accessible after rollback
           STATUS="$(curl -fsS -o /dev/null -w "%{http_code}" -L --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/?t=$(date +%s)")"
           test "$STATUS" -eq 200 || { echo "Site not accessible after rollback (HTTP $STATUS)"; exit 1; }
-          echo "Rollback successful - site is accessible"
+          # Verify version.json reflects the correct release after rollback.
+          # HTTP 200 alone cannot detect a failed symlink swap (Nginx may still serve
+          # the old/broken release). Checking version.json proves the swap succeeded.
+          VERSION_JSON="$(curl -fsSL --max-time 15 --retry 5 --retry-connrefused -H "Cache-Control: no-cache" "${ROOT_URL}/version.json?t=$(date +%s)")"
+          CURRENT_SHA="$(echo "$VERSION_JSON" | jq -r '.sha // empty' || true)"
+          if [[ -n "${TARGET_SHA}" ]]; then
+            # Specific SHA rollback: version.json must match the requested SHA exactly
+            [[ "${CURRENT_SHA}" == "${TARGET_SHA}" ]] \
+              || { echo "version.json SHA mismatch: expected ${TARGET_SHA}, got ${CURRENT_SHA}"; echo "$VERSION_JSON"; exit 1; }
+            echo "Rollback successful — now serving SHA ${TARGET_SHA}"
+          else
+            # Previous release rollback: SHA must have changed from pre-rollback state
+            if [[ -n "${PRE_ROLLBACK_SHA}" && "${CURRENT_SHA}" == "${PRE_ROLLBACK_SHA}" ]]; then
+              echo "SHA unchanged after rollback (was: ${PRE_ROLLBACK_SHA}, still: ${CURRENT_SHA}) — symlink may not have swapped"
+              echo "$VERSION_JSON"
+              exit 1
+            fi
+            echo "Rollback successful — was: ${PRE_ROLLBACK_SHA:-unknown}, now: ${CURRENT_SHA:-unknown}"
+          fi

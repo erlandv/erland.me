@@ -85,7 +85,6 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 ### Utilities & Configuration
 
 - **@astrojs/check**: The insufferable linter that yells at me constantly while I code. It's like having a very judgemental parrot on my shoulder.
-- **@playform/compress**: Squishes CSS, HTML, JS, and SVG into tiny little packages. Because uncompressed files are for people who hate their users and their Lighthouse scores.
 - **ESLint**: The strict parent of my codebase. Tells me "no semicolons there" and "that variable name is embarrassing" until I learn to code like a proper adult.
 - **Prettier**: Auto-formats everything so my code looks professional even when my commit messages say "fix stuff" and "why doesn't this work."
 - **Fuse.js**: Powers the instant search. No backend, no database queries, no loading spinners. Just pure client-side magic that actually works.
@@ -131,7 +130,7 @@ Because apparently "just clone and run" is too simple for modern development. He
 
 Let's start with the obvious stuff you should already have installed (but let's be real, you probably don't):
 
-- **Node.js v22.18.0+**: Not optional. Not negotiable. The project will yell at you via `.nvmrc` and `package.json` engines. Use [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) like a civilized developer, or prepare for version mismatch hell.
+- **Node.js v22.20.0+**: Not optional. Not negotiable. The project will yell at you via `.nvmrc` and `package.json` engines. Use [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) like a civilized developer, or prepare for version mismatch hell.
 - **npm v10.9.0+**: Comes with Node, but double-check anyway. Life is full of disappointments, and outdated package managers are one of them.
 - **Git**: If you don't have Git installed but somehow ended up reading this on GitHub, I have questions. Many questions.
 - **Basic Terminal Skills**: Can you `cd` into a directory? Can you read error messages without panicking? Good enough.
@@ -180,9 +179,9 @@ npm run generate:search  # Rebuild search index from content
 
 The project enforces strict Node.js version consistency across all environments:
 
-- **`.nvmrc`**: Stores `22.18.0` for [nvm](https://github.com/nvm-sh/nvm) and [fnm](https://github.com/Schniz/fnm) users. Auto-switches when entering directory (if shell integration enabled).
+- **`.nvmrc`**: Stores `22.20.0` for [nvm](https://github.com/nvm-sh/nvm) and [fnm](https://github.com/Schniz/fnm) users. Auto-switches when entering directory (if shell integration enabled).
 - **`.node-version`**: Same version for [asdf](https://asdf-vm.com/) and [nodenv](https://github.com/nodenv/nodenv) users. Because the ecosystem has 47 ways to manage Node.js versions.
-- **`package.json` engines**: Requires `node >= 22.18.0` and `npm >= 10.9.0`. Use `npm install --engine-strict` if you want npm to actually enforce this (it's opt-in because npm is too polite by default).
+- **`package.json` engines**: Requires `node >= 22.20.0` and `npm >= 12.0.2`. Use `npm install --engine-strict` if you want npm to actually enforce this (it's opt-in because npm is too polite by default).
 - **GitHub Actions**: CI/CD workflows read from `.nvmrc` via `node-version-file` parameter. Single source of truth, zero version drift.
 
 Why this paranoia? Because "_it works on my machine_" is not acceptable when production and CI/CD need byte-for-byte reproducibility. Also because I've been burned before. Multiple times. I don't want to talk about it..
