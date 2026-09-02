@@ -13,6 +13,8 @@ on:
       - 'package-lock.json'
       - 'src/**'
       - 'scripts/**'
+      - '.github/workflows/staging.yml'
+      - 'public/**'
   workflow_dispatch:
 
 # --- Concurrency: ensure only one staging deploy per branch runs at a time ---
