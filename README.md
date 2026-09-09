@@ -70,7 +70,6 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **TypeScript**: Because I don't trust JavaScript. Or myself. Or you. Especially myself. Every variable is typed. Every function returns exactly what it promises. This is a dictatorship, not a democracy.
 - **Vite**: Blazing-fast build tool that's faster than my attention span. Rebuilds in milliseconds. Which is good, because I break things constantly.
 - **Shiki**: Makes code blocks actually readable instead of looking like regex had a baby with a JSON error. Syntax highlighting that doesn't make your eyes bleed.
-- **Sharp**: The image optimizer that does in milliseconds what Photoshop users spend 10 minutes doing manually. Automatic WebP conversion, responsive sizing, compression. It's a gift.
 
 ### Content & Styling
 
@@ -97,6 +96,7 @@ Yeah, the project is laughably minimal, but the stack? Absolutely over-engineere
 - **Nginx & Symlinks**: Production deployment with atomic symlink swaps for zero-downtime releases. Allegedly zero downtime. It's worked so far. Probably.
 - **Atlantic Cloud**: Who deploys a personal static site on AWS? Please. This budget VPS handles everything I need without pretending to be a startup.
 - **Cloudflare Pages**: The staging playground where things break spectacularly in private before they break publicly. It's called "testing in production" but with extra steps.
+- **Cloudflare R2**: S3-compatible object storage fronted by `img.erland.me`. Holds all blog images attachments so Git doesn't have to carry emotional and binary baggage. Zero egress fees, so my wallet survives even if three whole people accidentally read my blog on the same day.
 
 ## Project Structure
 
@@ -270,7 +270,7 @@ It's a static site, so it's already fast by default (cheat codes enabled), but I
 - **Structured Data**: Comprehensive `JSON-LD` schemas for everything—`BlogPosting`, `CreativeWork`, `CollectionPage`, `BreadcrumbList`, `WebSite` with `SearchAction`. Google's Knowledge Graph loves me. Probably. Includes word count, reading time, article sections, the whole nine yards.
 - **Resource Hints**: Strategic `preconnect` for Google Fonts, GTM, and AdSense domains. `dns-prefetch` as fallback. Fonts get `preload` with `crossorigin`. Search index preloads conditionally only on pages that need it. No wasted prefetching—every hint has a purpose.
 - **Robot Files**: Auto-generates `robots.txt` with environment-aware rules. The boring configuration files that search engines actually read and humans pretend to understand.
-- **Responsive Images**: Every image properly sized with explicit `width` and `height` attributes. No layout shifts, no browser guessing games, no excuses. Sharp handles WebP conversion and compression automatically.
+- **CDN-Delivered Media**: Content images served directly from Cloudflare R2 (`img.erland.me`) with aggressive 1-year immutable caching headers. Build times dropped to near-instant because Astro no longer spends its youth resizing PNGs locally. Native lazy loading and async decoding included, so the browser doesn't choke while loading my unsolicited hot takes.
 - **Social Tags**: Comprehensive OG and Twitter meta tags with proper image dimensions (1200×630), alt text, and all the metadata social networks demand. When you share a link, it doesn't look like it's from 2005. First impressions matter, even for URLs.
 - **Minimal JS**: Almost zero JavaScript execution. Only the absolutely essential interactive bits get hydrated. Everything else is good old-fashioned HTML. Groundbreaking, I know. Manual chunk splitting keeps vendor code separate for better caching.
 - **HTML Compression**: Production builds minify HTML output. Because every byte counts when you're obsessing over Lighthouse scores.
