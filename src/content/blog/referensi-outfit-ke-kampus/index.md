@@ -9,7 +9,7 @@ excerpt: >-
   berkuliah adalah kebebasan berpakaian. Pasalnya, selama di sekolah kita harus
   selalu menggunakan seragam sekolah. Berbeda…
 publishDate: 2022-03-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/referensi-outfit-ke-kampus/hero.png
 heroAlt: Referensi Outfit ke Kampus yang Keren dan Nyaman Digunakan
 tags: []
 category: essay
@@ -22,37 +22,37 @@ Jadi, kita bisa menentukan sendiri memakai outfit keren yang kita sukai untuk pe
 
 ## Kaos dan Celana Jeans
 
-![](./images/outfit-ke-kampus-kaos-jeans.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-kaos-jeans.jpg)
 
 Outfit ke kampus ini sangat cocok untuk kalian yang menyukai gaya simple. Coba deh padukan kaos polos kalian dengan celana jeans, kalian akan terlihat cool! Perpaduan kaos dan celana jeans emang nyaman untuk dipakai berkegiatan sehari-hari, termasuk untuk outfit keren ke kampus. Supaya terlihat semakin keren, jangan lupa padukan juga dengan sneakers, ya!
 
 ## Pajamas Collar Shirt
 
-![](./images/outfit-ke-kampus-pajamas-collar-shirt.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-pajamas-collar-shirt.jpg)
 
 Apakah kalian mengikuti asian fashion trends? Kalau ya, pasti tidak asing dengan jenis outfit keren satu ini. Outfit dengan model kerah pajamas ini sangat populer di negara-negara Asia, khususnya di Korea dan China. Cobain deh memakai outft keren ini untuk ke kampus, dan cobain mix and match bawahannya dengan ankle pants atau pun celana jeans. Jangan lupa juga pakai sneakers favorit kalian!
 
 ## Denim Jacket
 
-![](./images/outfit-ke-kampus-denim-jacket.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-denim-jacket.jpg)
 
 Outfit keren satu ini cocok untuk kalian yang suka memakai outer. Berhubung pemakaian denim jaket ini juga lagi ngetren di mana-mana, jadi outfit berjaket ini cocok untuk kalian pakai ke kampus. Untuk bawahannya, kalian bisa menggunakan celana jeans atau celana chino berwarna gelap, lalu ditambah mix and match dengan sepatu chelsea boots yang akan membuat kalian semakin bertambah kelihatan trendy.
 
 ## Flanel Kemeja
 
-![](./images/outfit-ke-kampus-flanel-kemeja.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-flanel-kemeja.jpg)
 
 Outfit dengan <a href="https://www.mldspot.com/trending/flanel-fashion-invasion">flanel kemeja</a> ini merupakan outfit keren yang cocok banget untuk kalian yang mau terlihat simple, tetapi tetap ingin memakai outer. Tidak lain dan tidak bukan tentu saja pilihannya memakai flanel kemeja. Outfit ini cocok dipakai dalam kegiatan kampus sehari-hari karena bahannya yang tidak terlalu tebal, oke-oke aja untuk di iklim tropis. Selain stylish, outfit ke kampus ini nyaman banget untuk digunakan. Cobain deh pakai flanel kemeja. Mix and match bawahannya bisa dengan celana chino atau pun celana jeans.
 
 ## Sweater / Pullover
 
-![](./images/outfit-ke-kampus-sweater.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-sweater.jpg)
 
 Memakai pakaian ini sebenarnya lebih cocok digunakan saat cuaca dingin, tetapi tidak ada salahnya juga kalian memakai sweater atau pullover untuk outfit ke kampus. Untuk mengubah tampilan style agar terlihat sporty, kalian bisa memadukan dengan bawahan ankle pants atau bisa juga dengan jogger. Apalagi jika ditambah sneakers dengan warna yang senada dengan atasannya, akan membuat kalian terlihat lebih keren lagi!
 
 ## Hoodie
 
-![](./images/outfit-ke-kampus-hoodie.jpg)
+![](https://img.erland.me/blog/referensi-outfit-ke-kampus/images/outfit-ke-kampus-hoodie.jpg)
 
 Apakah kalian termasuk yang menyukai oversized fit clothes? Kalau ya, kalian bisa menggunakan oversized hoodie sebagai outfit keren ke kampus. Dengan memakai hoodie, kalian juga bisa berganti outfit kaos karena kalian bisa double dengan kaos polos di dalamnya. Selain cocok dengan cuaca dingin, salah satu kelebihan memakai hoodie ialah sangat versatile untuk di-mix and match dengan bawahan apapun.
 

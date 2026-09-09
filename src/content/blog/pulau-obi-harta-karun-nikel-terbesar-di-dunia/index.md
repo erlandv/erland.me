@@ -9,7 +9,7 @@ excerpt: >-
   secara luas, Indonesia memiliki peluang untuk bersaing secara global karena
   sumber daya mineral yang melimpah. Ada banyak…
 publishDate: 2022-10-31T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/pulau-obi-harta-karun-nikel-terbesar-di-dunia/hero.png
 heroAlt: 'Pulau Obi, Harta Karun Nikel Terbesar di Dunia'
 tags: []
 category: info

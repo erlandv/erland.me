@@ -9,7 +9,7 @@ excerpt: >-
   dibahas, ada saja hal menarik lainnya yang dapat diperbincangkan mengenai
   eksistensi Tuhan. Dari hasil pemahaman dan pemikiran…
 publishDate: 2020-11-05T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/pengertian-theis-atheis-agnostik-gnostik/hero.png
 heroAlt: 'Berkenalan dengan Theis, Atheis, Agnostik, dan Gnostik'
 tags: []
 category: essay
@@ -46,7 +46,7 @@ Dari keempat jenis yang sudah dijelaskan di atas. Tercipta empat kombinasi menge
 
 - **Atheis Gnostik**, mereka yang tidak menyembah Tuhan dan berpendapat bahwa Tuhan memang jelas-jelas tidak ada.
 
-![theis atheis agnostik gnostik](./images/theis-atheis-agnostik-gnostik.jpg)
+![theis atheis agnostik gnostik](https://img.erland.me/blog/pengertian-theis-atheis-agnostik-gnostik/images/theis-atheis-agnostik-gnostik.jpg)
 
 Ada yang mengatakan bahwa di luar sana didominasi oleh theis agnostik, yaitu golongan orang-orang yang tidak begitu yakin bahwa Tuhan itu ada atau tidak, namun rajin melakukan ibadah/ peribadatan untuk sekadar berjaga-jaga jika pada akhirnya nanti ada hari di mana Tuhan melakukan pengadilan (masih banyak alasan lainnya).
 

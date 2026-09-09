@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Asuransi pendidikan syariah adalah sistem asuransi yang saling menanggung risiko dengan menghibahkan sebagian atau seluruh kontribusi melalui dana tabarru
 publishDate: 2021-10-28T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/asuransi-pendidikan-syariah-dalam-pandangan-islam/hero.png
 heroAlt: Asuransi Pendidikan Syariah dalam Pandangan Islam
 tags: []
 category: info
@@ -16,7 +16,7 @@ Hari ini, seiring dengan terus berkembangnya informasi, umat islam sebagai mayor
 
 Islam mengatur aturan atau hukum jual beli agar pembeli maupun penjual tidak terperosok dalam praktik jual beli yang menyalahi syariah. Sesuatu yang terlihat sepele tapi akan berakibat dosa kalau tidak menerapkannya.
 
-![asuransi pendidikan syariah](./images/asuransi-pendidikan-syariah.png)
+![asuransi pendidikan syariah](https://img.erland.me/blog/asuransi-pendidikan-syariah-dalam-pandangan-islam/images/asuransi-pendidikan-syariah.png)
 
 Aturan hukum jual beli dalam islam dikenal sebagai hukum muamalah. Hukum ini pada awalnya diterapkan untuk menjaga hak-hak muslim dalam melakukan transaksi. Kegiatan jual beli terbilang sah apabila pembeli dan penjual sudah bersepakat. Jika berpijak pada hukum jual beli dengan merujuk pada Al-Qur’an, maka aktivitas perdagangan adalah kegiatan yang halal dilakukan. Hal tersebut dijelaskan di surat Al-Baqarah ayat 275, Allah SWT berfirman:
 

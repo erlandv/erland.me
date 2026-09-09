@@ -8,7 +8,7 @@ excerpt: >-
   mewah. Driver handal, layanan profesional. Siapa coba yang tidak mengenal
   Semarang? Saya rasa nyaris tidak ada. Semarang…
 publishDate: 2020-03-09T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sewa-bus-pariwisata-semarang/hero.png
 heroAlt: Rekomendasi Sewa Bus Pariwisata Semarang
 tags: []
 category: reviews
@@ -19,7 +19,7 @@ draft: false
 
 Siapa coba yang tidak mengenal Semarang? Saya rasa nyaris tidak ada. Semarang adalah salah satu kota besar di Indonesia dan merupakan ibu kota dari Provinsi Jawa Tengah. Dengan label kota besar itu menjadikan Semarang menjadi salah satu destinasi wisata menarik yang patut dikunjungi untuk mengisi liburan kalian bersama teman-teman atau keluarga.
 
-![](./images/kota-semarang.png '_Artworks by [Tirto Waluyo](https://dribbble.com/AnakePresiden)_')
+![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/kota-semarang.png '_Artworks by [Tirto Waluyo](https://dribbble.com/AnakePresiden)_')
 
 Ada banyak tempat wisata di Semarang dan sekitarnya yang nyaman, seru, dan murah. Di antaranya yang paling populer tentu saja Lawang Sewu sebagai ikon pariwisata kota Semarang. Sampai-sampai ada yang mengatakan "_Belum ke Semarang kalau belum ke Lawang Sewu_". Selain itu, masih banyak sekali objek wisata di Semarang seperti Ayana Gedong Songo, Lereng Kelir, Brown Canyon, Pantai Tirang, Taman Bunga Celosia, dll. Saking banyaknya, saya sampai malas untuk menyebutkan. Hahaha. Di lain kesempatan, saya akan buat artikel khusus _review_ cerita perjalanan ke tempat wisata yang disebutkan di atas, karena kebetulan saya sudah pernah mengunjungi semuanya tahun 2016 silam, sepulang dari [Gunung Argopuro](/blog/menjelajah-gunung-argopuro/).
 
@@ -29,7 +29,7 @@ Salah satu faktor penting dari sebuah perjalanan liburan adalah perkara transpor
 
 Penyedia jasa sewa bus pariwisata yang saya rekomendasikan adalah **Ranggawarsita Tour** yang merupakan biro perjalanan wisata terbaik di Semarang. Ada cukup banyak alasan mengapa Anda harus memilih Ranggawarsita. Berikut ini akan saya jelaskan, mari disimak.
 
-![](./images/Sewa-Bus-Semarang-Ranggawarsita.jpg)
+![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Sewa-Bus-Semarang-Ranggawarsita.jpg)
 
 ## Tentang Ranggawarsita Tour
 
@@ -145,33 +145,33 @@ Seperti yang saya bilang tadi, Ranggawarsita Tour memiliki banyak mitra, salah s
 
 Daftar di atas hanya sebagian kecil dari mitra PO. bus yang bermitra dengan Ranggawarsita Tour, sebenarnya lebih banyak lagi. Jika Anda ingin mengetahui daftar lengkapnya, Anda dapat mengunjungi situs web Ranggawarsita Tour secara langsung.
 
-![Sewa-Bus-Pariwisata-Semarang](./images/Sewa-Bus-Pariwisata-Semarang.jpg)
+![Sewa-Bus-Pariwisata-Semarang](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Sewa-Bus-Pariwisata-Semarang.jpg)
 
 ## Reputasi Ranggawarsita Tour
 
 Sebagai penyedia jasa penyewaan bus terbesar di Semarang, Ranggawarsita Tour pastilah mempunyai reputasi baik di mata pelanggan, tidak diragukan lagi. Mereka memiliki testimoni dan ulasan positif dari pelanggan yang telah menggunakan jasa mereka, dan saya yakin Anda adalah pelanggan selanjutnya yang akan puas menerima pelayanan prima dari Ranggawarsita. Berikut ini saya lampirkan sebagian testimoni asli dari mereka yang telah memilih Ranggawarsita Tour sebagai mitra perjalanan.
 
-[![Testimoni Ranggawarsita](./images/Testimoni-Ranggawarsita.jpg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita.jpg)
+[![Testimoni Ranggawarsita](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Testimoni-Ranggawarsita.jpg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita.jpg)
 
-[![](./images/Testimoni-Ranggawarsita-3.jpg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-3.jpg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Testimoni-Ranggawarsita-3.jpg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-3.jpg)
 
-[![](./images/Testimoni-Ranggawarsita-4.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-4.jpeg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Testimoni-Ranggawarsita-4.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-4.jpeg)
 
-[![](./images/Testimoni-Ranggawarsita-5.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-5.jpeg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Testimoni-Ranggawarsita-5.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-5.jpeg)
 
-[![](./images/Testimoni-Ranggawarsita-7.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-7.jpeg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Testimoni-Ranggawarsita-7.jpeg)](/wp-content/uploads/2020/03/Testimoni-Ranggawarsita-7.jpeg)
 
 Itu hanya sebagian kecil testimoni yang saya ambil dari _website_ mereka. Sebagai biro jasa penyewaan bus terbesar di Semarang, pasti mereka punya lebih banyak testimoni dengan _review_ positif yang mereka dapat dari pelanggan sejak 2013 hingga sekarang. Mereka telah dipercaya oleh perusahaan dan instansi ternama yang menggunakan jasa sewa bus mereka untuk berbagai keperluan. Sebut saja Telkom Indonesia, Unilever, Garuda Indonesia, Indofood, Pertamina, Indocement, Maspion Group, KOMINFO, KEMENKES, dan masih banyak yang lainnya.
 
 > Baca juga: **[SEVA Pusat Mobil Murah](/blog/seva-pusat-mobil-murah/)**
 
-[![](./images/sewa-bus-semarang-pariwisata.jpg)](/wp-content/uploads/2020/04/sewa-bus-semarang-pariwisata.jpg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/sewa-bus-semarang-pariwisata.jpg)](/wp-content/uploads/2020/04/sewa-bus-semarang-pariwisata.jpg)
 
-[![](./images/harga-sewa-bus-semarang.jpg)](/wp-content/uploads/2020/04/harga-sewa-bus-semarang.jpg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/harga-sewa-bus-semarang.jpg)](/wp-content/uploads/2020/04/harga-sewa-bus-semarang.jpg)
 
-[![](./images/sewa-bus-semarang-murah.jpg)](/wp-content/uploads/2020/04/sewa-bus-semarang-murah.jpg)
+[![](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/sewa-bus-semarang-murah.jpg)](/wp-content/uploads/2020/04/sewa-bus-semarang-murah.jpg)
 
-[![Sewa Bus Pariwisata](./images/Sewa-Bus-Pariwisata.jpg)](/wp-content/uploads/2020/03/Sewa-Bus-Pariwisata.jpg)
+[![Sewa Bus Pariwisata](https://img.erland.me/blog/sewa-bus-pariwisata-semarang/images/Sewa-Bus-Pariwisata.jpg)](/wp-content/uploads/2020/03/Sewa-Bus-Pariwisata.jpg)
 
 Saya rasa sudah banyak alasan kuat untuk memilih Ranggawarsita Tour sebagai pilihan Anda untuk menggunakan jasa sewa bus Semarang dan Jawa Tengah, keunggulan-keunggulan tersebut belum tentu Anda dapatkan di tempat lain. Dan yang terpenting, meskipun dengan banyak keunggulan yang terdapat pada layanan Ranggawarsita Tour, Anda tetap akan mendapatkan harga terbaik yang _worth it_, saya jamin. Jangan lupa pula, mereka berani memberi garansi. Sebagai tambahan, saya lampirkan juga nomor telepon Ranggawarsita Tour yang sebaiknya Anda simpan untuk dihubungi kapan pun Anda membutuhkan jasa sewa bus pariwisata terbaik di Semarang.  
 Telepon/WhatsApp: **0822-2515-0321**  

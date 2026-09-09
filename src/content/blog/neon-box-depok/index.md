@@ -6,7 +6,7 @@ excerpt: >-
   Tempat Pembuatan Neon Box Depok. Rekomendasi bengkel reklame pusat produksi neonbox bulat akrilik LED dengan harga murah.
 publishDate: 2020-04-18T00:00:00.000Z
 updatedDate: 2025-11-04
-hero: ./hero.png
+hero: https://img.erland.me/blog/neon-box-depok/hero.png
 heroAlt: Rekomendasi Jasa Pembuatan Neon Box Depok
 tags: []
 category: reviews
@@ -72,12 +72,12 @@ Terakhir adalah frame neonbox atau bagian samping. Bahan yang digunakan untuk ba
 Berikut ini adalah beberapa foto contoh-contoh neonbox hasil produksi yang saya ambil dari situs web Cipta Mica Kreasi sebagai referensi Anda yang akan membuat reklame untuk toko, ruko, kios, kantor, atau tempat usaha Anda. Ada banyak sekali sebenarnya seperti neon box barbershop, cafe, hotel, laundry, papan nama apotek, plang praktik dokter, dan lain-lain. Tapi saya hanya mencantumkan enam foto aja di sini. Jika Anda ingin melihat lebih banyak galeri hasil produksi reklame yang khususnya neon box depok, silakan mengunjungi Instagram **@ciptamica**
 
 :::gallery
-![neon box depok](./images/neon-box-depok.jpg),
-![jasa neon box depok](./images/jasa-neon-box-depok.jpg),
-![harga neon box akrilik depok](./images/harga-neon-box-akrilik-depok.jpg),
-![neon box bulat depok](./images/neon-box-bulat-depok.jpg),
-![pemasangan neon box depok](./images/pemasangan-neon-box-depok.jpg),
-![pembuatan neon box depok](./images/pembuatan-neon-box-depok.jpg)
+![neon box depok](https://img.erland.me/blog/neon-box-depok/images/neon-box-depok.jpg),
+![jasa neon box depok](https://img.erland.me/blog/neon-box-depok/images/jasa-neon-box-depok.jpg),
+![harga neon box akrilik depok](https://img.erland.me/blog/neon-box-depok/images/harga-neon-box-akrilik-depok.jpg),
+![neon box bulat depok](https://img.erland.me/blog/neon-box-depok/images/neon-box-bulat-depok.jpg),
+![pemasangan neon box depok](https://img.erland.me/blog/neon-box-depok/images/pemasangan-neon-box-depok.jpg),
+![pembuatan neon box depok](https://img.erland.me/blog/neon-box-depok/images/pembuatan-neon-box-depok.jpg)
 :::
 
 ## Pertanyaan Terkait Neon Box

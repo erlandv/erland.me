@@ -7,7 +7,7 @@ excerpt: >-
   Pentingnya menjaga keamanan data bisnis pada email perusahaan,
   hadirnya email hosting berperan penting untuk hal ini.
 publishDate: 2025-07-10T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/keamanan-data-bisnis-dengan-email-hosting/hero.png
 heroAlt: Keamanan Data Bisnis dengan Email Hosting
 tags: []
 category: essay

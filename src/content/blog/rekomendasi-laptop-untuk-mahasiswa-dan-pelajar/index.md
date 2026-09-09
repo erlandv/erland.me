@@ -9,7 +9,7 @@ excerpt: >-
   Kini peran laptop bukan hanya dibutuhkan oleh pekerja, tetapi juga dibutuhkan
   oleh mahasiswa dan pelajar. Terutama di masa…
 publishDate: 2022-04-21T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/rekomendasi-laptop-untuk-mahasiswa-dan-pelajar/hero.png
 heroAlt: Rekomendasi Laptop untuk Mahasiswa dan Pelajar
 tags: []
 category: info
@@ -32,7 +32,7 @@ Bagi sebagian besar orang, budget selalu menjadi pertimbangan awal dalam membeli
 
 Menyesuaikan spesifikasi laptop dengan kebutuhan yang akan kita kerjakan juga termasuk penting. Setiap kebutuhan orang berbeda-beda, bahkan setiap mahasiswa juga bisa berbeda-beda kebutuhannya sesuai dengan jurusan kuliahnya. Misalnya bagi mahasiswa multimedia yang kebutuhannya untuk mengolah gambar, foto, atau animasi menggunakan aplikasi seperti Adobe Photoshop, After Effect, InDesign tentunya memerlukan laptop dengan prosesor dan RAM yang tinggi, serta kartu grafis yang mumpuni seperti <a href="https://penalis.com/teknologi/laptop-gaming-terbaik/">laptop gaming terbaik</a>.
 
-![laptop untuk mahasiswa](./images/laptop-untuk-mahasiswa.png)
+![laptop untuk mahasiswa](https://img.erland.me/blog/rekomendasi-laptop-untuk-mahasiswa-dan-pelajar/images/laptop-untuk-mahasiswa.png)
 
 Jelas berbeda untuk mahasiswa jurusan Ekonomi misalnya, mungkin laptop dengan spesifikasi standar dengan Processor Intel dan RAM 2GB sudah cukup. Oleh karena itu, penting bagi kita menyesuaikan spesifikasi laptop yang akan dibeli dengan kebutuhan yang akan kita kerjakan sehari-hari. Dengan menyesuaikan spesifikasi laptop dengan kebutuhan yang akan dikerjakan, tentu akan memudahkan kita dalam memilih laptop seperti apa yang cocok digunakan sehari-hari.
 
@@ -62,7 +62,7 @@ Laptop Acer TravelMate Spin B3 ini dirilis pada April 2020 bersamaan dengan seri
 
 Laptop ini memang memiliki desain yang konvertibel dengan tujuan dapat digunakan dalam berbagai mode penggunaan yang dapat disesuaikan dengan kebutuhan, sangat cocok untuk fleksibilitas dalam pembelajaran oleh pelajar atau mahasiswa. Selain itu, laptop ini juga memiliki baterai yang tahan lama, tombol keyboard yang dipasang secara mekanis, serta beberapa fitur seperti kamera HD HDR yang berguna untuk belajar online via Google Meet atau Zoom. Semua fitur-fitur tersebut tentu memberikan kemudahan bagi pelajar dan mahasiswa dalam aktivitas pembelajaran jarak jauh maupun langsung.
 
-![](./images/acer-travelmate-spin-b3.jpg)
+![](https://img.erland.me/blog/rekomendasi-laptop-untuk-mahasiswa-dan-pelajar/images/acer-travelmate-spin-b3.jpg)
 
 Laptop Acer TravelMate Spin B3 ini tersedia dengan harga mulai Rp5.499.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 
@@ -84,7 +84,7 @@ Laptop Acer Swift 1 Fresh (SF114-34) ini dirilis pada Maret 2021. Laptop ini mem
 
 Fitur lain yang tidak kalah menarik dari Acer Swift 1 Fresh (SF114-34) ini adalah desainnya juga dirancang fanless sehingga saat kita mengoperasikan laptop ini terasa sunyi dan minim suara, hal ini tentu berguna untuk menjaga konsentrasi ketika mengerjakan tugas sekolah atau kuliah. Lebih kerennya lagi, meskipun berfitur fanless, laptop ini tidak mudah panas karena adanya fitur Elevated Hinge Design. Dengan itu, aktivitas pengetikan di laptop ini menjadi ergonomis dan terasa nyaman untuk kegiatan pelajar dan mahasiswa sehari-hari.
 
-![](./images/acer-swift-1-fresh.jpg)
+![](https://img.erland.me/blog/rekomendasi-laptop-untuk-mahasiswa-dan-pelajar/images/acer-swift-1-fresh.jpg)
 
 Laptop Acer Swift 1 Fresh (SF114-34) ini tersedia dengan harga mulai Rp6.699.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 
@@ -111,7 +111,7 @@ Laptop Aspire 5 Slim (A514-54/54G) ini dirilis pada Desember 2020. Jika kalian m
 
 Laptop Aspire 5 Slim (A514-54/54G) ini juga dilengkapi dengan tampilan layar real IPS dalam teknologi yang membuat warna di monitor menjadi lebih hidup. Tidak lupa dengan konektivitas sinyal, Aspire 5 Slim juga ini dilengkapi Exo Amp Antenna dengan cakupan hingga 360 derajat, sehingga memungkinkan sinyal menjadi lebih cepat ditangkap. Dan satu lagi fitur yang tidak kalah menarik, laptop ini sudah disematkan Office Home and Students 2019, sehingga kalian sebagai pelajar dan mahasiswa tidak perlu lagi repot instal aplikasi tersebut untuk kebutuhan mengerjakan tugas.
 
-![](./images/aspire-5-slim.jpg)
+![](https://img.erland.me/blog/rekomendasi-laptop-untuk-mahasiswa-dan-pelajar/images/aspire-5-slim.jpg)
 
 Laptop Aspire 5 Slim (A514-54/54G) ini tersedia dengan harga mulai Rp8.999.000 yang bisa didapatkan melalui penjualan toko retail Acer. Untuk spesifikasi lengkapnya, silakan simak tabel di bawah ini.
 

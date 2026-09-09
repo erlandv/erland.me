@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Ketahui terlebih dahulu istilah-istilah dalam saham yang perlu diketahui pemula sebelum terjun berinvestasi di pasar modal.
 publishDate: 2024-10-27T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/istilah-dalam-saham-yang-perlu-diketahui-oleh-pemula/hero.png
 heroAlt: 50+ Istilah Dalam Saham yang Perlu Diketahui oleh Pemula
 tags: []
 category: info

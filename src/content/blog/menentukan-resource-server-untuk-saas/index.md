@@ -3,7 +3,7 @@ title: Menentukan Resource Server untuk SaaS agar Stabil, Efisien, dan Mudah Ber
 description: Bingung menentukan resource server untuk SaaS? Pelajari cara memilih CPU, RAM, dan storage yang tepat agar aplikasi stabil, efisien, dan hemat biaya operasional
 excerpt: 'Menentukan resource server untuk SaaS: memilih CPU, RAM, dan storage yang tepat agar aplikasi stabil, efisien, dan hemat biaya.'
 publishDate: 2026-01-20
-hero: ./hero.png
+hero: https://img.erland.me/blog/menentukan-resource-server-untuk-saas/hero.png
 heroAlt: Menentukan Resource Server untuk SaaS
 category: info
 draft: false
@@ -11,7 +11,7 @@ draft: false
 
 Ketika kita membangun produk SaaS, salah satu keputusan paling krusial adalah menentukan resource server yang tepat. Banyak founder sering menganggap ini hal teknis yang bisa dipikirkan nanti, tapi kenyataannya justru keputusan ini berdampak langsung pada performa aplikasi, biaya operasional, dan kemampuan kita berkembang cepat. Kita tidak mau kan, pengguna baru sign up lalu aplikasi terasa lemot? Atau trafik naik tiba-tiba dan server tidak sanggup menampungnya?
 
-![Menentukan Resource Server untuk SaaS](./images/menentukan-resource-server-untuk-saas.webp)
+![Menentukan Resource Server untuk SaaS](https://img.erland.me/blog/menentukan-resource-server-untuk-saas/images/menentukan-resource-server-untuk-saas.webp)
 
 Menentukan resource server untuk SaaS bukan soal memilih RAM besar atau CPU banyak saja. Ini soal memahami bagaimana aplikasi bekerja, pola trafiknya, jenis proses yang berjalan, dan bagaimana karakter beban yang mungkin berubah seiring waktu. Dan yang lebih penting: kita butuh fleksibilitas untuk berkembang, karena MVP yang sederhana bisa berubah menjadi sistem kompleks dalam hitungan bulan.
 

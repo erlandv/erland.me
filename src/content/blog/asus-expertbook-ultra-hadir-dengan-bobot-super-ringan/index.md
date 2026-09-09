@@ -3,7 +3,7 @@ title: Bawa ke Mana Saja, ASUS ExpertBook Ultra Hadir dengan Bobot Super Ringan
 description: Review ASUS ExpertBook Ultra B9406CAA, laptop bisnis ultra-portabel dengan Intel Core Ultra & AI on-device. Performa tinggi, ringan 0,99 kg, dan aman bagi data.
 excerpt: Review ASUS ExpertBook Ultra, laptop bisnis ultra-portabel dengan Intel Core Ultra & AI on-device, performa tinggi.
 publishDate: 2026-05-07
-hero: ./hero.png
+hero: https://img.erland.me/blog/asus-expertbook-ultra-hadir-dengan-bobot-super-ringan/hero.png
 heroAlt: ASUS ExpertBook Ultra
 category: review
 draft: false
@@ -20,8 +20,8 @@ Mengusung tagline "The Flagship of the Industry. Period.", ASUS ExpertBook Ultra
 Bobot yang ringan menjadi keunggulan utama ASUS ExpertBook Ultra untuk profesional yang membutuhkan mobilitas tinggi. Varian POLED hanya berbobot 0,99 kg, sementara varian Tandem OLED memiliki bobot 1,09 kg, angka yang sangat ringan untuk kelas flagship. 
 
 :::gallery
-![ASUS ExpertBook Ultra](./images/asus-expertbook-ultra.webp),
-![Laptop ASUS ExpertBook Ultra](./images/laptop-asus-expertbook-ultra.webp)
+![ASUS ExpertBook Ultra](https://img.erland.me/blog/asus-expertbook-ultra-hadir-dengan-bobot-super-ringan/images/asus-expertbook-ultra.webp),
+![Laptop ASUS ExpertBook Ultra](https://img.erland.me/blog/asus-expertbook-ultra-hadir-dengan-bobot-super-ringan/images/laptop-asus-expertbook-ultra.webp)
 :::
 
 Dengan dimensi kompak 31,09 x 21,28 x 1,09 cm, laptop ini mudah dimasukkan ke dalam tas kerja atau ransel sehari-hari tanpa menimbulkan beban berlebih. Gita Wirjawan, Brand Ambassador ASUS Commercial Business Indonesia, menyatakan bahwa bobot ringan dan daya tahan baterai ExpertBook Ultra menghadirkan definisi baru mobilitas berdaya tinggi. 

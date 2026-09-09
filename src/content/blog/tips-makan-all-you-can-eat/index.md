@@ -8,7 +8,7 @@ excerpt: >-
   aku sih iya, karena aku suka makan. Apalagi di jaman sekarang banyak banget
   kuliner dengan tema serta promo yang…
 publishDate: 2022-08-02T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tips-makan-all-you-can-eat/hero.png
 heroAlt: Tips Makan All You Can Eat
 tags: []
 category: info
@@ -23,7 +23,7 @@ Kalian udah gak asing lagi ya dengan kata All You Can Eat? Bagaimana tidak, seka
 
 Sesuai dengan namanya, All You Can Eat adalah sistem di mana restoran atau tempat makan yang memakai konsep para pengunjung bisa makan serta menikmati sepuasnya menu hidangan yang disajikan hanya dengan sekali bayar.
 
-![all you can eat](./images/all-you-can-eat.png)
+![all you can eat](https://img.erland.me/blog/tips-makan-all-you-can-eat/images/all-you-can-eat.png)
 
 Walau begitu, resto yang menyediakan sistem All You Can Eat ini tetap memiliki peraturan, ya. Apa sih peraturannya? Kalian cukup membayar dengan harga yang sudah ditentukan resto. Biasanya harga yang ditentukan ialah harga untuk perorang. Setelah itu kalian baru deh bisa makan apa saja yang telah disediakan resto, bebas, dan boleh nambah.
 

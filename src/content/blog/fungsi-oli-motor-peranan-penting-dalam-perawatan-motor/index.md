@@ -9,7 +9,7 @@ excerpt: >-
   memerlukan perawatan berkala yang wajib hukumnya. Kalau Anda cuek dalam
   melakukan perawatan bisa dipastikan bakal kerepotan…
 publishDate: 2021-09-29T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/fungsi-oli-motor-peranan-penting-dalam-perawatan-motor/hero.png
 heroAlt: 'Fungsi Oli Motor, Peranan Penting dalam Perawatan Motor'
 tags: []
 category: info
@@ -34,7 +34,7 @@ Oli mesin mempunyai peran sangat penting pada sepeda motor. Pemilik motor diwaji
 
 Perawatan motor matic tentu berbeda dengan perawatan motor manual, begitupun juga oli yang digunakan juga harus sesuai dengan jenis kendaraan. Motor matic semakin menjadi pilihan para pengendara di Indonesia. Alasannya mungkin sangat simpel. Asal sudah bisa mengendarai sepeda, maka dapat dipastikan seorang bisa mengendarai motor matic.
 
-![fungsi oli motor](./images/fungsi-oli-motor.png)
+![fungsi oli motor](https://img.erland.me/blog/fungsi-oli-motor-peranan-penting-dalam-perawatan-motor/images/fungsi-oli-motor.png)
 
 Tinggal hidupkan mesin, main gas sedikit, maka Anda sudah bisa naik motor. Tidak perlu bolak-balik macet karena bingung mengendalikan kopling dan persneling seperti saat Anda belajar motor manual. Namun begitu, di balik semua kemudahannya, sepeda motor matic perlu perhatian lebih serius. Terutama dalam urusan oli motornya yang memang beda dari oli motor manual.
 

@@ -9,7 +9,7 @@ excerpt: >-
   walaupun secara umum fungsinya sama, yaitu mendingankan minuman dan makanan
   agar lebih awet. Ketiga jenis kulkas tersebut ialah…
 publishDate: 2021-12-27T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/rekomendasi-kulkas-showcase/hero.png
 heroAlt: Rekomendasi Kulkas Showcase Terbaik dengan Harga Terjangkau
 tags: []
 category: reviews
@@ -24,7 +24,7 @@ Kulkas freezer juga umumnya memiliki dua jenis, yaitu deep freezer dan chest fre
 
 Sementara kulkas showcase merupakan jenis kulkas yang sekilas mirip dengan jenis fridge, tetapi terlihat berbeda. Perbedaanya terlihat dari tampilan pintu berbahan kaca transparan sehingga isinya dapat dilihat dari luar. Hal ini sesuai dengan namanya, showcase, yang artinya memperlihatkan atau mempertunjukan. Kulkas showcase ini memang dikhususkan untuk para penjual makanan dan minuman supaya dagangan mereka dapat dilihat langsung oleh pembeli tanpa perlu membuka pintunya. Selain itu, bagian dalam dari kulkas dengan jenis ini berupa rak-rak yang dapat digunakan untuk menyusun makanan atau minuman dalam beberapa baris.
 
-![kulkas showcase](./images/kulkas-showcase.png 'kulkas showcase')
+![kulkas showcase](https://img.erland.me/blog/rekomendasi-kulkas-showcase/images/kulkas-showcase.png 'kulkas showcase')
 
 Kalau kalian adalah seorang pedagang yang menjual makanan dan minuman dingin, sudah seharusnya kalian memiliki kulkas showcase untuk menarik minat calon pembeli karena memudahkan mereka untuk melihat-lihat makanan dan minuman tanpa harus membuka pintu kulkas.
 
@@ -48,7 +48,7 @@ Kabar baik untuk kalian yang berminat membeli kulkas showcase, AQUA Japan memili
 
 Kulkas showcase seri ini berkapasitas 320 liter dengan power input 230 watt. AQUA Japan AQB-340AB merupakan showcase cooler produksi AQUA Japan yang cocok sebagai display untuk berjualan minuman. Teknologi Fast Cooling mampu mempercepat proses pendinginan.
 
-![aqua japan aqb 231](./images/aqua-japan-aqb-231.jpg 'AQUA Japan AQB-231')
+![aqua japan aqb 231](https://img.erland.me/blog/rekomendasi-kulkas-showcase/images/aqua-japan-aqb-231.jpg 'AQUA Japan AQB-231')
 
 Selain itu showcase ini juga dilengkapi dengan Anti Fog dan Dew yang menjaga pintu kaca dari kabut dan embun sehingga produk yang ter-display di dalam dapat dengan mudah terlihat oleh calon pembeli produk. Rak yang dapat diatur ketinggiannya atau adjustable shelf sesuai dengan jenis minuman yang akan dipajang. Memudahkan pemilik usaha minuman dingin dalam menyusun berbagai minuman. Anda perlu mengeluarkan uang Rp 4.599.000 jika berminat untuk membeli showcase seri ini.
 
@@ -58,7 +58,7 @@ Untuk informasi lebih lengkap terkait produk AQUA Japan AQB-231, silakan mengunj
 
 Fitur-fitur yang ada pada kulkas showcase AQUA Japan AQB-181 ini mirip dengan seri AQB-231, seperti big handle door, anti fog & dew, serta adjustable shelves. Bahkan bentuk dan warna dari keduanya juga sangat mirip, yang membuat AQUA Japan AQB-181 berbeda dengan seri AQB-231 adalah kapasitasnya yang berukuran 170 liter dan power input 210 watt. Harga yang ditawarkan untuk meminang kulkas showcase AQUA Japan AQB-181 adalah Rp 4.199.000.
 
-![aqua japan aqb 181](./images/aqua-japan-aqb-181.jpg 'AQUA Japan AQB-181')
+![aqua japan aqb 181](https://img.erland.me/blog/rekomendasi-kulkas-showcase/images/aqua-japan-aqb-181.jpg 'AQUA Japan AQB-181')
 
 Untuk informasi lebih lengkap terkait produk AQUA Japan AQB-181, silakan mengunjungi link <a href="https://aquajapanid.com/product/detail/288/AQB-181">https://aquajapanid.com/product/detail/288/AQB-181</a>
 

@@ -5,7 +5,7 @@ description: 'Mentahan file template kalender 2024 CDR, AI, PDF, PNG HD sekali k
 excerpt: 'Free download file template kalender 2024 berformat vector'
 publishDate: 2023-11-01
 updatedDate: 2024-01-10
-hero: ./hero.png
+hero: https://img.erland.me/downloads/template-kalender-2024/hero.png
 heroAlt: 'Template Kalender 2024'
 draft: false
 downloadFiles:
@@ -43,8 +43,8 @@ Desain kalendernya masih sama dengan tahun-tahun sebelumnya. Saya mencoba membua
 ## Preview Kalender 2024
 
 :::gallery
-![Preview Template 2024](./template-kalender-2024.webp 'Januari'),
-![Preview Template 2024](./download-template-kalender-2024.webp 'Februari')
+![Preview Template 2024](https://img.erland.me/downloads/template-kalender-2024/template-kalender-2024.webp 'Januari'),
+![Preview Template 2024](https://img.erland.me/downloads/template-kalender-2024/download-template-kalender-2024.webp 'Februari')
 :::
 
 Desain template kalender 2024 ini dibuat dengan menggunakan 2 font favorit saya, yaitu [font Philosopher](https://fonts.google.com/specimen/Philosopher) dan [font Poppins](https://fonts.google.com/specimen/Poppins) yang merupakan font berlisensi [Open Font Licence](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL), keduanya dapat diunduh langsung melalui Google Fonts secara gratis.

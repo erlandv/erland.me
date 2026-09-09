@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Ada banyak sekali khasiat kunyit putih dan madu untuk kesehatan tubuh, berikut ini simak 10 khasiat kunyit putih dan madu yang perlu diketahui.
 publishDate: 2024-10-09T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/khasiat-kunyit-putih-dan-madu/hero.png
 heroAlt: 10 Khasiat Kunyit Putih dan Madu untuk Kesehatan Tubuh
 tags: []
 category: info
@@ -14,7 +14,7 @@ draft: false
 
 Kombinasi bahan alami seperti kunyit putih dan madu telah digunakan secara tradisional selama berabad-abad untuk mendukung kesehatan. Kedua bahan ini dikenal karena khasiatnya yang luar biasa dalam meningkatkan kekebalan tubuh dan menjaga kesehatan secara keseluruhan. Kali ini, kita akan membahas lebih dalam tentang khasiat kunyit putih dan madu bagi tubuh dan cara penggunaannya dalam kehidupan sehari-hari.
 
-![](./images/khasiat-kunyit-putih-dan-madu-1024x683.webp)
+![](https://img.erland.me/blog/khasiat-kunyit-putih-dan-madu/images/khasiat-kunyit-putih-dan-madu-1024x683.webp)
 
 ## Apa Itu Kunyit Putih dan Madu?
 
@@ -92,7 +92,7 @@ Kunyit putih dan madu sangat baik untuk meredakan batuk dan pilek. Keduanya beke
 
 Kunyit putih dan madu bisa kamu konsumsi dalam berbagai bentuk. Salah satu cara termudah adalah dengan mencampurkan satu sendok teh madu dengan setengah sendok teh kunyit putih bubuk ke dalam segelas air hangat. Kamu bisa minum ramuan ini setiap pagi untuk mendapatkan manfaat kesehatannya. Atau, kamu juga bisa menggunakan Sari Kunyit Putih dari Sido Muncul agar lebih praktis.
 
-![](./images/sari-kunyit-putih-sido-muncul.webp)
+![](https://img.erland.me/blog/khasiat-kunyit-putih-dan-madu/images/sari-kunyit-putih-sido-muncul.webp)
 
 Jika kamu ingin mengetahui lebih dalam tentang manfaat kunyit putih, kamu bisa mengunjungi artikel <a href="https://www.sidomunculstore.com/blog/post/15-manfaat-kunyit-putih-untuk-kesehatan-anda.html">manfaat kunyit putih</a> dari Sido Muncul. Brand ini sudah dikenal dalam dunia herbal Indonesia dan menawarkan produk-produk berkualitas dari bahan alami, termasuk kunyit putih.
 

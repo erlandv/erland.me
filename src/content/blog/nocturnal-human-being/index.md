@@ -8,7 +8,7 @@ excerpt: >-
   larut malam dan aktif pada malam hari. Sebutan lainnya yaitu evening person,
   night owl, atau lychnobite. Sebutansebutan…
 publishDate: 2017-01-17T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/nocturnal-human-being/hero.png
 heroAlt: 'Nocturnal Human Being, Si Manusia Pemuja Malam'
 tags: []
 category: essay
@@ -19,7 +19,7 @@ _**Nocturnal human being**_ adalah sebutan bagi orang yang cenderung terjaga hi
 
 Untuk kali ini aku menambahkan satu sebutan lagi, sebut saja "manusia pemuja malam". Ini hanyalah berupa diksi yang aku sematkan bagi orang yang produktif di malam hari. Aku, kamu, dan banyak lagi orang di muka bumi ini yang mengalami.
 
-![nocturnal human being](./images/nocturnal-human-being.jpg)
+![nocturnal human being](https://img.erland.me/blog/nocturnal-human-being/images/nocturnal-human-being.jpg)
 
 Ketika siang, kita merasakan tidak bisa fokus dan kurang bersemangat untuk melakukan sesuatu. Terutama tidak bisa fokus untuk menghasilkan buah pikiran. Sebagai manusia yang perlu aktualisasi diri dalam pekerjaan yang dikerjakan siang hari, mau tidak mau, perlu memaksakan diri untuk aktif di siang hari karena suatu tuntutan. Bisa dibilang orang-orang ini memiliki waktu tidur hanya 5-6 jam.
 
@@ -61,7 +61,7 @@ Para peneliti di _University of Alberta_ menguji kekuatan kaki sembilan orang 
 
 Peneliti dari _Catholic University of the Sacred Heart_ di Milan menemukan, bahwa orang yang rutin tidur larut malam, cenderung memiliki solusi yang lebih orisinil dan kreatif dibanding orang yang tidur lebih awal.
 
-![nocturnal human being](./images/nocturnal-human-being.png)
+![nocturnal human being](https://img.erland.me/blog/nocturnal-human-being/images/nocturnal-human-being.png)
 
 _Jadi siapa yang bangga dengan hobi begadang?_
 

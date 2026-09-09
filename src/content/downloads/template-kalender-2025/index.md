@@ -5,7 +5,7 @@ description: 'Free download file template kalender 2025 CDR, AI, PDF, PNG HD tra
 excerpt: 'Free download file template kalender 2025 berformat vector'
 publishDate: 2024-11-01
 updatedDate: 2024-12-12
-hero: ./hero.png
+hero: https://img.erland.me/downloads/template-kalender-2025/hero.png
 heroAlt: 'Template Kalender 2025'
 draft: false
 downloadFiles:
@@ -40,7 +40,7 @@ Template kalender 2025 ini didesain menggunakan CorelDRAW, dibuat dan disusun se
 
 ## Preview Kalender 2025
 
-![preview kalender 2025](./template-kalender-2025.webp 'preview kalender 2025')
+![preview kalender 2025](https://img.erland.me/downloads/template-kalender-2025/template-kalender-2025.webp 'preview kalender 2025')
 
 Ada sedikit perbedaan desain pada template kalender 2025 kali ini. Saya sedikit mengubah tampilan frame nama bulan pada kalender dan menambahkan urutan angka bulan berjalan. Selebihnya, desain kalender masih sama seperti tahun-tahun sebelumnya yang menonjolkan sisi simple dan elegant dengan mengutamakan UX atau kemudahan dalam membaca kalender.
 
@@ -61,15 +61,15 @@ Template kalender 2025 lengkap full 12 bulan ini saya buat menggunakan CorelDRAW
 - CorelDRAW versi 2023 (24.3)
 - CorelDRAW versi 2024 (25.0)
 
-![preview kalender 2025](./template-kalender-2025-cdr.webp 'preview kalender 2025')
+![preview kalender 2025](https://img.erland.me/downloads/template-kalender-2025/template-kalender-2025-cdr.webp 'preview kalender 2025')
 
 Bagi kalian pengguna produk Adobe ataupun software editor lain, tidak perlu khawatir. Karena selain file .cdr, saya juga membuat template kalender 2025 dengan format .ai, .pdf, dan juga .png agar lebih universal.
 
 File format .ai dan .pdf dapat dibuka dan diedit dengan Adobe Illustrator. Sedangkan file format .png dapat dibuka dan diedit dengan Adobe Photoshop, latar belakang file .png juga sudah dibuat transparan.
 
 :::gallery
-![Preview di Adobe Illustrator](./template-kalender-2025-ai.webp 'Adobe Illustrator'),
-![Preview di Adobe Photoshop](./template-kalender-2025-png.webp 'Adobe Photoshop')
+![Preview di Adobe Illustrator](https://img.erland.me/downloads/template-kalender-2025/template-kalender-2025-ai.webp 'Adobe Illustrator'),
+![Preview di Adobe Photoshop](https://img.erland.me/downloads/template-kalender-2025/template-kalender-2025-png.webp 'Adobe Photoshop')
 :::
 
 Jadi secara keseluruhan terdapat 4 jenis format file kalender 2025, yaitu format file .cdr, .ai, .pdf, dan .png yang semua file tersebut di-compress ke dalam satu file ZIP atau saya sebut sebagai edisi full pack. Selain edisi full pack, saya juga sudah memisahkan file-file dengan link download berdasarkan formatnya masing-masing, ini khusus untuk kalian yang ingin download template kalender 2025 dalam satu format saja. Silakan download file kalender 2025 sesuai format yang kalian butuhkan.

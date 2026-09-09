@@ -9,7 +9,7 @@ excerpt: >-
   keterampilan dalam mendesain terus meningkat. Pemahaman ini harus dimiliki
   oleh para pemula sebelum mereka mempelajari lebih lanjut…
 publishDate: 2021-10-29T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/dasar-desain-grafis/hero.png
 heroAlt: 10 Dasar Desain Grafis yang Perlu Diketahui
 tags: []
 category: essay
@@ -18,7 +18,7 @@ draft: false
 
 Dasar desain grafis harus kita pahami terlebih dahulu untuk membuat keterampilan dalam mendesain terus meningkat. Pemahaman ini harus dimiliki oleh para pemula sebelum mereka mempelajari lebih lanjut mengenai teknik desain grafis atau lainnya. Prinsip dasar [tentang desain grafis](/blog/sekilas-tentang-desain-grafis/) ini akan sangat bermanfaat ketika Anda terjun ke dunia grafis hingga nantinya menjadi seorang profesional.
 
-![dasar desain grafis](./images/dasar-desain-grafis.png)
+![dasar desain grafis](https://img.erland.me/blog/dasar-desain-grafis/images/dasar-desain-grafis.png)
 
 Berikut ini dasar-dasar desain grafis beserta penjelasannya yang harus Anda ketahui, yaitu:
 

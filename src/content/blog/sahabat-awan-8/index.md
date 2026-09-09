@@ -8,7 +8,7 @@ excerpt: >-
   beberapa hari. Inilah waktunya untuk menyegarkan otak dan menentukan jalan
   selanjutnya. Ayah bilang kalau kami sekeluarga…
 publishDate: 2019-01-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-8/hero.png
 heroAlt: Sahabat Awan (Bagian 8)
 tags: []
 category: story
@@ -206,7 +206,7 @@ Tak ada persaingan menggapai prestasi. Sungguh hidup terasa statis. Tulisan yang
 
 Sepulang bekerja dari toko sembako jelek itu aku tak kuasa menahan lelah dan merebahkan diri ke atas kasur yang jelek juga. Karena ulah Dian, aku mendapatkan teguran keras dari bu Nia. Dian lah yang membuat konsentrasiku buyar. Kubuka sebuah kaleng bekas Khong Guan yang terselip di bawah ranjangku. Beberapa mainan bekas yang aku dapatkan di sungai masih kusimpan sebagai kenangan. Burung origami  pemberian nenek bergelantungan di langit kamarku. Sebenarnya aku sudah melupakan kejadian yang telah lalu, namun karena Dian, lembaran-lembaran memori itu terungkap kembali. Akhir-akhir ini aku mulai terhubung dengan Siti dan Pahing. Tapi, Siti sudah pergi meninggalkanku dan Pahing disibukan dengan aktivitas kuliahnya.
 
-![](./images/cinta-segitiga.jpeg)
+![](https://img.erland.me/blog/sahabat-awan-8/images/cinta-segitiga.jpeg)
 
 Aku benar-benar merasa minder berada di antara mereka semua. Mungkin hanya aku yang tidak bisa menggapai cita-cita. Aku merasa kalau seharusnya aku mundur dari persaingan ini. Aku memang tak sama dengan yang lain. Mereka semua bercita-cita menciptakan uang dengan jerih payah mereka sendiri sementara diriku ini bercita-cita untuk menghabiskan uang, _traveling_ kemana-mana dan menulis naskah novel yang tak tau arahnya kemana.
 

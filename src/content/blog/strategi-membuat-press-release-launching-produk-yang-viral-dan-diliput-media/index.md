@@ -8,7 +8,7 @@ excerpt: >-
   viral di sosial media dan bisa diliput oleh banyak media nasional
 publishDate: 2025-10-31
 updatedDate: 2025-11-04
-hero: ./hero.png
+hero: https://img.erland.me/blog/strategi-membuat-press-release-launching-produk-yang-viral-dan-diliput-media/hero.png
 heroAlt: Press Release Launching Produk
 category: info
 draft: false
@@ -20,7 +20,7 @@ Intinya kamu sedang membawa kabar kelahiran satu produk baru ke ruang publik, la
 
 ## Kenapa Press Release Launching Produk masih ampuh
 
-![Press Release Launching Produk](./images/press-release-launching-produk.webp 'Press Release Launching Produk')
+![Press Release Launching Produk](https://img.erland.me/blog/strategi-membuat-press-release-launching-produk-yang-viral-dan-diliput-media/images/press-release-launching-produk.webp 'Press Release Launching Produk')
 
 Press Release Launching Produk bekerja sebagai jembatan antara brand dan media. Jurnalis butuh bahan yang faktual, ringkas, dan jelas agar proses penyuntingan lebih cepat. Rilis yang matang juga membantu mesin pencari memahami konteks produk sehingga memperkuat jejak digital marketing. Kombinasi keduanya membuat awareness naik serta membuka peluang konversi. Intinya kamu mempermudah kerja newsroom dan algoritma sekaligus.
 

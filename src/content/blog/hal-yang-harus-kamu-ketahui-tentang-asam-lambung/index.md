@@ -9,7 +9,7 @@ excerpt: >-
   biasanya orangorang akan menyimpulkannya dengan penyakit maag. Padahal
   penyakit di lambung itu bukan maag saja dan masih…
 publishDate: 2021-10-27T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/hal-yang-harus-kamu-ketahui-tentang-asam-lambung/hero.png
 heroAlt: Hal yang Harus Kamu Ketahui Tentang Asam Lambung
 tags: []
 category: info
@@ -28,7 +28,7 @@ Kenapa asam lambung yang seharusnya berada di lambung malah bisa naik hingga men
 
 Apakah penyakit ini hanya bisa dialami oleh beberapa orang tertentu saja? Penyakit asam lambung ini bisa diidap oleh anak-anak maupun orang dewasa. Gejalanya sekilas hampir mirip dengan serangan jantung karena adanya rasa sensasi terbakar di dada. Walaupun penyakit ini tidak separah penyakit jantung tapi tetap harus diwaspadai karena bisa berakibat semakin buruk jika adanya komplikasi setelah penyakit ini muncul.
 
-![asam lambung](./images/asam-lambung.png)
+![asam lambung](https://img.erland.me/blog/hal-yang-harus-kamu-ketahui-tentang-asam-lambung/images/asam-lambung.png)
 
 Jika penyakit asam lambung ini dibiarkan begitu saja secara terus menerus dan dalam waktu yang cukup lama maka akan timbul banyak pengaruh di tubuh kita seperti asam lambung akan dengan sangat mudah naik ke atas hingga kerongkongan menjadi GERD, kerusakan di dalam lambung akan sangat mungkin menjadi semakin meluas dan kasus paling parah bisa menyebar hingga ke usus, selain itu juga karena menyangkut dengan sistem pencernaan maka bisa menyebabkan gangguan pencernaan seperti konstipasi atau diare dan yang paling parah dari itu semua bisa menyebabkan tumor atau bahkan kanker.
 

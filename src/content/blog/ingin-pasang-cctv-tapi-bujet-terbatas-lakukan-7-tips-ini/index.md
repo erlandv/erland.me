@@ -8,7 +8,7 @@ excerpt: >-
   Television). Kini IP Camera CCTV tidak hanya dipasang di fasilitas umum,
   kantorkantor atau tempat usaha. Di rumahrumah…
 publishDate: 2024-02-25T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/ingin-pasang-cctv-tapi-bujet-terbatas-lakukan-7-tips-ini/hero.png
 heroAlt: Ingin Pasang CCTV tapi Bujet Terbatas? Lakukan 7 Tips Ini!
 tags: []
 category: info
@@ -17,7 +17,7 @@ draft: false
 
 Tingginya tingkat kejahatan memicu maraknya penggunaan CCTV (Closed-Circuit Television). Kini IP Camera CCTV tidak hanya dipasang di fasilitas umum, kantor-kantor atau tempat usaha. Di rumah-rumah pribadi pun menggunakan kamera pengintai ini untuk meningkatkan keamanan dan berjaga-jaga dari hal-hal yang tidak diinginkan.
 
-![pemasangan cctv](./images/pemasangan-cctv.webp 'Source: https://images.pexels.com/photos/12623480/pexels-photo-12623480.jpeg')
+![pemasangan cctv](https://img.erland.me/blog/ingin-pasang-cctv-tapi-bujet-terbatas-lakukan-7-tips-ini/images/pemasangan-cctv.webp 'Source: https://images.pexels.com/photos/12623480/pexels-photo-12623480.jpeg')
 
 Seperti penjelasan di atas, Internet Protocol (IP) Camera dapat menghemat biaya instalasi CCTV karena tidak membutuhkan banyak kabel. Dukungan teknologi Internet of Things (IoT) pada IP camera CCTV juga membuat Anda bisa mengakses rekaman secara real time melalui aplikasi yang terpasang pada laptop maupun ponsel. Hal inilah yang menjadikan kamera pengaman berbasis IP lebih unggul dibandingkan analog camera.
 

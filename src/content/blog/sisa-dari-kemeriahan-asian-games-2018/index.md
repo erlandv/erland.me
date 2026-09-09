@@ -9,7 +9,7 @@ excerpt: >-
   September 2018 yang mulai dilaksakan pada 18 Agustus 2018. Meskipun telah
   berakhir, namun masih terasa euforianya hingga…
 publishDate: 2018-11-15T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sisa-dari-kemeriahan-asian-games-2018/hero.png
 heroAlt: Sisa Dari Kemeriahan Asian Games 2018
 tags: []
 category: essay
@@ -28,7 +28,7 @@ Terakhir yang menjadi pusat perhatian pada babak final bulu tangkis Asian Games 
 
 Ramai bermunculan komentar-komentar di sosial media Instagram mengenai tubuh atletis Jojo. Komentar-komentar tersebut dapat dikatakan sebagai _sexual harassment_ terhadap laki-laki. Beberapa komentar yang ditujukan oleh wanita kepada Jojo seperti “rahim hangat”, “hamil online”, dan lain sebagainya. Hal ini sempat menjadi _Trending Topic_ di Twitter mengenai perbedaan perlakuan antara laki-laki dan perempuan dalam _sexual harassment_.
 
-![](./images/kemeriahan-asian-games.jpg)
+![](https://img.erland.me/blog/sisa-dari-kemeriahan-asian-games-2018/images/kemeriahan-asian-games.jpg)
 
 Bicara tentang _sexual harassment_ pengertiannya adalah pelecehan seksual yang berarti perilaku pendekatan terkait dengan seks yang tak diinginkan, termasuk permintaan untuk melakukan seks, dan perilaku lainnya yang secara verbal ataupun fisik yang merujuk pada seks. Pelecehan seksual bisa terjadi dimana saja kita berada.
 

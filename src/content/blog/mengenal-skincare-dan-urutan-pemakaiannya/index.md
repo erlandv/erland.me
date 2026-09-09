@@ -9,7 +9,7 @@ excerpt: >-
   perhatian individu. Skincare menjadi salah satu solusi yang efektif untuk
   merawat kulit secara optimal. Namun, penggunaan…
 publishDate: 2023-11-12T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/mengenal-skincare-dan-urutan-pemakaiannya/hero.png
 heroAlt: Mengenal Skincare dan Urutan Pemakaiannya yang Benar
 tags: []
 category: info
@@ -26,7 +26,7 @@ Seperti yang diinformasikan oleh <a href="https://beranda.co.id">beranda.co.id</
 
 Skincare juga bukan hanya untuk wanita, seorang pria pun tetap membutuhkan skincare karena kulit merupakan organ terbesar pada tubuh manusia yang berfungsi sebagai pelindung tubuh dari berbagai elemen eksternal seperti debu, polusi udara, sinar UV, zat-zat kimia, dll.
 
-![](./images/urutan-pakai-skincare.webp)
+![](https://img.erland.me/blog/mengenal-skincare-dan-urutan-pemakaiannya/images/urutan-pakai-skincare.webp)
 
 Produk skincare, yang umumnya mengandung bahan aktif seperti AHA, BHA, PHA, retinol, niacinamide, dan hyaluronic acid, dapat memberikan berbagai manfaat, antara lain:
 

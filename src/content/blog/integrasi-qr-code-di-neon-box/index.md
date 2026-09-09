@@ -7,7 +7,7 @@ excerpt: >-
   Tips menggabungkan offline dan online marketing dengan integrasi QR code di neon box sebagai
   jembatan pelanggan ke toko digital.
 publishDate: 2025-11-07
-hero: ./hero.png
+hero: https://img.erland.me/blog/integrasi-qr-code-di-neon-box/hero.png
 heroAlt: Integrasi QR Code di Neon Box
 tags: []
 category: essay
@@ -26,7 +26,7 @@ Ada momen ketika orang lewat, tertarik pada visual neon box, tetapi belum siap m
 
 Desain adalah kunci. QR code harus punya kontras tinggi, biasanya modul gelap di atas latar putih. Hindari latar yang terlalu ramai, karena area tenang di sekitar QR atau quiet zone membantu kamera fokus. Jika ingin menambahkan logo di tengah QR, pilih level koreksi error yang lebih tinggi seperti Q atau H agar kode tetap bisa dipindai dengan stabil. Jangan lupa menuliskan ajakan singkat di bawahnya. Teks seperti "Scan untuk menu", "Ambil promo di sini", atau "Follow kami" membuat orang paham apa yang mereka dapat setelah scan.
 
-![Integrasi QR Code di Neon Box](./images/integrasi-qr-code-di-neon-box.webp)
+![Integrasi QR Code di Neon Box](https://img.erland.me/blog/integrasi-qr-code-di-neon-box/images/integrasi-qr-code-di-neon-box.webp)
 
 Ukuran huruf pendamping juga perlu dipikirkan. Huruf yang terlalu kecil akan hilang dari jarak jalan. Gunakan font sans-serif tegas dan ringkas. Hindari terlalu banyak informasi di sekitar QR agar titik fokus tidak pecah. Ingat bahwa desain neon box yang baik adalah yang bisa dibaca cepat, jadi prioritaskan satu tujuan utama dan sisanya didorong ke halaman tujuan.
 

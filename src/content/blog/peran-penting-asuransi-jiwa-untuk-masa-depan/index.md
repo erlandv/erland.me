@@ -9,7 +9,7 @@ excerpt: >-
   yang penting, terlebih jika sudah punya investasi pada instrumen lain dan juga
   memiliki gaji bulanan yang lebih dari…
 publishDate: 2021-11-19T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/peran-penting-asuransi-jiwa-untuk-masa-depan/hero.png
 heroAlt: Peran Penting Asuransi Jiwa untuk Masa Depan
 tags: []
 category: essay
@@ -26,7 +26,7 @@ Jika hal buruk tersebut terjadi, akan ada biaya-biaya yang harus dikeluarkan unt
 
 Asuransi jiwa adalah program perlindungan bagi keluarga apabila hal-hal yang tidak diinginkan. Asuransi jiwa merupakan salah satu bentuk jenis asuransi dengan program perlindungan yang akan memberikan jasa dalam penanggulangan risiko yang berkaitan erat dengan jiwa seseorang.
 
-![asuransi jiwa prudential](./images/asuransi-jiwa-prudential.png)
+![asuransi jiwa prudential](https://img.erland.me/blog/peran-penting-asuransi-jiwa-untuk-masa-depan/images/asuransi-jiwa-prudential.png)
 
 Asuransi jiwa yang akan menanggung pemegang polis terhadap kerugian finansial tak terduga yang disebabkan karena meninggalnya seseorang dalam jangka waktu tertentu. Manfaat perlindungan jiwa ini adalah sebagai jaminan kepastian terhadap tertanggung dan keluarga dalam menghadapi berbagai resiko kehidupan seperti sakit kritis, cacat, dan meninggal.
 
@@ -68,7 +68,7 @@ Ilustrasi asuransi adalah sebuah dokumen yang memberikan gambaran tentang manfaa
 
 Setelah konsultasi dengan agen asuransi dan memahami ilustrasi asuransi serta sepakat dengan segala persyaratannya, Anda akan diberikan SPAJ (Surat Permintaan Asuransi Jiwa) yang berisi informasi penting dan rinci tentang data diri calon nasabah. Agar manfaat asuransi yang diterima dapat maksimal dan tidak ada kendala nantinya, Anda dituntut untuk jujur dalam mengisi SPAJ. Pastikan Anda sudah Mengenal SPAJ, <a href="https://www.prudential.co.id/id/pulse/article/mengenal-spaj-manfaat-dan-aturan-pengisiannya/">Manfaat dan Aturan Pengisiannya</a> terlebih dahulu sebelum sampai pada tahap ini.
 
-![](./images/asuransi-jiwa.jpg)
+![](https://img.erland.me/blog/peran-penting-asuransi-jiwa-untuk-masa-depan/images/asuransi-jiwa.jpg)
 
 ## Cara Klaim Polis Asuransi Jiwa
 

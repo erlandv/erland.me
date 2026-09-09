@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Asuransi kesehatan keluarga merupakan produk asuransi untuk melindungi seluruh anggota keluarga dari risiko kesehatan yang muncul hanya dalam satu polis.
 publishDate: 2021-12-28T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-memilih-asuransi-kesehatan-keluarga/hero.png
 heroAlt: Cara Memilih Asuransi Kesehatan Keluarga yang Tepat
 tags: []
 category: essay
@@ -48,7 +48,7 @@ Di zaman yang saat ini serba digital, pastikan kalian memilih asuransi dengan si
 
 ## Rekomendasi Asuransi Kesehatan Keluarga
 
-![asuransi kesehatan keluarga](./images/asuransi-kesehatan-keluarga.png)
+![asuransi kesehatan keluarga](https://img.erland.me/blog/cara-memilih-asuransi-kesehatan-keluarga/images/asuransi-kesehatan-keluarga.png)
 
 Jika kalian saat ini benar-benar berminat untuk membeli produk asuransi kesehatan keluarga, saya punya rekomendasi terbaik untuk kalian. Yaitu PRUPrime Healthcare dari Prudential, sebuah produk asuransi tambahan yang memberikan perlindungan tidak hanya di Indonesia, tapi juga dengan jangkauan internasional sesuai standar pelayanan Prudential Indonesia yang sudah melindungi jutaan nasabahnya. Berikut beberapa hal yang dapat kalian pertimbangkan untuk memilih <a href="https://www.prudential.co.id/id/health/medical/">asuransi kesehatan keluarga Prudential</a> satu ini.
 

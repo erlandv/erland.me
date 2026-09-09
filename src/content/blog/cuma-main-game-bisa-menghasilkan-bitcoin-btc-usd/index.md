@@ -9,7 +9,7 @@ excerpt: >-
   sekarang masih belum pernah dengar bitcoin? Bitcoin itu adalah mata uang
   digital yang pertama kali ditemukan oleh seorang…
 publishDate: 2021-09-27T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cuma-main-game-bisa-menghasilkan-bitcoin-btc-usd/hero.png
 heroAlt: Cuma Main Game Bisa Menghasilkan Bitcoin BTC USD
 tags:
   - crypto

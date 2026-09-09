@@ -6,7 +6,7 @@ excerpt: >-
   Solusi jitu mengembangkan bisnis dengan pemasaran online di internet, ikuti perkembangan zaman agar bisnis turut berkembang.
 publishDate: 2022-05-22T00:00:00.000Z
 updatedDate: 2025-11-04
-hero: ./hero.png
+hero: https://img.erland.me/blog/mengembangkan-bisnis-dengan-pemasaran-online/hero.png
 heroAlt: Mengembangkan Bisnis dengan Pemasaran Online
 tags: []
 category: essay
@@ -19,7 +19,7 @@ Lihatlah, orang-orang rela begadang menunggu jam 12 malam saat _harbolnas_, demi
 
 Anda yang sedang membaca ini, saya tebak, pasti pernah belanja _online_. Betul? Belanja _online_ memang menyenangkan, bertransaksi jual beli bisa sambil rebahan. Belanja hanya bermodal _smartphone_, kemudian tinggal menunggu kurir berteriak "pakeeeetttt" di depan rumah. Sungguh sangat menghemat waktu dan tenaga, bukan?
 
-![pemasaran bisnis online](./images/pemasaran-bisnis-online.jpg)
+![pemasaran bisnis online](https://img.erland.me/blog/mengembangkan-bisnis-dengan-pemasaran-online/images/pemasaran-bisnis-online.jpg)
 
 Itulah yang dilihat dari sisi pembeli, coba sekarang kita lihat dari sisi penjual. Bagaimana kita sebagai pebisnis memanfaatkan kemajuan teknologi ini untuk memasarkan bisnis? Bagaimana meraup lebih banyak keuntungan dari tren jual beli _online_ sekarang ini? Bagaimana mengoptimalkan bisnis _online_ di internet agar mudah ditemukan dan menarik perhatian calon pelanggan? Mari kita bahas.
 

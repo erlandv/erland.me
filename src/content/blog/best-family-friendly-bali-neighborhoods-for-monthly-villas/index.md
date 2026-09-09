@@ -3,7 +3,7 @@ title: Best Family-Friendly Bali Neighborhoods for Monthly Villas
 description: Find the perfect Bali neighborhood for your family stay. Compare Sanur, Canggu, and Ubud for schools, healthcare, and child-friendly villas. Read our guide.
 excerpt: Planning a month in Bali with kids? Explore the best family areas like Sanur, Canggu, and Ubud. Covers schools, safety, and villa rental tips.
 publishDate: 2025-12-30
-hero: ./hero.png
+hero: https://img.erland.me/blog/best-family-friendly-bali-neighborhoods-for-monthly-villas/hero.png
 heroAlt: Best Family-Friendly Bali
 category: info
 draft: false
@@ -15,7 +15,7 @@ Choosing the right neighborhood shapes the monthly villa experience for families
 
 Sanur provides a sheltered beach, a flat seaside promenade that is ideal for strollers and short daily walks, and predictable low tide swimming that suits young children. Nusa Dua offers resort style safety with private beaches, guarded complexes and quiet streets that make evening routines simpler for families with small children.
 
-![Best Family-Friendly Bali Neighborhoods for Monthly Villas](./images/best-family-friendly-bali-neighborhoods-for-monthly-villas.webp)
+![Best Family-Friendly Bali Neighborhoods for Monthly Villas](https://img.erland.me/blog/best-family-friendly-bali-neighborhoods-for-monthly-villas/images/best-family-friendly-bali-neighborhoods-for-monthly-villas.webp)
 
 ### Beach access and safe swimming
 

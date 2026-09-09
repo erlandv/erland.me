@@ -9,7 +9,7 @@ excerpt: >-
   disediakan oleh suatu perusahaan atau lembaga. Mess tempat tinggalku ini
   disediakan oleh perusahaan pengolah kayu. Letaknya…
 publishDate: 2017-02-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-2/hero.png
 heroAlt: Sahabat Awan (Bagian 2)
 tags: []
 category: story
@@ -25,7 +25,7 @@ Perusahaan tempat keluargaku bernaung ini bukanlah satu-satunya perusahaan di te
 
 Dulu waktu pertama kali aku dan keluarga pindah ke tempat ini, masih terasa makmurnya perusahaan ini. Suara riuh-riuh karyawan dan suara pemotong kayu yang memekikkan telinga, berkumandang di angkasa bumi Kalimantan. Banyak orang bilang, Kalimantan adalah paru-paru dunia. Mereka betul, karena Kalimantan banyak ditumbuhi berbagai jenis pohon yang tumbuh subur di tanah Kalimantan, selain itu juga kaya dengan sumber daya alamnya. Tapi sekaya apapun hasil alam yang dimiliki Kalimantan, tetap orang asinglah yang paling berjaya.
 
-![](./images/long-house.jpg)
+![](https://img.erland.me/blog/sahabat-awan-2/images/long-house.jpg)
 
 Sekarang keadaan sudah berbeda, pemerintah sudah sadar akan pentingnya hutan. Sejak diberantasnya operasi _ilegal logging_ dan dibatasinya penebangan pohon. Semua perusahaan dilanda kekacauan, banyak karyawan yang mengundurkan diri karena takut akan masa depan mereka kelak. Sementara para kepala keluarga yang tidak memiliki tujuan kemana mereka akan bekerja lagi terpaksa harus terus mengabdi kepada perusahaan tersebut.
 

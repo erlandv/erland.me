@@ -8,7 +8,7 @@ excerpt: >-
   favorit untuk dinikmati. Musik jazz memiliki aliran musik yang kompleks dan
   terbuka dengan genre musik lainnya. Musik jazz…
 publishDate: 2022-05-12T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tokoh-musik-jazz-legendaris-dan-masa-kini-di-indonesia/hero.png
 heroAlt: Tokoh Musik Jazz Legendaris dan Masa Kini di Indonesia
 tags: []
 category: essay
@@ -19,7 +19,7 @@ Di kalangan penikmat musik, genre musik jazz kerap menjadi salah satu musikl fav
 
 Berbicara tentang musik jazz di Indonesia, genre musik ini berkembang di Indonesia dengan sejarah yang panjang. Musik jazz pertama kali masuk ke Indonesia pada tahun 1919 melalui The American Jazz Band. Musik jazz semakin populer di Indonesia dan mengalami puncak kepopulerannya di tahun 1950an. Kemudian seiring berjalan waktu, musik jazz terus berkembang di Indonesia hingga tahun 1980 an melalui hadirnya musisi jazz kondang ternama di Indonesia.
 
-![musik jazz](./images/musik-jazz.png)
+![musik jazz](https://img.erland.me/blog/tokoh-musik-jazz-legendaris-dan-masa-kini-di-indonesia/images/musik-jazz.png)
 
 Walau musik jazz ini sempat meredup popularitasnya dalam beberapa dekade setelahnya, tetapi dalam beberapa tahun terakhir ini ternyata musik jazz kembali menggeliat di industri musik tanah air.
 

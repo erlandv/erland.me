@@ -9,7 +9,7 @@ excerpt: >-
   pernah protes pada Tuhan atas takdir yang dimiliki? Bisa dipastikan kamu telah
   mengalami Quarter Life Crisis. Mungkin juga…
 publishDate: 2019-01-08T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/menghadapi-quarter-life-crisis/hero.png
 heroAlt: Menghadapi Quarter Life Crisis
 tags: []
 category: essay
@@ -26,7 +26,7 @@ Bisa dipastikan kamu telah mengalami _Quarter Life Crisis_. Mungkin juga kamu s
 
 Mari kita bahas mengenai _Quarter Life Crisis_ ini. Dikutip dari <a href="http://id.wikipedia.org/">Wikipedia</a>, bahwa _Quarter Life Crisis_ merupakan periode kehidupan mulai dari usia 20-an hingga 30-an, di mana seseorang mulai merasa ragu tentang kehidupan mereka sendiri yang mengakibatkan stress karena ini merupakan bagian dari transisi menuju dewasa.
 
-![](./images/quater-life-crisis.jpg)
+![](https://img.erland.me/blog/menghadapi-quarter-life-crisis/images/quater-life-crisis.jpg)
 
 Akan ada banyak sekali penyebab _Quarter Life Crisis_ ini. Seperti galau masalah pendidikan, galau mengenai pekerjaan, galau dalam urusan cinta, galau dalam masalah yang ada pada keluarga, galau terhadap masa depan yang belum pasti, galau terhadap tujuan hidup, galau terhadap idealisme yang tidak sesuai dengan realita, galau terhadap jumlah temanmu yang semakin lama semakin berkurang, dan lain sebagainya.
 

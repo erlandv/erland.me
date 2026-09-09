@@ -9,7 +9,7 @@ excerpt: >-
   atau berlebihan. Seolaholah aku membuat kesan bahwa ramalan zodiak itu
   memiliki mantra yang membuat terjatuh ke dalam…
 publishDate: 2020-10-22T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/terjebak-tipu-daya-zodiak/hero.png
 heroAlt: Terjebak Tipu Daya Zodiak
 tags: []
 category: essay

@@ -9,7 +9,7 @@ excerpt: >-
   memang membahas topik crypto, selalu ada saja pembahasannya di setiap obrolan
   dengan kerabat dan temanteman saat sedang…
 publishDate: 2022-04-05T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/token-aha-cryptocurrency-berkonsep-eco-friendly/hero.png
 heroAlt: 'Token AHA, Cryptocurrency Berkonsep Eco Friendly'
 tags:
   - crypto
@@ -21,7 +21,7 @@ Kembali lagi kita membahas cryptocurrency! Seolah tak pernah ada habisnya memang
 
 Saat ini ada salah satu token cryptocurrency asal Indonesia yang sedang ramai diperbincangkan, namanya Alam Hijau Anagata, atau nama ringkasnya adalah AHA. Yang menarik dari token crypto ini adalah token ini dirancang khusus untuk mendukung industri [crypto](/blog/tag/crypto/) agar lebih ramah lingkungan dengan mengusung misi mengurangi emisi karbon. Hal ini tentu sangat bagus mengingat memang kegiatan dalam penambangan cryptocurrency itu membutuhkan energi dan daya listrik yang sangat besar.
 
-![token aha](./images/token-aha.png)
+![token aha](https://img.erland.me/blog/token-aha-cryptocurrency-berkonsep-eco-friendly/images/token-aha.png)
 
 Inilah yang membuat token crypto ini populer, project-nya sangat kontras dengan apa yang selama ini dihasilkan dari kegiatan crypto. Di saat banyak yang mencemari lingkungan dengan aktivitas yang menghasilkan emisi karbon, polusi udara, limbah, dan sebagainya, tetapi token AHA ini justru memiliki misi untuk melestarikan lingkungan. Ingin tau lebih lanjut tentang token AHA? Mari kita bahas!
 

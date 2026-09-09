@@ -7,7 +7,7 @@ excerpt: >-
   Mengulas fitur-fitur laptop ASUS Vivobook S14 M3407HA,
   sebuah laptop AI 2025 dengan teknologi AI modern.
 publishDate: 2025-05-28T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/laptop-ai-2025-asus-vivobook-s14/hero.png
 heroAlt: Laptop AI 2025 ASUS Vivobook S14
 tags: []
 category: reviews
@@ -22,7 +22,7 @@ Dari luar, laptop ini memang terlihat simpel dan clean. Tapi begitu aku mulai me
 
 Pertama kali unboxing, aku langsung suka dengan desain bodinya yang sleek dan ringan. Bobotnya cuma sekitar 1,4 kg dan ketebalan sekitar 1,39 cm, super tipis buat ukuran laptop berperforma tinggi. Cocok banget buat aku yang sering kerja mobile, entah itu ngoding di coffee shop, edit presentasi di coworking space, atau sekadar streaming Netflix di kamar.
 
-![Laptop AI 2025 ASUS Vivobook S14 M3407HA](./images/laptop-ai-2025-asus-vivobook-s14-m3407ha.webp 'Laptop AI 2025 ASUS Vivobook S14 M3407HA')
+![Laptop AI 2025 ASUS Vivobook S14 M3407HA](https://img.erland.me/blog/laptop-ai-2025-asus-vivobook-s14/images/laptop-ai-2025-asus-vivobook-s14-m3407ha.webp 'Laptop AI 2025 ASUS Vivobook S14 M3407HA')
 
 Material bodinya terasa solid dan premium, apalagi dengan pilihan warna yang stylish. Keyboard-nya nyaman buat ngetik cepat, aku bahkan nulis artikel [blog](/blog/) ini pakai laptop ini juga. LED backlit keyboard-nya bikin kerja malam hari juga tetap nyaman.
 
@@ -44,7 +44,7 @@ Hasilnya? Aku bisa ngerjain project AI lokal pakai Python dan TensorFlow, dan pe
 
 Serius, ini salah satu fitur yang bikin aku betah berlama-lama depan layar. ASUS Vivobook S14 dibekali layar 14 inci dengan resolusi 2.8K OLED, warna yang ditampilkan tajam banget, detailnya juga luar biasa.
 
-![ASUS Vivobook S14 M3407HA](./images/asus-vivobook-s14-m3407ha.webp 'ASUS Vivobook S14 M3407HA')
+![ASUS Vivobook S14 M3407HA](https://img.erland.me/blog/laptop-ai-2025-asus-vivobook-s14/images/asus-vivobook-s14-m3407ha.webp 'ASUS Vivobook S14 M3407HA')
 
 Refresh rate-nya 120Hz, jadi scrolling pun super mulus. Ini kerasa banget pas lagi edit video, scroll timeline coding, atau cuma nonton YouTube. Sertifikasi layar seperti 100% DCI-P3 dan Pantone Validated bikin laptop ini cocok juga buat kamu yang kerja di bidang desain grafis atau content creation.
 
@@ -68,7 +68,7 @@ Sensor fingerprint juga bikin proses login lebih cepat dan aman.
 
 ## ASUS Vivobook S14, Laptop AI 2025 yang Layak Dimiliki
 
-![ASUS Vivobook S14](./images/laptop-ai-2025-asus-vivobook-s14.webp 'ASUS Vivobook S14')
+![ASUS Vivobook S14](https://img.erland.me/blog/laptop-ai-2025-asus-vivobook-s14/images/laptop-ai-2025-asus-vivobook-s14.webp 'ASUS Vivobook S14')
 
 Setelah pakai selama beberapa minggu, aku bisa bilang ASUS Vivobook S14 ini bukan cuma laptop biasa. Ia adalah kombinasi antara desain stylish, performa tinggi, fitur AI canggih, dan mobilitas luar biasa.
 

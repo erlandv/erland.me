@@ -9,7 +9,7 @@ excerpt: >-
   Pernah kepikiran nggak, kenapa bapakbapak betah banget nongkrong di pos ronda
   main catur? Ternyata konon katanya permainan…
 publishDate: 2021-11-12T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/mengasah-otak-dengan-game/hero.png
 heroAlt: Tips Mengasah Otak yang Menyenangkan dengan Game
 tags: []
 category: essay
@@ -64,7 +64,7 @@ Kartu yang paling rendah bisa dipindahkan ke bawahnya kartu yang lebih tinggi, t
 
 Nah, untuk kalian yang mau bermain game Solitaire, saya punya rekomendasi tempat bermain Solitaire yang menyenangkan. Ada sebuah website yang menyediakan tempat bermain Solitaire, kita bisa bermain game online secara langsung di browser, tanpa harus instal aplikasi apapun. Tidak hanya itu, kita juga bisa memainkannya di PC/Laptop dan juga di perangkat smartphone. Website tersebut bernama <a href="https://www.solitaire.org">solitaire.org</a>.
 
-![](./images/solitaire-online-game.png 'www.solitaire.org')
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/solitaire-online-game.png 'www.solitaire.org')
 
 ## Main Game Asah Otak di solitaire.org
 
@@ -72,31 +72,31 @@ Solitaire.org ini adalah website dimana kita bisa main permainan solitaire secar
 
 ### Daily Word Search Game
 
-![](./images/daily-word-search-game.jpg)
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/daily-word-search-game.jpg)
 
 Untuk yang suka dengan permainan kata-kata, mencari kata, menyusun kata, ada game mengeja dan mencari kata sebanyak-banyaknya. Misalkan kayak Daily Word Search. Di sini ada kotak yang berisi huruf-huruf acak, lalu kita disuruh mencari kata yang disediakan, katanya bisa horizontal, vertikal, atau diagonal. Game ini bisa dimainkan di <a href="https://www.solitaire.org/daily-word-search/">https://www.solitaire.org/daily-word-search/</a>
 
 ### Mahjong
 
-![](./images/game-mahjong.jpg)
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/game-mahjong.jpg)
 
 Mahjong! Siapa yang nggak tahu permainan ini. Permainan yang sederhana, cuma sekadar cocok-cocokan biji Mahjong. Sederhana tapi nggak gampang! Karena dibutuhkan kejelian untuk menemukan biji Mahjong yang sama di antara segambreng biji Mahjong yang ditumpuk dalam beragam bentuk. Belum lagi dibatasi waktu, eh tapi gambar di biji Mahjongnya bisa diganti-ganti lho, cobain aja. Kalian bisa klik <a href="https://www.solitaire.org/daily-mahjong/">https://www.solitaire.org/daily-mahjong/</a> untuk memainkan Mahjong.
 
 ### Zuma Ball
 
-![](./images/game-zuma-online.jpg)
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/game-zuma-online.jpg)
 
 Game asah otak lain yang bisa dimainkan di solitaire.org ini adalah Zuma! Deretan gundu beraneka warna, tinggal ditembak-tembakkin doang supaya habis di jalan dan nggak nyampe ke ujung. Game ini santai banget, bahkan bisa dimainin pakai sebelah tangan. Daripada bertepuk sebelah tangan, mending main game sebelah tangan, betul? Untuk bermain game Zuma Ball silakan klik tautan berikut <a href="https://www.solitaire.org/zuma-ball/">https://www.solitaire.org/zuma-ball/</a>
 
 ### China Hidden Tample Game
 
-![](./images/china-hidden-tample-game.jpg)
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/china-hidden-tample-game.jpg)
 
 Kamu merasa jeli? Kamu merasa punya mata setajam elang? Maka kamu bisa coba main game berjenis hidden games, salah satunya adalah China Hidden Temple. Permainannya sederhana, cuma nyari benda, angka, dsb yang tersembunyi. Tapi apakah segampang itu? Tentu tidak! Karena ada waktunya, dan setiap kamu salah atau asal klik, dikenakan penalti berupa berkurangnya waktu. Cobain deh keseruan main hidden game dengan klik tautan berikut <a href="https://www.solitaire.org/china-temple/">https://www.solitaire.org/china-temple/</a>
 
 ### Chess Grandmaster
 
-![](./images/chess-grandmaster.jpg)
+![](https://img.erland.me/blog/mengasah-otak-dengan-game/images/chess-grandmaster.jpg)
 
 Last but not least, karena tadi udah disebut di atas. Tentunya kita punya Chess Grandmaster game! Kita bisa bertanding catur lawan komputer. Menariknya, ada dua jenis permain yang bisa dimainkan. Catur yang biasa, dan puzzle. Puzzle ini adalah dimana kita akan menghadapi tantangan untuk menyelesaikan pertandingan dalam 2, 3, 4 langkah. Merasa jago main catur? Coba deh main catur di <a href="https://www.solitaire.org/chess-grandmaster/">https://www.solitaire.org/chess-grandmaster/</a>
 

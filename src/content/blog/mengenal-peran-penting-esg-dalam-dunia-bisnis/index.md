@@ -8,7 +8,7 @@ excerpt: >-
   semata. Konsep sustainability telah menjadi bagian penting dari bisnis yang
   bertanggung jawab dan dapat bertahan dalam…
 publishDate: 2023-11-06T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/mengenal-peran-penting-esg-dalam-dunia-bisnis/hero.png
 heroAlt: Mengenal Peran Penting ESG Dalam Dunia Bisnis
 tags: []
 category: essay
@@ -37,7 +37,7 @@ Komponen "_Governance_" dari ESG fokus pada bagaimana perusahaan dikelola dan di
 
 ## Mengapa ESG Penting dalam Bisnis?
 
-![](./images/business.webp 'Source: freepik.com/free-photo/business-partners-handshake-global-corporate-with-technology-concept_15556737.htm')
+![](https://img.erland.me/blog/mengenal-peran-penting-esg-dalam-dunia-bisnis/images/business.webp 'Source: freepik.com/free-photo/business-partners-handshake-global-corporate-with-technology-concept_15556737.htm')
 
 ESG memiliki peran penting dalam dunia bisnis karena dampaknya yang luas. Berikut beberapa alasan mengapa ESG menjadi semakin relevan:
 

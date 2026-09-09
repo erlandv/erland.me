@@ -8,7 +8,7 @@ excerpt: >-
   orang pemain, tetapi di dalam sepak bola terdapat penghargaan bagi individu.
   Penghargaan diberikan kepada salah satu pemain…
 publishDate: 2022-05-08T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/penghargaan-paling-bergengsi-di-dunia-sepak-bola/hero.png
 heroAlt: Penghargaan Paling Bergengsi di Dunia Sepak Bola
 tags: []
 category: essay
@@ -29,7 +29,7 @@ Penggemar sepak bola mana yang tidak pernah mendengar nama ini? Menurut saya, Ba
 
 Menurut sejarah, Ballon d'Or pertama kali diadakan pada tahun 1956 dan digagas oleh wartawan asal Prancis, Gabriel Hanot. Tolok ukurnya ditentukan oleh voting dari para wartawan. Pemain sepak bola pertama yang mendapatkan penghargaan Ballon d'Or saat itu adalah Stanley Matthews, seorang pemain asal Inggris. Stanley Matthews mendapatkan Ballon d'Or edisi pertama setelah mengalahkan dua pesaingnya, yaitu Alfredo di Stefano dan Raymond Kopa.
 
-![penghargaan sepak bola](./images/penghargaan-sepak-bola.png)
+![penghargaan sepak bola](https://img.erland.me/blog/penghargaan-paling-bergengsi-di-dunia-sepak-bola/images/penghargaan-sepak-bola.png)
 
 Hingga kemudian Ballon d'Or pun menjadi ajang <a href="https://www.guinness.id/temu-bola/article/penyuka-bola-ketahui-3-penghargaan-paling-bergengsi-di-dunia-sepak-bola">penghargaan paling bergengsi di dunia sepak bola</a> kepada pemain yang diselenggarakan rutin setiap tahun. Pada awalnya, penghargaan Ballon d'Or ini hanya diperuntukan kepada pemain sepak bola Eropa, sehingga pemain-pemain legendaris asal benua lain seperti Pele dan Diego Maradona tidak bisa mendapatkan penghargaan ini. Hingga akhirnya pada tahun 1995, penghargaan Ballon d'Or bisa diperebutkan juga oleh pemain non Eropa. Dan pemain non Eropa pertama yang mendapatkan Ballon d'Or adalah George Weah.
 

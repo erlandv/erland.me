@@ -9,7 +9,7 @@ excerpt: >-
   bilang nanti akan datang anaknya bos orang tua kami. Katanya dia masih
   seumuran dengan kami. Tempat tinggalnya di Jakarta,…
 publishDate: 2017-12-24T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-6/hero.png
 heroAlt: Sahabat Awan (Bagian 6)
 tags: []
 category: story
@@ -130,7 +130,7 @@ _“Kalau sudah sampai rumah Dian, kita minjam uang Dian dulu. Ingat kata bu gur
 
 Kami segera menuju ke rumah Dian. Aku masih berharap semoga warga belum bisa menemukan gubuk nenek. Sesampainya di rumah Dian, aku membujuknya membayar ojek. Sebenarnya dia tidak mau, tapi karena bujukanku dan karena embel-embel ketua kelas, dia rela memecahkan tabungannya. Kami pergi ke rumah ibu Dewi dengan sepeda. Aku kayuh sepeda secepatnya, sementara Pahing duduk di belakang dengan santainya. Pria yang satu ini diyakini saat dewasa tidak akan menjadi pria yang gagah. Pria yang satu ini sudah kelas 6 dan sudah disunat tapi belum bisa mengendarai sepeda.
 
-![](./images/cerita-fiksi-sahabat-awan-kalimantan.jpg)
+![](https://img.erland.me/blog/sahabat-awan-6/images/cerita-fiksi-sahabat-awan-kalimantan.jpg)
 
 Setelah bertemu dengan ibu Dewi, aku menjelaskan semua kejadiannya. Kami pun langsung berangkat kembali ke mess. Aku tanpa sadar telah meninggalkan Dian begitu saja sampai lupa mengucapkan terima kasih. Saat di speedboat, ternyata ada pandangan pertama pada waktu yang tidak sempurna. Bang Usup jatuh cinta pada pesona ibu Dewi. Aku dan Pahing tersenyum melihat gelagat yang aneh dari Bang Usup. Sampai di mess, bang Usup juga tidak bisa melepaskan pandangannya dari bu Dewi.
 

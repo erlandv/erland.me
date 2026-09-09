@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Berikut ini rekomendasi aplikasi desain grafis pilihan terbaik untuk PC gratis dan berbayar, software desain grafis paling populer
 publishDate: 2021-11-16T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/aplikasi-desain-grafis-terbaik/hero.png
 heroAlt: 10 Aplikasi Desain Grafis Terbaik yang Menjadi Pilihan
 tags: []
 category: essay
@@ -16,7 +16,7 @@ Selain perlu memahami prinsip [dasar desain grafis](/blog/dasar-desain-grafis/),
 
 Sekarang ini, banyak aplikasi yang menawarkan berbagai fasilitas yang menarik. Sebelum menentukan aplikasi desain yang hendak digunakan, Anda harus mempelajari masing-masing aplikasinya terlebih dahulu agar dapat memenuhi kebutuhan Anda dalam desain.
 
-![aplikasi desain grafis](./images/aplikasi-desain-grafis.png)
+![aplikasi desain grafis](https://img.erland.me/blog/aplikasi-desain-grafis-terbaik/images/aplikasi-desain-grafis.png)
 
 Berikut ini 10 aplikasi desain grafis terbaik tahun 2021 yang bisa dijadikan andalan.
 

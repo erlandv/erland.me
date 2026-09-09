@@ -9,7 +9,7 @@ excerpt: >-
   database, dan bahasa pemprograman yang akan digunakan di website kalian.
   Dengan menggunakan VPS, kalian punya kebebasan penuh…
 publishDate: 2021-09-09T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/install-nginx-mysql-php/hero.png
 heroAlt: 'Install Nginx, MySQL, PHP di VPS Ubuntu'
 tags: []
 category: info
@@ -46,7 +46,7 @@ Tunggu sampai proses instalasi selesai.
 
 Jika proses install berjalan lancar, kalian bisa buka IP VPS di browser dan hasilnya akan terdapat tampilan halaman pemberitahuan tentang Nginx yang berhasil diinstal seperti gambar di bawah ini.
 
-![welcome to nginx](./images/welcome-to-nginx.jpg 'Berhasil install Nginx')
+![welcome to nginx](https://img.erland.me/blog/install-nginx-mysql-php/images/welcome-to-nginx.jpg 'Berhasil install Nginx')
 
 ## Install PHP-FPM di Ubuntu
 

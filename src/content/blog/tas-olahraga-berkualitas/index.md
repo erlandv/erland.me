@@ -9,7 +9,7 @@ excerpt: >-
   merek sportwear yang menawarkan kualitas bagus dari berbagai produknya,
   sehingga tas yang didapatkan juga akan mempunyai…
 publishDate: 2022-06-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tas-olahraga-berkualitas/hero.png
 heroAlt: Pertimbangan Ketika Akan Membeli Tas Olahraga Berkualitas
 tags: []
 category: essay
@@ -24,7 +24,7 @@ Merek seperti Nike, Adidas, Puma, dan merek lainnya bisa menjamin kualitas tas o
 
 Tas olahraga berkualitas akan memberikan kenyamanan ketika digunakan. Kenyamanan tersebut juga dipengaruhi dari model tas olahraga yang akan dipilih. Di mana untuk pilihan model tas yang tersedia di pasaran biasanya ada dua jenis tas olahraga.
 
-![](./images/tas-olahraga.webp)
+![](https://img.erland.me/blog/tas-olahraga-berkualitas/images/tas-olahraga.webp)
 
 Pertama adalah tas duffle yang merupakan tas untuk gym. Bagi yang suka gym bisa memilih tas ini yang mempunyai cara dijinjing ataupun digantungkan pada pundak. Keuntungan model tas gym ini mempunyai kapasitas yang besar dan bisa digunakan untuk aktivitas lainnya selain olahraga.
 
@@ -34,7 +34,7 @@ Jenis tas kedua yaitu tas punggung atau ransel untuk olahraga. Tas punggung ini 
 
 Tips untuk membeli tas olahraga yang mempunyai kualitas bagus juga dari ukurannya. Bagi yang mempunyai banyak peralatan olahraga atau barang yang dibawa saat berolahraga, maka sebaiknya pilih tas olahraga yang mempunyai kapasitas besar. Sehingga tas tersebut akan muat untuk tempat barang agar bisa masuk ke dalam tas dan bisa tertata dengan rapi.
 
-![tas olahraga](./images/tas-olahraga.jpg)
+![tas olahraga](https://img.erland.me/blog/tas-olahraga-berkualitas/images/tas-olahraga.jpg)
 
 Tawaran kapasitas tas olahraga juga beragam yaitu mulai dari 15 liter hingga 120 liter, ukuran tersebut bisa disesuaikan dengan kebutuhan sehingga mendapatkan tas olahraga yang tidak terlalu besar atau justru terlalu kecil. Pastikan kapasitas tas olahraga yang dipilih muat untuk tempat handuk, sepatu olahraga, baju ganti, peralatan mandi, tempat minum, dan juga barang lainnya yang dibawa saat olahraga.
 

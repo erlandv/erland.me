@@ -9,7 +9,7 @@ excerpt: >-
   memiliki banyak kompetitor atau pesaing di dalamnya. Ada banyak produkproduk
   fashion yang bermunculan dengan berbagai ciri khas…
 publishDate: 2020-12-06T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/membuat-brand-fashion-dengan-jasa-print-kain/hero.png
 heroAlt: Membuat Brand Fashion dengan Jasa Print Kain
 tags: []
 category: essay
@@ -22,7 +22,7 @@ Berbagai macam inovasi dan modifikasi dilakukan pada produk-produk _fashion_. Mi
 
 Membuat suatu _brand_ atau produk memang bukan merupakan sesuatu yang dianggap sepele, tapi bukan berarti hal tersebut tidak bisa kita lakukan. Bahkan, di zaman sekarang ini, hal tersebut kini sudah bisa dilakukan oleh siapa saja yang berniat melakukannya.
 
-![Membuat Brand Fashion dengan Jasa Print Kain](./images/membuat-brand-fashion-dengan-jasa-print-kain.jpg)
+![Membuat Brand Fashion dengan Jasa Print Kain](https://img.erland.me/blog/membuat-brand-fashion-dengan-jasa-print-kain/images/membuat-brand-fashion-dengan-jasa-print-kain.jpg)
 
 ## Jasa Print Kain
 

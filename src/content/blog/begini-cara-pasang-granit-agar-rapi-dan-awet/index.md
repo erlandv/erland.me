@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Cara memasang granit itu tidak mudah, tapi tidak terlalu sulit juga. Ikuti langkah berikut ini untuk memasang batu alam ini dengan rapi dan tahan lama.
 publishDate: 2024-05-03T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/begini-cara-pasang-granit-agar-rapi-dan-awet/hero.png
 heroAlt: Begini Cara Pasang Granit agar Rapi dan Awet
 tags: []
 category: info
@@ -16,7 +16,7 @@ Granit atau granum telah menjadi salah satu bahan bangunan yang paling populer d
 
 Namun, agar hasilnya memuaskan dan tahan lama, penting untuk memasang granum dengan benar. Artikel ini akan membahas cara pasang agar rapi dan awet, serta mengapa Anda harus mempertimbangkan batu alam ini dalam proyek desain Anda.
 
-![](./images/pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22699397.htm')
+![](https://img.erland.me/blog/begini-cara-pasang-granit-agar-rapi-dan-awet/images/pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22699397.htm')
 
 ## Tips Pasang Granit agar Rapi dan Awet
 
@@ -44,7 +44,7 @@ Sebelum memulai pemasangan, tentukan titik awal yang tepat untuk memulai pemasan
 
 Tarik benang untuk membuat garis lurus di sepanjang area yang akan dipasangi granum. Pastikan benang tersebut sejajar dengan permukaan lantai. Kemudian, gunakan leveling untuk memastikan bahwa benang tersebut berada pada tingkat yang sama dengan permukaan lantai.
 
-![](./images/cara-pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22698700.htm')
+![](https://img.erland.me/blog/begini-cara-pasang-granit-agar-rapi-dan-awet/images/cara-pasang-granit.webp 'Source: https://www.freepik.com/free-photo/tiler-working-renovation-apartment_22698700.htm')
 
 ### Periksa Gambar Pola
 
