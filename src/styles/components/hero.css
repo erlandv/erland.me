@@ -1,6 +1,7 @@
 .hero-image {
   display: block;
   width: clamp(220px, 45vw, 320px);
+  aspect-ratio: 1 / 1;
   height: auto;
   border-radius: 18px;
   margin: 0 auto 1.5rem;

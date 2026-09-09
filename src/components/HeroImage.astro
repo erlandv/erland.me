@@ -23,6 +23,8 @@ import '@/styles/components/hero.css';
 interface Props {
   image: HeroSource;
   alt: string;
+  width?: number;
+  height?: number;
   loading?: 'eager' | 'lazy';
   sizes?: string;
   widths?: number[];
@@ -32,6 +34,8 @@ interface Props {
 const {
   image,
   alt,
+  width = 512,
+  height = 512,
   loading = 'eager',
   sizes = '(max-width: 640px) min(60vw, 320px), min(45vw, 320px)',
   widths = [180, 220, 270, 320, 480, 640],
@@ -45,6 +49,8 @@ const {
     <img
       src={image}
       alt={alt}
+      width={width}
+      height={height}
       loading={loading}
       fetchpriority={fetchpriority}
       class='hero-image'
