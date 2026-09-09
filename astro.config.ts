@@ -192,28 +192,9 @@ export default defineConfig({
     },
   },
 
-  // Image optimization
-  // Note: AVIF generation disabled via AVIF=false in build scripts for speed
-  // AVIF encoding is ~6s per image; WebP provides 99% of benefits with 10x faster build
+  // Image service: all media is offloaded to Cloudflare R2, no local processing needed
   image: {
-    // Optional: switch image service via env to avoid native Sharp issues on some hosts
-    // IMAGE_SERVICE options:
-    // - "squoosh" (WASM) via deep entrypoint (supported)
-    // - "passthrough" via passthroughImageService() (no transforms, Astro-compatible fallback)
-    // - unset => default Sharp (if available)
-    service:
-      process.env.IMAGE_SERVICE === 'squoosh'
-        ? { entrypoint: 'astro/assets/services/squoosh' }
-        : process.env.IMAGE_SERVICE === 'passthrough'
-          ? passthroughImageService()
-          : undefined,
-    domains: [validatedEnv.SITE_DOMAIN],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: validatedEnv.SITE_DOMAIN,
-      },
-    ],
+    service: passthroughImageService(),
   },
 
   // Scoped style strategy
