@@ -20,7 +20,7 @@
  * @param {Object} props
  * @param {string} props.href - Post URL (absolute or relative path)
  * @param {string} props.title - Post title displayed in card header
- * @param {ImageMetadata | null} [props.hero] - Hero image from content collection (optional)
+ * @param {HeroSource | null} [props.hero] - Hero image: R2 URL string or local ImageMetadata (optional)
  * @param {string} props.alt - Alt text for hero image (required for accessibility)
  * @param {string | null} [props.category] - Post category (optional, generates link to category page)
  * @param {string | null} [props.dateLabel] - Formatted date string (optional, e.g., "Jan 15, 2024")
@@ -30,13 +30,18 @@ import Icon from '@components/Icon.astro';
 import { slugifyCategory } from '@lib/content/blog';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { getCardImageConfig, DEFAULT_HERO_PATH } from '@lib/content/images';
+import {
+  getCardImageConfig,
+  DEFAULT_HERO_PATH,
+  isRemoteHero,
+  type HeroSource,
+} from '@lib/content/images';
 import styles from './post-card.module.css';
 
 interface Props {
   href: string;
   title: string;
-  hero?: ImageMetadata | null;
+  hero?: HeroSource | null;
   alt: string;
   category?: string | null;
   dateLabel?: string | null;
@@ -60,14 +65,26 @@ const { widths, sizes } = getCardImageConfig();
     <div class={styles['post-card__thumb']}>
       {
         hero ? (
-          <Image
-            src={hero}
-            alt={alt}
-            loading='lazy'
-            widths={widths}
-            sizes={sizes}
-            class={styles['post-card__img']}
-          />
+          isRemoteHero(hero) ? (
+            // Remote R2 URL — plain img tag
+            <img
+              src={hero}
+              alt={alt}
+              loading='lazy'
+              class={styles['post-card__img']}
+              decoding='async'
+            />
+          ) : (
+            // Local ImageMetadata — Astro optimizes
+            <Image
+              src={hero as ImageMetadata}
+              alt={alt}
+              loading='lazy'
+              widths={widths}
+              sizes={sizes}
+              class={styles['post-card__img']}
+            />
+          )
         ) : (
           <img
             src={DEFAULT_HERO_PATH}
