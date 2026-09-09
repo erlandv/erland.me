@@ -9,6 +9,7 @@ node_modules/
 
 # generated static files
 AGENTS.md
+CLAUDE.md
 public/robots.txt
 public/ads.txt
 public/search-index.json
@@ -59,6 +60,7 @@ coverage/
 .turbo/
 .npm/
 .yarn-integrity
+.wrangler/
 
 # IDEs and editors
 .vscode/
