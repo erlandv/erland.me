@@ -48,7 +48,7 @@ const logger = (() => {
 
 // Bump this value to force clients to refresh caches when deploying breaking changes.
 // Increment manually (e.g., 'v2' or a timestamp/sha) on deploy.
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `erland-me-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 
@@ -120,8 +120,13 @@ self.addEventListener('fetch', event => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Skip cross-origin requests (analytics, ads, etc)
-  if (url.origin !== location.origin) {
+  // Handle same-origin requests or allowed CDN image assets (e.g. img.erland.me)
+  const isSameOrigin = url.origin === location.origin;
+  const isCdnImage =
+    (url.hostname === 'img.erland.me' || url.hostname.endsWith('.r2.dev')) &&
+    isImage(url);
+
+  if (!isSameOrigin && !isCdnImage) {
     return;
   }
 
@@ -171,6 +176,12 @@ async function cacheFirstStrategy(request, maxAge = CACHE_MAX_AGE.static) {
   const cached = await caches.match(request);
 
   if (cached) {
+    // Opaque responses (cross-origin without CORS) cannot expose headers;
+    // serve directly from cache
+    if (cached.type === 'opaque') {
+      return cached;
+    }
+
     // Check if cache is still fresh (may be precached without our header)
     const cachedDate = new Date(cached.headers.get('sw-cached-date') || 0);
     const now = new Date();
@@ -185,8 +196,11 @@ async function cacheFirstStrategy(request, maxAge = CACHE_MAX_AGE.static) {
   try {
     const response = await fetch(request);
 
-    // Cache successful responses (store in runtime cache)
-    if (response.ok) {
+    // Cache successful responses or opaque responses (e.g. cross-origin CDN images)
+    if (response.type === 'opaque') {
+      const runtimeCache = await caches.open(RUNTIME_CACHE);
+      runtimeCache.put(request, response.clone());
+    } else if (response.ok) {
       const responseToCache = response.clone();
 
       // Read body to make a fresh Response we can modify headers on.
@@ -284,7 +298,8 @@ function isImage(url) {
     '.avif',
     '.ico',
   ];
-  return imageExtensions.some(ext => url.pathname.endsWith(ext));
+  const pathname = url.pathname.toLowerCase();
+  return imageExtensions.some(ext => pathname.endsWith(ext));
 }
 
 /**
