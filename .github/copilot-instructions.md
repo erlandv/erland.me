@@ -25,14 +25,14 @@ import { z } from 'astro/zod';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
-  schema: ({ image }) => z.object({/* ... */}),
+  schema: z.object({/* ... */}),
 });
 ```
 
 ### Content Collections System
 
 - **Collections**: Three collections in `src/content/` — `blog/`, `downloads/`, `portfolio/` — each with frontmatter validated by schemas in `content.config.ts`
-- **Blog & Downloads**: Markdown files loaded via `glob()` loader; supports hero images via `image()` schema helper (paths relative to markdown)
+- **Blog & Downloads**: Markdown files loaded via `glob()` loader; hero images use absolute Cloudflare R2 URLs (`z.url()`) hosted on `img.erland.me`
 - **Portfolio**: JSON/YAML files loaded via `glob()` loader for structured project metadata (no markdown rendering)
 - **Entry Routing**: Use `entry.id` for dynamic routes (e.g., `/blog/${entry.id}/`)
 - **Search index**: Client-side fuzzy search powered by Fuse.js; **always regenerate** via `npm run generate:search` after content changes
@@ -75,7 +75,7 @@ const blog = defineCollection({
 - **Metadata generation**: `predev` hook auto-runs scripts before `npm run dev`; `build` commands regenerate robots.txt, ads.txt, search-index.json, sitemaps
 - **Sitemap structure**: Custom sitemaps (`sitemap_index.xml`, `post-sitemap.xml`, `page-sitemap.xml`) for GSC backward compatibility; generated via `scripts/generate-sitemap.mjs` post-build; **only generated in production environment**
 - **Environment-aware**: Use `import.meta.env.SITE` (Astro components), `process.env.SITE_URL` (config files), or `SITE_URL` env var
-- **Asset compression**: `@playform/compress` integration handles production minification (CSS, HTML, JS, SVG, JSON); AVIF disabled in production builds via `AVIF=false` for ~10s total build time (optimal for 126+ pages)
+- **Asset compression**: `@playform/compress` integration handles production minification (CSS, HTML, JS, SVG, JSON); content media is offloaded to Cloudflare R2 for ~2-3s total build time (optimal for 138+ pages)
 
 ### Environment Validation System
 
@@ -100,10 +100,10 @@ const blog = defineCollection({
 
 **Build Commands**:
 
-- `npm run build:dev` - Development mode build with AVIF images + full asset processing
-- `npm run build` - Production mode with `AVIF=false` for optimized ~10s build time
+- `npm run build:dev` - Development mode build (relaxed validation, local development)
+- `npm run build` - Production mode build with fresh metadata generation
 - `npm run build:clean` - Force clean `dist/` before build (production optimized)
-- `npm run dev` - Always runs in development mode with full image formats
+- `npm run dev` - Dev server with hot reload
 
 **Validation Features**:
 
@@ -116,8 +116,8 @@ const blog = defineCollection({
 
 **Build Performance**:
 
-- **AVIF disabled in production** via `AVIF=false` environment variable (production builds: ~10s, dev builds: ~20s)
-- Sharp optimization: WebP format provides 99% of AVIF benefits with 10x faster encoding
+- **Media offloaded to Cloudflare R2**: All blog and download images served via CDN (`img.erland.me`) with 1-year immutable caching; zero local image compilation during build (~2-3s build time)
+- **Passthrough image service**: `astro.config.ts` uses `passthroughImageService()`, bypassing native Sharp dependencies during builds
 - @playform/compress reduces build output by ~40% (CSS ~400B, HTML ~610KB, JS ~140KB total)
 
 ## Critical Commands
@@ -210,13 +210,12 @@ template:
 
 ### Image Handling Pattern
 
-Use `resolveHero()` from `src/lib/content/images.ts` to handle both frontmatter images and fallback hero images from glob imports:
+Content images are stored in Cloudflare R2 (`https://img.erland.me/...`). `src/lib/content/images.ts` handles hero and Open Graph image URLs:
 
 ```typescript
 const hero = resolveHero(frontmatter.hero);
-const optimizedHero = hero
-  ? await getOgImageUrl(hero, 1200, 'avif')
-  : undefined;
+// Remote R2 URLs are returned directly as-is without local transformation:
+const ogImage = hero ? await getOgImageUrl(hero) : undefined;
 ```
 
 ## Adding New Content Collections
@@ -229,15 +228,14 @@ import { z } from 'astro/zod';
 
 const newCollection = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/newCollection' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().max(160).optional(),
-      publishDate: z.coerce.date(),
-      hero: image().optional(),
-      draft: z.boolean().default(false),
-      // Add custom fields
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(160).optional(),
+    publishDate: z.coerce.date(),
+    hero: z.url().optional(),
+    draft: z.boolean().default(false),
+    // Add custom fields
+  }),
 });
 
 export const collections = { blog, downloads, portfolio, newCollection };
@@ -644,9 +642,8 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 
 **Build Configuration**:
 
-- `AVIF`: Set to `false` in production scripts for fast WebP-only builds (default behavior)
+- Media Delivery: Cloudflare R2 object storage (`img.erland.me`) with `passthroughImageService()`
 - Minification: Handled by @playform/compress (CSS, HTML, JS, SVG, JSON automatic)
-- Image optimization: Sharp + WebP format (AVIF disabled for speed)
 
 **Validation Rules**:
 
@@ -654,9 +651,3 @@ Update `src/env.d.ts` when adding new environment variables to maintain TypeScri
 - Development mode: Localhost domains supported (localhost, 127.0.0.1)
 - Production mode: Proper domain format enforced for SITE_DOMAIN
 - All URLs validated for proper format, domains validated with regex patterns
-
-### More Info
-
-- Respond primarily in Indonesian. Preserve English for all technical vocabulary.
-- When generating code snippets or related documentation, ensure all comments and documentation are in English.
-- All commit messages and Pull Request (PR) descriptions must be written in English.
