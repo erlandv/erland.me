@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Asuransi Unit Link adalah produk asuransi yang memberikan dua manfaat sekaligus, yakni manfaat proteksi finansial dan manfaat investasi
 publishDate: 2021-12-13T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/asuransi-unit-link/hero.png
 heroAlt: Aman dan Nyaman Bersama Asuransi Unit Link
 tags: []
 category: essay
@@ -20,7 +20,7 @@ Asuransi memiliki fungsi di antaranya adalah untuk mengalihkan resiko. Kita past
 
 Asuransi nggak selalu terpakai. Tapi kan, kita udah keluar biaya. Apakah bisa asuransi itu jadi investasi? Di Asuransi Unit Link, itu bisa! Kenapa bisa jadi investasi? Ya kenapa nggak? Karena dana yang dihimpun dari nasabah akan dikembangkan oleh pihak asuransi, bahkan dana yang dikembangkan asuransi itu bisa menghemat biaya premi setiap bulannya. Jadi selain perasaan aman dan nyaman karena merasa terlindungi, eh dapet cuan juga.
 
-![asuransi unit link prudential](./images/asuransi-unit-link-prudential.png)
+![asuransi unit link prudential](https://img.erland.me/blog/asuransi-unit-link/images/asuransi-unit-link-prudential.png)
 
 Jadi Asuransi Unit Link ini adalah produk asuransi yang memberikan dua manfaat sekaligus, yakni manfaat proteksi finansial dan juga manfaat investasi. Produk ini cocok dipilih untuk kita yang sedang merencanakan masa depan melalui investasi. Apalagi kan, sekarang emang lagi gencar tuh soal investasi yang menyasar anak muda kayak kita.
 

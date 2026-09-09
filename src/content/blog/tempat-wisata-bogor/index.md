@@ -4,7 +4,7 @@ description: Rekomendasi tempat wisata di Bogor terbaru 2020, cek beragam piliha
 excerpt: Rekomendasi tempat wisata di Bogor terbaru 2020, cek beragam pilihan destinasi objek wisata Bogor murah untuk liburan Anda.
 publishDate: 2020-06-29
 updatedDate: 2026-07-26
-hero: ./hero.png
+hero: https://img.erland.me/blog/tempat-wisata-bogor/hero.png
 heroAlt: Rekomendasi Tempat Wisata di Bogor
 tags: []
 category: info
@@ -18,7 +18,7 @@ Iya, Bogor mendapat julukan kota hujan karena.... Ya karena memang sering hujan.
 
 Curah hujan di Bogor begitu tinggi karena letak geografis yang berada di dataran tinggi, rata-rata ketinggian Bogor itu berada di antara 200 hingga 300 meter di atas permukaan laut. Dan juga, Bogor itu berada kaki gunung, seperti diapit oleh dua gunung, yaitu Gunung Salak dan Gunung Gede Pangrango, sehingga membuat kawasan Bogor sering dilanda hujan <a href="https://id.wikipedia.org/wiki/Orografi">orografi</a> (hujan yang terjadi di daerah penggunungan).
 
-![wisata bogor](./images/wisata-bogor.jpg 'Photo by Budhidarma')
+![wisata bogor](https://img.erland.me/blog/tempat-wisata-bogor/images/wisata-bogor.jpg 'Photo by Budhidarma')
 
 Itu sekedar informasi aja, kamu boleh mengabaikannya kalau ngga tertarik. Karena inti tulisan ini memang untuk berbagi info tempat wisata di Bogor.
 

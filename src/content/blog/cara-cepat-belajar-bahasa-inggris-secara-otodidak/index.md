@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Simak tips cara cepat belajar bahasa Inggris secara otodidak yang efektif untuk pemula, tingkatkan skill bahasa Inggris kalian!
 publishDate: 2022-02-21T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-cepat-belajar-bahasa-inggris-secara-otodidak/hero.png
 heroAlt: 4 Cara Cepat Belajar Bahasa Inggris Secara Otodidak
 tags: []
 category: essay
@@ -14,7 +14,7 @@ draft: false
 
 Di era sekarang, bahasa Inggris mempunyai peranan penting dalam hampir semua aspek. Dalam dunia kerja, bahasa Inggris sangat diperlukan untuk meningkatkan skill juga memperluas networking. Dalam dunia bisnis, bahasa Inggris juga akan membantumu untuk meningkatkan bisnis dengan baik. Dengan demikian, maka jangan heran apabila banyak orang sudah mulai belajar bahasa Inggris, entah itu melalui <a href="https://www.ef.co.id/englishfirst/adults/courses/beginner/">kursus bahasa Inggris</a> atau belajar sendiri atau secara autodidak.
 
-![belajar bahasa inggris](./images/belajar-bahasa-inggris.png)
+![belajar bahasa inggris](https://img.erland.me/blog/cara-cepat-belajar-bahasa-inggris-secara-otodidak/images/belajar-bahasa-inggris.png)
 
 Nah, kalau kalian tertarik untuk belajar secara autodidak, kalian bisa mengikuti beberapa tips di bawah ini, nih! Yuk, simak bersama-sama!
 

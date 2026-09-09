@@ -9,7 +9,7 @@ excerpt: >-
   berusaha membawa nenek ke rumah sakit. “Eg, ayo ikut aku.” perintah Dimas.
   “May, kamu usahakan bertiga itu gendong nenek. Dan…
 publishDate: 2018-12-03T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-7/hero.png
 heroAlt: Sahabat Awan (Bagian 7)
 tags: []
 category: story
@@ -52,7 +52,7 @@ Tanganku ditarik paksa oleh Christy. Kami berlari tergesa-gesa menuju mess bang 
 
 Kami pun bergegas ke dermaga dan menjemput bidan di perusahaan sebelah. Si bidan gelagapan dipanggil tengah malam buta. Beliau juga ikut dalam kegaduhan kami. Setelah mengantar bidan ke mess, kamipun melanjutkan perjalanan ke Sampit untuk memberi tahu ibu Dewi. 
 
-![](./images/sahabat-awan-7.jpg)
+![](https://img.erland.me/blog/sahabat-awan-7/images/sahabat-awan-7.jpg)
 
 Di mess terjadi kegaduhan yang luar biasa. Nenek segera diangkut menggunakan klotok. Bidan yang diketahui namanya ibu Fatimah itu juga dibuat bingung ketika mengetahui bahwa pasien yang dihadapinya itu bukanlah orang yang ingin melahirkan. Beberapa penghuni mess juga ikut dalam kelotok itu. Bahkan gerobak jelek itu juga tidak lupa diberondong. Sesampainya di kota, karena tidak ada apapun lagi yang bisa diharapkan. Terpaksa nenek diangkut dengan gerobak lagi. Dengan semangat kebersamaan, para orang tua kami mendorong nenek dengan hati yang was-was tentunya.
 

@@ -7,7 +7,7 @@ excerpt: >-
   Sebuah solusi menghemat pengeluaran untuk biaya hosting menjadi
   lebih murah tanpa mengorbankan performa website.
 publishDate: 2025-07-19T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/menghemat-biaya-hosting-tanpa-mengorbankan-performa/hero.png
 heroAlt: Menghemat Biaya Hosting Tanpa Mengorbankan Performa? Ini Solusinya
 tags: []
 category: essay
@@ -44,7 +44,7 @@ Kontrol yang lebih luas juga bikin kamu bisa atur semuanya sesuai kebutuhan. Ngg
 
 Kalau kamu lagi cari <a href="https://nevacloud.com">vps murah</a> dengan performa tinggi dan layanan yang profesional, <a href="https://nevacloud.com">Nevacloud</a> bisa jadi salah satu opsi yang layak kamu cek. Mereka punya berbagai paket fleksibel yang cocok buat berbagai kebutuhan—dari website pribadi sampai aplikasi skala bisnis.
 
-![](./images/nevacloud.webp)
+![](https://img.erland.me/blog/menghemat-biaya-hosting-tanpa-mengorbankan-performa/images/nevacloud.webp)
 
 ## Kapan Waktunya Pindah ke VPS?
 

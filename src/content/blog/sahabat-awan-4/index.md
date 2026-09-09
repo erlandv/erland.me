@@ -8,7 +8,7 @@ excerpt: >-
   di seluruh dunia. Tapi dari sebuah hukuman itu bisa terbentuk disiplin hidup.
   Namun ada juga orang yang menyalahgunakan…
 publishDate: 2017-04-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-4/hero.png
 heroAlt: Sahabat Awan (Bagian 4)
 tags: []
 category: story
@@ -172,7 +172,7 @@ Begitulah Umaku, cintanya terhadap kampung halaman sangatlah besar. Beliau tidak
 
 Sehabis salat aku mencoba bertanya lagi tentang nenek lampir itu, tapi Uma malah menyuruhku belajar. Sampai nyala lampu menghilang dari pandangan mata, aku masih menyimpan rasa penasaran tentang nenek lampir itu. Besoknya kami pergi memancing ikan untuk dimasukan ke dalam kolam di depan rumah main. Hari itu aku merasa aneh, di dalam otakku bertuliskan nenek lampir dan nenek lampir. Apakah nenek lampir itu nyata atau cuma rekayasa orang tua untuk menakuti anaknya?
 
-![](./images/hutan.jpg)
+![](https://img.erland.me/blog/sahabat-awan-4/images/hutan.jpg)
 
 Sehabis salat aku mencoba bertanya lagi tentang nenek lampir itu, tapi Uma malah menyuruhku belajar. Sampai nyala lampu menghilang dari pandangan mata, aku masih menyimpan rasa penasaran tentang nenek lampir itu. Besoknya kami pergi memancing ikan untuk dimasukan ke dalam kolam di depan rumah main. Hari itu aku merasa aneh, di dalam otakku bertuliskan nenek lampir dan nenek lampir. Apakah nenek lampir itu nyata atau cuma rekayasa orang tua untuk menakuti anaknya?
 

@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Jika kalian lebih tertarik untuk mendapatkan Dogecoin dengan cara mining, berikut saya berikan sedikit penjelasan caranya.
 publishDate: 2022-04-03T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-mining-dogecoin/hero.png
 heroAlt: Cara Mining Dogecoin
 tags:
   - crypto
@@ -19,7 +19,7 @@ Dari sekian banyak jenis cryptocurrency, salah satunya yang populer adalah Dogec
 
 Jackson Palmer mengatakan bahwa Dogecoin merupakan aset yang ringan dan memiliki daya tarik yang lebih besar. Faktanya, dalam sebuah cuitan di Twitter, CEO Tesla Elon Musk, memberikan pernyataan bahwa Dogecoin adalah koin favoritnya.
 
-![](./images/tweet-elon-musk-dogecoin-e1649144041775.png 'Source: https://twitter.com/elonmusk/status/1113009339743100929')
+![](https://img.erland.me/blog/cara-mining-dogecoin/images/tweet-elon-musk-dogecoin-e1649144041775.png 'Source: https://twitter.com/elonmusk/status/1113009339743100929')
 
 Sama seperti cryptocurrency lainnya, Dogecoin juga menggunakan teknologi blockchain. Teknologi ini seperti buku besar digital yang didistribusikan ke semua pengguna untuk mencatat transaksi dengan menggunakan uang kripto ini.
 
@@ -33,7 +33,7 @@ Kenaikan harga DOGE pada waktu itu terjadi saat beberapa aset cryptocurrency ter
 
 Kemudian pada 25 Desember 2013, terdapat kejadian kasus pencurian besar dan pertama kalinya di Dogecoin yang menyebabkan hilangnya jutaan koin pada platform Doge Wallet. Lalu pada Januari 2014, volume perdagangan Dogecoin secara singkat mengalahkan Bitcoin dan seluruh aset kripto lainnya. Walaupun begitu, kapitalisasi DOGE tetap berada jauh di belakang Bitcoin.
 
-![cara mining dogecoin](./images/cara-mining-dogecoin.png)
+![cara mining dogecoin](https://img.erland.me/blog/cara-mining-dogecoin/images/cara-mining-dogecoin.png)
 
 Tercatat pula DOGE sempat mencapai puncak nilai sebesar 0,017 USD per koin pada cryptocurrency bubble, yakti antara akhir tahun 2017 sampai dengan awal tahun 2018. Hingga kemudian pada Juli 2020, harga DOGE kembali meroket setelah mengikuti tren di aplikasi TikTok yang bertujuan untuk membuat harga DOGE menjadi 1 USD.
 

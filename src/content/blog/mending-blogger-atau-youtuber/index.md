@@ -9,7 +9,7 @@ excerpt: >-
   banyak digunakan oleh content creator. Pertanyaannya, dari dua platform di
   atas manakah yang memiliki prospek lebih…
 publishDate: 2022-06-14T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/mending-blogger-atau-youtuber/hero.png
 heroAlt: Mending Blogger Atau Youtuber? Yuk Cari Tahu Jawabannya!
 tags: []
 category: essay
@@ -62,7 +62,7 @@ Saat ini setiap orang sudah bisa menjadi youtuber dengan kontennya masing-masing
 
 Kira-kira apa saja sih yang harus dipertimbangkan ketika ingin terjun sebagai blogger maupun youtubers, berikut ulasan selengkapnya.
 
-![blogger atau youtuber](./images/blogger-atau-youtuber.png)
+![blogger atau youtuber](https://img.erland.me/blog/mending-blogger-atau-youtuber/images/blogger-atau-youtuber.png)
 
 ### 1\. Pertimbangan Passion dan Minat
 

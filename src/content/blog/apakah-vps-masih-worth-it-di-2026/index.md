@@ -3,7 +3,7 @@ title: Apakah VPS Masih Worth It di 2026? Ini Jawaban dari Sisi Teknis dan Biaya
 description: Apakah VPS masih worth it di 2026? Simak analisis mendalam dari sisi teknis, keamanan, hingga efisiensi biaya untuk website dengan traffic tinggi di sini!
 excerpt: Temukan alasan mengapa VPS tetap jadi pilihan terbaik di 2026 dibanding shared hosting atau cloud untuk bisnis Anda
 publishDate: 2026-01-09
-hero: ./hero.png
+hero: https://img.erland.me/blog/apakah-vps-masih-worth-it-di-2026/hero.png
 heroAlt: Apakah VPS Masih Worth It di 2026
 category: essay
 draft: false
@@ -11,7 +11,7 @@ draft: false
 
 Ketika sebuah website terus berkembang, kebutuhan server pasti ikut meningkat, dan di sinilah banyak orang mulai mempertimbangkan [VPS murah](https://www.domainesia.com/cloud-vps/) sebagai solusi upgrade yang lebih bertenaga. Dalam banyak kasus, pengguna yang sebelumnya memakai shared hosting akan disarankan untuk "naik kelas" ke layanan yang lebih kuat, terutama ketika performa mulai turun atau sumber daya tidak lagi mencukupi.
 
-![Apakah VPS Masih Worth It di 2026](./images/apakah-vps-masih-worth-it-di-2026.webp)
+![Apakah VPS Masih Worth It di 2026](https://img.erland.me/blog/apakah-vps-masih-worth-it-di-2026/images/apakah-vps-masih-worth-it-di-2026.webp)
 
 VPS kemudian menjadi pilihan populer karena memberikan kontrol penuh, stabilitas lebih tinggi, serta kemampuan menangani traffic besar dengan lebih baik. Banyak pengguna memanfaatkannya untuk fungsi berbeda seperti server VPN, server email, remote desktop (RDP), deployment aplikasi, hingga server game. Fleksibilitas inilah yang membuat VPS semakin relevan, bahkan ketika teknologi cloud terus berkembang.
 

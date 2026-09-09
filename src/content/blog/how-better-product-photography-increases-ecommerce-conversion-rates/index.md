@@ -3,13 +3,13 @@ title: How Better Product Photography Increases Ecommerce Conversion Rates
 description: Discover how high-quality product photography boosts ecommerce conversion rates by building buyer trust, reducing uncertainty, and removing friction.
 excerpt: Find out how consistent product imagery reduces returns and helps customers make faster buying decisions.
 publishDate: 2026-01-14
-hero: ./hero.png
+hero: https://img.erland.me/blog/how-better-product-photography-increases-ecommerce-conversion-rates/hero.png
 heroAlt: How Better Product Photography Increases Ecommerce Conversion Rates
 category: essay
 draft: false
 ---
 
-![How Better Product Photography Increases Ecommerce Conversion Rates](./images/how-better-product-photography-increases-ecommerce-conversion-rates.webp)
+![How Better Product Photography Increases Ecommerce Conversion Rates](https://img.erland.me/blog/how-better-product-photography-increases-ecommerce-conversion-rates/images/how-better-product-photography-increases-ecommerce-conversion-rates.webp)
 Image via [Dreamstime.com](https://www.dreamstime.com/)
 
 In ecommerce, shoppers can’t pick up your product, turn it over in their hands, feel the texture, or ask a sales associate a quick question. They have your product page, your copy, your reviews, and your visuals. That’s it. And among those, product photography often does the most heavy lifting in the shortest amount of time.

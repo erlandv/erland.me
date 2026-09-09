@@ -9,7 +9,7 @@ excerpt: >-
   bahasa Inggris dengan programprogram inovatif dan sistematis. Dari sekian
   banyaknya bahasa yang ada di seluruh dunia, bahasa…
 publishDate: 2021-04-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/ef-adults-kursus-bahasa-inggris-profesional/hero.png
 heroAlt: 'Review EF Adults, Lembaga Kursus Bahasa Inggris Profesional'
 tags: []
 category: reviews
@@ -48,7 +48,7 @@ Menurut <a href="https://penalis.com">penalis.com</a> dalam _update_ artikelnya,
 
 Walau sebenarnya terdapat [cara cepat belajar bahasa Inggris secara otodidak](/blog/cara-cepat-belajar-bahasa-inggris-secara-otodidak/), tapi belajar kepada guru atau ahlinya jauh lebih direkomendasikan. Kursus bahasa Inggris adalah salah satu solusinya. Dengan kursus, proses belajar akan lebih efektif dibandingkan belajar dengan secara mandiri, juga akan lebih fokus karena setiap materi pembelajarannya terdapat tahap-tahap dari yang tingkat pemula hingga tingkat lanjutan.
 
-![EF Adults Kursus Bahasa Inggris Profesional](./images/ef-adults-kursus-bahasa-inggris-profesional.jpg)
+![EF Adults Kursus Bahasa Inggris Profesional](https://img.erland.me/blog/ef-adults-kursus-bahasa-inggris-profesional/images/ef-adults-kursus-bahasa-inggris-profesional.jpg)
 
 Jika Anda tertarik untuk mencoba les, saya memiliki rekomendasi tempat kursus bahasa Inggris yang bagus, saya merekomendasikan **EF Adults kursus bahasa Inggris profesional** kepada Anda. Tempat les bahasa Inggris ini sangat terkenal, saya yakin Anda pun mengenalnya, atau minimal pernah mendengar namanya. Namun, kalau memeng belum, mari berikut ini saya informasikan sekilas tentang EF.
 

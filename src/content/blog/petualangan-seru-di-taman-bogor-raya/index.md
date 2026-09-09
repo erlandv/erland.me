@@ -8,7 +8,7 @@ excerpt: >-
   liburan yang paling menarik di Indonesia. Selain cuaca sejuknya, Bogor juga
   menawarkan berbagai pilihan wisata untuk…
 publishDate: 2023-09-16T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/petualangan-seru-di-taman-bogor-raya/hero.png
 heroAlt: Petualangan Seru di Taman Bogor Raya
 tags: []
 category: info
@@ -19,7 +19,7 @@ Bogor, yang terkenal dengan julukan "Kota Hujan," adalah salah satu destinasi li
 
 Bagi keluarga yang mencari tempat untuk liburan yang menyenangkan, Bogor adalah jawabannya. Kota ini memiliki berbagai aktivitas dan atraksi yang cocok untuk semua anggota keluarga, mulai dari yang muda hingga yang tua. Salah satu tempat yang harus dikunjungi adalah Taman Bogor Raya. Mari kita bahas lebih lanjut tentang keindahan taman ini.
 
-![](./images/taman-bogor-raya.jpeg 'Source: https://kebunraya.id/bogor')
+![](https://img.erland.me/blog/petualangan-seru-di-taman-bogor-raya/images/taman-bogor-raya.jpeg 'Source: https://kebunraya.id/bogor')
 
 <a href="https://www.indonesia.travel/id/id/ide-liburan/6-kebun-raya-di-indonesia-yang-cocok-dikunjungi-bersama-keluarga">Taman Bogor Raya</a> adalah salah satu taman botani terbesar dan terindah di Indonesia. Dengan luas lebih dari 80 hektar, taman ini merupakan tempat yang ideal untuk berjalan-jalan santai sambil menikmati keindahan alam. Yang membuatnya istimewa adalah koleksi tumbuhan yang luar biasa, termasuk berbagai spesies langka dan eksotis.
 
@@ -39,7 +39,7 @@ Sebelum mengunjungi Taman Bogor Raya, pastikan untuk memeriksa jam operasional d
 
 Jika Anda ingin mengetahui lebih banyak tentang pariwisata, budaya, dan kuliner Indonesia, kunjungi Indonesia.travel. Situs web ini adalah sumber informasi terpercaya yang akan membantu Anda merencanakan perjalanan Anda ke berbagai destinasi menarik di Indonesia. Temukan keajaiban Indonesia dan jatuh cinta pada kekayaan budaya dan alamnya. Jadi, jangan ragu untuk menjelajahi Indonesia lebih dalam dan rasakan pesonanya sendiri!
 
-![](./images/kebun-raya-bogor.jpg 'Source: https://kebunraya.id/bogor')
+![](https://img.erland.me/blog/petualangan-seru-di-taman-bogor-raya/images/kebun-raya-bogor.jpg 'Source: https://kebunraya.id/bogor')
 
 Bogor adalah destinasi yang sempurna untuk liburan keluarga, dan Taman Bogor Raya adalah salah satu dari banyak tempat yang harus Anda kunjungi. Jangan lewatkan kesempatan untuk mengeksplorasi keindahan alam dan tumbuhan yang luar biasa di taman botani ini.
 

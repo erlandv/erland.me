@@ -8,7 +8,7 @@ excerpt: >-
   saat libur lebaran nanti. Harga tiket penerbangan langsung ke Kroasia memang
   cukup mahal, sehingga perlu persiapan dana…
 publishDate: 2024-04-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/4-daya-tarik-danau-plitvice-surga-tersembunyi-di-kroasia/hero.png
 heroAlt: 4 Daya Tarik Danau Plitvice! Surga Tersembunyi di Kroasia
 tags: []
 category: info
@@ -19,7 +19,7 @@ Melalui pinjaman KTA, kamu bisa pergi liburan ke luar negeri bersama keluarga sa
 
 Saat di Kroasia, jangan lupa mengunjungi Taman Nasional Danau Plitvice yang terletak di tengah-tengah wilayah Dalmatia. Danau cantik ini berada di pedalaman Laut Adriatik. Lalu, pegunungan yang ada di sekitarnya merupakan bagian dari Pegunungan Alpen. Tak heran jika pemandangannya sangat memanjakan mata.
 
-![danau](./images/ljubisa-pokrajac.webp 'Source: https://www.pexels.com/id-id/foto/pemandangan-lanskap-lansekap-alam-14319765/')
+![danau](https://img.erland.me/blog/4-daya-tarik-danau-plitvice-surga-tersembunyi-di-kroasia/images/ljubisa-pokrajac.webp 'Source: https://www.pexels.com/id-id/foto/pemandangan-lanskap-lansekap-alam-14319765/')
 
 ## Nikmati Keindahan Danau Plitvice Kroasia dengan KTA
 
@@ -53,7 +53,7 @@ Veliki Slap menambah keindahan dan kemegahan Danau Plitvice karena di air terjun
 
 Pemandangan mahal ini bisa kamu nikmati bersama keluarga di libur lebaran nanti dengan mengajukan pinjaman <a href="https://www.dbs.id/digibank/id/id/pinjaman/produk-pinjaman/digibank-kta-instan?cid=id_bh_digibank_seoKTA_KTA_erland_01032024">KTA</a> untuk mempersiapkan kebutuhan akomodasi.
 
-![](./images/danau-plitvice.webp 'Source: https://www.pexels.com/id-id/foto/pemandangan-lanskap-lansekap-alam-10685665/')
+![](https://img.erland.me/blog/4-daya-tarik-danau-plitvice-surga-tersembunyi-di-kroasia/images/danau-plitvice.webp 'Source: https://www.pexels.com/id-id/foto/pemandangan-lanskap-lansekap-alam-10685665/')
 
 ## 3 Aktivitas Seru yang Bisa Dilakukan di Danau Plitvice
 

@@ -9,7 +9,7 @@ excerpt: >-
   website. Dengan minify kode akan memperkecil output dari file tersebut
   sehingga akan lebih cepat diload oleh browser.…
 publishDate: 2021-11-18T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/minify-html-css-javascript-tanpa-plugin/hero.png
 heroAlt: 'Minify HTML, CSS, JavaScript Tanpa Plugin WordPress'
 tags: []
 category: info
@@ -20,7 +20,7 @@ Minify HTML, CSS, JavaScript merupakan salah satu cara mempercepat loading websi
 
 Sebenarnya fitur minify sudah ada di sebagian besar plugin-plugin cache seperti W3 Total Cache, WP Rocket, LiteSpeed Cache, WP Optimize, dll. Namun, akan lebih baik jika kita menerapkan minify HTML tanpa plugin, kan? Penggunaan plugin yang terlalu banyak berpotensi memperberat loading web dan juga menambah penggunaan disk pada server.
 
-![minify html css js tanpa plugin](./images/minify-html-css-js-tanpa-plugin.png)
+![minify html css js tanpa plugin](https://img.erland.me/blog/minify-html-css-javascript-tanpa-plugin/images/minify-html-css-js-tanpa-plugin.png)
 
 Cara minify HTML, CSS, JavaScript tanpa plugin sangat gampang, kalian nggak perlu punya skill khusus untuk menerapkannya. Cukup copy-paste kode di bawah ini ke dalam file `functions.php` pada theme yang sedang digunakan. Akan lebih baik jika menggunakan <a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/">child theme</a> supaya kode ini tidak terhapus ketika upgrade theme.
 

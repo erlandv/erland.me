@@ -8,7 +8,7 @@ excerpt: >-
   memudahkan dalam urusan berpergian, terlebih lagi mobil memiliki lebih banyak
   keunggulan dibanding kendaraan pribadi lainnya…
 publishDate: 2020-10-14T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tips-membeli-mobil-bekas/hero.png
 heroAlt: 'Tips Otomotif: Beli Mobil Bekas Berkualitas'
 tags: []
 category: info
@@ -21,7 +21,7 @@ Mahalnya harga sebuah mobil baru membuat sebagian orang menyiasatinya dengan mem
 
 Untuk itu, berikut saya uraikan beberapa tips yang perlu Anda perhatikan sebelum membeli mobil bekas.
 
-![Tips Membeli Mobil Bekas](./images/tips-membeli-mobil-bekas.jpg)
+![Tips Membeli Mobil Bekas](https://img.erland.me/blog/tips-membeli-mobil-bekas/images/tips-membeli-mobil-bekas.jpg)
 
 ## Periksa Surat-surat Kendaraan
 

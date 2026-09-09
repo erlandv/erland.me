@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Hanya sebuah dokumentasi sederhana tentang cara mengubah URL website yang dibangun menggunakan WordPress di database MySQL dengan CLI.
 publishDate: 2022-08-25T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-mengganti-url-wordpress-di-database-mysql/hero.png
 heroAlt: Cara Mengganti URL WordPress di Database MySQL
 tags: []
 category: info

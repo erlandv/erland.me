@@ -9,7 +9,7 @@ excerpt: >-
   store milik Anda pribadi? Bagi yang masih bingung, tidak perlu khawatir.
   Karena saya akan coba jelaskan apa saja tipsnya…
 publishDate: 2022-04-13T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tips-memilih-cms-untuk-toko-online/hero.png
 heroAlt: Tips Memilih CMS untuk Toko Online Anda
 tags: []
 category: essay
@@ -26,7 +26,7 @@ Content Management System merupakan sebuah perangkat lunak. Fungsi dari perangka
 
 CMS sendiri biasa digunakan untuk membuat [blog](/blog/), forum online, landing page, website company, dan lainnya. Selain itu, CMS juga cocok untuk yang ingin membuat toko online sendiri.
 
-![toko online](./images/toko-online.png)
+![toko online](https://img.erland.me/blog/tips-memilih-cms-untuk-toko-online/images/toko-online.png)
 
 CMS adalah perangkat lunak untuk website bagi pemula. Karena dengan CMS, kita tidak perlu paham secara mendalam tentang bahasa pemrograman. Karena, dengan CMS Anda bisa membuat website tanpa harus melalui proses coding terlebih dahulu.
 

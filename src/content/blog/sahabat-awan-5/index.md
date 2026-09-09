@@ -9,7 +9,7 @@ excerpt: >-
   lagi. Sejak kejadian malam tadi, kakiku rasanya gatal ingin ke gubuk itu lagi
   setelah hari sudah siang. Aku ingin membuktikan…
 publishDate: 2017-05-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-5/hero.png
 heroAlt: Sahabat Awan (Bagian 5)
 tags: []
 category: story

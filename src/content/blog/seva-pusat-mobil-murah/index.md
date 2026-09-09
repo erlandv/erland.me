@@ -9,7 +9,7 @@ excerpt: >-
   otomotif terpercaya untuk jual beli mobil bekas. Sebelumnya, saya adalah
   pencinta sepeda motor. Kendaraan roda dua tersebut…
 publishDate: 2020-10-15T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/seva-pusat-mobil-murah/hero.png
 heroAlt: 'Ulasan: SEVA Pusat Mobil Murah Terlengkap di Indonesia'
 tags: []
 category: reviews
@@ -31,7 +31,7 @@ Setelah beberapa lama saya mencari-cari mobil bekas di SEVA yang sesuai dengan s
 
 Oke, setelah membeli mobil di SEVA, tentu saya di sini ingin merekomendasikan _marketplace_ otomotif ini kepada kalian. Untuk kalian yang belum tau tentang **[SEVA pusat mobil murah](/blog/seva-pusat-mobil-murah/)**, sini saya kasih tau!
 
-![SEVA Pusat Mobil Murah](./images/seva-pusat-mobil-murah.jpg)
+![SEVA Pusat Mobil Murah](https://img.erland.me/blog/seva-pusat-mobil-murah/images/seva-pusat-mobil-murah.jpg)
 
 ## Tentang SEVA Pusat Mobil Murah
 
@@ -109,25 +109,25 @@ Sampai di sini, apakah Anda mulai tertarik mengikuti jejak saya untuk beli <a hr
 
 ### 1\. Kunjungi situs seva.id
 
-![](./images/cara-beli-mobil-di-seva-1.jpg)
+![](https://img.erland.me/blog/seva-pusat-mobil-murah/images/cara-beli-mobil-di-seva-1.jpg)
 
 Buka situs web **www.seva.id** lalu cari mobil bekas yang sesuai dengan selera dan anggaran Anda.
 
 ### 2\. Bandingkan Produk
 
-![](./images/cara-beli-mobil-di-seva-2.jpg)
+![](https://img.erland.me/blog/seva-pusat-mobil-murah/images/cara-beli-mobil-di-seva-2.jpg)
 
 Jika Anda masih bingung mau beli mobil yang mana, manfaatkan fitur "**Bandingkan Produk**" untuk mendapatkan pilihan yang tepat.
 
 ### 3\. _Request Test Drive_
 
-![](./images/cara-beli-mobil-di-seva-3.jpg)
+![](https://img.erland.me/blog/seva-pusat-mobil-murah/images/cara-beli-mobil-di-seva-3.jpg)
 
 Masih ragu? Mau _test drive_ dulu? Klik aja tombol "_**Request Test Drive**_" untuk menambah keyakinan Anda.
 
 ### 4\. Pesan Kendaraan
 
-![](./images/cara-beli-mobil-di-seva-4.jpg)
+![](https://img.erland.me/blog/seva-pusat-mobil-murah/images/cara-beli-mobil-di-seva-4.jpg)
 
 Jika sudah menemukan mobil yang cocok sesuai dengan keinginan Anda dan sudah yakin dengan pilihan tersebut, klik tombol "**Pesan Sekarang**".
 

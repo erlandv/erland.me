@@ -5,7 +5,7 @@ description: 'Free download file template kalender 2026 CDR, AI, PDF, PNG HD tra
 excerpt: 'Free download file template kalender 2026 berformat vector'
 publishDate: 2025-10-01
 updatedDate: 2025-11-19
-hero: ./hero.png
+hero: https://img.erland.me/downloads/template-kalender-2026/hero.png
 heroAlt: 'Template Kalender 2026'
 draft: false
 rating:
@@ -49,8 +49,8 @@ CorelDRAW masih menjadi aplikasi andalan untuk membuat template kalender 2026 in
 Jika di tahun-tahun sebelumnya template kalender selalu menggunakan warna kuning sebagai warna utama, mulai tahun ini desain kalender menggunakan warna biru agar menyesuaikan dengan tampilan revamp personal web ini, juga masih terdapat urutan angka bulan berjalan pada frame kalender.
 
 :::gallery
-![Preview Kalender 2026](./template-kalender-2026.webp 'Preview Kalender Januari'),
-![Preview Kalender 2026](./preview-template-kalender-2026.webp 'Preview Kalender Februari')
+![Preview Kalender 2026](https://img.erland.me/downloads/template-kalender-2026/template-kalender-2026.webp 'Preview Kalender Januari'),
+![Preview Kalender 2026](https://img.erland.me/downloads/template-kalender-2026/preview-template-kalender-2026.webp 'Preview Kalender Februari')
 :::
 
 Yang berbeda juga di template kalender 2026 ini adalah penggunaan font **Plus Jakarta** Sans pada teks catatan keterangan libur nasional dan juga area catatan diberikan blok warna abu-abu. Selebihnya masih sama seperti tahun-tahun sebelumnya, termasuk peran font **Philosopher** pada teks nama bulan, nama hari, dan angka-angka tanggalnya.
@@ -72,11 +72,11 @@ Membuat suatu desain untuk dicetak memang <a href="https://www.coreldraw.com/en/
 - CorelDRAW versi 2023 (24.3)
 - CorelDRAW versi 2024 (25.0-25.1)
 
-![Template kalender 2026 CDR](./template-kalender-2026-cdr.png 'Template kalender 2026 CDR')
+![Template kalender 2026 CDR](https://img.erland.me/downloads/template-kalender-2026/template-kalender-2026-cdr.png 'Template kalender 2026 CDR')
 
 Bagi kalian pengguna produk Adobe ataupun aplikasi editor lain, tidak perlu khawatir. Karena selain file `.cdr`, saya juga membuat template kalender 2026 dengan format `.ai`, `.pdf`, dan juga `.png` agar lebih universal di berbagai aplikasi desain atau editor.
 
-![Template kalender 2026 PDF](./template-kalender-2026-pdf.png 'Template kalender 2026 PDF')
+![Template kalender 2026 PDF](https://img.erland.me/downloads/template-kalender-2026/template-kalender-2026-pdf.png 'Template kalender 2026 PDF')
 
 Jadi, secara keseluruhan terdapat 4 jenis format file kalender 2026, yaitu format file `.cdr`, `.ai`, `.pdf`, dan `.png` yang semua file tersebut di-compress ke dalam satu file ZIP atau saya sebut sebagai edisi **full pack**.
 

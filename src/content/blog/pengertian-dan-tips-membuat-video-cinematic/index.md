@@ -8,7 +8,7 @@ excerpt: >-
   yang berusaha membuat konten berupa video cinematic, tetapi banyak juga yang
   salah memahami pengertian dari video…
 publishDate: 2022-07-05T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/pengertian-dan-tips-membuat-video-cinematic/hero.png
 heroAlt: Pengertian dan Tips Membuat Video Cinematic
 tags: []
 category: essay
@@ -22,7 +22,7 @@ Pada dasarnya cinematic berasal dari kata cinema yang artinya adalah film. Jadi 
 
 Sebenarnya istilah video cinematic sudah ada sejak lama, hanya mungkin saja baru populer akhir-akhir ini berkat perkembangan teknologi kamera dan sosial media. Dahulu kala di saat kamera DSLR, mirrorless atau kamera canggih lainnya belum ada, kebanyakan orang hanya bisa mengandalkan kamera sebagai media rekam betacam digital yang mana alat dengan media tersebut masih memiliki kemampuan terbatas seperti kemampuan rentang kontras yang masih sempit, warna yang terbatas, dynamic range yang rendah, hingga kemampuan DOP yang tidak bisa dibuat tipis sehingga membuat framing yang dilakukan sulit atau bahkan tidak bisa fokus ke satu objek.
 
-![video cinematic](./images/video-cinematic.png)
+![video cinematic](https://img.erland.me/blog/pengertian-dan-tips-membuat-video-cinematic/images/video-cinematic.png)
 
 Sementara itu di industri film sudah mengalami kemajuan yang signifikan karena mayoritas produser film memiliki budget yang tinggi, saat itu kita sudah bisa menikmati film dengan visual yang menarik seperti kontrasnya yang tajam, warnanya yang banyak, dynamic range yang tinggi, hingga DOF yang tipis sehingga sangat membantu untuk menyampaikan pesan yang disampaikan di dalam film untuk dinikmati oleh para penonton.
 

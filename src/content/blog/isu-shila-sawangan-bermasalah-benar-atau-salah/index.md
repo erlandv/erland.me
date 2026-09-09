@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Beredarnya isu tentang Shila Sawangan bermasalah menjadi bahan perbincangan banyak pihak. Benarkah bermasalah kasus lahan sangketa?
 publishDate: 2024-05-30T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/isu-shila-sawangan-bermasalah-benar-atau-salah/hero.png
 heroAlt: 'Isu Shila Sawangan Bermasalah, Benar atau Salah?'
 tags: []
 category: info
@@ -28,7 +28,7 @@ Setelah cukup lama melalui proses hukum yang rumit, kasus lahan sangketa <a href
 
 Hal ini tercantum pada Surat Amar Kasasi Perkara Nomor **519 K/TUN/2022/ Jo. No. 81/B/2022/PT.TUN.JKT Jo. No. 101/G/2021/PTUN.BDG** yang dengan tegas menolak permohonan kasasi yang diajukan oleh Ida Farida. Dalam surat itu juga tercantum hukuman kepada Ida Farida selaku pemohon kasasi untuk membayar biaya perkara yang timbul pada tingkat tersebut.
 
-![](./images/shila-sawangan-bermasalah.webp 'Source: https://drive.google.com/file/d/181UlXoW8B-eCSTLbeR5EkQCGqOUCcYKE/view')
+![](https://img.erland.me/blog/isu-shila-sawangan-bermasalah-benar-atau-salah/images/shila-sawangan-bermasalah.webp 'Source: https://drive.google.com/file/d/181UlXoW8B-eCSTLbeR5EkQCGqOUCcYKE/view')
 
 Dengan selesainya kasus Shila Sawangan bermasalah ini, pihak pengembang Shila Sawangan kini dapat melanjutkan rencana pembangunan perumahan Shila Sawangan beserta pembangunan fasilitas-fasilitas tambahan yang dapat memanjakan penghuni perumahan. Selain itu juga para penghuni dan calon pembeli unit perumahan Shila Sawangan juga dapat lebih tenang karena adanya kepastian hukum terkait legalitas kepemilikan lahan di Shila Sawangan.
 
@@ -38,7 +38,7 @@ Meluasnya isu <a href="https://www.idntimes.com/life/diy/marwan-fitranansya-1/is
 
 Shila Sawangan merupakan proyek kawasan perumahan hasil kolaborasi Vasanta Group dan Mitsubishi Corporation. Perumahan ini dibangun di lokasi yang sangat strategis, tepatnya berada di dekat dua akses jalan utama, yaitu Jalan Raya Bojong Sari dan Jalan Raya Muchtar. Selain itu, lokasi perumahan ini juga mudah diakses dari beberapa jalur tol, seperti Tol Cijago (Cinere Jagorawi), Tol JORR 2 (Jakarta Outer Ring Road 2), dan juga Tol Desari (Depok Antasari). Dekatnya lokasi perumahan ini ke jalan utama dan juga ke jalan tol membuat akses dari perumahan ke berbagai daerah Jabodetabek menjadi lebih mudah.
 
-![](./images/shila-sawangan.webp)
+![](https://img.erland.me/blog/isu-shila-sawangan-bermasalah-benar-atau-salah/images/shila-sawangan.webp)
 
 Selain aksesibilitasnya, Shila Sawangan juga memiliki keunggulan suasana lingkungan hunian yang asri karena perumahan ini dibangun di atas lahan RTH (Ruang Terbuka Hijau) seluas 102 hektar dan posisinya menghadap ke sebuah danau seluas 26 hektar. Ditambah lagi desain unit-unit perumahan ini mengusung konsep natural yang membuat kesan perumahan asri dan nyaman semakin terasa di Shila Sawangan.
 

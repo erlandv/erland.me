@@ -9,7 +9,7 @@ excerpt: >-
   pasti sudah tau betapa pentingnya penggunaan lampu pada motor. Gimana tidak
   ya? Lampu motor memang berperan penting untuk…
 publishDate: 2022-09-21T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/peraturan-lampu-motor-saat-berkendara/hero.png
 heroAlt: Peraturan Lampu Motor Saat Berkendara
 tags: []
 category: info

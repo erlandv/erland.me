@@ -3,7 +3,7 @@ title: 'Intip Tren Laptop Terbaru 2026: Desain Futuristik dan Spek Dewa'
 description: Cari laptop spek dewa di 2026? ROG Strix Scar 18 hadir dengan performa Intel Core Ultra 9 dan layar 18 inci. Temukan fitur unggulan ASUS selengkapnya di sini!
 excerpt: Nikmati visual imersif di layar 18" Mini LED 240Hz dengan ROG Strix Scar 18. Laptop ASUS terbaru ini tawarkan spek monster untuk Anda.
 publishDate: 2026-02-13
-hero: ./hero.png
+hero: https://img.erland.me/blog/intip-tren-laptop-terbaru-2026/hero.png
 heroAlt: Intip Tren Laptop Terbaru 2026
 category: info
 draft: false
@@ -23,7 +23,7 @@ Rasio aspek 16\:10 juga memberikan tampilan yang lebih tinggi dan pengalaman vis
 
 ROG Strix Scar 18 dilengkapi dengan prosesor Intel® Core™ Ultra 9 275HX yang menawarkan kecepatan hingga 5.4GHz. Prosesor ini memungkinkan laptop untuk menangani tugas-tugas berat seperti video editing, 3D rendering, dan gaming dengan lancar tanpa adanya hambatan. Dengan 24 inti dan 24 thread, prosesor ini menjanjikan performa multitasking tanpa hambatan.
 
-![Asus ROG](./images/asus-rog.webp)
+![Asus ROG](https://img.erland.me/blog/intip-tren-laptop-terbaru-2026/images/asus-rog.webp)
 
 Ditambah dengan GPU NVIDIA® GeForce RTX™ 5080, laptop ini dapat menjalankan aplikasi grafis berat dan game AAA terbaru dengan pengaturan grafis tertinggi tanpa lag. Spesifikasi ini membuat ROG Strix Scar 18 menjadi pilihan ideal untuk para gamer dan profesional yang membutuhkan laptop dengan kekuatan komputasi maksimal.
 

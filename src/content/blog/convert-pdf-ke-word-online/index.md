@@ -9,7 +9,7 @@ excerpt: >-
   menggunakan file portable ini karena kepraktisannya. File PDF bisa dibuka di
   perangkat apa pun selama ada aplikasi PDF reader.…
 publishDate: 2021-01-06T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/convert-pdf-ke-word-online/hero.png
 heroAlt: Cara Mengubah file PDF ke Word Secara Online
 tags: [pdf, word]
 category: info
@@ -20,7 +20,7 @@ File PDF itu udah jadi “bahasa universal”-nya dokumen. Tinggal buka pakai PD
 
 Kabar baiknya, proses convert ini bisa dilakukan online, gratis, dan cepat. Berikut beberapa situs yang bisa kamu coba.
 
-![pdf ke word](./images/pdf-ke-word.jpg)
+![pdf ke word](https://img.erland.me/blog/convert-pdf-ke-word-online/images/pdf-ke-word.jpg)
 
 ## Plagiarismdetector.net
 

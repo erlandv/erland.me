@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Tutorial cara menggunakan SSH untuk mengakses VPS dari jarak jauh (remote) menggunakan Terminal Linux dan PuTTy di Windows.
 publishDate: 2021-09-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-menggunakan-ssh/hero.png
 heroAlt: Remote Virtual Server Menggunakan SSH
 tags: []
 category: info
@@ -56,7 +56,7 @@ Setelah download, lanjutkan dengan menginstalnya di Windows dengan cara yang sam
 
 Setelah instalasi selesai, buka PuTTy, dan lakukan konfigurasi seperti petunjuk gambar di bawah ini.
 
-![](./images/akses-ssh-putty.jpg 'Mengakses SSH di PuTTy')
+![](https://img.erland.me/blog/cara-menggunakan-ssh/images/akses-ssh-putty.jpg 'Mengakses SSH di PuTTy')
 
 Berikut penjelasan konfigurasi mengakses SSH melalui PuTTy.
 
@@ -69,10 +69,10 @@ Setelah itu biasanya akan terdapat notifikasi peringatan yang hanya muncul saat 
 
 Kemudian akan diminta untuk memasukan username dan password seperti gambar di bawah ini, isi dengan user dan password kalian, ya.
 
-![](./images/login-ssh-putty.jpg 'Login SSH di PuTTy')
+![](https://img.erland.me/blog/cara-menggunakan-ssh/images/login-ssh-putty.jpg 'Login SSH di PuTTy')
 
 Jika informasi username, password, dan IP server yang dicantumkan benar, maka kalian akan berhasil login ke server dan bisa memulai untuk remote server melalui SSH di Windows dengan menggunakan PuTTy.
 
-![](./images/menggunakan-ssh-putty.jpg 'Berhasil login SSH di PuTTy')
+![](https://img.erland.me/blog/cara-menggunakan-ssh/images/menggunakan-ssh-putty.jpg 'Berhasil login SSH di PuTTy')
 
 Jika ini pertama kalinya kalian menggunakan SSH untuk mengakses VPS secara remote, mulailah belajar Linux agar terampil dalam mengoperasikan terminal dengan command line. Yuk gunakan Linux!

@@ -6,7 +6,7 @@ excerpt: >-
   Tempat pembuatan neon box Bogor. Rekomendasi bengkel reklame pusat produksi neonbox bulat akrilik LED dengan harga murah.
 publishDate: 2020-04-13T00:00:00.000Z
 updatedDate: 2025-11-04
-hero: ./hero.png
+hero: https://img.erland.me/blog/neon-box-bogor/hero.png
 heroAlt: Rekomendasi Jasa Pembuatan Neon Box di Bogor
 tags: []
 category: reviews
@@ -17,7 +17,7 @@ draft: false
 
 Jika Anda sedang mencari jasa <a href="https://properadv.com">neon box bogor</a> yang terpercaya, carilah vendor reklame yang ahli dalam pembuatan berbagai bentuk dan jenis neon box dengan harga yang relatif murah. Selain itu, mereka juga memberikan garansi, pengerjaannya juga cepat dan profesional karena mereka telah berpengalaman di dunia reklame lebih dari lima tahun.
 
-![](./images/las-reklame-bogor.png)
+![](https://img.erland.me/blog/neon-box-bogor/images/las-reklame-bogor.png)
 
 ## Jenis Neon Box
 
@@ -73,12 +73,12 @@ Terakhir adalah frame neonbox atau bagian samping. Bahan yang digunakan untuk ba
 Berikut ini adalah beberapa foto contoh-contoh neonbox hasil produksi yang saya ambil dari situs web lasreklame sebagai referensi Anda yang akan membuat reklame untuk toko, ruko, kios, kantor, tempat usaha Anda. Ada banyak sekali sebenarnya seperti neon box barbershop, cafe, hotel, plang praktik dokter, apotek, bidan, dan lain-lain. Tapi saya hanya mencantumkan enam foto aja di sini. Jika Anda ingin melihat lebih banyak galeri hasil produksi reklame, silakan mengunjungi profil akun Instagram **@lasreklame**
 
 :::gallery
-![las reklame bogor](./images/las-reklame-bogor.jpg),
-![jasa neon box bogor](./images/jasa-neon-box-bogor.jpg),
-![pemasangan neon box bogor](./images/pemasangan-neon-box-bogor.jpg),
-![neon box akrilik](./images/neon-box-akrilik.jpg),
-![pembuatan neon box bogor](./images/pembuatan-neon-box-bogor.jpg),
-![neon box bulat](./images/neon-box-bulat.jpg)
+![las reklame bogor](https://img.erland.me/blog/neon-box-bogor/images/las-reklame-bogor.jpg),
+![jasa neon box bogor](https://img.erland.me/blog/neon-box-bogor/images/jasa-neon-box-bogor.jpg),
+![pemasangan neon box bogor](https://img.erland.me/blog/neon-box-bogor/images/pemasangan-neon-box-bogor.jpg),
+![neon box akrilik](https://img.erland.me/blog/neon-box-bogor/images/neon-box-akrilik.jpg),
+![pembuatan neon box bogor](https://img.erland.me/blog/neon-box-bogor/images/pembuatan-neon-box-bogor.jpg),
+![neon box bulat](https://img.erland.me/blog/neon-box-bogor/images/neon-box-bulat.jpg)
 :::
 
 ## Pertanyaan Terkait Neon Box

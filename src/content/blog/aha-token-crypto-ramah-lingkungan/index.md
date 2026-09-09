@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Dampak kerusakan lingkungan di industri crypto yang menjadi latar belakang berdirinya AHA token ramah lingkungan ini.
 publishDate: 2022-04-21T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/aha-token-crypto-ramah-lingkungan/hero.png
 heroAlt: AHA Token Crypto Ramah Lingkungan
 tags:
   - crypto
@@ -19,7 +19,7 @@ Efek negatif yang ditimbulkan dari kegiatan cryptocurrency bisa timbul karena pe
 
 Jumlah penambang token juga sangat banyak, dan terus bertambah banyak. Ada yang berbentuk perusahaan, ada juga yang perorangan melakukan solo mining. Lebih buruknya lagi, komputer-komputer mereka selalu hidup 24 jam nonstop setiap hari. Bisa dibayangkan seberapa besar daya listrik yang habis digunakan untuk kegiatan transaksi crypto ini?
 
-![aha token crypto](./images/aha-token-crypto.png)
+![aha token crypto](https://img.erland.me/blog/aha-token-crypto-ramah-lingkungan/images/aha-token-crypto.png)
 
 Sementara itu, untuk menghasilkan daya listrik berskala besar ini, dibutuhkan energi fosil berjumlah besar. Energi fosil seperti batubara, gas alam, atau minyak bumi memang didesain untuk produksi listrik skala besar secara terus-menerus, tapi kegiatan ini sangat jauh dari kata ramah lingkungan.
 

@@ -9,7 +9,7 @@ excerpt: >-
   semua disiapkan, sebenarnya tidak terlalu sulit, kok. Tapi coba kita lihat
   dulu faktafaktanya berikut ini: Fresh graduate…
 publishDate: 2022-03-25T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tips-fresh-graduate-cara-dapat-kerja-pertama/hero.png
 heroAlt: 'Tips Karier: Cara Dapat Kerja Pertama untuk Fresh Graduate'
 tags: []
 category: essay
@@ -28,7 +28,7 @@ Saya akan mencoba memberi sudut pandang baru tentang bagaimana menyiapkan karier
 
 Dan banyak lagi tips terkait cara dapat kerja untuk fresh graduate yang mungkin bisa membantu. Penasaran? Mari kita mulai pembahasan.
 
-![Cara Dapat Kerja untuk Fresh Graduate](./images/Cara-Dapat-Kerja-untuk-Fresh-Graduate.png '© [Ifan Prasya](https://www.linkedin.com/in/ifanprasya)')
+![Cara Dapat Kerja untuk Fresh Graduate](https://img.erland.me/blog/tips-fresh-graduate-cara-dapat-kerja-pertama/images/Cara-Dapat-Kerja-untuk-Fresh-Graduate.png '© [Ifan Prasya](https://www.linkedin.com/in/ifanprasya)')
 
 ## Eksplorasi Masalah di Sekitar Kamu
 
@@ -46,7 +46,7 @@ Mudah saja. Pertama-tama, kita harus cari tau dulu masalah-masalah di sekitar ya
 
 Sebagai contoh, kamu bisa melihat bagan _Sustainable Development Goals_ (disingkat menjadi SDG) berikut ini:
 
-![](./images/sustainable-development-goals.png '© socisdg.com')
+![](https://img.erland.me/blog/tips-fresh-graduate-cara-dapat-kerja-pertama/images/sustainable-development-goals.png '© socisdg.com')
 
 Kira-kira, kamu ingin berkontribusi di bidang apa? Cari tau area mana yang bikin kamu tersentuh hatinya; penuh bara semangat untuk turut serta mengentaskan masalah tersebut dari dunia.
 

@@ -8,7 +8,7 @@ excerpt: >-
   sangka kanopi juga bisa digunakan untuk di belakang rumah, jendela atau
   tempattempat lain? Terlebih dari fungsinya…
 publishDate: 2020-03-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/jenis-jenis-kanopi/hero.png
 heroAlt: Beragam Jenis-jenis Kanopi Rumah
 tags: []
 category: info
@@ -23,9 +23,9 @@ Kanopi juga membuat rumah semakin terlihat sejuk dan tanpa kita sadari kanopi ju
 
 Jadi, kenapa kita perlu memasang kanopi agar menghemat energi listrik? Itu karena ruangan di dalam rumah menjadi lebih sejuk dan adem sehingga kamu tidak harus menyalakan kipas atau AC untuk mendinginkan ruangan. Sangat banyak kan manfaat dari atap kanopi. Itu lah sebabnya banyak orang yang memasang atap kanopi di rumahnya.
 
-![kanopi modern minimalis](./images/kanopi-modern-minimalis.jpg)
+![kanopi modern minimalis](https://img.erland.me/blog/jenis-jenis-kanopi/images/kanopi-modern-minimalis.jpg)
 
-![kanopi  baja ringan](./images/kanopi-baja-ringan.jpg)
+![kanopi  baja ringan](https://img.erland.me/blog/jenis-jenis-kanopi/images/kanopi-baja-ringan.jpg)
 
 Ada beberapa jenis bahan untuk dijadikan atap kanopi, loh. Yuk kita simak apa saja bahan yang bisa dijadikan atap kanopi.
 

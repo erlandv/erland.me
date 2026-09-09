@@ -7,7 +7,7 @@ excerpt: >-
   Beberapa manfaat dari lidah buaya dan cara menggunakan lidah buaya
   untuk merawat kesehatan rambut.
 publishDate: 2024-11-11T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/manfaat-lidah-buaya-untuk-rambut/hero.png
 heroAlt: Beberapa Manfaat Lidah Buaya untuk Rambut dan Cara Menggunakannya
 tags: []
 category: info
@@ -18,7 +18,7 @@ Lidah buaya sudah lama dikenal sebagai tanaman serbaguna yang memiliki segudang 
 
 Selain kandungan nutrisinya yang melimpah, cara penggunaan lidah buaya juga cukup mudah, bahkan bisa dilakukan di rumah. Yuk, kita bahas lebih dalam tentang <a href="https://www.kahfeveryday.com/2024/04/26/4-manfaat-lidah-buaya-untuk-rambut-dan-cara-pemanfaatannya/">manfaat lidah buaya</a>, terutama untuk rambut, serta cara penggunaannya.
 
-![](./images/manfaat-lidah-buaya.webp 'Source: https://www.freepik.com/free-photo/aloevera-table_6118252.htm')
+![](https://img.erland.me/blog/manfaat-lidah-buaya-untuk-rambut/images/manfaat-lidah-buaya.webp 'Source: https://www.freepik.com/free-photo/aloevera-table_6118252.htm')
 
 ## Manfaat Lidah Buaya secara Umum
 
@@ -64,7 +64,7 @@ Paparan sinar matahari, polusi, dan bahan kimia bisa membuat rambut mudah rusak.
 
 ## Cara Menggunakan Lidah Buaya untuk Rambut
 
-![](./images/manfaat-lidah-buaya-untuk-rambut-1.webp 'Source: https://pixabay.com/photos/aloe-aloe-vera-aloe-gel-4529704/')
+![](https://img.erland.me/blog/manfaat-lidah-buaya-untuk-rambut/images/manfaat-lidah-buaya-untuk-rambut-1.webp 'Source: https://pixabay.com/photos/aloe-aloe-vera-aloe-gel-4529704/')
 
 Menggunakan lidah buaya untuk perawatan rambut tidaklah sulit. Kamu bisa mencobanya sendiri di rumah dengan bahan yang mudah didapat. Berikut ini beberapa cara yang bisa kamu coba:
 
@@ -117,6 +117,6 @@ Untuk membuat masker rambut dari lidah buaya, cara pembuatannya tidak terlalu su
 
 Sangat mudah sekali untuk membuat masker rambut dari lidah buaya, tapi kalau kamu orangnya benar-benar tidak mau ribet, ada produk yang cocok untuk kamu nih, yaitu **Kahf Nourishing Beard & Hair Oil 30ml** yang diformulasikan secara khusus dengan Moroccan Argan Oil, sehingga bisa menutrisi pertumbuhan rambut.
 
-![](./images/kahf-nourishing-beard-hair-oil.webp 'Source: https://www.kahfeveryday.com/product/nourishing-beard-oil-30-ml/')
+![](https://img.erland.me/blog/manfaat-lidah-buaya-untuk-rambut/images/kahf-nourishing-beard-hair-oil.webp 'Source: https://www.kahfeveryday.com/product/nourishing-beard-oil-30-ml/')
 
 Lidah buaya memang punya segudang manfaat untuk kesehatan rambut. Mulai dari mengatasi kerontokan, mengurangi ketombe, hingga melembutkan rambut secara alami. Dengan cara penggunaan yang sederhana dan bahan yang mudah didapat, lidah buaya bisa jadi solusi perawatan rambut di rumah. Cobalah beberapa cara di atas secara rutin dan rasakan manfaatnya untuk rambut kamu!

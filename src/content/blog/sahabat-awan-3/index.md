@@ -9,7 +9,7 @@ excerpt: >-
   kenangan. Saat itu teman sebayaku kirakira masih ada 19 orang. Ada 5 kenangan
   yang masih segar terpatri indah di kepalaku…
 publishDate: 2017-03-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan-3/hero.png
 heroAlt: Sahabat Awan (Bagian 3)
 tags: []
 category: story
@@ -69,7 +69,7 @@ Setelah keadaan normal. Akhirnya si dokter bisa menjalankan tugasnya dengan sedi
 
 Aku ingat benar saat kami bermain di jembatan kayu yang lapuk. Di jembatan yang sudah dibuat 10 tahun lamanya itu, aku beserta 5 teman perempuan lainnya Chirsty, Indri, Indah, Wati, dan Lia bermain karet gelang. Dimas, Pahing, Egi dan Gian duduk santai di atas pohon di samping jembatan itu. Siti dengan legowo duduk di samping kami yang asyik bermain. Aku mengerti dengan perasaannya saat itu, dia pasti kecewa melihat keadaannya saat ini. Sesekali aku melakukan hal yang bodoh demi melihat senyuman dari bibir tipisnya. Egi dan Gian juga sesekali mengejek kami untuk mencairkan suasana.
 
-![Jembatan Kayu](./images/jembatan-kayu.jpg)
+![Jembatan Kayu](https://img.erland.me/blog/sahabat-awan-3/images/jembatan-kayu.jpg)
 
 Saking asyiknya melompat kami tidak mengetahui kalau ternyata jembatan tersebut dibuat kewalahan dengan hentakan kaki kami. Ditambah dengan turunnya Dimas cs ke jembatan, hal itu otomatis menambah berat beban si jembatan. Mereka yang merasa bosan hanya duduk di atas pohon mengajak kami bermain yang lebih ekstrim. Permainan tikus dan kucing adalah permain favorit kami saat itu. Hentakan demi hentakan membuat si jembatan semakin teraniaya. Berlarian kesana kemari dan menghamburkan tawa membuat si jembatan semakin sedih saja.
 

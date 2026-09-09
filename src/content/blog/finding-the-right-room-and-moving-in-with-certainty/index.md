@@ -3,7 +3,7 @@ title: Finding the Right Room and Moving in with Certainty
 description: Secure the perfect room in Singapore with strict budget planner. Covers specific districts, viewing protocols, and tenancy agreement essentials to save you time
 excerpt: Secure the perfect room in Singapore. Covers specific districts, viewing protocols, and tenancy agreement essentials to save you time.
 publishDate: 2025-11-29
-hero: ./hero.png
+hero: https://img.erland.me/blog/finding-the-right-room-and-moving-in-with-certainty/hero.png
 heroAlt: Finding the Right Room and Moving in with Certainty
 category: info
 draft: false
@@ -13,7 +13,7 @@ Decide one firm monthly rent ceiling and limit your search to three named distri
 
 Budget A 1,200 SGD per month: Target Bedok Hougang Tampines Pasir Ris Sengkang. At 1,200 you will secure a single non master room in an HDB flat with shared bathroom and kitchen use. If a listing in these neighbourhoods asks for more than 1,200 move on immediately. Do not compromise on this figure because these areas produce predictable value at this price.
 
-![Finding the Right Room and Moving in with Certainty](./images/finding-the-right-room-and-moving-in-with-certainty.webp)
+![Finding the Right Room and Moving in with Certainty](https://img.erland.me/blog/finding-the-right-room-and-moving-in-with-certainty/images/finding-the-right-room-and-moving-in-with-certainty.webp)
 
 Budget B 1,700 SGD per month: Target Toa Payoh Novena Queenstown Clementi Kallang. For 1,700 expect a master room with attached bath or an independent private room in an older condominium close to an MRT line. If utilities are not included plan for an additional 80 SGD monthly for electricity and 30 SGD for internet; insist on written confirmation of what is covered.
 

@@ -8,7 +8,7 @@ excerpt: >-
   tiba dan hati ini sudah tidak sabar ingin bertemu dengan ibu dan bapak di
   kampung. Sepanjang perjalanan dari Semarang…
 publishDate: 2019-02-03T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-di-tepi-jalan/hero.png
 heroAlt: Sahabat Di Tepi Jalan
 tags: []
 category: story
@@ -48,7 +48,7 @@ _“Iya… Tapi dengan syarat kamu harus memberikan aku pinjaman buku untuk aku 
 
 Mendengar perkataan itu, aku langsung memeluknya. Air mata ini pun tak bisa kubendung lagi. Tak kusangka ternyata warga di desaku masih banyak yang kurang mampu, padahal mereka sudah bekerja keras di desa sendiri tapi apa daya kekuaasaan ada di tangan mandor pengumpul yang kerjanya hanya mengumpulkan karet yang sudah disadap dan memberikan uang tak sesuai dengan kerja keras mereka.
 
-![](./images/sahabat-tepi-jalan.jpg)
+![](https://img.erland.me/blog/sahabat-di-tepi-jalan/images/sahabat-tepi-jalan.jpg)
 
 Hari pertama masuk sekolah, aku di jemput Lina pagi-pagi sekali sekitar pukul 5 subuh. Aku memang harus berangkat pagi karena aku akan melewati perjalanan yang panjang untuk ke sekolah. Pagi itu Lina menjalankan sepedanya dengan semangat untuk menuju jalan besar, kami harus melewati jalan kecil yang rusak dan melewati hutan karet untuk ke sana. Sekitar 20 menit perjalanan akhirnya sampai juga di tepi jalan besar kemudian aku menaiki truk angkutan yang biasa mengangkut anak-anak sekolah ke kota, sedih rasanya aku harus meninggalkan Lina pulang sendirian.
 

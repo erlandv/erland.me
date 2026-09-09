@@ -9,7 +9,7 @@ excerpt: >-
   kesempatan. Hanya saja, kita tidak terlalu memperhatikan dan memahaminya. Bagi
   kalian yang bekerja di dunia grafis, maka penting…
 publishDate: 2021-10-11T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sekilas-tentang-desain-grafis/hero.png
 heroAlt: Sekilas Tentang Desain Grafis
 tags: []
 category: essay
@@ -24,7 +24,7 @@ Bagi kalian yang bekerja di dunia grafis, maka penting untuk mengerti berbagai h
 
 Desain grafis adalah seni dalam berkomunikasi visual melalui ruang, gambar, dan tulisan. Jika kita lihat, desain grafis terdiri dari dua kata, yaitu desain dan grafis. Kata desain memiliki arti suatu perbuatan atau proses dengan mengatur segala sesuatu sebelum berbuat atau lebih mudahnya adalah merancang. Sementara, grafis artinya adalah garis atau titik yang berhubungan dengan cetak-mencetak.
 
-![definisi desain grafis](./images/definisi-desain-grafis.png)
+![definisi desain grafis](https://img.erland.me/blog/sekilas-tentang-desain-grafis/images/definisi-desain-grafis.png)
 
 Jika kedua kata tersebut dijadikan satu, maka pengertian desain grafis adalah kombinasi kompleks antara grafik, gambar, kata-kata, angka, ilustrasi, dan foto yang membutuhkan pemikiran khusus untuk bisa digabungkan sehingga menghasilkan sesuatu yang khusus dan berguna dalam bidang visual.
 

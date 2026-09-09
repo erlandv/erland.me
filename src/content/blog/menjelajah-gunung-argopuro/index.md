@@ -9,7 +9,7 @@ excerpt: >-
   berbagi pengalaman yang mungkin berguna sebagai info untuk kalian yang ingin
   kesana. Perjalanan ini atas dasar inisiatif…
 publishDate: 2017-10-02T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/menjelajah-gunung-argopuro/hero.png
 heroAlt: Menjelajah Gunung Argopuro
 tags: []
 category: story
@@ -79,14 +79,14 @@ Jam 06.45, kereta tiba di Stasiun Probolinggo. Saya turun, keluar stasiun, nyar
 Dan akhirnya, bertemulah kami bertiga di Terminal Probolinggo. Lengkap sudah tim kami untuk menuju Argopuro. Dari terminal Probolinggo kami naik Bus AKAS untuk menuju Besuki. Ongkosnya murah, cuma 12 ribu perorang. Perjalanan sekitar 2-3 jam. Turun di Alun-alun Besuki. Kami istirahat sejenak di Alun-alun. Mengisi waktu dengan makan siang dan belanja logistik pendakian.  
 Setelah semuanya siap, kami menumpang ojek untuk menuju desa Baderan. Dulu mah masih ada angkot untuk menuju Baderan, tapi sekarang udah gak ada, entah ke mana, cuma ada ojek. Ongkosnya 30 ribu perorang. Waktu tempuh Besuki-Baderan sekitar 30-45 menit perjalanan.
 
-![Puncak Rengganis Argopuro](./images/puncak-rengganis-argopuro.jpeg)
+![Puncak Rengganis Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/puncak-rengganis-argopuro.jpeg)
 
 Sampai di desa Baderan, siang jam 12.00. Kami langsung ke _basecamp_ untuk mengurus perizinan. Sialnya, kami tidak diizinankan naik hari itu karena waktu udah terlalu siang. Saya coba nego petugasnya, memberi usul andai kami gak bisa tiba di Pos Mata Air 1 sebelum gelap maka kami akan nyari tempat _camp_ darurat sebelum Pos Mata Air 1, tetap gak bisa, ditolak, kecuali kami naik ojek ke Pos Mata Air 1. Saya nolak karena ongkos ojek ke Pos Mata Air 1 terlalu mahal. Normalnya, pendaki hanya naik ojek ke Makadam (Pintu Hutan).  
 Karena buntu, yasudah kami putuskan untuk memulai pendakian besok pagi dan hari itu kami bermalam di _basecamp_ Baderan.
 
 Target hari pertama gagal sudah.
 
-![Retribusi Gunung Argopuro](./images/retribusi-gunung-argopuro.jpg)
+![Retribusi Gunung Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/retribusi-gunung-argopuro.jpg)
 
 Besoknya, pagi tanggal 27 September 2016 selepas subuh kami sudah siap segala-galanya untuk menjelajah panjangnya trek pendakian Argopuro. Kami naik ojek ke Pintu Hutan. Dari _basecamp_ Baderan sekitar 45 menit perjalanan. Kalau mau jalan kaki dari _Basecamp_ Baderan ke Pintu Hutan bisa 3-4 jam, jadi rekomen naik ojek aja untuk menghemat tenaga. Argopuro itu gunung dengan trek terpanjang di pulau Jawa, jangan so kuat.
 
@@ -101,7 +101,7 @@ Satu jam kemudian, jam 11.00 masih belum tiba di Pos Mata Air 1. Mulai ngos-ngos
 _Finally_, jam 12.00 kami tiba di Pos Mata Air 1. Meleset dua jam dari estimasi. Gara-gara trek bedebah tadi yang bekas motor cross bikin nyusahin. Kami beristirahat di Pos ini. Isi air, makan siang, salat zuhur, ngopi dan bersantai. Sampe jam 13.00 kami di pos Mata Air 1, mencoba memulihkan tenaga.  
 Oh iya, posisi sumber air di Pos ini ada di sebelah kiri dari arah Baderan. Ada jalan menurun menyusuri pepohanan, ikutin aja tanda tali rafia yang diikat di batang pohon. Sekitar 500 meter. Sumber airnya itu sungai kecil, airnya jernih dingin menyegarkan, cocok buat nyeduh nutrisari rasa jeruk.
 
-![Pos Mata Air 1 Argopuro](./images/pos-mata-air-1-argopuro.jpg)
+![Pos Mata Air 1 Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/pos-mata-air-1-argopuro.jpg)
 
 Di Pos Mata Air 1, kami menghabiskan waktu satu jam untuk beristirahat. Targetnya bisa sampe Cikasur sebelum langit gelap. _FYI_, di gunung Argopuro ini dilarang melakukan pendakian pada malam hari. Selain karena berbahaya, trek yang selalu tak terduga,treknya kadang membingungkan, butuh kepekaan untuk orientasi jalur, hewan liar rutin berkeliaran, juga karena kepercayaan warga lokal, melarang siapapun mendaki saat langit gelap. Saya mah bukan ngajarin _musyrik_, cuma ngajak mencoba menghormati adat setempat, karena kita di sini tamu.
 
@@ -112,7 +112,7 @@ Waktu menunjuk 17.30, di sini saya mulai benar-benar putus asa mengejar target C
 
 Sepuluh menit kemudian, kami menemukan tempat _camp_. Gak luas, cuma cukup untuk satu tenda, dan rada menurun tanahnya. Berhubung langit sudah sempurna gelap, kami tanpa mikir panjang langsung lepas keril, keluarkan isi, pasang tenda.
 
-![Cerita Pendakian Argopuro](./images/cerita-pendakian-argopuro.jpeg)
+![Cerita Pendakian Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/cerita-pendakian-argopuro.jpeg)
 
 Saya pribadi langsung berinisiatif memasak untuk makan malam sementara Botak dan Aldi memasang tenda. Tujuan saya di situ adalah makan kemudian tidur secepatnya. Tenaga bener-bener habis, perlu istirahat panjang supaya besok pagi pulih lagi.
 
@@ -132,11 +132,11 @@ Semua karena rasa capek, stress, keburu putus asa. Tapi biarlah, setidaknya ada 
 
 Treknya keluar-masuk hutan, di sini mulai banyak tanaman yang biasa disebut _jancukan_, daunnya berwarna hijau tua, berduri, yang kalau tersentuh kulit sedikit saja bisa langsung ngerasain perih berjam-jam. Kami udah mengantisipasi dengan memakai baju lengan panjang, dan sarung tangan. Gak main-main ini mah asli, tanaman itu berbahaya.
 
-![Tanaman Jancukan Argopuro](./images/tanaman-jancukan-argopuro.jpg)
+![Tanaman Jancukan Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/tanaman-jancukan-argopuro.jpg)
 
 Jam 08:30, kami tiba di Sabana Besar. Sabana luas, panjang, bikin mandi keringat. Rada mirip sama Gunung Rinjani. Antisipasinya di sini adalah memakai topi rimba untuk menghalau panas terik matahari yang bahkan masih pagipun sudah terasa panas.
 
-![Cikasur Gunung Argopuro](./images/cikasur-gunung-argopuro.jpg)
+![Cikasur Gunung Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/cikasur-gunung-argopuro.jpg)
 
 Kurang lebih jam 10.00, kami akhirnya tiba di Cikasur. Tempat yang seharusnya menjadi tempat camp kami semalam. Di Cikasur kami istirahat lumayan lama. Cikasur adalah sebuah Sabana luas, terdapat sungai di sini yang bisa dipakai mandi. Airnya dingin menyegarkan, jernih pula. Cuci muka make airnya aja berasa minum _Sprite_.  
 Enjoy Cikasur!
@@ -167,9 +167,9 @@ Dari Cisentor ke Rawa Embik memakan waktu hampir dua jam. Kami istirahat sebenta
 
 Setelah dirasa cukup istirahat, kami melanjutkan perjalanan ke Persimpangan Puncak. Dari Rawa Embik ke Persimpangan lumayan singkat, kurang lebih setengah jam. Dari Persimpangan kami langsung terus berjalan tanpa istirahat lagi, dari Persimpangan kami ke Puncak Rengganis terlebih dahulu. Treknya mirip hutan pinus, _full_ nanjak terus. Memakan waktu kurang lebih 20 menit dan tibalah kami di Puncak Rengganis.
 
-![Puncak Rengganis](./images/puncak-rengganis.jpg)
+![Puncak Rengganis](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/puncak-rengganis.jpg)
 
-![Puncak Rengganis Gunung Argopuro](./images/puncak-rengganis-gunung-argopuro.jpg)
+![Puncak Rengganis Gunung Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/puncak-rengganis-gunung-argopuro.jpg)
 
 Puncak Rengganis tampak indah, tampak sarat akan sejarah. Ada reruntuhan istana Dewi Rengganis. Memang terlihat gersang, bebatuan dimana-mana. Dan terkadang tercium bau belerang. Mirip-mirip Gunung Papandayan gitu. Di sini, kami menghabiskan waktu sekitar 20 menit. Biasalah ngemil, minum dan berfoto-foto. Setelah itu turun kembali ke Persimpangan.
 
@@ -178,9 +178,9 @@ Trek ke Puncak Argopuro lebih berat dari ke Rengganis, lebih panjang, lebih nanj
 
 Kurang lebih sekitar jam 10 kami tiba di Puncak Argopuro, kami telah tiba di tujuan utama pendakian ini. Menghabiskan waktu sekitar 20 menit di Puncak Argopuro kemudian kami langsung bergegas melanjutkan perjalanan ke tujuan akhir perjalanan kami, yaitu turun dan pulang kembali dengan selamat.
 
-![Puncak Gunung Argopuro](./images/puncak-gunung-argopuro.jpeg)
+![Puncak Gunung Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/puncak-gunung-argopuro.jpeg)
 
-![Puncak Argopuro](./images/puncak-argopuro.jpg)
+![Puncak Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/puncak-argopuro.jpg)
 
 Perjalanan turun kembali ke Cisentor lebih banyak diam, fokus turun, hampir jalan terus gak pernah berhenti. Sejujurnya saya ingin cepet tiba di Cisentor. Udah keburu siang.  
 Dan akhirnya, sekitar jam 12.00 kami tiba kembali di Cisentor.  
@@ -204,13 +204,13 @@ Jam 06.00 kami telah selesai _packing_, langsung melanjutkan perjalanan turun m
 
 Kembali kami dihadapkan trek yang aneh, membingungkan. Walau dalam hati saya khawatir nyasar, tapi saya selalu berusaha tenang memimpin perjalanan di depan, Botak dan Aldi menuturkan di belakang. Berusaha setenang mungkin saya orientasi jalur, memperhatikan keadaan dan tanda-tanda, sambil berhati-hati karena banyak tanaman jancukan. Treknya bener-bener panjang, kami baru tiba di Hutan Lumut sekitar jam 09.00, sepagi itu tampak gelap. Yaiyalah... di dalem hutan. Pepohonan tinggi yang batangnya penuh lumut ada dimana-mana, karena itulah dinamai Hutan Lumut. Lumayan banyak yang landai trek di sini. Dan akhirnya, kami tiba di Danau Taman Hidup sekitar jam 10.30 WIB.
 
-![Taman Hidup](./images/taman-hidup.jpg)
+![Taman Hidup](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/taman-hidup.jpg)
 
-![Taman Hidup Argopuro](./images/taman-hidup-argopuro.jpg)
+![Taman Hidup Argopuro](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/taman-hidup-argopuro.jpg)
 
 Taman Hidup bener-bener panaroma yang indah. _Hidden paradise, more than_ Ranu Kumbolo. Danau luas yang membentang tenang. Udara segar khas penggunungan, sejuk. Bikin nyaman. Kami berusaha sepuasnya menikmati Taman Hidup berhubung kemarin target kami untuk nge-_camp_ di sini kembali gagal.
 
-![Danau Taman Hidup](./images/danau-taman-hidup.jpg)
+![Danau Taman Hidup](https://img.erland.me/blog/menjelajah-gunung-argopuro/images/danau-taman-hidup.jpg)
 
 Setelah merasa cukup di Taman Hidup, kami bergegas turun ke Bremi. Posisi di sini juga di kejar waktu. Kami harus tiba Bremi sebelum jam 15.00 karena bus AKAS Bremi-Probolinggo cuma ada di jam 08.00 dan 15.00, jadi kalau kami ketinggalan yang jam 15.00 harus menunggu besoknya jam 08.00. Kali ini saya pantang untuk gagal target lagi, berhubung saya dan Botak punya jadwal kereta Pasundan besoknya dari Surabaya, jadi saya _geberrrr_ jalannya. Sebenernya jarak Taman Hidup ke Bremi gak terlalu jauh, treknya juga menurun terus. Mungkin efek capek jadi terasa gak habis-habis treknya. Tetep aja dibuat stress mah.
 

@@ -9,7 +9,7 @@ excerpt: >-
   Berbagai partikel, zat, dan atom, membentuk suatu kombinasi dengan kualitas
   seni yang tinggi. Dari semua kombinasi itu…
 publishDate: 2017-01-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sahabat-awan/hero.png
 heroAlt: Sahabat Awan
 tags: []
 category: story

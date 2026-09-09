@@ -9,7 +9,7 @@ excerpt: >-
   Kadang kita lupa buat bersyukur ketika kita diberikan sehat yang luar biasa.
   Jujur kenikmatan sehat saat diambil sedikit…
 publishDate: 2021-10-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/tips-memilih-asuransi-kesehatan-yang-tepat/hero.png
 heroAlt: Tips Memilih Asuransi Kesehatan yang Tepat
 tags: []
 category: essay
@@ -28,7 +28,7 @@ Asuransi sebagai bentuk perlindungan diri sendiri dan juga keluarga supaya tentu
 
 Menjaga kesehatan bisa kita mulai dari kegiatan sehari-hari dengan rutin konsumsi makanan yang sehat dengan gizi seimbang, cukupi air putih setiap hari minimal 2Liter, serta olahraga dan tentunya menghindari stress. Apalagi semakin bertambahnya usia menjaga kesehatan sangat diperlukan sekali.
 
-![asuransi kesehatan](./images/asuransi-kesehatan.png)
+![asuransi kesehatan](https://img.erland.me/blog/tips-memilih-asuransi-kesehatan-yang-tepat/images/asuransi-kesehatan.png)
 
 Sehat untuk diri sendiri serta keluarga juga tetap sehat merupakan anugerah terindah yang pastinya di inginkan semua orang. Sehingga kebutuhan asuransi saat ini apalagi dengan adanya pandemi ini menurut aku sangat penting. Jadi aku sendiri merasakan banyak manfaatnya saat memiliki asuransi misalkan saat melahirkan, saat operasi besar waktu beberapa teman saya terkena tiroid yang mengharuskan untuk dioperasi.
 

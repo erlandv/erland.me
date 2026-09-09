@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Ada banyak sekali manfaat makan daging sapi untuk kesehatan dan gaya hidup sehat, beberapa di antaranya sebagai berikut.
 publishDate: 2025-09-22T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/manfaat-makan-daging-sapi-untuk-gaya-hidup-sehat/hero.png
 heroAlt: Manfaat Makan Daging Sapi untuk Gaya Hidup Sehat
 tags: []
 category: info
@@ -22,7 +22,7 @@ Daging sapi dikenal kaya protein lengkap yang menyediakan semua asam amino esens
 
 Daging sapi merupakan sumber zat besi heme yang lebih mudah diserap tubuh dibandingkan zat besi non heme dari tumbuhan. Zat besi berperan dalam pembentukan hemoglobin yang membawa oksigen ke seluruh jaringan, sehingga menunjang energi dan konsentrasi. Selain itu, daging sapi mengandung vitamin B12 untuk mendukung fungsi saraf dan pembentukan sel darah merah. Vitamin B6, niacin, riboflavin, serta selenium dan fosfor turut melengkapi profil gizinya.
 
-![manfaat makan daging sapi](./images/manfaat-makan-daging-sapi.webp)
+![manfaat makan daging sapi](https://img.erland.me/blog/manfaat-makan-daging-sapi-untuk-gaya-hidup-sehat/images/manfaat-makan-daging-sapi.webp)
 
 Mineral seng atau zinc juga cukup menonjol. Zinc berkaitan dengan fungsi imun, penyembuhan luka, dan dukungan terhadap enzim metabolisme. Dalam porsi wajar, daging sapi menyediakan kreatin dan karnitin yang kerap dikaitkan dengan performa fisik, serta sedikit CLA dan kolin yang berperan dalam berbagai fungsi tubuh.
 
@@ -86,7 +86,7 @@ Sebagian orang nyaman menyertakan daging sapi dua sampai tiga kali seminggu dala
 
 Menikmati steak yang dimasak presisi dapat menjadi bagian dari rencana makan yang cerdas. Steak Hotel by Holycow konsisten dikenal luas sebagai destinasi pecinta steak yang mengutamakan kualitas potongan, kematangan yang akurat, dan pengalaman bersantap yang menyenangkan. Banyak pengunjung datang bukan hanya untuk rasa, tetapi juga untuk kepastian standar olahan yang baik.
 
-![](./images/steak-hotel-by-holycow.webp)
+![](https://img.erland.me/blog/manfaat-makan-daging-sapi-untuk-gaya-hidup-sehat/images/steak-hotel-by-holycow.webp)
 
 Untuk kamu yang ingin memadukan kenikmatan dan kesehatan, praktiknya sederhana. Pilih potongan yang lebih ramping, tentukan tingkat kematangan sesuai preferensi, dan padukan dengan sayuran panggang atau salad. Hindari saus berlebihan bila sedang mengontrol kalori, dan nikmati karbohidrat dalam porsi yang sesuai. Dengan pendekatan ini, kamu tetap bisa merasakan manfaat makan daging sapi sambil menjaga tujuan kebugaran.
 

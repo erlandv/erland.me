@@ -9,7 +9,7 @@ excerpt: >-
   menuju kota Garut untuk mendaki gunung Papandayan. Bersama seorang temanku,
   Arif Afandi. Kami menumpang bus Primajasa…
 publishDate: 2014-08-10T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/jalan-berliku-mencapai-cita-citaku/hero.png
 heroAlt: Jalan Berliku Mencapai Cita-citaku
 tags: []
 category: essay
@@ -37,7 +37,7 @@ Keren yaa bocah ingusan kelas 5 SD sudah bisa merasakan penat. Padahal masalah h
 
 Kamu tau KRL Ekonomi? Atau pernah menaikinya? Kalau pernah, masa kecil kamu pasti bahagia. Jauh sebelum ada Commuter Line, KRL Ekonomi begitu murah walau tak nyaman, pintu kereta terbuka lebar saat berjalan, banyak yang naik di atap kereta. Terbilang membahayakan. Yaa namanya juga kelas ekonomi.
 
-![KRL Ekonomi](./images/krl-ekonomi.jpg 'Sumber: [https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg](https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg)')
+![KRL Ekonomi](https://img.erland.me/blog/jalan-berliku-mencapai-cita-citaku/images/krl-ekonomi.jpg 'Sumber: [https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg](https://id.wikipedia.org/wiki/Berkas:KRL_train_surfing_5.jpg)')
 
 Di KRL Ekonomi tak hanya ada penumpang kereta, ada pedagang asongan, pengemis, pengamen, bahkan ada badut sulat dan topeng monyet juga juga. Benar-benar transportasi umum yang antik.
 

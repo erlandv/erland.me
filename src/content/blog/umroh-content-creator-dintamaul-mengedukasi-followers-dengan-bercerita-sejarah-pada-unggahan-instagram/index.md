@@ -11,7 +11,7 @@ excerpt: >-
   menjadi sarana yang populer bagi para content creator untuk berbagi
   pengetahuan dan mengedukasi pengikut mereka. Salah satu…
 publishDate: 2023-06-09T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/umroh-content-creator-dintamaul-mengedukasi-followers-dengan-bercerita-sejarah-pada-unggahan-instagram/hero.png
 heroAlt: >-
   Umroh, Content Creator Dintamaul Mengedukasi Followers dengan Bercerita
   Sejarah pada Unggahan Instagram
@@ -26,7 +26,7 @@ Dintamaul, seorang content creator yang aktif di Instagram, telah berhasil mencu
 
 Dalam setiap unggahan Instagramnya, Dintamaul tidak hanya menyajikan gambar-gambar menakjubkan, tetapi juga memberikan konteks sejarah tentang tempat yang ia kunjungi. Misalnya, ketika ia berbagi foto Masjidil Haram di Mekah, Sebagai content creator, Dintamaul tidak hanya mengunggah gambar itu sendiri, tetapi juga mengisi keterangan dengan cerita tentang sejarah masjid yang dianggap sebagai tempat suci bagi umat Muslim.
 
-![influencer dintamaul umrah](./images/influencer-dintamaul-umrah-1.webp)
+![influencer dintamaul umrah](https://img.erland.me/blog/umroh-content-creator-dintamaul-mengedukasi-followers-dengan-bercerita-sejarah-pada-unggahan-instagram/images/influencer-dintamaul-umrah-1.webp)
 
 Dintamaul menggambarkan perjalanan spiritualnya dengan cara yang cerdas, dengan menggabungkan fakta-fakta sejarah yang menarik dengan pengalaman pribadinya. Sebagai content creator ia juga menggunakan bahasa yang mudah dipahami, sehingga pengetahuan sejarah yang ia bagikan dapat diakses oleh berbagai kalangan, tidak hanya oleh mereka yang sudah familiar dengan sejarah umat Islam.
 

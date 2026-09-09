@@ -9,7 +9,7 @@ excerpt: >-
   penting bagi Indonesia. Setidaknya, untuk meningkatkan kesadaran bahwa kita
   berada dalam situasi darurat. Darurat susu…
 publishDate: 2021-03-01T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/sejarah-hari-susu-sedunia/hero.png
 heroAlt: Sejarah Hari Susu Sedunia 1 Juni
 tags: []
 category: info

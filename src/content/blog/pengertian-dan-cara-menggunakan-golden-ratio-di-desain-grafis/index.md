@@ -7,7 +7,7 @@ excerpt: >-
   Mengenal istilah Golden Ratio dalam ilmu desain grafis
   dan cara menggunakan teknik golden ratio untuk desain grafis.
 publishDate: 2025-10-07
-hero: ./hero.png
+hero: https://img.erland.me/blog/pengertian-dan-cara-menggunakan-golden-ratio-di-desain-grafis/hero.png
 heroAlt: golden ratio
 tags: []
 category: essay
@@ -22,7 +22,7 @@ Meski tidak semua kalangan mengenal istilah pengertian dan cara menggunakan Gold
 
 Sebelum langsung mempelajari ilmu baru pengertian dan cara menggunakan golden ratio dalam ilmu desain grafis, ada baiknya kalian memahami apa saja istilah yang sudah ada. Hampir sama seperti dunia IT, ternyata para desainer grafis dan semacamnya itu juga memiliki istilah yang harus dikenal. Memiliki arti Rasio Emas, ternyata Golden Rasio ini merupakan notabene yang berhubungan dengan keindahan, kemewahan, dan juga sesuatu yang spesial.
 
-![golden ratio](./images/golden-ratio.webp 'golden ratio')
+![golden ratio](https://img.erland.me/blog/pengertian-dan-cara-menggunakan-golden-ratio-di-desain-grafis/images/golden-ratio.webp 'golden ratio')
 
 Ada beberapa pendapat lain yang menyatakan bahwa, golden ratio ini biasa disimbolkan dengan huruf Yunani yang sering muncul di objek lain. Seperti yang ada di konsep seni, geometri, arsitektur, hingga pada struktur makhluk hidup. Untuk pengetahuan tambahan lain, kalian bisa membaca pada sumber dan referensi lainnya untuk pengetahuan diri. Ada banyak sumber dan referensi dari dan cara menggunakan golden ratio dalam ilmu desain grafis zyang bisa kalian cari tau.
 

@@ -8,7 +8,7 @@ excerpt: >-
   baik di dalam maupun di luar ruangan, kan? Tahukah Anda bahwa jenis CCTV yang
   berbeda bentuk dan ukurannya, memiliki…
 publishDate: 2023-01-31T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/mengenal-berbagai-jenis-cctv/hero.png
 heroAlt: 'Mengenal Berbagai Jenis CCTV, Anda Pilih yang Mana?'
 tags: []
 category: info
@@ -17,7 +17,7 @@ draft: false
 
 Anda pasti sudah sering melihat camera CCTV yang dipasang di berbagai tempat, baik di dalam maupun di luar ruangan, kan? Tahukah Anda bahwa jenis CCTV yang berbeda bentuk dan ukurannya, memiliki fungsi yang berbeda pula? Ada jenis yang hanya dapat digunakan di dalam ruangan saja, ada pula jenis yang terbaik untuk dipasang pada hunian tempat tinggal, area usaha, atau perkantoran.
 
-![](./images/berbagai-jenis-cctv.jpg)
+![](https://img.erland.me/blog/mengenal-berbagai-jenis-cctv/images/berbagai-jenis-cctv.jpg)
 
 Demi meningkatkan pengawasan keamanan, pemasangan kamera pengawas sudah menjadi kebutuhan utama di lingkungan fasilitas umum, area pemukiman, perkantoran, hingga rumah pribadi. Selain merupakan upaya pencegahan tindak kejahatan, kamera pengawas juga bisa digunakan sebagai bukti kejahatan yang dapat diajukan ke pengadilan. Namun, penggunaan dan penempatan kamera pengawas tidak boleh sembarangan. Terdapat beberapa jenis CCTV dengan fungsi yang berbeda. Agar tidak salah pasang, yuk kenali jenis-jenis kamera CCTV mana yang cocok sesuai kebutuhan Anda.
 

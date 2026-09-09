@@ -5,7 +5,7 @@ description: >-
 excerpt: >-
   Seperti ini cara main UNO stacko dan aturan main UNO block, permainan seru untuk dimainkan bersama-sama dengan teman atau keluarga
 publishDate: 2022-03-02T00:00:00.000Z
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-bermain-uno-stacko/hero.png
 heroAlt: Cara Bermain UNO Stacko dan Aturan Mainnya
 tags: []
 category: info
@@ -22,7 +22,7 @@ Di artikel ini, saya akan memberikan penjelasan tentang aturan permainan dan <a 
 
 Sebelum mempelajari aturan dan cara bermainnya, terlebih dahulu kalian harus mengetahui jenis-jenis balok pada permainan UNO Stacko karena jika tidak, kalian akan kesulitan mempelajarinya nanti.
 
-![](./images/aturan-main-uno-stacko.jpg)
+![](https://img.erland.me/blog/cara-bermain-uno-stacko/images/aturan-main-uno-stacko.jpg)
 
 Bisa dikatakan permainan UNO Stacko ini tidak jauh berbeda dengan permainan UNO Card, karena ya dari namanya saja sudah sama-sama UNO, kan? Permainan UNO Stacko juga memiliki beberapa tanda pada setiap baloknya. Supaya kalian bisa dengan mudah mempelajari aturan permainannya, ketahui jenis-jenis balok pada UNO Stacko yang akan saya jelaskan berikut ini.
 
@@ -61,7 +61,7 @@ Kurang lebih sama kan dengan UNO Card? Dari jenis-jenis balok UNO stacko di atas
 
 Sebelum memulai permainan ini, tentunya kita harus menyusun terlebih dahulu seluruh balok-balok UNO stacko. Cara menyusunnya cukup mudah, kalian harus membariskan 3 balok secara acak, 3 baris balok ini kita sebutlah sebagai tingkatan.
 
-![](./images/cara-main-uno-stacko.jpg)
+![](https://img.erland.me/blog/cara-bermain-uno-stacko/images/cara-main-uno-stacko.jpg)
 
 Kemudian di tingkatan selanjutnya bariskan kembali 3 balok acak secara menyilang dengan tingkatan di bawahnya. Begitu seterusnya, susun balok saling menyilang antar tingkatan hingga membentuk seperti menara atau sebutan lainnya adalah jenga.
 

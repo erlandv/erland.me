@@ -3,7 +3,7 @@ title: Tangga Kayu Bisa Menjadi Area Rayap Jika Bagian Bawahnya Lembap
 description: Tangga kayu rawan rayap akibat area bawah yang lembap? Kenali tanda kerusakannya dan cegah sejak dini dengan jasa basmi rayap Jogja terbaik di sini.
 excerpt: Jangan biarkan area bawah tangga kayu Anda lembap dan jadi sarang rayap. Cari tahu tanda-tanda serangan rayap dan cara mencegahnya.
 publishDate: 2026-06-14
-hero: ./hero.png
+hero: https://img.erland.me/blog/tangga-kayu-bisa-menjadi-area-rayap-jika-bagian-bawahnya-lembap/hero.png
 heroAlt: Tangga Kayu Bisa Menjadi Area Rayap
 category: info
 draft: false
@@ -43,7 +43,7 @@ Langkah pertama adalah menjaga area bawah tangga tetap rapi dan kering. Hindari 
 
 Kedua, pastikan sirkulasi udara tetap baik. Jika ruang bawah tangga tertutup, buka dan bersihkan secara berkala agar tidak menjadi pengap.
 
-![Tangga Kayu Bisa Menjadi Area Rayap](./images/tangga-kayu-bisa-menjadi-area-rayap.webp)
+![Tangga Kayu Bisa Menjadi Area Rayap](https://img.erland.me/blog/tangga-kayu-bisa-menjadi-area-rayap-jika-bagian-bawahnya-lembap/images/tangga-kayu-bisa-menjadi-area-rayap.webp)
 
 Ketiga, cek sambungan kayu, celah dinding, dan bagian bawah tangga secara rutin. Tanda kecil seperti serbuk halus atau jalur tanah bisa menjadi petunjuk awal sebelum kerusakan semakin parah.
 

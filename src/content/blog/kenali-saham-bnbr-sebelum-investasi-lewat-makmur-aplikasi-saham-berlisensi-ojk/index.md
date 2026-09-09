@@ -3,7 +3,7 @@ title: Kenali Saham BNBR Sebelum Investasi Lewat Makmur, Aplikasi Saham Berlisen
 description: Mau investasi saham BNBR? Cek analisis fundamental, likuiditas, hingga valuasinya dulu. Transaksi aman & mudah lewat aplikasi Makmur berlisensi OJK!
 excerpt: Mau investasi saham BNBR? Cek analisis fundamental, likuiditas, hingga valuasinya dulu lewat aplikasi Makmur berlisensi OJK!
 publishDate: 2026-08-10
-hero: ./hero.png
+hero: https://img.erland.me/blog/kenali-saham-bnbr-sebelum-investasi-lewat-makmur-aplikasi-saham-berlisensi-ojk/hero.png
 heroAlt: Kenali Saham BNBR Sebelum Investasi
 category: info
 draft: false
@@ -47,7 +47,7 @@ Pergerakan harga saham BNBR dalam lima tahun terakhir menunjukkan beberapa perio
 
 Saham BNBR belum memiliki pembagian dividen, sehingga investor dapat lebih memperhatikan perkembangan harga saham dan kinerja perusahaan sebagai bagian dari strategi investasi.
 
-![Kenali Saham BNBR Sebelum Investasi](./images/kenali-saham-bnbr-sebelum-investasi.webp)
+![Kenali Saham BNBR Sebelum Investasi](https://img.erland.me/blog/kenali-saham-bnbr-sebelum-investasi-lewat-makmur-aplikasi-saham-berlisensi-ojk/images/kenali-saham-bnbr-sebelum-investasi.webp)
 
 Data historis harga dapat menjadi referensi untuk memahami pola pergerakan saham. Namun, keputusan investasi tetap perlu mempertimbangkan berbagai faktor lain seperti kondisi perusahaan, tujuan investasi, dan profil risiko masing-masing investor.
 

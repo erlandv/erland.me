@@ -3,7 +3,7 @@ title: 5 Cara Pilih Air Cooler Supaya Efektif dan Tidak Boros Listrik
 description: Ingin ruangan sejuk tanpa tagihan listrik membengkak? Simak 5 cara memilih air cooler yang efektif, hemat energi, dan tips rekomendasi produk terbaik di sini.
 excerpt: Panduan lengkap memilih air cooler terbaik yang ampuh mendinginkan ruangan dengan efektif dan tidak boros listrik.
 publishDate: 2026-03-02
-hero: ./hero.png
+hero: https://img.erland.me/blog/cara-pilih-air-cooler-supaya-efektif-dan-tidak-boros-listrik/hero.png
 heroAlt: Cara Pilih Air Cooler Supaya Efektif
 category: info
 draft: false
@@ -15,7 +15,7 @@ Menggunakan air cooler dengan cara yang tepat juga bisa membantu menjaga kenyama
 
 Kalau Anda sedang mencari [air cooler terbaik](https://polytron.co.id/kategori-produk/appliances/kipas-angin/air-cooler/?utm_source=backlink&utm_medium=article&utm_campaign=rankpillar_feb) yang tidak hanya mendinginkan tetapi juga efisien, memahami bagaimana memilih air cooler yang sesuai adalah langkah pertama yang penting. Berikut ini beberapa cara yang bisa Anda terapkan agar air cooler bekerja optimal dan tetap ramah listrik.
 
-![Cara Pilih Air Cooler Supaya Efektif](./images/cara-pilih-air-cooler-supaya-efektif.webp)
+![Cara Pilih Air Cooler Supaya Efektif](https://img.erland.me/blog/cara-pilih-air-cooler-supaya-efektif-dan-tidak-boros-listrik/images/cara-pilih-air-cooler-supaya-efektif.webp)
 
 ## Cara Memilih Air Cooler Agar Tidak Boros Listrik
 
