@@ -25,10 +25,10 @@
  */
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import type { ImageMetadata } from 'astro';
 
 type BlogEntry = CollectionEntry<'blog'>;
-type HeroType = string | ImageMetadata | undefined;
+// After R2 migration, hero is always a string URL from the schema
+type HeroType = string | undefined;
 
 /**
  * Enriched post object with rendered Content component
@@ -73,14 +73,6 @@ export const safeDate = (value: unknown): Date | null => {
  */
 export async function loadAllPosts(): Promise<Post[]> {
   const entries = await getCollection('blog');
-  const heroMap = import.meta.glob(
-    '../content/blog/*/hero.{jpg,jpeg,png,webp,gif,svg}',
-    {
-      query: '?url',
-      import: 'default',
-      eager: true,
-    },
-  );
 
   const posts: Post[] = [];
   for (const entry of entries) {
@@ -88,11 +80,8 @@ export async function loadAllPosts(): Promise<Post[]> {
     const body = entry.body;
     // In Content Layer API, use entry.id as the slug (it's the file path without extension)
     const slug = entry.id;
-    const heroEntry = Object.entries(heroMap).find(([p]) =>
-      p.startsWith(`../content/blog/${slug}/hero.`),
-    );
-    const fallbackHero = heroEntry?.[1] as string | undefined;
-    const hero = entry.data.hero ?? fallbackHero;
+    // After R2 migration, hero is always a string URL directly from frontmatter
+    const hero = entry.data.hero;
     posts.push({
       slug,
       data: entry.data,

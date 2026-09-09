@@ -10,7 +10,6 @@ import listing from '@/styles/pages/listing.module.css';
 import categoryIndex from '@/pages/blog/styles/_category-index.module.css';
 import { loadAllPosts, slugifyCategory } from '@lib/content/blog';
 import { categoriesIndexJsonLd, breadcrumbJsonLd } from '@lib/content/seo';
-import type { ImageMetadata } from 'astro';
 
 const posts = await loadAllPosts();
 
@@ -24,7 +23,8 @@ type CatInfo = {
     excerpt: string | null;
     date: Date | null;
   } | null;
-  hero: ImageMetadata | null;
+  // After R2 migration, hero is a string URL (or null)
+  hero: string | null;
 };
 
 const getExcerpt = (post: any) =>
@@ -116,7 +116,7 @@ const categories = Array.from(categoriesMap.values()).sort(
                 {c.hero ? (
                   <div class={categoryIndex['category-card__thumb']}>
                     <img
-                      src={c.hero.src}
+                      src={c.hero}
                       alt={c.name}
                       class={categoryIndex['category-card__img']}
                       loading='lazy'

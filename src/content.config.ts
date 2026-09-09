@@ -4,52 +4,50 @@ import { z } from 'astro/zod';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().max(160).optional(),
-      excerpt: z.string().max(200).optional(),
-      publishDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      hero: image().optional(),
-      heroAlt: z.string().optional(),
-      tags: z.array(z.string()).default([]),
-      category: z.string().optional(),
-      draft: z.boolean().default(false),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(160).optional(),
+    excerpt: z.string().max(200).optional(),
+    publishDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    hero: z.url().optional(),
+    heroAlt: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    category: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
 });
 
 const downloads = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/downloads' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      heading: z.string().optional(),
-      description: z.string().max(160).optional(),
-      excerpt: z.string().max(200).optional(),
-      publishDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      hero: image().optional(),
-      heroAlt: z.string().optional(),
-      draft: z.boolean().default(false),
-      downloadFiles: z
-        .array(
-          z.object({
-            label: z.string(),
-            href: z.string(),
-            size: z.string().optional(),
-          }),
-        )
-        .optional(),
-      rating: z
-        .object({
-          ratingValue: z.number().min(1).max(5),
-          reviewCount: z.number().int().positive(),
-          bestRating: z.number().default(5),
-          worstRating: z.number().default(1),
-        })
-        .optional(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    heading: z.string().optional(),
+    description: z.string().max(160).optional(),
+    excerpt: z.string().max(200).optional(),
+    publishDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    hero: z.url().optional(),
+    heroAlt: z.string().optional(),
+    draft: z.boolean().default(false),
+    downloadFiles: z
+      .array(
+        z.object({
+          label: z.string(),
+          href: z.string(),
+          size: z.string().optional(),
+        }),
+      )
+      .optional(),
+    rating: z
+      .object({
+        ratingValue: z.number().min(1).max(5),
+        reviewCount: z.number().int().positive(),
+        bestRating: z.number().default(5),
+        worstRating: z.number().default(1),
+      })
+      .optional(),
+  }),
 });
 
 const portfolio = defineCollection({

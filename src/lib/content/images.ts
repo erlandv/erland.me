@@ -44,64 +44,58 @@ import { getImage } from 'astro:assets';
 export const DEFAULT_HERO_PATH = '/assets/content/hero-default.png';
 
 /**
- * Normalize optional hero image metadata to stable type
- *
- * Frontmatter schema validates with `image()` helper, ensuring type safety.
- * This function provides null-safe handling for optional hero images.
- *
- * @param hero - Optional ImageMetadata from frontmatter (validated by schema)
- * @returns ImageMetadata if present, null otherwise
- * @example
- * const hero = resolveHero(frontmatter.hero);
- * if (hero) {
- *   const ogUrl = await getOgImageUrl(hero);
- * }
+ * Union type for hero image sources.
+ * - `string`: absolute URL pointing to R2 (e.g. https://img.erland.me/blog/slug/hero.png)
+ * - `ImageMetadata`: local file processed by Astro (legacy / during transition)
  */
-export function resolveHero(hero?: ImageMetadata | null): ImageMetadata | null {
+export type HeroSource = string | ImageMetadata;
+
+/**
+ * Type guard — returns true if the hero is a remote URL string (R2).
+ */
+export function isRemoteHero(hero: HeroSource | null): hero is string {
+  return typeof hero === 'string';
+}
+
+/**
+ * Normalize optional hero image to stable type.
+ *
+ * @param hero - Optional hero from frontmatter (now always string URL after R2 migration)
+ * @returns HeroSource if present, null otherwise
+ */
+export function resolveHero(hero?: HeroSource | null): HeroSource | null {
   return hero ?? null;
 }
 
 /**
  * Check if hero image exists
- * Helper to determine if fallback should be used
- *
- * @param hero - Optional ImageMetadata from frontmatter
- * @returns true if hero exists, false otherwise
- * @example
- * const hasHero = hasHeroImage(frontmatter.hero);
- * if (!hasHero) {
- *   // Use fallback
- * }
  */
-export function hasHeroImage(hero?: ImageMetadata | null): boolean {
+export function hasHeroImage(hero?: HeroSource | null): boolean {
   return hero != null;
 }
 
 /**
- * Generate optimized image URL for Open Graph and JSON-LD metadata
+ * Generate optimized image URL for Open Graph and JSON-LD metadata.
  *
- * Produces site-root relative URL (e.g., `/_astro/hero-1200.avif`) that
- * should be prefixed with `SITE_URL` for absolute URLs in meta tags.
+ * - Remote URL (R2): returned as-is — Astro cannot transform external images at build time.
+ *   The image is already on Cloudflare's CDN, no local optimization needed.
+ * - Local ImageMetadata: processed via Astro's getImage() as before.
  *
- * **Optimization Strategy:**
- * - Default 1200px width matches common OG dimensions (1200x630)
- * - Height auto-calculated to preserve aspect ratio
- * - AVIF format prioritized for best compression (60% smaller than JPEG)
- *
- * @param hero - ImageMetadata from content schema
- * @param targetWidth - Target width in pixels (default: 1200 for OG standard)
- * @param preferFormat - Image format preference (default: 'avif' for best compression)
- * @returns Site-relative optimized image URL
- * @example
- * const ogUrl = await getOgImageUrl(hero, 1200, 'avif');
- * // Returns: "/_astro/hero-abc123.1200w.avif"
- * // Use in meta: `${SITE_URL}${ogUrl}`
+ * @param hero - HeroSource (string URL or ImageMetadata)
+ * @param targetWidth - Target width in pixels (default: 1200)
+ * @param preferFormat - Format preference (default: 'avif')
+ * @returns Absolute-or-relative image URL string
  */
 export async function getOgImageUrl(
-  hero: ImageMetadata,
+  hero: HeroSource,
   targetWidth = 1200,
   preferFormat: 'avif' | 'webp' = 'avif',
 ): Promise<string> {
+  if (isRemoteHero(hero)) {
+    // Remote R2 URL — return as-is, already on Cloudflare CDN
+    return hero;
+  }
+  // Local ImageMetadata — optimize via Astro
   const optimized = await getImage({
     src: hero,
     width: targetWidth,
@@ -111,21 +105,16 @@ export async function getOgImageUrl(
 }
 
 /**
- * Generate multiple image format URLs for fallback support
- * Produces both AVIF (modern, best compression) and WebP (wide support)
- *
- * @param hero - ImageMetadata from content schema
- * @param targetWidth - Target width in pixels (default: 1200)
- * @returns Object with avif and webp URLs
- * @example
- * const urls = await getOgImageUrls(hero);
- * // { avif: "/_astro/hero.avif", webp: "/_astro/hero.webp" }
- * // Use in picture element for progressive fallback
+ * Generate multiple image format URLs for fallback support (local images only).
+ * For remote images, returns the same URL for both formats.
  */
 export async function getOgImageUrls(
-  hero: ImageMetadata,
+  hero: HeroSource,
   targetWidth = 1200,
 ): Promise<{ avif: string; webp: string }> {
+  if (isRemoteHero(hero)) {
+    return { avif: hero, webp: hero };
+  }
   const [avif, webp] = await Promise.all([
     getImage({ src: hero, width: targetWidth, format: 'avif' }),
     getImage({ src: hero, width: targetWidth, format: 'webp' }),
