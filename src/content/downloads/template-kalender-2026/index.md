@@ -40,6 +40,10 @@ downloadFiles:
     size: '5.34 MB'
 ---
 
+> **Template kalender 2027 sudah rilis!**
+>
+> Download di sini: [https://erland.me/download/template-kalender-2027/](/download/template-kalender-2027/)
+
 Setelah di tahun-tahun sebelumnya saya selalu berbagi template kalender, kali ini saya masih mencoba untuk terus konsisten berbagi file template kalender secara gratis. Melihat tingginya antusias orang-orang, memasuki penghujung tahun ini saya kembali membagikan template kalender 2026 melalui blog pribadi ini. Tidak ada tujuan lain selain untuk berbagi kepada kalian yang membutuhkan.
 
 CorelDRAW masih menjadi aplikasi andalan untuk membuat template kalender 2026 ini, dibuat secara manual termasuk pada penyusunan angka-angka pada tanggal di setiap bulannya dengan referensi kalender digital di gadget, kemudian ditambahkan hari libur nasional Indonesia yang sudah diumumkan oleh pemerintah melalui <a href="https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2025-09/SKB%20Libur%20Nasional%20dan%20Cuti%20Bersama%20Tahun%202026.pdf" rel="nofollow noopener" target="_blank">SKB Libur Nasional dan Cuti Bersama Tahun 2026</a>.
